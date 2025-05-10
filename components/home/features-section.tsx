@@ -179,17 +179,7 @@ export default function FeaturesSection() {
                 {feature.description}
               </p>
 
-              {/* Learn more link that appears on hover */}
-              <div className="overflow-hidden h-6">
-                <motion.div
-                  initial={{ y: 30, opacity: 0 }}
-                  animate={hoveredFeature === index ? { y: 0, opacity: 1 } : { y: 30, opacity: 0 }}
-                  transition={{ duration: 0.3 }}
-                  className="flex items-center text-blue-600 font-medium"
-                >
-                  Learn more <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                </motion.div>
-              </div>
+          
             </motion.div>
           ))}
         </motion.div>

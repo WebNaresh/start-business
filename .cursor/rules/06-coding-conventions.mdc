@@ -1,0 +1,105 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# StartBusiness Demo Website - Coding Conventions
+
+## TypeScript
+- Use TypeScript for all new code
+- Define interfaces and types in [types/](mdc:types) directory
+- Use explicit typing when type inference is not clear
+- Always use declared variables or remove them if unused
+- Remove unused function parameters to avoid TypeScript/ESLint warnings
+- Prefer destructuring of parameters and objects when appropriate
+- Always use `const` instead of `let` if the variable is never reassigned
+- Only use `let` when you need to reassign a variable later in the code
+
+## Component Structure
+- Create functional components using TypeScript
+- Use Next.js' App Router conventions
+- Organize components by feature and reusability
+- Place page-specific components in `_components` directory within the page directory
+- Keep global components in the root `components` directory
+
+## Styling
+- Use Tailwind CSS for styling
+- Component-specific styles should be co-located with the component
+- Follow the shadcn/ui pattern for component customization
+- Use consistent color scheme with blue gradients and white backgrounds
+- Create visually engaging interfaces with Lucide React icons
+- Implement smooth animations using Framer Motion
+- Design modern UIs with attention to spacing, alignment, and visual hierarchy
+
+## JSX Syntax
+- Always escape special characters in JSX text content
+- Use self-closing tags for elements without children (`<Component />`)
+- Use fragment shorthand (`<>...</>`) instead of `<React.Fragment>`
+- Add proper `key` props to elements in arrays using unique, stable identifiers
+- Use semantic HTML elements for better accessibility
+- Add proper ARIA labels and roles where needed
+
+## State Management
+- Use React's built-in hooks (useState, useEffect) for local state
+- Use React Context for shared state when needed
+- Keep state as local as possible
+- Use proper dependency arrays in useEffect hooks
+
+## Data Fetching
+- Use Next.js built-in data fetching methods
+- Implement proper loading and error states
+- Use TypeScript interfaces for API responses
+- Handle API errors gracefully with user-friendly messages
+
+## Image Optimization
+- Use Next.js Image component for all images
+- Provide proper width, height, and alt text
+- Use appropriate image formats (WebP when possible)
+- Implement proper loading strategies (lazy loading for below-fold images)
+
+## Animation
+- Use Framer Motion for animations
+- Keep animations subtle and purposeful
+- Ensure animations don't interfere with usability
+- Add proper animation variants for reusability
+
+## Mobile Responsiveness
+- Follow mobile-first approach
+- Test on multiple screen sizes
+- Use Tailwind's responsive classes
+- Ensure touch targets are large enough
+- Test on real devices when possible
+
+## Performance
+- Implement proper code splitting
+- Optimize images and assets
+- Use proper caching strategies
+- Monitor and optimize Core Web Vitals
+- Implement proper loading states
+
+## Error Handling
+- Use try/catch blocks for error handling
+- Always provide user-friendly error messages
+- Log errors appropriately
+- Implement proper fallback UI for errors
+
+## Client-Side Code
+- Use "use client" directive for client components
+- Handle hydration properly
+- Implement proper loading states
+- Use proper event handlers
+- Handle browser APIs safely
+
+## Deployment
+- Follow Vercel deployment best practices
+- Use proper environment variables
+- Implement proper build optimization
+- Monitor deployment performance
+- Use proper caching strategies
+
+# 07-editing-policy
+
+**Rule:**
+Whenever a user request involves a code or UI change, the assistant must directly edit the relevant file(s) in the codebase, rather than only providing code suggestions or asking for permission to edit.
+- The assistant should only provide suggestions or ask for confirmation if the user explicitly requests it, or if the change is potentially destructive or ambiguous.
+- For all other cases, the assistant should make the necessary edits directly and inform the user of the changes made.

@@ -1,0 +1,75 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# StartBusiness Demo Website - Components
+
+## UI Components
+- [components/ui/](mdc:components/ui) - shadcn/ui base components (buttons, inputs, etc.)
+- [components/header.tsx](mdc:components/header.tsx) - Global header with navigation
+- [components/footer.tsx](mdc:components/footer.tsx) - Global footer
+- [components/whatsapp-button.tsx](mdc:components/whatsapp-button.tsx) - WhatsApp chat button
+- [components/whatsapp-cta-button.tsx](mdc:components/whatsapp-cta-button.tsx) - WhatsApp CTA button
+
+## Page Components
+- [components/home/](mdc:components/home) - Home page components
+- [components/about/](mdc:components/about) - About page components
+- [components/blog/](mdc:components/blog) - Blog page components
+- [components/services/](mdc:components/services) - Services page components
+
+## UI Design Principles
+- Use a clean, modern UI with proper spacing and visual hierarchy
+- Create visually engaging interfaces with Lucide React icons
+- Implement smooth animations using Framer Motion
+- Follow a mobile-first approach with responsive designs
+- Use consistent color scheme with blue gradients and white backgrounds
+- Maintain accessibility standards with proper contrast and focus states
+
+## Common Component Usage
+Examples of component usage patterns:
+
+```tsx
+// WhatsApp CTA Button
+<WhatsAppCTAButton className="rounded-full px-5">
+  Chat With Us
+</WhatsAppCTAButton>
+
+// Service Card
+<Card className="hover:shadow-lg transition-shadow">
+  <CardHeader>
+    <CardTitle>Service Title</CardTitle>
+    <CardDescription>Service description</CardDescription>
+  </CardHeader>
+  <CardContent>
+    <ul className="space-y-2">
+      <li className="flex items-center">
+        <Check className="mr-2 h-4 w-4 text-blue-600" />
+        Feature 1
+      </li>
+    </ul>
+  </CardContent>
+  <CardFooter>
+    <Button asChild>
+      <Link href="/services/[slug]">Learn More</Link>
+    </Button>
+  </CardFooter>
+</Card>
+
+// Blog Post Card
+<Card className="overflow-hidden">
+  <CardHeader className="p-0">
+    <Image
+      src="/blog-image.jpg"
+      alt="Blog post"
+      width={400}
+      height={250}
+      className="w-full object-cover"
+    />
+  </CardHeader>
+  <CardContent className="p-4">
+    <h3 className="text-lg font-semibold">Blog Title</h3>
+    <p className="text-sm text-gray-600">Blog excerpt...</p>
+  </CardContent>
+</Card>
+```

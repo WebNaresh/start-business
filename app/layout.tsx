@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   description:
     "Professional business registration, compliance, and legal services to help your business thrive in India",
   keywords: "company registration, trademark, compliance, business services, startup registration, legal services",
-    generator: 'v0.dev'
+  generator: 'v0.dev'
 }
 
 export default function RootLayout({
@@ -23,13 +23,20 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
-        <ThemeProvider attribute="class" defaultTheme="light">
-          <Header />
-          <main>{children}</main>
-          <Footer />
-          <WhatsAppButton />
+    <html lang="en" suppressHydrationWarning>
+      <body className={inter.className} suppressHydrationWarning>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="light"
+          enableSystem={false}
+          disableTransitionOnChange
+        >
+          <div className="relative min-h-screen flex flex-col">
+            <Header />
+            <main className="flex-1">{children}</main>
+            <Footer />
+            <WhatsAppButton />
+          </div>
         </ThemeProvider>
       </body>
     </html>

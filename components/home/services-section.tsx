@@ -181,7 +181,7 @@ export default function ServicesSection() {
             >
               <h3 className="mb-4 text-xl font-bold">{service.title}</h3>
               <ul className="space-y-2">
-                {service.items.slice(0, 4).map((item, idx) => (
+                {service.items.map((item, idx) => (
                   <li key={idx} className="flex items-start">
                     <CheckCircle className="mr-2 h-5 w-5 flex-shrink-0 text-blue-600" />
                     <span className="text-slate-700">{item}</span>
@@ -191,12 +191,7 @@ export default function ServicesSection() {
               {service.items.length > 4 && (
                 <p className="mt-2 text-sm text-slate-500">+{service.items.length - 4} more services</p>
               )}
-              <Link
-                href={`/services/${service.slug}`}
-                className="mt-4 inline-flex items-center text-blue-600 hover:text-blue-700 group"
-              >
-                View all services <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </Link>
+              
             </motion.div>
           ))}
         </motion.div>

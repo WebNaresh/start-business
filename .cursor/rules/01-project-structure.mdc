@@ -1,0 +1,28 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# StartBusiness Demo Website - Project Structure
+
+This is a Next.js-based business registration and compliance services website.
+
+## Key Directories
+- [app/](mdc:app) - Next.js pages and routing using App Router
+  - [app/about/](mdc:app/about) - About page and components
+  - [app/blog/](mdc:app/blog) - Blog page and components
+  - [app/services/](mdc:app/services) - Services pages and components
+  - [app/contact/](mdc:app/contact) - Contact page
+- [components/](mdc:components) - Reusable React components
+  - [components/ui/](mdc:components/ui) - shadcn/ui component library
+  - [components/home/](mdc:components/home) - Home page components
+  - [components/about/](mdc:components/about) - About page components
+  - [components/blog/](mdc:components/blog) - Blog page components
+- [public/](mdc:public) - Static assets (logo, images)
+
+## Main Configuration Files
+- [package.json](mdc:package.json) - Dependencies and scripts
+- [next.config.ts](mdc:next.config.ts) - Next.js configuration
+- [components.json](mdc:components.json) - shadcn/ui configuration
+- [tsconfig.json](mdc:tsconfig.json) - TypeScript configuration
+- [tailwind.config.ts](mdc:tailwind.config.ts) - Tailwind CSS configuration

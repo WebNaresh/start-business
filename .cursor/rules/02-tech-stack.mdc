@@ -1,0 +1,51 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# StartBusiness Demo Website - Tech Stack
+
+## Frontend Framework
+- Next.js 14 (App Router)
+- React 18
+- TypeScript
+
+## UI and Styling
+- Tailwind CSS for styling
+- shadcn/ui component library
+- Lucide React for icons
+- Framer Motion for animations
+- Mobile-first, responsive design
+
+## State Management
+- React useState/useReducer for local state
+- Zustand for global client state (when needed)
+
+## Authentication
+- Custom OTP-based authentication system
+- Email/SMS login without passwords
+
+## Database
+- PostgreSQL
+- Prisma ORM for database access
+
+## Key Features
+- Business Registration Services
+- Company Incorporation
+- Trademark & Copyright Services
+- Compliance Management
+- Blog with Featured Posts
+- WhatsApp Integration
+- Contact Form
+
+## Key Libraries
+- next/image for optimized images
+- next/link for client-side navigation
+- framer-motion for animations
+- lucide-react for icons
+- @vercel/blob for image storage
+
+## Deployment
+- Vercel for hosting
+- Automatic deployments from v0.dev
+- GitHub integration for version control
