@@ -20,7 +20,7 @@ export default function AboutTeam() {
       social: {
         linkedin: "#",
         twitter: "#",
-        email: "rajesh@startbusiness.co.in",
+        email: "rajesh@StartBusiness",
       },
     },
     {
@@ -31,7 +31,7 @@ export default function AboutTeam() {
       social: {
         linkedin: "#",
         twitter: "#",
-        email: "priya@startbusiness.co.in",
+        email: "priya@StartBusiness",
       },
     },
     {
@@ -42,7 +42,7 @@ export default function AboutTeam() {
       social: {
         linkedin: "#",
         twitter: "#",
-        email: "vikram@startbusiness.co.in",
+        email: "vikram@StartBusiness",
       },
     },
     {
@@ -53,7 +53,7 @@ export default function AboutTeam() {
       social: {
         linkedin: "#",
         twitter: "#",
-        email: "ananya@startbusiness.co.in",
+        email: "ananya@StartBusiness",
       },
     },
   ]

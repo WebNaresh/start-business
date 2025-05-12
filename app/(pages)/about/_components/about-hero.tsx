@@ -49,7 +49,7 @@ export default function AboutHero() {
             transition={{ duration: 0.5 }}
             className="mb-4 text-4xl font-bold md:text-5xl lg:text-6xl text-slate-800"
           >
-            About <span className="text-[#2563eb]">StartBusiness.co.in</span>
+            About <span className="text-[#2563eb]">StartBusiness</span>
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -69,7 +69,7 @@ export default function AboutHero() {
           >
             <h2 className="mb-6 text-3xl font-bold text-[#2563eb]">Our Story</h2>
             <p className="mb-4 text-lg text-slate-600">
-              StartBusiness.co.in was founded with a vision to simplify the complex process of business registration and
+              StartBusiness was founded with a vision to simplify the complex process of business registration and
               compliance for entrepreneurs and businesses across India.
             </p>
             <p className="mb-4 text-lg text-slate-600">

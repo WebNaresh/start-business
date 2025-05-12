@@ -14,7 +14,7 @@ export default function TestimonialsSection() {
 
   const testimonials = [
     {
-      text: "StartBusiness.co.in made the company registration process incredibly smooth. Their team was professional and guided us through every step. Highly recommended!",
+      text: "StartBusiness made the company registration process incredibly smooth. Their team was professional and guided us through every step. Highly recommended!",
       author: "Rahul Sharma",
       position: "CEO, TechStart Solutions",
       image: "/diverse-business-person.png",
@@ -32,7 +32,7 @@ export default function TestimonialsSection() {
       image: "/indian-businessman.png",
     },
     {
-      text: "I was impressed by their attention to detail and prompt responses. The team at StartBusiness.co.in is knowledgeable and professional. Would definitely use their services again.",
+      text: "I was impressed by their attention to detail and prompt responses. The team at StartBusiness is knowledgeable and professional. Would definitely use their services again.",
       author: "Ananya Desai",
       position: "Co-founder, Innovate Solutions",
       image: "/indian-businesswoman.png",

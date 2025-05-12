@@ -10,7 +10,7 @@ import { ThemeProvider } from "@/components/theme-provider"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "StartBusiness.co.in - Business Registration & Compliance Services",
+  title: "StartBusiness - Business Registration & Compliance Services",
   description:
     "Professional business registration, compliance, and legal services to help your business thrive in India",
   keywords: "company registration, trademark, compliance, business services, startup registration, legal services",

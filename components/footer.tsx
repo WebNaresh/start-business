@@ -102,7 +102,7 @@ export default function Footer() {
                 <div className="relative h-10 w-10 mr-2 overflow-hidden">
                   <Image
                     src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/startbusiness_icon_transparent-u5NDFsSQarqF4PBI4Y5RxkT51hJhDI.png"
-                    alt="StartBusiness.co.in"
+                    alt="StartBusiness"
                     fill
                     className="object-contain"
                   />
@@ -333,7 +333,7 @@ export default function Footer() {
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row items-center justify-between">
             <p className="text-sm text-slate-500 mb-4 md:mb-0 text-center md:text-left">
-              &copy; {new Date().getFullYear()} StartBusiness.co.in. All rights reserved.
+              &copy; {new Date().getFullYear()} StartBusiness. All rights reserved.
             </p>
             <div className="flex flex-wrap justify-center gap-4 text-sm text-slate-500">
               <Link href="/privacy-policy" className="hover:text-blue-400 transition-colors">

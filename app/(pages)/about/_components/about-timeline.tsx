@@ -13,7 +13,7 @@ export default function AboutTimeline() {
     {
       year: "2012",
       title: "Company Founded",
-      description: "StartBusiness.co.in was established with a vision to simplify business registration in India.",
+      description: "StartBusiness was established with a vision to simplify business registration in India.",
     },
     {
       year: "2014",

@@ -112,7 +112,7 @@ export default function Header() {
             <div className="relative h-10 w-10 mr-2 overflow-hidden">
               <Image
                 src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/startbusiness_icon_transparent-u5NDFsSQarqF4PBI4Y5RxkT51hJhDI.png"
-                alt="StartBusiness.co.in"
+                alt="StartBusiness"
                 fill
                 className="object-contain"
               />
@@ -170,12 +170,12 @@ export default function Header() {
                   <Link href="/" className="flex items-center">
                     <Image
                       src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/startbusiness_icon_transparent-u5NDFsSQarqF4PBI4Y5RxkT51hJhDI.png"
-                      alt="StartBusiness.co.in"
+                      alt="StartBusiness"
                       width={32}
                       height={32}
                       className="mr-2"
                     />
-                    <span className="text-lg font-bold text-slate-900">StartBusiness.co.in</span>
+                    <span className="text-lg font-bold text-slate-900">StartBusiness</span>
                   </Link>
                   <SheetClose className="rounded-full p-1 hover:bg-slate-100">
                     <X className="h-5 w-5" />

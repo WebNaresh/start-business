@@ -220,18 +220,7 @@ export default function FeaturesSection() {
           </motion.div>
         </div>
 
-        {/* Bottom CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.5, delay: 0.6 }}
-          className="mt-16 text-center"
-        >
-          <WhatsAppCTAButton className="px-8 py-4 rounded-full text-lg shadow-lg hover:shadow-[#2563eb]/20 group">
-            <span className="font-medium">Start your business journey today</span>
-            <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
-          </WhatsAppCTAButton>
-        </motion.div>
+      
       </div>
     </section>
   )
