@@ -25,8 +25,10 @@ export default function Chatbot() {
   const [isLoading, setIsLoading] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [isKeyboardOpen, setIsKeyboardOpen] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const chatContainerRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   // Check if mobile on mount and on resize
   useEffect(() => {
@@ -38,15 +40,40 @@ export default function Chatbot() {
       }
     };
 
-    // Initial check
     checkIfMobile();
-
-    // Add resize listener
     window.addEventListener('resize', checkIfMobile);
-
-    // Cleanup
     return () => window.removeEventListener('resize', checkIfMobile);
   }, []);
+
+  // Handle keyboard visibility
+  useEffect(() => {
+    if (!isMobile) return;
+
+    const handleFocus = () => {
+      setIsKeyboardOpen(true);
+      // Scroll to bottom when keyboard opens
+      setTimeout(() => {
+        messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    };
+
+    const handleBlur = () => {
+      setIsKeyboardOpen(false);
+    };
+
+    const input = inputRef.current;
+    if (input) {
+      input.addEventListener('focus', handleFocus);
+      input.addEventListener('blur', handleBlur);
+    }
+
+    return () => {
+      if (input) {
+        input.removeEventListener('focus', handleFocus);
+        input.removeEventListener('blur', handleBlur);
+      }
+    };
+  }, [isMobile]);
 
   // Scroll to bottom when messages change
   useEffect(() => {
@@ -182,7 +209,9 @@ export default function Chatbot() {
         )}
 
         {isExpanded && (
-          <Card className="border border-gray-200 shadow-xl bg-white dark:bg-gray-900 overflow-hidden z-[1000]">
+          <Card className={`border border-gray-200 shadow-xl bg-white dark:bg-gray-900 overflow-hidden z-[1000] ${
+            isMobile && isKeyboardOpen ? 'fixed bottom-0 left-0 right-0 w-full rounded-none' : ''
+          }`}>
             <CardHeader className="p-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white">
               <div className="flex justify-between items-center">
                 <div className="flex items-center gap-2">
@@ -235,7 +264,11 @@ export default function Chatbot() {
 
             <CardContent ref={chatContainerRef} className="p-0 overflow-hidden">
               <div
-                className="h-[300px] sm:h-[350px] md:h-[400px] overflow-y-auto p-4 space-y-4 bg-gray-50 dark:bg-gray-800"
+                className={`overflow-y-auto p-4 space-y-4 bg-gray-50 dark:bg-gray-800 ${
+                  isMobile && isKeyboardOpen 
+                    ? 'h-[calc(100vh-180px)]' 
+                    : 'h-[300px] sm:h-[350px] md:h-[400px]'
+                }`}
                 style={{
                   backgroundImage: `radial-gradient(circle at 25px 25px, rgba(0, 0, 0, 0.05) 2%, transparent 0%), 
                                     radial-gradient(circle at 75px 75px, rgba(0, 0, 0, 0.025) 2%, transparent 0%)`,
@@ -332,9 +365,12 @@ export default function Chatbot() {
               </div>
             </CardContent>
 
-            <CardFooter className="p-3 border-t bg-white dark:bg-gray-900">
+            <CardFooter className={`p-3 border-t bg-white dark:bg-gray-900 ${
+              isMobile && isKeyboardOpen ? 'sticky bottom-0' : ''
+            }`}>
               <form onSubmit={handleSubmit} className="flex gap-2 w-full">
                 <Input
+                  ref={inputRef}
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   placeholder="Ask about business registration, finance, or compliance..."
