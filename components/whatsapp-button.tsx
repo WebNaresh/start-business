@@ -21,7 +21,7 @@ export default function WhatsAppButton() {
       href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent("Hi! I'm interested in your business services.")}`}
       target="_blank"
       rel="noopener noreferrer"
-      className="fixed bottom-6 left-6 z-[9999] flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg hover:bg-[#22c55e] transition-all duration-200 hover:scale-105 active:scale-95"
+      className="fixed bottom-6 left-6 z-[8999] flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg hover:bg-[#22c55e] transition-all duration-200 hover:scale-105 active:scale-95"
       aria-label="Chat on WhatsApp"
     >
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="h-7 w-7">
