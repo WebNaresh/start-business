@@ -8,6 +8,7 @@ import ContactSection from "@/components/home/contact-section"
 import StatsSection from "@/components/home/stats-section"
 import ProcessSection from "@/components/home/process-section"
 import FAQSection from "@/components/home/faq-section"
+import Chatbot from "@/components/Chatbot"
 
 
 export default function Home() {
@@ -24,7 +25,9 @@ export default function Home() {
     
       <FAQSection />
       <ContactSection />
-     
+      <div className="fixed bottom-4 right-4 z-50">
+        <Chatbot />
+      </div>
     </div>
   )
 }

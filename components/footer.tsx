@@ -33,16 +33,10 @@ export default function Footer() {
     }, 1000)
   }
 
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    })
-  }
+
 
   return (
     <footer className="relative overflow-hidden">
-      {/* Newsletter Section */}
       <div className="bg-gradient-to-r from-blue-600 to-blue-700 py-16 relative">
         {/* Background Elements */}
         <div className="absolute top-0 right-0 w-64 h-64 bg-blue-500 rounded-full -mr-32 -mt-32 opacity-20"></div>
@@ -351,13 +345,7 @@ export default function Footer() {
       </div>
 
       {/* Scroll to top button */}
-      <button
-        onClick={scrollToTop}
-        className="fixed bottom-6 right-6 z-50 bg-blue-600 hover:bg-blue-500 text-white rounded-full p-3 shadow-lg transition-all hover:shadow-blue-600/20 hover:shadow-xl"
-        aria-label="Scroll to top"
-      >
-        <ChevronUp className="h-5 w-5" />
-      </button>
+  
     </footer>
   )
 }
