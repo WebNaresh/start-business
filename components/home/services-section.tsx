@@ -1,213 +1,169 @@
 "use client"
 
+import { useState } from "react"
+import Image from "next/image"
 import Link from "next/link"
 import { motion } from "framer-motion"
 import { useInView } from "react-intersection-observer"
-import { ArrowRight, CheckCircle } from "lucide-react"
+import { ArrowRight } from "lucide-react"
 
 export default function ServicesSection() {
+  const [hoveredService, setHoveredService] = useState<number | null>(null)
   const { ref, inView } = useInView({
     triggerOnce: true,
     threshold: 0.1,
   })
 
+  // Reduced to 6 main service categories with icons and images
   const services = [
     {
-      title: "Startup Registration & Incorporation",
+      title: "Business Registration",
+      description: "Register your business entity with proper legal structure",
+      image: "/services/service-business-registration.png",
+      icon: "/icons/business-registration.png",
       slug: "startup-registration",
-      items: [
-        "Sole Proprietorship",
-        "Private Limited Company",
-        "Public Limited Company",
-        "Partnership",
-        "Limited Liability Partnership",
-        "Section 8 Company",
-        "Farmer Producer Company",
-        "Artisans Producer Company",
-        "Subsidiary of a Foreign Company",
-        "Company Incorporation in Foreign Jurisdiction",
-      ],
-      bgColor: "bg-gradient-to-br from-blue-50 to-blue-100 hover:from-blue-100 hover:to-blue-200",
-      borderColor: "border-blue-200",
+      color: "from-blue-500 to-blue-600",
+      lightColor: "from-blue-50 to-blue-100",
     },
     {
-      title: "Trademark & Copyrights",
+      title: "Trademark Protection",
+      description: "Secure your brand identity and intellectual property",
+      image: "/services/service-trademark.png",
+      icon: "/icons/trademark.png",
       slug: "trademark-copyright",
-      items: [
-        "Trademark Registration",
-        "Trademark Objection",
-        "Trademark Opposition",
-        "Trademark Hearing",
-        "Trademark Rectification",
-        "Trademark Registration in Foreign Jurisdiction",
-        "Copyright Registration",
-        "Copyright Objection",
-      ],
-      bgColor: "bg-gradient-to-br from-blue-50 to-blue-100 hover:from-blue-100 hover:to-blue-200",
-      borderColor: "border-blue-200",
+      color: "from-purple-500 to-purple-600",
+      lightColor: "from-purple-50 to-purple-100",
     },
     {
-      title: "Companies Law Compliance",
+      title: "Compliance Services",
+      description: "Stay compliant with all regulatory requirements",
+      image: "/services/service-compliance.png",
+      icon: "/icons/compliance.png",
       slug: "company-compliance",
-      items: [
-        "Obtaining Digital Signature Certificate",
-        "Obtaining DIN",
-        "Change in Directors",
-        "Appointment of Auditor",
-        "Annual Filing of Forms",
-        "Dematerialisation of Securities",
-        "Alteration in Share Capital",
-        "Share Transfer",
-        "Alteration in MOA and AOA",
-        "Change in Company Name",
-        "Shifting of Registered Office",
-        "Charge Registration",
-        "Conducting Due Diligence",
-        "Providing Search Reports",
-        "Maintenance of Statutory Registers",
-        "Closure and Winding up of Business",
-        "Beneficial Owner Compliance",
-      ],
-      bgColor: "bg-gradient-to-br from-purple-50 to-purple-100 hover:from-purple-100 hover:to-purple-200",
-      borderColor: "border-purple-200",
+      color: "from-emerald-500 to-emerald-600",
+      lightColor: "from-emerald-50 to-emerald-100",
     },
     {
-      title: "LLP Compliances",
-      slug: "llp-compliance",
-      items: [
-        "Change in Designated Partner",
-        "Filing of Form 8 and Form 11",
-        "Beneficial Owner Compliance",
-        "Maintenance of Statutory Registers",
-      ],
-      bgColor: "bg-gradient-to-br from-amber-50 to-amber-100 hover:from-amber-100 hover:to-amber-200",
-      borderColor: "border-amber-200",
+      title: "Tax & GST",
+      description: "Manage tax registrations and filings efficiently",
+      image: "/services/service-tax.png",
+      icon: "/icons/tax.png",
+      slug: "tax-services",
+      color: "from-amber-500 to-amber-600",
+      lightColor: "from-amber-50 to-amber-100",
     },
     {
-      title: "FEMA Compliance Services",
-      slug: "fema-compliance",
-      items: ["FDI Reporting with RBI", "Filing of FLA Return"],
-      bgColor: "bg-gradient-to-br from-rose-50 to-rose-100 hover:from-rose-100 hover:to-rose-200",
-      borderColor: "border-rose-200",
-    },
-    {
-      title: "Other Registrations",
-      slug: "other-registrations",
-      items: [
-        "Startup Registration",
-        "MSME (Udyam) Registration",
-        "FSSAI Basic Registration",
-        "FSSAI State License",
-        "FSSAI Central License",
-        "GST Registration",
-        "ESI Registration",
-        "Shop & Establishment",
-        "Importer-Exporter Code",
-        "EPF Registration",
-        "GeM Portal Registration",
-      ],
-      bgColor: "bg-gradient-to-br from-cyan-50 to-cyan-100 hover:from-cyan-100 hover:to-cyan-200",
-      borderColor: "border-cyan-200",
+      title: "FSSAI Registration",
+      description: "Food business licensing and compliance solutions",
+      image: "/services/service-fssai.png",
+      icon: "/icons/fssai.png",
+      slug: "fssai-registration",
+      color: "from-rose-500 to-rose-600",
+      lightColor: "from-rose-50 to-rose-100",
     },
     {
       title: "NGO Services",
+      description: "Specialized services for non-profit organizations",
+      image: "/services/service-ngo.png",
+      icon: "/icons/ngo.png",
       slug: "ngo-services",
-      items: [
-        "Section 8 Company Registration",
-        "Incorporation of Company Limited by Guarantee",
-        "Trust Registration",
-        "NGO Darpan Registration",
-        "CSR Registration",
-        "Filing of CSR-1",
-        "Registration on CSR Exchange Portal",
-      ],
-      bgColor: "bg-gradient-to-br from-orange-50 to-orange-100 hover:from-orange-100 hover:to-orange-200",
-      borderColor: "border-orange-200",
-    },
-    {
-      title: "POSH Compliance",
-      slug: "posh-compliance",
-      items: [
-        "Drafting of Organizational Policy",
-        "Conducting Training Programs",
-        "Formulation of Internal Complaints Committee",
-        "Appointment of External Member",
-        "Drafting of Minutes",
-        "Drafting and Filing of Annual Reports",
-      ],
-      bgColor: "bg-gradient-to-br from-indigo-50 to-indigo-100 hover:from-indigo-100 hover:to-indigo-200",
-      borderColor: "border-indigo-200",
+      color: "from-cyan-500 to-cyan-600",
+      lightColor: "from-cyan-50 to-cyan-100",
     },
   ]
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  }
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-  }
-
   return (
-    <section className="bg-slate-50 py-16" ref={ref}>
-      <div className="container mx-auto px-4">
+    <section className="py-8 relative overflow-hidden" ref={ref}>
+      {/* Background elements */}
+      <div className="absolute inset-0 bg-gradient-to-b from-white to-slate-50"></div>
+      <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-blue-50 rounded-full -mr-16 -mt-16 opacity-30"></div>
+      <div className="absolute bottom-0 left-0 w-1/4 h-1/4 bg-blue-50 rounded-full -ml-16 -mb-16 opacity-30"></div>
+
+      <div className="container mx-auto px-4 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.5 }}
-          className="mb-12 text-center"
+          className="mb-16 text-center"
         >
-          <h2 className="mb-4 text-3xl font-bold md:text-4xl">Our Comprehensive Services</h2>
-          <p className="mx-auto max-w-2xl text-slate-600">Everything you need to start, run, and grow your business</p>
+          <span className="inline-block px-4 py-1.5 mb-4 text-sm font-medium text-[#2563eb] bg-blue-50 rounded-full">
+            Our Services
+          </span>
+          <h2 className="mb-4 text-3xl font-bold md:text-4xl lg:text-5xl">
+            Comprehensive <span className="text-[#2563eb]">Business Solutions</span>
+          </h2>
+          <p className="mx-auto max-w-2xl text-slate-600 text-lg">
+            Everything you need to start, run, and grow your business
+          </p>
         </motion.div>
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate={inView ? "visible" : "hidden"}
-          className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
-        >
+
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {services.map((service, index) => (
             <motion.div
               key={index}
-              variants={itemVariants}
-              className={`rounded-lg ${service.bgColor} ${service.borderColor} border p-6 shadow-sm transition-all hover:shadow-md`}
+              initial={{ opacity: 0, y: 30 }}
+              animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              className="group relative rounded-xl overflow-hidden shadow-lg h-[280px] transform transition-all duration-500 hover:-translate-y-2 hover:shadow-xl"
+              onMouseEnter={() => setHoveredService(index)}
+              onMouseLeave={() => setHoveredService(null)}
             >
-              <h3 className="mb-4 text-xl font-bold">{service.title}</h3>
-              <ul className="space-y-2">
-                {service.items.slice(0, 4).map((item, idx) => (
-                  <li key={idx} className="flex items-start">
-                    <CheckCircle className="mr-2 h-5 w-5 flex-shrink-0 text-blue-600" />
-                    <span className="text-slate-700">{item}</span>
-                  </li>
-                ))}
-              </ul>
-              {service.items.length > 4 && (
-                <p className="mt-2 text-sm text-slate-500">+{service.items.length - 4} more services</p>
-              )}
-              <Link
-                href={`/services/${service.slug}`}
-                className="mt-4 inline-flex items-center text-blue-600 hover:text-blue-700 group"
-              >
-                View all services <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </Link>
+              {/* Background Image */}
+              <div className="absolute inset-0 w-full h-full">
+                <Image
+                  src={service.image || `/placeholder.svg?height=400&width=600&query=${service.title}`}
+                  alt={service.title}
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/80 to-transparent"></div>
+              </div>
+
+              {/* Content */}
+              <div className="absolute inset-0 p-6 flex flex-col justify-end text-white">
+                <div className="mb-4 flex items-center">
+                
+                  <h3 className="text-xl font-bold">{service.title}</h3>
+                </div>
+                <p className="mb-4 text-white/80">{service.description}</p>
+
+                {/* Animated button */}
+                <Link
+                  href={`/services/${service.slug}`}
+                  className="inline-flex items-center text-sm font-medium text-white hover:text-[#2563eb] transition-colors"
+                >
+                  <span className="relative">
+                    <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#2563eb] transition-all duration-300 group-hover:w-full"></span>
+                    Explore Services
+                  </span>
+                  <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </Link>
+              </div>
+
+              {/* Hover overlay with gradient */}
+              <div
+                className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-tr ${
+                  service.color
+                } mix-blend-soft-light`}
+              ></div>
             </motion.div>
           ))}
-        </motion.div>
-        <div className="mt-12 text-center">
+        </div>
+
+        {/* Bottom CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ duration: 0.5, delay: 0.6 }}
+          className="mt-16 text-center"
+        >
           <Link
             href="/services"
-            className="inline-flex items-center rounded-full bg-blue-600 px-6 py-3 text-white hover:bg-blue-700 transition-colors"
+            className="inline-flex items-center rounded-full bg-[#2563eb] px-8 py-4 text-lg font-medium text-white hover:bg-blue-700 transition-all shadow-lg hover:shadow-blue-500/20 group"
           >
-            View All Services <ArrowRight className="ml-2 h-5 w-5" />
+            View All Services <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
           </Link>
-        </div>
+        </motion.div>
       </div>
     </section>
   )

@@ -28,7 +28,7 @@ export default function AboutTestimonial() {
             </div>
             <blockquote className="mb-8 text-center">
               <p className="mb-4 text-xl font-medium text-slate-700 md:text-2xl">
-                "StartBusiness.co.in transformed our business registration experience. Their team's expertise and
+                "StartBusiness transformed our business registration experience. Their team's expertise and
                 dedication made the entire process smooth and hassle-free. They not only helped us with the registration
                 but also provided valuable guidance on compliance requirements. I highly recommend their services to
                 anyone looking to start a business in India."

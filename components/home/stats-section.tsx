@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion"
 import { useInView } from "react-intersection-observer"
-import { Award, Building, FileCheck, Users } from "lucide-react"
+import { Award, Building, FileCheck, Clock } from "lucide-react"
 
 export default function StatsSection() {
   const { ref, inView } = useInView({
@@ -13,16 +13,11 @@ export default function StatsSection() {
   const stats = [
     {
       icon: Building,
-      value: "5000+",
+      value: "1000+",
       label: "Businesses Registered",
       color: "bg-navy-100 text-navy-700",
     },
-    {
-      icon: Users,
-      value: "10000+",
-      label: "Happy Clients",
-      color: "bg-emerald-100 text-emerald-600",
-    },
+ 
     {
       icon: FileCheck,
       value: "98%",
@@ -35,6 +30,12 @@ export default function StatsSection() {
       label: "Expert Consultants",
       color: "bg-amber-100 text-amber-600",
     },
+    {
+      icon: Clock,
+      value:"1000+ hrs",
+      label:"Time Saved",
+      color:"bg-green-100 text-green-600"
+    }
   ]
 
   return (

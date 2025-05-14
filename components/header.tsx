@@ -3,20 +3,22 @@
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import Image from "next/image"
-import { Menu, Phone, Mail, ChevronDown, X, MapPin } from "lucide-react"
-import { motion, AnimatePresence } from "framer-motion"
+import { Menu, Phone, Mail, X, MapPin } from "lucide-react"
+import { motion } from "framer-motion"
+import { usePathname } from "next/navigation"
 
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger, SheetClose } from "@/components/ui/sheet"
 import WhatsAppCTAButton from "@/components/whatsapp-cta-button"
 
 export default function Header() {
-  const [isOpen, setIsOpen] = useState(false)
+  const [mounted, setMounted] = useState(false)
   const [scrolled, setScrolled] = useState(false)
-  const [activeLink, setActiveLink] = useState("/")
+  const pathname = usePathname()
 
   // Handle scroll effect
   useEffect(() => {
+    setMounted(true)
     const handleScroll = () => {
       if (window.scrollY > 10) {
         setScrolled(true)
@@ -26,31 +28,28 @@ export default function Header() {
     }
 
     window.addEventListener("scroll", handleScroll)
-
-    // Set active link based on current path
-    if (typeof window !== "undefined") {
-      setActiveLink(window.location.pathname)
-    }
-
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
   const navLinks = [
     { name: "Home", href: "/" },
-    {
-      name: "Services",
-      href: "/services",
-      dropdown: [
-        { name: "Startup Registration", href: "/services/startup-registration" },
-        { name: "Trademark & Copyright", href: "/services/trademark-copyright" },
-        { name: "Company Compliance", href: "/services/company-compliance" },
-        { name: "View All Services", href: "/services", highlight: true },
-      ],
-    },
+    { name: "Services", href: "/services" },
     { name: "About Us", href: "/about" },
     { name: "Blog", href: "/blog" },
     { name: "Contact", href: "/contact" },
   ]
+
+  const isActive = (href: string) => {
+    if (href === "/") {
+      return pathname === href
+    }
+    return pathname.startsWith(href)
+  }
+
+  // Prevent hydration mismatch by not rendering until mounted
+  if (!mounted) {
+    return null
+  }
 
   return (
     <header className={`sticky top-0 z-50 w-full transition-all duration-300 ${scrolled ? "shadow-md" : ""}`}>
@@ -113,7 +112,7 @@ export default function Header() {
             <div className="relative h-10 w-10 mr-2 overflow-hidden">
               <Image
                 src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/startbusiness_icon_transparent-u5NDFsSQarqF4PBI4Y5RxkT51hJhDI.png"
-                alt="StartBusiness.co.in"
+                alt="StartBusiness"
                 fill
                 className="object-contain"
               />
@@ -127,58 +126,26 @@ export default function Header() {
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center space-x-1">
-            {navLinks.map((link) =>
-              !link.dropdown ? (
-                <Link
-                  key={link.name}
-                  href={link.href}
-                  className={`relative px-3 py-2 text-sm font-medium rounded-md transition-colors ${
-                    activeLink === link.href ? "text-blue-600" : "text-slate-700 hover:text-blue-600 hover:bg-blue-50"
-                  }`}
-                >
-                  {link.name}
-                  {activeLink === link.href && (
-                    <motion.div
-                      layoutId="activeIndicator"
-                      className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-600 rounded-full"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={{ duration: 0.3 }}
-                    />
-                  )}
-                </Link>
-              ) : (
-                <div key={link.name} className="relative group">
-                  <button
-                    className={`flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors ${
-                      activeLink.startsWith(link.href)
-                        ? "text-blue-600"
-                        : "text-slate-700 hover:text-blue-600 hover:bg-blue-50"
-                    }`}
-                  >
-                    {link.name}
-                    <ChevronDown className="ml-1 h-4 w-4 transition-transform group-hover:rotate-180" />
-                  </button>
-
-                  {/* Dropdown */}
-                  <div className="absolute left-0 mt-1 hidden w-64 rounded-lg bg-white p-2 shadow-xl group-hover:block border border-slate-100 transition-all">
-                    {link.dropdown.map((item) => (
-                      <Link
-                        key={item.name}
-                        href={item.href}
-                        className={`block rounded-md px-4 py-2.5 text-sm transition-colors ${
-                          item.highlight
-                            ? "font-medium text-blue-600 hover:bg-blue-50"
-                            : "text-slate-700 hover:bg-slate-50 hover:text-blue-600"
-                        }`}
-                      >
-                        {item.name}
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-              ),
-            )}
+            {navLinks.map((link) => (
+              <Link
+                key={link.name}
+                href={link.href}
+                className={`relative px-3 py-2 text-sm font-medium rounded-md transition-colors ${
+                  isActive(link.href) ? "text-blue-600" : "text-slate-700 hover:text-blue-600 hover:bg-blue-50"
+                }`}
+              >
+                {link.name}
+                {isActive(link.href) && (
+                  <motion.div
+                    layoutId="activeIndicator"
+                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-600 rounded-full"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.3 }}
+                  />
+                )}
+              </Link>
+            ))}
           </nav>
 
           {/* Desktop CTA */}
@@ -203,12 +170,12 @@ export default function Header() {
                   <Link href="/" className="flex items-center">
                     <Image
                       src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/startbusiness_icon_transparent-u5NDFsSQarqF4PBI4Y5RxkT51hJhDI.png"
-                      alt="StartBusiness.co.in"
+                      alt="StartBusiness"
                       width={32}
                       height={32}
                       className="mr-2"
                     />
-                    <span className="text-lg font-bold text-slate-900">StartBusiness.co.in</span>
+                    <span className="text-lg font-bold text-slate-900">StartBusiness</span>
                   </Link>
                   <SheetClose className="rounded-full p-1 hover:bg-slate-100">
                     <X className="h-5 w-5" />
@@ -218,62 +185,19 @@ export default function Header() {
                 {/* Mobile navigation */}
                 <div className="flex-1 overflow-auto py-4 px-2">
                   <nav className="flex flex-col space-y-1">
-                    {navLinks.map((link) =>
-                      !link.dropdown ? (
-                        <Link
-                          key={link.name}
-                          href={link.href}
-                          className={`rounded-md px-4 py-3 text-base font-medium transition-colors ${
-                            activeLink === link.href
-                              ? "bg-blue-50 text-blue-600"
-                              : "text-slate-700 hover:bg-slate-50 hover:text-blue-600"
-                          }`}
-                        >
-                          {link.name}
-                        </Link>
-                      ) : (
-                        <div key={link.name}>
-                          <button
-                            onClick={() => setIsOpen(!isOpen)}
-                            className={`flex w-full items-center justify-between rounded-md px-4 py-3 text-base font-medium transition-colors ${
-                              activeLink.startsWith(link.href) || isOpen
-                                ? "bg-blue-50 text-blue-600"
-                                : "text-slate-700 hover:bg-slate-50 hover:text-blue-600"
-                            }`}
-                          >
-                            {link.name}
-                            <ChevronDown className={`h-5 w-5 transition-transform ${isOpen ? "rotate-180" : ""}`} />
-                          </button>
-                          <AnimatePresence>
-                            {isOpen && (
-                              <motion.div
-                                initial={{ height: 0, opacity: 0 }}
-                                animate={{ height: "auto", opacity: 1 }}
-                                exit={{ height: 0, opacity: 0 }}
-                                transition={{ duration: 0.3 }}
-                                className="overflow-hidden"
-                              >
-                                <div className="ml-4 mt-1 space-y-1 border-l-2 border-blue-100 pl-4">
-                                  {link.dropdown.map((item) => (
-                                    <Link
-                                      key={item.name}
-                                      href={item.href}
-                                      className={`block rounded-md px-3 py-2.5 text-base transition-colors ${
-                                        item.highlight
-                                          ? "font-medium text-blue-600 hover:bg-blue-50"
-                                          : "text-slate-700 hover:bg-slate-50 hover:text-blue-600"
-                                      }`}
-                                    >
-                                      {item.name}
-                                    </Link>
-                                  ))}
-                                </div>
-                              </motion.div>
-                            )}
-                          </AnimatePresence>
-                        </div>
-                      ),
-                    )}
+                    {navLinks.map((link) => (
+                      <Link
+                        key={link.name}
+                        href={link.href}
+                        className={`rounded-md px-4 py-3 text-base font-medium transition-colors ${
+                          isActive(link.href)
+                            ? "bg-blue-50 text-blue-600"
+                            : "text-slate-700 hover:bg-slate-50 hover:text-blue-600"
+                        }`}
+                      >
+                        {link.name}
+                      </Link>
+                    ))}
                   </nav>
                 </div>
 

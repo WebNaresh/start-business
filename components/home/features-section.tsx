@@ -1,82 +1,78 @@
 "use client"
 
-import { useState } from "react"
+import Image from "next/image"
+import { useState, useRef } from "react"
 import { motion } from "framer-motion"
 import { useInView } from "react-intersection-observer"
-import { Clock, FileCheck, Shield, Users, Zap, Award, Globe, HeartHandshake, ArrowRight } from "lucide-react"
+import { Shield, Award, Zap, Users, ArrowRight } from "lucide-react"
+import WhatsAppCTAButton from "@/components/whatsapp-cta-button"
 
 export default function FeaturesSection() {
-  const [hoveredFeature, setHoveredFeature] = useState<number | null>(null)
-
+  const [activeFeature, setActiveFeature] = useState<number>(0)
   const { ref, inView } = useInView({
     triggerOnce: true,
     threshold: 0.1,
   })
 
+  // Reduced to 5 key differentiating features with unique images
   const features = [
     {
-      icon: Clock,
-      title: "Quick Turnaround",
-      description: "Fast processing and timely delivery of all services with guaranteed deadlines",
-      color: "bg-blue-100 text-blue-600",
-      gradient: "from-blue-500 to-blue-600",
-      highlight: "bg-blue-50",
-    },
-    {
       icon: Shield,
-      title: "Legal Expertise",
-      description: "Team of experienced professionals with specialized knowledge to guide you",
-      color: "bg-blue-100 text-blue-600",
-      gradient: "from-blue-500 to-blue-700",
+      title: "Legal Protection",
+      description:
+        "Our expert team ensures your business has complete legal protection with proper documentation and compliance measures.",
+      image: "/features/feature-legal-protection.png",
+      color: "bg-blue-100 text-[#2563eb]",
       highlight: "bg-blue-50",
-    },
-    {
-      icon: FileCheck,
-      title: "Compliance Assured",
-      description: "Stay compliant with all regulatory requirements and avoid legal complications",
-      color: "bg-purple-100 text-purple-600",
-      gradient: "from-purple-500 to-purple-600",
-      highlight: "bg-purple-50",
-    },
-    {
-      icon: Users,
-      title: "Dedicated Support",
-      description: "Personalized assistance throughout the process with a dedicated manager",
-      color: "bg-amber-100 text-amber-600",
-      gradient: "from-amber-500 to-amber-600",
-      highlight: "bg-amber-50",
+      points: [
+        "Comprehensive legal documentation",
+        "Regulatory compliance assurance",
+        "Intellectual property protection",
+      ],
     },
     {
       icon: Zap,
-      title: "Efficient Process",
-      description: "Streamlined procedures to save your time and effort with digital solutions",
-      color: "bg-rose-100 text-rose-600",
-      gradient: "from-rose-500 to-rose-600",
-      highlight: "bg-rose-50",
+      title: "Accelerated Processing",
+      description:
+        "Experience faster business registration and compliance processes with our streamlined systems and expert handling.",
+      image: "/features/feature-accelerated-processing.png",
+      color: "bg-amber-100 text-amber-600",
+      highlight: "bg-amber-50",
+      points: ["50% faster than industry average", "Real-time application tracking", "Priority processing options"],
+    },
+    {
+      icon: Users,
+      title: "Dedicated Expert Team",
+      description:
+        "Work with our specialized team of legal and business experts who provide personalized guidance throughout your journey.",
+      image: "/features/feature-expert-team.png",
+      color: "bg-green-100 text-green-600",
+      highlight: "bg-green-50",
+      points: [
+        "Industry specialists with 10+ years experience",
+        "Dedicated account manager",
+        "Direct access to legal experts",
+      ],
     },
     {
       icon: Award,
-      title: "Quality Service",
-      description: "Commitment to excellence in every interaction with satisfaction guarantee",
-      color: "bg-indigo-100 text-indigo-600",
-      gradient: "from-indigo-500 to-indigo-600",
-      highlight: "bg-indigo-50",
+      title: "Success Guarantee",
+      description:
+        "We stand behind our services with a success guarantee, ensuring your business registration and compliance needs are met.",
+      image: "/features/feature-success-guarantee.png",
+      color: "bg-purple-100 text-purple-600",
+      highlight: "bg-purple-50",
+      points: ["98% first-time approval rate", "Money-back guarantee", "Free revisions and corrections"],
     },
     {
-      icon: Globe,
-      title: "Pan-India Service",
-      description: "Serving clients across all states and union territories with local expertise",
-      color: "bg-cyan-100 text-cyan-600",
-      gradient: "from-cyan-500 to-cyan-600",
-      highlight: "bg-cyan-50",
-    },
-    {
-      icon: HeartHandshake,
-      title: "Client-Centric Approach",
-      description: "Tailored solutions to meet your specific needs with personalized strategies",
-      color: "bg-orange-100 text-orange-600",
-      gradient: "from-orange-500 to-orange-600",
-      highlight: "bg-orange-50",
+      icon: Shield,
+      title: "Digital-First Approach",
+      description:
+        "Our digital platform simplifies document submission, tracking, and management for a seamless experience.",
+      image: "/features/feature-digital-approach.png",
+      color: "bg-rose-100 text-rose-600",
+      highlight: "bg-rose-50",
+      points: ["Secure digital document storage", "Paperless application process", "Real-time status updates"],
     },
   ]
 
@@ -120,107 +116,112 @@ export default function FeaturesSection() {
           transition={{ duration: 0.5 }}
           className="mb-16 text-center"
         >
-          <span className="inline-block px-4 py-1.5 mb-4 text-sm font-medium text-blue-600 bg-blue-50 rounded-full">
-            Our Advantages
+          <span className="inline-block px-4 py-1.5 mb-4 text-sm font-medium text-[#2563eb] bg-blue-50 rounded-full border border-blue-100">
+            Our Unique Advantages
           </span>
-          <h2 className="mb-4 text-3xl font-bold md:text-4xl lg:text-5xl bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">
-            Why Choose StartBusiness.co.in?
+          <h2 className="mb-4 text-3xl font-bold md:text-4xl lg:text-5xl bg-gradient-to-r from-[#2563eb] to-blue-800 bg-clip-text text-transparent">
+            Why Choose us
           </h2>
           <p className="mx-auto max-w-2xl text-slate-600 text-lg">
-            We provide end-to-end business solutions with expertise, efficiency, and excellence
+            We go beyond standard services to provide exceptional value and results for your business
           </p>
         </motion.div>
 
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate={inView ? "visible" : "hidden"}
-          className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4"
-        >
-          {features.map((feature, index) => (
-            <motion.div
-              key={index}
-              variants={itemVariants}
-              className={`group rounded-xl p-6 transition-all duration-300 relative overflow-hidden
-                ${hoveredFeature === index ? feature.highlight : "bg-white"}
-                border border-slate-200 hover:border-transparent
-                hover:shadow-lg hover:shadow-${feature.color.split(" ")[0].replace("bg-", "")}/10`}
-              onMouseEnter={() => setHoveredFeature(index)}
-              onMouseLeave={() => setHoveredFeature(null)}
-              whileHover={{ y: -5 }}
-            >
-              {/* Animated border on hover */}
-              <motion.div
-                className="absolute inset-0 opacity-0 group-hover:opacity-100 pointer-events-none"
-                initial={false}
-                animate={hoveredFeature === index ? { opacity: 1 } : { opacity: 0 }}
-                transition={{ duration: 0.3 }}
-              >
-                <div className="absolute inset-0 rounded-xl border-2 border-transparent bg-gradient-to-br from-blue-500 to-blue-600 -z-10 mask-border"></div>
-              </motion.div>
-
-              {/* Icon with animated background */}
-              <div className="relative mb-6">
-                <div
-                  className={`absolute inset-0 rounded-full ${feature.color.split(" ")[0]} opacity-20 blur-lg transform group-hover:scale-150 transition-transform duration-500`}
-                ></div>
-                <div
-                  className={`relative z-10 rounded-full ${feature.color} p-4 w-fit transition-all duration-300 group-hover:scale-110 group-hover:shadow-md`}
-                >
-                  <feature.icon className="h-6 w-6" />
-                </div>
-              </div>
-
-              {/* Content */}
-              <h3 className="mb-3 text-xl font-bold group-hover:text-blue-600 transition-colors duration-300">
-                {feature.title}
-              </h3>
-              <p className="text-slate-600 mb-4 group-hover:text-slate-700 transition-colors duration-300">
-                {feature.description}
-              </p>
-
-              {/* Learn more link that appears on hover */}
-              <div className="overflow-hidden h-6">
-                <motion.div
-                  initial={{ y: 30, opacity: 0 }}
-                  animate={hoveredFeature === index ? { y: 0, opacity: 1 } : { y: 30, opacity: 0 }}
-                  transition={{ duration: 0.3 }}
-                  className="flex items-center text-blue-600 font-medium"
-                >
-                  Learn more <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                </motion.div>
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
-
-        {/* Bottom CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.5, delay: 0.6 }}
-          className="mt-16 text-center"
-        >
-          <a
-            href="#contact"
-            className="inline-flex items-center px-6 py-3 text-white bg-blue-600 rounded-full hover:bg-blue-700 transition-colors shadow-lg hover:shadow-blue-500/20"
+        <div className="grid gap-10 lg:grid-cols-2 items-center">
+          {/* Feature tabs - left side */}
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            animate={inView ? "visible" : "hidden"}
+            className="flex flex-col space-y-4"
           >
-            <span className="font-medium">Start your business journey today</span>
-            <ArrowRight className="ml-2 h-5 w-5" />
-          </a>
-        </motion.div>
-      </div>
+            {features.map((feature, index) => (
+              <motion.div
+                key={index}
+                variants={itemVariants}
+                className={`group rounded-xl p-6 transition-all duration-300 cursor-pointer
+                  ${
+                    activeFeature === index
+                      ? `border-l-4 border-[#2563eb] shadow-lg ${feature.highlight}`
+                      : "border border-slate-200 bg-white hover:border-blue-200"
+                  }`}
+                onClick={() => setActiveFeature(index)}
+              >
+                <div className="flex items-start">
+                  <div
+                    className={`${feature.color} p-3 rounded-full mr-4 transition-all duration-300 ${
+                      activeFeature === index ? "scale-110" : "group-hover:scale-110"
+                    }`}
+                  >
+                    <feature.icon className="h-6 w-6" />
+                  </div>
+                  <div>
+                    <h3
+                      className={`text-xl font-bold transition-colors duration-300 ${
+                        activeFeature === index ? "text-[#2563eb]" : "text-slate-800 group-hover:text-[#2563eb]"
+                      }`}
+                    >
+                      {feature.title}
+                    </h3>
+                    <p className="text-slate-600 mt-1 line-clamp-2 group-hover:text-slate-700 transition-colors duration-300">
+                      {feature.description}
+                    </p>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
 
-      {/* Add this to your global CSS or as a style tag */}
-      <style jsx>{`
-        .mask-border {
-          mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-          mask-composite: exclude;
-          -webkit-mask-composite: xor;
-          mask-composite: exclude;
-          padding: 1px;
-        }
-      `}</style>
+          {/* Feature details - right side */}
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="bg-white rounded-2xl shadow-xl overflow-hidden border border-blue-100"
+          >
+            <div className="relative h-96 w-full">
+              <Image
+                src={
+                  features[activeFeature].image ||
+                  `/placeholder.svg?height=400&width=600&query=${features[activeFeature].title}`
+                }
+                alt={features[activeFeature].title}
+                fill
+                className="object-fill transition-all duration-500"
+                priority
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+              <div className="absolute bottom-0 left-0 p-6 text-white">
+                <h3 className="text-2xl font-bold mb-2">{features[activeFeature].title}</h3>
+                <p className="text-white/90 max-w-md">{features[activeFeature].description}</p>
+              </div>
+            </div>
+            <div className="p-6">
+              <h4 className="font-semibold text-[#2563eb] mb-4">Key Benefits:</h4>
+              <ul className="space-y-3">
+                {features[activeFeature].points.map((point, idx) => (
+                  <li key={idx} className="flex items-start">
+                    <div className="bg-blue-100 rounded-full p-1 mr-3 mt-0.5">
+                      <svg className="w-3 h-3 text-[#2563eb]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                      </svg>
+                    </div>
+                    <span className="text-slate-700">{point}</span>
+                  </li>
+                ))}
+              </ul>
+              <div className="mt-6">
+                <WhatsAppCTAButton service={features[activeFeature].title} className="w-full justify-center rounded-lg">
+                  Learn more about {features[activeFeature].title}
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </WhatsAppCTAButton>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+
+      
+      </div>
     </section>
   )
 }

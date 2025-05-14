@@ -1,0 +1,59 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# StartBusiness Demo Website - Routing Structure
+
+## Next.js App Router
+
+This project uses Next.js App Router with directory-based routing.
+
+## Public Pages
+- [app/page.tsx](mdc:app/page.tsx) - Main landing page
+- [app/about/](mdc:app/about) - About page
+- [app/services/](mdc:app/services) - Services pages
+- [app/blog/](mdc:app/blog) - Blog page
+- [app/contact/](mdc:app/contact) - Contact page
+
+## Dynamic Routes
+- [app/services/[slug]/](mdc:app/services/[slug]/) - Individual service pages
+- [app/blog/[slug]/](mdc:app/blog/[slug]/) - Individual blog post pages
+
+## Route Structure
+
+The app follows a consistent structure for each route:
+```
+app/
+  ├── page.tsx         # Landing page
+  ├── about/
+  │   ├── page.tsx     # About page
+  │   └── _components/ # About page components
+  ├── services/
+  │   ├── page.tsx     # Services listing page
+  │   ├── [slug]/
+  │   │   └── page.tsx # Individual service page
+  │   └── _components/ # Service page components
+  ├── blog/
+  │   ├── page.tsx     # Blog listing page
+  │   ├── [slug]/
+  │   │   └── page.tsx # Individual blog post
+  │   └── _components/ # Blog page components
+  └── contact/
+      └── page.tsx     # Contact page
+```
+
+## Layout & Providers
+- [app/layout.tsx](mdc:app/layout.tsx) - Root layout with metadata and theme provider
+- [components/header.tsx](mdc:components/header.tsx) - Global header
+- [components/footer.tsx](mdc:components/footer.tsx) - Global footer
+- [components/whatsapp-button.tsx](mdc:components/whatsapp-button.tsx) - Global WhatsApp button
+
+## Application Routes
+- [app/dashboard/](mdc:app/dashboard) - User dashboard
+- [app/leads/](mdc:app/leads) - Lead management
+- [app/proposals/](mdc:app/proposals) - Proposal management
+- [app/settings/](mdc:app/settings) - User and account settings
+
+## API Routes
+- [app/api/](mdc:app/api) - API endpoints using Next.js Route Handlers
