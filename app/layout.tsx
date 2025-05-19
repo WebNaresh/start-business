@@ -6,6 +6,7 @@ import Header from "@/components/header"
 import Footer from "@/components/footer"
 import WhatsAppButton from "@/components/whatsapp-button"
 import { ThemeProvider } from "@/components/theme-provider"
+import Chatbot from "@/components/Chatbot"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -43,6 +44,9 @@ export default function RootLayout({
             <main className="flex-1">{children}</main>
             <Footer />
             <WhatsAppButton />
+            <div className="fixed bottom-4 right-4 z-50">
+        <Chatbot />
+      </div>
           </div>
         </ThemeProvider>
       </body>
