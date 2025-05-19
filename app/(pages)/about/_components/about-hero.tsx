@@ -35,7 +35,7 @@ export default function AboutHero() {
   ]
 
   return (
-    <section className="relative bg-white py-20 overflow-hidden" ref={ref}>
+    <section className="relative bg-white py-8 overflow-hidden" ref={ref}>
       <div className="absolute inset-0 bg-white"></div>
       <div className="absolute inset-0 bg-[url('/pattern-bg.png')] opacity-[0.02]"></div>
       <div className="absolute top-0 right-0 w-64 h-64 bg-blue-50 rounded-full -mr-32 -mt-32 opacity-50"></div>
