@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     title: "StartBusiness - Business Registration & Compliance Services",
     description:
       "Professional business registration, compliance, and legal services to help your business thrive in India",
-    images: ["/og/hero_og.png"],
+    images: ["/hero_og.png"],
     url: "https://startbusiness.co.in",
   },
   metadataBase: new URL("https://startbusiness.co.in"),
