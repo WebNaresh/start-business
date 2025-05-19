@@ -210,7 +210,9 @@ export default function Chatbot() {
 
         {isExpanded && (
           <Card className={`border border-gray-200 shadow-xl bg-white dark:bg-gray-900 overflow-hidden z-[1000] ${
-            isMobile && isKeyboardOpen ? 'fixed bottom-0 left-0 right-0 w-full rounded-none' : ''
+            isMobile && isKeyboardOpen
+              ? 'fixed bottom-0 left-0 right-0 w-full h-[100dvh] max-h-[100dvh] rounded-none'
+              : ''
           }`}>
             <CardHeader className="p-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white">
               <div className="flex justify-between items-center">
@@ -262,11 +264,15 @@ export default function Chatbot() {
               </div>
             </CardHeader>
 
-            <CardContent ref={chatContainerRef} className="p-0 overflow-hidden">
+            <CardContent ref={chatContainerRef} className={`p-0 overflow-hidden ${
+              isMobile && isKeyboardOpen
+                ? 'flex-1 h-[calc(100dvh-120px)] max-h-[calc(100dvh-120px)]' // leave space for header/footer
+                : ''
+            }`}>
               <div
                 className={`overflow-y-auto p-4 space-y-4 bg-gray-50 dark:bg-gray-800 ${
-                  isMobile && isKeyboardOpen 
-                    ? 'h-[calc(100vh-180px)]' 
+                  isMobile && isKeyboardOpen
+                    ? 'h-full min-h-0' 
                     : 'h-[300px] sm:h-[350px] md:h-[400px]'
                 }`}
                 style={{
@@ -366,7 +372,7 @@ export default function Chatbot() {
             </CardContent>
 
             <CardFooter className={`p-3 border-t bg-white dark:bg-gray-900 ${
-              isMobile && isKeyboardOpen ? 'sticky bottom-0' : ''
+              isMobile && isKeyboardOpen ? 'sticky bottom-0 z-[1001] bg-white dark:bg-gray-900' : ''
             }`}>
               <form onSubmit={handleSubmit} className="flex gap-2 w-full">
                 <Input
