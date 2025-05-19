@@ -1,91 +1,67 @@
 "use client"
 
 import { useState } from "react"
-import Image from "next/image"
 import Link from "next/link"
 import { motion } from "framer-motion"
-import { useInView } from "react-intersection-observer"
 import { ArrowRight } from "lucide-react"
 
 export default function ServicesSection() {
-  const [hoveredService, setHoveredService] = useState<number | null>(null)
-  const { ref, inView } = useInView({
-    triggerOnce: true,
-    threshold: 0.1,
-  })
-
-  // Reduced to 6 main service categories with icons and images
+  // Service data as per the image
   const services = [
     {
       title: "Business Registration",
-      description: "Register your business entity with proper legal structure",
-      image: "/services/service-business-registration.png",
-      icon: "/icons/business-registration.png",
+      description: "Complete business registration and incorporation services",
+      price: "₹4,999",
+      billing: "/one-time",
       slug: "startup-registration",
-      color: "from-blue-500 to-blue-600",
-      lightColor: "from-blue-50 to-blue-100",
+      mostPopular: true,
     },
     {
       title: "Trademark Protection",
-      description: "Secure your brand identity and intellectual property",
-      image: "/services/service-trademark.png",
-      icon: "/icons/trademark.png",
+      description: "Comprehensive trademark registration and protection",
+      price: "₹6,499",
+      billing: "/one-time",
       slug: "trademark-copyright",
-      color: "from-purple-500 to-purple-600",
-      lightColor: "from-purple-50 to-purple-100",
+      mostPopular: false,
     },
     {
       title: "Compliance Services",
-      description: "Stay compliant with all regulatory requirements",
-      image: "/services/service-compliance.png",
-      icon: "/icons/compliance.png",
+      description: "Annual compliance and regulatory requirements",
+      price: "₹12,999",
+      billing: "/one-time",
       slug: "company-compliance",
-      color: "from-emerald-500 to-emerald-600",
-      lightColor: "from-emerald-50 to-emerald-100",
+      mostPopular: false,
     },
     {
       title: "Tax & GST",
-      description: "Manage tax registrations and filings efficiently",
-      image: "/services/service-tax.png",
-      icon: "/icons/tax.png",
+      description: "Complete tax and GST management services",
+      price: "₹8,999",
+      billing: "/one-time",
       slug: "tax-services",
-      color: "from-amber-500 to-amber-600",
-      lightColor: "from-amber-50 to-amber-100",
+      mostPopular: false,
     },
     {
       title: "FSSAI Registration",
-      description: "Food business licensing and compliance solutions",
-      image: "/services/service-fssai.png",
-      icon: "/icons/fssai.png",
+      description: "Food business licensing and compliance",
+      price: "₹3,999",
+      billing: "/one-time",
       slug: "fssai-registration",
-      color: "from-rose-500 to-rose-600",
-      lightColor: "from-rose-50 to-rose-100",
+      mostPopular: false,
     },
     {
       title: "NGO Services",
       description: "Specialized services for non-profit organizations",
-      image: "/services/service-ngo.png",
-      icon: "/icons/ngo.png",
+      price: "₹9,999",
+      billing: "/one-time",
       slug: "ngo-services",
-      color: "from-cyan-500 to-cyan-600",
-      lightColor: "from-cyan-50 to-cyan-100",
+      mostPopular: false,
     },
   ]
 
   return (
-    <section className="py-8 relative overflow-hidden" ref={ref}>
-      {/* Background elements */}
-      <div className="absolute inset-0 bg-gradient-to-b from-white to-slate-50"></div>
-      <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-blue-50 rounded-full -mr-16 -mt-16 opacity-30"></div>
-      <div className="absolute bottom-0 left-0 w-1/4 h-1/4 bg-blue-50 rounded-full -ml-16 -mb-16 opacity-30"></div>
-
-      <div className="container mx-auto px-4 relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.5 }}
-          className="mb-16 text-center"
-        >
+    <section className="py-12 bg-white">
+      <div className="container mx-auto px-4">
+        <div className="mb-8 text-center">
           <span className="inline-block px-4 py-1.5 mb-4 text-sm font-medium text-[#2563eb] bg-blue-50 rounded-full">
             Our Services
           </span>
@@ -95,75 +71,31 @@ export default function ServicesSection() {
           <p className="mx-auto max-w-2xl text-slate-600 text-lg">
             Everything you need to start, run, and grow your business
           </p>
-        </motion.div>
-
+        </div>
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-          {services.map((service, index) => (
+          {services.map((service, idx) => (
             <motion.div
-              key={index}
+              key={service.title}
               initial={{ opacity: 0, y: 30 }}
-              animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="group relative rounded-xl overflow-hidden shadow-lg h-[280px] transform transition-all duration-500 hover:-translate-y-2 hover:shadow-xl"
-              onMouseEnter={() => setHoveredService(index)}
-              onMouseLeave={() => setHoveredService(null)}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: idx * 0.08 }}
+              className={`relative rounded-xl bg-white shadow-md border ${service.mostPopular ? 'border-[#2563eb] shadow-lg' : 'border-slate-100'} flex flex-col p-6 h-[240px] justify-between`}
             >
-              {/* Background Image */}
-              <div className="absolute inset-0 w-full h-full">
-                <Image
-                  src={service.image || `/placeholder.svg?height=400&width=600&query=${service.title}`}
-                  alt={service.title}
-                  fill
-                  className="object-cover transition-transform duration-700 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/80 to-transparent"></div>
+              <div>
+                <h3 className="text-lg font-bold mb-1">{service.title}</h3>
+                <p className="text-slate-600 text-sm mb-6">{service.description}</p>
+                <div className="text-2xl font-bold mb-2">{service.price}<span className="text-base font-normal text-slate-500">{service.billing}</span></div>
               </div>
-
-              {/* Content */}
-              <div className="absolute inset-0 p-6 flex flex-col justify-end text-white">
-                <div className="mb-4 flex items-center">
-                
-                  <h3 className="text-xl font-bold">{service.title}</h3>
-                </div>
-                <p className="mb-4 text-white/80">{service.description}</p>
-
-                {/* Animated button */}
-                <Link
-                  href={`/services/${service.slug}`}
-                  className="inline-flex items-center text-sm font-medium text-white hover:text-[#2563eb] transition-colors"
-                >
-                  <span className="relative">
-                    <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#2563eb] transition-all duration-300 group-hover:w-full"></span>
-                    Explore Services
-                  </span>
-                  <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                </Link>
-              </div>
-
-              {/* Hover overlay with gradient */}
-              <div
-                className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-tr ${
-                  service.color
-                } mix-blend-soft-light`}
-              ></div>
+              <Link
+                href={`/services/${service.slug}`}
+                className={`w-full flex items-center justify-center rounded-md px-4 py-2 text-sm font-semibold transition-colors ${service.mostPopular ? 'bg-[#2563eb] text-white hover:bg-blue-700' : 'bg-slate-100 text-slate-800 hover:bg-slate-200'} mt-auto`}
+              >
+                Get Started <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
             </motion.div>
           ))}
         </div>
-
-        {/* Bottom CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.5, delay: 0.6 }}
-          className="mt-16 text-center"
-        >
-          <Link
-            href="/services"
-            className="inline-flex items-center rounded-full bg-[#2563eb] px-8 py-4 text-lg font-medium text-white hover:bg-blue-700 transition-all shadow-lg hover:shadow-blue-500/20 group"
-          >
-            View All Services <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
-          </Link>
-        </motion.div>
       </div>
     </section>
   )
