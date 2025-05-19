@@ -52,7 +52,7 @@ export default function Header() {
   }
 
   return (
-    <header className={`sticky top-0 z-50 w-full transition-all duration-300 ${scrolled ? "shadow-md" : ""}`}>
+    <header className={`sticky top-0 z-50 w-full transition-all duration-300 shadow-md ${scrolled ? "shadow-md" : ""}`}>
       {/* Top info bar */}
       <div className="bg-gradient-to-r from-blue-700 to-blue-600 py-2 text-white">
         <div className="container mx-auto flex flex-wrap items-center justify-between px-4 text-sm">
@@ -177,26 +177,24 @@ export default function Header() {
                     />
                     <span className="text-lg font-bold text-slate-900">StartBusiness</span>
                   </Link>
-                  <SheetClose className="rounded-full p-1 hover:bg-slate-100">
-                    <X className="h-5 w-5" />
-                  </SheetClose>
                 </div>
 
                 {/* Mobile navigation */}
                 <div className="flex-1 overflow-auto py-4 px-2">
                   <nav className="flex flex-col space-y-1">
                     {navLinks.map((link) => (
-                      <Link
-                        key={link.name}
-                        href={link.href}
-                        className={`rounded-md px-4 py-3 text-base font-medium transition-colors ${
-                          isActive(link.href)
-                            ? "bg-blue-50 text-blue-600"
-                            : "text-slate-700 hover:bg-slate-50 hover:text-blue-600"
-                        }`}
-                      >
-                        {link.name}
-                      </Link>
+                      <SheetClose asChild key={link.name}>
+                        <Link
+                          href={link.href}
+                          className={`rounded-md px-4 py-3 text-base font-medium transition-colors ${
+                            isActive(link.href)
+                              ? "bg-blue-50 text-blue-600"
+                              : "text-slate-700 hover:bg-slate-50 hover:text-blue-600"
+                          }`}
+                        >
+                          {link.name}
+                        </Link>
+                      </SheetClose>
                     ))}
                   </nav>
                 </div>

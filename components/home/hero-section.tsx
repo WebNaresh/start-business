@@ -91,10 +91,7 @@ export default function HeroSection() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
             >
-              <span className="inline-flex items-center rounded-full bg-blue-50 px-3 py-1 text-xs font-medium text-blue-600 ring-1 ring-inset ring-blue-200/50">
-                <span className="mr-1.5 h-1.5 w-1.5 rounded-full bg-blue-600"></span>
-                Trusted by 5000+ Businesses
-              </span>
+           
             </motion.div>
 
             <AnimatePresence mode="wait" custom={direction}>
