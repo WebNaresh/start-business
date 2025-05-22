@@ -1,16 +1,7 @@
-"use client"
-
-import HeroSection from "@/components/home/hero-section"
-import FeaturesSection from "@/components/home/features-section"
-import StatsSection from "@/components/home/stats-section"
-import ServicesSection from "@/components/home/services-section"
-import TestimonialsSection from "@/components/home/testimonials-section"
-import ContactSection from "@/components/home/contact-section"
-import ProcessSection from "@/components/home/process-section"
-import FAQSection from "@/components/home/faq-section"
+'use client'
 
 import { useState, useEffect } from 'react'
-import { subscribeUser, unsubscribeUser, sendNotification } from './actions'
+import { subscribeUser, unsubscribeUser, sendNotification } from '../actions'
 
 function urlBase64ToUint8Array(base64String: string) {
   const padding = '='.repeat((4 - (base64String.length % 4)) % 4)
@@ -138,21 +129,12 @@ function InstallPrompt() {
     </div>
   )
 }
-
-export default function Home() {
+ 
+export default function NotificationsPage() {
   return (
-    <div className="flex min-h-screen flex-col">
-      <HeroSection />
-      <StatsSection />
-      <FeaturesSection />
-      <ServicesSection />
-      <ProcessSection />
-      <TestimonialsSection />
-      <FAQSection />
-      <ContactSection />
+    <div>
       <PushNotificationManager />
       <InstallPrompt />
     </div>
   )
-}
- 
+} 

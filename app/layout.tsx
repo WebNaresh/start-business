@@ -8,6 +8,7 @@ import WhatsAppButton from "@/components/whatsapp-button"
 import { ThemeProvider } from "@/components/theme-provider"
 import Chatbot from "@/components/Chatbot"
 import { UIProvider } from "@/context/ui-context"
+import Head from "next/head"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -78,6 +79,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <Head>
+      <meta name="apple-mobile-web-app-title" content="Start Business" />
+      </Head>
       <body className={inter.className} suppressHydrationWarning>
         <ThemeProvider
           attribute="class"
