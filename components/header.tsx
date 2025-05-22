@@ -109,7 +109,7 @@ export default function Header() {
         <div className="container mx-auto flex items-center justify-between px-4">
           {/* Logo */}
           <Link href="/" className="flex items-center">
-            <div className="relative h-10 w-10 mr-2 overflow-hidden">
+            <div className="relative h-8 w-8 mr-2 overflow-hidden">
               <Image
                 src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/startbusiness_icon_transparent-u5NDFsSQarqF4PBI4Y5RxkT51hJhDI.png"
                 alt="StartBusiness"

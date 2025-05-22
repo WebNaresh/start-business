@@ -3,7 +3,7 @@
 import type React from "react"
 
 import { useState, useRef, useEffect } from "react"
-import { motion, AnimatePresence } from "framer-motion"
+import { motion } from "framer-motion"
 import { Send, User, Bot, Loader2, Trash, Clock, ChevronDown, X } from "lucide-react"
 import { format } from "date-fns"
 import { Button } from "@/components/ui/button"
@@ -15,7 +15,6 @@ import { Badge } from "@/components/ui/badge"
 import Image from "next/image"
 import { useMobile } from "@/hooks/use-mobile"
 import { useUI } from "@/context/ui-context"
-
 
 interface Message {
   id: string
@@ -108,6 +107,24 @@ export default function Chatbot() {
     }
   }, [messages.length])
 
+  // Prevent body scrolling when chatbot is expanded on mobile
+  useEffect(() => {
+    if (!isMobile) return
+
+    if (isExpanded) {
+      // Prevent scrolling on the body when chatbot is expanded on mobile
+      document.body.style.overflow = "hidden"
+    } else {
+      // Restore scrolling when chatbot is collapsed
+      document.body.style.overflow = ""
+    }
+
+    return () => {
+      // Cleanup: ensure scrolling is restored when component unmounts
+      document.body.style.overflow = ""
+    }
+  }, [isExpanded, isMobile])
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (!input.trim()) return
@@ -192,45 +209,39 @@ export default function Chatbot() {
 
   return (
     <div className="relative z-[9999]">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className={`fixed bottom-4 right-4 z-50 ${
-          isExpanded ? (isMobile ? "w-[calc(100%-2rem)]" : "w-full max-w-md md:max-w-2xl") : "w-auto"
-        }`}
-      >
-        {!isExpanded && (
-          <motion.div
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            className="absolute bottom-0 right-0 mb-2 mr-2"
+      {/* Chat button */}
+      {!isExpanded && (
+        <div className="fixed bottom-4 right-4 z-50">
+          <Button
+            onClick={toggleExpand}
+            size="icon"
+            className="rounded-full h-14 w-14 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 shadow-lg"
           >
-            <Button
-              onClick={toggleExpand}
-              size="icon"
-              className="rounded-full h-14 w-14 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 shadow-lg"
-            >
-              <Bot className="h-6 w-6" />
-            </Button>
-          </motion.div>
-        )}
+            <Bot className="h-6 w-6" />
+          </Button>
+        </div>
+      )}
 
-        {isExpanded && (
+      {/* Backdrop overlay for mobile */}
+      {isMobile && isExpanded && (
+        <div className="fixed inset-0 bg-black/50 z-[9998]" onClick={toggleExpand} style={{ touchAction: "none" }} />
+      )}
+
+      {/* Chat window */}
+      {isExpanded && (
+        <div
+          className={`fixed z-[9999] ${
+            isMobile
+              ? "inset-0" // Full screen on mobile
+              : "bottom-4 right-4 w-full max-w-md md:max-w-2xl" // Normal size on desktop
+          }`}
+        >
           <Card
-            className={`border border-gray-200 shadow-xl bg-white dark:bg-gray-900 overflow-hidden z-[1000] ${
-              isMobile && isKeyboardOpen
-                ? "fixed top-0 left-0 right-0 w-full h-[100dvh] max-h-[100dvh] rounded-none"
-                : ""
-            }`}
-            style={{
-              // Use a fixed height when keyboard is open to prevent layout shifts
-              height: isMobile && isKeyboardOpen ? "100dvh" : "auto",
-              // Ensure the bottom is visible when keyboard is open
-              bottom: isMobile && isKeyboardOpen ? "0" : "auto",
-            }}
+            className={`${
+              isMobile ? "h-full w-full rounded-none border-0" : "border border-gray-200 shadow-xl"
+            } flex flex-col overflow-hidden`}
           >
-            <CardHeader className="p-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white">
+            <CardHeader className="p-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white flex-shrink-0">
               <div className="flex justify-between items-center">
                 <div className="flex items-center gap-2">
                   <Avatar className="h-8 w-8 border-2 border-white/20">
@@ -282,123 +293,107 @@ export default function Chatbot() {
               </div>
             </CardHeader>
 
-            <CardContent
-              ref={chatContainerRef}
-              className="p-0 overflow-hidden flex-grow"
-              style={{
-                // Calculate the content height to ensure it fits within the viewport
-                height:
-                  isMobile && isKeyboardOpen
-                    ? "calc(100dvh - 130px)" // Adjust based on header and footer height
-                    : "auto",
-              }}
-            >
+            <CardContent ref={chatContainerRef} className="p-0 overflow-hidden flex-grow">
               <div
-                className={`overflow-y-auto p-4 space-y-4 bg-gray-50 dark:bg-gray-800 ${
-                  isMobile && isKeyboardOpen ? "h-full" : "h-[300px] sm:h-[350px] md:h-[400px]"
-                }`}
+                className="overflow-y-auto p-4 space-y-4 bg-gray-50 dark:bg-gray-800 h-full"
                 style={{
                   backgroundImage: `radial-gradient(circle at 25px 25px, rgba(0, 0, 0, 0.05) 2%, transparent 0%), 
-                                    radial-gradient(circle at 75px 75px, rgba(0, 0, 0, 0.025) 2%, transparent 0%)`,
+                                  radial-gradient(circle at 75px 75px, rgba(0, 0, 0, 0.025) 2%, transparent 0%)`,
                   backgroundSize: "100px 100px",
                 }}
               >
-                <AnimatePresence>
-                  {messages.map((message) => (
-                    <motion.div
-                      key={message.id}
-                      variants={messageVariants}
-                      initial="hidden"
-                      animate="visible"
-                      exit="exit"
-                      layout
-                      className={`flex ${message.role === "user" ? "justify-end" : "justify-start"} group`}
-                    >
-                      {message.role === "assistant" && (
-                        <Avatar className="h-8 w-8 mr-2 mt-1 flex-shrink-0">
-                          <AvatarImage src="/bot-avatar.png" alt="Business Assistant" />
-                          <AvatarFallback className="text-white relative">
-                            <div className="relative w-full h-full">
-                              <Image
-                                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/startbusiness_icon_transparent-u5NDFsSQarqF4PBI4Y5RxkT51hJhDI.png"
-                                alt="StartBusiness"
-                                fill
-                                className="object-contain"
-                              />
-                            </div>
-                          </AvatarFallback>
-                        </Avatar>
-                      )}
-
-                      <div className="flex flex-col max-w-[80%]">
-                        <div
-                          className={`rounded-2xl p-3 shadow-sm ${
-                            message.role === "user"
-                              ? "bg-gradient-to-r from-blue-500 to-blue-600 text-white ml-2"
-                              : "bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600"
-                          }`}
-                        >
-                          <div className="whitespace-pre-wrap break-words">{message.content}</div>
-                        </div>
-
-                        <div
-                          className={`text-xs mt-1 flex items-center opacity-0 group-hover:opacity-100 transition-opacity ${
-                            message.role === "user" ? "justify-end mr-2" : "justify-start ml-2"
-                          } text-gray-500`}
-                        >
-                          <Clock className="h-3 w-3 inline mr-1" />
-                          {format(message.timestamp, "h:mm a")}
-                        </div>
-                      </div>
-
-                      {message.role === "user" && (
-                        <Avatar className="h-8 w-8 ml-2 mt-1 flex-shrink-0">
-                          <AvatarImage src="/user-avatar.png" alt="User" />
-                          <AvatarFallback className="bg-green-600 text-white">
-                            <User className="h-4 w-4" />
-                          </AvatarFallback>
-                        </Avatar>
-                      )}
-                    </motion.div>
-                  ))}
-
-                  {isLoading && (
-                    <motion.div
-                      variants={messageVariants}
-                      initial="hidden"
-                      animate="visible"
-                      className="flex justify-start"
-                    >
-                      <Avatar className="h-8 w-8 mr-2 mt-1">
+                {messages.map((message) => (
+                  <motion.div
+                    key={message.id}
+                    variants={messageVariants}
+                    initial="hidden"
+                    animate="visible"
+                    className={`flex ${message.role === "user" ? "justify-end" : "justify-start"} group`}
+                  >
+                    {message.role === "assistant" && (
+                      <Avatar className="h-8 w-8 mr-2 mt-1 flex-shrink-0">
                         <AvatarImage src="/bot-avatar.png" alt="Business Assistant" />
-                        <AvatarFallback className="bg-blue-600 text-white">BA</AvatarFallback>
-                      </Avatar>
-
-                      <div className="bg-white dark:bg-gray-700 rounded-2xl p-4 shadow-sm border border-gray-200 dark:border-gray-600 flex items-center">
-                        <div className="flex space-x-1">
-                          {loadingDots.map((_, i) => (
-                            <motion.div
-                              key={i}
-                              custom={i}
-                              variants={loadingVariants}
-                              initial="initial"
-                              animate="animate"
-                              className="h-2 w-2 rounded-full bg-blue-600"
+                        <AvatarFallback className="text-white relative">
+                          <div className="relative w-full h-full">
+                            <Image
+                              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/startbusiness_icon_transparent-u5NDFsSQarqF4PBI4Y5RxkT51hJhDI.png"
+                              alt="StartBusiness"
+                              fill
+                              className="object-contain"
                             />
-                          ))}
-                        </div>
-                      </div>
-                    </motion.div>
-                  )}
+                          </div>
+                        </AvatarFallback>
+                      </Avatar>
+                    )}
 
-                  <div ref={messagesEndRef} />
-                </AnimatePresence>
+                    <div className="flex flex-col max-w-[80%]">
+                      <div
+                        className={`rounded-2xl p-3 shadow-sm ${
+                          message.role === "user"
+                            ? "bg-gradient-to-r from-blue-500 to-blue-600 text-white ml-2"
+                            : "bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600"
+                        }`}
+                      >
+                        <div className="whitespace-pre-wrap break-words">{message.content}</div>
+                      </div>
+
+                      <div
+                        className={`text-xs mt-1 flex items-center opacity-0 group-hover:opacity-100 transition-opacity ${
+                          message.role === "user" ? "justify-end mr-2" : "justify-start ml-2"
+                        } text-gray-500`}
+                      >
+                        <Clock className="h-3 w-3 inline mr-1" />
+                        {format(message.timestamp, "h:mm a")}
+                      </div>
+                    </div>
+
+                    {message.role === "user" && (
+                      <Avatar className="h-8 w-8 ml-2 mt-1 flex-shrink-0">
+                        <AvatarImage src="/user-avatar.png" alt="User" />
+                        <AvatarFallback className="bg-green-600 text-white">
+                          <User className="h-4 w-4" />
+                        </AvatarFallback>
+                      </Avatar>
+                    )}
+                  </motion.div>
+                ))}
+
+                {isLoading && (
+                  <motion.div
+                    variants={messageVariants}
+                    initial="hidden"
+                    animate="visible"
+                    className="flex justify-start"
+                  >
+                    <Avatar className="h-8 w-8 mr-2 mt-1">
+                      <AvatarImage src="/bot-avatar.png" alt="Business Assistant" />
+                      <AvatarFallback className="bg-blue-600 text-white">BA</AvatarFallback>
+                    </Avatar>
+
+                    <div className="bg-white dark:bg-gray-700 rounded-2xl p-4 shadow-sm border border-gray-200 dark:border-gray-600 flex items-center">
+                      <div className="flex space-x-1">
+                        {loadingDots.map((_, i) => (
+                          <motion.div
+                            key={i}
+                            custom={i}
+                            variants={loadingVariants}
+                            initial="initial"
+                            animate="animate"
+                            className="h-2 w-2 rounded-full bg-blue-600"
+                          />
+                        ))}
+                      </div>
+                    </div>
+                  </motion.div>
+                )}
+
+                <div ref={messagesEndRef} />
               </div>
             </CardContent>
 
             <CardFooter
-              className={`p-3 border-t bg-white dark:bg-gray-900 ${
-                isMobile && isKeyboardOpen ? "sticky bottom-0 left-0 right-0 z-[1001]" : ""
+              className={`p-3 border-t bg-white dark:bg-gray-900 flex-shrink-0 ${
+                isKeyboardOpen ? "sticky bottom-0 left-0 right-0 z-[1001]" : ""
               }`}
             >
               <form onSubmit={handleSubmit} className="flex gap-2 w-full">
@@ -421,8 +416,8 @@ export default function Chatbot() {
               </form>
             </CardFooter>
           </Card>
-        )}
-      </motion.div>
+        </div>
+      )}
     </div>
   )
 }
