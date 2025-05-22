@@ -1,84 +1,95 @@
-'use client';
+"use client"
 
-import { useState, useRef, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Send, User, Bot, Loader2, Trash, Clock, ChevronDown, X } from 'lucide-react';
-import { format } from 'date-fns';
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/components/ui/card";
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
-import { Badge } from "@/components/ui/badge";
-import Image from 'next/image';
+import type React from "react"
+
+import { useState, useRef, useEffect } from "react"
+import { motion, AnimatePresence } from "framer-motion"
+import { Send, User, Bot, Loader2, Trash, Clock, ChevronDown, X } from "lucide-react"
+import { format } from "date-fns"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/components/ui/card"
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar"
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
+import { Badge } from "@/components/ui/badge"
+import Image from "next/image"
+import { useMobile } from "@/hooks/use-mobile"
+import { useUI } from "@/context/ui-context"
+
 
 interface Message {
-  id: string;
-  role: 'user' | 'assistant';
-  content: string;
-  timestamp: Date;
+  id: string
+  role: "user" | "assistant"
+  content: string
+  timestamp: Date
 }
 
 export default function Chatbot() {
-  const [messages, setMessages] = useState<Message[]>([]);
-  const [input, setInput] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
-  const [isExpanded, setIsExpanded] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
-  const [isKeyboardOpen, setIsKeyboardOpen] = useState(false);
-  const messagesEndRef = useRef<HTMLDivElement>(null);
-  const chatContainerRef = useRef<HTMLDivElement>(null);
-  const inputRef = useRef<HTMLInputElement>(null);
+  const [messages, setMessages] = useState<Message[]>([])
+  const [input, setInput] = useState("")
+  const [isLoading, setIsLoading] = useState(false)
+  const [isExpanded, setIsExpanded] = useState(false)
+  const [isKeyboardOpen, setIsKeyboardOpen] = useState(false)
+  const messagesEndRef = useRef<HTMLDivElement>(null)
+  const chatContainerRef = useRef<HTMLDivElement>(null)
+  const inputRef = useRef<HTMLInputElement>(null)
+  const isMobile = useMobile()
+  const { setChatbotExpanded } = useUI()
 
-  // Check if mobile on mount and on resize
+  // Update global state when chatbot expands/collapses
   useEffect(() => {
-    const checkIfMobile = () => {
-      const mobile = window.innerWidth < 768;
-      setIsMobile(mobile);
-      if (mobile) {
-        setIsExpanded(false);
-      }
-    };
+    setChatbotExpanded(isExpanded)
+  }, [isExpanded, setChatbotExpanded])
 
-    checkIfMobile();
-    window.addEventListener('resize', checkIfMobile);
-    return () => window.removeEventListener('resize', checkIfMobile);
-  }, []);
-
-  // Handle keyboard visibility
+  // Check viewport height on keyboard open/close
   useEffect(() => {
-    if (!isMobile) return;
+    if (!isMobile) return
+
+    // Store initial viewport height
+    const initialViewportHeight = window.innerHeight
+
+    const handleResize = () => {
+      // If the current height is significantly less than initial height, keyboard is likely open
+      const isKeyboard = window.innerHeight < initialViewportHeight * 0.75
+      setIsKeyboardOpen(isKeyboard)
+
+      // Ensure we scroll to the bottom when keyboard state changes
+      setTimeout(() => {
+        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
+      }, 100)
+    }
+
+    window.addEventListener("resize", handleResize)
+    return () => window.removeEventListener("resize", handleResize)
+  }, [isMobile])
+
+  // Handle input focus events as a secondary detection method
+  useEffect(() => {
+    if (!isMobile) return
 
     const handleFocus = () => {
-      setIsKeyboardOpen(true);
-      // Scroll to bottom when keyboard opens
+      // Don't set keyboard state here, just scroll
       setTimeout(() => {
-        messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-      }, 100);
-    };
+        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
+      }, 100)
+    }
 
-    const handleBlur = () => {
-      setIsKeyboardOpen(false);
-    };
-
-    const input = inputRef.current;
+    const input = inputRef.current
     if (input) {
-      input.addEventListener('focus', handleFocus);
-      input.addEventListener('blur', handleBlur);
+      input.addEventListener("focus", handleFocus)
     }
 
     return () => {
       if (input) {
-        input.removeEventListener('focus', handleFocus);
-        input.removeEventListener('blur', handleBlur);
+        input.removeEventListener("focus", handleFocus)
       }
-    };
-  }, [isMobile]);
+    }
+  }, [isMobile])
 
   // Scroll to bottom when messages change
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages]);
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
+  }, [messages])
 
   // Welcome message on first load
   useEffect(() => {
@@ -87,84 +98,85 @@ export default function Chatbot() {
         setMessages([
           {
             id: Date.now().toString(),
-            role: 'assistant',
-            content: 'Hello! I\'m your business and finance assistant. I can help you with:\n\n• Business registration and incorporation\n• Financial services and products\n• Tax-related queries\n• Business compliance\n• Financial planning\n\nHow can I assist you today?',
+            role: "assistant",
+            content:
+              "Hello! I'm your business and finance assistant. I can help you with:\n\n• Business registration and incorporation\n• Financial services and products\n• Tax-related queries\n• Business compliance\n• Financial planning\n\nHow can I assist you today?",
             timestamp: new Date(),
           },
-        ]);
-      }, 500);
+        ])
+      }, 500)
     }
-  }, [messages.length]);
+  }, [messages.length])
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!input.trim()) return;
+    e.preventDefault()
+    if (!input.trim()) return
 
     const userMessage: Message = {
       id: Date.now().toString(),
-      role: 'user',
+      role: "user",
       content: input,
       timestamp: new Date(),
-    };
+    }
 
-    setMessages(prev => [...prev, userMessage]);
-    setInput('');
-    setIsLoading(true);
+    setMessages((prev) => [...prev, userMessage])
+    setInput("")
+    setIsLoading(true)
 
     // If collapsed, expand the chat on user message
     if (!isExpanded) {
-      setIsExpanded(true);
+      setIsExpanded(true)
     }
 
     try {
-      const response = await fetch('/api/chat', {
-        method: 'POST',
+      const response = await fetch("/api/chat", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({ message: input }),
-      });
+      })
 
-      const data = await response.json();
+      const data = await response.json()
       const assistantMessage: Message = {
         id: (Date.now() + 1).toString(),
-        role: 'assistant',
+        role: "assistant",
         content: data.message || "I'm sorry, I couldn't process that request.",
         timestamp: new Date(),
-      };
+      }
 
-      setMessages(prev => [...prev, assistantMessage]);
+      setMessages((prev) => [...prev, assistantMessage])
     } catch (error) {
-      console.error('Error:', error);
+      console.error("Error:", error)
       const errorMessage: Message = {
         id: (Date.now() + 1).toString(),
-        role: 'assistant',
+        role: "assistant",
         content: "I'm sorry, there was an error processing your request. Please try again.",
         timestamp: new Date(),
-      };
-      setMessages(prev => [...prev, errorMessage]);
+      }
+      setMessages((prev) => [...prev, errorMessage])
     } finally {
-      setIsLoading(false);
+      setIsLoading(false)
     }
-  };
+  }
 
   const clearChat = () => {
-    setMessages([]);
-  };
+    setMessages([])
+  }
 
   const toggleExpand = () => {
-    setIsExpanded(!isExpanded);
-  };
+    setIsExpanded(!isExpanded)
+  }
 
   // Message animations
   const messageVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.3 } },
     exit: { opacity: 0, transition: { duration: 0.2 } },
-  };
+  }
 
   // Loading animation dots
-  const loadingDots = Array(3).fill(0);
+  const loadingDots = Array(3).fill(0)
   const loadingVariants = {
     initial: { y: 0 },
     animate: (i: number) => ({
@@ -172,11 +184,11 @@ export default function Chatbot() {
       transition: {
         delay: i * 0.1,
         duration: 0.6,
-        repeat: Infinity,
+        repeat: Number.POSITIVE_INFINITY,
         repeatType: "loop" as const,
       },
     }),
-  };
+  }
 
   return (
     <div className="relative z-[9999]">
@@ -185,11 +197,7 @@ export default function Chatbot() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
         className={`fixed bottom-4 right-4 z-50 ${
-          isExpanded 
-            ? isMobile 
-              ? "w-[calc(100%-2rem)]" 
-              : "w-full max-w-md md:max-w-2xl" 
-            : "w-auto"
+          isExpanded ? (isMobile ? "w-[calc(100%-2rem)]" : "w-full max-w-md md:max-w-2xl") : "w-auto"
         }`}
       >
         {!isExpanded && (
@@ -209,24 +217,34 @@ export default function Chatbot() {
         )}
 
         {isExpanded && (
-          <Card className={`border border-gray-200 shadow-xl bg-white dark:bg-gray-900 overflow-hidden z-[1000] ${
-            isMobile && isKeyboardOpen
-              ? 'fixed top-0 bottom-0 left-0 right-0 w-full h-[100dvh] max-h-[100dvh] rounded-none'
-              : ''
-          }`}>
+          <Card
+            className={`border border-gray-200 shadow-xl bg-white dark:bg-gray-900 overflow-hidden z-[1000] ${
+              isMobile && isKeyboardOpen
+                ? "fixed top-0 left-0 right-0 w-full h-[100dvh] max-h-[100dvh] rounded-none"
+                : ""
+            }`}
+            style={{
+              // Use a fixed height when keyboard is open to prevent layout shifts
+              height: isMobile && isKeyboardOpen ? "100dvh" : "auto",
+              // Ensure the bottom is visible when keyboard is open
+              bottom: isMobile && isKeyboardOpen ? "0" : "auto",
+            }}
+          >
             <CardHeader className="p-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white">
               <div className="flex justify-between items-center">
                 <div className="flex items-center gap-2">
                   <Avatar className="h-8 w-8 border-2 border-white/20">
                     <AvatarImage src="/bot-avatar.png" alt="Business Assistant" />
-               
-                    <AvatarFallback className=" text-white"> 
-                    <Image
-                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/startbusiness_icon_transparent-u5NDFsSQarqF4PBI4Y5RxkT51hJhDI.png"
-                alt="StartBusiness"
-                fill
-                className="object-contain"
-              /></AvatarFallback>
+                    <AvatarFallback className="text-white relative">
+                      <div className="relative w-full h-full">
+                        <Image
+                          src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/startbusiness_icon_transparent-u5NDFsSQarqF4PBI4Y5RxkT51hJhDI.png"
+                          alt="StartBusiness"
+                          fill
+                          className="object-contain"
+                        />
+                      </div>
+                    </AvatarFallback>
                   </Avatar>
                   <CardTitle className="text-lg font-medium">Business Assistant</CardTitle>
                   <Badge variant="outline" className="bg-blue-800/30 text-white border-blue-400 ml-2">
@@ -264,21 +282,25 @@ export default function Chatbot() {
               </div>
             </CardHeader>
 
-            <CardContent ref={chatContainerRef} className={`p-0 overflow-hidden ${
-              isMobile && isKeyboardOpen
-                ? 'flex-1 h-full max-h-full pb-20'
-                : ''
-            }`}>
+            <CardContent
+              ref={chatContainerRef}
+              className="p-0 overflow-hidden flex-grow"
+              style={{
+                // Calculate the content height to ensure it fits within the viewport
+                height:
+                  isMobile && isKeyboardOpen
+                    ? "calc(100dvh - 130px)" // Adjust based on header and footer height
+                    : "auto",
+              }}
+            >
               <div
                 className={`overflow-y-auto p-4 space-y-4 bg-gray-50 dark:bg-gray-800 ${
-                  isMobile && isKeyboardOpen
-                    ? 'h-full min-h-0 pb-20'
-                    : 'h-[300px] sm:h-[350px] md:h-[400px]'
+                  isMobile && isKeyboardOpen ? "h-full" : "h-[300px] sm:h-[350px] md:h-[400px]"
                 }`}
                 style={{
                   backgroundImage: `radial-gradient(circle at 25px 25px, rgba(0, 0, 0, 0.05) 2%, transparent 0%), 
                                     radial-gradient(circle at 75px 75px, rgba(0, 0, 0, 0.025) 2%, transparent 0%)`,
-                  backgroundSize: '100px 100px',
+                  backgroundSize: "100px 100px",
                 }}
               >
                 <AnimatePresence>
@@ -290,27 +312,30 @@ export default function Chatbot() {
                       animate="visible"
                       exit="exit"
                       layout
-                      className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'} group`}
+                      className={`flex ${message.role === "user" ? "justify-end" : "justify-start"} group`}
                     >
-                      {message.role === 'assistant' && (
+                      {message.role === "assistant" && (
                         <Avatar className="h-8 w-8 mr-2 mt-1 flex-shrink-0">
                           <AvatarImage src="/bot-avatar.png" alt="Business Assistant" />
-                          <AvatarFallback className=" text-white"> 
-                    <Image
-                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/startbusiness_icon_transparent-u5NDFsSQarqF4PBI4Y5RxkT51hJhDI.png"
-                alt="StartBusiness"
-                fill
-                className="object-contain"
-              /></AvatarFallback>
+                          <AvatarFallback className="text-white relative">
+                            <div className="relative w-full h-full">
+                              <Image
+                                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/startbusiness_icon_transparent-u5NDFsSQarqF4PBI4Y5RxkT51hJhDI.png"
+                                alt="StartBusiness"
+                                fill
+                                className="object-contain"
+                              />
+                            </div>
+                          </AvatarFallback>
                         </Avatar>
                       )}
 
                       <div className="flex flex-col max-w-[80%]">
                         <div
                           className={`rounded-2xl p-3 shadow-sm ${
-                            message.role === 'user'
-                              ? 'bg-gradient-to-r from-blue-500 to-blue-600 text-white ml-2'
-                              : 'bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600'
+                            message.role === "user"
+                              ? "bg-gradient-to-r from-blue-500 to-blue-600 text-white ml-2"
+                              : "bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600"
                           }`}
                         >
                           <div className="whitespace-pre-wrap break-words">{message.content}</div>
@@ -318,15 +343,15 @@ export default function Chatbot() {
 
                         <div
                           className={`text-xs mt-1 flex items-center opacity-0 group-hover:opacity-100 transition-opacity ${
-                            message.role === 'user' ? 'justify-end mr-2' : 'justify-start ml-2'
+                            message.role === "user" ? "justify-end mr-2" : "justify-start ml-2"
                           } text-gray-500`}
                         >
                           <Clock className="h-3 w-3 inline mr-1" />
-                          {format(message.timestamp, 'h:mm a')}
+                          {format(message.timestamp, "h:mm a")}
                         </div>
                       </div>
 
-                      {message.role === 'user' && (
+                      {message.role === "user" && (
                         <Avatar className="h-8 w-8 ml-2 mt-1 flex-shrink-0">
                           <AvatarImage src="/user-avatar.png" alt="User" />
                           <AvatarFallback className="bg-green-600 text-white">
@@ -371,11 +396,11 @@ export default function Chatbot() {
               </div>
             </CardContent>
 
-            <CardFooter className={`p-3 border-t bg-white dark:bg-gray-900 ${
-              isMobile && isKeyboardOpen
-                ? 'fixed bottom-0 left-0 right-0 z-[1001] bg-white dark:bg-gray-900'
-                : ''
-            }`}>
+            <CardFooter
+              className={`p-3 border-t bg-white dark:bg-gray-900 ${
+                isMobile && isKeyboardOpen ? "sticky bottom-0 left-0 right-0 z-[1001]" : ""
+              }`}
+            >
               <form onSubmit={handleSubmit} className="flex gap-2 w-full">
                 <Input
                   ref={inputRef}
@@ -399,5 +424,5 @@ export default function Chatbot() {
         )}
       </motion.div>
     </div>
-  );
-} 
+  )
+}

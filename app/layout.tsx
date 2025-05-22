@@ -7,6 +7,7 @@ import Footer from "@/components/footer"
 import WhatsAppButton from "@/components/whatsapp-button"
 import { ThemeProvider } from "@/components/theme-provider"
 import Chatbot from "@/components/Chatbot"
+import { UIProvider } from "@/context/ui-context"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -85,13 +86,14 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <div className="relative min-h-screen flex flex-col">
+            <UIProvider>
             <Header />
             <main className="flex-1">{children}</main>
             <Footer />
             <WhatsAppButton />
             <div className="fixed bottom-4 right-4 z-50">
         <Chatbot />
-      </div>
+      </div></UIProvider>
           </div>
         </ThemeProvider>
       </body>
