@@ -88,9 +88,8 @@ export default function EnhancedFooter() {
     const day = now.getDay()
     const hour = now.getHours()
 
-    if (day === 0) return false // Sunday
-    if (day === 6) return hour >= 10 && hour < 16 // Saturday 10-4
-    return hour >= 9 && hour < 18 // Monday-Friday 9-6
+    if (day === 0 || day === 6) return false // Saturday and Sunday closed
+    return hour >= 10 && hour < 19 // Monday-Friday 10-7
   }
 
   const containerVariants = {
@@ -112,7 +111,12 @@ export default function EnhancedFooter() {
   return (
     <footer className="relative overflow-hidden">
       {/* Enhanced CTA Section */}
-    
+      <div className="relative bg-gradient-to-br from-blue-600 via-blue-700 to-blue-800 py-20">
+        {/* Animated Background */}
+     
+      
+     
+      </div>
 
       {/* Enhanced Main Footer */}
       <div className="bg-gradient-to-br from-slate-50 to-white py-16">
@@ -341,11 +345,11 @@ export default function EnhancedFooter() {
                 <div className="space-y-2 text-sm">
                   <div className="flex justify-between items-center">
                     <span className="text-slate-600">Monday - Friday:</span>
-                    <span className="font-medium text-slate-700">9:00 AM - 6:00 PM</span>
+                    <span className="font-medium text-slate-700">10:00 AM - 7:00 PM</span>
                   </div>
                   <div className="flex justify-between items-center">
                     <span className="text-slate-600">Saturday:</span>
-                    <span className="font-medium text-slate-700">10:00 AM - 4:00 PM</span>
+                    <span className="font-medium text-red-600">Closed</span>
                   </div>
                   <div className="flex justify-between items-center">
                     <span className="text-slate-600">Sunday:</span>
