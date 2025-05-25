@@ -150,8 +150,8 @@ export default function Home() {
       <TestimonialsSection />
       <FAQSection />
       <ContactSection />
-      <PushNotificationManager />
-      <InstallPrompt />
+      {/* <PushNotificationManager />
+      <InstallPrompt /> */}
     </div>
   )
 }

@@ -1,226 +1,219 @@
 "use client"
 
-import Image from "next/image"
-import { useState, useRef } from "react"
+import { useState } from "react"
 import { motion } from "framer-motion"
 import { useInView } from "react-intersection-observer"
-import { Shield, Award, Zap, Users, ArrowRight } from "lucide-react"
+import { Eye, Zap, Shield, Smartphone, GraduationCap, ArrowRight, CheckCircle, Star } from "lucide-react"
+import { Badge } from "@/components/ui/badge"
 import WhatsAppCTAButton from "@/components/whatsapp-cta-button"
 
-export default function FeaturesSection() {
+export default function WhyChooseUs() {
   const [activeFeature, setActiveFeature] = useState<number>(0)
   const { ref, inView } = useInView({
     triggerOnce: true,
     threshold: 0.1,
   })
 
-  // Reduced to 5 key differentiating features with unique images
   const features = [
     {
-      icon: Shield,
-      title: "Legal Protection",
-      description:
-        "Our expert team ensures your business has complete legal protection with proper documentation and compliance measures.",
-      image: "/features/feature-legal-protection.png",
-      color: "bg-blue-100 text-[#2563eb]",
-      highlight: "bg-blue-50",
-      points: [
-        "Comprehensive legal documentation",
-        "Regulatory compliance assurance",
-        "Intellectual property protection",
-      ],
+      icon: Eye,
+      title: "Pay What You See",
+      shortDesc: "Transparent pricing, no hidden costs",
+      benefit: "100% transparent pricing",
+      color: "from-blue-500 to-blue-600",
+      bgColor: "bg-blue-50",
+      iconColor: "text-blue-600",
     },
     {
       icon: Zap,
       title: "Accelerated Processing",
-      description:
-        "Experience faster business registration and compliance processes with our streamlined systems and expert handling.",
-      image: "/features/feature-accelerated-processing.png",
-      color: "bg-amber-100 text-amber-600",
-      highlight: "bg-amber-50",
-      points: ["50% faster than industry average", "Real-time application tracking", "Priority processing options"],
-    },
-    {
-      icon: Users,
-      title: "Dedicated Expert Team",
-      description:
-        "Work with our specialized team of legal and business experts who provide personalized guidance throughout your journey.",
-      image: "/features/feature-expert-team.png",
-      color: "bg-green-100 text-green-600",
-      highlight: "bg-green-50",
-      points: [
-        "Industry specialists with 10+ years experience",
-        "Dedicated account manager",
-        "Direct access to legal experts",
-      ],
-    },
-    {
-      icon: Award,
-      title: "Success Guarantee",
-      description:
-        "We stand behind our services with a success guarantee, ensuring your business registration and compliance needs are met.",
-      image: "/features/feature-success-guarantee.png",
-      color: "bg-purple-100 text-purple-600",
-      highlight: "bg-purple-50",
-      points: ["98% first-time approval rate", "Money-back guarantee", "Free revisions and corrections"],
+      shortDesc: "50% faster than industry standard",
+      benefit: "Lightning-fast delivery",
+      color: "from-orange-500 to-orange-600",
+      bgColor: "bg-orange-50",
+      iconColor: "text-orange-600",
     },
     {
       icon: Shield,
-      title: "Digital-First Approach",
-      description:
-        "Our digital platform simplifies document submission, tracking, and management for a seamless experience.",
-      image: "/features/feature-digital-approach.png",
-      color: "bg-rose-100 text-rose-600",
-      highlight: "bg-rose-50",
-      points: ["Secure digital document storage", "Paperless application process", "Real-time status updates"],
+      title: "Success Guarantee",
+      shortDesc: "98% approval rate, money-back promise",
+      benefit: "Risk-free guarantee",
+      color: "from-green-500 to-green-600",
+      bgColor: "bg-green-50",
+      iconColor: "text-green-600",
+    },
+    {
+      icon: Smartphone,
+      title: "Digital First Approach",
+      shortDesc: "Paperless, secure, real-time tracking",
+      benefit: "100% digital experience",
+      color: "from-purple-500 to-purple-600",
+      bgColor: "bg-purple-50",
+      iconColor: "text-purple-600",
+    },
+    {
+      icon: GraduationCap,
+      title: "Built by CA-CS Team",
+      shortDesc: "Expert CAs & CSs for speed + precision",
+      benefit: "Professional expertise",
+      color: "from-indigo-500 to-indigo-600",
+      bgColor: "bg-indigo-50",
+      iconColor: "text-indigo-600",
     },
   ]
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  }
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-  }
-
   return (
-    <section className="py-20 relative overflow-hidden" ref={ref}>
-      {/* Background elements */}
-      <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-blue-50 rounded-full -mr-16 -mt-16 opacity-70"></div>
-      <div className="absolute bottom-0 left-0 w-1/4 h-1/4 bg-blue-50 rounded-full -ml-16 -mb-16 opacity-70"></div>
+    <section className="py-16 relative overflow-hidden bg-gradient-to-br from-slate-50 to-white" ref={ref}>
+      {/* Background Elements */}
+      <div className="absolute top-0 right-0 w-72 h-72 bg-blue-100 rounded-full -mr-36 -mt-36 opacity-60 blur-3xl" />
+      <div className="absolute bottom-0 left-0 w-64 h-64 bg-purple-100 rounded-full -ml-32 -mb-32 opacity-50 blur-2xl" />
 
-      {/* Animated background grid */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div
-          className="absolute inset-0 opacity-[0.03]"
-          style={{
-            backgroundImage:
-              "linear-gradient(#2563eb 1px, transparent 1px), linear-gradient(to right, #2563eb 1px, transparent 1px)",
-            backgroundSize: "40px 40px",
-          }}
-        ></div>
-      </div>
-
-      <div className="container mx-auto px-4 relative">
+      <div className="container mx-auto px-4 relative z-10">
+        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.5 }}
-          className="mb-16 text-center"
+          transition={{ duration: 0.6 }}
+          className="text-center mb-12"
         >
-          <span className="inline-block px-4 py-1.5 mb-4 text-sm font-medium text-[#2563eb] bg-blue-50 rounded-full border border-blue-100">
-            Our Unique Advantages
-          </span>
-          <h2 className="mb-4 text-3xl font-bold md:text-4xl lg:text-5xl bg-gradient-to-r from-[#2563eb] to-blue-800 bg-clip-text text-transparent">
-            Why Choose us
+          <Badge className="mb-4 bg-blue-100 text-blue-700 border-blue-200 px-4 py-2">
+            <Star className="w-4 h-4 mr-2 fill-current" />
+            Why 10,000+ Businesses Choose Us
+          </Badge>
+          <h2 className="text-4xl md:text-5xl font-bold mb-4">
+            <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+              Why Choose Us?
+            </span>
           </h2>
-          <p className="mx-auto max-w-2xl text-slate-600 text-lg">
-            We go beyond standard services to provide exceptional value and results for your business
-          </p>
+          <p className="text-xl text-slate-600 max-w-2xl mx-auto">Five key reasons that make us different</p>
         </motion.div>
 
-        <div className="grid gap-10 lg:grid-cols-2 items-center">
-          {/* Feature tabs - left side */}
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            animate={inView ? "visible" : "hidden"}
-            className="flex flex-col space-y-4"
-          >
-            {features.map((feature, index) => (
+        {/* Features Grid - Better Alignment */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="max-w-6xl mx-auto mb-12"
+        >
+          {/* Top Row - 3 Cards */}
+          <div className="grid md:grid-cols-3 gap-6 mb-6">
+            {features.slice(0, 3).map((feature, index) => (
               <motion.div
                 key={index}
-                variants={itemVariants}
-                className={`group rounded-xl p-6 transition-all duration-300 cursor-pointer
-                  ${
-                    activeFeature === index
-                      ? `border-l-4 border-[#2563eb] shadow-lg ${feature.highlight}`
-                      : "border border-slate-200 bg-white hover:border-blue-200"
-                  }`}
-                onClick={() => setActiveFeature(index)}
+                initial={{ opacity: 0, y: 20 }}
+                animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="group relative p-6 bg-white rounded-2xl border border-slate-200 hover:border-slate-300 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 cursor-pointer"
+                onMouseEnter={() => setActiveFeature(index)}
               >
-                <div className="flex items-start">
-                  <div
-                    className={`${feature.color} p-3 rounded-full mr-4 transition-all duration-300 ${
-                      activeFeature === index ? "scale-110" : "group-hover:scale-110"
-                    }`}
-                  >
-                    <feature.icon className="h-6 w-6" />
-                  </div>
-                  <div>
-                    <h3
-                      className={`text-xl font-bold transition-colors duration-300 ${
-                        activeFeature === index ? "text-[#2563eb]" : "text-slate-800 group-hover:text-[#2563eb]"
-                      }`}
-                    >
-                      {feature.title}
-                    </h3>
-                    <p className="text-slate-600 mt-1 line-clamp-2 group-hover:text-slate-700 transition-colors duration-300">
-                      {feature.description}
-                    </p>
-                  </div>
+                {/* Icon */}
+                <div
+                  className={`${feature.bgColor} w-14 h-14 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}
+                >
+                  <feature.icon className={`w-7 h-7 ${feature.iconColor}`} />
                 </div>
+
+                {/* Content */}
+                <h3 className="text-xl font-bold text-slate-800 mb-2 group-hover:text-blue-600 transition-colors">
+                  {feature.title}
+                </h3>
+                <p className="text-slate-600 text-sm mb-4 leading-relaxed">{feature.shortDesc}</p>
+
+                {/* Benefit Badge */}
+                <div className="flex items-center justify-between">
+                  <Badge variant="secondary" className="text-xs bg-slate-100 text-slate-700">
+                    <CheckCircle className="w-3 h-3 mr-1" />
+                    {feature.benefit}
+                  </Badge>
+                  <ArrowRight className="w-4 h-4 text-slate-400 group-hover:text-blue-500 group-hover:translate-x-1 transition-all duration-300" />
+                </div>
+
+                {/* Hover Gradient Overlay */}
+                <div
+                  className={`absolute inset-0 bg-gradient-to-br ${feature.color} opacity-0 group-hover:opacity-5 rounded-2xl transition-opacity duration-300`}
+                />
               </motion.div>
             ))}
-          </motion.div>
+          </div>
 
-          {/* Feature details - right side */}
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            className="bg-white rounded-2xl shadow-xl overflow-hidden border border-blue-100"
-          >
-            <div className="relative h-96 w-full">
-              <Image
-                src={
-                  features[activeFeature].image ||
-                  `/placeholder.svg?height=400&width=600&query=${features[activeFeature].title}`
-                }
-                alt={features[activeFeature].title}
-                fill
-                className="object-fill transition-all duration-500"
-                priority
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-              <div className="absolute bottom-0 left-0 p-6 text-white">
-                <h3 className="text-2xl font-bold mb-2">{features[activeFeature].title}</h3>
-                <p className="text-white/90 max-w-md">{features[activeFeature].description}</p>
+          {/* Bottom Row - 2 Cards Centered */}
+          <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+            {features.slice(3, 5).map((feature, index) => (
+              <motion.div
+                key={index + 3}
+                initial={{ opacity: 0, y: 20 }}
+                animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                transition={{ duration: 0.5, delay: (index + 3) * 0.1 }}
+                className="group relative p-6 bg-white rounded-2xl border border-slate-200 hover:border-slate-300 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 cursor-pointer"
+                onMouseEnter={() => setActiveFeature(index + 3)}
+              >
+                {/* Icon */}
+                <div
+                  className={`${feature.bgColor} w-14 h-14 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}
+                >
+                  <feature.icon className={`w-7 h-7 ${feature.iconColor}`} />
+                </div>
+
+                {/* Content */}
+                <h3 className="text-xl font-bold text-slate-800 mb-2 group-hover:text-blue-600 transition-colors">
+                  {feature.title}
+                </h3>
+                <p className="text-slate-600 text-sm mb-4 leading-relaxed">{feature.shortDesc}</p>
+
+                {/* Benefit Badge */}
+                <div className="flex items-center justify-between">
+                  <Badge variant="secondary" className="text-xs bg-slate-100 text-slate-700">
+                    <CheckCircle className="w-3 h-3 mr-1" />
+                    {feature.benefit}
+                  </Badge>
+                  <ArrowRight className="w-4 h-4 text-slate-400 group-hover:text-blue-500 group-hover:translate-x-1 transition-all duration-300" />
+                </div>
+
+                {/* Hover Gradient Overlay */}
+                <div
+                  className={`absolute inset-0 bg-gradient-to-br ${feature.color} opacity-0 group-hover:opacity-5 rounded-2xl transition-opacity duration-300`}
+                />
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Bottom CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ duration: 0.6, delay: 0.8 }}
+          className="text-center"
+        >
+          <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl p-8 text-white">
+            <h3 className="text-2xl font-bold mb-2">Ready to Experience the Difference?</h3>
+            <p className="text-blue-100 mb-6 max-w-2xl mx-auto">
+              Join thousands of successful businesses who trust us with their growth journey
+            </p>
+
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <WhatsAppCTAButton className="bg-white text-blue-600 hover:bg-blue-50 font-semibold px-8 py-3 rounded-xl shadow-lg">
+                Start Your Journey
+                <ArrowRight className="w-4 h-4 ml-2" />
+              </WhatsAppCTAButton>
+
+              <div className="flex items-center gap-4 text-blue-100">
+                <div className="text-center">
+                  <div className="text-lg font-bold text-white">1,000+</div>
+                  <div className="text-xs">Happy Clients</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-lg font-bold text-white">4.9★</div>
+                  <div className="text-xs">Rating</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-lg font-bold text-white">24/7</div>
+                  <div className="text-xs">Support</div>
+                </div>
               </div>
             </div>
-            <div className="p-6">
-              <h4 className="font-semibold text-[#2563eb] mb-4">Key Benefits:</h4>
-              <ul className="space-y-3">
-                {features[activeFeature].points.map((point, idx) => (
-                  <li key={idx} className="flex items-start">
-                    <div className="bg-blue-100 rounded-full p-1 mr-3 mt-0.5">
-                      <svg className="w-3 h-3 text-[#2563eb]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
-                      </svg>
-                    </div>
-                    <span className="text-slate-700">{point}</span>
-                  </li>
-                ))}
-              </ul>
-              <div className="mt-6">
-                <WhatsAppCTAButton service={features[activeFeature].title} className="w-full justify-center rounded-lg">
-                  Learn more about {features[activeFeature].title}
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </WhatsAppCTAButton>
-              </div>
-            </div>
-          </motion.div>
-        </div>
-
-      
+          </div>
+        </motion.div>
       </div>
     </section>
   )

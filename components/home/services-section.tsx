@@ -35,12 +35,12 @@ export default function EnhancedServicesSection() {
   // Enhanced service data with more details
   const services = [
     {
-      title: "Business Registration",
-      description: "Complete business registration and incorporation services with expert guidance",
-      price: "₹4,999",
-      originalPrice: "₹7,999",
+      title: "Private Limited Registration",
+      description: "Most popular choice for startups and growing businesses",
+      price: "₹12,000",
+      originalPrice: "₹15,000",
       billing: "/one-time",
-      slug: "startup-registration",
+      slug: "private-limited-registration",
       mostPopular: true,
       category: "registration",
       icon: Building2,
@@ -60,20 +60,95 @@ export default function EnhancedServicesSection() {
       },
     },
     {
-      title: "Trademark Protection",
-      description: "Comprehensive trademark registration and protection for your brand",
-      price: "₹6,499",
-      originalPrice: "₹9,999",
+      title: "Limited Liability Partnership",
+      description: "Perfect for professional services and partnerships",
+      price: "₹10,000",
+      originalPrice: "₹13,000",
       billing: "/one-time",
-      slug: "trademark-copyright",
+      slug: "llp-registration",
+      mostPopular: false,
+      category: "registration",
+      icon: Users,
+      rating: 4.8,
+      completedProjects: 1800,
+      deliveryTime: "10-12 days",
+      features: [
+        "LLP Agreement Drafting",
+        "Digital Signature Certificate",
+        "Designated Partner DIN",
+        "LLP Registration Certificate",
+        "PAN & TAN Registration",
+      ],
+      testimonial: {
+        text: "Professional and efficient service!",
+        author: "Priya Sharma",
+      },
+    },
+    {
+      title: "GST Registration",
+      description: "Faster GST registration with compliance guidance",
+      price: "₹3,000",
+      originalPrice: "₹4,500",
+      billing: "/one-time",
+      slug: "gst-registration",
+      mostPopular: false,
+      category: "tax",
+      icon: Calculator,
+      rating: 4.9,
+      completedProjects: 3200,
+      deliveryTime: "5-7 days",
+      features: [
+        "GST Registration Application",
+        "Document Preparation",
+        "Government Liaison",
+        "GSTIN Generation",
+        "Compliance Guidance",
+      ],
+      testimonial: {
+        text: "Quick and hassle-free registration!",
+        author: "Amit Patel",
+      },
+    },
+    {
+      title: "ROC Annual Compliances",
+      description: "Stay compliant with all ROC requirements including annual returns and financial statements",
+      price: "₹15,000",
+      originalPrice: "₹20,000",
+      billing: "/year",
+      slug: "roc-compliance",
+      mostPopular: false,
+      category: "compliance",
+      icon: FileCheck,
+      rating: 4.7,
+      completedProjects: 4100,
+      deliveryTime: "3-5 days",
+      features: [
+        "Annual Return Filing",
+        "Financial Statements",
+        "Board Resolutions",
+        "Compliance Calendar",
+        "Penalty Protection",
+      ],
+      testimonial: {
+        text: "Never missed a deadline since!",
+        author: "Neha Gupta",
+      },
+    },
+    {
+      title: "Trademark Registration & Protection",
+      description: "Protect your brand identity with our end-to-end trademark registration services",
+      price: "₹3,000",
+      originalPrice: "₹4,500",
+      billing: "/one-time",
+      slug: "trademark-registration",
       mostPopular: false,
       category: "legal",
       icon: Shield,
       rating: 4.8,
-      completedProjects: 1800,
+      completedProjects: 1200,
       deliveryTime: "15-20 days",
       features: [
-        "Trademark Search & Analysis",
+        "Trademark Search",
         "Application Filing",
         "Government Fee Included",
         "Status Updates",
@@ -81,100 +156,31 @@ export default function EnhancedServicesSection() {
       ],
       testimonial: {
         text: "Protected our brand perfectly!",
-        author: "Priya Sharma",
-      },
-    },
-    {
-      title: "Compliance Services",
-      description: "Annual compliance and regulatory requirements management",
-      price: "₹12,999",
-      originalPrice: "₹18,999",
-      billing: "/one-time",
-      slug: "company-compliance",
-      mostPopular: false,
-      category: "compliance",
-      icon: FileCheck,
-      rating: 4.9,
-      completedProjects: 3200,
-      deliveryTime: "5-7 days",
-      features: [
-        "Annual Return Filing",
-        "Board Resolution",
-        "Compliance Calendar",
-        "Penalty Protection",
-        "Expert Consultation",
-      ],
-      testimonial: {
-        text: "Never missed a deadline since!",
-        author: "Amit Patel",
-      },
-    },
-    {
-      title: "Tax & GST Services",
-      description: "Complete tax and GST management with expert consultation",
-      price: "₹8,999",
-      originalPrice: "₹12,999",
-      billing: "/one-time",
-      slug: "tax-services",
-      mostPopular: false,
-      category: "tax",
-      icon: Calculator,
-      rating: 4.7,
-      completedProjects: 4100,
-      deliveryTime: "3-5 days",
-      features: ["GST Registration", "Monthly Returns", "Tax Planning", "Refund Processing", "Audit Support"],
-      testimonial: {
-        text: "Saved us thousands in taxes!",
-        author: "Neha Gupta",
-      },
-    },
-    {
-      title: "FSSAI Registration",
-      description: "Food business licensing and compliance made simple",
-      price: "₹3,999",
-      originalPrice: "₹5,999",
-      billing: "/one-time",
-      slug: "fssai-registration",
-      mostPopular: false,
-      category: "registration",
-      icon: Utensils,
-      rating: 4.8,
-      completedProjects: 1200,
-      deliveryTime: "10-12 days",
-      features: [
-        "License Application",
-        "Document Preparation",
-        "Government Liaison",
-        "Renewal Reminders",
-        "Compliance Support",
-      ],
-      testimonial: {
-        text: "Started our food business hassle-free!",
         author: "Vikram Singh",
       },
     },
     {
-      title: "NGO Registration",
-      description: "Specialized services for non-profit organizations and trusts",
-      price: "₹9,999",
-      originalPrice: "₹14,999",
-      billing: "/one-time",
-      slug: "ngo-services",
+      title: "ITR-4 Return Filing",
+      description: "Specialized tax filing service for businesses under presumptive taxation scheme",
+      price: "₹2,999",
+      originalPrice: "₹4,000",
+      billing: "/year",
+      slug: "itr4-filing",
       mostPopular: false,
-      category: "legal",
-      icon: Heart,
+      category: "tax",
+      icon: Calculator,
       rating: 4.9,
       completedProjects: 800,
-      deliveryTime: "12-15 days",
+      deliveryTime: "2-3 days",
       features: [
-        "Trust/Society Registration",
-        "12A & 80G Registration",
-        "FCRA Compliance",
-        "Annual Filings",
-        "Donation Receipts",
+        "Income Computation",
+        "Tax Calculation",
+        "Form Preparation",
+        "E-filing Support",
+        "Tax Planning Tips",
       ],
       testimonial: {
-        text: "Helping us help others legally!",
+        text: "Saved us time and money!",
         author: "Dr. Sunita Rao",
       },
     },
@@ -235,11 +241,8 @@ export default function EnhancedServicesSection() {
             <Sparkles className="w-4 h-4 mr-2" />
             Our Services
           </Badge>
-          <h2 className="mb-6 text-4xl font-bold md:text-5xl lg:text-6xl">
-            Comprehensive{" "}
-            <span className="bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">
-              Business Solutions
-            </span>
+          <h2 className="mb-6 text-4xl font-bold md:text-5xl lg:text-5xl text-blue-700">
+          Our Popular Services 
           </h2>
           <p className="mx-auto max-w-3xl text-slate-600 text-xl leading-relaxed">
             Everything you need to start, run, and grow your business with confidence
@@ -325,8 +328,6 @@ export default function EnhancedServicesSection() {
                 onMouseLeave={() => setHoveredCard(null)}
                 whileHover={{ scale: 1.02 }}
               >
-           
-
                 {/* Savings Badge */}
                 <div className="absolute top-4 right-4 z-10">
                   <Badge variant="destructive" className="bg-green-600 hover:bg-green-700">
@@ -385,8 +386,6 @@ export default function EnhancedServicesSection() {
                       )}
                     </ul>
                   </div>
-
-            
 
                   {/* Pricing */}
                   <div className="mb-6">
