@@ -63,7 +63,7 @@ export default function WhyChooseUs() {
   ]
 
   return (
-    <section className="py-16 relative overflow-hidden bg-gradient-to-br from-slate-50 to-white" ref={ref}>
+    <section className="py-8 relative overflow-hidden bg-gradient-to-br from-slate-50 to-white" ref={ref}>
       {/* Background Elements */}
       <div className="absolute top-0 right-0 w-72 h-72 bg-blue-100 rounded-full -mr-36 -mt-36 opacity-60 blur-3xl" />
       <div className="absolute bottom-0 left-0 w-64 h-64 bg-purple-100 rounded-full -ml-32 -mb-32 opacity-50 blur-2xl" />
@@ -186,31 +186,19 @@ export default function WhyChooseUs() {
           className="text-center"
         >
           <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl p-8 text-white">
+            <div>
             <h3 className="text-2xl font-bold mb-2">Ready to Experience the Difference?</h3>
             <p className="text-blue-100 mb-6 max-w-2xl mx-auto">
-              Join thousands of successful businesses who trust us with their growth journey
+            Let our experts guide you through the entire process, from choosing the right structure to completing all registrations.
             </p>
-
+            </div>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <WhatsAppCTAButton className="bg-white text-blue-600 hover:bg-blue-50 font-semibold px-8 py-3 rounded-xl shadow-lg">
                 Start Your Journey
                 <ArrowRight className="w-4 h-4 ml-2" />
               </WhatsAppCTAButton>
 
-              <div className="flex items-center gap-4 text-blue-100">
-                <div className="text-center">
-                  <div className="text-lg font-bold text-white">1,000+</div>
-                  <div className="text-xs">Happy Clients</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-lg font-bold text-white">4.9★</div>
-                  <div className="text-xs">Rating</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-lg font-bold text-white">24/7</div>
-                  <div className="text-xs">Support</div>
-                </div>
-              </div>
+          
             </div>
           </div>
         </motion.div>

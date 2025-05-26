@@ -111,15 +111,10 @@ export default function EnhancedFooter() {
   return (
     <footer className="relative overflow-hidden">
       {/* Enhanced CTA Section */}
-      <div className="relative bg-gradient-to-br from-blue-600 via-blue-700 to-blue-800 py-20">
-        {/* Animated Background */}
-     
-      
-     
-      </div>
+   
 
       {/* Enhanced Main Footer */}
-      <div className="bg-gradient-to-br from-slate-50 to-white py-16">
+      <div className="bg-gradient-to-br from-slate-200 to-white py-16">
         <div className="container mx-auto px-4">
           <motion.div
             variants={containerVariants}

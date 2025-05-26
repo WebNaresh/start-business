@@ -19,6 +19,7 @@ import {
   Filter,
   Search,
   X,
+  AlertCircle,
 } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
@@ -329,7 +330,7 @@ export default function EnhancedServicesSection() {
                 whileHover={{ scale: 1.02 }}
               >
                 {/* Savings Badge */}
-                <div className="absolute top-4 right-4 z-10">
+                <div className="absolute top-1 right-1 z-10">
                   <Badge variant="destructive" className="bg-green-600 hover:bg-green-700">
                     Save {savingsPercent}%
                   </Badge>
@@ -350,22 +351,6 @@ export default function EnhancedServicesSection() {
                         {service.title}
                       </h3>
                       <p className="text-slate-600 text-sm leading-relaxed">{service.description}</p>
-                    </div>
-                  </div>
-
-                  {/* Stats Row */}
-                  <div className="flex items-center gap-4 mb-4 text-xs text-slate-500">
-                    <div className="flex items-center gap-1">
-                      <Star className="w-3 h-3 fill-yellow-400 text-yellow-400" />
-                      <span className="font-medium">{service.rating}</span>
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <Users className="w-3 h-3" />
-                      <span>{service.completedProjects}+ projects</span>
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <Clock className="w-3 h-3" />
-                      <span>{service.deliveryTime}</span>
                     </div>
                   </div>
 
@@ -395,6 +380,10 @@ export default function EnhancedServicesSection() {
                       <span className="text-sm font-normal text-slate-500">{service.billing}</span>
                     </div>
                     <p className="text-sm text-green-600 font-medium">You save ₹{savings.toLocaleString()}!</p>
+                    <div className="flex items-center gap-1 mt-2 text-sm text-red-600">
+                      <AlertCircle className="w-4 h-4" />
+                      <span>Government fee excluded</span>
+                    </div>
                   </div>
 
                   {/* CTA Button */}
@@ -444,32 +433,7 @@ export default function EnhancedServicesSection() {
           </motion.div>
         )}
 
-        {/* Trust Indicators */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.6, delay: 0.8 }}
-          className="mt-16 text-center"
-        >
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            <div>
-              <div className="text-3xl font-bold text-blue-600 mb-2">10,000+</div>
-              <div className="text-sm text-slate-600">Happy Clients</div>
-            </div>
-            <div>
-              <div className="text-3xl font-bold text-blue-600 mb-2">4.9★</div>
-              <div className="text-sm text-slate-600">Average Rating</div>
-            </div>
-            <div>
-              <div className="text-3xl font-bold text-blue-600 mb-2">24/7</div>
-              <div className="text-sm text-slate-600">Support Available</div>
-            </div>
-            <div>
-              <div className="text-3xl font-bold text-blue-600 mb-2">100%</div>
-              <div className="text-sm text-slate-600">Compliance Assured</div>
-            </div>
-          </div>
-        </motion.div>
+       
       </div>
     </section>
   )

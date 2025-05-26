@@ -14,19 +14,19 @@ import WhatsAppCTAButton from "@/components/whatsapp-cta-button"
 export default function EnhancedHeroSection() {
   const slides = [
     {
-      image: "/hero-slide-1.png",
-      title: "Start Your Business Journey With Confidence",
-      description: "Professional business registration, compliance, and legal services to help your business thrive",
+      image: "/hero/hero_new.png",
+      title: "Initiate Business Journey With Confidence",
+      description: "Registration, compliance, and legal services to help your business thrive",
       stats: { clients: "500+", rating: "4.9", time: "24hrs" },
     },
     {
-      image: "/hero/hero1.jpg",
+      image: "/hero/hero_new_1.png",
       title: "Expert Guidance For Your Business Growth",
       description: "Get personalized consultation and support for all your business compliance needs",
       stats: { clients: "1000+", rating: "4.8", time: "48hrs" },
     },
     {
-      image: "/hero-slide-3.png",
+      image: "/hero/hero_new_2.png",
       title: "Launch Your Startup With Strategic Support",
       description: "Comprehensive solutions to navigate complex regulatory requirements and focus on your growth",
       stats: { clients: "750+", rating: "4.9", time: "72hrs" },
@@ -199,28 +199,7 @@ export default function EnhancedHeroSection() {
                   {slides[currentSlide].description}
                 </motion.p>
 
-                {/* Dynamic stats */}
-                <motion.div
-                  className="mb-8 flex gap-6"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.3 }}
-                >
-                  <div className="text-center">
-                    <div className="text-2xl font-bold text-blue-600">{slides[currentSlide].stats.clients}</div>
-                    <div className="text-sm text-slate-500">Happy Clients</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="flex items-center justify-center text-2xl font-bold text-blue-600">
-                      {slides[currentSlide].stats.rating} <Star className="w-4 h-4 ml-1 fill-current" />
-                    </div>
-                    <div className="text-sm text-slate-500">Rating</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-2xl font-bold text-blue-600">{slides[currentSlide].stats.time}</div>
-                    <div className="text-sm text-slate-500">Avg. Time</div>
-                  </div>
-                </motion.div>
+               
               </motion.div>
             </AnimatePresence>
 
