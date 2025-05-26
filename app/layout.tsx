@@ -10,7 +10,7 @@ import Chatbot from "@/components/Chatbot"
 import { UIProvider } from "@/context/ui-context"
 import Head from "next/head"
 import Script from "next/script"
-
+import { Analytics } from "@vercel/analytics/next"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -179,6 +179,7 @@ export default function RootLayout({
           enableSystem={false}
           disableTransitionOnChange
         >
+          <Analytics/>
           <div className="relative min-h-screen flex flex-col">
             <UIProvider>
               <Header />
