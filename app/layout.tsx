@@ -78,7 +78,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head>
+      <Head>
         <meta name="apple-mobile-web-app-title" content="Start Business" />
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-2T86HZSNGB"
@@ -170,7 +170,7 @@ export default function RootLayout({
             })
           }}
         />
-      </head>
+      </Head>
       <body className={inter.className} suppressHydrationWarning>
         <ThemeProvider
           attribute="class"
