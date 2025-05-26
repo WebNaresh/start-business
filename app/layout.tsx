@@ -9,13 +9,13 @@ import { ThemeProvider } from "@/components/theme-provider"
 import Chatbot from "@/components/Chatbot"
 import { UIProvider } from "@/context/ui-context"
 import Head from "next/head"
+import SchemaMarkup from "@/components/schema-markup"
 
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
   title: "StartBusiness - Business Registration, Compliance & Legal Services in India",
-  description:
-    "StartBusiness offers professional company registration, trademark, GST, FSSAI, compliance, and legal services for startups and businesses in India. Fast, affordable, and expert support.",
+  description: "Professional company registration, trademark, GST, FSSAI, compliance, and legal services for startups and businesses in India. Fast, affordable, and expert support.",
   keywords: "company registration, business registration, startup, trademark, GST, FSSAI, compliance, legal services, India, Pune, online incorporation, business consultant, MSME, LLP, private limited, ngo registration, tax filing, business support",
   authors: [{ name: "StartBusiness", url: "https://startbusiness.co.in" }],
   creator: "StartBusiness",
@@ -35,9 +35,8 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "StartBusiness - Business Registration, Compliance & Legal Services in India",
-    description:
-      "StartBusiness offers professional company registration, trademark, GST, FSSAI, compliance, and legal services for startups and businesses in India. Fast, affordable, and expert support.",
-    url: "https://startbusiness.co.in",
+    description: "Professional company registration, trademark, GST, FSSAI, compliance, and legal services for startups and businesses in India. Fast, affordable, and expert support.",
+    url: "https://www.startbusiness.co.in",
     siteName: "StartBusiness",
     images: [
       {
@@ -53,15 +52,14 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "StartBusiness - Business Registration, Compliance & Legal Services in India",
-    description:
-      "StartBusiness offers professional company registration, trademark, GST, FSSAI, compliance, and legal services for startups and businesses in India. Fast, affordable, and expert support.",
+    description: "Professional company registration, trademark, GST, FSSAI, compliance, and legal services for startups and businesses in India. Fast, affordable, and expert support.",
     images: ["/hero_og.png"],
     creator: "@startbusinessin",
     site: "@startbusinessin",
   },
   metadataBase: new URL("https://startbusiness.co.in"),
   alternates: {
-    canonical: "https://startbusiness.co.in",
+    canonical: "https://www.startbusiness.co.in",
     languages: {
       "en-IN": "https://startbusiness.co.in",
     },
@@ -80,7 +78,8 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <Head>
-      <meta name="apple-mobile-web-app-title" content="Start Business" />
+        <meta name="apple-mobile-web-app-title" content="Start Business" />
+        <SchemaMarkup />
       </Head>
       <body className={inter.className} suppressHydrationWarning>
         <ThemeProvider
@@ -91,13 +90,14 @@ export default function RootLayout({
         >
           <div className="relative min-h-screen flex flex-col">
             <UIProvider>
-            <Header />
-            <main className="flex-1">{children}</main>
-            <Footer />
-            <WhatsAppButton />
-            <div className="fixed bottom-4 right-4 z-50">
-        <Chatbot />
-      </div></UIProvider>
+              <Header />
+              <main className="flex-1">{children}</main>
+              <Footer />
+              <WhatsAppButton />
+              <div className="fixed bottom-4 right-4 z-50">
+                <Chatbot />
+              </div>
+            </UIProvider>
           </div>
         </ThemeProvider>
       </body>
