@@ -1,0 +1,333 @@
+{
+    "private-limited-company": {
+      "title": "Private Limited Company Registration",
+      "shortTitle": "Private Limited Company",
+      "description": "Transform your business idea into a legally recognized entity with complete liability protection and professional credibility.",
+      "category": "business-setup",
+      "icon": "Building2",
+      "color": "blue",
+      "popular": true,
+      "pricing": {
+        "amount": "7,999",
+        "originalAmount": "12,999",
+        "currency": "₹",
+        "gst": true,
+        "includes": [
+          "Name approval fees",
+          "ROC filing fees",
+          "DSC for one director",
+          "DIN for two directors",
+          "Professional charges",
+          "Company incorporation certificate"
+        ]
+      },
+      "timeline": {
+        "total": "15-20 working days",
+        "steps": [
+          { "name": "Name Approval", "duration": "2-3 days" },
+          { "name": "DSC & DIN", "duration": "3-4 days" },
+          { "name": "Document Filing", "duration": "5-7 days" },
+          { "name": "Final Approval", "duration": "5-6 days" }
+        ]
+      },
+      "whatIs": {
+        "title": "What is a Private Limited Company?",
+        "description": "A Private Limited Company is a type of business entity where shareholders' liability is limited to their investment, and shares cannot be publicly traded. It's a separate legal entity from its owners, offering personal asset protection and enhanced credibility."
+      },
+      "keyFeatures": [
+        "Separate legal entity",
+        "Limited liability protection",
+        "Perpetual succession",
+        "Enhanced credibility",
+        "Easy to raise capital",
+        "Professional structure"
+      ],
+      "idealFor": [
+        "Startups seeking funding",
+        "Medium to large businesses",
+        "Companies planning expansion",
+        "Tech companies",
+        "Manufacturing units",
+        "Service-based businesses"
+      ],
+      "process": [
+        {
+          "step": 1,
+          "title": "Name Approval",
+          "description": "Apply for name approval through MCA portal with up to 2 name options."
+        },
+        {
+          "step": 2,
+          "title": "DSC & DIN Application",
+          "description": "Obtain Digital Signature Certificate and Director Identification Number."
+        },
+        {
+          "step": 3,
+          "title": "Document Filing",
+          "description": "Submit incorporation documents including MOA, AOA, and other forms."
+        },
+        {
+          "step": 4,
+          "title": "Registration Approval",
+          "description": "Receive Certificate of Incorporation from MCA."
+        },
+        {
+          "step": 5,
+          "title": "Post Registration",
+          "description": "Complete PAN, TAN, GST, and bank account opening formalities."
+        }
+      ],
+      "requiredDocuments": {
+        "forDirectors": [
+          "PAN Card",
+          "Aadhaar Card",
+          "Passport size photographs",
+          "Bank statement/utility bill for address proof",
+          "Mobile number linked with Aadhaar",
+          "Email ID"
+        ],
+        "forRegisteredOffice": [
+          "Rent agreement/ownership deed",
+          "Utility bills (not older than 2 months)",
+          "NOC from property owner",
+          "Property tax receipt",
+          "Municipality trade license",
+          "Office photographs"
+        ]
+      },
+      "faqs": [
+        {
+          "question": "What is the minimum capital required for Private Limited Company?",
+          "answer": "There is no minimum capital requirement as per the Companies Act 2013. You can start with a nominal paid-up capital of ₹1 lakh or even less."
+        },
+        {
+          "question": "How many directors are required?",
+          "answer": "A minimum of 2 and maximum of 15 directors are required. At least one director must be a resident Indian."
+        },
+        {
+          "question": "Can a salaried person be a director?",
+          "answer": "Yes, a salaried person can be a director unless their employment contract specifically prohibits it."
+        },
+        {
+          "question": "What are the annual compliance requirements?",
+          "answer": "Annual compliances include filing annual returns, financial statements, income tax returns, GST returns, and conducting annual general meetings."
+        }
+      ]
+    },
+    "llp": {
+      "title": "Limited Liability Partnership Registration",
+      "shortTitle": "LLP Registration",
+      "description": "Combine the benefits of partnership flexibility with corporate liability protection for your business.",
+      "category": "business-setup",
+      "icon": "Users",
+      "color": "green",
+      "popular": true,
+      "pricing": {
+        "amount": "6,999",
+        "originalAmount": "10,999",
+        "currency": "₹",
+        "gst": true,
+        "includes": [
+          "Name approval fees",
+          "LLP registration fees",
+          "DSC for partners",
+          "DIN for designated partners",
+          "Professional charges",
+          "LLP incorporation certificate"
+        ]
+      },
+      "timeline": {
+        "total": "12-18 working days",
+        "steps": [
+          { "name": "Name Approval", "duration": "2-3 days" },
+          { "name": "DSC & DIN", "duration": "3-4 days" },
+          { "name": "Document Filing", "duration": "4-6 days" },
+          { "name": "Final Approval", "duration": "3-5 days" }
+        ]
+      },
+      "whatIs": {
+        "title": "What is a Limited Liability Partnership?",
+        "description": "A Limited Liability Partnership (LLP) is a hybrid business structure that combines the operational flexibility of a partnership with the limited liability benefits of a corporation. Partners are not personally liable for the misconduct or negligence of other partners."
+      },
+      "keyFeatures": [
+        "Limited liability protection",
+        "Operational flexibility",
+        "No minimum capital requirement",
+        "Separate legal entity",
+        "Perpetual succession",
+        "Easy compliance requirements"
+      ],
+      "idealFor": [
+        "Professional service firms",
+        "Consultancy businesses",
+        "Small to medium enterprises",
+        "Family businesses",
+        "Joint ventures",
+        "Service-oriented businesses"
+      ],
+      "process": [
+        {
+          "step": 1,
+          "title": "Name Approval",
+          "description": "Apply for LLP name approval through MCA portal."
+        },
+        {
+          "step": 2,
+          "title": "DSC & DIN",
+          "description": "Obtain Digital Signature Certificate and Director Identification Number for designated partners."
+        },
+        {
+          "step": 3,
+          "title": "LLP Agreement",
+          "description": "Draft and execute LLP agreement defining partnership terms."
+        },
+        {
+          "step": 4,
+          "title": "Registration Filing",
+          "description": "Submit incorporation documents to MCA."
+        },
+        {
+          "step": 5,
+          "title": "Certificate Issuance",
+          "description": "Receive LLP incorporation certificate and complete post-registration formalities."
+        }
+      ],
+      "requiredDocuments": {
+        "forPartners": [
+          "PAN Card",
+          "Aadhaar Card",
+          "Passport size photographs",
+          "Address proof",
+          "Mobile number",
+          "Email ID"
+        ],
+        "forRegisteredOffice": [
+          "Rent agreement/ownership deed",
+          "Utility bills",
+          "NOC from property owner",
+          "Property documents",
+          "Office address proof"
+        ]
+      },
+      "faqs": [
+        {
+          "question": "What is the minimum number of partners required for LLP?",
+          "answer": "A minimum of 2 partners are required to form an LLP. There is no maximum limit on the number of partners."
+        },
+        {
+          "question": "Is there any minimum capital requirement for LLP?",
+          "answer": "No, there is no minimum capital requirement for LLP registration."
+        },
+        {
+          "question": "What are the annual compliance requirements for LLP?",
+          "answer": "LLPs need to file annual returns, maintain books of accounts, and comply with income tax and GST requirements."
+        }
+      ]
+    },
+    "gst-registration": {
+      "title": "GST Registration",
+      "shortTitle": "GST Registration",
+      "description": "Get your business registered under GST to comply with tax regulations and expand your market reach.",
+      "category": "tax-compliance",
+      "icon": "FileText",
+      "color": "purple",
+      "popular": true,
+      "pricing": {
+        "amount": "2,999",
+        "originalAmount": "4,999",
+        "currency": "₹",
+        "gst": true,
+        "includes": [
+          "GST registration application",
+          "Document preparation",
+          "Government liaison",
+          "GST certificate",
+          "Professional charges",
+          "Post-registration support"
+        ]
+      },
+      "timeline": {
+        "total": "7-10 working days",
+        "steps": [
+          { "name": "Document Collection", "duration": "1-2 days" },
+          { "name": "Application Filing", "duration": "1 day" },
+          { "name": "Verification", "duration": "3-5 days" },
+          { "name": "Certificate Issuance", "duration": "2-3 days" }
+        ]
+      },
+      "whatIs": {
+        "title": "What is GST Registration?",
+        "description": "GST (Goods and Services Tax) registration is mandatory for businesses with annual turnover exceeding ₹20 lakhs (₹10 lakhs for special category states). It enables businesses to collect GST from customers and claim input tax credits."
+      },
+      "keyFeatures": [
+        "Legal compliance",
+        "Input tax credit benefits",
+        "Nationwide business expansion",
+        "Enhanced credibility",
+        "Government tender eligibility",
+        "Digital tax system"
+      ],
+      "idealFor": [
+        "Businesses with turnover > ₹20 lakhs",
+        "E-commerce sellers",
+        "Inter-state traders",
+        "Service providers",
+        "Manufacturers",
+        "Importers and exporters"
+      ],
+      "process": [
+        {
+          "step": 1,
+          "title": "Document Preparation",
+          "description": "Collect and prepare all required documents for GST registration."
+        },
+        {
+          "step": 2,
+          "title": "Online Application",
+          "description": "Submit GST registration application on the GST portal."
+        },
+        {
+          "step": 3,
+          "title": "Verification",
+          "description": "GST department verifies the application and documents."
+        },
+        {
+          "step": 4,
+          "title": "Certificate Issuance",
+          "description": "Receive GST registration certificate with GSTIN."
+        }
+      ],
+      "requiredDocuments": {
+        "forBusiness": [
+          "PAN Card of business",
+          "Aadhaar Card of proprietor/partners/directors",
+          "Business registration certificate",
+          "Bank account details",
+          "Digital signature",
+          "Photographs"
+        ],
+        "forAddress": [
+          "Rent agreement/ownership deed",
+          "Electricity bill",
+          "Property tax receipt",
+          "NOC from landlord",
+          "Address proof documents"
+        ]
+      },
+      "faqs": [
+        {
+          "question": "Is GST registration mandatory for all businesses?",
+          "answer": "GST registration is mandatory for businesses with annual turnover exceeding ₹20 lakhs (₹10 lakhs for special category states) or involved in inter-state supply."
+        },
+        {
+          "question": "Can I get voluntary GST registration?",
+          "answer": "Yes, businesses can opt for voluntary GST registration even if their turnover is below the threshold limit."
+        },
+        {
+          "question": "What is GSTIN?",
+          "answer": "GSTIN (Goods and Services Tax Identification Number) is a unique 15-digit number assigned to every GST registered business."
+        }
+      ]
+    }
+  }
+  
