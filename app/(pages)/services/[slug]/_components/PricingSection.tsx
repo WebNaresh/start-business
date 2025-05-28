@@ -272,7 +272,7 @@ export default function PricingSection({ service }: PricingSectionProps) {
                 <div className="space-y-4">
                   {[
                     { icon: Award, text: "100% Success Rate", color: "text-blue-600" },
-                    { icon: Users, text: "10,000+ Happy Clients", color: "text-green-600" },
+                    { icon: Users, text: "1,000+ Happy Clients", color: "text-green-600" },
                     { icon: Zap, text: "Lightning Fast Process", color: "text-orange-600" },
                     { icon: Shield, text: "100% Secure & Legal", color: "text-purple-600" },
                   ].map((item, index) => (
