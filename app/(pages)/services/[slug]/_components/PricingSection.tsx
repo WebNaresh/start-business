@@ -127,14 +127,14 @@ export default function PricingSection({ service }: PricingSectionProps) {
               Transparent Pricing
             </Badge>
 
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
               <span className="text-slate-800">Simple &</span>{" "}
               <span className={`bg-gradient-to-r ${colors.gradient} bg-clip-text text-transparent`}>
                 Affordable Pricing
               </span>
             </h2>
 
-            <p className="text-xl md:text-2xl text-slate-600 leading-relaxed max-w-4xl mx-auto">
+            <p className="text-base md:text-lg text-slate-600 leading-relaxed max-w-4xl mx-auto">
               Get started with our {service.shortTitle} service at an unbeatable price with no hidden costs
             </p>
           </motion.div>
@@ -169,17 +169,17 @@ export default function PricingSection({ service }: PricingSectionProps) {
                   </div>
 
                   {/* Service Title */}
-                  <h3 className="text-2xl md:text-3xl font-bold mb-4">{service.title}</h3>
+                  <h3 className="text-xl md:text-2xl font-bold mb-4">{service.title}</h3>
 
                   {/* Pricing */}
                   <div className="mb-8">
                     <div className="flex items-baseline gap-4 mb-3">
-                      <span className="text-5xl md:text-6xl font-bold">
+                      <span className="text-4xl md:text-5xl font-bold">
                         {service.pricing?.currency || "₹"}
                         {service.pricing?.amount || "2,999"}
                       </span>
                       <div className="text-right">
-                        <span className="text-2xl text-white/70 line-through block">
+                        <span className="text-xl text-white/70 line-through block">
                           {service.pricing?.currency || "₹"}
                           {service.pricing?.originalAmount || "4,999"}
                         </span>
@@ -195,7 +195,7 @@ export default function PricingSection({ service }: PricingSectionProps) {
 
                   {/* What's Included */}
                   <div className="mb-8">
-                    <h4 className="text-xl font-semibold mb-4 flex items-center">
+                    <h4 className="text-lg font-semibold mb-4 flex items-center">
                       <CheckCircle className="w-5 h-5 mr-2" />
                       What's Included
                     </h4>
@@ -238,7 +238,7 @@ export default function PricingSection({ service }: PricingSectionProps) {
             <motion.div variants={itemVariants} className="space-y-6">
               {/* Timeline Card */}
               <div className="bg-white rounded-2xl p-6 shadow-lg border border-slate-200">
-                <h4 className="text-lg font-bold text-slate-800 mb-4 flex items-center">
+                <h4 className="text-base font-bold text-slate-800 mb-4 flex items-center">
                   <Clock className={`w-5 h-5 ${colors.text} mr-3`} />
                   Processing Timeline
                 </h4>
@@ -248,14 +248,14 @@ export default function PricingSection({ service }: PricingSectionProps) {
                       key={index}
                       className="flex justify-between items-center py-2 border-b border-slate-100 last:border-b-0"
                     >
-                      <span className="text-slate-700 text-sm">{step.name}</span>
-                      <span className="font-medium text-slate-800 text-sm">{step.duration}</span>
+                      <span className="text-sm text-slate-700">{step.name}</span>
+                      <span className="font-medium text-sm text-slate-800">{step.duration}</span>
                     </div>
                   )) || []}
                 </div>
                 <div className="mt-4 pt-4 border-t border-slate-100">
                   <div className="flex justify-between items-center">
-                    <span className="font-semibold text-slate-800">Total Time:</span>
+                    <span className="text-sm font-semibold text-slate-800">Total Time:</span>
                     <Badge className={`${colors.bg} ${colors.text} ${colors.border}`}>
                       {service.timeline?.total || "7-10 days"}
                     </Badge>
@@ -265,7 +265,7 @@ export default function PricingSection({ service }: PricingSectionProps) {
 
               {/* Trust Indicators */}
               <div className="bg-white rounded-2xl p-6 shadow-lg border border-slate-200">
-                <h4 className="text-lg font-bold text-slate-800 mb-4 flex items-center">
+                <h4 className="text-base font-bold text-slate-800 mb-4 flex items-center">
                   <Shield className="w-5 h-5 text-green-600 mr-3" />
                   Why Choose Us
                 </h4>

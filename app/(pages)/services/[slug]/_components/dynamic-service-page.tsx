@@ -302,7 +302,7 @@ export default function DynamicServicePage({ service, slug }: DynamicServicePage
         <OverviewSection service={service} />
         <FeaturesSection service={service} />
         <ProcessSection service={service} />
-        <DocumentsSection service={service} checkedDocuments={checkedDocuments} toggleDocument={toggleDocument} />
+        <DocumentsSection service={service}/>
         <PricingSection service={service} />
         <FaqSection service={service} openFAQs={openFAQs} toggleFAQ={toggleFAQ} />
         {/* ...rest of the page (CTA, etc.) ... */}

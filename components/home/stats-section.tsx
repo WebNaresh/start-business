@@ -156,7 +156,7 @@ export default function TrustStatsSection() {
             Trusted by Entrepreneurs Nationwide
           </Badge>
 
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+          <h2 className="text-4xl md:text-5xl lg:text-5xl font-bold mb-6">
             Why Entrepreneurs{" "}
             <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Trust Us</span>
           </h2>
