@@ -16,7 +16,7 @@ export default function EnhancedHeroSection() {
   const slides = [
     {
       image: "/hero/hero_new.png",
-      title: "Initiate Business Journey With Confidence",
+      title: "Start Your Business Journey Now",
       description: "Registration, compliance, and legal services to help your business thrive",
       stats: { clients: "500+", rating: "4.9", time: "24hrs" },
     },
@@ -147,10 +147,30 @@ export default function EnhancedHeroSection() {
     visible: { opacity: 1, y: 0 },
   }
 
+  // Service options for hero section
+  const mainServices = [
+    {
+      name: "Private Limited Company",
+      href: "/services/private-limited-company",
+    },
+    {
+      name: "Limited Liability Partnership",
+      href: "/services/llp",
+    },
+    {
+      name: "One Person Company",
+      href: "/services/opc",
+    },
+    {
+      name: "Sole Proprietorship",
+      href: "/services/sole-proprietorship",
+    },
+  ]
+
   return (
     <section
       ref={heroRef}
-      className="relative py-8 md:py-16 overflow-hidden bg-gradient-to-br from-white via-blue-50/30 to-slate-50"
+      className="relative py-8 md:py-16 min-h-screen overflow-hidden bg-gradient-to-br from-white via-blue-50/30 to-slate-50"
     >
       {/* Enhanced background elements */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-blue-100 to-transparent rounded-full -mr-48 -mt-48 opacity-60 blur-3xl"></div>
@@ -243,107 +263,136 @@ export default function EnhancedHeroSection() {
             </motion.div>
           </div>
 
-          {/* Enhanced Image Slider */}
-          <motion.div variants={itemVariants} className="flex items-center justify-center">
-            <div className="relative w-full max-w-lg md:max-w-xl lg:max-w-2xl">
-              <div
-                className="relative rounded-xl overflow-hidden shadow-sm z-10 aspect-[4/3] bg-gradient-to-br from-white to-slate-50"
-                onMouseEnter={() => setIsPaused(true)}
-                onMouseLeave={() => setIsPaused(false)}
-                onTouchStart={handleTouchStart}
-                onTouchMove={handleTouchMove}
-                onTouchEnd={handleTouchEnd}
-              >
-                <AnimatePresence mode="wait" custom={direction}>
-                  <motion.div
-                    key={currentSlide}
-                    custom={direction}
-                    variants={slideVariants}
-                    initial="enter"
-                    animate="center"
-                    exit="exit"
-                    transition={{ duration: 0.6, type: "spring", bounce: 0.2 }}
-                    className="absolute inset-0"
-                  >
-                    <Image
-                      src={slides[currentSlide].image || "/placeholder.svg"}
-                      alt={slides[currentSlide].title}
-                      fill
-                      className="object-contain p-6"
-                      priority={currentSlide === 0}
-                    />
-                  </motion.div>
-                </AnimatePresence>
-
-                {/* Enhanced navigation */}
-                <motion.button
-                  onClick={prevSlide}
-                  className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white rounded-full p-3 shadow-lg z-20 transition-all hover:scale-110"
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.95 }}
-                  aria-label="Previous slide"
-                >
-                  <ChevronLeft className="h-5 w-5 text-blue-600" />
-                </motion.button>
-
-                <motion.button
-                  onClick={nextSlide}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white rounded-full p-3 shadow-lg z-20 transition-all hover:scale-110"
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.95 }}
-                  aria-label="Next slide"
-                >
-                  <ChevronRight className="h-5 w-5 text-blue-600" />
-                </motion.button>
-
-                {/* Progress bar */}
-                <div className="absolute bottom-0 left-0 right-0 h-1 bg-white/30 z-20">
-                  <motion.div
-                    className="h-full bg-gradient-to-r from-blue-500 to-blue-600"
-                    style={{ width: `${progress}%` }}
-                    transition={{ duration: 0.1 }}
-                  />
+          {/* Right Side: Conditional rendering based on currentSlide */}
+          {slides[currentSlide].title === "Launch Your Startup With Strategic Support" ? (
+            <motion.div
+              variants={itemVariants}
+              className="w-full max-w-lg mx-auto flex flex-col gap-4"
+            >
+              <div className="bg-white rounded-2xl shadow-lg border border-slate-100 p-6">
+                <h3 className="text-xl font-semibold text-slate-800 mb-4">What type of business are you starting?</h3>
+                <div className="flex flex-col gap-3">
+                  {mainServices.map((service) => (
+                    <Link
+                      key={service.href}
+                      href={service.href}
+                      className="flex items-center justify-between px-5 py-4 rounded-xl border border-slate-200 bg-slate-50 hover:bg-blue-50 hover:border-blue-200 transition-all group text-base font-medium text-slate-800 hover:text-blue-700 shadow-sm"
+                    >
+                      <span>{service.name}</span>
+                      <ArrowRight className="h-5 w-5 text-blue-500 group-hover:translate-x-1 transition-transform" />
+                    </Link>
+                  ))}
+                </div>
+                <div className="mt-4 text-sm text-slate-500">
+                  Not sure what's right for you?{' '}
+                  <Link href="/contact" className="text-blue-600 hover:underline font-medium">
+                    Schedule a free consultation →
+                  </Link>
                 </div>
               </div>
-
-              {/* Enhanced decorative elements */}
-              <motion.div
-                className="absolute -bottom-6 -left-6 h-32 w-32 rounded-full bg-gradient-to-br from-blue-100 to-blue-200 z-0 opacity-60"
-                animate={{ rotate: 360 }}
-                transition={{ duration: 20, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
-              />
-              <motion.div
-                className="absolute -top-6 -right-6 h-20 w-20 rounded-full bg-gradient-to-br from-slate-100 to-slate-200 z-0 opacity-50"
-                animate={{ rotate: -360 }}
-                transition={{ duration: 15, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
-              />
-
-              {/* Enhanced slide indicators */}
-              <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 flex space-x-3 z-20">
-                {slides.map((_, index) => (
-                  <motion.button
-                    key={index}
-                    onClick={() => handleDotClick(index)}
-                    className={`relative overflow-hidden rounded-full transition-all ${
-                      index === currentSlide ? "bg-blue-600 w-10 h-3" : "bg-slate-300 hover:bg-blue-400 w-3 h-3"
-                    }`}
-                    whileHover={{ scale: 1.2 }}
-                    whileTap={{ scale: 0.9 }}
-                    aria-label={`Go to slide ${index + 1}`}
-                  >
-                    {index === currentSlide && (
-                      <motion.div
-                        className="absolute inset-0 bg-blue-700"
-                        initial={{ width: "0%" }}
-                        animate={{ width: `${progress}%` }}
-                        transition={{ duration: 0.1 }}
+            </motion.div>
+          ) : (
+            <motion.div variants={itemVariants} className="flex items-center justify-center">
+              <div className="relative w-full max-w-lg md:max-w-xl lg:max-w-2xl">
+                <div
+                  className="relative rounded-xl overflow-hidden shadow-sm z-10 aspect-[4/3] bg-gradient-to-br from-white to-slate-50"
+                  onMouseEnter={() => setIsPaused(true)}
+                  onMouseLeave={() => setIsPaused(false)}
+                  onTouchStart={handleTouchStart}
+                  onTouchMove={handleTouchMove}
+                  onTouchEnd={handleTouchEnd}
+                >
+                  <AnimatePresence mode="wait" custom={direction}>
+                    <motion.div
+                      key={currentSlide}
+                      custom={direction}
+                      variants={slideVariants}
+                      initial="enter"
+                      animate="center"
+                      exit="exit"
+                      transition={{ duration: 0.6, type: "spring", bounce: 0.2 }}
+                      className="absolute inset-0"
+                    >
+                      <Image
+                        src={slides[currentSlide].image || "/placeholder.svg"}
+                        alt={slides[currentSlide].title}
+                        fill
+                        className="object-contain p-6"
+                        priority={currentSlide === 0}
                       />
-                    )}
+                    </motion.div>
+                  </AnimatePresence>
+
+                  {/* Enhanced navigation */}
+                  <motion.button
+                    onClick={prevSlide}
+                    className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white rounded-full p-3 shadow-lg z-20 transition-all hover:scale-110"
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.95 }}
+                    aria-label="Previous slide"
+                  >
+                    <ChevronLeft className="h-5 w-5 text-blue-600" />
                   </motion.button>
-                ))}
+
+                  <motion.button
+                    onClick={nextSlide}
+                    className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white rounded-full p-3 shadow-lg z-20 transition-all hover:scale-110"
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.95 }}
+                    aria-label="Next slide"
+                  >
+                    <ChevronRight className="h-5 w-5 text-blue-600" />
+                  </motion.button>
+
+                  {/* Progress bar */}
+                  <div className="absolute bottom-0 left-0 right-0 h-1 bg-white/30 z-20">
+                    <motion.div
+                      className="h-full bg-gradient-to-r from-blue-500 to-blue-600"
+                      style={{ width: `${progress}%` }}
+                      transition={{ duration: 0.1 }}
+                    />
+                  </div>
+                </div>
+
+                {/* Enhanced decorative elements */}
+                <motion.div
+                  className="absolute -bottom-6 -left-6 h-32 w-32 rounded-full bg-gradient-to-br from-blue-100 to-blue-200 z-0 opacity-60"
+                  animate={{ rotate: 360 }}
+                  transition={{ duration: 20, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
+                />
+                <motion.div
+                  className="absolute -top-6 -right-6 h-20 w-20 rounded-full bg-gradient-to-br from-slate-100 to-slate-200 z-0 opacity-50"
+                  animate={{ rotate: -360 }}
+                  transition={{ duration: 15, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
+                />
+
+                {/* Enhanced slide indicators */}
+                <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 flex space-x-3 z-20">
+                  {slides.map((_, index) => (
+                    <motion.button
+                      key={index}
+                      onClick={() => handleDotClick(index)}
+                      className={`relative overflow-hidden rounded-full transition-all ${
+                        index === currentSlide ? "bg-blue-600 w-10 h-3" : "bg-slate-300 hover:bg-blue-400 w-3 h-3"
+                      }`}
+                      whileHover={{ scale: 1.2 }}
+                      whileTap={{ scale: 0.9 }}
+                      aria-label={`Go to slide ${index + 1}`}
+                    >
+                      {index === currentSlide && (
+                        <motion.div
+                          className="absolute inset-0 bg-blue-700"
+                          initial={{ width: "0%" }}
+                          animate={{ width: `${progress}%` }}
+                          transition={{ duration: 0.1 }}
+                        />
+                      )}
+                    </motion.button>
+                  ))}
+                </div>
               </div>
-            </div>
-          </motion.div>
+            </motion.div>
+          )}
         </motion.div>
       </div>
     </section>
