@@ -10,6 +10,7 @@ import { motion, AnimatePresence, useInView, useMotionValue, useSpring } from "f
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import WhatsAppCTAButton from "@/components/whatsapp-cta-button"
+import Link from "next/link"
 
 export default function EnhancedHeroSection() {
   const slides = [
@@ -172,7 +173,7 @@ export default function EnhancedHeroSection() {
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
-          className="grid gap-12 lg:grid-cols-2 lg:gap-16 items-center"
+          className="grid gap-4 lg:grid-cols-2 lg:gap-16 items-center"
         >
           {/* Content Section */}
           <div className="flex flex-col justify-center">
@@ -233,12 +234,13 @@ export default function EnhancedHeroSection() {
                 Get Started Now
                 <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
               </WhatsAppCTAButton>
+              <Link href="/services">
               <Button
                 variant="outline"
                 className="border-blue-200 text-blue-600 hover:bg-blue-50 rounded-xl hover:border-blue-300 transition-all duration-300"
               >
                 View Our Services
-              </Button>
+              </Button></Link>
             </motion.div>
           </div>
 
@@ -246,7 +248,7 @@ export default function EnhancedHeroSection() {
           <motion.div variants={itemVariants} className="flex items-center justify-center">
             <div className="relative w-full max-w-lg md:max-w-xl lg:max-w-2xl">
               <div
-                className="relative rounded-3xl overflow-hidden shadow-lg z-10 aspect-[4/3] bg-gradient-to-br from-white to-slate-50"
+                className="relative rounded-xl overflow-hidden shadow-sm z-10 aspect-[4/3] bg-gradient-to-br from-white to-slate-50"
                 onMouseEnter={() => setIsPaused(true)}
                 onMouseLeave={() => setIsPaused(false)}
                 onTouchStart={handleTouchStart}
@@ -293,17 +295,6 @@ export default function EnhancedHeroSection() {
                   aria-label="Next slide"
                 >
                   <ChevronRight className="h-5 w-5 text-blue-600" />
-                </motion.button>
-
-                {/* Play/Pause button */}
-                <motion.button
-                  onClick={togglePlayPause}
-                  className="absolute top-4 right-4 bg-white/90 hover:bg-white rounded-full p-2 shadow-md z-20 transition-all"
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.95 }}
-                  aria-label={isPlaying ? "Pause slideshow" : "Play slideshow"}
-                >
-                  {isPlaying ? <Pause className="h-4 w-4 text-blue-600" /> : <Play className="h-4 w-4 text-blue-600" />}
                 </motion.button>
 
                 {/* Progress bar */}
