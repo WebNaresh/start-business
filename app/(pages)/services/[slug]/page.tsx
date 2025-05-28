@@ -10,7 +10,8 @@ interface ServicePageProps {
 }
 
 export async function generateMetadata({ params }: ServicePageProps): Promise<Metadata> {
-  const service = servicesData[params.slug as keyof typeof servicesData]
+  const param = await params;
+  const service = servicesData[param.slug as keyof typeof servicesData]
 
   if (!service) {
     return {
@@ -46,7 +47,7 @@ export async function generateMetadata({ params }: ServicePageProps): Promise<Me
       follow: true,
     },
     alternates: {
-      canonical: `https://startbusiness.co.in/services/${params.slug}`,
+      canonical: `https://startbusiness.co.in/services/${param.slug}`,
     },
   }
 }
@@ -57,12 +58,13 @@ export async function generateStaticParams() {
   }))
 }
 
-export default function ServicePage({ params }: ServicePageProps) {
-  const service = servicesData[params.slug as keyof typeof servicesData]
+export default async function ServicePage({ params }: ServicePageProps) {
+  const param = await params;
+  const service = servicesData[param.slug as keyof typeof servicesData]
 
   if (!service) {
     notFound()
   }
 
-  return <DynamicServicePage service={service} slug={params.slug} />
+  return <DynamicServicePage service={service} slug={param.slug} />
 }
