@@ -76,25 +76,7 @@ export default function ContactInfo() {
         </p>
       </div>
 
-      {/* Trust Indicators */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <div className="text-center p-4 bg-blue-50 rounded-xl">
-          <Shield className="w-6 h-6 text-blue-600 mx-auto mb-2" />
-          <div className="text-sm font-medium text-slate-700">100% Secure</div>
-        </div>
-        <div className="text-center p-4 bg-green-50 rounded-xl">
-          <Award className="w-6 h-6 text-green-600 mx-auto mb-2" />
-          <div className="text-sm font-medium text-slate-700">Certified Experts</div>
-        </div>
-        <div className="text-center p-4 bg-purple-50 rounded-xl">
-          <Globe className="w-6 h-6 text-purple-600 mx-auto mb-2" />
-          <div className="text-sm font-medium text-slate-700">Pan India Service</div>
-        </div>
-        <div className="text-center p-4 bg-orange-50 rounded-xl">
-          <Clock className="w-6 h-6 text-orange-600 mx-auto mb-2" />
-          <div className="text-sm font-medium text-slate-700">Quick Response</div>
-        </div>
-      </div>
+     
 
       {/* Contact Methods */}
       <div className="space-y-4">
@@ -175,7 +157,7 @@ export default function ContactInfo() {
             Need immediate assistance? Our WhatsApp support is available 24/7 for urgent queries.
           </p>
           <WhatsAppCTAButton className="w-full">
-            <MessageSquare className="w-4 h-4 mr-2" />
+       
             Chat With Us Now
           </WhatsAppCTAButton>
         </div>
