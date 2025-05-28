@@ -166,7 +166,7 @@ export default function OverviewSection({ service }: OverviewSectionProps) {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.3 }}
-              className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight"
+              className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6 leading-tight"
             >
               <span className="bg-gradient-to-r from-yellow-300 to-orange-300 bg-clip-text text-transparent">
                 {service.title.split(" ").slice(0, 2).join(" ")}
@@ -178,12 +178,10 @@ export default function OverviewSection({ service }: OverviewSectionProps) {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
-              className="text-xl md:text-2xl text-white/90 mb-8 leading-relaxed max-w-2xl mx-auto lg:mx-0"
+              className="text-base md:text-lg text-white/90 mb-8 leading-relaxed max-w-2xl mx-auto lg:mx-0"
             >
               {service.description}
             </motion.p>
-
-       
 
             {/* Enhanced Features List */}
             <motion.div
@@ -253,8 +251,8 @@ export default function OverviewSection({ service }: OverviewSectionProps) {
                       <div className="bg-gradient-to-r from-blue-600 to-purple-600 w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-4">
                         <Sparkles className="w-6 h-6 text-white" />
                       </div>
-                      <h3 className="text-2xl font-bold text-slate-800 mb-2">Get Free Consultation</h3>
-                      <p className="text-slate-600">
+                      <h3 className="text-xl font-bold text-slate-800 mb-2">Get Free Consultation</h3>
+                      <p className="text-sm text-slate-600">
                         Fill your details and our expert will call you back within 30 minutes
                       </p>
                     </div>
@@ -331,8 +329,6 @@ export default function OverviewSection({ service }: OverviewSectionProps) {
                         )}
                       </Button>
                     </form>
-
-                
                   </>
                 ) : (
                   /* Success State */
@@ -349,8 +345,8 @@ export default function OverviewSection({ service }: OverviewSectionProps) {
                     >
                       <CheckCircle className="w-8 h-8 text-white" />
                     </motion.div>
-                    <h3 className="text-2xl font-bold text-green-800 mb-2">Thank You!</h3>
-                    <p className="text-green-600 mb-4">
+                    <h3 className="text-xl font-bold text-green-800 mb-2">Thank You!</h3>
+                    <p className="text-sm text-green-600 mb-4">
                       Your request has been submitted successfully. Our expert will call you within 30 minutes.
                     </p>
                     <div className="bg-green-50 rounded-lg p-4 border border-green-200">
