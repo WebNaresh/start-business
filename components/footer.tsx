@@ -114,7 +114,7 @@ export default function EnhancedFooter() {
    
 
       {/* Enhanced Main Footer */}
-      <div className="bg-gradient-to-br from-slate-200 to-white py-16">
+      <div className="bg-gradient-to-br from-slate-200 to-white py-8">
         <div className="container mx-auto px-4">
           <motion.div
             variants={containerVariants}
@@ -147,26 +147,7 @@ export default function EnhancedFooter() {
                 entrepreneurs since 2020.
               </p>
 
-              {/* Trust Badges */}
-              <div className="grid grid-cols-2 gap-3 mb-6">
-                <div className="flex items-center gap-2 text-sm text-slate-600">
-                  <Shield className="w-4 h-4 text-green-500" />
-                  <span>100% Secure</span>
-                </div>
-                <div className="flex items-center gap-2 text-sm text-slate-600">
-                  <Award className="w-4 h-4 text-blue-500" />
-                  <span>Certified Experts</span>
-                </div>
-                <div className="flex items-center gap-2 text-sm text-slate-600">
-                  <Users className="w-4 h-4 text-purple-500" />
-                  <span>10K+ Clients</span>
-                </div>
-                <div className="flex items-center gap-2 text-sm text-slate-600">
-                  <Globe className="w-4 h-4 text-orange-500" />
-                  <span>Pan India</span>
-                </div>
-              </div>
-
+      
               {/* Enhanced Social Links */}
               <div className="flex space-x-3">
                 {[
@@ -389,9 +370,9 @@ export default function EnhancedFooter() {
 
             <div className="flex flex-wrap justify-center gap-6 text-sm">
               {[
-                { name: "Privacy Policy", href: "/privacy-policy" },
-                { name: "Terms of Service", href: "/terms-of-service" },
-                { name: "Refund Policy", href: "/refund-policy" },
+                { name: "Privacy Policy", href: "/legal/privacy-policy" },
+                { name: "Terms of Service", href: "/legal/terms" },
+                { name: "Refund Policy", href: "/legal/refund-policy" },
               ].map((link, index) => (
                 <Link
                   key={index}
