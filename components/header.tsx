@@ -3,18 +3,168 @@
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import Image from "next/image"
-import { Menu, Phone, Mail, X, MapPin } from "lucide-react"
-import { motion } from "framer-motion"
+import { Menu, Phone, Mail, X, MapPin, ChevronDown, ChevronRight, Building2, FileText, Gavel, Shield } from "lucide-react"
+import { motion, AnimatePresence } from "framer-motion"
 import { usePathname } from "next/navigation"
 
 import { Button } from "@/components/ui/button"
-import { Sheet, SheetContent, SheetTrigger, SheetClose } from "@/components/ui/sheet"
+import { Sheet, SheetContent, SheetTrigger, SheetClose, SheetTitle } from "@/components/ui/sheet"
 import WhatsAppCTAButton from "@/components/whatsapp-cta-button"
+import { Badge } from "@/components/ui/badge"
+
+interface SubService {
+  name: string
+  href: string
+  popular?: boolean
+  new?: boolean
+  description?: string
+}
+
+interface Service {
+  id: string
+  name: string
+  shortName: string
+  icon: any
+  description: string
+  color: string
+  bgColor: string
+  gradientFrom: string
+  gradientTo: string
+  subServices: SubService[]
+}
 
 export default function Header() {
   const [mounted, setMounted] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const [isServicesOpen, setIsServicesOpen] = useState(false)
   const pathname = usePathname()
+
+  const serviceCategories: Service[] = [
+    {
+      id: "business-setup",
+      name: "Business Setup",
+      shortName: "Setup",
+      icon: Building2,
+      description: "Complete business registration and setup services",
+      color: "text-blue-600",
+      bgColor: "bg-blue-50",
+      gradientFrom: "from-blue-600",
+      gradientTo: "to-blue-400",
+      subServices: [
+        {
+          name: "Private Limited Company",
+          href: "/services/private-limited-company",
+          popular: true,
+          description: "Register your business as a Private Limited Company with limited liability protection",
+        },
+        {
+          name: "Limited Liability Partnership",
+          href: "/services/llp",
+          description: "Form an LLP with the benefits of partnership and limited liability",
+        },
+        {
+          name: "One Person Company",
+          href: "/services/opc",
+          description: "Start a company with a single person as shareholder and director",
+        },
+        {
+          name: "Sole Proprietorship",
+          href: "/services/sole-proprietorship",
+          description: "Register as a sole proprietor for simple business structure",
+        },
+      ],
+    },
+    {
+      id: "tax-compliance",
+      name: "Tax & Compliance",
+      shortName: "Tax",
+      icon: FileText,
+      description: "GST, tax filing, and compliance management",
+      color: "text-emerald-600",
+      bgColor: "bg-emerald-50",
+      gradientFrom: "from-emerald-600",
+      gradientTo: "to-green-400",
+      subServices: [
+        {
+          name: "GST Registration",
+          href: "/services/gst-registration",
+          popular: true,
+          description: "Register for Goods and Services Tax (GST) for your business",
+        },
+        {
+          name: "GST Filing",
+          href: "/services/gst-filing",
+          description: "File your GST returns accurately and on time",
+        },
+        {
+          name: "Income Tax Filing",
+          href: "/services/income-tax-filing",
+          popular: true,
+          description: "File your income tax returns accurately and on time",
+        },
+      ],
+    },
+    {
+      id: "trademark-ip",
+      name: "Trademark & IP",
+      shortName: "IP",
+      icon: Shield,
+      description: "Intellectual property protection and registration",
+      color: "text-purple-600",
+      bgColor: "bg-purple-50",
+      gradientFrom: "from-purple-600",
+      gradientTo: "to-indigo-400",
+      subServices: [
+        {
+          name: "Trademark Registration",
+          href: "/services/trademark-registration",
+          popular: true,
+          description: "Register your brand name and logo as a trademark",
+        },
+        {
+          name: "Copyright Registration",
+          href: "/services/copyright-registration",
+          description: "Protect your creative works with copyright registration",
+        },
+        {
+          name: "Patent Registration",
+          href: "/services/patent-registration",
+          popular: true,
+          description: "Register your invention or innovation as a patent",
+        },
+      ],
+    },
+    {
+      id: "licenses-registrations",
+      name: "Licenses & Registrations",
+      shortName: "Licenses",
+      icon: Gavel,
+      description: "Various business licenses and regulatory approvals",
+      color: "text-amber-600",
+      bgColor: "bg-amber-50",
+      gradientFrom: "from-amber-600",
+      gradientTo: "to-orange-400",
+      subServices: [
+        {
+          name: "FSSAI License",
+          href: "/services/fssai-license",
+          popular: true,
+          description: "Obtain food safety license for your food business",
+        },
+        {
+          name: "MSME Registration",
+          href: "/services/msme-registration",
+          popular: true,
+          description: "Register as a Micro, Small, or Medium Enterprise",
+        },
+        {
+          name: "ISO Certification",
+          href: "/services/iso-certification",
+          description: "Get international quality management certification",
+        },
+      ],
+    },
+  ]
 
   // Handle scroll effect
   useEffect(() => {
@@ -126,7 +276,90 @@ export default function Header() {
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center space-x-1">
-            {navLinks.map((link) => (
+            <Link
+              href="/"
+              className={`relative px-3 py-2 text-sm font-medium rounded-md transition-colors ${
+                isActive("/") ? "text-blue-600" : "text-slate-700 hover:text-blue-600 hover:bg-blue-50"
+              }`}
+            >
+              Home
+              {isActive("/") && (
+                <motion.div
+                  layoutId="activeIndicator"
+                  className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-600 rounded-full"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.3 }}
+                />
+              )}
+            </Link>
+
+            {/* Services Dropdown */}
+            <div className="relative" onMouseEnter={() => setIsServicesOpen(true)} onMouseLeave={() => setIsServicesOpen(false)}>
+              <button
+                className={`relative px-3 py-2 text-sm font-medium rounded-md transition-colors flex items-center gap-1 ${
+                  isActive("/services") ? "text-blue-600" : "text-slate-700 hover:text-blue-600 hover:bg-blue-50"
+                }`}
+              >
+                Services
+                <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${isServicesOpen ? "rotate-180" : ""}`} />
+              </button>
+
+              <AnimatePresence>
+                {isServicesOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 10 }}
+                    transition={{ duration: 0.2 }}
+                    className="absolute top-full left-0 mt-1 w-[800px] bg-white rounded-xl shadow-xl border border-slate-200 overflow-hidden"
+                  >
+                    <div className="grid grid-cols-4 gap-6 p-6">
+                      {serviceCategories.map((category) => (
+                        <div key={category.id} className="space-y-3">
+                          <div className="flex items-center gap-2">
+                            <div className={`p-2 rounded-lg ${category.bgColor}`}>
+                              <category.icon className={`w-4 h-4 ${category.color}`} />
+                            </div>
+                            <h3 className="text-sm font-semibold text-slate-800">{category.name}</h3>
+                          </div>
+                          <div className="space-y-1">
+                            {category.subServices.map((service) => (
+                              <Link
+                                key={service.href}
+                                href={service.href}
+                                className="block px-2 py-1.5 text-sm text-slate-600 hover:text-blue-600 hover:bg-blue-50 rounded-md transition-colors"
+                              >
+                                <div className="flex items-center justify-between">
+                                  <span>{service.name}</span>
+                                  {service.popular && (
+                                    <Badge className="bg-amber-50 text-amber-600 hover:bg-amber-100 border-none text-[10px] px-1.5 py-0">
+                                      Popular
+                                    </Badge>
+                                  )}
+                                </div>
+                              </Link>
+                            ))}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                    <div className="bg-slate-50 px-6 py-4 border-t border-slate-200">
+                      <Link
+                        href="/services"
+                        className="text-sm font-medium text-blue-600 hover:text-blue-700 flex items-center gap-1"
+                      >
+                        View all services
+                        <ChevronRight className="w-4 h-4" />
+                      </Link>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+
+            {/* Other nav links */}
+            {navLinks.slice(2).map((link) => (
               <Link
                 key={link.name}
                 href={link.href}
@@ -164,6 +397,7 @@ export default function Header() {
               </Button>
             </SheetTrigger>
             <SheetContent side="right" className="w-[85%] sm:w-[350px] p-0">
+              <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
               <div className="flex flex-col h-full">
                 {/* Mobile menu header */}
                 <div className="p-4 border-b flex items-center justify-between">
