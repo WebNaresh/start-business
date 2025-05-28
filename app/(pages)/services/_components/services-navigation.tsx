@@ -165,6 +165,17 @@ export default function EnhancedServicesNavigation() {
           description: "Register for Goods and Services Tax (GST) for your business",
         },
         {
+          name: "ITR-4 Filing",
+          href: "/services/itr-4-filing",
+          popular: true,
+          description: "File your income tax returns under presumptive taxation scheme",
+        },
+        {
+          name: "ROC Annual Compliances",
+          href: "/services/roc-annual-compliances",
+          description: "Stay compliant with all ROC requirements including annual returns",
+        },
+        {
           name: "GST Filing",
           href: "/services/gst-filing",
           description: "File your GST returns accurately and on time",
@@ -199,11 +210,11 @@ export default function EnhancedServicesNavigation() {
       ],
     },
     {
-      id: "trademark-ip",
-      name: "Trademark & IP",
+      id: "intellectual-property",
+      name: "Intellectual Property",
       shortName: "IP",
       icon: Shield,
-      description: "Intellectual property protection and registration",
+      description: "Protect your brand and intellectual property",
       color: "text-purple-600",
       bgColor: "bg-purple-50",
       gradientFrom: "from-purple-600",
@@ -213,7 +224,7 @@ export default function EnhancedServicesNavigation() {
           name: "Trademark Registration",
           href: "/services/trademark-registration",
           popular: true,
-          description: "Register your brand name and logo as a trademark",
+          description: "Protect your brand identity with trademark registration",
         },
         {
           name: "Trademark Search",

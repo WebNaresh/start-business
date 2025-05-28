@@ -14,7 +14,7 @@ export default function ContactSection() {
   })
 
   return (
-    <section className="bg-slate-50 py-16" ref={ref}>
+    <section className="bg-slate-50 py-8 md:py-16" ref={ref}>
       <div className="container mx-auto px-4">
         <div className="grid gap-8 md:grid-cols-2">
           <motion.div

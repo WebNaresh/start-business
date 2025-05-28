@@ -46,7 +46,7 @@ export default function ProcessSection() {
   ]
 
   return (
-    <section className="py-20 bg-gradient-to-b from-white to-slate-50" ref={ref}>
+    <section className="py-4 md:py-8 bg-gradient-to-b from-white to-slate-50" ref={ref}>
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

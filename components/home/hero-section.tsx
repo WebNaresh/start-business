@@ -170,7 +170,7 @@ export default function EnhancedHeroSection() {
   return (
     <section
       ref={heroRef}
-      className="relative py-8 md:py-16 min-h-screen overflow-hidden bg-gradient-to-br from-white via-blue-50/30 to-slate-50"
+      className="relative py-8 md:py-16  overflow-hidden bg-gradient-to-br from-white via-blue-50/30 to-slate-50"
     >
       {/* Enhanced background elements */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-blue-100 to-transparent rounded-full -mr-48 -mt-48 opacity-60 blur-3xl"></div>

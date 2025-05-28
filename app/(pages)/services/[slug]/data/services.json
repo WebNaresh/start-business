@@ -8,8 +8,8 @@
       "color": "blue",
       "popular": true,
       "pricing": {
-        "amount": "7,999",
-        "originalAmount": "12,999",
+        "amount": "12,000",
+        "originalAmount": "15,000",
         "currency": "₹",
         "gst": true,
         "includes": [
@@ -123,8 +123,8 @@
       "color": "green",
       "popular": true,
       "pricing": {
-        "amount": "6,999",
-        "originalAmount": "10,999",
+        "amount": "10,000",
+        "originalAmount": "13,000",
         "currency": "₹",
         "gst": true,
         "includes": [
@@ -233,8 +233,8 @@
       "color": "purple",
       "popular": true,
       "pricing": {
-        "amount": "2,999",
-        "originalAmount": "4,999",
+        "amount": "3,000",
+        "originalAmount": "4,500",
         "currency": "₹",
         "gst": true,
         "includes": [
@@ -328,6 +328,312 @@
           "answer": "GSTIN (Goods and Services Tax Identification Number) is a unique 15-digit number assigned to every GST registered business."
         }
       ]
+    },
+    "roc-annual-compliances": {
+      "title": "ROC Annual Compliances",
+      "shortTitle": "ROC Compliances",
+      "description": "Stay compliant with all ROC requirements including annual returns and financial statements.",
+      "category": "compliance",
+      "icon": "FileCheck",
+      "color": "orange",
+      "popular": true,
+      "pricing": {
+        "amount": "15,000",
+        "originalAmount": "18,000",
+        "currency": "₹",
+        "gst": true,
+        "includes": [
+          "Annual return filing",
+          "Financial statements preparation",
+          "Board meeting minutes",
+          "Compliance calendar management",
+          "Professional charges",
+          "Post-filing support"
+        ]
+      },
+      "timeline": {
+        "total": "10-15 working days",
+        "steps": [
+          { "name": "Document Collection", "duration": "2-3 days" },
+          { "name": "Financial Preparation", "duration": "3-4 days" },
+          { "name": "Board Meeting", "duration": "1-2 days" },
+          { "name": "Filing", "duration": "4-6 days" }
+        ]
+      },
+      "whatIs": {
+        "title": "What are ROC Annual Compliances?",
+        "description": "ROC (Registrar of Companies) Annual Compliances are mandatory requirements for companies to file their annual returns and financial statements with the Ministry of Corporate Affairs."
+      },
+      "keyFeatures": [
+        "Annual return filing",
+        "Financial statements preparation",
+        "Board meeting compliance",
+        "Statutory audit support",
+        "Compliance calendar",
+        "Expert guidance"
+      ],
+      "idealFor": [
+        "Private Limited Companies",
+        "Public Limited Companies",
+        "One Person Companies",
+        "Small Companies",
+        "Startups",
+        "Growing businesses"
+      ],
+      "process": [
+        {
+          "step": 1,
+          "title": "Document Collection",
+          "description": "Gather financial statements, board meeting minutes, and other required documents."
+        },
+        {
+          "step": 2,
+          "title": "Financial Preparation",
+          "description": "Prepare and review financial statements and annual returns."
+        },
+        {
+          "step": 3,
+          "title": "Board Meeting",
+          "description": "Conduct board meeting and prepare minutes."
+        },
+        {
+          "step": 4,
+          "title": "Filing",
+          "description": "File annual returns and financial statements with ROC."
+        }
+      ],
+      "requiredDocuments": {
+        "forCompany": [
+          "Financial statements",
+          "Board meeting minutes",
+          "Shareholder details",
+          "Director details",
+          "Audit reports",
+          "Previous year's returns"
+        ],
+        "forFiling": [
+          "Digital signature certificate",
+          "Board resolution",
+          "Auditor's report",
+          "Annual return form",
+          "Financial statements",
+          "Director's report"
+        ]
+      },
+      "faqs": [
+        {
+          "question": "What is the due date for filing annual returns?",
+          "answer": "Annual returns must be filed within 60 days from the date of Annual General Meeting (AGM)."
+        },
+        {
+          "question": "What happens if I miss the filing deadline?",
+          "answer": "Late filing attracts additional fees and penalties. It's important to file within the due date to avoid these charges."
+        }
+      ]
+    },
+    "trademark-registration": {
+      "title": "Trademark Registration & Protection",
+      "shortTitle": "Trademark Registration",
+      "description": "Protect your brand identity with our end-to-end trademark registration services.",
+      "category": "intellectual-property",
+      "icon": "Shield",
+      "color": "indigo",
+      "popular": true,
+      "pricing": {
+        "amount": "3,000",
+        "originalAmount": "4,500",
+        "currency": "₹",
+        "gst": true,
+        "includes": [
+          "Trademark search",
+          "Application filing",
+          "Government fees",
+          "Document preparation",
+          "Professional charges",
+          "Post-registration support"
+        ]
+      },
+      "timeline": {
+        "total": "18-24 months",
+        "steps": [
+          { "name": "Search & Filing", "duration": "5-7 days" },
+          { "name": "Examination", "duration": "3-4 months" },
+          { "name": "Publication", "duration": "4 months" },
+          { "name": "Registration", "duration": "12-18 months" }
+        ]
+      },
+      "whatIs": {
+        "title": "What is Trademark Registration?",
+        "description": "Trademark registration provides legal protection for your brand name, logo, or slogan, preventing others from using similar marks in the same business category."
+      },
+      "keyFeatures": [
+        "Brand protection",
+        "Nationwide rights",
+        "Legal enforcement",
+        "Asset value",
+        "Market exclusivity",
+        "Renewal support"
+      ],
+      "idealFor": [
+        "Startups",
+        "Brand owners",
+        "Product manufacturers",
+        "Service providers",
+        "E-commerce businesses",
+        "Franchise owners"
+      ],
+      "process": [
+        {
+          "step": 1,
+          "title": "Trademark Search",
+          "description": "Conduct comprehensive search to ensure mark availability."
+        },
+        {
+          "step": 2,
+          "title": "Application Filing",
+          "description": "Prepare and file trademark application with proper documentation."
+        },
+        {
+          "step": 3,
+          "title": "Examination & Publication",
+          "description": "Handle examination process and respond to objections if any."
+        },
+        {
+          "step": 4,
+          "title": "Registration",
+          "description": "Obtain registration certificate and provide renewal guidance."
+        }
+      ],
+      "requiredDocuments": {
+        "forApplicant": [
+          "Logo/brand artwork",
+          "Business proof",
+          "Identity proof",
+          "Address proof",
+          "User affidavit",
+          "Power of attorney"
+        ],
+        "forRegistration": [
+          "Trademark application form",
+          "Class specification",
+          "User affidavit",
+          "Statement of use",
+          "Priority documents",
+          "Translation documents (if any)"
+        ]
+      },
+      "faqs": [
+        {
+          "question": "How long does trademark registration take?",
+          "answer": "The complete process typically takes 18-24 months, though the application filing is done within a week."
+        },
+        {
+          "question": "What is the validity of a trademark?",
+          "answer": "A trademark is valid for 10 years from the filing date and can be renewed indefinitely for subsequent periods of 10 years."
+        }
+      ]
+    },
+    "itr-4-filing": {
+      "title": "ITR-4 Return Filing – Presumptive Taxation",
+      "shortTitle": "ITR-4 Filing",
+      "description": "Specialized tax filing service for businesses under presumptive taxation scheme.",
+      "category": "tax-compliance",
+      "icon": "Calculator",
+      "color": "teal",
+      "popular": true,
+      "pricing": {
+        "amount": "2,999",
+        "originalAmount": "3,999",
+        "currency": "₹",
+        "gst": true,
+        "includes": [
+          "Income computation",
+          "Tax calculation",
+          "Return filing",
+          "Document preparation",
+          "Professional charges",
+          "Post-filing support"
+        ]
+      },
+      "timeline": {
+        "total": "5-7 working days",
+        "steps": [
+          { "name": "Document Collection", "duration": "1-2 days" },
+          { "name": "Computation", "duration": "2-3 days" },
+          { "name": "Review", "duration": "1 day" },
+          { "name": "Filing", "duration": "1-2 days" }
+        ]
+      },
+      "whatIs": {
+        "title": "What is ITR-4 Filing?",
+        "description": "ITR-4 is a tax return form for businesses and professionals opting for presumptive taxation scheme under sections 44AD, 44ADA, and 44AE of the Income Tax Act."
+      },
+      "keyFeatures": [
+        "Simplified taxation",
+        "Lower compliance burden",
+        "Expert computation",
+        "Timely filing",
+        "Document management",
+        "Post-filing support"
+      ],
+      "idealFor": [
+        "Small businesses",
+        "Retailers",
+        "Professionals",
+        "Freelancers",
+        "Consultants",
+        "Service providers"
+      ],
+      "process": [
+        {
+          "step": 1,
+          "title": "Document Collection",
+          "description": "Gather income and expense details, bank statements, and other required documents."
+        },
+        {
+          "step": 2,
+          "title": "Income Computation",
+          "description": "Calculate taxable income under presumptive taxation scheme."
+        },
+        {
+          "step": 3,
+          "title": "Return Preparation",
+          "description": "Prepare ITR-4 with accurate computations and documentation."
+        },
+        {
+          "step": 4,
+          "title": "Filing",
+          "description": "File return and provide acknowledgment and post-filing support."
+        }
+      ],
+      "requiredDocuments": {
+        "forFiling": [
+          "Bank statements",
+          "Business income details",
+          "Expense records",
+          "Previous year's return",
+          "PAN card",
+          "Aadhaar card"
+        ],
+        "forVerification": [
+          "Business registration proof",
+          "GST returns (if applicable)",
+          "TDS certificates",
+          "Investment proofs",
+          "Loan statements",
+          "Property documents"
+        ]
+      },
+      "faqs": [
+        {
+          "question": "Who can file ITR-4?",
+          "answer": "ITR-4 can be filed by individuals, HUFs, and firms (other than LLPs) having total income up to ₹50 lakhs and opting for presumptive taxation scheme."
+        },
+        {
+          "question": "What is the due date for filing ITR-4?",
+          "answer": "The due date is typically July 31st of the assessment year, unless extended by the government."
+        }
+      ]
     }
-  }
+}
   

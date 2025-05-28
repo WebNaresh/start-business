@@ -98,7 +98,7 @@ export default function TestimonialsSection() {
 
   return (
     <section
-      className="py-20 relative overflow-hidden bg-gradient-to-b from-white to-blue-50"
+      className="py-8 md:py-16 relative overflow-hidden bg-gradient-to-b from-white to-blue-50"
       ref={ref}
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
