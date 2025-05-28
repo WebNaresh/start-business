@@ -78,14 +78,14 @@ export default function WhyChooseUs() {
         >
           <Badge className="mb-4 bg-blue-100 text-blue-700 border-blue-200 px-4 py-2">
             <Star className="w-4 h-4 mr-2 fill-current" />
-            Why 10,000+ Businesses Choose Us
+            Why 1,000+ Businesses Choose Us
           </Badge>
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">
             <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
               Why Choose Us?
             </span>
           </h2>
-          <p className="text-xl text-slate-600 max-w-2xl mx-auto">Five key reasons that make us different</p>
+          <p className="text-lg text-slate-600 max-w-2xl mx-auto">Five key reasons that make us different</p>
         </motion.div>
 
         {/* Features Grid - Better Alignment */}
@@ -114,10 +114,10 @@ export default function WhyChooseUs() {
                 </div>
 
                 {/* Content */}
-                <h3 className="text-xl font-bold text-slate-800 mb-2 group-hover:text-blue-600 transition-colors">
+                <h3 className="text-lg font-bold text-slate-800 mb-2 group-hover:text-blue-600 transition-colors">
                   {feature.title}
                 </h3>
-                <p className="text-slate-600 text-sm mb-4 leading-relaxed">{feature.shortDesc}</p>
+                <p className="text-sm text-slate-600 mb-4 leading-relaxed">{feature.shortDesc}</p>
 
                 {/* Benefit Badge */}
                 <div className="flex items-center justify-between">
@@ -155,10 +155,10 @@ export default function WhyChooseUs() {
                 </div>
 
                 {/* Content */}
-                <h3 className="text-xl font-bold text-slate-800 mb-2 group-hover:text-blue-600 transition-colors">
+                <h3 className="text-lg font-bold text-slate-800 mb-2 group-hover:text-blue-600 transition-colors">
                   {feature.title}
                 </h3>
-                <p className="text-slate-600 text-sm mb-4 leading-relaxed">{feature.shortDesc}</p>
+                <p className="text-sm text-slate-600 mb-4 leading-relaxed">{feature.shortDesc}</p>
 
                 {/* Benefit Badge */}
                 <div className="flex items-center justify-between">
@@ -187,8 +187,8 @@ export default function WhyChooseUs() {
         >
           <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl p-8 text-white">
             <div>
-            <h3 className="text-2xl font-bold mb-2">Ready to Experience the Difference?</h3>
-            <p className="text-blue-100 mb-6 max-w-2xl mx-auto">
+            <h3 className="text-xl font-bold mb-2">Ready to Experience the Difference?</h3>
+            <p className="text-base text-blue-100 mb-6 max-w-2xl mx-auto">
             Let our experts guide you through the entire process, from choosing the right structure to completing all registrations.
             </p>
             </div>

@@ -89,7 +89,7 @@ export default function PricingSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.5 }}
-            className="inline-block px-4 py-1.5 mb-4 text-sm font-medium text-[#2563eb] bg-blue-50 rounded-full border border-blue-100"
+            className="inline-block px-4 py-1.5 mb-4 text-sm font-medium text-blue-600 bg-blue-50 rounded-full border border-blue-100"
           >
             Pricing Plans
           </motion.span>
@@ -150,7 +150,7 @@ export default function PricingSection() {
               animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
               transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
               className={`relative rounded-2xl bg-white p-8 shadow-lg transition-all duration-300 hover:shadow-xl border ${
-                plan.popular ? "border-[#2563eb]" : "border-slate-100 hover:border-blue-100"
+                plan.popular ? "border-blue-500" : "border-slate-100 hover:border-blue-100"
               }`}
             >
               {plan.popular && (
@@ -166,15 +166,15 @@ export default function PricingSection() {
                   <plan.icon className="h-6 w-6" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-slate-800">{plan.name}</h3>
-                  <p className="text-slate-500 text-sm">{plan.description}</p>
+                  <h3 className="text-lg font-bold text-slate-800">{plan.name}</h3>
+                  <p className="text-sm text-slate-500">{plan.description}</p>
                 </div>
               </div>
 
               <div className="mb-6 pb-6 border-b border-slate-100">
                 <div className="flex items-baseline">
-                  <span className="text-4xl font-bold text-[#2563eb]">{isAnnual ? plan.price : plan.monthlyPrice}</span>
-                  <span className="text-slate-500 ml-2 text-lg">/{isAnnual ? "year" : "month"}</span>
+                  <span className="text-3xl font-bold text-blue-600">{isAnnual ? plan.price : plan.monthlyPrice}</span>
+                  <span className="text-base text-slate-500 ml-2">/{isAnnual ? "year" : "month"}</span>
                 </div>
                 <p className="text-sm text-slate-500 mt-2">{isAnnual ? "Billed annually" : "Billed monthly"}</p>
               </div>
@@ -197,8 +197,8 @@ export default function PricingSection() {
                   service={`${plan.name} Plan`}
                   className={`w-full rounded-lg ${
                     plan.popular
-                      ? "bg-[#2563eb] hover:bg-blue-700"
-                      : "bg-blue-50 text-[#2563eb] hover:bg-blue-100 border border-blue-200"
+                      ? "bg-blue-600 hover:bg-blue-700"
+                      : "bg-blue-50 text-blue-600 hover:bg-blue-100 border border-blue-200"
                   }`}
                 >
                   Get Started
@@ -225,7 +225,7 @@ export default function PricingSection() {
           className="mt-16 text-center bg-white rounded-xl p-8 shadow-md max-w-3xl mx-auto border border-slate-100"
         >
           <h3 className="text-xl font-bold text-slate-800 mb-3">Need a Custom Solution?</h3>
-          <p className="text-slate-600 mb-6">
+          <p className="text-base text-slate-600 mb-6">
             We offer tailored packages for businesses with specific requirements. Contact our sales team for a
             personalized quote.
           </p>
@@ -252,11 +252,11 @@ export default function PricingSection() {
         >
           <p className="text-slate-600">
             Have questions about our pricing? Check our{" "}
-            <a href="/faq" className="text-[#2563eb] hover:underline">
+            <a href="/faq" className="text-blue-600 hover:underline">
               FAQ section
             </a>{" "}
             or{" "}
-            <a href="/contact" className="text-[#2563eb] hover:underline">
+            <a href="/contact" className="text-blue-600 hover:underline">
               contact us
             </a>
             .

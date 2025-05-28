@@ -156,12 +156,12 @@ export default function TrustStatsSection() {
             Trusted by Entrepreneurs Nationwide
           </Badge>
 
-          <h2 className="text-4xl md:text-5xl lg:text-5xl font-bold mb-6">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6">
             Why Entrepreneurs{" "}
             <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Trust Us</span>
           </h2>
 
-          <p className="text-xl md:text-2xl text-slate-600 max-w-4xl mx-auto leading-relaxed">
+          <p className="text-lg text-slate-600 max-w-4xl mx-auto leading-relaxed">
             With thousands of successful business registrations and a proven track record, we're the preferred choice
             for entrepreneurs across India.
           </p>
@@ -193,7 +193,7 @@ export default function TrustStatsSection() {
 
                   {/* Value */}
                   <motion.div
-                    className="text-4xl md:text-5xl font-bold text-slate-800 mb-2"
+                    className="text-3xl md:text-4xl font-bold text-slate-800 mb-2"
                     initial={{ opacity: 0, scale: 0.5 }}
                     animate={inView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.5 }}
                     transition={{ duration: 0.6, delay: index * 0.1 + 0.5 }}
@@ -202,7 +202,7 @@ export default function TrustStatsSection() {
                   </motion.div>
 
                   {/* Label */}
-                  <h3 className="text-lg font-semibold text-slate-700 mb-2">{stat.label}</h3>
+                  <h3 className="text-base font-semibold text-slate-700 mb-2">{stat.label}</h3>
 
                   {/* Description */}
                   <p className="text-sm text-slate-500 mb-4">{stat.description}</p>

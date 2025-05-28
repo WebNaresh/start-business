@@ -115,11 +115,11 @@ export default function TestimonialsSection() {
           transition={{ duration: 0.5 }}
           className="mb-16 text-center"
         >
-          <span className="inline-block px-4 py-1.5 mb-4 text-sm font-medium text-[#2563eb] bg-blue-50 rounded-full border border-blue-100">
+          <span className="inline-block px-4 py-1.5 mb-4 text-sm font-medium text-blue-600 bg-blue-50 rounded-full border border-blue-100">
             Testimonials
           </span>
           <h2 className="mb-4 text-3xl font-bold md:text-4xl text-slate-800">What Our Clients Say</h2>
-          <p className="mx-auto max-w-2xl text-slate-600">
+          <p className="mx-auto max-w-2xl text-lg text-slate-600">
             Trusted by entrepreneurs and businesses across India for reliable and efficient services
           </p>
         </motion.div>
@@ -159,9 +159,9 @@ export default function TestimonialsSection() {
                         <Star key={star} className="h-5 w-5 fill-yellow-400 text-yellow-400" />
                       ))}
                     </div>
-                    <p className="mb-6 text-slate-700 leading-relaxed">{testimonial.text}</p>
+                    <p className="mb-6 text-base text-slate-700 leading-relaxed">{testimonial.text}</p>
                     <div className="flex items-center">
-                      <div className="mr-4 h-14 w-14 overflow-hidden rounded-full border-2 border-[#2563eb]/20">
+                      <div className="mr-4 h-14 w-14 overflow-hidden rounded-full border-2 border-blue-200">
                         <Image
                           src={testimonial.image || "/placeholder.svg"}
                           alt={testimonial.author}
@@ -171,7 +171,7 @@ export default function TestimonialsSection() {
                         />
                       </div>
                       <div>
-                        <h4 className="font-bold text-[#2563eb]">{testimonial.author}</h4>
+                        <h4 className="text-base font-bold text-blue-600">{testimonial.author}</h4>
                         <p className="text-sm text-slate-500">{testimonial.position}</p>
                       </div>
                     </div>
@@ -185,14 +185,14 @@ export default function TestimonialsSection() {
           <div className="absolute top-1/2 left-0 right-0 -mt-6 flex justify-between px-2 md:px-4 pointer-events-none">
             <button
               onClick={prevTestimonial}
-              className="rounded-full bg-white p-3 text-[#2563eb] shadow-lg hover:bg-[#2563eb] hover:text-white transition-colors transform -translate-y-1/2 pointer-events-auto focus:outline-none focus:ring-2 focus:ring-[#2563eb] focus:ring-offset-2"
+              className="rounded-full bg-white p-3 text-blue-600 shadow-lg hover:bg-blue-600 hover:text-white transition-colors transform -translate-y-1/2 pointer-events-auto focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2"
               aria-label="Previous testimonial"
             >
               <ChevronLeft className="h-6 w-6" />
             </button>
             <button
               onClick={nextTestimonial}
-              className="rounded-full bg-white p-3 text-[#2563eb] shadow-lg hover:bg-[#2563eb] hover:text-white transition-colors transform -translate-y-1/2 pointer-events-auto focus:outline-none focus:ring-2 focus:ring-[#2563eb] focus:ring-offset-2"
+              className="rounded-full bg-white p-3 text-blue-600 shadow-lg hover:bg-blue-600 hover:text-white transition-colors transform -translate-y-1/2 pointer-events-auto focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2"
               aria-label="Next testimonial"
             >
               <ChevronRight className="h-6 w-6" />
@@ -209,7 +209,7 @@ export default function TestimonialsSection() {
                   setActiveIndex(index)
                 }}
                 className={`h-2.5 rounded-full transition-all ${
-                  activeIndex === index ? "w-8 bg-[#2563eb]" : "w-2.5 bg-blue-200 hover:bg-blue-300"
+                  activeIndex === index ? "w-8 bg-blue-600" : "w-2.5 bg-blue-200 hover:bg-blue-300"
                 }`}
                 aria-label={`Go to testimonial ${index + 1}`}
                 aria-current={activeIndex === index ? "true" : "false"}

@@ -15,7 +15,7 @@ export default function ProcessSection() {
       icon: MessageSquare,
       title: "Consultation",
       description: "Schedule a free consultation with our experts to discuss your requirements",
-      color: "bg-blue-100 text-blue-600 border-blue-600",
+      color: "bg-blue-50 text-blue-600 border-blue-600",
       hoverColor: "group-hover:bg-blue-600 group-hover:text-white",
       shadowColor: "shadow-blue-200",
     },
@@ -23,25 +23,25 @@ export default function ProcessSection() {
       icon: FileText,
       title: "Documentation",
       description: "We'll guide you through the required documentation process",
-      color: "bg-emerald-100 text-emerald-600 border-emerald-600",
-      hoverColor: "group-hover:bg-emerald-600 group-hover:text-white",
-      shadowColor: "shadow-emerald-200",
+      color: "bg-blue-50 text-blue-600 border-blue-600",
+      hoverColor: "group-hover:bg-blue-600 group-hover:text-white",
+      shadowColor: "shadow-blue-200",
     },
     {
       icon: ClipboardCheck,
       title: "Processing",
       description: "Our team handles all the paperwork and filing with the authorities",
-      color: "bg-purple-100 text-purple-600 border-purple-600",
-      hoverColor: "group-hover:bg-purple-600 group-hover:text-white",
-      shadowColor: "shadow-purple-200",
+      color: "bg-blue-50 text-blue-600 border-blue-600",
+      hoverColor: "group-hover:bg-blue-600 group-hover:text-white",
+      shadowColor: "shadow-blue-200",
     },
     {
       icon: CheckCircle,
       title: "Completion",
       description: "Receive your registration certificates and start your business journey",
-      color: "bg-amber-100 text-amber-600 border-amber-600",
-      hoverColor: "group-hover:bg-amber-600 group-hover:text-white",
-      shadowColor: "shadow-amber-200",
+      color: "bg-blue-50 text-blue-600 border-blue-600",
+      hoverColor: "group-hover:bg-blue-600 group-hover:text-white",
+      shadowColor: "shadow-blue-200",
     },
   ]
 
@@ -54,11 +54,11 @@ export default function ProcessSection() {
           transition={{ duration: 0.5 }}
           className="mb-16 text-center"
         >
-          <span className="inline-block rounded-full bg-blue-100 px-4 py-1 text-sm font-semibold text-blue-600 mb-4">
+          <span className="inline-block rounded-full bg-blue-50 px-4 py-1 text-sm font-semibold text-blue-600 mb-4">
             Simple Process
           </span>
           <h2 className="mb-4 text-3xl font-bold md:text-4xl">How It Works</h2>
-          <p className="mx-auto max-w-2xl text-slate-600">
+          <p className="mx-auto max-w-2xl text-lg text-slate-600">
             Our streamlined 4-step process makes business registration simple, efficient, and hassle-free
           </p>
         </motion.div>
@@ -97,8 +97,8 @@ export default function ProcessSection() {
 
                 {/* Content */}
                 <div className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-all duration-300 w-full border border-slate-100 group-hover:border-slate-200">
-                  <h3 className="mb-3 text-xl font-bold">{step.title}</h3>
-                  <p className="text-slate-600 mb-4">{step.description}</p>
+                  <h3 className="mb-3 text-lg font-bold">{step.title}</h3>
+                  <p className="text-base text-slate-600 mb-4">{step.description}</p>
 
                   {/* Arrow for next step - hidden on last item */}
                   {index < steps.length - 1 && (
