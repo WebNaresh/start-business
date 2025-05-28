@@ -203,7 +203,7 @@ export default function EnhancedHeroSection() {
               </motion.div>
             </AnimatePresence>
 
-            <motion.div variants={itemVariants} className="mb-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <motion.div variants={itemVariants} className="mb-8 hidden md:grid grid-cols-1 sm:grid-cols-2 gap-4">
               {[
                 "⚡ Quick turnaround time",
                 "🎯 Expert legal guidance",
