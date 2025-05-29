@@ -397,36 +397,7 @@ export default function CalculatorGrid() {
             </Tabs>
           </motion.div>
 
-          {/* Summary Stats */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.6 }}
-            className="mt-16 text-center"
-          >
-            <div className="bg-gradient-to-r from-slate-50 to-blue-50 rounded-3xl p-8 border border-slate-200">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-blue-600 mb-2">7</div>
-                  <div className="text-slate-600 text-sm">Financial Calculators</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-blue-600 mb-2">8</div>
-                  <div className="text-slate-600 text-sm">Tax Calculators</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-blue-600 mb-2">4</div>
-                  <div className="text-slate-600 text-sm">Loan Calculators</div>
-                </div>
-              </div>
-              <div className="mt-6 text-center">
-                <p className="text-slate-600 text-sm">
-                  Comprehensive financial tools with intelligent insights and detailed explanations
-                </p>
-              </div>
-            </div>
-          </motion.div>
+       
         </div>
       </div>
     </section>

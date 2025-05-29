@@ -187,7 +187,7 @@ export default function Header() {
     { name: "About Us", href: "/about" },
 
     { name: "Contact", href: "/contact" },
-    { name: "Calculators", href: "/calculators" },
+    { name: "Tools", href: "/calculators" },
   ]
 
   const isActive = (href: string) => {
