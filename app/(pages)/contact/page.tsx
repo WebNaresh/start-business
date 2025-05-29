@@ -4,6 +4,7 @@ import ContactInfo from "./_components/contact-info"
 import ContactForm from "./_components/contact-form"
 import ContactMap from "./_components/contact-map"
 import ContactFAQ from "./_components/contact-faq"
+import ContactLocationInfo from "./_components/contact-location-info"
 
 
 export const metadata: Metadata = {
@@ -98,7 +99,7 @@ export default function ContactPage() {
       </section>
 
       <ContactMap />
-      <ContactFAQ faqs={faqs} />
+  <ContactLocationInfo/>
     </div>
   )
 }

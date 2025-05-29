@@ -93,37 +93,6 @@ export default function ContactMap() {
                   </Button>
                 </div>
               </div>
-
-              {/* Nearby Landmarks */}
-              <div className="bg-white rounded-2xl p-6 shadow-lg border border-slate-100">
-                <h3 className="text-xl font-semibold text-slate-800 mb-4">Nearby Landmarks</h3>
-                <ul className="space-y-3 text-sm text-slate-600">
-                  <li className="flex items-center">
-                    <div className="w-2 h-2 bg-blue-500 rounded-full mr-3"></div>
-                    Behind Goodluck Café
-                  </li>
-                  <li className="flex items-center">
-                    <div className="w-2 h-2 bg-blue-500 rounded-full mr-3"></div>
-                    Near Deccan Gymkhana
-                  </li>
-                  <li className="flex items-center">
-                    <div className="w-2 h-2 bg-blue-500 rounded-full mr-3"></div>
-                    Close to FC Road
-                  </li>
-                  <li className="flex items-center">
-                    <div className="w-2 h-2 bg-blue-500 rounded-full mr-3"></div>
-                    Walking distance from Pune Station
-                  </li>
-                </ul>
-              </div>
-
-              {/* Parking Info */}
-              <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl p-6 border border-green-100">
-                <h3 className="text-lg font-semibold text-green-800 mb-2">Parking Available</h3>
-                <p className="text-sm text-green-700">
-                  Free parking space available for visitors. Please inform us in advance for reserved parking.
-                </p>
-              </div>
             </div>
           </div>
         </motion.div>

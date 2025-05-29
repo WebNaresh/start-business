@@ -1,20 +1,10 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { MessageSquare, Phone, Mail, MapPin, Clock, Globe, Shield, Award } from "lucide-react"
-import { Badge } from "@/components/ui/badge"
+import { MessageSquare, Phone, Mail, MapPin } from "lucide-react"
 import WhatsAppCTAButton from "@/components/whatsapp-cta-button"
 
 export default function ContactInfo() {
-  const isBusinessOpen = () => {
-    const now = new Date()
-    const day = now.getDay()
-    const hour = now.getHours()
-
-    if (day === 0 || day === 6) return false // Saturday and Sunday closed
-    return hour >= 10 && hour < 19 // Monday-Friday 10-7
-  }
-
   const contactMethods = [
     {
       icon: MessageSquare,
@@ -54,12 +44,6 @@ export default function ContactInfo() {
     },
   ]
 
-  const businessHours = [
-    { day: "Monday - Friday", hours: "10:00 AM - 7:00 PM", isToday: [1, 2, 3, 4, 5].includes(new Date().getDay()) },
-    { day: "Saturday", hours: "Closed", isToday: new Date().getDay() === 6 },
-    { day: "Sunday", hours: "Closed", isToday: new Date().getDay() === 0 },
-  ]
-
   return (
     <motion.div
       initial={{ opacity: 0, x: -20 }}
@@ -68,16 +52,8 @@ export default function ContactInfo() {
       transition={{ duration: 0.6 }}
       className="space-y-8"
     >
-      {/* Header */}
-      <div>
-        <h2 className="text-3xl md:text-4xl font-bold text-slate-800 mb-4">Let's Connect</h2>
-        <p className="text-lg text-slate-600 leading-relaxed">
-          Ready to start your business journey? Choose your preferred way to reach out to our expert team.
-        </p>
-      </div>
-
-     
-
+ 
+<h2 className="text-3xl md:text-4xl font-bold text-slate-800 mb-2 flex justify-center">Let's Connect</h2>
       {/* Contact Methods */}
       <div className="space-y-4">
         {contactMethods.map((method, index) => (
@@ -109,58 +85,20 @@ export default function ContactInfo() {
         ))}
       </div>
 
-      {/* Business Hours */}
+      {/* WhatsApp CTA */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6, delay: 0.4 }}
-        className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-6 border border-blue-100"
+        className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-6 border border-green-100"
       >
-        <div className="flex items-center justify-between mb-4">
-          <h3 className="text-xl font-semibold text-slate-800 flex items-center">
-            <Clock className="w-5 h-5 mr-2 text-blue-600" />
-            Business Hours
-          </h3>
-          <Badge
-            variant={isBusinessOpen() ? "default" : "secondary"}
-            className={`${
-              isBusinessOpen()
-                ? "bg-green-100 text-green-700 border-green-200"
-                : "bg-red-100 text-red-700 border-red-200"
-            }`}
-          >
-            {isBusinessOpen() ? "Open Now" : "Closed"}
-          </Badge>
-        </div>
-
-        <div className="space-y-3">
-          {businessHours.map((schedule, index) => (
-            <div
-              key={index}
-              className={`flex justify-between items-center p-3 rounded-lg transition-colors ${
-                schedule.isToday ? "bg-blue-100 border border-blue-200" : "bg-white/50"
-              }`}
-            >
-              <span className={`font-medium ${schedule.isToday ? "text-blue-800" : "text-slate-700"}`}>
-                {schedule.day}:
-              </span>
-              <span className={`${schedule.isToday ? "text-blue-700 font-semibold" : "text-slate-600"}`}>
-                {schedule.hours}
-              </span>
-            </div>
-          ))}
-        </div>
-
-        <div className="mt-6 pt-4 border-t border-blue-200">
-          <p className="text-sm text-slate-600 mb-4">
-            Need immediate assistance? Our WhatsApp support is available 24/7 for urgent queries.
-          </p>
-          <WhatsAppCTAButton className="w-full">
-       
-            Chat With Us Now
-          </WhatsAppCTAButton>
-        </div>
+        <p className="text-sm text-slate-600 mb-4">
+          Need immediate assistance? Our WhatsApp support is available 24/7 for urgent queries.
+        </p>
+        <WhatsAppCTAButton className="w-full">
+          Chat With Us Now
+        </WhatsAppCTAButton>
       </motion.div>
     </motion.div>
   )
