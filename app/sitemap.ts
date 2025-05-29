@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next'
 import services from '@/app/(pages)/services/[slug]/data/services.json'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-    const baseUrl = 'https://biztreeaccounting.com'
+    const baseUrl = 'https://www.startbusiness.co.in/'
 
     // Static routes with high priority
     const staticRoutes = [
