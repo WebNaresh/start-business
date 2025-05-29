@@ -11,12 +11,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
             lastModified: new Date(),
             changeFrequency: 'daily' as const,
             priority: 1,
+            images: [`${baseUrl}/logo.png`],
         },
         {
             url: `${baseUrl}/services`,
             lastModified: new Date(),
             changeFrequency: 'daily' as const,
             priority: 0.9,
+            images: [`${baseUrl}/hero_new_1.png`, `${baseUrl}/hero_new_2.png`, `${baseUrl}/hero_new.png`],
         },
         {
             url: `${baseUrl}/about`,
