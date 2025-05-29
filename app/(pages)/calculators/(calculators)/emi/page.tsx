@@ -6,6 +6,8 @@ export const metadata: Metadata = {
   title: "EMI Calculator | Calculate Loan EMI with Amortization Schedule",
   description:
     "Calculate your loan EMI with detailed amortization schedule. Compare different loan amounts, interest rates, and tenures.",
+  keywords: "emi calculator, loan calculator, amortization schedule, loan EMI, loan interest, loan tenure, loan amount, loan interest rate",
+  
 }
 
 export default function EMICalculatorPage() {

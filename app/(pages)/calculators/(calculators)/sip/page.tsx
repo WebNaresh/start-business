@@ -6,6 +6,16 @@ export const metadata: Metadata = {
   title: "SIP Calculator | Systematic Investment Plan Calculator with Growth Projections",
   description:
     "Calculate your SIP returns with detailed projections. Plan your mutual fund investments with intelligent insights and growth analysis.",
+  keywords: "sip calculator, mutual fund calculator, systematic investment plan, sip returns, sip growth, sip investment, sip calculator, sip returns, sip growth, sip investment",
+  openGraph: {
+    images: ["/calculator_og.png"],
+  },
+  appleWebApp: {
+    title: "SIP Calculator | Systematic Investment Plan Calculator with Growth Projections",
+    
+   
+  },    
+  
 }
 
 export default function SIPCalculatorPage() {
