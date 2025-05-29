@@ -1,6 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
+import { useState, useMemo } from "react"
 import {
   Calculator,
   TrendingUp,
@@ -8,145 +9,234 @@ import {
   Car,
   PiggyBank,
   Receipt,
-  Building2,
-  CreditCard,
   Banknote,
   Target,
   Shield,
   Briefcase,
+  Percent,
+  FileText,
+  Users,
+  Gift,
+  DollarSign,
+  CalculatorIcon as CalcIcon,
+  FileCheck,
+  Building,
+  Search,
+  X,
 } from "lucide-react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import Link from "next/link"
 
-const calculators = [
-  {
-    id: "emi",
-    title: "EMI Calculator",
-    description: "Calculate monthly installments for loans with detailed amortization schedule",
-    icon: Calculator,
-    category: "Loans",
-    color: "blue",
-    popular: true,
-  },
-  {
-    id: "sip",
-    title: "SIP Calculator",
-    description: "Plan your systematic investment with compound growth projections",
-    icon: TrendingUp,
-    category: "Investment",
-    color: "green",
-    popular: true,
-  },
-  {
-    id: "home-loan",
-    title: "Home Loan Calculator",
-    description: "Calculate home loan EMI, eligibility, and total interest payable",
-    icon: Home,
-    category: "Loans",
-    color: "purple",
-    popular: true,
-  },
-  {
-    id: "car-loan",
-    title: "Car Loan Calculator",
-    description: "Determine car loan EMI and total cost with insurance options",
-    icon: Car,
-    category: "Loans",
-    color: "orange",
-  },
-  {
-    id: "fd",
-    title: "Fixed Deposit Calculator",
-    description: "Calculate FD maturity amount with compound interest",
-    icon: PiggyBank,
-    category: "Investment",
-    color: "blue",
-  },
-  {
-    id: "gst",
-    title: "GST Calculator",
-    description: "Calculate GST inclusive/exclusive amounts for all tax slabs",
-    icon: Receipt,
-    category: "Tax",
-    color: "red",
-  },
-  {
-    id: "business-loan",
-    title: "Business Loan Calculator",
-    description: "Calculate business loan EMI and eligibility for your venture",
-    icon: Building2,
-    category: "Business",
-    color: "indigo",
-  },
-  {
-    id: "credit-card",
-    title: "Credit Card Calculator",
-    description: "Calculate minimum payments and payoff time for credit cards",
-    icon: CreditCard,
-    category: "Loans",
-    color: "pink",
-  },
-  {
-    id: "income-tax",
-    title: "Income Tax Calculator",
-    description: "Calculate income tax liability with latest tax slabs and deductions",
-    icon: Banknote,
-    category: "Tax",
-    color: "yellow",
-  },
-  {
-    id: "retirement",
-    title: "Retirement Calculator",
-    description: "Plan your retirement corpus with inflation-adjusted calculations",
-    icon: Target,
-    category: "Investment",
-    color: "teal",
-  },
-  {
-    id: "insurance",
-    title: "Insurance Calculator",
-    description: "Calculate life insurance coverage needed for financial security",
-    icon: Shield,
-    category: "Insurance",
-    color: "cyan",
-  },
-  {
-    id: "ppf",
-    title: "PPF Calculator",
-    description: "Calculate PPF maturity amount with 15-year investment cycle",
-    icon: Briefcase,
-    category: "Investment",
-    color: "emerald",
-  },
-]
-
-const getColorClasses = (color: string) => {
-  const colorMap = {
-    blue: "from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700",
-    green: "from-green-500 to-green-600 hover:from-green-600 hover:to-green-700",
-    purple: "from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700",
-    orange: "from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700",
-    red: "from-red-500 to-red-600 hover:from-red-600 hover:to-red-700",
-    indigo: "from-indigo-500 to-indigo-600 hover:from-indigo-600 hover:to-indigo-700",
-    pink: "from-pink-500 to-pink-600 hover:from-pink-600 hover:to-pink-700",
-    yellow: "from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700",
-    teal: "from-teal-500 to-teal-600 hover:from-teal-600 hover:to-teal-700",
-    cyan: "from-cyan-500 to-cyan-600 hover:from-cyan-600 hover:to-cyan-700",
-    emerald: "from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700",
-  }
-  return colorMap[color as keyof typeof colorMap] || colorMap.blue
+const calculatorCategories: {
+  All: Array<{
+    id: string
+    title: string
+    description: string
+    icon: any
+    category: string
+  }>
+  Financial: Array<{
+    id: string
+    title: string
+    description: string
+    icon: any
+    category: string
+  }>
+  Tax: Array<{
+    id: string
+    title: string
+    description: string
+    icon: any
+    category: string
+  }>
+  Loan: Array<{
+    id: string
+    title: string
+    description: string
+    icon: any
+    category: string
+  }>
+} = {
+  All: [
+    // Financial
+    {
+      id: "sip",
+      title: "SIP Calculator",
+      description: "Plan your systematic investment with compound growth projections",
+      icon: TrendingUp,
+      category: "Financial",
+    },
+    {
+      id: "fixed-deposit",
+      title: "Fixed Deposit Calculator",
+      description: "Calculate FD maturity amount with compound interest",
+      icon: PiggyBank,
+      category: "Financial",
+    },
+    {
+      id: "rd",
+      title: "RD Calculator",
+      description: "Calculate recurring deposit maturity amount and returns",
+      icon: Target,
+      category: "Financial",
+    },
+    {
+      id: "retirement-corpus",
+      title: "Retirement Corpus Calculator",
+      description: "Plan your retirement corpus with inflation-adjusted calculations",
+      icon: Shield,
+      category: "Financial",
+    },
+    {
+      id: "ppf",
+      title: "PPF Calculator",
+      description: "Calculate PPF maturity amount with 15-year investment cycle",
+      icon: Briefcase,
+      category: "Financial",
+    },
+    {
+      id: "ssy",
+      title: "SSY Calculator",
+      description: "Calculate Sukanya Samriddhi Yojana returns for girl child",
+      icon: Gift,
+      category: "Financial",
+    },
+    {
+      id: "nps",
+      title: "NPS Calculator",
+      description: "Calculate National Pension System corpus and annuity",
+      icon: Users,
+      category: "Financial",
+    },
+    // Tax
+    {
+      id: "gst",
+      title: "GST Calculator",
+      description: "Calculate GST inclusive/exclusive amounts for all tax slabs",
+      icon: Receipt,
+      category: "Tax",
+    },
+    {
+      id: "income-tax",
+      title: "Income Tax Calculator",
+      description: "Calculate income tax liability with latest tax slabs and deductions",
+      icon: Banknote,
+      category: "Tax",
+    },
+    {
+      id: "hra",
+      title: "HRA Calculator",
+      description: "Calculate House Rent Allowance exemption and tax benefits",
+      icon: Home,
+      category: "Tax",
+    },
+    {
+      id: "gratuity",
+      title: "Gratuity Calculator",
+      description: "Calculate gratuity amount based on salary and service years",
+      icon: Gift,
+      category: "Tax",
+    },
+    {
+      id: "tds",
+      title: "TDS Calculator",
+      description: "Calculate Tax Deducted at Source for various income types",
+      icon: FileText,
+      category: "Tax",
+    },
+    {
+      id: "salary",
+      title: "Salary Calculator",
+      description: "Calculate take-home salary after taxes and deductions",
+      icon: DollarSign,
+      category: "Tax",
+    },
+    {
+      id: "gstr-3b-interest",
+      title: "GSTR-3B Interest Calculator",
+      description: "Calculate interest on delayed GSTR-3B filing",
+      icon: Percent,
+      category: "Tax",
+    },
+    {
+      id: "hra-rent-receipt",
+      title: "HRA Rent Receipt Generator",
+      description: "Generate rent receipts for HRA tax exemption claims",
+      icon: FileCheck,
+      category: "Tax",
+    },
+    // Loan
+    {
+      id: "emi",
+      title: "EMI Calculator",
+      description: "Calculate monthly installments for loans with detailed amortization schedule",
+      icon: Calculator,
+      category: "Loan",
+    },
+    {
+      id: "home-loan",
+      title: "Home Loan Calculator",
+      description: "Calculate home loan EMI, eligibility, and total interest payable",
+      icon: Home,
+      category: "Loan",
+    },
+    {
+      id: "car-loan",
+      title: "Car Loan Calculator",
+      description: "Determine car loan EMI and total cost with insurance options",
+      icon: Car,
+      category: "Loan",
+    },
+    {
+      id: "business-loan",
+      title: "Business Loan Calculator",
+      description: "Calculate business loan EMI and eligibility for your venture",
+      icon: Building,
+      category: "Loan",
+    },
+  ],
+  Financial: [],
+  Tax: [],
+  Loan: [],
 }
 
+// Populate category-specific arrays
+calculatorCategories.Financial = calculatorCategories.All.filter((calc) => calc.category === "Financial")
+calculatorCategories.Tax = calculatorCategories.All.filter((calc) => calc.category === "Tax")
+calculatorCategories.Loan = calculatorCategories.All.filter((calc) => calc.category === "Loan")
+
 export default function CalculatorGrid() {
+  const [activeTab, setActiveTab] = useState("All")
+  const [searchQuery, setSearchQuery] = useState("")
+
+  // Filter calculators based on search query
+  const filteredCalculators = useMemo(() => {
+    const calculators = calculatorCategories[activeTab as keyof typeof calculatorCategories]
+    if (!searchQuery) return calculators
+
+    return calculators.filter(
+      (calculator) =>
+        calculator.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        calculator.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        calculator.category.toLowerCase().includes(searchQuery.toLowerCase()),
+    )
+  }, [activeTab, searchQuery])
+
+  const clearSearch = () => {
+    setSearchQuery("")
+  }
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.2,
+        staggerChildren: 0.05,
+        delayChildren: 0.1,
       },
     },
   }
@@ -156,58 +246,188 @@ export default function CalculatorGrid() {
     visible: { opacity: 1, y: 0 },
   }
 
+  const getCategoryIcon = (category: string) => {
+    switch (category) {
+      case "Financial":
+        return <TrendingUp className="w-4 h-4" />
+      case "Tax":
+        return <Receipt className="w-4 h-4" />
+      case "Loan":
+        return <Calculator className="w-4 h-4" />
+      default:
+        return <CalcIcon className="w-4 h-4" />
+    }
+  }
+
+  const getCategoryCount = (category: string) => {
+    if (category === "All") return calculatorCategories.All.length
+    return calculatorCategories[category as keyof typeof calculatorCategories].length
+  }
+
   return (
-    <section className="py-8 md:py-12 relative">
+    <section id="calculators" className="py-12 relative">
       <div className="container mx-auto px-4">
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
-        >
-          {calculators.map((calculator) => (
-            <motion.div key={calculator.id} variants={itemVariants}>
-              <Card className="group h-full hover:shadow-xl transition-all duration-300 border-0 bg-white/80 backdrop-blur-sm hover:bg-white">
-                <CardHeader className="pb-4">
-                  <div className="flex items-start justify-between mb-3">
-                    <div
-                      className={`w-12 h-12 rounded-xl bg-gradient-to-r ${getColorClasses(calculator.color)} flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}
-                    >
-                      <calculator.icon className="w-6 h-6 text-white" />
-                    </div>
-                    <div className="flex flex-col items-end gap-2">
-                      {calculator.popular && (
-                        <Badge variant="secondary" className="bg-yellow-100 text-yellow-700 border-yellow-200 text-xs">
-                          Popular
-                        </Badge>
-                      )}
-                      <Badge variant="outline" className="text-xs">
-                        {calculator.category}
-                      </Badge>
-                    </div>
-                  </div>
-                  <CardTitle className="text-lg font-semibold text-slate-800 group-hover:text-slate-900">
-                    {calculator.title}
-                  </CardTitle>
-                  <CardDescription className="text-sm text-slate-600 leading-relaxed">
-                    {calculator.description}
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="pt-0">
-                  <Link href={`/calculators/${calculator.id}`}>
-                    <Button
-                      className={`w-full bg-gradient-to-r ${getColorClasses(calculator.color)} text-white border-0 hover:shadow-lg transition-all duration-300`}
-                      size="sm"
-                    >
-                      Calculate Now
-                    </Button>
-                  </Link>
-                </CardContent>
-              </Card>
-            </motion.div>
-          ))}
-        </motion.div>
+        <div className="max-w-7xl mx-auto">
+          {/* Search Bar */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mb-8"
+          >
+            <div className="relative max-w-md mx-auto">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 w-4 h-4" />
+              <Input
+                type="text"
+                placeholder="Search calculators..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="pl-10 pr-10 py-3 rounded-xl border-slate-200 focus:border-blue-500 focus:ring-blue-500"
+              />
+              {searchQuery && (
+                <button
+                  onClick={clearSearch}
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-slate-600 transition-colors"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              )}
+            </div>
+          </motion.div>
+
+          {/* Tabs */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+          >
+            <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+              <TabsList className="grid w-full grid-cols-4 mb-8 bg-slate-100 p-1 rounded-xl">
+                {["All", "Financial", "Tax", "Loan"].map((category) => (
+                  <TabsTrigger
+                    key={category}
+                    value={category}
+                    className="flex items-center gap-2 px-4 py-1 rounded-lg data-[state=active]:bg-white data-[state=active]:text-blue-600 data-[state=active]:shadow-sm transition-all duration-200"
+                  >
+              
+                    <span className="font-medium">{category}</span>
+           
+                  </TabsTrigger>
+                ))}
+              </TabsList>
+
+              {/* Tab Content */}
+              {["All", "Financial", "Tax", "Loan"].map((category) => (
+                <TabsContent key={category} value={category} className="mt-0">
+                  {/* Results Info */}
+                  {searchQuery && (
+                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="mb-6 text-center">
+                      <p className="text-slate-600">
+                        {filteredCalculators.length > 0
+                          ? `Found ${filteredCalculators.length} calculator${filteredCalculators.length !== 1 ? "s" : ""} for "${searchQuery}"`
+                          : `No calculators found for "${searchQuery}"`}
+                      </p>
+                    </motion.div>
+                  )}
+
+                  {/* Calculators Grid */}
+                  <motion.div
+                    variants={containerVariants}
+                    initial="hidden"
+                    animate="visible"
+                    key={`${category}-${searchQuery}`}
+                    className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+                  >
+                    {filteredCalculators.map((calculator, index) => (
+                      <motion.div
+                        key={calculator.id}
+                        variants={itemVariants}
+                        transition={{ delay: index * 0.05 }}
+                        className="group"
+                      >
+                        <Card className="h-full hover:shadow-xl transition-all duration-300 border-0 bg-white/80 backdrop-blur-sm hover:bg-white group-hover:scale-105">
+                          <CardHeader className="pb-4">
+                            <div className="flex items-start justify-between mb-3">
+                              <div className="w-12 h-12 rounded-xl bg-gradient-to-r from-blue-600 to-blue-700 flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                                <calculator.icon className="w-6 h-6 text-white" />
+                              </div>
+                              <Badge variant="outline" className="text-xs">
+                                {calculator.category}
+                              </Badge>
+                            </div>
+                            <CardTitle className="text-lg font-semibold text-slate-800 group-hover:text-slate-900 leading-tight">
+                              {calculator.title}
+                            </CardTitle>
+                            <CardDescription className="text-sm text-slate-600 leading-relaxed">
+                              {calculator.description}
+                            </CardDescription>
+                          </CardHeader>
+                          <CardContent className="pt-0">
+                            <Link href={`/calculators/${calculator.id}`}>
+                              <Button
+                                className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white border-0 hover:shadow-lg transition-all duration-300 group-hover:shadow-xl"
+                                size="sm"
+                              >
+                                Calculate Now
+                                <CalcIcon className="w-4 h-4 ml-2" />
+                              </Button>
+                            </Link>
+                          </CardContent>
+                        </Card>
+                      </motion.div>
+                    ))}
+                  </motion.div>
+
+                  {/* No Results */}
+                  {filteredCalculators.length === 0 && searchQuery && (
+                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-center py-12">
+                      <div className="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <Search className="w-8 h-8 text-slate-400" />
+                      </div>
+                      <h3 className="text-lg font-semibold text-slate-800 mb-2">No calculators found</h3>
+                      <p className="text-slate-600 mb-4">Try adjusting your search terms or browse all calculators.</p>
+                      <Button variant="outline" onClick={clearSearch}>
+                        Clear Search
+                      </Button>
+                    </motion.div>
+                  )}
+                </TabsContent>
+              ))}
+            </Tabs>
+          </motion.div>
+
+          {/* Summary Stats */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.6 }}
+            className="mt-16 text-center"
+          >
+            <div className="bg-gradient-to-r from-slate-50 to-blue-50 rounded-3xl p-8 border border-slate-200">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div className="text-center">
+                  <div className="text-3xl font-bold text-blue-600 mb-2">7</div>
+                  <div className="text-slate-600 text-sm">Financial Calculators</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-3xl font-bold text-blue-600 mb-2">8</div>
+                  <div className="text-slate-600 text-sm">Tax Calculators</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-3xl font-bold text-blue-600 mb-2">4</div>
+                  <div className="text-slate-600 text-sm">Loan Calculators</div>
+                </div>
+              </div>
+              <div className="mt-6 text-center">
+                <p className="text-slate-600 text-sm">
+                  Comprehensive financial tools with intelligent insights and detailed explanations
+                </p>
+              </div>
+            </div>
+          </motion.div>
+        </div>
       </div>
     </section>
   )
