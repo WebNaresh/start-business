@@ -185,8 +185,9 @@ export default function Header() {
   const navLinks = [
     { name: "Home", href: "/" },
     { name: "About Us", href: "/about" },
-    { name: "Blog", href: "/blog" },
+
     { name: "Contact", href: "/contact" },
+    { name: "Calculators", href: "/calculators" },
   ]
 
   const isActive = (href: string) => {
