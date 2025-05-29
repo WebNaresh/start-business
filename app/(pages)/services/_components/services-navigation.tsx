@@ -362,7 +362,7 @@ export default function EnhancedServicesNavigation() {
   const activeService = serviceCategories.find((cat) => cat.id === activeCategory)
 
   return (
-    <div className="bg-white border-b border-slate-200 sticky top-0 z-40 shadow-sm" ref={navRef}>
+    <div className="bg-white border-b border-slate-200 sticky top-[55px] z-40 shadow-sm" ref={navRef}>
       <div className="container mx-auto px-4">
         {/* Mobile Header */}
         <div className="md:hidden flex items-center justify-between py-3">
