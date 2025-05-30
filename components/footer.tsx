@@ -144,7 +144,7 @@ export default function EnhancedFooter() {
 
               <p className="mb-6 text-slate-600 leading-relaxed">
                 Your trusted partner for business registration, compliance, and legal services in India. Empowering
-                entrepreneurs since 2020.
+                entrepreneurs since 2017.
               </p>
 
       

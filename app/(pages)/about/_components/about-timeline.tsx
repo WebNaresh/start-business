@@ -11,27 +11,27 @@ export default function AboutTimeline() {
 
   const milestones = [
     {
-      year: "2012",
+      year: "2017",
       title: "Company Founded",
       description: "StartBusiness was established with a vision to simplify business registration in India.",
     },
     {
-      year: "2014",
+      year: "2019",
       title: "Expanded Services",
       description: "Added trademark registration and intellectual property services to our portfolio.",
     },
     {
-      year: "2016",
+      year: "2020",
       title: "1000+ Clients",
       description: "Reached the milestone of serving over 1000 businesses across India.",
     },
     {
-      year: "2018",
+      year: "2021",
       title: "Digital Transformation",
       description: "Launched our digital platform for seamless service delivery and client communication.",
     },
     {
-      year: "2020",
+      year: "2022",
       title: "Pan-India Presence",
       description: "Expanded our operations to serve clients across all states and union territories in India.",
     },
