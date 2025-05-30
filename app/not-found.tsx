@@ -93,7 +93,7 @@ export default function NotFound() {
           transition={{ delay: 0.2, duration: 0.5 }}
         >
           <h2 className="text-4xl font-bold text-gray-800 mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600">
-            Oops! Page Not Found
+            Coming Soon...
           </h2>
           <h3 className="text-2xl text-gray-600 mb-8 font-medium">
             We are still under development, please check back later.
