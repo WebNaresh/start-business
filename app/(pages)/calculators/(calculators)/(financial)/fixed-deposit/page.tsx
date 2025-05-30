@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import FixedDepositCalculator from "../_calculators/fixed-deposit-calculator";
+import FixedDepositCalculator from "../_components/fixed-deposit-calculator";
 
 export const metadata: Metadata = {
   title: "Fixed Deposit Calculator | Calculate Fixed Deposit Returns",

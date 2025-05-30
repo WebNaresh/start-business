@@ -1,5 +1,5 @@
 import type { Metadata } from "next"
-import NPSCalculator from "../_calculators/nps-calculator"
+import NPSCalculator from "../_components/nps-calculator"
 
 
 export const metadata: Metadata = {

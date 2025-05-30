@@ -1,5 +1,5 @@
 import type { Metadata } from "next"
-import PPFCalculator from "../_calculators/ppf-calculator"
+import PPFCalculator from "../_components/ppf-calculator"
 
 export const metadata: Metadata = {
   title: "PPF Calculator - Public Provident Fund Calculator | Financial Tools",

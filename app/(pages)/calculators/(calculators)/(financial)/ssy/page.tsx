@@ -1,5 +1,5 @@
 import type { Metadata } from "next"
-import SSYCalculator from "../_calculators/ssy-calculator"
+import SSYCalculator from "../_components/ssy-calculator"
 
 
 export const metadata: Metadata = {
