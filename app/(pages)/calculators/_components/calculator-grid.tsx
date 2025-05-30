@@ -265,7 +265,7 @@ export default function CalculatorGrid() {
   }
 
   return (
-    <section id="calculators" className="py-12 relative">
+    <section id="calculators" className="py-4 relative">
       <div className="container mx-auto px-4">
         <div className="max-w-7xl mx-auto">
           {/* Search Bar */}
