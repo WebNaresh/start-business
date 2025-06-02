@@ -166,7 +166,7 @@ export default function EnhancedServicesSection() {
       price: "₹2,999",
       originalPrice: "₹4,000",
       billing: "/year",
-      slug: "itr4-filing",
+      slug: "itr-4-filing",
       mostPopular: false,
       category: "tax",
       icon: Calculator,

@@ -1669,6 +1669,121 @@
           "answer": "The process typically takes 45-60 days, depending on the company's readiness and complexity of operations. This includes documentation, implementation, and audit phases."
         }
       ]
+    },
+    "roc-compliance": {
+      "title": "ROC Compliance Services",
+      "shortTitle": "ROC Compliance",
+      "description": "Stay compliant with all ROC requirements including annual returns, financial statements, and board meetings - avoid penalties and maintain good standing.",
+      "category": "compliance",
+      "icon": "FileCheck",
+      "color": "orange",
+      "popular": true,
+      "pricing": {
+        "amount": "15,000",
+        "originalAmount": "18,000",
+        "currency": "₹",
+        "gst": true,
+        "includes": [
+          "Annual return filing",
+          "Financial statements preparation",
+          "Board meeting minutes",
+          "Compliance calendar management",
+          "Professional charges",
+          "Post-filing support"
+        ]
+      },
+      "timeline": {
+        "total": "10-15 working days",
+        "steps": [
+          { "name": "Document Collection", "duration": "2-3 days" },
+          { "name": "Financial Preparation", "duration": "3-4 days" },
+          { "name": "Board Meeting", "duration": "1-2 days" },
+          { "name": "Filing", "duration": "4-6 days" }
+        ]
+      },
+      "whatIs": {
+        "title": "What is ROC Compliance?",
+        "description": "ROC (Registrar of Companies) Compliance refers to the mandatory requirements that companies must fulfill with the Ministry of Corporate Affairs. This includes filing annual returns, financial statements, and maintaining proper corporate governance."
+      },
+      "keyFeatures": [
+        "Annual return filing",
+        "Financial statements preparation",
+        "Board meeting compliance",
+        "Statutory audit support",
+        "Compliance calendar",
+        "Expert guidance"
+      ],
+      "idealFor": [
+        "Private Limited Companies",
+        "Public Limited Companies",
+        "One Person Companies",
+        "Small Companies",
+        "Startups",
+        "Growing businesses"
+      ],
+      "process": [
+        {
+          "step": 1,
+          "title": "Document Collection",
+          "description": "Gather financial statements, board meeting minutes, and other required documents."
+        },
+        {
+          "step": 2,
+          "title": "Financial Preparation",
+          "description": "Prepare and review financial statements and annual returns."
+        },
+        {
+          "step": 3,
+          "title": "Board Meeting",
+          "description": "Conduct board meeting and prepare minutes."
+        },
+        {
+          "step": 4,
+          "title": "Filing",
+          "description": "File annual returns and financial statements with ROC."
+        },
+        {
+          "step": 5,
+          "title": "Post-filing Support",
+          "description": "Provide filing acknowledgment and handle any post-filing queries."
+        }
+      ],
+      "requiredDocuments": {
+        "forCompany": [
+          "Financial statements",
+          "Board meeting minutes",
+          "Shareholder details",
+          "Director details",
+          "Audit reports",
+          "Previous year's returns"
+        ],
+        "forFiling": [
+          "Digital signature certificate",
+          "Board resolution",
+          "Auditor's report",
+          "Annual return form",
+          "Financial statements",
+          "Director's report"
+        ]
+      },
+      "faqs": [
+        {
+          "question": "What is the due date for filing annual returns?",
+          "answer": "Annual returns must be filed within 60 days from the date of Annual General Meeting (AGM)."
+        },
+        {
+          "question": "What happens if I miss the filing deadline?",
+          "answer": "Late filing attracts additional fees and penalties. It's important to file within the due date to avoid these charges."
+        },
+        {
+          "question": "What are the key ROC compliance requirements?",
+          "answer": "Key requirements include filing annual returns, financial statements, board meeting minutes, director's report, and maintaining statutory registers."
+        },
+        {
+          "question": "Do I need to conduct board meetings?",
+          "answer": "Yes, companies must conduct at least 4 board meetings in a year, with a maximum gap of 120 days between two meetings."
+        }
+      ]
     }
 }
   
