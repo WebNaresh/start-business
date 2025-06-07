@@ -136,14 +136,14 @@ export default function FeaturesSection({ service }: FeaturesSectionProps) {
               Service Features & Benefits
             </Badge>
 
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4">
               <span className="text-slate-800">Why Choose Our</span>{" "}
               <span className={`bg-gradient-to-r ${colors.gradient} bg-clip-text text-transparent`}>
                 {service.shortTitle}
               </span>
             </h2>
 
-            <p className="text-lg md:text-xl text-slate-600 leading-relaxed max-w-4xl mx-auto">
+            <p className="text-sm md:text-base text-slate-600 leading-relaxed max-w-4xl mx-auto">
               {service.whatIs?.description ||
                 "Comprehensive solution designed to meet all your business needs with expert guidance and seamless execution."}
             </p>
@@ -179,8 +179,8 @@ export default function FeaturesSection({ service }: FeaturesSectionProps) {
                       <CheckCircle className={`w-8 h-8 ${colors.text}`} />
                     </div>
                     <div>
-                      <h3 className="text-xl font-bold text-slate-800 mb-1">Key Features</h3>
-                      <p className="text-slate-600 text-xs">What makes us different</p>
+                      <h3 className="text-base font-bold text-slate-800 mb-1">Key Features</h3>
+                      <p className="text-xs text-slate-600">What makes us different</p>
                     </div>
                   </div>
 
@@ -249,8 +249,8 @@ export default function FeaturesSection({ service }: FeaturesSectionProps) {
                       <Users className="w-8 h-8 text-slate-700" />
                     </div>
                     <div>
-                      <h3 className="text-xl font-bold text-slate-800 mb-1">Perfect For</h3>
-                      <p className="text-slate-600 text-xs">Who should choose this</p>
+                      <h3 className="text-base font-bold text-slate-800 mb-1">Perfect For</h3>
+                      <p className="text-xs text-slate-600">Who should choose this</p>
                     </div>
                   </div>
 

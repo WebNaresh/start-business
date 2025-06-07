@@ -1,36 +1,12 @@
 "use client"
 
 import { motion, useScroll } from "framer-motion"
-import {
-  ArrowRight,
-  CheckCircle,
-  Clock,
-  Star,
-  Users,
-  FileText,
-  ChevronDown,
-  Phone,
-  MessageCircle,
-  Share2,
-  Play,
-  ArrowUp,
-  X,
-  Calendar,
-  Shield,
-  Award,
-  TrendingUp,
-  Bookmark,
-  BookmarkCheck,
-} from "lucide-react"
+
 import { useState, useEffect, useRef } from "react"
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible"
+
 import { Progress } from "@/components/ui/progress"
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import WhatsAppCTAButton from "@/components/whatsapp-cta-button"
+import {  TooltipProvider } from "@/components/ui/tooltip"
+
 import OverviewSection from "./OverviewSection"
 import FeaturesSection from "./FeaturesSection"
 import ProcessSection from "./ProcessSection"
@@ -121,7 +97,7 @@ const FloatingNavbar = ({
               <button
                 key={item.id}
                 onClick={() => scrollToSection(item.id)}
-                className={`px-3 py-2 text-xs sm:text-sm font-medium rounded-lg transition-all duration-200 whitespace-nowrap ${
+                className={`px-2 py-1.5 text-xs font-medium rounded-lg transition-all duration-200 whitespace-nowrap ${
                   activeSection === item.id
                     ? "text-blue-600 bg-blue-50"
                     : "text-slate-600 hover:text-slate-900 hover:bg-slate-50"

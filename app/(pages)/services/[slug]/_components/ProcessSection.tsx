@@ -130,14 +130,14 @@ export default function ProcessSection({ service }: ProcessSectionProps) {
               Step-by-Step Process
             </Badge>
 
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4">
               <span className="text-slate-800">Simple</span>{" "}
               <span className={`bg-gradient-to-r ${colors.gradient} bg-clip-text text-transparent`}>
                 Registration Process
               </span>
             </h2>
 
-            <p className="text-base md:text-lg text-slate-600 leading-relaxed max-w-4xl mx-auto mb-8">
+            <p className="text-sm md:text-base text-slate-600 leading-relaxed max-w-4xl mx-auto mb-6">
               Follow our streamlined process to get your business registered quickly and efficiently
             </p>
           </motion.div>
@@ -192,10 +192,10 @@ export default function ProcessSection({ service }: ProcessSectionProps) {
                       </div>
 
                       {/* Step Content */}
-                      <h3 className={`text-lg font-bold mb-2 ${colors.text}`}>
+                      <h3 className={`text-base font-bold mb-2 ${colors.text}`}>
                         {step.title}
                       </h3>
-                      <p className="text-sm text-slate-600 leading-relaxed mb-4">{step.description}</p>
+                      <p className="text-xs text-slate-600 leading-relaxed mb-3">{step.description}</p>
                     </div>
                   </motion.div>
                 )
@@ -255,7 +255,7 @@ export default function ProcessSection({ service }: ProcessSectionProps) {
                         <h3 className={`text-base font-bold mb-2 ${colors.text}`}>
                           {step.title}
                         </h3>
-                        <p className="text-sm text-slate-600 leading-relaxed mb-3">{step.description}</p>
+                        <p className="text-xs text-slate-600 leading-relaxed mb-3">{step.description}</p>
                         <ArrowRight className="w-4 h-4 text-slate-400 ml-auto" />
                       </div>
                     </div>

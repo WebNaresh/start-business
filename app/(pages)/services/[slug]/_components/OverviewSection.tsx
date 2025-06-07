@@ -166,7 +166,7 @@ export default function OverviewSection({ service }: OverviewSectionProps) {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.3 }}
-              className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6 leading-tight"
+              className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-4 leading-tight"
             >
               <span className="bg-gradient-to-r from-yellow-300 to-orange-300 bg-clip-text text-transparent">
                 {service.title.split(" ").slice(0, 2).join(" ")}
@@ -178,7 +178,7 @@ export default function OverviewSection({ service }: OverviewSectionProps) {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
-              className="text-base md:text-lg text-white/90 mb-8 leading-relaxed max-w-2xl mx-auto lg:mx-0"
+              className="text-sm md:text-base text-white/90 mb-6 leading-relaxed max-w-2xl mx-auto lg:mx-0"
             >
               {service.description}
             </motion.p>
@@ -251,8 +251,8 @@ export default function OverviewSection({ service }: OverviewSectionProps) {
                       <div className="bg-gradient-to-r from-blue-600 to-purple-600 w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-4">
                         <Sparkles className="w-6 h-6 text-white" />
                       </div>
-                      <h3 className="text-xl font-bold text-slate-800 mb-2">Get Free Consultation</h3>
-                      <p className="text-sm text-slate-600">
+                      <h3 className="text-lg font-bold text-slate-800 mb-2">Get Free Consultation</h3>
+                      <p className="text-xs text-slate-600">
                         Fill your details and our expert will call you back within 30 minutes
                       </p>
                     </div>

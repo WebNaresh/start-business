@@ -21,8 +21,8 @@ export default function FaqSection({ service, openFAQs, toggleFAQ }: FaqSectionP
             transition={{ duration: 0.6 }}
             className="text-center mb-12"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-slate-800 mb-4">Frequently Asked Questions</h2>
-            <p className="text-lg text-slate-600">Get answers to common questions about {service.shortTitle}</p>
+            <h2 className="text-2xl md:text-3xl font-bold text-slate-800 mb-3">Frequently Asked Questions</h2>
+            <p className="text-sm text-slate-600">Get answers to common questions about {service.shortTitle}</p>
           </motion.div>
           <div className="space-y-4">
             {service.faqs.map((faq: { question: string; answer: string }, index: number) => (
@@ -40,7 +40,7 @@ export default function FaqSection({ service, openFAQs, toggleFAQ }: FaqSectionP
                 >
                   <CollapsibleTrigger className="w-full p-6 text-left hover:bg-slate-50 transition-colors duration-300 rounded-xl">
                     <div className="flex items-center justify-between">
-                      <h3 className="text-lg font-semibold text-slate-800 pr-4">{faq.question}</h3>
+                      <h3 className="text-base font-semibold text-slate-800 pr-4">{faq.question}</h3>
                       <motion.div
                         animate={{ rotate: openFAQs.includes(index) ? 180 : 0 }}
                         transition={{ duration: 0.3 }}
@@ -55,7 +55,7 @@ export default function FaqSection({ service, openFAQs, toggleFAQ }: FaqSectionP
                       initial={{ opacity: 0, y: -10 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.3 }}
-                      className="text-slate-600 leading-relaxed border-t border-slate-100 pt-4"
+                      className="text-xs text-slate-600 leading-relaxed border-t border-slate-100 pt-3"
                     >
                       {faq.answer}
                     </motion.div>

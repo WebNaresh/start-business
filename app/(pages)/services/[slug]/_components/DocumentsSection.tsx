@@ -89,8 +89,8 @@ export default function DocumentsSection({ service }: DocumentsSectionProps) {
               <FileText className="w-4 h-4 mr-2" />
               Document Checklist
             </Badge>
-            <h2 className="text-3xl md:text-4xl font-bold text-slate-800 mb-4">Required Documents</h2>
-            <p className="text-base md:text-lg text-slate-600 max-w-2xl mx-auto">
+            <h2 className="text-2xl md:text-3xl font-bold text-slate-800 mb-3">Required Documents</h2>
+            <p className="text-sm text-slate-600 max-w-2xl mx-auto">
               Prepare these documents to ensure a smooth registration process
             </p>
           </motion.div>
@@ -115,10 +115,10 @@ export default function DocumentsSection({ service }: DocumentsSectionProps) {
                       <CategoryIcon className={`w-6 h-6 ${colors.text}`} />
                     </div>
                     <div className="flex-1">
-                      <h3 className="text-lg font-bold text-slate-800 capitalize">
+                      <h3 className="text-base font-bold text-slate-800 capitalize">
                         {category.replace(/([A-Z])/g, " $1").trim()}
                       </h3>
-                      <p className="text-sm text-slate-500">
+                      <p className="text-xs text-slate-500">
                         {(documents as string[]).length} documents required
                       </p>
                     </div>
@@ -162,8 +162,8 @@ export default function DocumentsSection({ service }: DocumentsSectionProps) {
             className="text-center mt-12"
           >
             <div className="bg-white rounded-xl p-6 shadow-lg border border-slate-200">
-              <h3 className="text-lg font-semibold text-slate-800 mb-2">Need Help with Documents?</h3>
-              <p className="text-sm text-slate-600 mb-4">Our experts can guide you through the document preparation process</p>
+              <h3 className="text-base font-semibold text-slate-800 mb-2">Need Help with Documents?</h3>
+              <p className="text-xs text-slate-600 mb-3">Our experts can guide you through the document preparation process</p>
               <Badge className="bg-blue-100 text-blue-700 border-blue-200">
                 <Phone className="w-3 h-3 mr-1" />
                 Expert Support Available
