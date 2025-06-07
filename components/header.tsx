@@ -75,6 +75,27 @@ export default function Header() {
           href: "/services/sole-proprietorship",
           description: "Register as a sole proprietor for simple business structure",
         },
+        {
+          name: "Nidhi Company",
+          href: "/services/nidhi-company",
+          description: "Establish a Nidhi Company for borrowing and lending among members",
+        },
+        {
+          name: "Producer Company",
+          href: "/services/producer-company",
+          description: "Form a company owned by primary producers or farmers",
+        },
+        {
+          name: "Partnership Firm",
+          href: "/services/partnership-firm",
+          description: "Create a partnership between two or more individuals",
+        },
+        {
+          name: "Startup India Registration",
+          href: "/services/startup-india",
+          new: true,
+          description: "Register under Startup India to access government benefits and incentives",
+        },
       ],
     },
     {
@@ -95,9 +116,25 @@ export default function Header() {
           description: "Register for Goods and Services Tax (GST) for your business",
         },
         {
+          name: "ITR-4 Filing",
+          href: "/services/itr-4-filing",
+          popular: true,
+          description: "File your income tax returns under presumptive taxation scheme",
+        },
+        {
+          name: "ROC Annual Compliances",
+          href: "/services/roc-annual-compliances",
+          description: "Stay compliant with all ROC requirements including annual returns",
+        },
+        {
           name: "GST Filing",
           href: "/services/gst-filing",
           description: "File your GST returns accurately and on time",
+        },
+        {
+          name: "GST Cancellation and Revocation",
+          href: "/services/gst-cancellation",
+          description: "Cancel or revoke your GST registration",
         },
         {
           name: "Income Tax Filing",
@@ -105,14 +142,24 @@ export default function Header() {
           popular: true,
           description: "File your income tax returns accurately and on time",
         },
+        {
+          name: "TDS Return Filing",
+          href: "/services/tds-filing",
+          description: "File your Tax Deducted at Source (TDS) returns",
+        },
+        {
+          name: "Annual Compliance",
+          href: "/services/annual-compliance",
+          description: "Manage all your annual compliance requirements",
+        },
       ],
     },
     {
-      id: "trademark-ip",
+      id: "intellectual-property",
       name: "Trademark & IP",
       shortName: "IP",
       icon: Shield,
-      description: "Intellectual property protection and registration",
+      description: "Protect your brand and intellectual property",
       color: "text-purple-600",
       bgColor: "bg-purple-50",
       gradientFrom: "from-purple-600",
@@ -122,14 +169,23 @@ export default function Header() {
           name: "Trademark Registration",
           href: "/services/trademark-registration",
           popular: true,
-          description: "Register your brand name and logo as a trademark",
+          description: "Protect your brand identity with trademark registration",
+        },
+        {
+          name: "Trademark Search",
+          href: "/services/trademark-search",
+          description: "Check if your desired trademark is available",
+        },
+        {
+          name: "Respond to TM Objection",
+          href: "/services/trademark-objection",
+          description: "Get help responding to trademark objections",
         },
         {
           name: "Copyright Registration",
           href: "/services/copyright-registration",
           description: "Protect your creative works with copyright registration",
         },
-     
       ],
     },
     {
@@ -143,14 +199,32 @@ export default function Header() {
       gradientFrom: "from-amber-600",
       gradientTo: "to-orange-400",
       subServices: [
-    
+        {
+          name: "Import Export Code",
+          href: "/services/iec-license",
+          description: "Get IEC code for import/export business activities",
+        },
+        {
+          name: "Digital Signature Certificate",
+          href: "/services/digital-signature",
+          description: "Obtain DSC for secure electronic transactions",
+        },
         {
           name: "MSME Registration",
           href: "/services/msme-registration",
           popular: true,
           description: "Register as a Micro, Small, or Medium Enterprise",
         },
-   
+        {
+          name: "Shop & Establishment License",
+          href: "/services/shop-establishment",
+          description: "Obtain mandatory license for your business premises",
+        },
+        {
+          name: "Professional Tax Registration",
+          href: "/services/professional-tax",
+          description: "Register for professional tax in your state",
+        },
       ],
     },
   ]
