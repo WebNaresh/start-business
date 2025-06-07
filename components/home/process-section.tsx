@@ -2,7 +2,8 @@
 
 import { motion } from "framer-motion"
 import { useInView } from "react-intersection-observer"
-import { ClipboardCheck, FileText, MessageSquare, CheckCircle, ArrowRight } from "lucide-react"
+import { ClipboardCheck, FileText, MessageSquare, CheckCircle, ArrowRight, Sparkles } from "lucide-react"
+import { Badge } from "@/components/ui/badge"
 
 export default function ProcessSection() {
   const { ref, inView } = useInView({
@@ -18,35 +19,39 @@ export default function ProcessSection() {
       color: "bg-blue-50 text-blue-600 border-blue-600",
       hoverColor: "group-hover:bg-blue-600 group-hover:text-white",
       shadowColor: "shadow-blue-200",
+      gradient: "from-blue-500 to-blue-600",
     },
     {
       icon: FileText,
       title: "Documentation",
       description: "We'll guide you through the required documentation process",
-      color: "bg-blue-50 text-blue-600 border-blue-600",
-      hoverColor: "group-hover:bg-blue-600 group-hover:text-white",
-      shadowColor: "shadow-blue-200",
+      color: "bg-purple-50 text-purple-600 border-purple-600",
+      hoverColor: "group-hover:bg-purple-600 group-hover:text-white",
+      shadowColor: "shadow-purple-200",
+      gradient: "from-purple-500 to-purple-600",
     },
     {
       icon: ClipboardCheck,
       title: "Processing",
       description: "Our team handles all the paperwork and filing with the authorities",
-      color: "bg-blue-50 text-blue-600 border-blue-600",
-      hoverColor: "group-hover:bg-blue-600 group-hover:text-white",
-      shadowColor: "shadow-blue-200",
+      color: "bg-emerald-50 text-emerald-600 border-emerald-600",
+      hoverColor: "group-hover:bg-emerald-600 group-hover:text-white",
+      shadowColor: "shadow-emerald-200",
+      gradient: "from-emerald-500 to-emerald-600",
     },
     {
       icon: CheckCircle,
       title: "Completion",
       description: "Receive your registration certificates and start your business journey",
-      color: "bg-blue-50 text-blue-600 border-blue-600",
-      hoverColor: "group-hover:bg-blue-600 group-hover:text-white",
-      shadowColor: "shadow-blue-200",
+      color: "bg-amber-50 text-amber-600 border-amber-600",
+      hoverColor: "group-hover:bg-amber-600 group-hover:text-white",
+      shadowColor: "shadow-amber-200",
+      gradient: "from-amber-500 to-amber-600",
     },
   ]
 
   return (
-    <section className="py-4 md:py-8 bg-gradient-to-b from-white to-slate-50" ref={ref}>
+    <section className="py-12 md:py-16 bg-gradient-to-b from-white to-slate-50" ref={ref}>
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -54,22 +59,25 @@ export default function ProcessSection() {
           transition={{ duration: 0.5 }}
           className="mb-16 text-center"
         >
-          <span className="inline-block rounded-full bg-blue-50 px-4 py-1 text-sm font-semibold text-blue-600 mb-4">
+          <Badge variant="secondary" className="mb-4 bg-blue-100 text-blue-700 px-4 py-2">
+            <Sparkles className="w-4 h-4 mr-2" />
             Simple Process
-          </span>
-          <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-3">How It Works</h2>
-          <p className="text-sm text-slate-600 mb-8 max-w-2xl mx-auto">
+          </Badge>
+          <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-3">
+            How It <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Works</span>
+          </h2>
+          <p className="text-sm md:text-base text-slate-600 mb-8 max-w-2xl mx-auto">
             Our streamlined 4-step process makes business registration simple, efficient, and hassle-free
           </p>
         </motion.div>
 
         <div className="relative">
           {/* Connecting line for mobile */}
-          <div className="absolute left-1/2 top-0 h-full w-1 -translate-x-1/2 bg-gradient-to-b from-blue-200 via-emerald-200 to-amber-200 md:hidden"></div>
+          <div className="absolute left-1/2 top-0 h-full w-1 -translate-x-1/2 bg-gradient-to-b from-blue-200 via-purple-200 to-emerald-200 md:hidden"></div>
 
           {/* Connecting line for desktop */}
           <div className="absolute left-0 top-1/2 hidden h-2 w-full -translate-y-1/2 md:block">
-            <div className="h-full bg-gradient-to-r from-blue-200 via-purple-200 to-amber-200 rounded-full"></div>
+            <div className="h-full bg-gradient-to-r from-blue-200 via-purple-200 to-emerald-200 rounded-full"></div>
           </div>
 
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
@@ -88,17 +96,19 @@ export default function ProcessSection() {
 
                 {/* Icon container */}
                 <div
-                  className={`relative z-10 mb-6 flex h-20 w-20 items-center justify-center rounded-full ${
+                  className={`relative z-10 mb-6 flex h-16 w-16 md:h-20 md:w-20 items-center justify-center rounded-full ${
                     step.color
                   } border-2 transition-all duration-300 ${step.hoverColor} shadow-lg ${step.shadowColor}`}
                 >
-                  <step.icon className="h-10 w-10 transition-transform duration-300 group-hover:scale-110" />
+                  <step.icon className="h-8 w-8 md:h-10 md:w-10 transition-transform duration-300 group-hover:scale-110" />
                 </div>
 
                 {/* Content */}
-                <div className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-all duration-300 w-full border border-slate-100 group-hover:border-slate-200">
-                  <h3 className="text-base font-semibold text-slate-900 mb-2">{step.title}</h3>
-                  <p className="text-xs text-slate-600 mb-4">{step.description}</p>
+                <div className="bg-white rounded-xl p-4 md:p-6 shadow-md hover:shadow-lg transition-all duration-300 w-full border border-slate-100 group-hover:border-slate-200">
+                  <h3 className="text-base md:text-lg font-semibold text-slate-900 mb-2 group-hover:text-blue-600 transition-colors">
+                    {step.title}
+                  </h3>
+                  <p className="text-xs md:text-sm text-slate-600 mb-4 leading-relaxed">{step.description}</p>
 
                   {/* Arrow for next step - hidden on last item */}
                   {index < steps.length - 1 && (
@@ -108,6 +118,11 @@ export default function ProcessSection() {
                       </div>
                     </div>
                   )}
+
+                  {/* Hover gradient overlay */}
+                  <div
+                    className={`absolute inset-0 bg-gradient-to-br ${step.gradient} opacity-0 group-hover:opacity-5 rounded-xl transition-opacity duration-300 pointer-events-none`}
+                  />
                 </div>
               </motion.div>
             ))}
@@ -123,10 +138,10 @@ export default function ProcessSection() {
         >
           <a
             href="#contact"
-            className="inline-flex items-center rounded-full bg-blue-600 px-6 py-3 text-white hover:bg-blue-700 transition-colors shadow-lg hover:shadow-xl"
+            className="inline-flex items-center rounded-full bg-gradient-to-r from-blue-600 to-blue-700 px-6 py-3 text-white hover:from-blue-700 hover:to-blue-800 transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-0.5"
           >
             Start Your Business Journey
-            <ArrowRight className="ml-2 h-5 w-5" />
+            <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
           </a>
         </motion.div>
       </div>

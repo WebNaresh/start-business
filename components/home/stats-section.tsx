@@ -124,7 +124,7 @@ export default function TrustStatsSection() {
 
   return (
     <section
-      className="py-20 relative overflow-hidden bg-gradient-to-br from-slate-50 via-white to-blue-50/30"
+      className="py-8 relative overflow-hidden bg-gradient-to-br from-slate-50 via-white to-blue-50/30"
       ref={ref}
     >
       {/* Background Elements */}

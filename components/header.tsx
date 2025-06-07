@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import Image from "next/image"
-import { Menu, Phone, Mail, X, MapPin, ChevronDown, ChevronRight, Building2, FileText, Gavel, Shield } from "lucide-react"
+import { Menu, Phone, Mail, X, MapPin, ChevronDown, ChevronRight, Building2, FileText, Gavel, Shield, Search } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
 import { usePathname } from "next/navigation"
 
@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger, SheetClose, SheetTitle } from "@/components/ui/sheet"
 import WhatsAppCTAButton from "@/components/whatsapp-cta-button"
 import { Badge } from "@/components/ui/badge"
+import { Input } from "@/components/ui/input"
 
 interface SubService {
   name: string
@@ -38,6 +39,7 @@ export default function Header() {
   const [scrolled, setScrolled] = useState(false)
   const [openCategory, setOpenCategory] = useState<string | null>(null)
   const [expandedMobileCategory, setExpandedMobileCategory] = useState<string | null>(null)
+  const [showSearch, setShowSearch] = useState(false)
   const pathname = usePathname()
 
   const serviceCategories: Service[] = [
@@ -167,25 +169,27 @@ export default function Header() {
     },
   ]
 
-  // Handle scroll effect
+  // Handle scroll effect with improved performance
   useEffect(() => {
     setMounted(true)
+    let lastScrollY = window.scrollY
     const handleScroll = () => {
-      if (window.scrollY > 10) {
+      const currentScrollY = window.scrollY
+      if (currentScrollY > 10) {
         setScrolled(true)
       } else {
         setScrolled(false)
       }
+      lastScrollY = currentScrollY
     }
 
-    window.addEventListener("scroll", handleScroll)
+    window.addEventListener("scroll", handleScroll, { passive: true })
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
   const navLinks = [
     { name: "Home", href: "/" },
     { name: "About Us", href: "/about" },
-
     { name: "Contact", href: "/contact" },
     { name: "Tools", href: "/calculators" },
   ]
@@ -197,56 +201,88 @@ export default function Header() {
     return pathname.startsWith(href)
   }
 
-  // Prevent hydration mismatch by not rendering until mounted
   if (!mounted) {
     return null
   }
 
   return (
-    <header className={`sticky top-0 z-50 w-full transition-all duration-300 shadow-md ${scrolled ? "shadow-md" : ""}`}>
-      
+    <header className={`sticky top-0 z-50 w-full transition-all duration-300 ${scrolled ? "shadow-lg bg-white/95 backdrop-blur-sm" : "bg-white"}`}>
+      {/* Top bar with contact info */}
+     
+
+      {/* Search overlay */}
+      <AnimatePresence>
+        {showSearch && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className="absolute top-full left-0 right-0 bg-white shadow-lg p-4"
+          >
+            <div className="container mx-auto">
+              <div className="relative">
+                <Input
+                  type="search"
+                  placeholder="Search for services, calculators, or information..."
+                  className="w-full pl-10 pr-4 py-2"
+                />
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-slate-400" />
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Main navigation */}
-      <div className={`bg-white transition-all duration-300 ${scrolled ? "py-2" : "py-3"}`}>
+      <div className={`transition-all duration-300 ${scrolled ? "py-2" : "py-3"}`}>
         <div className="container mx-auto flex items-center justify-between px-4">
-          {/* Logo */}
-          <Link href="/" className="flex items-center">
-            <div className="relative h-8 w-8 mr-2 overflow-hidden">
+          {/* Logo with animation */}
+          <Link href="/" className="flex items-center group">
+            <motion.div 
+              className="relative h-8 w-8 mr-2 overflow-hidden"
+              whileHover={{ scale: 1.1 }}
+              transition={{ type: "spring", stiffness: 400, damping: 10 }}
+            >
               <Image
                 src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/startbusiness_icon_transparent-u5NDFsSQarqF4PBI4Y5RxkT51hJhDI.png"
                 alt="StartBusiness"
                 fill
                 className="object-contain"
               />
-            </div>
+            </motion.div>
             <div>
-              <span className="text-xl font-bold bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">
+              <span className="text-xl font-bold bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent group-hover:from-blue-700 group-hover:to-blue-900 transition-all duration-300">
                 StartBusiness
               </span>
             </div>
           </Link>
 
-          {/* Desktop Navigation */}
+          {/* Desktop Navigation with improved hover effects */}
           <nav className="hidden lg:flex items-center space-x-1">
-            <Link
-              href="/"
-              className={`relative px-3 py-2 text-sm font-medium rounded-md transition-colors ${
-                isActive("/") ? "text-blue-600" : "text-slate-700 hover:text-blue-600 hover:bg-blue-50"
-              }`}
-            >
-              Home
-              {isActive("/") && (
-                <motion.div
-                  layoutId="activeIndicator"
-                  className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-600 rounded-full"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.3 }}
-                />
-              )}
-            </Link>
+            {navLinks.map((link) => (
+              <Link
+                key={link.name}
+                href={link.href}
+                className={`relative px-3 py-2 text-sm font-medium rounded-md transition-all duration-200 ${
+                  isActive(link.href) 
+                    ? "text-blue-600" 
+                    : "text-slate-700 hover:text-blue-600 hover:bg-blue-50"
+                }`}
+              >
+                {link.name}
+                {isActive(link.href) && (
+                  <motion.div
+                    layoutId="activeIndicator"
+                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-600 rounded-full"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.3 }}
+                  />
+                )}
+              </Link>
+            ))}
 
-            {/* Service Categories */}
+            {/* Service Categories with enhanced dropdown */}
             {serviceCategories.map((category) => (
               <div 
                 key={category.id} 
@@ -255,8 +291,10 @@ export default function Header() {
                 onMouseLeave={() => setOpenCategory(null)}
               >
                 <button
-                  className={`relative px-3 py-2 text-sm font-medium rounded-md transition-colors flex items-center gap-1 ${
-                    isActive(`/services/${category.id}`) ? "text-blue-600" : "text-slate-700 hover:text-blue-600 hover:bg-blue-50"
+                  className={`relative px-3 py-2 text-sm font-medium rounded-md transition-all duration-200 flex items-center gap-1 ${
+                    isActive(`/services/${category.id}`) 
+                      ? "text-blue-600" 
+                      : "text-slate-700 hover:text-blue-600 hover:bg-blue-50"
                   }`}
                 >
                   {category.name}
@@ -284,7 +322,7 @@ export default function Header() {
                             <Link
                               key={service.href}
                               href={service.href}
-                              className="block px-2 py-1.5 text-sm text-slate-600 hover:text-blue-600 hover:bg-blue-50 rounded-md transition-colors"
+                              className="block px-2 py-1.5 text-sm text-slate-600 hover:text-blue-600 hover:bg-blue-50 rounded-md transition-all duration-200"
                             >
                               <div className="flex items-center justify-between">
                                 <span>{service.name}</span>
@@ -301,10 +339,10 @@ export default function Header() {
                       <div className="bg-slate-50 px-4 py-3 border-t border-slate-200">
                         <Link
                           href={`/services/${category.id}`}
-                          className="text-sm font-medium text-blue-600 hover:text-blue-700 flex items-center gap-1"
+                          className="text-sm font-medium text-blue-600 hover:text-blue-700 flex items-center gap-1 group"
                         >
                           View all {category.name} services
-                          <ChevronRight className="w-4 h-4" />
+                          <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                         </Link>
                       </div>
                     </motion.div>
@@ -312,44 +350,32 @@ export default function Header() {
                 </AnimatePresence>
               </div>
             ))}
-
-            {/* Other nav links */}
-            {navLinks.slice(1).map((link) => (
-              <Link
-                key={link.name}
-                href={link.href}
-                className={`relative px-3 py-2 text-sm font-medium rounded-md transition-colors ${
-                  isActive(link.href) ? "text-blue-600" : "text-slate-700 hover:text-blue-600 hover:bg-blue-50"
-                }`}
-              >
-                {link.name}
-                {isActive(link.href) && (
-                  <motion.div
-                    layoutId="activeIndicator"
-                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-600 rounded-full"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 0.3 }}
-                  />
-                )}
-              </Link>
-            ))}
           </nav>
 
-          {/* Desktop CTA */}
+          {/* Desktop CTA with animation */}
           <div className="hidden lg:flex items-center">
-            <WhatsAppCTAButton className="rounded-full px-5 shadow-sm hover:shadow transition-all">
-              Chat With Us
-            </WhatsAppCTAButton>
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <WhatsAppCTAButton className="rounded-full px-5 shadow-sm hover:shadow transition-all">
+                Chat With Us
+              </WhatsAppCTAButton>
+            </motion.div>
           </div>
 
-          {/* Mobile menu button */}
+          {/* Mobile menu button with animation */}
           <Sheet>
             <SheetTrigger asChild>
-              <Button variant="outline" size="icon" className="lg:hidden border-none">
-                <Menu className="h-5 w-5" />
-                <span className="sr-only">Toggle menu</span>
-              </Button>
+              <motion.div
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+              >
+                <Button variant="outline" size="icon" className="lg:hidden border-none">
+                  <Menu className="h-5 w-5" />
+                  <span className="sr-only">Toggle menu</span>
+                </Button>
+              </motion.div>
             </SheetTrigger>
             <SheetContent side="right" className="w-[85%] sm:w-[350px] p-0">
               <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
