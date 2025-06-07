@@ -179,6 +179,7 @@ export default function PricingSection({ service }: PricingSectionProps) {
                     <Button
                       variant="outline"
                       className="text-white border-white/30 hover:bg-white/20"
+                      onClick={() => window.location.href = "tel:+919699214195"}
                     >
                       <Phone className="w-5 h-5 mr-2" />
                       Call Expert

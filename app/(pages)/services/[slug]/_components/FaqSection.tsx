@@ -13,7 +13,7 @@ export default function FaqSection({ service, openFAQs, toggleFAQ }: FaqSectionP
   return (
     <section id="faqs" className="py-16 bg-white">
       <div className="container mx-auto px-4">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-Callw-4xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}

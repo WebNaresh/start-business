@@ -171,6 +171,7 @@ export default function OverviewSection({ service }: OverviewSectionProps) {
               <Button
                 variant="outline"
                 className="text-blue-600 border-blue-200 hover:bg-blue-50"
+                onClick={() => window.location.href = "tel:+919699214195"}
               >
                 <Phone className="w-5 h-5 mr-2" />
                 Call Expert
