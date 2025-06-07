@@ -172,12 +172,12 @@ export default function TrustStatsSection() {
           variants={containerVariants}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16"
+          className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8 mb-16"
         >
           {stats.map((stat, index) => (
             <motion.div key={index} variants={itemVariants} className="group relative">
               {/* Main Card */}
-              <div className="relative bg-white rounded-2xl p-8 border border-slate-200 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 overflow-hidden">
+              <div className="relative bg-white rounded-2xl p-4 md:p-8 border border-slate-200 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 overflow-hidden">
                 {/* Background Gradient */}
                 <div
                   className={`absolute inset-0 bg-gradient-to-br ${stat.color} opacity-0 group-hover:opacity-5 transition-opacity duration-500`}
@@ -186,14 +186,14 @@ export default function TrustStatsSection() {
                 {/* Icon */}
                 <div className="relative z-10">
                   <div
-                    className={`${stat.bgColor} w-16 h-16 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}
+                    className={`${stat.bgColor} w-12 h-12 md:w-16 md:h-16 rounded-2xl flex items-center justify-center mb-4 md:mb-6 group-hover:scale-110 transition-transform duration-300`}
                   >
-                    <stat.icon className={`w-8 h-8 ${stat.iconColor}`} />
+                    <stat.icon className={`w-6 h-6 md:w-8 md:h-8 ${stat.iconColor}`} />
                   </div>
 
                   {/* Value */}
                   <motion.div
-                    className="text-3xl md:text-4xl font-bold text-slate-800 mb-2"
+                    className="text-2xl md:text-4xl font-bold text-slate-800 mb-2"
                     initial={{ opacity: 0, scale: 0.5 }}
                     animate={inView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.5 }}
                     transition={{ duration: 0.6, delay: index * 0.1 + 0.5 }}
@@ -202,18 +202,18 @@ export default function TrustStatsSection() {
                   </motion.div>
 
                   {/* Label */}
-                  <h3 className="text-base font-semibold text-slate-900 mb-2">{stat.label}</h3>
+                  <h3 className="text-sm md:text-base font-semibold text-slate-900 mb-1 md:mb-2">{stat.label}</h3>
 
                   {/* Description */}
-                  <p className="text-xs text-slate-600 mb-4">{stat.description}</p>
+                  <p className="text-[10px] md:text-xs text-slate-600 mb-3 md:mb-4">{stat.description}</p>
 
                   {/* Trend Badge */}
                   <div className="flex items-center justify-between">
-                    <Badge variant="secondary" className={`text-xs ${stat.bgColor} ${stat.iconColor} border-0`}>
-                      <ArrowUp className="w-3 h-3 mr-1" />
+                    <Badge variant="secondary" className={`text-[10px] md:text-xs ${stat.bgColor} ${stat.iconColor} border-0`}>
+                      <ArrowUp className="w-2 h-2 md:w-3 md:h-3 mr-1" />
                       {stat.trend}
                     </Badge>
-                    <CheckCircle className={`w-5 h-5 ${stat.iconColor} opacity-60`} />
+                    <CheckCircle className={`w-4 h-4 md:w-5 md:h-5 ${stat.iconColor} opacity-60`} />
                   </div>
                 </div>
 
@@ -225,7 +225,7 @@ export default function TrustStatsSection() {
 
               {/* Floating Number Effect */}
               <motion.div
-                className="absolute -top-2 -right-2 w-8 h-8 bg-white rounded-full shadow-lg flex items-center justify-center text-xs font-bold text-slate-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                className="absolute -top-2 -right-2 w-6 h-6 md:w-8 md:h-8 bg-white rounded-full shadow-lg flex items-center justify-center text-[10px] md:text-xs font-bold text-slate-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                 animate={{ rotate: 360 }}
                 transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
               >
