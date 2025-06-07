@@ -29,11 +29,21 @@ export default function Chatbot() {
   const [isLoading, setIsLoading] = useState(false)
   const [isExpanded, setIsExpanded] = useState(false)
   const [isKeyboardOpen, setIsKeyboardOpen] = useState(false)
+  const [showHelpPopup, setShowHelpPopup] = useState(true)
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const chatContainerRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
   const isMobile = useMobile()
   const { setChatbotExpanded } = useUI()
+
+  // Hide help popup after 5 seconds
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowHelpPopup(false)
+    }, 30000)
+
+    return () => clearTimeout(timer)
+  }, [])
 
   // Update global state when chatbot expands/collapses
   useEffect(() => {
@@ -209,6 +219,73 @@ export default function Chatbot() {
 
   return (
     <div className="relative z-[9999]">
+      {/* Help Popup */}
+      {showHelpPopup && !isExpanded && (
+        <motion.div
+          initial={{ opacity: 0, y: 20, scale: 0.95 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          exit={{ opacity: 0, y: 20, scale: 0.95 }}
+          className="fixed bottom-20 right-4 z-[9999]"
+        >
+          <Card className="w-72 shadow-xl border border-blue-100">
+            <CardContent className="p-4">
+              <div className="flex items-start gap-3">
+                <Avatar className="h-10 w-10 border-2 border-blue-100">
+                  <AvatarImage src="/bot-avatar.png" alt="Business Assistant" />
+                  <AvatarFallback className="text-white relative">
+                    <div className="relative w-full h-full">
+                      <Image
+                        src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/startbusiness_icon_transparent-u5NDFsSQarqF4PBI4Y5RxkT51hJhDI.png"
+                        alt="StartBusiness"
+                        fill
+                        className="object-contain"
+                      />
+                    </div>
+                  </AvatarFallback>
+                </Avatar>
+                <div className="flex-1">
+                  <div className="flex items-center gap-2 mb-1">
+                    <h3 className="text-sm font-semibold text-slate-900">Business Assistant</h3>
+                    <Badge variant="outline" className="bg-green-50 text-green-600 border-green-200 text-xs">
+                      Online
+                    </Badge>
+                  </div>
+                  <p className="text-sm text-slate-600 mb-3">May I help you with your business needs?</p>
+                  <div className="flex gap-2">
+                    <Button
+                      size="sm"
+                      className="flex-1 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white"
+                      onClick={() => {
+                        setShowHelpPopup(false)
+                        setIsExpanded(true)
+                      }}
+                    >
+                      Yes, please
+                    </Button>
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      className="flex-1"
+                      onClick={() => setShowHelpPopup(false)}
+                    >
+                      Not now
+                    </Button>
+                  </div>
+                </div>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="h-6 w-6 -mt-1 -mr-1"
+                  onClick={() => setShowHelpPopup(false)}
+                >
+                  <X className="h-4 w-4" />
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        </motion.div>
+      )}
+
       {/* Chat button */}
       {!isExpanded && (
         <div className="fixed bottom-4 right-4 z-50">

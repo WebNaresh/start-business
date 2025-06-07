@@ -244,10 +244,10 @@ export default function EnhancedHeroSection() {
 
             <motion.div
               variants={itemVariants}
-              className="flex flex-col space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0"
+              className="flex items-center gap-4"
             >
               <WhatsAppCTAButton
-                className="group transition-all duration-300 rounded-xl shadow-lg hover:shadow-xl hover:shadow-green-200"
+                className=""
               >
                 Get Started Now
                 <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -255,7 +255,7 @@ export default function EnhancedHeroSection() {
               <Link href="/services" className="md:w-auto w-full">
                 <Button
                   variant="outline"
-                  className="w-full border-blue-200 text-blue-600 hover:bg-blue-50 rounded-xl hover:border-blue-300 transition-all duration-300"
+                  className=""
                 >
                   View Our Services
                 </Button>
