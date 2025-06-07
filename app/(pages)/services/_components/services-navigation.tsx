@@ -206,7 +206,7 @@ export default function EnhancedServicesNavigation() {
     },
     {
       id: "intellectual-property",
-      name: "Intellectual Property",
+      name: "Trademark & IP",
       shortName: "IP",
       icon: Shield,
       description: "Protect your brand and intellectual property",
