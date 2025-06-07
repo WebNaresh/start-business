@@ -25,39 +25,6 @@ interface PricingSectionProps {
 }
 
 export default function PricingSection({ service }: PricingSectionProps) {
-  // Get dynamic colors based on service color
-  const getColorClasses = (color: string) => {
-    const colorMap = {
-      blue: {
-        bg: "bg-blue-50",
-        text: "text-blue-600",
-        border: "border-blue-200",
-        gradient: "from-blue-500 to-blue-600",
-        accent: "bg-blue-500",
-        light: "bg-blue-100",
-      },
-      green: {
-        bg: "bg-green-50",
-        text: "text-green-600",
-        border: "border-green-200",
-        gradient: "from-green-500 to-green-600",
-        accent: "bg-green-500",
-        light: "bg-green-100",
-      },
-      purple: {
-        bg: "bg-purple-50",
-        text: "text-purple-600",
-        border: "border-purple-200",
-        gradient: "from-purple-500 to-purple-600",
-        accent: "bg-purple-500",
-        light: "bg-purple-100",
-      },
-    }
-    return colorMap[color as keyof typeof colorMap] || colorMap.blue
-  }
-
-  const colors = getColorClasses(service.color)
-
   const savings =
     Number.parseInt(service.pricing?.originalAmount?.replace(/,/g, "") || "0") -
     Number.parseInt(service.pricing?.amount?.replace(/,/g, "") || "0")
@@ -84,33 +51,21 @@ export default function PricingSection({ service }: PricingSectionProps) {
   return (
     <section
       id="pricing"
-      className="py-4 relative overflow-hidden bg-gradient-to-br from-slate-50 via-white to-blue-50/30"
+      className="py-4 relative overflow-hidden bg-white"
     >
       {/* Background Elements */}
-      <div className="absolute inset-0 opacity-30">
+      <div className="absolute inset-0 opacity-5">
         <motion.div
           className="absolute top-0 right-0 w-96 h-96 bg-blue-100 rounded-full -mr-48 -mt-48 blur-3xl"
           animate={{ scale: [1, 1.2, 1], rotate: [0, 180, 360] }}
           transition={{ duration: 25, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
         />
         <motion.div
-          className="absolute bottom-0 left-0 w-80 h-80 bg-purple-100 rounded-full -ml-40 -mb-40 blur-2xl"
+          className="absolute bottom-0 left-0 w-80 h-80 bg-blue-50 rounded-full -ml-40 -mb-40 blur-2xl"
           animate={{ scale: [1.2, 1, 1.2], rotate: [360, 180, 0] }}
           transition={{ duration: 20, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
         />
       </div>
-
-      {/* Floating Elements */}
-      <motion.div
-        className="absolute top-20 right-20 w-4 h-4 bg-blue-400 rounded-full opacity-40"
-        animate={{ y: [0, -30, 0], x: [0, 20, 0], scale: [1, 1.3, 1] }}
-        transition={{ duration: 8, repeat: Number.POSITIVE_INFINITY }}
-      />
-      <motion.div
-        className="absolute bottom-32 left-16 w-3 h-3 bg-purple-400 rounded-full opacity-50"
-        animate={{ y: [0, 25, 0], rotate: [0, 360] }}
-        transition={{ duration: 6, repeat: Number.POSITIVE_INFINITY, delay: 2 }}
-      />
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-7xl mx-auto">
@@ -122,14 +77,14 @@ export default function PricingSection({ service }: PricingSectionProps) {
             transition={{ duration: 0.8 }}
             className="text-center mb-16"
           >
-            <Badge className={`mb-6 ${colors.bg} ${colors.text} ${colors.border} px-6 py-3 text-sm`}>
+            <Badge className="mb-6 bg-blue-50 text-blue-600 border-blue-200 px-6 py-3 text-sm">
               <Sparkles className="w-4 h-4 mr-2" />
               Transparent Pricing
             </Badge>
 
             <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4">
               <span className="text-slate-800">Simple &</span>{" "}
-              <span className={`bg-gradient-to-r ${colors.gradient} bg-clip-text text-transparent`}>
+              <span className="text-blue-600">
                 Affordable Pricing
               </span>
             </h2>
@@ -150,7 +105,7 @@ export default function PricingSection({ service }: PricingSectionProps) {
             {/* Pricing Card */}
             <motion.div variants={itemVariants} className="lg:col-span-2 relative">
               <div
-                className={`bg-gradient-to-br ${colors.gradient} rounded-3xl p-8 lg:p-12 text-white shadow-2xl relative overflow-hidden`}
+                className="bg-blue-600 rounded-3xl p-8 lg:p-12 text-white shadow-2xl relative overflow-hidden"
               >
                 {/* Background Pattern */}
                 <div className="absolute inset-0 opacity-10">
@@ -165,7 +120,7 @@ export default function PricingSection({ service }: PricingSectionProps) {
                       <Star className="w-4 h-4 mr-2 fill-current" />
                       Most Popular Choice
                     </Badge>
-                    <Badge className="bg-green-500 text-white px-4 py-2">Save {savingsPercent}%</Badge>
+                    <Badge className="bg-blue-500 text-white px-4 py-2">Save {savingsPercent}%</Badge>
                   </div>
 
                   {/* Service Title */}
@@ -209,7 +164,7 @@ export default function PricingSection({ service }: PricingSectionProps) {
                           transition={{ duration: 0.4, delay: index * 0.1 }}
                           className="flex items-center text-white/90 text-sm"
                         >
-                          <CheckCircle className="w-4 h-4 mr-3 flex-shrink-0 text-green-300" />
+                          <CheckCircle className="w-4 h-4 mr-3 flex-shrink-0 text-blue-300" />
                           {item}
                         </motion.div>
                       )) || []}
@@ -219,12 +174,11 @@ export default function PricingSection({ service }: PricingSectionProps) {
                   {/* CTA Buttons */}
                   <div className="flex flex-col sm:flex-row gap-4">
                     <WhatsAppCTAButton className="">
-               
                       Get Started Now
                     </WhatsAppCTAButton>
                     <Button
                       variant="outline"
-                      className="text-green-500"
+                      className="text-white border-white/30 hover:bg-white/20"
                     >
                       <Phone className="w-5 h-5 mr-2" />
                       Call Expert
@@ -237,9 +191,9 @@ export default function PricingSection({ service }: PricingSectionProps) {
             {/* Timeline & Features */}
             <motion.div variants={itemVariants} className="space-y-6">
               {/* Timeline Card */}
-              <div className="bg-white rounded-2xl p-6 shadow-lg border border-slate-200">
+              <div className="bg-white rounded-2xl p-6 shadow-lg border border-blue-200">
                 <h4 className="text-base font-bold text-slate-800 mb-4 flex items-center">
-                  <Clock className={`w-5 h-5 ${colors.text} mr-3`} />
+                  <Clock className="w-5 h-5 text-blue-600 mr-3" />
                   Processing Timeline
                 </h4>
                 <div className="space-y-3">
@@ -256,7 +210,7 @@ export default function PricingSection({ service }: PricingSectionProps) {
                 <div className="mt-4 pt-4 border-t border-slate-100">
                   <div className="flex justify-between items-center">
                     <span className="text-sm font-semibold text-slate-800">Total Time:</span>
-                    <Badge className={`${colors.bg} ${colors.text} ${colors.border}`}>
+                    <Badge className="bg-blue-50 text-blue-600 border-blue-200">
                       {service.timeline?.total || "7-10 days"}
                     </Badge>
                   </div>
@@ -264,17 +218,17 @@ export default function PricingSection({ service }: PricingSectionProps) {
               </div>
 
               {/* Trust Indicators */}
-              <div className="bg-white rounded-2xl p-6 shadow-lg border border-slate-200">
+              <div className="bg-white rounded-2xl p-6 shadow-lg border border-blue-200">
                 <h4 className="text-base font-bold text-slate-800 mb-4 flex items-center">
-                  <Shield className="w-5 h-5 text-green-600 mr-3" />
+                  <Shield className="w-5 h-5 text-blue-600 mr-3" />
                   Why Choose Us
                 </h4>
                 <div className="space-y-4">
                   {[
                     { icon: Award, text: "100% Success Rate", color: "text-blue-600" },
-                    { icon: Users, text: "1,000+ Happy Clients", color: "text-green-600" },
-                    { icon: Zap, text: "Lightning Fast Process", color: "text-orange-600" },
-                    { icon: Shield, text: "100% Secure & Legal", color: "text-purple-600" },
+                    { icon: Users, text: "1,000+ Happy Clients", color: "text-blue-600" },
+                    { icon: Zap, text: "Lightning Fast Process", color: "text-blue-600" },
+                    { icon: Shield, text: "100% Secure & Legal", color: "text-blue-600" },
                   ].map((item, index) => (
                     <motion.div
                       key={index}
@@ -292,8 +246,6 @@ export default function PricingSection({ service }: PricingSectionProps) {
               </div>
             </motion.div>
           </motion.div>
-
-        
         </div>
       </div>
     </section>

@@ -59,23 +59,12 @@ export default function OverviewSection({ service }: OverviewSectionProps) {
     }, 1500)
   }
 
-  const getColorClasses = (color: string) => {
-    const colorMap = {
-      blue: "from-blue-600 to-blue-700",
-      green: "from-green-600 to-green-700",
-      purple: "from-purple-600 to-purple-700",
-    }
-    return colorMap[color as keyof typeof colorMap] || colorMap.blue
-  }
-
-  const gradientClass = getColorClasses(service.color)
-
   return (
-    <section id="overview" className={`relative py-4 md:py-8 bg-gradient-to-br ${gradientClass} overflow-hidden`}>
+    <section id="overview" className="relative py-4 md:py-8 bg-white overflow-hidden">
       {/* Enhanced Background Elements */}
-      <div className="absolute inset-0 opacity-10">
+      <div className="absolute inset-0 opacity-5">
         <motion.div
-          className="absolute top-0 right-0 w-96 h-96 bg-white rounded-full -mr-48 -mt-48 blur-3xl"
+          className="absolute top-0 right-0 w-96 h-96 bg-blue-100 rounded-full -mr-48 -mt-48 blur-3xl"
           animate={{
             scale: [1, 1.2, 1],
             rotate: [0, 180, 360],
@@ -87,7 +76,7 @@ export default function OverviewSection({ service }: OverviewSectionProps) {
           }}
         />
         <motion.div
-          className="absolute bottom-0 left-0 w-80 h-80 bg-white rounded-full -ml-40 -mb-40 blur-2xl"
+          className="absolute bottom-0 left-0 w-80 h-80 bg-blue-50 rounded-full -ml-40 -mb-40 blur-2xl"
           animate={{
             scale: [1.2, 1, 1.2],
             rotate: [360, 180, 0],
@@ -98,47 +87,7 @@ export default function OverviewSection({ service }: OverviewSectionProps) {
             ease: "linear",
           }}
         />
-        <motion.div
-          className="absolute top-1/2 left-1/4 w-64 h-64 bg-white rounded-full -ml-32 -mt-32 blur-xl opacity-20"
-          animate={{
-            y: [0, -50, 0],
-            x: [0, 30, 0],
-          }}
-          transition={{
-            duration: 12,
-            repeat: Number.POSITIVE_INFINITY,
-            ease: "easeInOut",
-          }}
-        />
       </div>
-
-      {/* Floating Elements */}
-      <motion.div
-        className="absolute top-20 right-20 w-6 h-6 bg-white/20 rounded-full"
-        animate={{
-          y: [0, -20, 0],
-          opacity: [0.2, 0.5, 0.2],
-          scale: [1, 1.2, 1],
-        }}
-        transition={{ duration: 4, repeat: Number.POSITIVE_INFINITY }}
-      />
-      <motion.div
-        className="absolute bottom-32 left-16 w-4 h-4 bg-white/30 rounded-full"
-        animate={{
-          y: [0, 15, 0],
-          opacity: [0.3, 0.6, 0.3],
-          scale: [1, 1.3, 1],
-        }}
-        transition={{ duration: 3, repeat: Number.POSITIVE_INFINITY, delay: 1 }}
-      />
-      <motion.div
-        className="absolute top-1/3 left-10 w-2 h-2 bg-white/40 rounded-full"
-        animate={{
-          rotate: [0, 360],
-          scale: [1, 1.5, 1],
-        }}
-        transition={{ duration: 8, repeat: Number.POSITIVE_INFINITY }}
-      />
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -155,7 +104,7 @@ export default function OverviewSection({ service }: OverviewSectionProps) {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
               >
-                <Badge className="mb-6 bg-white/20 text-white border-white/30 hover:bg-white/30 px-4 py-2 backdrop-blur-sm">
+                <Badge className="mb-6 bg-blue-50 text-blue-600 border-blue-200 hover:bg-blue-100 px-4 py-2">
                   <Star className="w-4 h-4 mr-2 fill-current" />
                   Most Popular Service
                 </Badge>
@@ -166,19 +115,19 @@ export default function OverviewSection({ service }: OverviewSectionProps) {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.3 }}
-              className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-4 leading-tight"
+              className="text-2xl md:text-3xl lg:text-4xl font-bold text-slate-900 mb-4 leading-tight"
             >
-              <span className="bg-gradient-to-r from-yellow-300 to-orange-300 bg-clip-text text-transparent">
+              <span className="text-blue-600">
                 {service.title.split(" ").slice(0, 2).join(" ")}
               </span>{" "}
-              <span className="text-white">{service.title.split(" ").slice(2).join(" ")}</span>
+              <span className="text-slate-900">{service.title.split(" ").slice(2).join(" ")}</span>
             </motion.h1>
 
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
-              className="text-sm md:text-base text-white/90 mb-6 leading-relaxed max-w-2xl mx-auto lg:mx-0"
+              className="text-sm md:text-base text-slate-600 mb-6 leading-relaxed max-w-2xl mx-auto lg:mx-0"
             >
               {service.description}
             </motion.p>
@@ -201,9 +150,9 @@ export default function OverviewSection({ service }: OverviewSectionProps) {
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.5, delay: 0.8 + index * 0.1 }}
-                  className="flex items-center p-3 rounded-lg bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20 transition-all duration-300"
+                  className="flex items-center p-3 rounded-lg bg-blue-50 border border-blue-100 hover:bg-blue-100 transition-all duration-300"
                 >
-                  <span className="text-white text-sm font-medium">{feature}</span>
+                  <span className="text-slate-700 text-sm font-medium">{feature}</span>
                 </motion.div>
               ))}
             </motion.div>
@@ -221,7 +170,7 @@ export default function OverviewSection({ service }: OverviewSectionProps) {
               </WhatsAppCTAButton>
               <Button
                 variant="outline"
-                className="text-green-500"
+                className="text-blue-600 border-blue-200 hover:bg-blue-50"
               >
                 <Phone className="w-5 h-5 mr-2" />
                 Call Expert
@@ -236,11 +185,11 @@ export default function OverviewSection({ service }: OverviewSectionProps) {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="relative"
           >
-            <div className="bg-white/95 backdrop-blur-lg rounded-3xl p-8 shadow-2xl border border-white/20 relative overflow-hidden">
+            <div className="bg-white rounded-3xl p-8 shadow-lg border border-slate-200 relative overflow-hidden">
               {/* Form Background Pattern */}
               <div className="absolute inset-0 opacity-5">
                 <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500 rounded-full -mr-16 -mt-16"></div>
-                <div className="absolute bottom-0 left-0 w-24 h-24 bg-purple-500 rounded-full -ml-12 -mb-12"></div>
+                <div className="absolute bottom-0 left-0 w-24 h-24 bg-blue-400 rounded-full -ml-12 -mb-12"></div>
               </div>
 
               <div className="relative z-10">
@@ -248,7 +197,7 @@ export default function OverviewSection({ service }: OverviewSectionProps) {
                   <>
                     {/* Form Header */}
                     <div className="text-center mb-6">
-                      <div className="bg-gradient-to-r from-blue-600 to-purple-600 w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-4">
+                      <div className="bg-blue-600 w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-4">
                         <Sparkles className="w-6 h-6 text-white" />
                       </div>
                       <h3 className="text-lg font-bold text-slate-800 mb-2">Get Free Consultation</h3>
@@ -310,7 +259,7 @@ export default function OverviewSection({ service }: OverviewSectionProps) {
                       <Button
                         type="submit"
                         disabled={isSubmitting}
-                        className="w-full h-12 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
+                        className="w-full h-12 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
                       >
                         {isSubmitting ? (
                           <>
@@ -341,16 +290,16 @@ export default function OverviewSection({ service }: OverviewSectionProps) {
                       initial={{ scale: 0 }}
                       animate={{ scale: 1 }}
                       transition={{ delay: 0.2, type: "spring", bounce: 0.5 }}
-                      className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4"
+                      className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4"
                     >
                       <CheckCircle className="w-8 h-8 text-white" />
                     </motion.div>
-                    <h3 className="text-xl font-bold text-green-800 mb-2">Thank You!</h3>
-                    <p className="text-sm text-green-600 mb-4">
+                    <h3 className="text-xl font-bold text-blue-600 mb-2">Thank You!</h3>
+                    <p className="text-sm text-slate-600 mb-4">
                       Your request has been submitted successfully. Our expert will call you within 30 minutes.
                     </p>
-                    <div className="bg-green-50 rounded-lg p-4 border border-green-200">
-                      <p className="text-sm text-green-700">
+                    <div className="bg-blue-50 rounded-lg p-4 border border-blue-100">
+                      <p className="text-sm text-slate-700">
                         <strong>What's Next?</strong>
                         <br />• Expert consultation call
                         <br />• Customized service plan
@@ -361,24 +310,6 @@ export default function OverviewSection({ service }: OverviewSectionProps) {
                 )}
               </div>
             </div>
-
-            {/* Floating Elements around Form */}
-            <motion.div
-              className="absolute -top-4 -right-4 w-8 h-8 bg-yellow-400 rounded-full opacity-60"
-              animate={{
-                y: [0, -10, 0],
-                rotate: [0, 180, 360],
-              }}
-              transition={{ duration: 6, repeat: Number.POSITIVE_INFINITY }}
-            />
-            <motion.div
-              className="absolute -bottom-4 -left-4 w-6 h-6 bg-pink-400 rounded-full opacity-50"
-              animate={{
-                y: [0, 10, 0],
-                scale: [1, 1.2, 1],
-              }}
-              transition={{ duration: 4, repeat: Number.POSITIVE_INFINITY, delay: 1 }}
-            />
           </motion.div>
         </div>
       </div>

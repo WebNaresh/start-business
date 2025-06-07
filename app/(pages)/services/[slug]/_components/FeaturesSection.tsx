@@ -14,39 +14,6 @@ export default function FeaturesSection({ service }: FeaturesSectionProps) {
   const [hoveredFeature, setHoveredFeature] = useState<number | null>(null)
   const [hoveredIdeal, setHoveredIdeal] = useState<number | null>(null)
 
-  // Get dynamic colors based on service color
-  const getColorClasses = (color: string) => {
-    const colorMap = {
-      blue: {
-        bg: "bg-blue-50",
-        text: "text-blue-600",
-        border: "border-blue-200",
-        gradient: "from-blue-500 to-blue-600",
-        light: "bg-blue-100",
-        accent: "bg-blue-500",
-      },
-      green: {
-        bg: "bg-green-50",
-        text: "text-green-600",
-        border: "border-green-200",
-        gradient: "from-green-500 to-green-600",
-        light: "bg-green-100",
-        accent: "bg-green-500",
-      },
-      purple: {
-        bg: "bg-purple-50",
-        text: "text-purple-600",
-        border: "border-purple-200",
-        gradient: "from-purple-500 to-purple-600",
-        light: "bg-purple-100",
-        accent: "bg-purple-500",
-      },
-    }
-    return colorMap[color as keyof typeof colorMap] || colorMap.blue
-  }
-
-  const colors = getColorClasses(service.color)
-
   // Feature icons mapping
   const featureIcons = [Zap, Shield, Award, TrendingUp, Star, CheckCircle]
 
@@ -72,10 +39,10 @@ export default function FeaturesSection({ service }: FeaturesSectionProps) {
   return (
     <section
       id="features"
-      className="py-4 relative overflow-hidden bg-gradient-to-br from-slate-50 via-white to-blue-50/30"
+      className="py-4 relative overflow-hidden bg-white"
     >
       {/* Enhanced Background Elements */}
-      <div className="absolute inset-0 opacity-40">
+      <div className="absolute inset-0 opacity-5">
         <motion.div
           className="absolute top-0 right-0 w-96 h-96 bg-blue-100 rounded-full -mr-48 -mt-48 blur-3xl"
           animate={{
@@ -89,7 +56,7 @@ export default function FeaturesSection({ service }: FeaturesSectionProps) {
           }}
         />
         <motion.div
-          className="absolute bottom-0 left-0 w-80 h-80 bg-purple-100 rounded-full -ml-40 -mb-40 blur-2xl"
+          className="absolute bottom-0 left-0 w-80 h-80 bg-blue-50 rounded-full -ml-40 -mb-40 blur-2xl"
           animate={{
             scale: [1.2, 1, 1.2],
             rotate: [360, 180, 0],
@@ -102,25 +69,6 @@ export default function FeaturesSection({ service }: FeaturesSectionProps) {
         />
       </div>
 
-      {/* Floating Particles */}
-      <motion.div
-        className="absolute top-20 right-20 w-4 h-4 bg-blue-400 rounded-full opacity-30"
-        animate={{
-          y: [0, -30, 0],
-          x: [0, 20, 0],
-          scale: [1, 1.3, 1],
-        }}
-        transition={{ duration: 8, repeat: Number.POSITIVE_INFINITY }}
-      />
-      <motion.div
-        className="absolute bottom-32 left-16 w-3 h-3 bg-purple-400 rounded-full opacity-40"
-        animate={{
-          y: [0, 25, 0],
-          rotate: [0, 360],
-        }}
-        transition={{ duration: 6, repeat: Number.POSITIVE_INFINITY, delay: 2 }}
-      />
-
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-7xl mx-auto">
           {/* Enhanced Header */}
@@ -131,14 +79,14 @@ export default function FeaturesSection({ service }: FeaturesSectionProps) {
             transition={{ duration: 0.8 }}
             className="text-center mb-16"
           >
-            <Badge className={`mb-6 ${colors.bg} ${colors.text} ${colors.border} px-6 py-3 text-sm`}>
+            <Badge className="mb-6 bg-blue-50 text-blue-600 border-blue-200 px-6 py-3 text-sm">
               <Sparkles className="w-4 h-4 mr-2" />
               Service Features & Benefits
             </Badge>
 
             <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4">
               <span className="text-slate-800">Why Choose Our</span>{" "}
-              <span className={`bg-gradient-to-r ${colors.gradient} bg-clip-text text-transparent`}>
+              <span className="text-blue-600">
                 {service.shortTitle}
               </span>
             </h2>
@@ -160,23 +108,21 @@ export default function FeaturesSection({ service }: FeaturesSectionProps) {
             {/* Key Features Card */}
             <motion.div variants={itemVariants} className="relative group">
               <div
-                className={`${colors.bg} rounded-3xl p-8 lg:p-10 border-2 ${colors.border} shadow-lg hover:shadow-2xl transition-all duration-500 relative overflow-hidden`}
+                className="bg-blue-50 rounded-3xl p-8 lg:p-10 border-2 border-blue-200 shadow-lg hover:shadow-2xl transition-all duration-500 relative overflow-hidden"
               >
                 {/* Card Background Pattern */}
                 <div className="absolute inset-0 opacity-5">
-                  <div className={`absolute top-0 right-0 w-32 h-32 ${colors.accent} rounded-full -mr-16 -mt-16`}></div>
-                  <div
-                    className={`absolute bottom-0 left-0 w-24 h-24 ${colors.accent} rounded-full -ml-12 -mb-12`}
-                  ></div>
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500 rounded-full -mr-16 -mt-16"></div>
+                  <div className="absolute bottom-0 left-0 w-24 h-24 bg-blue-400 rounded-full -ml-12 -mb-12"></div>
                 </div>
 
                 <div className="relative z-10">
                   {/* Card Header */}
                   <div className="flex items-center mb-8">
                     <div
-                      className={`${colors.light} w-16 h-16 rounded-2xl flex items-center justify-center mr-4 group-hover:scale-110 transition-transform duration-300`}
+                      className="bg-blue-100 w-16 h-16 rounded-2xl flex items-center justify-center mr-4 group-hover:scale-110 transition-transform duration-300"
                     >
-                      <CheckCircle className={`w-8 h-8 ${colors.text}`} />
+                      <CheckCircle className="w-8 h-8 text-blue-600" />
                     </div>
                     <div>
                       <h3 className="text-base font-bold text-slate-800 mb-1">Key Features</h3>
@@ -197,13 +143,13 @@ export default function FeaturesSection({ service }: FeaturesSectionProps) {
                           transition={{ duration: 0.5, delay: index * 0.1 }}
                           onMouseEnter={() => setHoveredFeature(index)}
                           onMouseLeave={() => setHoveredFeature(null)}
-                          className="group/item flex items-center p-4 rounded-xl bg-white/60 hover:bg-white hover:shadow-md transition-all duration-300 cursor-pointer"
+                          className="group/item flex items-center p-4 rounded-xl bg-white hover:bg-blue-50 hover:shadow-md transition-all duration-300 cursor-pointer"
                         >
                           <div
-                            className={`w-10 h-10 ${hoveredFeature === index ? colors.accent : colors.light} rounded-lg flex items-center justify-center mr-4 transition-all duration-300 group-hover/item:scale-110`}
+                            className={`w-10 h-10 ${hoveredFeature === index ? "bg-blue-600" : "bg-blue-100"} rounded-lg flex items-center justify-center mr-4 transition-all duration-300 group-hover/item:scale-110`}
                           >
                             <IconComponent
-                              className={`w-5 h-5 ${hoveredFeature === index ? "text-white" : colors.text} transition-colors duration-300`}
+                              className={`w-5 h-5 ${hoveredFeature === index ? "text-white" : "text-blue-600"} transition-colors duration-300`}
                             />
                           </div>
                           <div className="flex-1">
@@ -212,7 +158,7 @@ export default function FeaturesSection({ service }: FeaturesSectionProps) {
                             </span>
                           </div>
                           <ArrowRight
-                            className={`w-4 h-4 text-slate-400 group-hover/item:${colors.text.replace("text-", "text-")} group-hover/item:translate-x-1 transition-all duration-300`}
+                            className="w-4 h-4 text-slate-400 group-hover/item:text-blue-600 group-hover/item:translate-x-1 transition-all duration-300"
                           />
                         </motion.div>
                       )
@@ -221,7 +167,7 @@ export default function FeaturesSection({ service }: FeaturesSectionProps) {
 
                   {/* Feature Count Badge */}
                   <div className="mt-6 flex justify-between items-center">
-                    <Badge variant="secondary" className={`${colors.bg} ${colors.text} border-0`}>
+                    <Badge variant="secondary" className="bg-blue-50 text-blue-600 border-0">
                       {service.keyFeatures?.length || 0} Key Features
                     </Badge>
                     <div className="flex items-center text-sm text-slate-500">
@@ -238,15 +184,15 @@ export default function FeaturesSection({ service }: FeaturesSectionProps) {
               <div className="bg-white rounded-3xl p-8 lg:p-10 border-2 border-slate-200 shadow-lg hover:shadow-2xl transition-all duration-500 relative overflow-hidden">
                 {/* Card Background Pattern */}
                 <div className="absolute inset-0 opacity-5">
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-slate-800 rounded-full -mr-16 -mt-16"></div>
-                  <div className="absolute bottom-0 left-0 w-24 h-24 bg-slate-600 rounded-full -ml-12 -mb-12"></div>
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500 rounded-full -mr-16 -mt-16"></div>
+                  <div className="absolute bottom-0 left-0 w-24 h-24 bg-blue-400 rounded-full -ml-12 -mb-12"></div>
                 </div>
 
                 <div className="relative z-10">
                   {/* Card Header */}
                   <div className="flex items-center mb-8">
-                    <div className="bg-slate-100 w-16 h-16 rounded-2xl flex items-center justify-center mr-4 group-hover:scale-110 transition-transform duration-300">
-                      <Users className="w-8 h-8 text-slate-700" />
+                    <div className="bg-blue-50 w-16 h-16 rounded-2xl flex items-center justify-center mr-4 group-hover:scale-110 transition-transform duration-300">
+                      <Users className="w-8 h-8 text-blue-600" />
                     </div>
                     <div>
                       <h3 className="text-base font-bold text-slate-800 mb-1">Perfect For</h3>
@@ -267,13 +213,13 @@ export default function FeaturesSection({ service }: FeaturesSectionProps) {
                           transition={{ duration: 0.5, delay: index * 0.1 }}
                           onMouseEnter={() => setHoveredIdeal(index)}
                           onMouseLeave={() => setHoveredIdeal(null)}
-                          className="group/item flex items-center p-4 rounded-xl bg-slate-50 hover:bg-slate-100 hover:shadow-md transition-all duration-300 cursor-pointer"
+                          className="group/item flex items-center p-4 rounded-xl bg-slate-50 hover:bg-blue-50 hover:shadow-md transition-all duration-300 cursor-pointer"
                         >
                           <div
-                            className={`w-10 h-10 ${hoveredIdeal === index ? "bg-slate-700" : "bg-slate-200"} rounded-lg flex items-center justify-center mr-4 transition-all duration-300 group-hover/item:scale-110`}
+                            className={`w-10 h-10 ${hoveredIdeal === index ? "bg-blue-600" : "bg-blue-100"} rounded-lg flex items-center justify-center mr-4 transition-all duration-300 group-hover/item:scale-110`}
                           >
                             <IconComponent
-                              className={`w-5 h-5 ${hoveredIdeal === index ? "text-white" : "text-slate-600"} transition-colors duration-300`}
+                              className={`w-5 h-5 ${hoveredIdeal === index ? "text-white" : "text-blue-600"} transition-colors duration-300`}
                             />
                           </div>
                           <div className="flex-1">
@@ -281,7 +227,7 @@ export default function FeaturesSection({ service }: FeaturesSectionProps) {
                               {item}
                             </span>
                           </div>
-                          <ArrowRight className="w-4 h-4 text-slate-400 group-hover/item:text-slate-600 group-hover/item:translate-x-1 transition-all duration-300" />
+                          <ArrowRight className="w-4 h-4 text-slate-400 group-hover/item:text-blue-600 group-hover/item:translate-x-1 transition-all duration-300" />
                         </motion.div>
                       )
                     }) || []}
@@ -289,7 +235,7 @@ export default function FeaturesSection({ service }: FeaturesSectionProps) {
 
                   {/* Ideal For Count Badge */}
                   <div className="mt-6 flex justify-between items-center">
-                    <Badge variant="secondary" className="bg-slate-100 text-slate-700 border-0">
+                    <Badge variant="secondary" className="bg-blue-50 text-blue-600 border-0">
                       {service.idealFor?.length || 0} Business Types
                     </Badge>
                     <div className="flex items-center text-sm text-slate-500">
@@ -311,7 +257,7 @@ export default function FeaturesSection({ service }: FeaturesSectionProps) {
             className="mt-16 text-center"
           >
             <div
-              className={`bg-gradient-to-r ${colors.gradient} rounded-3xl p-8 lg:p-12 text-white relative overflow-hidden`}
+              className="bg-blue-600 rounded-3xl p-8 lg:p-12 text-white relative overflow-hidden"
             >
               {/* Background Pattern */}
               <div className="absolute inset-0 opacity-10">
@@ -320,16 +266,12 @@ export default function FeaturesSection({ service }: FeaturesSectionProps) {
               </div>
 
               <div className="relative z-10">
-                <div className=" items-center">
-       
-
+                <div className="items-center">
                   {/* Center - Message */}
                   <div className="text-center">
                     <h3 className="text-xl font-bold mb-2">Ready to Get Started?</h3>
                     <p className="text-white/90 text-sm">Join thousands who chose our expert services</p>
                   </div>
-
-           
                 </div>
               </div>
             </div>

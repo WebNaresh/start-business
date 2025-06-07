@@ -21,36 +21,6 @@ interface DocumentsSectionProps {
 }
 
 export default function DocumentsSection({ service }: DocumentsSectionProps) {
-  // Get dynamic colors based on service color
-  const getColorClasses = (color: string) => {
-    const colorMap = {
-      blue: {
-        bg: "bg-blue-50",
-        text: "text-blue-600",
-        border: "border-blue-200",
-        gradient: "from-blue-500 to-blue-600",
-        accent: "bg-blue-500",
-      },
-      green: {
-        bg: "bg-green-50",
-        text: "text-green-600",
-        border: "border-green-200",
-        gradient: "from-green-500 to-green-600",
-        accent: "bg-green-500",
-      },
-      purple: {
-        bg: "bg-purple-50",
-        text: "text-purple-600",
-        border: "border-purple-200",
-        gradient: "from-purple-500 to-purple-600",
-        accent: "bg-purple-500",
-      },
-    }
-    return colorMap[color as keyof typeof colorMap] || colorMap.blue
-  }
-
-  const colors = getColorClasses(service.color)
-
   // Document type icons mapping
   const getDocumentIcon = (docName: string) => {
     const name = docName.toLowerCase()
@@ -74,7 +44,7 @@ export default function DocumentsSection({ service }: DocumentsSectionProps) {
   }
 
   return (
-    <section id="documents" className="py-4 bg-slate-50">
+    <section id="documents" className="py-4 bg-white">
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
           {/* Header */}
@@ -85,7 +55,7 @@ export default function DocumentsSection({ service }: DocumentsSectionProps) {
             transition={{ duration: 0.6 }}
             className="text-center mb-12"
           >
-            <Badge className={`mb-4 ${colors.bg} ${colors.text} ${colors.border} px-4 py-2`}>
+            <Badge className="mb-4 bg-blue-50 text-blue-600 border-blue-200 px-4 py-2">
               <FileText className="w-4 h-4 mr-2" />
               Document Checklist
             </Badge>
@@ -107,12 +77,12 @@ export default function DocumentsSection({ service }: DocumentsSectionProps) {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: categoryIndex * 0.1 }}
-                  className="bg-white rounded-2xl p-8 shadow-lg border border-slate-200"
+                  className="bg-white rounded-2xl p-8 shadow-lg border border-blue-200"
                 >
                   {/* Category Header */}
                   <div className="flex items-center gap-4 mb-6">
-                    <div className={`${colors.bg} w-12 h-12 rounded-xl flex items-center justify-center`}>
-                      <CategoryIcon className={`w-6 h-6 ${colors.text}`} />
+                    <div className="bg-blue-50 w-12 h-12 rounded-xl flex items-center justify-center">
+                      <CategoryIcon className="w-6 h-6 text-blue-600" />
                     </div>
                     <div className="flex-1">
                       <h3 className="text-base font-bold text-slate-800 capitalize">
@@ -136,10 +106,10 @@ export default function DocumentsSection({ service }: DocumentsSectionProps) {
                           whileInView={{ opacity: 1, scale: 1 }}
                           viewport={{ once: true }}
                           transition={{ duration: 0.3, delay: docIndex * 0.05 }}
-                          className="p-4 rounded-xl border-2 border-slate-200 hover:border-slate-300 hover:shadow-md transition-all duration-300"
+                          className="p-4 rounded-xl border-2 border-blue-200 hover:border-blue-300 hover:shadow-md transition-all duration-300"
                         >
                           <div className="flex items-start gap-3">
-                            <DocIcon className="w-5 h-5 text-slate-400" />
+                            <DocIcon className="w-5 h-5 text-blue-600" />
                             <span className="text-sm text-slate-700 font-medium">
                               {doc}
                             </span>
@@ -161,10 +131,10 @@ export default function DocumentsSection({ service }: DocumentsSectionProps) {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="text-center mt-12"
           >
-            <div className="bg-white rounded-xl p-6 shadow-lg border border-slate-200">
+            <div className="bg-white rounded-xl p-6 shadow-lg border border-blue-200">
               <h3 className="text-base font-semibold text-slate-800 mb-2">Need Help with Documents?</h3>
               <p className="text-xs text-slate-600 mb-3">Our experts can guide you through the document preparation process</p>
-              <Badge className="bg-blue-100 text-blue-700 border-blue-200">
+              <Badge className="bg-blue-50 text-blue-600 border-blue-200">
                 <Phone className="w-3 h-3 mr-1" />
                 Expert Support Available
               </Badge>

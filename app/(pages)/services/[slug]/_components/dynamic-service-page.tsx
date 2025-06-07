@@ -87,9 +87,9 @@ const FloatingNavbar = ({
         opacity: showStickyNav ? 1 : 0,
       }}
       transition={{ duration: 0.3, ease: "easeInOut" }}
-      className="fixed top-1/5 left:1/2 md:left-1/3 transform -translate-x-1/2 z-50"
+      className="fixed top-1/5 left-1/2 md:left-1/3 transform -translate-x-1/2 z-50"
     >
-      <div className="bg-blue-50 backdrop-blur-md border border-slate-200/50 rounded-2xl shadow-lg shadow-slate-900/5">
+      <div className="bg-white backdrop-blur-md border border-slate-200 rounded-2xl shadow-lg shadow-slate-900/5">
         <div className="px-2 py-2">
           {/* Navigation Menu - Always visible */}
           <nav className="flex items-center gap-1">
@@ -100,14 +100,12 @@ const FloatingNavbar = ({
                 className={`px-2 py-1.5 text-xs font-medium rounded-lg transition-all duration-200 whitespace-nowrap ${
                   activeSection === item.id
                     ? "text-blue-600 bg-blue-50"
-                    : "text-slate-600 hover:text-slate-900 hover:bg-slate-50"
+                    : "text-slate-600 hover:text-blue-600 hover:bg-blue-50"
                 }`}
               >
                 {item.label}
               </button>
             ))}
-
-           
           </nav>
         </div>
       </div>
@@ -210,34 +208,6 @@ export default function DynamicServicePage({ service, slug }: DynamicServicePage
     }
   }
 
-  const getColorClasses = (color: string) => {
-    const colorMap = {
-      blue: {
-        bg: "bg-blue-50",
-        text: "text-blue-600",
-        border: "border-blue-200",
-        gradient: "from-blue-600 to-blue-700",
-        light: "bg-blue-100",
-      },
-      green: {
-        bg: "bg-green-50",
-        text: "text-green-600",
-        border: "border-green-200",
-        gradient: "from-green-600 to-green-700",
-        light: "bg-green-100",
-      },
-      purple: {
-        bg: "bg-purple-50",
-        text: "text-purple-600",
-        border: "border-purple-200",
-        gradient: "from-purple-600 to-purple-700",
-        light: "bg-purple-100",
-      },
-    }
-    return colorMap[color as keyof typeof colorMap] || colorMap.blue
-  }
-
-  const colors = getColorClasses(service.color)
   const savings =
     Number.parseInt(service.pricing.originalAmount.replace(/,/g, "")) -
     Number.parseInt(service.pricing.amount.replace(/,/g, ""))
@@ -272,7 +242,7 @@ export default function DynamicServicePage({ service, slug }: DynamicServicePage
       <div ref={pageRef} className="min-h-screen bg-white">
         {/* Reading Progress Bar */}
         <div className="fixed top-0 left-0 right-0 z-50">
-          <Progress value={readingProgress} className="h-1 rounded-none" />
+          <Progress value={readingProgress} className="h-1 rounded-none bg-blue-100" />
         </div>
         {/* Section Components */}
         <OverviewSection service={service} />
@@ -281,9 +251,7 @@ export default function DynamicServicePage({ service, slug }: DynamicServicePage
         <DocumentsSection service={service}/>
         <PricingSection service={service} />
         <FaqSection service={service} openFAQs={openFAQs} toggleFAQ={toggleFAQ} />
-        {/* ...rest of the page (CTA, etc.) ... */}
       </div>
-      {/* ...rest of the floating/fab/cta code ... */}
     </TooltipProvider>
   )
 }
