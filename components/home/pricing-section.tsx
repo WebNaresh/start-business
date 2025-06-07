@@ -98,7 +98,7 @@ export default function PricingSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-3xl md:text-4xl font-bold text-slate-800 mb-4"
+            className="text-2xl md:text-3xl font-bold text-slate-900 mb-3"
           >
             Transparent Pricing for Your Business Needs
           </motion.h2>
@@ -107,7 +107,7 @@ export default function PricingSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-lg text-slate-600"
+            className="text-sm text-slate-600 mb-8 max-w-2xl mx-auto"
           >
             Choose the perfect plan for your business requirements. All plans include our expert guidance and support.
           </motion.p>
@@ -166,8 +166,8 @@ export default function PricingSection() {
                   <plan.icon className="h-6 w-6" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-bold text-slate-800">{plan.name}</h3>
-                  <p className="text-sm text-slate-500">{plan.description}</p>
+                  <h3 className="text-base font-semibold text-slate-900 mb-2">{plan.name}</h3>
+                  <p className="text-xs text-slate-600">{plan.description}</p>
                 </div>
               </div>
 
@@ -176,7 +176,7 @@ export default function PricingSection() {
                   <span className="text-3xl font-bold text-blue-600">{isAnnual ? plan.price : plan.monthlyPrice}</span>
                   <span className="text-base text-slate-500 ml-2">/{isAnnual ? "year" : "month"}</span>
                 </div>
-                <p className="text-sm text-slate-500 mt-2">{isAnnual ? "Billed annually" : "Billed monthly"}</p>
+                <p className="text-xs text-slate-600 mt-2">{isAnnual ? "Billed annually" : "Billed monthly"}</p>
               </div>
 
               <ul className="space-y-4 mb-8">

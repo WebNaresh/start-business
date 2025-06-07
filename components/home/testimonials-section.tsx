@@ -118,8 +118,8 @@ export default function TestimonialsSection() {
           <span className="inline-block px-4 py-1.5 mb-4 text-sm font-medium text-blue-600 bg-blue-50 rounded-full border border-blue-100">
             Testimonials
           </span>
-          <h2 className="mb-4 text-3xl font-bold md:text-4xl text-slate-800">What Our Clients Say</h2>
-          <p className="mx-auto max-w-2xl text-lg text-slate-600">
+          <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-3">What Our Clients Say</h2>
+          <p className="text-sm text-slate-600 mb-8 max-w-2xl mx-auto">
             Trusted by entrepreneurs and businesses across India for reliable and efficient services
           </p>
         </motion.div>
@@ -171,8 +171,8 @@ export default function TestimonialsSection() {
                         />
                       </div>
                       <div>
-                        <h4 className="text-base font-bold text-blue-600">{testimonial.author}</h4>
-                        <p className="text-sm text-slate-500">{testimonial.position}</p>
+                        <h3 className="text-base font-semibold text-slate-900 mb-2">{testimonial.author}</h3>
+                        <p className="text-xs text-slate-600">{testimonial.position}</p>
                       </div>
                     </div>
                   </motion.div>

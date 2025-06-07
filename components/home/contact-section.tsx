@@ -22,8 +22,8 @@ export default function ContactSection() {
             animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
             transition={{ duration: 0.5 }}
           >
-            <h2 className="mb-4 text-3xl font-bold">Get in Touch</h2>
-            <p className="mb-6 text-lg text-slate-600">
+            <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-3">Get in Touch</h2>
+            <p className="text-sm text-slate-600 mb-8 max-w-2xl mx-auto">
               Have questions about our services? Our experts are here to help you.
             </p>
             <div className="mb-6 space-y-4">
@@ -60,7 +60,7 @@ export default function ContactSection() {
                 <div className="mr-3 rounded-full bg-blue-100 p-2">
                   <MapPin className="h-5 w-5 text-blue-600" />
                 </div>
-                <span className="text-slate-700">
+                <span className="text-xs text-slate-600">
                   Office No 7, 3rd Floor, Saraswati Heights, Deccan Gymkhana, Behind Goodluck Café, Pune 411004
                 </span>
               </div>

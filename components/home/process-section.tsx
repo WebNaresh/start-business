@@ -57,8 +57,8 @@ export default function ProcessSection() {
           <span className="inline-block rounded-full bg-blue-50 px-4 py-1 text-sm font-semibold text-blue-600 mb-4">
             Simple Process
           </span>
-          <h2 className="mb-4 text-3xl font-bold md:text-4xl">How It Works</h2>
-          <p className="mx-auto max-w-2xl text-lg text-slate-600">
+          <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-3">How It Works</h2>
+          <p className="text-sm text-slate-600 mb-8 max-w-2xl mx-auto">
             Our streamlined 4-step process makes business registration simple, efficient, and hassle-free
           </p>
         </motion.div>
@@ -97,8 +97,8 @@ export default function ProcessSection() {
 
                 {/* Content */}
                 <div className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-all duration-300 w-full border border-slate-100 group-hover:border-slate-200">
-                  <h3 className="mb-3 text-lg font-bold">{step.title}</h3>
-                  <p className="text-base text-slate-600 mb-4">{step.description}</p>
+                  <h3 className="text-base font-semibold text-slate-900 mb-2">{step.title}</h3>
+                  <p className="text-xs text-slate-600 mb-4">{step.description}</p>
 
                   {/* Arrow for next step - hidden on last item */}
                   {index < steps.length - 1 && (

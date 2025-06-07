@@ -242,10 +242,10 @@ export default function EnhancedServicesSection() {
             <Sparkles className="w-4 h-4 mr-2" />
             Our Services
           </Badge>
-          <h2 className="mb-6 text-4xl font-bold md:text-5xl lg:text-5xl text-blue-700">
-          Our Popular Services 
+          <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-3">
+            Our Popular Services 
           </h2>
-          <p className="mx-auto max-w-3xl text-slate-600 text-xl leading-relaxed">
+          <p className="text-sm text-slate-600 mb-8 max-w-2xl mx-auto">
             Everything you need to start, run, and grow your business with confidence
           </p>
         </motion.div>
@@ -347,10 +347,10 @@ export default function EnhancedServicesSection() {
                       />
                     </div>
                     <div className="flex-1">
-                      <h3 className="text-xl font-bold mb-2 group-hover:text-blue-600 transition-colors">
+                      <h3 className="text-base font-semibold text-slate-900 mb-2 group-hover:text-blue-600 transition-colors">
                         {service.title}
                       </h3>
-                      <p className="text-slate-600 text-sm leading-relaxed">{service.description}</p>
+                      <p className="text-xs text-slate-600 text-sm leading-relaxed">{service.description}</p>
                     </div>
                   </div>
 

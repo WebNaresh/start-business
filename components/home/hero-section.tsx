@@ -209,14 +209,14 @@ export default function EnhancedHeroSection() {
                 exit="exit"
                 transition={{ duration: 0.6, type: "spring", bounce: 0.3 }}
               >
-                <motion.h1 className="mb-6 text-4xl font-bold leading-tight tracking-tight md:text-5xl lg:text-6xl">
+                <motion.h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-4">
                   <span className="bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">
                     {slides[currentSlide].title.split(" ").slice(0, 4).join(" ")}
                   </span>{" "}
                   <span className="text-slate-800">{slides[currentSlide].title.split(" ").slice(4).join(" ")}</span>
                 </motion.h1>
 
-                <motion.p className="mb-8 text-lg text-slate-600 md:text-xl max-w-lg leading-relaxed">
+                <motion.p className="text-sm md:text-base text-slate-600 mb-6 max-w-2xl">
                   {slides[currentSlide].description}
                 </motion.p>
 
@@ -270,7 +270,7 @@ export default function EnhancedHeroSection() {
               className="w-full max-w-lg mx-auto flex flex-col gap-4"
             >
               <div className="bg-white rounded-2xl shadow-lg border border-slate-100 p-6">
-                <h3 className="text-xl font-semibold text-slate-800 mb-4">What type of business are you starting?</h3>
+                <h2 className="text-lg md:text-xl font-semibold text-slate-800 mb-2">What type of business are you starting?</h2>
                 <div className="flex flex-col gap-3">
                   {mainServices.map((service) => (
                     <Link
@@ -283,7 +283,7 @@ export default function EnhancedHeroSection() {
                     </Link>
                   ))}
                 </div>
-                <div className="mt-4 text-sm text-slate-500">
+                <div className="mt-4 text-xs text-slate-500">
                   Not sure what's right for you?{' '}
                   <Link href="/contact" className="text-blue-600 hover:underline font-medium">
                     Schedule a free consultation →

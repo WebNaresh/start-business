@@ -46,8 +46,8 @@ export default function FAQSection() {
           transition={{ duration: 0.5 }}
           className="mb-12 text-center"
         >
-          <h2 className="mb-4 text-3xl font-bold md:text-4xl">Frequently Asked Questions</h2>
-          <p className="mx-auto max-w-2xl text-slate-600">Find answers to common questions about our services</p>
+          <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-3">Frequently Asked Questions</h2>
+          <p className="text-sm text-slate-600 mb-8 max-w-2xl mx-auto">Find answers to common questions about our services</p>
         </motion.div>
 
         <motion.div

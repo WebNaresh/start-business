@@ -80,12 +80,12 @@ export default function WhyChooseUs() {
             <Star className="w-4 h-4 mr-2 fill-current" />
             Why 1,000+ Businesses Choose Us
           </Badge>
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+          <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-3">
             <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
               Why Choose Us?
             </span>
           </h2>
-          <p className="text-lg text-slate-600 max-w-2xl mx-auto">Five key reasons that make us different</p>
+          <p className="text-sm text-slate-600 mb-8 max-w-2xl mx-auto">Five key reasons that make us different</p>
         </motion.div>
 
         {/* Features Grid - Better Alignment */}
@@ -114,10 +114,10 @@ export default function WhyChooseUs() {
                 </div>
 
                 {/* Content */}
-                <h3 className="text-lg font-bold text-slate-800 mb-2 group-hover:text-blue-600 transition-colors">
+                <h3 className="text-base font-semibold text-slate-900 mb-2 group-hover:text-blue-600 transition-colors">
                   {feature.title}
                 </h3>
-                <p className="text-sm text-slate-600 mb-4 leading-relaxed">{feature.shortDesc}</p>
+                <p className="text-xs text-slate-600 mb-4 leading-relaxed">{feature.shortDesc}</p>
 
                 {/* Benefit Badge */}
                 <div className="flex items-center justify-between">
@@ -155,10 +155,10 @@ export default function WhyChooseUs() {
                 </div>
 
                 {/* Content */}
-                <h3 className="text-lg font-bold text-slate-800 mb-2 group-hover:text-blue-600 transition-colors">
+                <h3 className="text-base font-semibold text-slate-900 mb-2 group-hover:text-blue-600 transition-colors">
                   {feature.title}
                 </h3>
-                <p className="text-sm text-slate-600 mb-4 leading-relaxed">{feature.shortDesc}</p>
+                <p className="text-xs text-slate-600 mb-4 leading-relaxed">{feature.shortDesc}</p>
 
                 {/* Benefit Badge */}
                 <div className="flex items-center justify-between">
