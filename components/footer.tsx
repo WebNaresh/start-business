@@ -182,7 +182,7 @@ export default function EnhancedFooter() {
                   { name: "Trademark & Copyright", href: "/services/trademark-copyright", popular: false },
                   { name: "Company Compliance", href: "/services/company-compliance", popular: true },
                   { name: "LLP Registration", href: "/services/llp-compliance", popular: false },
-                  { name: "FSSAI License", href: "/services/fssai-registration", popular: false },
+           
                   { name: "Tax Services", href: "/services/tax-services", popular: true },
                 ].map((service, index) => (
                   <li key={index}>

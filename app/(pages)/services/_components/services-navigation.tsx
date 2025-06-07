@@ -180,12 +180,7 @@ export default function EnhancedServicesNavigation() {
           href: "/services/gst-filing",
           description: "File your GST returns accurately and on time",
         },
-        {
-          name: "HSN Code Finder",
-          href: "/services/hsn-code-finder",
-          new: true,
-          description: "Find the correct HSN codes for your products and services",
-        },
+    
         {
           name: "GST Cancellation and Revocation",
           href: "/services/gst-cancellation",
@@ -241,23 +236,9 @@ export default function EnhancedServicesNavigation() {
           href: "/services/copyright-registration",
           description: "Protect your creative works with copyright registration",
         },
-        {
-          name: "Patent Registration",
-          href: "/services/patent-registration",
-          popular: true,
-          description: "Register your invention or innovation as a patent",
-        },
-        {
-          name: "Design Registration",
-          href: "/services/design-registration",
-          description: "Protect the visual design of your product",
-        },
-        {
-          name: "International Trademark",
-          href: "/services/international-trademark",
-          new: true,
-          description: "Extend your trademark protection internationally",
-        },
+
+    
+   
       ],
     },
     {
@@ -271,12 +252,7 @@ export default function EnhancedServicesNavigation() {
       gradientFrom: "from-amber-600",
       gradientTo: "to-orange-400",
       subServices: [
-        {
-          name: "FSSAI License",
-          href: "/services/fssai-license",
-          popular: true,
-          description: "Obtain food safety license for your food business",
-        },
+  
         {
           name: "Import Export Code",
           href: "/services/iec-license",
@@ -287,11 +263,7 @@ export default function EnhancedServicesNavigation() {
           href: "/services/digital-signature",
           description: "Obtain DSC for secure electronic transactions",
         },
-        {
-          name: "ISO Certification",
-          href: "/services/iso-certification",
-          description: "Get international quality management certification",
-        },
+   
         {
           name: "MSME Registration",
           href: "/services/msme-registration",

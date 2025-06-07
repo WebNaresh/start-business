@@ -129,12 +129,7 @@ export default function Header() {
           href: "/services/copyright-registration",
           description: "Protect your creative works with copyright registration",
         },
-        {
-          name: "Patent Registration",
-          href: "/services/patent-registration",
-          popular: true,
-          description: "Register your invention or innovation as a patent",
-        },
+     
       ],
     },
     {
@@ -148,23 +143,14 @@ export default function Header() {
       gradientFrom: "from-amber-600",
       gradientTo: "to-orange-400",
       subServices: [
-        {
-          name: "FSSAI License",
-          href: "/services/fssai-license",
-          popular: true,
-          description: "Obtain food safety license for your food business",
-        },
+    
         {
           name: "MSME Registration",
           href: "/services/msme-registration",
           popular: true,
           description: "Register as a Micro, Small, or Medium Enterprise",
         },
-        {
-          name: "ISO Certification",
-          href: "/services/iso-certification",
-          description: "Get international quality management certification",
-        },
+   
       ],
     },
   ]

@@ -53,11 +53,7 @@ const faqs = [
     answer:
       "You'll need proof of identity, address proof, business registration documents, the trademark logo/design (if applicable), and a list of goods/services for which the trademark will be used. Our team will guide you through the complete documentation process.",
   },
-  {
-    question: "Do you provide services outside of India?",
-    answer:
-      "Yes, we provide international trademark registration and company incorporation services in select foreign jurisdictions including USA, UK, Singapore, and Dubai. Please contact us for specific requirements and pricing.",
-  },
+
   {
     question: "What are the annual compliance requirements for a Private Limited Company?",
     answer:

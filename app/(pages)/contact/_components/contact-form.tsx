@@ -39,7 +39,7 @@ export default function ContactForm() {
     { value: "trademark", label: "Trademark Registration" },
     { value: "compliance", label: "Compliance Services" },
     { value: "llp", label: "LLP Registration" },
-    { value: "fssai", label: "FSSAI License" },
+   
     { value: "tax-services", label: "Tax Services" },
     { value: "other", label: "Other Services" },
   ]

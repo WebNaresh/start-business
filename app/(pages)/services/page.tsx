@@ -63,11 +63,7 @@ const servicesFaqs = [
     answer:
       "Our trademark registration includes comprehensive trademark search, application filing, government fee, status tracking, objection handling (if any), and final certificate delivery. We also provide ongoing trademark watch services.",
   },
-  {
-    question: "Can you help with international business setup?",
-    answer:
-      "Yes, we provide international business setup services for Singapore, USA, UK, Dubai, and other jurisdictions. This includes company registration, bank account opening assistance, and ongoing compliance support.",
-  },
+
   {
     question: "What are your service charges and payment terms?",
     answer:
