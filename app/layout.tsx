@@ -78,20 +78,22 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <Head>
+      <head>
         <meta name="apple-mobile-web-app-title" content="Start Business" />
-     
         {/* Google Analytics */}
-        <Script id="google-analytics" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-2T86HZSNGB');
-          `}
-        </Script>
-      
-      </Head>
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-2T86HZSNGB"
+          strategy="afterInteractive"
+        />
+     <Script id="google-analytics" strategy="afterInteractive">
+     {`
+       window.dataLayer = window.dataLayer || [];
+       function gtag(){dataLayer.push(arguments);}
+       gtag('js', new Date());
+       gtag('config', 'G-2T86HZSNGB');
+     `}
+   </Script>
+      </head>
       <body className={inter.className} suppressHydrationWarning>
         <ThemeProvider
           attribute="class"
