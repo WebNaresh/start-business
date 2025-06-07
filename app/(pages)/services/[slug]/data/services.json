@@ -1899,6 +1899,1041 @@
           "answer": "No, a Nidhi Company can only accept deposits from its members. Non-members cannot deposit money with a Nidhi Company."
         }
       ]
+    },
+    "annual-compliance": {
+      "title": "Annual Compliance Services",
+      "shortTitle": "Annual Compliance",
+      "description": "Stay compliant with all annual regulatory requirements including ROC filings, tax returns, and statutory audits - ensure your business maintains good standing with authorities.",
+      "category": "compliance",
+      "icon": "FileCheck",
+      "color": "purple",
+      "popular": true,
+      "pricing": {
+        "amount": "12,000",
+        "originalAmount": "15,000",
+        "currency": "₹",
+        "gst": true,
+        "includes": [
+          "Annual return filing",
+          "Financial statements",
+          "Board meeting minutes",
+          "Tax return filing",
+          "Professional charges",
+          "Compliance calendar"
+        ]
+      },
+      "timeline": {
+        "total": "15-20 working days",
+        "steps": [
+          { "name": "Document Collection", "duration": "3-4 days" },
+          { "name": "Financial Preparation", "duration": "5-7 days" },
+          { "name": "Board Meeting", "duration": "2-3 days" },
+          { "name": "Filing", "duration": "5-7 days" }
+        ]
+      },
+      "whatIs": {
+        "title": "What are Annual Compliances?",
+        "description": "Annual compliances are mandatory requirements that businesses must fulfill with various regulatory authorities including ROC, Income Tax Department, and GST Department. These include filing annual returns, financial statements, tax returns, and conducting statutory audits."
+      },
+      "keyFeatures": [
+        "ROC compliance",
+        "Tax return filing",
+        "Financial statements",
+        "Board meetings",
+        "Statutory audits",
+        "Compliance tracking"
+      ],
+      "idealFor": [
+        "Private Limited Companies",
+        "Public Limited Companies",
+        "One Person Companies",
+        "LLPs",
+        "Small Companies",
+        "Startups"
+      ],
+      "process": [
+        {
+          "step": 1,
+          "title": "Document Collection",
+          "description": "Gather financial statements, bank statements, and other required documents."
+        },
+        {
+          "step": 2,
+          "title": "Financial Preparation",
+          "description": "Prepare and review financial statements and annual returns."
+        },
+        {
+          "step": 3,
+          "title": "Board Meeting",
+          "description": "Conduct board meeting and prepare minutes."
+        },
+        {
+          "step": 4,
+          "title": "Return Filing",
+          "description": "File annual returns with ROC and tax returns with ITD."
+        },
+        {
+          "step": 5,
+          "title": "Post-filing Support",
+          "description": "Provide filing acknowledgments and handle any queries."
+        }
+      ],
+      "requiredDocuments": {
+        "forCompany": [
+          "Financial statements",
+          "Bank statements",
+          "Board meeting minutes",
+          "Shareholder details",
+          "Director details",
+          "Previous year's returns"
+        ],
+        "forFiling": [
+          "Digital signature certificate",
+          "Board resolution",
+          "Auditor's report",
+          "Annual return form",
+          "Financial statements",
+          "Director's report"
+        ]
+      },
+      "faqs": [
+        {
+          "question": "What is the due date for filing annual returns?",
+          "answer": "Annual returns must be filed within 60 days from the date of Annual General Meeting (AGM). For companies requiring audit, the due date is 30 days from AGM."
+        },
+        {
+          "question": "What happens if I miss the filing deadline?",
+          "answer": "Late filing attracts additional fees and penalties. For ROC filings, the late fee is ₹100 per day. For tax returns, there's a penalty of up to ₹10,000."
+        },
+        {
+          "question": "Do I need to conduct board meetings?",
+          "answer": "Yes, companies must conduct at least 4 board meetings in a year, with a maximum gap of 120 days between two meetings. Small companies and OPCs need only 2 meetings."
+        },
+        {
+          "question": "What are the key annual compliance requirements?",
+          "answer": "Key requirements include filing annual returns, financial statements, tax returns, conducting board meetings, maintaining statutory registers, and complying with audit requirements."
+        }
+      ]
+    },
+    "tds-filing": {
+      "title": "TDS Return Filing Services",
+      "shortTitle": "TDS Filing",
+      "description": "Ensure accurate and timely TDS return filing with our expert services - stay compliant with tax regulations and avoid penalties.",
+      "category": "tax-compliance",
+      "icon": "FileText",
+      "color": "blue",
+      "popular": true,
+      "pricing": {
+        "amount": "1,999",
+        "originalAmount": "2,999",
+        "currency": "₹",
+        "gst": true,
+        "includes": [
+          "TDS return preparation",
+          "Form 24Q/26Q/27Q filing",
+          "Challan verification",
+          "TDS certificate generation",
+          "Professional charges",
+          "Post-filing support"
+        ]
+      },
+      "timeline": {
+        "total": "3-5 working days",
+        "steps": [
+          { "name": "Document Collection", "duration": "1-2 days" },
+          { "name": "Data Processing", "duration": "1-2 days" },
+          { "name": "Return Filing", "duration": "1 day" },
+          { "name": "Certificate Generation", "duration": "1 day" }
+        ]
+      },
+      "whatIs": {
+        "title": "What is TDS Return Filing?",
+        "description": "TDS (Tax Deducted at Source) return filing is the process of submitting details of tax deducted by a person/company to the Income Tax Department. It's mandatory for all entities that deduct TDS while making payments to vendors, employees, or other parties."
+      },
+      "keyFeatures": [
+        "Quarterly filing",
+        "Form 24Q/26Q/27Q",
+        "Challan verification",
+        "TDS certificates",
+        "Error-free returns",
+        "Timely filing"
+      ],
+      "idealFor": [
+        "Companies",
+        "LLPs",
+        "Partnership firms",
+        "Proprietorships",
+        "Government organizations",
+        "Educational institutions"
+      ],
+      "process": [
+        {
+          "step": 1,
+          "title": "Document Collection",
+          "description": "Gather TDS challans, payment details, and PAN information of deductees."
+        },
+        {
+          "step": 2,
+          "title": "Data Processing",
+          "description": "Process and verify TDS data, challans, and payment details."
+        },
+        {
+          "step": 3,
+          "title": "Return Preparation",
+          "description": "Prepare TDS return in the correct format (24Q/26Q/27Q)."
+        },
+        {
+          "step": 4,
+          "title": "Filing",
+          "description": "File TDS return and generate acknowledgment."
+        },
+        {
+          "step": 5,
+          "title": "Certificate Generation",
+          "description": "Generate and issue TDS certificates to deductees."
+        }
+      ],
+      "requiredDocuments": {
+        "forFiling": [
+          "TDS challans",
+          "PAN details of deductees",
+          "Payment details",
+          "Previous returns",
+          "Digital signature",
+          "Bank statements"
+        ],
+        "forVerification": [
+          "TAN details",
+          "Organization details",
+          "Payment records",
+          "Employee details",
+          "Vendor details",
+          "Previous certificates"
+        ]
+      },
+      "faqs": [
+        {
+          "question": "What are the due dates for TDS filing?",
+          "answer": "Q1 (Apr-Jun): July 31st, Q2 (Jul-Sep): October 31st, Q3 (Oct-Dec): January 31st, Q4 (Jan-Mar): May 31st."
+        },
+        {
+          "question": "What happens if I miss the filing deadline?",
+          "answer": "Late filing attracts a penalty of ₹200 per day until the return is filed, subject to a maximum of the TDS amount. Interest at 1.5% per month is also applicable."
+        },
+        {
+          "question": "Which TDS return form should I use?",
+          "answer": "Form 24Q for salary TDS, Form 26Q for non-salary TDS, Form 27Q for TDS on payments to non-residents, and Form 27EQ for TCS returns."
+        },
+        {
+          "question": "When should I issue TDS certificates?",
+          "answer": "TDS certificates (Form 16/16A) should be issued to deductees within 15 days from the due date of filing the return, but not later than June 15th of the following financial year."
+        }
+      ]
+    },
+    "gst-cancellation": {
+      "title": "GST Registration Cancellation Services",
+      "shortTitle": "GST Cancellation",
+      "description": "Cancel your GST registration smoothly with our expert services - handle the process efficiently whether due to business closure, transfer, or other reasons.",
+      "category": "tax-compliance",
+      "icon": "FileX",
+      "color": "red",
+      "popular": true,
+      "pricing": {
+        "amount": "2,999",
+        "originalAmount": "3,999",
+        "currency": "₹",
+        "gst": true,
+        "includes": [
+          "Cancellation application",
+          "Final return filing",
+          "Document preparation",
+          "Government liaison",
+          "Professional charges",
+          "Post-cancellation support"
+        ]
+      },
+      "timeline": {
+        "total": "15-20 working days",
+        "steps": [
+          { "name": "Document Collection", "duration": "2-3 days" },
+          { "name": "Final Return", "duration": "3-5 days" },
+          { "name": "Application Filing", "duration": "5-7 days" },
+          { "name": "Cancellation", "duration": "5-7 days" }
+        ]
+      },
+      "whatIs": {
+        "title": "What is GST Cancellation?",
+        "description": "GST cancellation is the process of surrendering your GST registration when you no longer need it. This could be due to business closure, transfer of business, change in business structure, or when turnover falls below the threshold limit."
+      },
+      "keyFeatures": [
+        "Smooth cancellation",
+        "Final return filing",
+        "Document preparation",
+        "Government liaison",
+        "Compliance check",
+        "Post-cancellation support"
+      ],
+      "idealFor": [
+        "Closing businesses",
+        "Transferring businesses",
+        "Below threshold businesses",
+        "Changing business structure",
+        "Merging entities",
+        "Discontinuing operations"
+      ],
+      "process": [
+        {
+          "step": 1,
+          "title": "Initial Assessment",
+          "description": "Review business status and reason for cancellation."
+        },
+        {
+          "step": 2,
+          "title": "Final Return Filing",
+          "description": "File final GST returns and clear all pending dues."
+        },
+        {
+          "step": 3,
+          "title": "Application Preparation",
+          "description": "Prepare cancellation application with required documents."
+        },
+        {
+          "step": 4,
+          "title": "Cancellation Filing",
+          "description": "Submit cancellation application to GST department."
+        },
+        {
+          "step": 5,
+          "title": "Post-cancellation",
+          "description": "Handle any queries and provide cancellation certificate."
+        }
+      ],
+      "requiredDocuments": {
+        "forCancellation": [
+          "GST registration certificate",
+          "Final GST returns",
+          "Stock statement",
+          "Bank statements",
+          "Business closure proof",
+          "Authorization letter"
+        ],
+        "forVerification": [
+          "PAN Card",
+          "Aadhaar Card",
+          "Business proof",
+          "Address proof",
+          "Previous returns",
+          "Payment challans"
+        ]
+      },
+      "faqs": [
+        {
+          "question": "When can I apply for GST cancellation?",
+          "answer": "You can apply for cancellation when your business is closing, transferring, merging, or when your turnover falls below the threshold limit. You can also apply if you're changing your business structure."
+        },
+        {
+          "question": "What happens to pending GST returns?",
+          "answer": "All pending GST returns must be filed before cancellation. This includes GSTR-1, GSTR-3B, and annual returns. Any pending tax must also be paid."
+        },
+        {
+          "question": "Can I cancel GST registration voluntarily?",
+          "answer": "Yes, you can voluntarily cancel your GST registration if your turnover is below the threshold limit or if you're closing your business. However, you must file all pending returns and clear all dues."
+        },
+        {
+          "question": "What happens to input tax credit after cancellation?",
+          "answer": "Any unutilized input tax credit must be reversed and paid to the government at the time of cancellation. This should be reflected in your final return."
+        }
+      ]
+    },
+    "trademark-objection": {
+      "title": "Trademark Objection Response Services",
+      "shortTitle": "Trademark Objection",
+      "description": "Handle trademark objections effectively with our expert services - respond to examination reports and overcome objections to secure your trademark registration.",
+      "category": "intellectual-property",
+      "icon": "ShieldAlert",
+      "color": "orange",
+      "popular": true,
+      "pricing": {
+        "amount": "4,999",
+        "originalAmount": "6,999",
+        "currency": "₹",
+        "gst": true,
+        "includes": [
+          "Objection analysis",
+          "Response drafting",
+          "Document preparation",
+          "Government filing",
+          "Professional charges",
+          "Follow-up support"
+        ]
+      },
+      "timeline": {
+        "total": "10-15 working days",
+        "steps": [
+          { "name": "Analysis", "duration": "2-3 days" },
+          { "name": "Response Preparation", "duration": "3-5 days" },
+          { "name": "Document Filing", "duration": "2-3 days" },
+          { "name": "Follow-up", "duration": "3-5 days" }
+        ]
+      },
+      "whatIs": {
+        "title": "What is Trademark Objection?",
+        "description": "Trademark objection is a formal notice from the Trademark Office raising concerns about your trademark application. It's not a rejection but an opportunity to address specific issues and provide additional information to support your application."
+      },
+      "keyFeatures": [
+        "Expert analysis",
+        "Strategic response",
+        "Document preparation",
+        "Government liaison",
+        "Legal support",
+        "Follow-up handling"
+      ],
+      "idealFor": [
+        "Trademark applicants",
+        "Brand owners",
+        "Startups",
+        "Businesses",
+        "Entrepreneurs",
+        "IP holders"
+      ],
+      "process": [
+        {
+          "step": 1,
+          "title": "Objection Analysis",
+          "description": "Review examination report and identify key objections."
+        },
+        {
+          "step": 2,
+          "title": "Response Strategy",
+          "description": "Develop strategy to address each objection effectively."
+        },
+        {
+          "step": 3,
+          "title": "Response Preparation",
+          "description": "Draft detailed response with supporting documents."
+        },
+        {
+          "step": 4,
+          "title": "Filing",
+          "description": "Submit response to Trademark Office."
+        },
+        {
+          "step": 5,
+          "title": "Follow-up",
+          "description": "Monitor status and handle any additional queries."
+        }
+      ],
+      "requiredDocuments": {
+        "forResponse": [
+          "Examination report",
+          "Original application",
+          "Supporting documents",
+          "Evidence of use",
+          "Prior registrations",
+          "Business proof"
+        ],
+        "forVerification": [
+          "Trademark details",
+          "Business registration",
+          "User affidavit",
+          "Previous correspondence",
+          "Market presence proof",
+          "Industry reports"
+        ]
+      },
+      "faqs": [
+        {
+          "question": "What are common grounds for trademark objection?",
+          "answer": "Common grounds include similarity with existing marks, descriptive nature, lack of distinctiveness, offensive content, or missing documentation. Each objection needs to be addressed specifically."
+        },
+        {
+          "question": "What is the time limit to respond to an objection?",
+          "answer": "You must respond within 30 days from the date of the examination report. This period can be extended by 30 days with a valid request and payment of extension fee."
+        },
+        {
+          "question": "What happens if I don't respond to the objection?",
+          "answer": "If you don't respond within the specified time, your application will be abandoned. You'll need to file a fresh application if you want to register the trademark."
+        },
+        {
+          "question": "Can I modify my trademark after receiving an objection?",
+          "answer": "Yes, you can modify your trademark to address objections, but significant changes may require a fresh application. Minor modifications can be made during the response process."
+        }
+      ]
+    },
+    "trademark-search": {
+      "title": "Trademark Search & Analysis Services",
+      "shortTitle": "Trademark Search",
+      "description": "Conduct thorough trademark searches before registration - identify potential conflicts, assess registrability, and make informed decisions about your brand protection strategy.",
+      "category": "intellectual-property",
+      "icon": "Search",
+      "color": "blue",
+      "popular": true,
+      "pricing": {
+        "amount": "2,999",
+        "originalAmount": "3,999",
+        "currency": "₹",
+        "gst": true,
+        "includes": [
+          "Comprehensive search",
+          "Similarity analysis",
+          "Risk assessment",
+          "Detailed report",
+          "Expert consultation",
+          "Registration guidance"
+        ]
+      },
+      "timeline": {
+        "total": "3-5 working days",
+        "steps": [
+          { "name": "Initial Search", "duration": "1-2 days" },
+          { "name": "Detailed Analysis", "duration": "1-2 days" },
+          { "name": "Report Preparation", "duration": "1 day" },
+          { "name": "Consultation", "duration": "1 day" }
+        ]
+      },
+      "whatIs": {
+        "title": "What is Trademark Search?",
+        "description": "Trademark search is a comprehensive analysis of existing trademarks to identify potential conflicts and assess the registrability of your proposed mark. It helps avoid rejection and legal disputes by checking similarity with existing marks across various classes."
+      },
+      "keyFeatures": [
+        "Comprehensive search",
+        "Similarity analysis",
+        "Risk assessment",
+        "Expert consultation",
+        "Detailed reporting",
+        "Registration guidance"
+      ],
+      "idealFor": [
+        "New businesses",
+        "Brand owners",
+        "Startups",
+        "Entrepreneurs",
+        "Product launches",
+        "Service providers"
+      ],
+      "process": [
+        {
+          "step": 1,
+          "title": "Initial Search",
+          "description": "Conduct preliminary search across trademark databases."
+        },
+        {
+          "step": 2,
+          "title": "Detailed Analysis",
+          "description": "Analyze similar marks and potential conflicts."
+        },
+        {
+          "step": 3,
+          "title": "Risk Assessment",
+          "description": "Evaluate registration risks and challenges."
+        },
+        {
+          "step": 4,
+          "title": "Report Preparation",
+          "description": "Prepare detailed search report with findings."
+        },
+        {
+          "step": 5,
+          "title": "Consultation",
+          "description": "Provide expert guidance on next steps."
+        }
+      ],
+      "requiredDocuments": {
+        "forSearch": [
+          "Proposed trademark",
+          "Business details",
+          "Product/service description",
+          "Target market",
+          "Industry information",
+          "Geographic scope"
+        ],
+        "forVerification": [
+          "Business registration",
+          "Brand guidelines",
+          "Market presence",
+          "Previous trademarks",
+          "Industry classification",
+          "Usage evidence"
+        ]
+      },
+      "faqs": [
+        {
+          "question": "Why is trademark search important?",
+          "answer": "Trademark search helps identify potential conflicts before filing, saving time and money. It reduces the risk of rejection and legal disputes, ensuring a smoother registration process."
+        },
+        {
+          "question": "What types of searches are conducted?",
+          "answer": "We conduct phonetic, visual, and conceptual similarity searches across all relevant classes. This includes exact matches, similar marks, and marks that might cause confusion."
+        },
+        {
+          "question": "Can I proceed if similar marks exist?",
+          "answer": "Similar marks don't always prevent registration. We analyze factors like class difference, market overlap, and distinctiveness to assess if your mark can be registered."
+        },
+        {
+          "question": "What happens after the search?",
+          "answer": "Based on the search results, we provide a detailed report and consultation on whether to proceed with registration, modify the mark, or consider alternative options."
+        }
+      ]
+    },
+    "iec-license": {
+      "title": "Import Export Code (IEC) Registration Services",
+      "shortTitle": "IEC License",
+      "description": "Obtain your Import Export Code (IEC) registration smoothly - essential for international trade, we handle the entire process from application to issuance.",
+      "category": "business-registration",
+      "icon": "Globe",
+      "color": "green",
+      "popular": true,
+      "pricing": {
+        "amount": "1,999",
+        "originalAmount": "2,999",
+        "currency": "₹",
+        "gst": true,
+        "includes": [
+          "Application preparation",
+          "Document processing",
+          "Government filing",
+          "IEC issuance",
+          "Professional charges",
+          "Post-registration support"
+        ]
+      },
+      "timeline": {
+        "total": "7-10 working days",
+        "steps": [
+          { "name": "Document Collection", "duration": "2-3 days" },
+          { "name": "Application Filing", "duration": "2-3 days" },
+          { "name": "Processing", "duration": "2-3 days" },
+          { "name": "IEC Issuance", "duration": "1-2 days" }
+        ]
+      },
+      "whatIs": {
+        "title": "What is IEC Registration?",
+        "description": "Import Export Code (IEC) is a unique 10-digit code issued by the Directorate General of Foreign Trade (DGFT) to businesses engaged in import/export activities. It's mandatory for international trade and serves as a primary business identification number for customs."
+      },
+      "keyFeatures": [
+        "Quick processing",
+        "Expert guidance",
+        "Document preparation",
+        "Government liaison",
+        "Lifetime validity",
+        "Post-registration support"
+      ],
+      "idealFor": [
+        "Importers",
+        "Exporters",
+        "Trading companies",
+        "Manufacturers",
+        "Service providers",
+        "E-commerce businesses"
+      ],
+      "process": [
+        {
+          "step": 1,
+          "title": "Document Collection",
+          "description": "Gather required documents and information."
+        },
+        {
+          "step": 2,
+          "title": "Application Preparation",
+          "description": "Prepare and verify IEC application."
+        },
+        {
+          "step": 3,
+          "title": "Filing",
+          "description": "Submit application to DGFT."
+        },
+        {
+          "step": 4,
+          "title": "Processing",
+          "description": "Monitor application status."
+        },
+        {
+          "step": 5,
+          "title": "IEC Issuance",
+          "description": "Receive and verify IEC certificate."
+        }
+      ],
+      "requiredDocuments": {
+        "forRegistration": [
+          "PAN Card",
+          "Aadhaar Card",
+          "Bank statement",
+          "Address proof",
+          "Business proof",
+          "Digital signature"
+        ],
+        "forVerification": [
+          "Business registration",
+          "Bank details",
+          "Office address",
+          "Contact information",
+          "Business type",
+          "Trade details"
+        ]
+      },
+      "faqs": [
+        {
+          "question": "Is IEC registration mandatory?",
+          "answer": "Yes, IEC registration is mandatory for any business engaged in import or export activities. It's required for customs clearance and international trade operations."
+        },
+        {
+          "question": "What is the validity of IEC?",
+          "answer": "IEC registration is valid for a lifetime and doesn't require renewal. However, it can be suspended or cancelled if the business violates foreign trade regulations."
+        },
+        {
+          "question": "Can I apply for IEC without a business?",
+          "answer": "No, you need to have a registered business entity (company, LLP, partnership, or proprietorship) to apply for IEC registration."
+        },
+        {
+          "question": "What are the benefits of IEC registration?",
+          "answer": "IEC enables international trade, customs clearance, foreign exchange transactions, and access to various export promotion schemes and benefits from the government."
+        }
+      ]
+    },
+    "digital-signature": {
+      "title": "Digital Signature Certificate (DSC) Services",
+      "shortTitle": "Digital Signature",
+      "description": "Get your Digital Signature Certificate (DSC) quickly - essential for e-filing, online transactions, and secure digital communications. We offer Class 2 and Class 3 DSCs for individuals and organizations.",
+      "category": "business-registration",
+      "icon": "Fingerprint",
+      "color": "purple",
+      "popular": true,
+      "pricing": {
+        "amount": "1,499",
+        "originalAmount": "1,999",
+        "currency": "₹",
+        "gst": true,
+        "includes": [
+          "DSC application",
+          "Document processing",
+          "Certificate issuance",
+          "Token delivery",
+          "Installation support",
+          "1-year validity"
+        ]
+      },
+      "timeline": {
+        "total": "2-3 working days",
+        "steps": [
+          { "name": "Document Collection", "duration": "1 day" },
+          { "name": "Application Filing", "duration": "1 day" },
+          { "name": "Verification", "duration": "1 day" },
+          { "name": "Issuance", "duration": "1 day" }
+        ]
+      },
+      "whatIs": {
+        "title": "What is Digital Signature Certificate?",
+        "description": "A Digital Signature Certificate (DSC) is a secure digital key that authenticates the identity of the certificate holder. It's used for signing documents electronically, filing returns, and conducting secure online transactions. DSCs are issued by Certifying Authorities licensed by the Controller of Certifying Authorities (CCA)."
+      },
+      "keyFeatures": [
+        "Quick processing",
+        "Secure authentication",
+        "Legal validity",
+        "Easy installation",
+        "Technical support",
+        "Multiple uses"
+      ],
+      "idealFor": [
+        "Companies",
+        "Directors",
+        "Professionals",
+        "Business owners",
+        "Government agencies",
+        "E-commerce businesses"
+      ],
+      "process": [
+        {
+          "step": 1,
+          "title": "Document Collection",
+          "description": "Gather required identity and address proofs."
+        },
+        {
+          "step": 2,
+          "title": "Application Filing",
+          "description": "Submit application to Certifying Authority."
+        },
+        {
+          "step": 3,
+          "title": "Verification",
+          "description": "Verify applicant's identity and documents."
+        },
+        {
+          "step": 4,
+          "title": "Issuance",
+          "description": "Generate and issue DSC."
+        },
+        {
+          "step": 5,
+          "title": "Installation",
+          "description": "Install DSC and provide usage guidance."
+        }
+      ],
+      "requiredDocuments": {
+        "forIndividuals": [
+          "PAN Card",
+          "Aadhaar Card",
+          "Address proof",
+          "Passport photo",
+          "Email ID",
+          "Mobile number"
+        ],
+        "forOrganizations": [
+          "Company registration",
+          "Board resolution",
+          "Authorized signatory ID",
+          "Address proof",
+          "Email ID",
+          "Mobile number"
+        ]
+      },
+      "faqs": [
+        {
+          "question": "What are the types of DSCs available?",
+          "answer": "We offer Class 2 and Class 3 DSCs. Class 2 is for e-filing and basic transactions, while Class 3 is for high-value transactions and sensitive communications. Both are valid for 1-2 years."
+        },
+        {
+          "question": "Where can I use my DSC?",
+          "answer": "DSC can be used for e-filing tax returns, company filings, e-tendering, e-procurement, online banking, and secure email communications. It's mandatory for many government and business transactions."
+        },
+        {
+          "question": "What happens if my DSC expires?",
+          "answer": "You'll need to renew your DSC before expiry to maintain continuous access to e-services. We can help you with the renewal process to ensure uninterrupted service."
+        },
+        {
+          "question": "Is DSC installation complicated?",
+          "answer": "No, we provide step-by-step installation guidance and technical support. The process is simple and can be completed in minutes. We also offer remote assistance if needed."
+        }
+      ]
+    },
+    "shop-establishment": {
+      "title": "Shop & Establishment License Services",
+      "shortTitle": "Shop Establishment",
+      "description": "Obtain your Shop & Establishment license efficiently - mandatory for all commercial establishments, we handle the entire registration process from application to issuance.",
+      "category": "business-registration",
+      "icon": "Store",
+      "color": "blue",
+      "popular": true,
+      "pricing": {
+        "amount": "2,999",
+        "originalAmount": "3,999",
+        "currency": "₹",
+        "gst": true,
+        "includes": [
+          "Application preparation",
+          "Document processing",
+          "Government filing",
+          "License issuance",
+          "Professional charges",
+          "Renewal support"
+        ]
+      },
+      "timeline": {
+        "total": "15-20 working days",
+        "steps": [
+          { "name": "Document Collection", "duration": "2-3 days" },
+          { "name": "Application Filing", "duration": "5-7 days" },
+          { "name": "Inspection", "duration": "5-7 days" },
+          { "name": "License Issuance", "duration": "3-5 days" }
+        ]
+      },
+      "whatIs": {
+        "title": "What is Shop & Establishment License?",
+        "description": "Shop & Establishment License is a mandatory registration for all commercial establishments, including shops, offices, restaurants, and other business premises. It's governed by state-specific Shop & Establishment Acts and ensures compliance with labor laws and working conditions."
+      },
+      "keyFeatures": [
+        "State-specific compliance",
+        "Quick processing",
+        "Expert guidance",
+        "Document preparation",
+        "Government liaison",
+        "Renewal support"
+      ],
+      "idealFor": [
+        "Retail shops",
+        "Restaurants",
+        "Offices",
+        "Service centers",
+        "Commercial establishments",
+        "Business premises"
+      ],
+      "process": [
+        {
+          "step": 1,
+          "title": "Document Collection",
+          "description": "Gather required documents and business details."
+        },
+        {
+          "step": 2,
+          "title": "Application Preparation",
+          "description": "Prepare and verify application forms."
+        },
+        {
+          "step": 3,
+          "title": "Filing",
+          "description": "Submit application to local authority."
+        },
+        {
+          "step": 4,
+          "title": "Inspection",
+          "description": "Coordinate with inspection officer."
+        },
+        {
+          "step": 5,
+          "title": "License Issuance",
+          "description": "Receive and verify license."
+        }
+      ],
+      "requiredDocuments": {
+        "forRegistration": [
+          "Business proof",
+          "Address proof",
+          "ID proof",
+          "Rent agreement",
+          "NOC from owner",
+          "Business plan"
+        ],
+        "forVerification": [
+          "Business registration",
+          "Property documents",
+          "Employee details",
+          "Working hours",
+          "Business type",
+          "Contact information"
+        ]
+      },
+      "faqs": [
+        {
+          "question": "Is Shop & Establishment license mandatory?",
+          "answer": "Yes, it's mandatory for all commercial establishments, including shops, offices, restaurants, and other business premises. It's required before starting operations."
+        },
+        {
+          "question": "What is the validity of the license?",
+          "answer": "The license is typically valid for 1-5 years, depending on the state. It needs to be renewed before expiry to maintain compliance."
+        },
+        {
+          "question": "What are the penalties for non-compliance?",
+          "answer": "Operating without a license can attract penalties, fines, and even closure of the establishment. The exact penalties vary by state."
+        },
+        {
+          "question": "Can I apply for multiple branches?",
+          "answer": "Yes, you need separate licenses for each branch or establishment. We can help you obtain licenses for all your locations."
+        }
+      ]
+    },
+    "professional-tax": {
+      "title": "Professional Tax Registration Services",
+      "shortTitle": "Professional Tax",
+      "description": "Get your Professional Tax registration done efficiently - mandatory for all professionals and businesses, we handle the entire process from application to compliance.",
+      "category": "tax-compliance",
+      "icon": "Receipt",
+      "color": "orange",
+      "popular": true,
+      "pricing": {
+        "amount": "1,999",
+        "originalAmount": "2,999",
+        "currency": "₹",
+        "gst": true,
+        "includes": [
+          "Registration application",
+          "Document processing",
+          "Government filing",
+          "Certificate issuance",
+          "Professional charges",
+          "Compliance support"
+        ]
+      },
+      "timeline": {
+        "total": "7-10 working days",
+        "steps": [
+          { "name": "Document Collection", "duration": "2-3 days" },
+          { "name": "Application Filing", "duration": "2-3 days" },
+          { "name": "Processing", "duration": "2-3 days" },
+          { "name": "Certificate Issuance", "duration": "1-2 days" }
+        ]
+      },
+      "whatIs": {
+        "title": "What is Professional Tax?",
+        "description": "Professional Tax is a state-level tax levied on professionals, traders, and employees. It's mandatory in most states and is collected by the state government. The tax amount varies by state and income level, with a maximum annual cap of ₹2,500."
+      },
+      "keyFeatures": [
+        "Quick registration",
+        "State-specific compliance",
+        "Expert guidance",
+        "Document preparation",
+        "Government liaison",
+        "Ongoing support"
+      ],
+      "idealFor": [
+        "Companies",
+        "Professionals",
+        "Business owners",
+        "Employees",
+        "Traders",
+        "Service providers"
+      ],
+      "process": [
+        {
+          "step": 1,
+          "title": "Document Collection",
+          "description": "Gather required documents and business details."
+        },
+        {
+          "step": 2,
+          "title": "Application Filing",
+          "description": "Prepare and verify registration forms."
+        },
+        {
+          "step": 3,
+          "title": "Filing",
+          "description": "Submit application to state authority."
+        },
+        {
+          "step": 4,
+          "title": "Processing",
+          "description": "Monitor application status."
+        },
+        {
+          "step": 5,
+          "title": "Certificate Issuance",
+          "description": "Receive and verify registration certificate."
+        }
+      ],
+      "requiredDocuments": {
+        "forRegistration": [
+          "PAN Card",
+          "Business proof",
+          "Address proof",
+          "Employee details",
+          "Bank statement",
+          "Previous returns"
+        ],
+        "forVerification": [
+          "Business registration",
+          "Employee records",
+          "Salary structure",
+          "State-specific documents",
+          "Contact information",
+          "Bank details"
+        ]
+      },
+      "faqs": [
+        {
+          "question": "Is Professional Tax mandatory?",
+          "answer": "Yes, Professional Tax is mandatory in most states for businesses and professionals. It's a state-level tax that must be paid by employers on behalf of their employees."
+        },
+        {
+          "question": "What is the tax amount?",
+          "answer": "The tax amount varies by state and income level. It's typically between ₹200-₹2,500 per year per employee. The exact amount depends on the state's slab rates."
+        },
+        {
+          "question": "When is the tax due?",
+          "answer": "Professional Tax is usually paid in two installments: April-September and October-March. The due dates vary by state, but generally fall in May and November."
+        },
+        {
+          "question": "What are the penalties for non-compliance?",
+          "answer": "Late payment or non-payment can attract penalties, interest, and legal action. The exact penalties vary by state but can include fines and prosecution."
+        }
+      ]
     }
 }
   
