@@ -12,6 +12,7 @@ import {
   Info,
   AlertCircle,
   CheckCircle,
+  ArrowLeft,
 } from "lucide-react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -21,6 +22,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Badge } from "@/components/ui/badge"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
+import Link from "next/link"
 
 export default function PPFCalculator() {
   const [annualInvestment, setAnnualInvestment] = useState(150000)
@@ -125,6 +127,12 @@ export default function PPFCalculator() {
 
   return (
     <div className="container mx-auto px-4 py-8">
+      <Link href="/calculators">
+        <Button variant="ghost" className="mb-4">
+          <ArrowLeft className="w-4 h-4 mr-2" />
+          Back to Calculators
+        </Button>
+      </Link>
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}

@@ -10,10 +10,11 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Badge } from "@/components/ui/badge"
 import { Calendar } from "@/components/ui/calendar"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
-import { Calculator, CalendarIcon, AlertTriangle, FileText, BookOpen, Clock } from "lucide-react"
+import { Calculator, CalendarIcon, AlertTriangle, FileText, BookOpen, Clock, ArrowLeft } from "lucide-react"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import { format } from "date-fns"
 import { cn } from "@/lib/utils"
+import Link from "next/link"
 
 interface InterestCalculation {
   taxLiability: number
@@ -25,7 +26,7 @@ interface InterestCalculation {
   totalPayable: number
 }
 
-export function Gstr3bInterestCalculator() {
+export default function GSTR3BInterestCalculator() {
   const [returnPeriod, setReturnPeriod] = useState("")
   const [dueDate, setDueDate] = useState<Date>()
   const [filingDate, setFilingDate] = useState<Date>()
@@ -123,6 +124,12 @@ export function Gstr3bInterestCalculator() {
 
   return (
     <div className="container mx-auto px-4 py-8">
+      <Link href="/calculators">
+        <Button variant="ghost" className="mb-4">
+          <ArrowLeft className="w-4 h-4 mr-2" />
+          Back to Calculators
+        </Button>
+      </Link>
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="text-center mb-8">

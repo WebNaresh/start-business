@@ -8,7 +8,7 @@ import WhatsAppButton from "@/components/whatsapp-button"
 import { ThemeProvider } from "@/components/theme-provider"
 import Chatbot from "@/components/Chatbot"
 import { UIProvider } from "@/context/ui-context"
-import Head from "next/head"
+
 import Script from "next/script"
 import { Analytics } from "@vercel/analytics/next"
 

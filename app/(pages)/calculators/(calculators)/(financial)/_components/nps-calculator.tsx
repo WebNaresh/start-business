@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { motion } from "framer-motion"
-import { Calculator, BookOpen, HelpCircle, Lightbulb, PiggyBank, TrendingUp, Shield, AlertCircle } from "lucide-react"
+import { Calculator, BookOpen, HelpCircle, Lightbulb, PiggyBank, TrendingUp, Shield, AlertCircle, ArrowLeft } from "lucide-react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Label } from "@/components/ui/label"
@@ -12,6 +12,8 @@ import { Badge } from "@/components/ui/badge"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { Button } from "@/components/ui/button"
+import Link from "next/link"
 
 export default function NPSCalculator() {
   const [monthlyContribution, setMonthlyContribution] = useState(5000)
@@ -169,6 +171,12 @@ export default function NPSCalculator() {
 
   return (
     <div className="container mx-auto px-4 py-8">
+      <Link href="/calculators">
+        <Button variant="ghost" className="mb-4">
+          <ArrowLeft className="w-4 h-4 mr-2" />
+          Back to Calculators
+        </Button>
+      </Link>
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}

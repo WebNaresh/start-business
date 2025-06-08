@@ -7,8 +7,10 @@ import { Label } from "@/components/ui/label"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Badge } from "@/components/ui/badge"
-import { Calculator, FileText, BookOpen, AlertCircle, Percent } from "lucide-react"
+import { Calculator, FileText, BookOpen, AlertCircle, Percent, ArrowLeft } from "lucide-react"
 import { Alert, AlertDescription } from "@/components/ui/alert"
+import Link from "next/link"
+import { Button } from "@/components/ui/button"
 
 interface TdsSection {
   section: string
@@ -138,7 +140,7 @@ const tdsRates: TdsSection[] = [
   },
 ]
 
-export function TdsCalculator() {
+export default function TDSCalculator() {
   const [selectedSection, setSelectedSection] = useState<TdsSection | null>(null)
   const [amount, setAmount] = useState("")
   const [panAvailable, setPanAvailable] = useState("yes")
@@ -194,6 +196,12 @@ export function TdsCalculator() {
 
   return (
     <div className="container mx-auto px-4 py-8">
+      <Link href="/calculators">
+        <Button variant="ghost" className="mb-4">
+          <ArrowLeft className="w-4 h-4 mr-2" />
+          Back to Calculators
+        </Button>
+      </Link>
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="text-center mb-8">

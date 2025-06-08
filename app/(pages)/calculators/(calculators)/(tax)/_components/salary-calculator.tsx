@@ -7,8 +7,11 @@ import { Label } from "@/components/ui/label"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Switch } from "@/components/ui/switch"
-import { Calculator, IndianRupee, PieChart, BookOpen, TrendingUp, Wallet } from "lucide-react"
+import { Calculator, IndianRupee, PieChart, BookOpen, TrendingUp, Wallet, ArrowLeft } from "lucide-react"
 import { Alert, AlertDescription } from "@/components/ui/alert"
+import { Badge } from "@/components/ui/badge"
+import Link from "next/link"
+import { Button } from "@/components/ui/button"
 
 interface SalaryBreakdown {
   grossSalary: number
@@ -247,6 +250,12 @@ export function SalaryCalculator() {
 
   return (
     <div className="container mx-auto px-4 py-8">
+      <Link href="/calculators">
+        <Button variant="ghost" className="mb-4">
+          <ArrowLeft className="w-4 h-4 mr-2" />
+          Back to Calculators
+        </Button>
+      </Link>
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="text-center mb-8">

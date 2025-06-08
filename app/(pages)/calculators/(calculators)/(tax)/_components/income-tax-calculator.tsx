@@ -174,7 +174,7 @@ export default function IncomeTaxCalculator() {
   ]
 
   return (
-    <div className="max-w-6xl mx-auto space-y-8">
+    <div className="container mx-auto px-4 py-8">
       <Link href="/calculators">
         <Button variant="ghost" className="mb-4">
           <ArrowLeft className="w-4 h-4 mr-2" />
