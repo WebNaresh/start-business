@@ -1,4 +1,4 @@
-"use client"
+  "use client"
 
 import type React from "react"
 
@@ -13,10 +13,7 @@ import {
   ArrowRight,
   Star,
   CheckCircle,
-  Clock,
-  Shield,
-  Award,
-  TrendingUp,
+
   Phone,
   Mail,
   User,

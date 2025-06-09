@@ -45,36 +45,36 @@ export default function DocumentsSection({ service }: DocumentsSectionProps) {
   return (
     <section id="documents" className="py-4 bg-white">
       <div className="container mx-auto px-4">
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-5xl mx-auto">
           {/* Header */}
-          <div className="text-center mb-12">
-            <Badge className="mb-4 bg-blue-50 text-blue-600 border-blue-200 px-4 py-2">
-              <FileText className="w-4 h-4 mr-2" />
+          <div className="text-center mb-8">
+            <Badge className="mb-3 bg-blue-50 text-blue-600 border-blue-200 px-3 py-1.5 text-xs">
+              <FileText className="w-3 h-3 mr-1.5" />
               Document Checklist
             </Badge>
-            <h2 className="text-2xl md:text-3xl font-bold text-slate-800 mb-3">Required Documents</h2>
-            <p className="text-sm text-slate-600 max-w-2xl mx-auto">
+            <h2 className="text-xl md:text-2xl font-bold text-slate-800 mb-2">Required Documents</h2>
+            <p className="text-xs text-slate-600 max-w-xl mx-auto">
               Prepare these documents to ensure a smooth registration process
             </p>
           </div>
 
           {/* Documents by Category */}
-          <div className="space-y-8">
+          <div className="space-y-6">
             {Object.entries(service.requiredDocuments || {}).map(([category, documents], categoryIndex) => {
               const CategoryIcon = getCategoryIcon(category)
 
               return (
                 <div
                   key={category}
-                  className="bg-white rounded-2xl p-8 shadow-lg border border-blue-200"
+                  className="bg-white rounded-xl p-6 shadow-md border border-blue-200"
                 >
                   {/* Category Header */}
-                  <div className="flex items-center gap-4 mb-6">
-                    <div className="bg-blue-50 w-12 h-12 rounded-xl flex items-center justify-center">
-                      <CategoryIcon className="w-6 h-6 text-blue-600" />
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="bg-blue-50 w-10 h-10 rounded-lg flex items-center justify-center">
+                      <CategoryIcon className="w-5 h-5 text-blue-600" />
                     </div>
                     <div className="flex-1">
-                      <h3 className="text-base font-bold text-slate-800 capitalize">
+                      <h3 className="text-sm font-bold text-slate-800 capitalize">
                         {category.replace(/([A-Z])/g, " $1").trim()}
                       </h3>
                       <p className="text-xs text-slate-500">
@@ -84,18 +84,18 @@ export default function DocumentsSection({ service }: DocumentsSectionProps) {
                   </div>
 
                   {/* Documents Grid */}
-                  <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                  <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-3">
                     {(documents as string[]).map((doc, docIndex) => {
                       const DocIcon = getDocumentIcon(doc)
 
                       return (
                         <div
                           key={docIndex}
-                          className="p-4 rounded-xl border-2 border-blue-200 hover:border-blue-300 hover:shadow-md transition-all duration-300"
+                          className="p-3 rounded-lg border border-blue-200 hover:border-blue-300 hover:shadow-sm transition-all duration-300"
                         >
-                          <div className="flex items-start gap-3">
-                            <DocIcon className="w-5 h-5 text-blue-600" />
-                            <span className="text-sm text-slate-700 font-medium">
+                          <div className="flex items-start gap-2">
+                            <DocIcon className="w-4 h-4 text-blue-600" />
+                            <span className="text-xs text-slate-700 font-medium">
                               {doc}
                             </span>
                           </div>
@@ -109,11 +109,11 @@ export default function DocumentsSection({ service }: DocumentsSectionProps) {
           </div>
 
           {/* Bottom Message */}
-          <div className="text-center mt-12">
-            <div className="bg-white rounded-xl p-6 shadow-lg border border-blue-200">
-              <h3 className="text-base font-semibold text-slate-800 mb-2">Need Help with Documents?</h3>
-              <p className="text-xs text-slate-600 mb-3">Our experts can guide you through the document preparation process</p>
-              <Badge className="bg-blue-50 text-blue-600 border-blue-200">
+          <div className="text-center mt-8">
+            <div className="bg-white rounded-lg p-4 shadow-md border border-blue-200">
+              <h3 className="text-sm font-semibold text-slate-800 mb-1.5">Need Help with Documents?</h3>
+              <p className="text-xs text-slate-600 mb-2">Our experts can guide you through the document preparation process</p>
+              <Badge className="bg-blue-50 text-blue-600 border-blue-200 text-xs">
                 <Phone className="w-3 h-3 mr-1" />
                 Expert Support Available
               </Badge>
