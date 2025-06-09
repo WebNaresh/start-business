@@ -1,14 +1,10 @@
-import type React from "react"
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import "./globals.css"
+import { UIProvider } from "@/context/ui-context"
+import { ThemeProvider } from "@/components/theme-provider"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
-import WhatsAppButton from "@/components/whatsapp-button"
-import { ThemeProvider } from "@/components/theme-provider"
-import Chatbot from "@/components/Chatbot"
-import { UIProvider } from "@/context/ui-context"
-
 import Script from "next/script"
 import { Analytics } from "@vercel/analytics/next"
 
@@ -85,14 +81,14 @@ export default function RootLayout({
           src="https://www.googletagmanager.com/gtag/js?id=G-2T86HZSNGB"
           strategy="afterInteractive"
         />
-     <Script id="google-analytics" strategy="afterInteractive">
-     {`
-       window.dataLayer = window.dataLayer || [];
-       function gtag(){dataLayer.push(arguments);}
-       gtag('js', new Date());
-       gtag('config', 'G-2T86HZSNGB');
-     `}
-   </Script>
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-2T86HZSNGB');
+          `}
+        </Script>
       </head>
       <body className={inter.className} suppressHydrationWarning>
         <ThemeProvider
@@ -101,16 +97,33 @@ export default function RootLayout({
           enableSystem={false}
           disableTransitionOnChange
         >
-          <Analytics/>
+          <Analytics />
           <div className="relative min-h-screen flex flex-col">
             <UIProvider>
               <Header />
               <main className="flex-1">{children}</main>
               <Footer />
-              <WhatsAppButton />
-              <div className="fixed bottom-4 right-4 z-50">
-                <Chatbot />
-              </div>
+              <a
+                href="tel:+919168499520"
+                className="fixed left-6 bottom-6 z-[8999] flex items-center gap-2 px-4 h-14 rounded-full bg-blue-600 text-white shadow-lg hover:bg-blue-700 transition-all duration-200 hover:scale-105 active:scale-95"
+                aria-label="Call Us"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="w-5 h-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                  />
+                </svg>
+                <span className="font-medium text-sm hidden sm:inline">Call Us Now</span>
+              </a>
             </UIProvider>
           </div>
         </ThemeProvider>

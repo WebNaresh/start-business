@@ -309,8 +309,8 @@ export default function ContactForm() {
         {/* Submit Buttons */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
           <WhatsAppCTAButton className="order-2 sm:order-1">
-            <MessageSquare className="w-4 h-4 mr-2" />
-            Chat on WhatsApp
+          
+            Call Us
           </WhatsAppCTAButton>
           <Button
             type="submit"

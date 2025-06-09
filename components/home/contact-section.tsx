@@ -5,7 +5,7 @@ import { useInView } from "react-intersection-observer"
 import { Mail, MapPin, Phone, MessageSquare } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
-import WhatsAppCTAButton from "@/components/whatsapp-cta-button"
+import CallCTAButton from "@/components/call-cta-button"
 
 export default function ContactSection() {
   const { ref, inView } = useInView({
@@ -24,28 +24,15 @@ export default function ContactSection() {
           >
             <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-3">Get in Touch</h2>
             <p className="text-sm text-slate-600 mb-8 max-w-2xl mx-auto">
-              Have questions about our services? Our experts are here to help you.
+              Have questions about our services? We're here to help. Reach out to us through any of the following channels.
             </p>
             <div className="mb-6 space-y-4">
               <div className="flex items-center">
                 <div className="mr-3 rounded-full bg-blue-100 p-2">
-                  <MessageSquare className="h-5 w-5 text-blue-600" />
-                </div>
-                <a
-                  href="https://wa.me/919699214195"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-slate-700 hover:text-blue-600"
-                >
-                  Chat on WhatsApp
-                </a>
-              </div>
-              <div className="flex items-center">
-                <div className="mr-3 rounded-full bg-blue-100 p-2">
                   <Phone className="h-5 w-5 text-blue-600" />
                 </div>
-                <a href="tel:+919699214195" className="text-slate-700 hover:text-blue-600">
-                  +91 96992 14195
+                <a href="tel:+919168499520" className="text-slate-700 hover:text-blue-600">
+                  +91 91684 99520
                 </a>
               </div>
               <div className="flex items-center">
@@ -172,7 +159,9 @@ export default function ContactSection() {
                 ></textarea>
               </div>
               <div className="flex flex-col sm:flex-row gap-3">
-                <WhatsAppCTAButton className="w-full sm:flex-1">Chat on WhatsApp</WhatsAppCTAButton>
+                <CallCTAButton className="w-full sm:flex-1">
+                  Call Us Now
+                </CallCTAButton>
                 <Button type="submit" className="w-full sm:flex-1 bg-blue-600 hover:bg-blue-700 transition-colors">
                   <span className="mr-2">Send Message</span>
                   <svg

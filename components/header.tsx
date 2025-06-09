@@ -34,6 +34,17 @@ interface Service {
   subServices: SubService[]
 }
 
+interface SubLink {
+  name: string
+  href: string
+}
+
+interface NavLink {
+  name: string
+  href: string
+  subLinks?: SubLink[]
+}
+
 export default function Header() {
   const [mounted, setMounted] = useState(false)
   const [scrolled, setScrolled] = useState(false)
@@ -247,11 +258,17 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
-  const navLinks = [
+  const navLinks: NavLink[] = [
     { name: "Home", href: "/" },
-    { name: "About Us", href: "/about" },
-    { name: "Contact", href: "/contact" },
-    { name: "Tools", href: "/calculators" },
+    { 
+      name: "More",
+      href: "#",
+      subLinks: [
+        { name: "About Us", href: "/about" },
+        { name: "Contact", href: "/contact" },
+        { name: "Tools", href: "/calculators" },
+      ]
+    }
   ]
 
   const isActive = (href: string) => {
@@ -320,26 +337,73 @@ export default function Header() {
           {/* Desktop Navigation with improved hover effects */}
           <nav className="hidden lg:flex items-center space-x-1">
             {navLinks.map((link) => (
-              <Link
-                key={link.name}
-                href={link.href}
-                className={`relative px-3 py-2 text-sm font-medium rounded-md transition-all duration-200 ${
-                  isActive(link.href) 
-                    ? "text-blue-600" 
-                    : "text-slate-700 hover:text-blue-600 hover:bg-blue-50"
-                }`}
+              <div 
+                key={link.name} 
+                className="relative" 
+                onMouseEnter={() => setOpenCategory(link.name)} 
+                onMouseLeave={() => setOpenCategory(null)}
               >
-                {link.name}
-                {isActive(link.href) && (
-                  <motion.div
-                    layoutId="activeIndicator"
-                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-600 rounded-full"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 0.3 }}
-                  />
+                {link.subLinks ? (
+                  <>
+                    <button
+                      className={`relative px-3 py-2 text-sm font-medium rounded-md transition-all duration-200 flex items-center gap-1 ${
+                        isActive(link.href) 
+                          ? "text-blue-600" 
+                          : "text-slate-700 hover:text-blue-600 hover:bg-blue-50"
+                      }`}
+                    >
+                      {link.name}
+                      <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${openCategory === link.name ? "rotate-180" : ""}`} />
+                    </button>
+
+                    <AnimatePresence>
+                      {openCategory === link.name && (
+                        <motion.div
+                          initial={{ opacity: 0, y: 10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: 10 }}
+                          transition={{ duration: 0.2 }}
+                          className="absolute top-full left-0 mt-1 w-[200px] bg-white rounded-xl shadow-xl border border-slate-200 overflow-hidden"
+                        >
+                          <div className="p-2">
+                            <div className="space-y-1">
+                              {link.subLinks.map((subLink) => (
+                                <Link
+                                  key={subLink.href}
+                                  href={subLink.href}
+                                  className="block px-3 py-2 text-sm text-slate-600 hover:text-blue-600 hover:bg-blue-50 rounded-md transition-all duration-200"
+                                >
+                                  {subLink.name}
+                                </Link>
+                              ))}
+                            </div>
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </>
+                ) : (
+                  <Link
+                    href={link.href}
+                    className={`relative px-3 py-2 text-sm font-medium rounded-md transition-all duration-200 ${
+                      isActive(link.href) 
+                        ? "text-blue-600" 
+                        : "text-slate-700 hover:text-blue-600 hover:bg-blue-50"
+                    }`}
+                  >
+                    {link.name}
+                    {isActive(link.href) && (
+                      <motion.div
+                        layoutId="activeIndicator"
+                        className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-600 rounded-full"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 0.3 }}
+                      />
+                    )}
+                  </Link>
                 )}
-              </Link>
+              </div>
             ))}
 
             {/* Service Categories with enhanced dropdown */}
@@ -470,6 +534,63 @@ export default function Header() {
                       </Link>
                     </SheetClose>
 
+                    {/* More dropdown in mobile */}
+                    <div className="space-y-1">
+                      <button
+                        onClick={() => setExpandedMobileCategory(expandedMobileCategory === "More" ? null : "More")}
+                        className={`w-full rounded-md px-4 py-3 text-base font-medium transition-colors flex items-center justify-between ${
+                          isActive("/about") || isActive("/contact") || isActive("/calculators")
+                            ? "bg-blue-50 text-blue-600"
+                            : "text-slate-700 hover:bg-slate-50 hover:text-blue-600"
+                        }`}
+                      >
+                        <span>More</span>
+                        <ChevronDown
+                          className={`w-5 h-5 transition-transform duration-200 ${
+                            expandedMobileCategory === "More" ? "rotate-180" : ""
+                          }`}
+                        />
+                      </button>
+                      <AnimatePresence>
+                        {expandedMobileCategory === "More" && (
+                          <motion.div
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: "auto", opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
+                            transition={{ duration: 0.2 }}
+                            className="overflow-hidden"
+                          >
+                            <div className="pl-4 space-y-1">
+                              <SheetClose asChild>
+                                <Link
+                                  href="/about"
+                                  className="block px-4 py-2.5 text-sm text-slate-600 hover:text-blue-600 hover:bg-blue-50 rounded-md transition-colors"
+                                >
+                                  About Us
+                                </Link>
+                              </SheetClose>
+                              <SheetClose asChild>
+                                <Link
+                                  href="/contact"
+                                  className="block px-4 py-2.5 text-sm text-slate-600 hover:text-blue-600 hover:bg-blue-50 rounded-md transition-colors"
+                                >
+                                  Contact
+                                </Link>
+                              </SheetClose>
+                              <SheetClose asChild>
+                                <Link
+                                  href="/calculators"
+                                  className="block px-4 py-2.5 text-sm text-slate-600 hover:text-blue-600 hover:bg-blue-50 rounded-md transition-colors"
+                                >
+                                  Tools
+                                </Link>
+                              </SheetClose>
+                            </div>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
+
                     {/* Mobile Service Categories */}
                     {serviceCategories.map((category) => (
                       <div key={category.id} className="space-y-1">
@@ -533,22 +654,6 @@ export default function Header() {
                           )}
                         </AnimatePresence>
                       </div>
-                    ))}
-
-                    {/* Other mobile nav links */}
-                    {navLinks.slice(1).map((link) => (
-                      <SheetClose asChild key={link.name}>
-                        <Link
-                          href={link.href}
-                          className={`rounded-md px-4 py-3 text-base font-medium transition-colors ${
-                            isActive(link.href)
-                              ? "bg-blue-50 text-blue-600"
-                              : "text-slate-700 hover:bg-slate-50 hover:text-blue-600"
-                          }`}
-                        >
-                          {link.name}
-                        </Link>
-                      </SheetClose>
                     ))}
                   </nav>
                 </div>

@@ -1,26 +1,17 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { MessageSquare, Phone, Mail, MapPin } from "lucide-react"
-import WhatsAppCTAButton from "@/components/whatsapp-cta-button"
+import { Phone, Mail, MapPin } from "lucide-react"
+import CallCTAButton from "@/components/call-cta-button"
 
 export default function ContactInfo() {
   const contactMethods = [
     {
-      icon: MessageSquare,
-      title: "WhatsApp Chat",
-      description: "Get instant responses to your queries",
-      value: "Chat with us on WhatsApp",
-      href: "https://wa.me/919699214195",
-      color: "bg-green-100 text-green-600",
-      hoverColor: "hover:bg-green-200",
-    },
-    {
       icon: Phone,
       title: "Phone Support",
       description: "Speak directly with our experts",
-      value: "+91 96992 14195",
-      href: "tel:+919699214195",
+      value: "+91 91684 99520",
+      href: "tel:+919168499520",
       color: "bg-blue-100 text-blue-600",
       hoverColor: "hover:bg-blue-200",
     },
@@ -52,8 +43,7 @@ export default function ContactInfo() {
       transition={{ duration: 0.6 }}
       className="space-y-8"
     >
- 
-<h2 className="text-3xl md:text-4xl font-bold text-slate-800 mb-2 flex justify-center">Let's Connect</h2>
+      <h2 className="text-3xl md:text-4xl font-bold text-slate-800 mb-2 flex justify-center">Let's Connect</h2>
       {/* Contact Methods */}
       <div className="space-y-4">
         {contactMethods.map((method, index) => (
@@ -85,20 +75,20 @@ export default function ContactInfo() {
         ))}
       </div>
 
-      {/* WhatsApp CTA */}
+      {/* Call CTA */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6, delay: 0.4 }}
-        className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-6 border border-green-100"
+        className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-6 border border-blue-100"
       >
         <p className="text-sm text-slate-600 mb-4">
-          Need immediate assistance? Our WhatsApp support is available 24/7 for urgent queries.
+          Need immediate assistance? Our phone support is available during business hours.
         </p>
-        <WhatsAppCTAButton className="w-full">
-          Chat With Us Now
-        </WhatsAppCTAButton>
+        <CallCTAButton className="w-full">
+          Call Us Now
+        </CallCTAButton>
       </motion.div>
     </motion.div>
   )
