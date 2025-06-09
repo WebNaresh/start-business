@@ -1,6 +1,5 @@
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible"
 import { ChevronDown } from "lucide-react"
-import { motion } from "framer-motion"
 import { ServiceData } from "./service-types"
 
 interface FaqSectionProps {
@@ -13,26 +12,14 @@ export default function FaqSection({ service, openFAQs, toggleFAQ }: FaqSectionP
   return (
     <section id="faqs" className="py-16 bg-white">
       <div className="container mx-auto px-4">
-        <div className="max-Callw-4xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-12"
-          >
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-12">
             <h2 className="text-2xl md:text-3xl font-bold text-slate-800 mb-3">Frequently Asked Questions</h2>
             <p className="text-sm text-slate-600">Get answers to common questions about {service.shortTitle}</p>
-          </motion.div>
+          </div>
           <div className="space-y-4">
             {service.faqs.map((faq: { question: string; answer: string }, index: number) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-              >
+              <div key={index}>
                 <Collapsible
                   open={openFAQs.includes(index)}
                   onOpenChange={() => toggleFAQ(index)}
@@ -41,27 +28,22 @@ export default function FaqSection({ service, openFAQs, toggleFAQ }: FaqSectionP
                   <CollapsibleTrigger className="w-full p-6 text-left hover:bg-slate-50 transition-colors duration-300 rounded-xl">
                     <div className="flex items-center justify-between">
                       <h3 className="text-base font-semibold text-slate-800 pr-4">{faq.question}</h3>
-                      <motion.div
-                        animate={{ rotate: openFAQs.includes(index) ? 180 : 0 }}
-                        transition={{ duration: 0.3 }}
-                        className="flex-shrink-0"
+                      <div
+                        className={`flex-shrink-0 transition-transform duration-300 ${
+                          openFAQs.includes(index) ? "rotate-180" : ""
+                        }`}
                       >
                         <ChevronDown className="w-5 h-5 text-slate-500" />
-                      </motion.div>
+                      </div>
                     </div>
                   </CollapsibleTrigger>
                   <CollapsibleContent className="px-6 pb-6">
-                    <motion.div
-                      initial={{ opacity: 0, y: -10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.3 }}
-                      className="text-xs text-slate-600 leading-relaxed border-t border-slate-100 pt-3"
-                    >
+                    <div className="text-xs text-slate-600 leading-relaxed border-t border-slate-100 pt-3">
                       {faq.answer}
-                    </motion.div>
+                    </div>
                   </CollapsibleContent>
                 </Collapsible>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>

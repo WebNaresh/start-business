@@ -17,7 +17,6 @@ import {
   Zap,
   Building,
 } from "lucide-react"
-import { motion } from "framer-motion"
 import type { ServiceData } from "./service-types"
 
 interface PricingSectionProps {
@@ -32,22 +31,6 @@ export default function PricingSection({ service }: PricingSectionProps) {
     (savings / Number.parseInt(service.pricing?.originalAmount?.replace(/,/g, "") || "1")) * 100,
   )
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.2,
-      },
-    },
-  }
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0 },
-  }
-
   return (
     <section
       id="pricing"
@@ -55,28 +38,14 @@ export default function PricingSection({ service }: PricingSectionProps) {
     >
       {/* Background Elements */}
       <div className="absolute inset-0 opacity-5">
-        <motion.div
-          className="absolute top-0 right-0 w-96 h-96 bg-blue-100 rounded-full -mr-48 -mt-48 blur-3xl"
-          animate={{ scale: [1, 1.2, 1], rotate: [0, 180, 360] }}
-          transition={{ duration: 25, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
-        />
-        <motion.div
-          className="absolute bottom-0 left-0 w-80 h-80 bg-blue-50 rounded-full -ml-40 -mb-40 blur-2xl"
-          animate={{ scale: [1.2, 1, 1.2], rotate: [360, 180, 0] }}
-          transition={{ duration: 20, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
-        />
+        <div className="absolute top-0 right-0 w-96 h-96 bg-blue-100 rounded-full -mr-48 -mt-48 blur-3xl" />
+        <div className="absolute bottom-0 left-0 w-80 h-80 bg-blue-50 rounded-full -ml-40 -mb-40 blur-2xl" />
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-7xl mx-auto">
           {/* Header */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="text-center mb-16"
-          >
+          <div className="text-center mb-16">
             <Badge className="mb-6 bg-blue-50 text-blue-600 border-blue-200 px-6 py-3 text-sm">
               <Sparkles className="w-4 h-4 mr-2" />
               Transparent Pricing
@@ -92,18 +61,12 @@ export default function PricingSection({ service }: PricingSectionProps) {
             <p className="text-sm md:text-base text-slate-600 leading-relaxed max-w-4xl mx-auto">
               Get started with our {service.shortTitle} service at an unbeatable price with no hidden costs
             </p>
-          </motion.div>
+          </div>
 
           {/* Main Pricing Card */}
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            className="grid lg:grid-cols-3 gap-8 mb-16"
-          >
+          <div className="grid lg:grid-cols-3 gap-8 mb-16">
             {/* Pricing Card */}
-            <motion.div variants={itemVariants} className="lg:col-span-2 relative">
+            <div className="lg:col-span-2 relative">
               <div
                 className="bg-blue-600 rounded-3xl p-8 lg:p-12 text-white shadow-2xl relative overflow-hidden"
               >
@@ -156,17 +119,13 @@ export default function PricingSection({ service }: PricingSectionProps) {
                     </h4>
                     <div className="grid md:grid-cols-2 gap-3">
                       {service.pricing?.includes?.map((item: string, index: number) => (
-                        <motion.div
+                        <div
                           key={index}
-                          initial={{ opacity: 0, x: -20 }}
-                          whileInView={{ opacity: 1, x: 0 }}
-                          viewport={{ once: true }}
-                          transition={{ duration: 0.4, delay: index * 0.1 }}
                           className="flex items-center text-white/90 text-sm"
                         >
                           <CheckCircle className="w-4 h-4 mr-3 flex-shrink-0 text-blue-300" />
                           {item}
-                        </motion.div>
+                        </div>
                       )) || []}
                     </div>
                   </div>
@@ -187,10 +146,10 @@ export default function PricingSection({ service }: PricingSectionProps) {
                   </div>
                 </div>
               </div>
-            </motion.div>
+            </div>
 
             {/* Timeline & Features */}
-            <motion.div variants={itemVariants} className="space-y-6">
+            <div className="space-y-6">
               {/* Timeline Card */}
               <div className="bg-white rounded-2xl p-6 shadow-lg border border-blue-200">
                 <h4 className="text-base font-bold text-slate-800 mb-4 flex items-center">
@@ -231,22 +190,18 @@ export default function PricingSection({ service }: PricingSectionProps) {
                     { icon: Zap, text: "Lightning Fast Process", color: "text-blue-600" },
                     { icon: Shield, text: "100% Secure & Legal", color: "text-blue-600" },
                   ].map((item, index) => (
-                    <motion.div
+                    <div
                       key={index}
-                      initial={{ opacity: 0, x: -20 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.4, delay: index * 0.1 }}
                       className="flex items-center text-slate-700"
                     >
                       <item.icon className={`w-4 h-4 mr-3 ${item.color}`} />
                       <span className="text-sm">{item.text}</span>
-                    </motion.div>
+                    </div>
                   ))}
                 </div>
               </div>
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
         </div>
       </div>
     </section>

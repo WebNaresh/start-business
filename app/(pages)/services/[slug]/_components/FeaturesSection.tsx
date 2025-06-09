@@ -2,7 +2,6 @@
 
 import { CheckCircle, Users, Star, Sparkles, ArrowRight, Zap, Shield, Award, TrendingUp } from "lucide-react"
 import type { ServiceData } from "./service-types"
-import { motion } from "framer-motion"
 import { Badge } from "@/components/ui/badge"
 import { useState } from "react"
 
@@ -20,65 +19,21 @@ export default function FeaturesSection({ service }: FeaturesSectionProps) {
   // Ideal for icons mapping
   const idealIcons = [Users, Star, Award, TrendingUp, Shield, Zap]
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.2,
-      },
-    },
-  }
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0 },
-  }
-
   return (
     <section
       id="features"
       className="py-4 relative overflow-hidden bg-white"
     >
-      {/* Enhanced Background Elements */}
+      {/* Background Elements */}
       <div className="absolute inset-0 opacity-5">
-        <motion.div
-          className="absolute top-0 right-0 w-96 h-96 bg-blue-100 rounded-full -mr-48 -mt-48 blur-3xl"
-          animate={{
-            scale: [1, 1.2, 1],
-            rotate: [0, 180, 360],
-          }}
-          transition={{
-            duration: 25,
-            repeat: Number.POSITIVE_INFINITY,
-            ease: "linear",
-          }}
-        />
-        <motion.div
-          className="absolute bottom-0 left-0 w-80 h-80 bg-blue-50 rounded-full -ml-40 -mb-40 blur-2xl"
-          animate={{
-            scale: [1.2, 1, 1.2],
-            rotate: [360, 180, 0],
-          }}
-          transition={{
-            duration: 20,
-            repeat: Number.POSITIVE_INFINITY,
-            ease: "linear",
-          }}
-        />
+        <div className="absolute top-0 right-0 w-96 h-96 bg-blue-100 rounded-full -mr-48 -mt-48 blur-3xl" />
+        <div className="absolute bottom-0 left-0 w-80 h-80 bg-blue-50 rounded-full -ml-40 -mb-40 blur-2xl" />
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-7xl mx-auto">
-          {/* Enhanced Header */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="text-center mb-16"
-          >
+          {/* Header */}
+          <div className="text-center mb-16">
             <Badge className="mb-6 bg-blue-50 text-blue-600 border-blue-200 px-6 py-3 text-sm">
               <Sparkles className="w-4 h-4 mr-2" />
               Service Features & Benefits
@@ -95,18 +50,12 @@ export default function FeaturesSection({ service }: FeaturesSectionProps) {
               {service.whatIs?.description ||
                 "Comprehensive solution designed to meet all your business needs with expert guidance and seamless execution."}
             </p>
-          </motion.div>
+          </div>
 
-          {/* Enhanced Features Grid */}
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            className="grid lg:grid-cols-2 gap-8 lg:gap-12"
-          >
+          {/* Features Grid */}
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
             {/* Key Features Card */}
-            <motion.div variants={itemVariants} className="relative group">
+            <div className="relative group">
               <div
                 className="bg-blue-50 rounded-3xl p-8 lg:p-10 border-2 border-blue-200 shadow-lg hover:shadow-2xl transition-all duration-500 relative overflow-hidden"
               >
@@ -135,12 +84,8 @@ export default function FeaturesSection({ service }: FeaturesSectionProps) {
                     {service.keyFeatures?.map((feature: string, index: number) => {
                       const IconComponent = featureIcons[index % featureIcons.length]
                       return (
-                        <motion.div
+                        <div
                           key={index}
-                          initial={{ opacity: 0, x: -20 }}
-                          whileInView={{ opacity: 1, x: 0 }}
-                          viewport={{ once: true }}
-                          transition={{ duration: 0.5, delay: index * 0.1 }}
                           onMouseEnter={() => setHoveredFeature(index)}
                           onMouseLeave={() => setHoveredFeature(null)}
                           className="group/item flex items-center p-4 rounded-xl bg-white hover:bg-blue-50 hover:shadow-md transition-all duration-300 cursor-pointer"
@@ -160,7 +105,7 @@ export default function FeaturesSection({ service }: FeaturesSectionProps) {
                           <ArrowRight
                             className="w-4 h-4 text-slate-400 group-hover/item:text-blue-600 group-hover/item:translate-x-1 transition-all duration-300"
                           />
-                        </motion.div>
+                        </div>
                       )
                     }) || []}
                   </div>
@@ -177,10 +122,10 @@ export default function FeaturesSection({ service }: FeaturesSectionProps) {
                   </div>
                 </div>
               </div>
-            </motion.div>
+            </div>
 
             {/* Ideal For Card */}
-            <motion.div variants={itemVariants} className="relative group">
+            <div className="relative group">
               <div className="bg-white rounded-3xl p-8 lg:p-10 border-2 border-slate-200 shadow-lg hover:shadow-2xl transition-all duration-500 relative overflow-hidden">
                 {/* Card Background Pattern */}
                 <div className="absolute inset-0 opacity-5">
@@ -205,12 +150,8 @@ export default function FeaturesSection({ service }: FeaturesSectionProps) {
                     {service.idealFor?.map((item: string, index: number) => {
                       const IconComponent = idealIcons[index % idealIcons.length]
                       return (
-                        <motion.div
+                        <div
                           key={index}
-                          initial={{ opacity: 0, x: -20 }}
-                          whileInView={{ opacity: 1, x: 0 }}
-                          viewport={{ once: true }}
-                          transition={{ duration: 0.5, delay: index * 0.1 }}
                           onMouseEnter={() => setHoveredIdeal(index)}
                           onMouseLeave={() => setHoveredIdeal(null)}
                           className="group/item flex items-center p-4 rounded-xl bg-slate-50 hover:bg-blue-50 hover:shadow-md transition-all duration-300 cursor-pointer"
@@ -228,7 +169,7 @@ export default function FeaturesSection({ service }: FeaturesSectionProps) {
                             </span>
                           </div>
                           <ArrowRight className="w-4 h-4 text-slate-400 group-hover/item:text-blue-600 group-hover/item:translate-x-1 transition-all duration-300" />
-                        </motion.div>
+                        </div>
                       )
                     }) || []}
                   </div>
@@ -245,17 +186,11 @@ export default function FeaturesSection({ service }: FeaturesSectionProps) {
                   </div>
                 </div>
               </div>
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
 
-          {/* Enhanced Bottom Section */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="mt-16 text-center"
-          >
+          {/* Bottom Section */}
+          <div className="mt-16 text-center">
             <div
               className="bg-blue-600 rounded-3xl p-8 lg:p-12 text-white relative overflow-hidden"
             >
@@ -275,7 +210,7 @@ export default function FeaturesSection({ service }: FeaturesSectionProps) {
                 </div>
               </div>
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

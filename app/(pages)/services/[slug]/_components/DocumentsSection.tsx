@@ -1,6 +1,5 @@
 "use client"
 
-import { motion } from "framer-motion"
 import {
   FileText,
   User,
@@ -48,13 +47,7 @@ export default function DocumentsSection({ service }: DocumentsSectionProps) {
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
           {/* Header */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-12"
-          >
+          <div className="text-center mb-12">
             <Badge className="mb-4 bg-blue-50 text-blue-600 border-blue-200 px-4 py-2">
               <FileText className="w-4 h-4 mr-2" />
               Document Checklist
@@ -63,7 +56,7 @@ export default function DocumentsSection({ service }: DocumentsSectionProps) {
             <p className="text-sm text-slate-600 max-w-2xl mx-auto">
               Prepare these documents to ensure a smooth registration process
             </p>
-          </motion.div>
+          </div>
 
           {/* Documents by Category */}
           <div className="space-y-8">
@@ -71,12 +64,8 @@ export default function DocumentsSection({ service }: DocumentsSectionProps) {
               const CategoryIcon = getCategoryIcon(category)
 
               return (
-                <motion.div
+                <div
                   key={category}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: categoryIndex * 0.1 }}
                   className="bg-white rounded-2xl p-8 shadow-lg border border-blue-200"
                 >
                   {/* Category Header */}
@@ -100,12 +89,8 @@ export default function DocumentsSection({ service }: DocumentsSectionProps) {
                       const DocIcon = getDocumentIcon(doc)
 
                       return (
-                        <motion.div
+                        <div
                           key={docIndex}
-                          initial={{ opacity: 0, scale: 0.9 }}
-                          whileInView={{ opacity: 1, scale: 1 }}
-                          viewport={{ once: true }}
-                          transition={{ duration: 0.3, delay: docIndex * 0.05 }}
                           className="p-4 rounded-xl border-2 border-blue-200 hover:border-blue-300 hover:shadow-md transition-all duration-300"
                         >
                           <div className="flex items-start gap-3">
@@ -114,23 +99,17 @@ export default function DocumentsSection({ service }: DocumentsSectionProps) {
                               {doc}
                             </span>
                           </div>
-                        </motion.div>
+                        </div>
                       )
                     })}
                   </div>
-                </motion.div>
+                </div>
               )
             })}
           </div>
 
           {/* Bottom Message */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="text-center mt-12"
-          >
+          <div className="text-center mt-12">
             <div className="bg-white rounded-xl p-6 shadow-lg border border-blue-200">
               <h3 className="text-base font-semibold text-slate-800 mb-2">Need Help with Documents?</h3>
               <p className="text-xs text-slate-600 mb-3">Our experts can guide you through the document preparation process</p>
@@ -139,7 +118,7 @@ export default function DocumentsSection({ service }: DocumentsSectionProps) {
                 Expert Support Available
               </Badge>
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>
