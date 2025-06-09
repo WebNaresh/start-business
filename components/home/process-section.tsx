@@ -1,16 +1,9 @@
 "use client"
 
-import { motion } from "framer-motion"
-import { useInView } from "react-intersection-observer"
 import { ClipboardCheck, FileText, MessageSquare, CheckCircle, ArrowRight, Sparkles } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 
 export default function ProcessSection() {
-  const { ref, inView } = useInView({
-    triggerOnce: true,
-    threshold: 0.1,
-  })
-
   const steps = [
     {
       icon: MessageSquare,
@@ -51,14 +44,9 @@ export default function ProcessSection() {
   ]
 
   return (
-    <section className="py-12 md:py-16 bg-gradient-to-b from-white to-slate-50" ref={ref}>
+    <section className="py-12 md:py-16 bg-gradient-to-b from-white to-slate-50">
       <div className="container mx-auto px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.5 }}
-          className="mb-16 text-center"
-        >
+        <div className="mb-16 text-center">
           <Badge variant="secondary" className="mb-4 bg-blue-100 text-blue-700 px-4 py-2">
             <Sparkles className="w-4 h-4 mr-2" />
             Simple Process
@@ -69,7 +57,7 @@ export default function ProcessSection() {
           <p className="text-sm md:text-base text-slate-600 mb-8 max-w-2xl mx-auto">
             Our streamlined 4-step process makes business registration simple, efficient, and hassle-free
           </p>
-        </motion.div>
+        </div>
 
         <div className="relative">
           {/* Connecting line for mobile */}
@@ -82,11 +70,8 @@ export default function ProcessSection() {
 
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
             {steps.map((step, index) => (
-              <motion.div
+              <div
                 key={index}
-                initial={{ opacity: 0, y: 20 }}
-                animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
                 className="group relative flex flex-col items-center text-center"
               >
                 {/* Step number */}
@@ -124,18 +109,13 @@ export default function ProcessSection() {
                     className={`absolute inset-0 bg-gradient-to-br ${step.gradient} opacity-0 group-hover:opacity-5 rounded-xl transition-opacity duration-300 pointer-events-none`}
                   />
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
 
         {/* CTA Button */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.5, delay: 0.5 }}
-          className="mt-12 text-center"
-        >
+        <div className="mt-12 text-center">
           <a
             href="#contact"
             className="inline-flex items-center rounded-full bg-gradient-to-r from-blue-600 to-blue-700 px-6 py-3 text-white hover:from-blue-700 hover:to-blue-800 transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-0.5"
@@ -143,7 +123,7 @@ export default function ProcessSection() {
             Start Your Business Journey
             <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
           </a>
-        </motion.div>
+        </div>
       </div>
     </section>
   )

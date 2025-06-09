@@ -1,17 +1,10 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { motion } from "framer-motion"
-import { useInView } from "react-intersection-observer"
-import { Building2, TrendingUp, Clock, FileCheck, Users, Star, ArrowUp, CheckCircle } from "lucide-react"
+import { Building2, TrendingUp, Clock, FileCheck, Star, ArrowUp, CheckCircle } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 
 export default function TrustStatsSection() {
-  const { ref, inView } = useInView({
-    triggerOnce: true,
-    threshold: 0.1,
-  })
-
   const [counters, setCounters] = useState({
     businesses: 0,
     successRate: 0,
@@ -26,34 +19,32 @@ export default function TrustStatsSection() {
     compliances: 5000,
   }
 
-  // Animated counter effect
+  // Simple counter effect
   useEffect(() => {
-    if (inView) {
-      const duration = 2000 // 2 seconds
-      const steps = 60
-      const stepDuration = duration / steps
+    const duration = 2000 // 2 seconds
+    const steps = 60
+    const stepDuration = duration / steps
 
-      let step = 0
-      const timer = setInterval(() => {
-        step++
-        const progress = step / steps
+    let step = 0
+    const timer = setInterval(() => {
+      step++
+      const progress = step / steps
 
-        setCounters({
-          businesses: Math.floor(finalStats.businesses * progress),
-          successRate: Math.floor(finalStats.successRate * progress),
-          hoursSaved: Math.floor(finalStats.hoursSaved * progress),
-          compliances: Math.floor(finalStats.compliances * progress),
-        })
+      setCounters({
+        businesses: Math.floor(finalStats.businesses * progress),
+        successRate: Math.floor(finalStats.successRate * progress),
+        hoursSaved: Math.floor(finalStats.hoursSaved * progress),
+        compliances: Math.floor(finalStats.compliances * progress),
+      })
 
-        if (step >= steps) {
-          clearInterval(timer)
-          setCounters(finalStats)
-        }
-      }, stepDuration)
+      if (step >= steps) {
+        clearInterval(timer)
+        setCounters(finalStats)
+      }
+    }, stepDuration)
 
-      return () => clearInterval(timer)
-    }
-  }, [inView])
+    return () => clearInterval(timer)
+  }, [])
 
   const stats = [
     {
@@ -98,59 +89,15 @@ export default function TrustStatsSection() {
     },
   ]
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.1,
-      },
-    },
-  }
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 30, scale: 0.9 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      transition: {
-        duration: 0.6,
-        ease: "easeOut",
-      },
-    },
-  }
-
   return (
-    <section
-      className="py-8 relative overflow-hidden bg-gradient-to-br from-slate-50 via-white to-blue-50/30"
-      ref={ref}
-    >
+    <section className="py-8 relative overflow-hidden bg-gradient-to-br from-slate-50 via-white to-blue-50/30">
       {/* Background Elements */}
       <div className="absolute top-0 left-0 w-96 h-96 bg-blue-100 rounded-full -ml-48 -mt-48 opacity-40 blur-3xl" />
       <div className="absolute bottom-0 right-0 w-80 h-80 bg-purple-100 rounded-full -mr-40 -mb-40 opacity-30 blur-2xl" />
 
-      {/* Floating Elements */}
-      <motion.div
-        className="absolute top-20 right-20 w-6 h-6 bg-blue-400 rounded-full opacity-20"
-        animate={{ y: [0, -20, 0], rotate: [0, 180, 360] }}
-        transition={{ duration: 8, repeat: Number.POSITIVE_INFINITY }}
-      />
-      <motion.div
-        className="absolute bottom-32 left-16 w-4 h-4 bg-purple-400 rounded-full opacity-30"
-        animate={{ y: [0, 15, 0], rotate: [360, 180, 0] }}
-        transition={{ duration: 6, repeat: Number.POSITIVE_INFINITY, delay: 2 }}
-      />
-
       <div className="container mx-auto px-4 relative z-10">
         {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-16"
-        >
+        <div className="text-center mb-16">
           <Badge className="mb-6 bg-blue-100 text-blue-700 border-blue-200 px-6 py-3 text-sm">
             <Star className="w-4 h-4 mr-2 fill-current" />
             Trusted by Entrepreneurs Nationwide
@@ -165,17 +112,12 @@ export default function TrustStatsSection() {
             With thousands of successful business registrations and a proven track record, we're the preferred choice
             for entrepreneurs across India.
           </p>
-        </motion.div>
+        </div>
 
         {/* Stats Grid */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate={inView ? "visible" : "hidden"}
-          className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8 mb-16"
-        >
+        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8 mb-16">
           {stats.map((stat, index) => (
-            <motion.div key={index} variants={itemVariants} className="group relative">
+            <div key={index} className="group relative">
               {/* Main Card */}
               <div className="relative bg-white rounded-2xl p-4 md:p-8 border border-slate-200 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 overflow-hidden">
                 {/* Background Gradient */}
@@ -192,14 +134,9 @@ export default function TrustStatsSection() {
                   </div>
 
                   {/* Value */}
-                  <motion.div
-                    className="text-2xl md:text-4xl font-bold text-slate-800 mb-2"
-                    initial={{ opacity: 0, scale: 0.5 }}
-                    animate={inView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.5 }}
-                    transition={{ duration: 0.6, delay: index * 0.1 + 0.5 }}
-                  >
+                  <div className="text-2xl md:text-4xl font-bold text-slate-800 mb-2">
                     {stat.value}
-                  </motion.div>
+                  </div>
 
                   {/* Label */}
                   <h3 className="text-sm md:text-base font-semibold text-slate-900 mb-1 md:mb-2">{stat.label}</h3>
@@ -224,18 +161,12 @@ export default function TrustStatsSection() {
               </div>
 
               {/* Floating Number Effect */}
-              <motion.div
-                className="absolute -top-2 -right-2 w-6 h-6 md:w-8 md:h-8 bg-white rounded-full shadow-lg flex items-center justify-center text-[10px] md:text-xs font-bold text-slate-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                animate={{ rotate: 360 }}
-                transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
-              >
+              <div className="absolute -top-2 -right-2 w-6 h-6 md:w-8 md:h-8 bg-white rounded-full shadow-lg flex items-center justify-center text-[10px] md:text-xs font-bold text-slate-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 {index + 1}
-              </motion.div>
-            </motion.div>
+              </div>
+            </div>
           ))}
-        </motion.div>
-
-   
+        </div>
       </div>
     </section>
   )

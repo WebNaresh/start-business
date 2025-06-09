@@ -2,7 +2,6 @@
 
 import { useState, useRef } from "react"
 import Link from "next/link"
-import { motion, useInView } from "framer-motion"
 import {
   ArrowRight,
   Building2,
@@ -30,8 +29,6 @@ export default function EnhancedServicesSection() {
   const [selectedCategory, setSelectedCategory] = useState("all")
   const [searchTerm, setSearchTerm] = useState("")
   const [hoveredCard, setHoveredCard] = useState<number | null>(null)
-  const sectionRef = useRef(null)
-  const isInView = useInView(sectionRef, { once: true, margin: "-100px" })
 
   // Enhanced service data with more details
   const services = [
@@ -204,40 +201,11 @@ export default function EnhancedServicesSection() {
     return matchesCategory && matchesSearch
   })
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.2,
-      },
-    },
-  }
-
-  const cardVariants = {
-    hidden: { opacity: 0, y: 30, scale: 0.9 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      transition: {
-        duration: 0.5,
-        ease: "easeOut",
-      },
-    },
-  }
-
   return (
-    <section ref={sectionRef} className="py-16 bg-gradient-to-br from-slate-50 via-white to-blue-50/30">
+    <section className="py-16 bg-gradient-to-br from-slate-50 via-white to-blue-50/30">
       <div className="container mx-auto px-4">
         {/* Enhanced Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.6 }}
-          className="mb-12 text-center"
-        >
+        <div className="mb-12 text-center">
           <Badge variant="secondary" className="mb-4 bg-blue-100 text-blue-700 px-4 py-2">
             <Sparkles className="w-4 h-4 mr-2" />
             Our Services
@@ -248,15 +216,10 @@ export default function EnhancedServicesSection() {
           <p className="text-sm text-slate-600 mb-8 max-w-2xl mx-auto">
             Everything you need to start, run, and grow your business with confidence
           </p>
-        </motion.div>
+        </div>
 
         {/* Enhanced Filters and Search */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="mb-12"
-        >
+        <div className="mb-12">
           <div className="flex flex-col lg:flex-row gap-6 items-center justify-between">
             {/* Category Filters */}
             <div className="flex flex-wrap gap-2">
@@ -300,15 +263,10 @@ export default function EnhancedServicesSection() {
               )}
             </div>
           </div>
-        </motion.div>
+        </div>
 
         {/* Enhanced Services Grid */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
-          className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3"
-        >
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {filteredServices.map((service, idx) => {
             const IconComponent = service.icon
             const savings =
@@ -319,15 +277,13 @@ export default function EnhancedServicesSection() {
             )
 
             return (
-              <motion.div
+              <div
                 key={service.title}
-                variants={cardVariants}
                 className={`group relative rounded-2xl bg-white shadow-lg border-2 transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 ${
                   service.mostPopular ? "border-blue-500 shadow-blue-100" : "border-slate-100 hover:border-blue-200"
                 } flex flex-col overflow-hidden`}
                 onMouseEnter={() => setHoveredCard(idx)}
                 onMouseLeave={() => setHoveredCard(null)}
-                whileHover={{ scale: 1.02 }}
               >
                 {/* Savings Badge */}
                 <div className="absolute top-1 right-1 z-10">
@@ -403,19 +359,19 @@ export default function EnhancedServicesSection() {
                 </div>
 
                 {/* Hover Effect Overlay */}
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-br from-blue-600/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
-                  initial={false}
-                  animate={{ opacity: hoveredCard === idx ? 1 : 0 }}
+                <div
+                  className={`absolute inset-0 bg-gradient-to-br from-blue-600/5 to-transparent transition-opacity duration-300 pointer-events-none ${
+                    hoveredCard === idx ? "opacity-100" : "opacity-0"
+                  }`}
                 />
-              </motion.div>
+              </div>
             )
           })}
-        </motion.div>
+        </div>
 
         {/* No Results State */}
         {filteredServices.length === 0 && (
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center py-12">
+          <div className="text-center py-12">
             <div className="w-24 h-24 mx-auto mb-4 bg-slate-100 rounded-full flex items-center justify-center">
               <Search className="w-8 h-8 text-slate-400" />
             </div>
@@ -430,16 +386,11 @@ export default function EnhancedServicesSection() {
             >
               Clear Filters
             </Button>
-          </motion.div>
+          </div>
         )}
 
         {/* View More Services Button */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="mt-12 text-center"
-        >
+        <div className="mt-12 text-center">
           <Link href="/services">
             <Button
               size="lg"
@@ -449,7 +400,7 @@ export default function EnhancedServicesSection() {
               <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
             </Button>
           </Link>
-        </motion.div>
+        </div>
       </div>
     </section>
   )

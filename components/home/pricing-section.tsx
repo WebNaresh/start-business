@@ -1,8 +1,6 @@
 "use client"
 
 import { useState } from "react"
-import { motion } from "framer-motion"
-import { useInView } from "react-intersection-observer"
 import { Check, X, ArrowRight, Shield, Clock, Users } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import WhatsAppCTAButton from "@/components/whatsapp-cta-button"
@@ -69,13 +67,9 @@ const pricingPlans = [
 
 export default function PricingSection() {
   const [isAnnual, setIsAnnual] = useState(true)
-  const { ref, inView } = useInView({
-    triggerOnce: true,
-    threshold: 0.1,
-  })
 
   return (
-    <section className="py-20 relative overflow-hidden" ref={ref}>
+    <section className="py-20 relative overflow-hidden">
       {/* Background elements */}
       <div className="absolute inset-0 bg-gradient-to-b from-white to-blue-50"></div>
       <div className="absolute top-0 right-0 w-64 h-64 bg-blue-100 rounded-full -mr-32 -mt-32 opacity-30"></div>
@@ -85,40 +79,20 @@ export default function PricingSection() {
       <div className="container mx-auto px-4 relative z-10">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <motion.span
-            initial={{ opacity: 0, y: 20 }}
-            animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.5 }}
-            className="inline-block px-4 py-1.5 mb-4 text-sm font-medium text-blue-600 bg-blue-50 rounded-full border border-blue-100"
-          >
+          <span className="inline-block px-4 py-1.5 mb-4 text-sm font-medium text-blue-600 bg-blue-50 rounded-full border border-blue-100">
             Pricing Plans
-          </motion.span>
+          </span>
 
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-2xl md:text-3xl font-bold text-slate-900 mb-3"
-          >
+          <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-3">
             Transparent Pricing for Your Business Needs
-          </motion.h2>
+          </h2>
 
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-sm text-slate-600 mb-8 max-w-2xl mx-auto"
-          >
+          <p className="text-sm text-slate-600 mb-8 max-w-2xl mx-auto">
             Choose the perfect plan for your business requirements. All plans include our expert guidance and support.
-          </motion.p>
+          </p>
 
           {/* Billing Toggle */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            className="flex items-center justify-center mt-8 space-x-4"
-          >
+          <div className="flex items-center justify-center mt-8 space-x-4">
             <span className={`text-sm font-medium ${!isAnnual ? "text-[#2563eb]" : "text-slate-500"}`}>Monthly</span>
             <button
               onClick={() => setIsAnnual(!isAnnual)}
@@ -138,17 +112,14 @@ export default function PricingSection() {
             <span className={`text-sm font-medium ${isAnnual ? "text-[#2563eb]" : "text-slate-500"}`}>
               Annual <span className="text-green-600 font-medium">(Save 20%)</span>
             </span>
-          </motion.div>
+          </div>
         </div>
 
         {/* Pricing Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto">
-          {pricingPlans.map((plan, index) => (
-            <motion.div
+          {pricingPlans.map((plan) => (
+            <div
               key={plan.name}
-              initial={{ opacity: 0, y: 30 }}
-              animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-              transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
               className={`relative rounded-2xl bg-white p-8 shadow-lg transition-all duration-300 hover:shadow-xl border ${
                 plan.popular ? "border-blue-500" : "border-slate-100 hover:border-blue-100"
               }`}
@@ -213,17 +184,12 @@ export default function PricingSection() {
                   Contact sales for details
                 </Button>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
 
         {/* Additional Info */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.5, delay: 0.6 }}
-          className="mt-16 text-center bg-white rounded-xl p-8 shadow-md max-w-3xl mx-auto border border-slate-100"
-        >
+        <div className="mt-16 text-center bg-white rounded-xl p-8 shadow-md max-w-3xl mx-auto border border-slate-100">
           <h3 className="text-xl font-bold text-slate-800 mb-3">Need a Custom Solution?</h3>
           <p className="text-base text-slate-600 mb-6">
             We offer tailored packages for businesses with specific requirements. Contact our sales team for a
@@ -241,15 +207,10 @@ export default function PricingSection() {
               Schedule a Consultation
             </Button>
           </div>
-        </motion.div>
+        </div>
 
         {/* FAQ Teaser */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.5, delay: 0.7 }}
-          className="mt-12 text-center"
-        >
+        <div className="mt-12 text-center">
           <p className="text-slate-600">
             Have questions about our pricing? Check our{" "}
             <a href="/faq" className="text-blue-600 hover:underline">
@@ -261,7 +222,7 @@ export default function PricingSection() {
             </a>
             .
           </p>
-        </motion.div>
+        </div>
       </div>
     </section>
   )

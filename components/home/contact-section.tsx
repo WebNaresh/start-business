@@ -1,27 +1,16 @@
 "use client"
 
-import { motion } from "framer-motion"
-import { useInView } from "react-intersection-observer"
 import { Mail, MapPin, Phone, MessageSquare } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import CallCTAButton from "@/components/call-cta-button"
 
 export default function ContactSection() {
-  const { ref, inView } = useInView({
-    triggerOnce: true,
-    threshold: 0.1,
-  })
-
   return (
-    <section className="bg-slate-50 py-8 md:py-16" ref={ref}>
+    <section className="bg-slate-50 py-8 md:py-16">
       <div className="container mx-auto px-4">
         <div className="grid gap-8 md:grid-cols-2">
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
-            transition={{ duration: 0.5 }}
-          >
+          <div>
             <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-3">Get in Touch</h2>
             <p className="text-sm text-slate-600 mb-8 max-w-2xl mx-auto">
               Have questions about our services? We're here to help. Reach out to us through any of the following channels.
@@ -86,13 +75,8 @@ export default function ContactSection() {
                 </svg>
               </a>
             </div>
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0, x: 0, y: 20 }}
-            animate={inView ? { opacity: 1, x: 0, y: 0 } : { opacity: 0, x: 0, y: 20 }}
-            transition={{ duration: 0.5 }}
-            className="rounded-lg bg-white p-6 shadow-lg w-full overflow-hidden"
-          >
+          </div>
+          <div className="rounded-lg bg-white p-6 shadow-lg w-full overflow-hidden">
             <form className="space-y-4">
               <div className="grid gap-4 md:grid-cols-2">
                 <div>
@@ -181,7 +165,7 @@ export default function ContactSection() {
                 </Button>
               </div>
             </form>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

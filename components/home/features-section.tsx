@@ -1,18 +1,12 @@
 "use client"
 
 import { useState } from "react"
-import { motion } from "framer-motion"
-import { useInView } from "react-intersection-observer"
 import { Eye, Zap, Shield, Smartphone, GraduationCap, ArrowRight, CheckCircle, Star, Headphones } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import WhatsAppCTAButton from "@/components/whatsapp-cta-button"
 
 export default function WhyChooseUs() {
   const [activeFeature, setActiveFeature] = useState<number>(0)
-  const { ref, inView } = useInView({
-    triggerOnce: true,
-    threshold: 0.1,
-  })
 
   const features = [
     {
@@ -72,19 +66,14 @@ export default function WhyChooseUs() {
   ]
 
   return (
-    <section className="py-8 relative overflow-hidden bg-gradient-to-br from-slate-50 to-white" ref={ref}>
+    <section className="py-8 relative overflow-hidden bg-gradient-to-br from-slate-50 to-white">
       {/* Background Elements */}
       <div className="absolute top-0 right-0 w-72 h-72 bg-blue-100 rounded-full -mr-36 -mt-36 opacity-60 blur-3xl" />
       <div className="absolute bottom-0 left-0 w-64 h-64 bg-purple-100 rounded-full -ml-32 -mb-32 opacity-50 blur-2xl" />
 
       <div className="container mx-auto px-4 relative z-10">
         {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-12"
-        >
+        <div className="text-center mb-12">
           <Badge className="mb-4 bg-blue-100 text-blue-700 border-blue-200 px-4 py-2">
             <Star className="w-4 h-4 mr-2 fill-current" />
             Why 1,000+ Businesses Choose Us
@@ -95,23 +84,15 @@ export default function WhyChooseUs() {
             </span>
           </h2>
           <p className="text-sm text-slate-600 mb-8 max-w-2xl mx-auto">Five key reasons that make us different</p>
-        </motion.div>
+        </div>
 
         {/* Features Grid - Better Alignment */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="max-w-6xl mx-auto mb-12"
-        >
+        <div className="max-w-6xl mx-auto mb-12">
           {/* All Features in 2x3 Grid */}
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
             {features.map((feature, index) => (
-              <motion.div
+              <div
                 key={index}
-                initial={{ opacity: 0, y: 20 }}
-                animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
                 className="group relative p-4 md:p-6 bg-white rounded-2xl border border-slate-200 hover:border-slate-300 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 cursor-pointer"
                 onMouseEnter={() => setActiveFeature(index)}
               >
@@ -141,18 +122,13 @@ export default function WhyChooseUs() {
                 <div
                   className={`absolute inset-0 bg-gradient-to-br ${feature.color} opacity-0 group-hover:opacity-5 rounded-2xl transition-opacity duration-300`}
                 />
-              </motion.div>
+              </div>
             ))}
           </div>
-        </motion.div>
+        </div>
 
         {/* Bottom CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.6, delay: 0.8 }}
-          className="text-center"
-        >
+        <div className="text-center">
           <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl p-6 md:p-8 text-white">
             <div>
               <h3 className="text-lg md:text-xl font-bold mb-2">Ready to Experience the Difference?</h3>
@@ -167,7 +143,7 @@ export default function WhyChooseUs() {
               </WhatsAppCTAButton>
             </div>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   )
