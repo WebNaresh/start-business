@@ -345,7 +345,7 @@ export default function EnhancedFooter() {
                   </p>
                   <WhatsAppCTAButton className="w-full text-sm py-2">
                   
-                    Chat With Us Now
+                    Call Now
                   </WhatsAppCTAButton>
                 </div>
               </div>

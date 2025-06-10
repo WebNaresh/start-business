@@ -210,7 +210,7 @@ export default function EnhancedHeroSection() {
                 transition={{ duration: 0.6, type: "spring", bounce: 0.3 }}
               >
                 <motion.h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-4">
-                  <span className="bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">
+                  <span className="text-slate-800">
                     {slides[currentSlide].title.split(" ").slice(0, 4).join(" ")}
                   </span>{" "}
                   <span className="text-slate-800">{slides[currentSlide].title.split(" ").slice(4).join(" ")}</span>

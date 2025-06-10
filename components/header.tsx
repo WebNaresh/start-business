@@ -266,6 +266,7 @@ export default function Header() {
       subLinks: [
         { name: "About Us", href: "/about" },
         { name: "Contact", href: "/contact" },
+        {name:"Blog",href:"/blog"},
         { name: "Tools", href: "/calculators" },
       ]
     }
@@ -287,28 +288,7 @@ export default function Header() {
       {/* Top bar with contact info */}
      
 
-      {/* Search overlay */}
-      <AnimatePresence>
-        {showSearch && (
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="absolute top-full left-0 right-0 bg-white shadow-lg p-4"
-          >
-            <div className="container mx-auto">
-              <div className="relative">
-                <Input
-                  type="search"
-                  placeholder="Search for services, calculators, or information..."
-                  className="w-full pl-10 pr-4 py-2"
-                />
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-slate-400" />
-              </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+     
 
       {/* Main navigation */}
       <div className={`transition-all duration-300 ${scrolled ? "py-2" : "py-3"}`}>
@@ -335,7 +315,7 @@ export default function Header() {
           </Link>
 
           {/* Desktop Navigation with improved hover effects */}
-          <nav className="hidden lg:flex items-center space-x-1">
+          <nav className="hidden lg:flex items-center md:space-x-0">
             {navLinks.map((link) => (
               <div 
                 key={link.name} 
@@ -346,7 +326,7 @@ export default function Header() {
                 {link.subLinks ? (
                   <>
                     <button
-                      className={`relative px-3 py-2 text-sm font-medium rounded-md transition-all duration-200 flex items-center gap-1 ${
+                      className={`relative px-1 py-1 text-sm font-medium rounded-md transition-all duration-200 flex items-center gap-1 ${
                         isActive(link.href) 
                           ? "text-blue-600" 
                           : "text-slate-700 hover:text-blue-600 hover:bg-blue-50"
@@ -365,13 +345,13 @@ export default function Header() {
                           transition={{ duration: 0.2 }}
                           className="absolute top-full left-0 mt-1 w-[200px] bg-white rounded-xl shadow-xl border border-slate-200 overflow-hidden"
                         >
-                          <div className="p-2">
+                          <div className="p-1">
                             <div className="space-y-1">
                               {link.subLinks.map((subLink) => (
                                 <Link
                                   key={subLink.href}
                                   href={subLink.href}
-                                  className="block px-3 py-2 text-sm text-slate-600 hover:text-blue-600 hover:bg-blue-50 rounded-md transition-all duration-200"
+                                  className="block px-2 py-2 text-sm text-slate-600 hover:text-blue-600 hover:bg-blue-50 rounded-md transition-all duration-200"
                                 >
                                   {subLink.name}
                                 </Link>
@@ -385,7 +365,7 @@ export default function Header() {
                 ) : (
                   <Link
                     href={link.href}
-                    className={`relative px-3 py-2 text-sm font-medium rounded-md transition-all duration-200 ${
+                    className={`relative px-2 py-2 text-sm font-medium rounded-md transition-all duration-200 ${
                       isActive(link.href) 
                         ? "text-blue-600" 
                         : "text-slate-700 hover:text-blue-600 hover:bg-blue-50"
@@ -415,7 +395,7 @@ export default function Header() {
                 onMouseLeave={() => setOpenCategory(null)}
               >
                 <button
-                  className={`relative px-3 py-2 text-sm font-medium rounded-md transition-all duration-200 flex items-center gap-1 ${
+                  className={`relative px-2 py-2 text-sm font-medium rounded-md transition-all duration-200 flex items-center gap-1 ${
                     isActive(`/services/${category.id}`) 
                       ? "text-blue-600" 
                       : "text-slate-700 hover:text-blue-600 hover:bg-blue-50"
@@ -483,7 +463,7 @@ export default function Header() {
               whileTap={{ scale: 0.95 }}
             >
               <WhatsAppCTAButton className="rounded-full px-5 shadow-sm hover:shadow transition-all">
-                Chat With Us
+                Call Now
               </WhatsAppCTAButton>
             </motion.div>
           </div>
@@ -678,7 +658,7 @@ export default function Header() {
                       <span>sales@biztreeaccounting.com</span>
                     </a>
                   </div>
-                  <WhatsAppCTAButton className="w-full rounded-md">Chat With Us Now</WhatsAppCTAButton>
+                  <WhatsAppCTAButton className="w-full rounded-md">Call Now</WhatsAppCTAButton>
                 </div>
               </div>
             </SheetContent>

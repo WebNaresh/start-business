@@ -56,7 +56,7 @@ export default function WhyChooseUs() {
     },
     {
       icon: Headphones,
-      title: "24/7 Support",
+      title: "24/7 Human Support",
       shortDesc: "Round-the-clock assistance and guidance",
       benefit: "Always available",
       color: "from-pink-500 to-pink-600",
