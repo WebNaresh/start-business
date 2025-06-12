@@ -292,7 +292,7 @@ export default function Header() {
 
       {/* Main navigation */}
       <div className={`transition-all duration-300 ${scrolled ? "py-2" : "py-3"}`}>
-        <div className="container mx-auto flex items-center justify-between px-4">
+        <div className="container mx-auto flex items-end justify-between px-4">
           {/* Logo with animation */}
           <Link href="/" className="flex items-center group">
             <motion.div 
@@ -315,7 +315,7 @@ export default function Header() {
           </Link>
 
           {/* Desktop Navigation with improved hover effects */}
-          <nav className="hidden lg:flex items-center md:space-x-0">
+          <nav className="hidden lg:flex items-center justify-end space-x-1">
             {navLinks.map((link) => (
               <div 
                 key={link.name} 
@@ -456,17 +456,7 @@ export default function Header() {
             ))}
           </nav>
 
-          {/* Desktop CTA with animation */}
-          <div className="hidden lg:flex items-center">
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <WhatsAppCTAButton className="rounded-full px-5 shadow-sm hover:shadow transition-all">
-                Call Now
-              </WhatsAppCTAButton>
-            </motion.div>
-          </div>
+     
 
           {/* Mobile menu button with animation */}
           <Sheet>

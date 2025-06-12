@@ -202,7 +202,7 @@ export default function EnhancedServicesSection() {
   })
 
   return (
-    <section className="py-16 bg-gradient-to-br from-slate-50 via-white to-blue-50/30">
+    <section className="py-8 ">
       <div className="container mx-auto px-4">
         {/* Enhanced Header */}
         <div className="mb-12 text-center">

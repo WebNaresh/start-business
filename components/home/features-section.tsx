@@ -66,10 +66,10 @@ export default function WhyChooseUs() {
   ]
 
   return (
-    <section className="py-8 relative overflow-hidden bg-gradient-to-br from-slate-50 to-white">
+    <section className="py-8 relative overflow-hidden ">
       {/* Background Elements */}
-      <div className="absolute top-0 right-0 w-72 h-72 bg-blue-100 rounded-full -mr-36 -mt-36 opacity-60 blur-3xl" />
-      <div className="absolute bottom-0 left-0 w-64 h-64 bg-purple-100 rounded-full -ml-32 -mb-32 opacity-50 blur-2xl" />
+      <div className="absolute top-0 right-0 w-72 h-72 rounded-full -mr-36 -mt-36 opacity-60 blur-3xl" />
+      <div className="absolute bottom-0 left-0 w-64 h-64  rounded-full -ml-32 -mb-32 opacity-50 blur-2xl" />
 
       <div className="container mx-auto px-4 relative z-10">
         {/* Header */}
