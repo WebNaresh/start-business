@@ -8,7 +8,7 @@ import { ArrowRight, ChevronLeft, ChevronRight, Play, Pause, Star } from "lucide
 import { motion, AnimatePresence, useInView, useMotionValue, useSpring } from "framer-motion"
 
 import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
+
 import WhatsAppCTAButton from "@/components/whatsapp-cta-button"
 import Link from "next/link"
 
@@ -177,7 +177,7 @@ export default function EnhancedHeroSection() {
   return (
     <section
       ref={heroRef}
-      className="relative py-8 md:py-16  overflow-hidden bg-gradient-to-br from-white via-blue-50/30 to-slate-50"
+      className="relative py-8 md:py-8  overflow-hidden bg-gradient-to-br from-white via-blue-50/30 to-slate-50"
     >
       {/* Enhanced background elements */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-blue-100 to-transparent rounded-full -mr-48 -mt-48 opacity-60 blur-3xl"></div>
