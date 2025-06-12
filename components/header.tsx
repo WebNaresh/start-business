@@ -641,11 +641,11 @@ export default function Header() {
                       <span>+91 96992 14195</span>
                     </a>
                     <a
-                      href="mailto:sales@biztreeaccounting.com"
+                      href="mailto:start@startbusiness.co.in"
                       className="flex items-center text-slate-700 hover:text-blue-600 transition-colors"
                     >
                       <Mail className="mr-2 h-4 w-4 text-blue-600" />
-                      <span>sales@biztreeaccounting.com</span>
+                      <span>start@startbusiness.co.in</span>
                     </a>
                   </div>
                   <WhatsAppCTAButton className="w-full rounded-md">Call Now</WhatsAppCTAButton>

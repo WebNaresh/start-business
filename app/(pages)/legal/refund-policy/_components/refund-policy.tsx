@@ -106,7 +106,7 @@ export default function RefundPolicy() {
               <div className="bg-slate-50 rounded-lg p-6">
                 <p className="text-slate-600">
                   For refund-related queries, please contact us at:<br />
-                  Email: sales@biztreeaccounting.com<br />
+                  Email: start@startbusiness.co.in<br />
                   Phone: +91 96992 14195<br />
                   Address: Office No 7, 3rd Floor, Saraswati Heights,<br />
                   Deccan Gymkhana, Behind Goodluck Café,<br />

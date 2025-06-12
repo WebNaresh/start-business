@@ -28,8 +28,8 @@ export default function ContactSection() {
                 <div className="mr-3 rounded-full bg-blue-100 p-2">
                   <Mail className="h-5 w-5 text-blue-600" />
                 </div>
-                <a href="mailto:sales@biztreeaccounting.com" className="text-slate-700 hover:text-blue-600">
-                  sales@biztreeaccounting.com
+                <a href="mailto:start@startbusiness.co.in" className="text-slate-700 hover:text-blue-600">
+                  start@startbusiness.co.in
                 </a>
               </div>
               <div className="flex items-start">

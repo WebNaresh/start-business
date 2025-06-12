@@ -290,10 +290,10 @@ export default function EnhancedFooter() {
                   <div>
                     <p className="text-sm font-medium text-slate-700 mb-1">Email Address</p>
                     <a
-                      href="mailto:sales@biztreeaccounting.com"
+                      href="mailto:start@startbusiness.co.in"
                       className="text-slate-600 hover:text-purple-600 transition-colors text-sm"
                     >
-                      sales@biztreeaccounting.com
+                      start@startbusiness.co.in
                     </a>
                   </div>
                 </div>

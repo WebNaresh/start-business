@@ -19,7 +19,7 @@ export default function SchemaMarkup() {
       "longitude": "73.8567"
     },
     "telephone": "+919699214195",
-    "email": "sales@biztreeaccounting.com",
+    "email": "start@startbusiness.co.in",
     "openingHoursSpecification": [
       {
         "@type": "OpeningHoursSpecification",
