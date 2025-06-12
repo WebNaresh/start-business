@@ -167,7 +167,7 @@ export default function Header() {
     },
     {
       id: "intellectual-property",
-      name: "Trademark & IP",
+      name: "Trademark Services",
       shortName: "IP",
       icon: Shield,
       description: "Protect your brand and intellectual property",
@@ -201,7 +201,7 @@ export default function Header() {
     },
     {
       id: "licenses-registrations",
-      name: "Licenses & Registrations",
+      name: "Important Registration",
       shortName: "Licenses",
       icon: Gavel,
       description: "Various business licenses and regulatory approvals",
@@ -260,16 +260,6 @@ export default function Header() {
 
   const navLinks: NavLink[] = [
     { name: "Home", href: "/" },
-    { 
-      name: "More",
-      href: "#",
-      subLinks: [
-        { name: "About Us", href: "/about" },
-        { name: "Contact", href: "/contact" },
-        {name:"Blog",href:"/blog"},
-        { name: "Tools", href: "/calculators" },
-      ]
-    }
   ]
 
   const isActive = (href: string) => {
@@ -293,168 +283,140 @@ export default function Header() {
       {/* Main navigation */}
       <div className={`transition-all duration-300 ${scrolled ? "py-2" : "py-3"}`}>
         <div className="container mx-auto flex items-end justify-between px-4">
-          {/* Logo with animation */}
-          <Link href="/" className="flex items-center group">
-            <motion.div 
-              className="relative h-8 w-8 mr-2 overflow-hidden"
-              whileHover={{ scale: 1.1 }}
-              transition={{ type: "spring", stiffness: 400, damping: 10 }}
-            >
-              <Image
-                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/startbusiness_icon_transparent-u5NDFsSQarqF4PBI4Y5RxkT51hJhDI.png"
-                alt="StartBusiness"
-                fill
-                className="object-contain"
-              />
-            </motion.div>
-            <div>
-              <span className="text-xl font-bold bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent group-hover:from-blue-700 group-hover:to-blue-900 transition-all duration-300">
-                StartBusiness
-              </span>
-            </div>
-          </Link>
-
-          {/* Desktop Navigation with improved hover effects */}
-          <nav className="hidden lg:flex items-center justify-end space-x-1">
-            {navLinks.map((link) => (
-              <div 
-                key={link.name} 
-                className="relative" 
-                onMouseEnter={() => setOpenCategory(link.name)} 
-                onMouseLeave={() => setOpenCategory(null)}
+          <div className="flex flex-1 items-center">
+            {/* Logo with animation */}
+            <Link href="/" className="flex items-center group">
+              <motion.div 
+                className="relative h-8 w-8 mr-2 overflow-hidden"
+                whileHover={{ scale: 1.1 }}
+                transition={{ type: "spring", stiffness: 400, damping: 10 }}
               >
-                {link.subLinks ? (
-                  <>
-                    <button
-                      className={`relative px-1 py-1 text-sm font-medium rounded-md transition-all duration-200 flex items-center gap-1 ${
-                        isActive(link.href) 
-                          ? "text-blue-600" 
-                          : "text-slate-700 hover:text-blue-600 hover:bg-blue-50"
-                      }`}
-                    >
-                      {link.name}
-                      <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${openCategory === link.name ? "rotate-180" : ""}`} />
-                    </button>
+                <Image
+                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/startbusiness_icon_transparent-u5NDFsSQarqF4PBI4Y5RxkT51hJhDI.png"
+                  alt="StartBusiness"
+                  fill
+                  className="object-contain"
+                />
+              </motion.div>
+              <div>
+                <span className="text-xl font-bold bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent group-hover:from-blue-700 group-hover:to-blue-900 transition-all duration-300">
+                  StartBusiness
+                </span>
+              </div>
+            </Link>
+          </div>
+          <div className="flex items-center flex-shrink-0">
+            {/* Desktop Navigation with improved hover effects */}
+            <nav className="hidden lg:flex items-center justify-end space-x-1">
+              <Link
+                href="/"
+                className={`relative px-2 py-2 text-sm font-medium rounded-md transition-all duration-200 ${
+                  isActive("/") 
+                    ? "text-blue-600" 
+                    : "text-slate-700 hover:text-blue-600 hover:bg-blue-50"
+                }`}
+              >
+                Home
+                {isActive("/") && (
+                  <motion.div
+                    layoutId="activeIndicator"
+                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-600 rounded-full"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.3 }}
+                  />
+                )}
+              </Link>
 
-                    <AnimatePresence>
-                      {openCategory === link.name && (
-                        <motion.div
-                          initial={{ opacity: 0, y: 10 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          exit={{ opacity: 0, y: 10 }}
-                          transition={{ duration: 0.2 }}
-                          className="absolute top-full left-0 mt-1 w-[200px] bg-white rounded-xl shadow-xl border border-slate-200 overflow-hidden"
-                        >
-                          <div className="p-1">
-                            <div className="space-y-1">
-                              {link.subLinks.map((subLink) => (
-                                <Link
-                                  key={subLink.href}
-                                  href={subLink.href}
-                                  className="block px-2 py-2 text-sm text-slate-600 hover:text-blue-600 hover:bg-blue-50 rounded-md transition-all duration-200"
-                                >
-                                  {subLink.name}
-                                </Link>
-                              ))}
-                            </div>
-                          </div>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </>
-                ) : (
-                  <Link
-                    href={link.href}
-                    className={`relative px-2 py-2 text-sm font-medium rounded-md transition-all duration-200 ${
-                      isActive(link.href) 
+              {serviceCategories.map((category) => (
+                <div 
+                  key={category.id} 
+                  className="relative" 
+                  onMouseEnter={() => setOpenCategory(category.id)} 
+                  onMouseLeave={() => setOpenCategory(null)}
+                >
+                  <button
+                    className={`relative px-2 py-2 text-sm font-medium rounded-md transition-all duration-200 flex items-center gap-1 ${
+                      isActive(`/services/${category.id}`) 
                         ? "text-blue-600" 
                         : "text-slate-700 hover:text-blue-600 hover:bg-blue-50"
                     }`}
                   >
-                    {link.name}
-                    {isActive(link.href) && (
+                    {category.name}
+                    <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${openCategory === category.id ? "rotate-180" : ""}`} />
+                  </button>
+
+                  <AnimatePresence>
+                    {openCategory === category.id && (
                       <motion.div
-                        layoutId="activeIndicator"
-                        className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-600 rounded-full"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ duration: 0.3 }}
-                      />
-                    )}
-                  </Link>
-                )}
-              </div>
-            ))}
-
-            {/* Service Categories with enhanced dropdown */}
-            {serviceCategories.map((category) => (
-              <div 
-                key={category.id} 
-                className="relative" 
-                onMouseEnter={() => setOpenCategory(category.id)} 
-                onMouseLeave={() => setOpenCategory(null)}
-              >
-                <button
-                  className={`relative px-2 py-2 text-sm font-medium rounded-md transition-all duration-200 flex items-center gap-1 ${
-                    isActive(`/services/${category.id}`) 
-                      ? "text-blue-600" 
-                      : "text-slate-700 hover:text-blue-600 hover:bg-blue-50"
-                  }`}
-                >
-                  {category.name}
-                  <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${openCategory === category.id ? "rotate-180" : ""}`} />
-                </button>
-
-                <AnimatePresence>
-                  {openCategory === category.id && (
-                    <motion.div
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: 10 }}
-                      transition={{ duration: 0.2 }}
-                      className="absolute top-full left-0 mt-1 w-[300px] bg-white rounded-xl shadow-xl border border-slate-200 overflow-hidden"
-                    >
-                      <div className="p-4">
-                        <div className="flex items-center gap-2 mb-3">
-                          <div className={`p-2 rounded-lg ${category.bgColor}`}>
-                            <category.icon className={`w-4 h-4 ${category.color}`} />
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 10 }}
+                        transition={{ duration: 0.2 }}
+                        className="absolute top-full left-0 mt-1 w-[300px] bg-white rounded-xl shadow-xl border border-slate-200 overflow-hidden"
+                      >
+                        <div className="p-4">
+                          <div className="flex items-center gap-2 mb-3">
+                            <div className={`p-2 rounded-lg ${category.bgColor}`}>
+                              <category.icon className={`w-4 h-4 ${category.color}`} />
+                            </div>
+                            <h3 className="text-sm font-semibold text-slate-800">{category.name}</h3>
                           </div>
-                          <h3 className="text-sm font-semibold text-slate-800">{category.name}</h3>
+                          <div className="space-y-1">
+                            {category.subServices.map((service) => (
+                              <Link
+                                key={service.href}
+                                href={service.href}
+                                className="block px-2 py-1.5 text-sm text-slate-600 hover:text-blue-600 hover:bg-blue-50 rounded-md transition-all duration-200"
+                              >
+                                <div className="flex items-center justify-between">
+                                  <span>{service.name}</span>
+                                  {service.popular && (
+                                    <Badge className="bg-amber-50 text-amber-600 hover:bg-amber-100 border-none text-[10px] px-1.5 py-0">
+                                      Popular
+                                    </Badge>
+                                  )}
+                                </div>
+                              </Link>
+                            ))}
+                          </div>
                         </div>
-                        <div className="space-y-1">
-                          {category.subServices.map((service) => (
-                            <Link
-                              key={service.href}
-                              href={service.href}
-                              className="block px-2 py-1.5 text-sm text-slate-600 hover:text-blue-600 hover:bg-blue-50 rounded-md transition-all duration-200"
-                            >
-                              <div className="flex items-center justify-between">
-                                <span>{service.name}</span>
-                                {service.popular && (
-                                  <Badge className="bg-amber-50 text-amber-600 hover:bg-amber-100 border-none text-[10px] px-1.5 py-0">
-                                    Popular
-                                  </Badge>
-                                )}
-                              </div>
-                            </Link>
-                          ))}
+                        <div className="bg-slate-50 px-4 py-3 border-t border-slate-200">
+                          <Link
+                            href={`/services/${category.id}`}
+                            className="text-sm font-medium text-blue-600 hover:text-blue-700 flex items-center gap-1 group"
+                          >
+                            View all {category.name} services
+                            <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                          </Link>
                         </div>
-                      </div>
-                      <div className="bg-slate-50 px-4 py-3 border-t border-slate-200">
-                        <Link
-                          href={`/services/${category.id}`}
-                          className="text-sm font-medium text-blue-600 hover:text-blue-700 flex items-center gap-1 group"
-                        >
-                          View all {category.name} services
-                          <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                        </Link>
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-            ))}
-          </nav>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              ))}
+
+              <Link
+                href="/blog"
+                className={`relative px-2 py-2 text-sm font-medium rounded-md transition-all duration-200 ${
+                  isActive("/blog") 
+                    ? "text-blue-600" 
+                    : "text-slate-700 hover:text-blue-600 hover:bg-blue-50"
+                }`}
+              >
+                Blogs
+                {isActive("/blog") && (
+                  <motion.div
+                    layoutId="activeIndicator"
+                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-600 rounded-full"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.3 }}
+                  />
+                )}
+              </Link>
+            </nav>
+          </div>
 
      
 
@@ -638,7 +600,7 @@ export default function Header() {
                       className="flex items-center text-slate-700 hover:text-blue-600 transition-colors"
                     >
                       <Phone className="mr-2 h-4 w-4 text-blue-600" />
-                      <span>+91 96992 14195</span>
+                      <span>+91 91684 99520</span>
                     </a>
                     <a
                       href="mailto:start@startbusiness.co.in"

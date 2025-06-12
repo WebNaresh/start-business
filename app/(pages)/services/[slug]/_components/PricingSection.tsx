@@ -132,11 +132,9 @@ export default function PricingSection({ service }: PricingSectionProps) {
 
                   {/* CTA Buttons */}
                   <div className="flex flex-col sm:flex-row gap-3">
-                    <WhatsAppCTAButton className="text-sm">
-                      Get Started Now
-                    </WhatsAppCTAButton>
+                   
                     <Button
-                      variant="outline"
+                      variant="default"
                       className="text-white border-white/30 hover:bg-white/20 text-sm"
                       onClick={() => window.location.href = "tel:+919699214195"}
                     >

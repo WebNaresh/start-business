@@ -223,9 +223,10 @@ export default function EnhancedFooter() {
               <ul className="space-y-3">
                 {[
                   { name: "About Us", href: "/about" },
+                  { name: "Tools", href: "/calculators" },
+                  { name: "Contact Us", href: "/contact" },
                   { name: "Success Stories", href: "/testimonials" },
                   { name: "Blog & Resources", href: "/blog" },
-                  { name: "Contact Us", href: "/contact" },
                   { name: "Career Opportunities", href: "/careers" },
                   { name: "Help & FAQs", href: "/faq" },
                 ].map((link, index) => (
@@ -278,7 +279,7 @@ export default function EnhancedFooter() {
                       rel="noopener noreferrer"
                       className="text-slate-600 hover:text-green-600 transition-colors text-sm font-medium"
                     >
-                      +91 96992 14195
+                      +91 91684 99520
                     </a>
                   </div>
                 </div>

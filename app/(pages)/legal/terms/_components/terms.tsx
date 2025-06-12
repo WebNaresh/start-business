@@ -113,7 +113,7 @@ export default function TermsAndConditions() {
                 <p className="text-slate-600">
                   For any questions regarding these Terms & Conditions, please contact us at:<br />
                   Email: start@startbusiness.co.in<br />
-                  Phone: +91 96992 14195<br />
+                  Phone: +91 91684 99520<br />
                   Address: Office No 7, 3rd Floor, Saraswati Heights,<br />
                   Deccan Gymkhana, Behind Goodluck Café,<br />
                   Pune 411004, Maharashtra

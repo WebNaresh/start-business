@@ -112,7 +112,7 @@ export default function ContactSection() {
                   type="tel"
                   id="phone"
                   className="w-full rounded-lg border border-slate-300 p-2.5 text-slate-900 focus:border-blue-500 focus:ring-blue-500"
-                  placeholder="+91 96992 14195"
+                  placeholder="+91 91684 99520"
                   required
                 />
               </div>

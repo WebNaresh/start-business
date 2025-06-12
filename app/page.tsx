@@ -11,6 +11,7 @@ import FAQSection from "@/components/home/faq-section"
 
 import { useState, useEffect } from 'react'
 import { subscribeUser, unsubscribeUser, sendNotification } from './actions'
+import LatestIncorporationsTicker from "@/components/home/LatestIncorporationsTicker"
 
 function urlBase64ToUint8Array(base64String: string) {
   const padding = '='.repeat((4 - (base64String.length % 4)) % 4)
@@ -147,6 +148,7 @@ export default function Home() {
       <ServicesSection />
       <FeaturesSection />
       <ProcessSection />
+      <LatestIncorporationsTicker/>
       <TestimonialsSection />
       <FAQSection />
       <ContactSection />

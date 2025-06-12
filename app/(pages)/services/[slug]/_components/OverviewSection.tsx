@@ -1,25 +1,14 @@
-  "use client"
+"use client"
 
 import type React from "react"
 
 import { useState } from "react"
 import { motion } from "framer-motion"
-import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import WhatsAppCTAButton from "@/components/whatsapp-cta-button"
-import {
-  ArrowRight,
-  Star,
-  CheckCircle,
-
-  Phone,
-  Mail,
-  User,
-  Send,
-  Sparkles,
-} from "lucide-react"
+import { ArrowRight, CheckCircle, Phone, Mail, User, Send, Sparkles } from "lucide-react"
 import type { ServiceData } from "./service-types"
 
 interface OverviewSectionProps {
@@ -95,28 +84,13 @@ export default function OverviewSection({ service }: OverviewSectionProps) {
             transition={{ duration: 0.8 }}
             className="text-center lg:text-left"
           >
-            {service.popular && (
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-              >
-                <Badge className="mb-6 bg-blue-50 text-blue-600 border-blue-200 hover:bg-blue-100 px-4 py-2">
-                  <Star className="w-4 h-4 mr-2 fill-current" />
-                  Most Popular Service
-                </Badge>
-              </motion.div>
-            )}
-
             <motion.h1
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.3 }}
               className="text-2xl md:text-3xl lg:text-4xl font-bold text-slate-900 mb-4 leading-tight"
             >
-              <span className="text-blue-600">
-                {service.title.split(" ").slice(0, 2).join(" ")}
-              </span>{" "}
+              <span className="text-blue-600">{service.title.split(" ").slice(0, 2).join(" ")}</span>{" "}
               <span className="text-slate-900">{service.title.split(" ").slice(2).join(" ")}</span>
             </motion.h1>
 
@@ -137,7 +111,7 @@ export default function OverviewSection({ service }: OverviewSectionProps) {
               className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8"
             >
               {[
-                "⚡ Lightning Fast Processing",
+                "⏱️ Quick Turnaround Time",
                 "🎯 Expert Legal Guidance",
                 "🔄 End-to-End Solutions",
                 "✅ 100% Compliance Assured",
@@ -161,14 +135,14 @@ export default function OverviewSection({ service }: OverviewSectionProps) {
               transition={{ duration: 0.8, delay: 0.9 }}
               className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
             >
-              <WhatsAppCTAButton className="">
+              {/* <WhatsAppCTAButton className="">
                 Get Started Now
                 <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
-              </WhatsAppCTAButton>
+              </WhatsAppCTAButton> */}
               <Button
-                variant="outline"
-                className="text-blue-600 border-blue-200 hover:bg-blue-50"
-                onClick={() => window.location.href = "tel:+919699214195"}
+                variant="default"
+                className=""
+                onClick={() => (window.location.href = "tel:+919699214195")}
               >
                 <Phone className="w-5 h-5 mr-2" />
                 Call Expert
@@ -181,7 +155,7 @@ export default function OverviewSection({ service }: OverviewSectionProps) {
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="relative"
+            className="relative max-w-full w-full mx-auto lg:mx-0"
           >
             <div className="bg-white rounded-3xl p-8 shadow-lg border border-slate-200 relative overflow-hidden">
               {/* Form Background Pattern */}
@@ -195,22 +169,15 @@ export default function OverviewSection({ service }: OverviewSectionProps) {
                   <>
                     {/* Form Header */}
                     <div className="text-center mb-6">
-                      <div className="bg-blue-600 w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-4">
-                        <Sparkles className="w-6 h-6 text-white" />
-                      </div>
+                   
                       <h3 className="text-lg font-bold text-slate-800 mb-2">Get Free Consultation</h3>
-                      <p className="text-xs text-slate-600">
-                        Fill your details and our expert will call you back within 30 minutes
-                      </p>
+                   
                     </div>
 
                     {/* Form */}
                     <form onSubmit={handleSubmit} className="space-y-6">
                       <div className="space-y-2">
-                        <Label htmlFor="name" className="text-sm font-medium text-slate-700 flex items-center">
-                          <User className="w-4 h-4 mr-2" />
-                          Full Name
-                        </Label>
+                 
                         <Input
                           id="name"
                           type="text"
@@ -223,10 +190,7 @@ export default function OverviewSection({ service }: OverviewSectionProps) {
                       </div>
 
                       <div className="space-y-2">
-                        <Label htmlFor="mobile" className="text-sm font-medium text-slate-700 flex items-center">
-                          <Phone className="w-4 h-4 mr-2" />
-                          Mobile Number
-                        </Label>
+                 
                         <Input
                           id="mobile"
                           type="tel"
@@ -239,10 +203,7 @@ export default function OverviewSection({ service }: OverviewSectionProps) {
                       </div>
 
                       <div className="space-y-2">
-                        <Label htmlFor="email" className="text-sm font-medium text-slate-700 flex items-center">
-                          <Mail className="w-4 h-4 mr-2" />
-                          Email Address
-                        </Label>
+                    
                         <Input
                           id="email"
                           type="email"
