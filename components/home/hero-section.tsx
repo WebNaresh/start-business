@@ -26,12 +26,12 @@ export default function EnhancedHeroSection() {
       description: "Get personalized consultation and support for all your business compliance needs",
       stats: { clients: "1000+", rating: "4.8", time: "48hrs" },
     },
-    {
-      image: "/hero/hero_new_2.png",
-      title: "Launch Your Startup With Strategic Support",
-      description: "Comprehensive solutions to navigate complex regulatory requirements and focus on your growth",
-      stats: { clients: "750+", rating: "4.9", time: "72hrs" },
-    },
+    // {
+    //   image: "/hero/hero_new_2.png",
+    //   title: "Launch Your Startup With Strategic Support",
+    //   description: "Comprehensive solutions to navigate complex regulatory requirements and focus on your growth",
+    //   stats: { clients: "750+", rating: "4.9", time: "72hrs" },
+    // },
   ]
 
   const [currentSlide, setCurrentSlide] = useState(0)
@@ -112,6 +112,13 @@ export default function EnhancedHeroSection() {
   useEffect(() => {
     progressValue.set(progress)
   }, [progress, progressValue])
+
+  // Ensure currentSlide is always valid
+  useEffect(() => {
+    if (currentSlide >= slides.length) {
+      setCurrentSlide(0)
+    }
+  }, [currentSlide, slides.length])
 
   const slideVariants = {
     enter: (direction: number) => ({
@@ -264,7 +271,8 @@ export default function EnhancedHeroSection() {
           </div>
 
           {/* Right Side: Conditional rendering based on currentSlide */}
-          {slides[currentSlide].title === "Launch Your Startup With Strategic Support" ? (
+          {/* Hide the business type card for the third slide since it's hidden */}
+          {false ? (
             <motion.div
               variants={itemVariants}
               className="w-full max-w-lg mx-auto flex flex-col gap-4"
