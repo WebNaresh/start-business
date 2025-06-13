@@ -30,7 +30,7 @@ export default function FAQAccordion({ faqs, showCallButtons = true }: FAQAccord
                 className="text-sm px-4 py-2 mt-2 flex items-center w-auto"
                 size="sm"
               >
-                <Phone className="w-4 h-4 mr-2" />
+             
                 Call for more info
               </CallCTAButton>
             )}
