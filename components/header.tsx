@@ -274,7 +274,7 @@ export default function Header() {
   }
 
   return (
-    <header className={`sticky top-0 z-50 w-full transition-all duration-300 ${scrolled ? "shadow-lg bg-white/95 backdrop-blur-sm" : "bg-white"}`}>
+    <header className={`sticky top-0 z-50 w-full transition-all duration-300 shadow-lg ${scrolled ? "shadow-lg bg-white/95 backdrop-blur-sm" : "bg-white"}`}>
       {/* Top bar with contact info */}
      
 
