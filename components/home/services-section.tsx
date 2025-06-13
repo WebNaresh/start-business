@@ -1,17 +1,16 @@
 "use client"
 
-import { useState, useRef } from "react"
+import type React from "react"
+
+import { useState, useRef, useCallback, useEffect } from "react"
 import Link from "next/link"
+import useEmblaCarousel from "embla-carousel-react"
 import {
   ArrowRight,
   Building2,
   Shield,
   FileCheck,
   Calculator,
-  Utensils,
-  Heart,
-  Star,
-  Clock,
   Users,
   CheckCircle,
   Sparkles,
@@ -19,16 +18,99 @@ import {
   Search,
   X,
   AlertCircle,
+  ChevronLeft,
+  ChevronRight,
+  Pause,
+  Play,
 } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
 
-export default function EnhancedServicesSection() {
+// Type definitions
+type Service = {
+  title: string
+  description: string
+  price: string
+  originalPrice: string
+  billing: string
+  slug: string
+  mostPopular: boolean
+  category: string
+  icon: React.ElementType
+  rating: number
+  completedProjects: number
+  deliveryTime: string
+  features: string[]
+  testimonial: {
+    text: string
+    author: string
+  }
+}
+
+type ServiceCardProps = {
+  service: Service
+  idx: number
+  hoveredCard: number | null
+  setHoveredCard: (idx: number | null) => void
+}
+
+export default function ServicesCarousel() {
   const [selectedCategory, setSelectedCategory] = useState("all")
   const [searchTerm, setSearchTerm] = useState("")
   const [hoveredCard, setHoveredCard] = useState<number | null>(null)
+  const [isPlaying, setIsPlaying] = useState(true)
+  const [currentSlide, setCurrentSlide] = useState(0)
+  const autoplayRef = useRef<NodeJS.Timeout | null>(null)
+
+  // Configure Embla Carousel with options for all screen sizes
+  const [emblaRef, emblaApi] = useEmblaCarousel({
+    align: "center",
+    containScroll: "trimSnaps",
+    dragFree: true,
+    loop: true,
+    slidesToScroll: 1,
+    breakpoints: {
+      "(min-width: 768px)": { slidesToScroll: 2 },
+      "(min-width: 1024px)": { slidesToScroll: 3 },
+    },
+  })
+
+  // Autoplay functionality
+  const autoplay = useCallback(() => {
+    if (!emblaApi || !isPlaying) return
+    if (autoplayRef.current) clearInterval(autoplayRef.current)
+    autoplayRef.current = setInterval(() => {
+      if (emblaApi) emblaApi.scrollNext()
+    }, 3000) // Change slide every 3 seconds
+  }, [emblaApi, isPlaying])
+
+  // Handle autoplay on mount and cleanup
+  useEffect(() => {
+    if (!emblaApi) return
+
+    autoplay()
+
+    emblaApi.on("pointerDown", () => {
+      if (autoplayRef.current) clearInterval(autoplayRef.current)
+    })
+
+    emblaApi.on("pointerUp", autoplay)
+
+    emblaApi.on("select", () => {
+      setCurrentSlide(emblaApi.selectedScrollSnap())
+    })
+
+    return () => {
+      if (autoplayRef.current) clearInterval(autoplayRef.current)
+    }
+  }, [emblaApi, autoplay])
+
+  // Toggle autoplay
+  const toggleAutoplay = () => {
+    setIsPlaying(!isPlaying)
+  }
 
   // Enhanced service data with more details
   const services = [
@@ -170,13 +252,7 @@ export default function EnhancedServicesSection() {
       rating: 4.9,
       completedProjects: 800,
       deliveryTime: "2-3 days",
-      features: [
-        "Income Computation",
-        "Tax Calculation",
-        "Form Preparation",
-        "E-filing Support",
-        "Tax Planning Tips",
-      ],
+      features: ["Income Computation", "Tax Calculation", "Form Preparation", "E-filing Support", "Tax Planning Tips"],
       testimonial: {
         text: "Saved us time and money!",
         author: "Dr. Sunita Rao",
@@ -202,17 +278,15 @@ export default function EnhancedServicesSection() {
   })
 
   return (
-    <section className="py-8 ">
+    <section className="py-4">
       <div className="container mx-auto px-4">
         {/* Enhanced Header */}
-        <div className="mb-12 text-center">
+        <div className="mb-8 text-center">
           <Badge variant="secondary" className="mb-4 bg-blue-100 text-blue-700 px-4 py-2">
             <Sparkles className="w-4 h-4 mr-2" />
             Our Services
           </Badge>
-          <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-3">
-            Our Popular Services 
-          </h2>
+          <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-3">Our Popular Services</h2>
           <p className="text-sm text-slate-600 mb-8 max-w-2xl mx-auto">
             Everything you need to start, run, and grow your business with confidence
           </p>
@@ -265,129 +339,87 @@ export default function EnhancedServicesSection() {
           </div>
         </div>
 
-        {/* Enhanced Services Grid */}
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-          {filteredServices.map((service, idx) => {
-            const IconComponent = service.icon
-            const savings =
-              Number.parseInt(service.originalPrice.replace(/[₹,]/g, "")) -
-              Number.parseInt(service.price.replace(/[₹,]/g, ""))
-            const savingsPercent = Math.round(
-              (savings / Number.parseInt(service.originalPrice.replace(/[₹,]/g, ""))) * 100,
-            )
-
-            return (
-              <div
-                key={service.title}
-                className={`group relative rounded-2xl bg-white shadow-lg border-2 transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 ${
-                  service.mostPopular ? "border-blue-500 shadow-blue-100" : "border-slate-100 hover:border-blue-200"
-                } flex flex-col overflow-hidden`}
-                onMouseEnter={() => setHoveredCard(idx)}
-                onMouseLeave={() => setHoveredCard(null)}
-              >
-                {/* Savings Badge */}
-                <div className="absolute top-1 right-1 z-10">
-                  <Badge variant="destructive" className="bg-green-600 hover:bg-green-700">
-                    Save {savingsPercent}%
-                  </Badge>
-                </div>
-
-                <div className="p-6 flex-1 flex flex-col">
-                  {/* Service Header */}
-                  <div className="flex items-start gap-4 mb-4">
+        {/* Services Carousel - Now used for all screen sizes */}
+        <div className="relative">
+          {filteredServices.length > 0 ? (
+            <>
+              <div className="overflow-hidden" ref={emblaRef}>
+                <div className="flex">
+                  {filteredServices.map((service, idx) => (
                     <div
-                      className={`p-3 rounded-xl ${service.mostPopular ? "bg-blue-100" : "bg-slate-100"} group-hover:scale-110 transition-transform duration-300`}
+                      key={service.title}
+                      className="flex-[0_0_100%] sm:flex-[0_0_85%] md:flex-[0_0_50%] lg:flex-[0_0_33.333%] min-w-0 px-4"
                     >
-                      <IconComponent
-                        className={`w-6 h-6 ${service.mostPopular ? "text-blue-600" : "text-slate-600"}`}
+                      <ServiceCard
+                        service={service}
+                        idx={idx}
+                        hoveredCard={hoveredCard}
+                        setHoveredCard={setHoveredCard}
                       />
                     </div>
-                    <div className="flex-1">
-                      <h3 className="text-base font-semibold text-slate-900 mb-2 group-hover:text-blue-600 transition-colors">
-                        {service.title}
-                      </h3>
-                      <p className="text-xs text-slate-600 text-sm leading-relaxed">{service.description}</p>
-                    </div>
-                  </div>
+                  ))}
+                </div>
+              </div>
 
-                  {/* Features List */}
-                  <div className="mb-6 flex-1">
-                    <h4 className="text-sm font-semibold mb-3 text-slate-700">What's included:</h4>
-                    <ul className="space-y-2">
-                      {service.features.slice(0, 3).map((feature, featureIdx) => (
-                        <li key={featureIdx} className="flex items-center gap-2 text-sm text-slate-600">
-                          <CheckCircle className="w-4 h-4 text-green-500 flex-shrink-0" />
-                          <span>{feature}</span>
-                        </li>
-                      ))}
-                      {service.features.length > 3 && (
-                        <li className="text-sm text-blue-600 font-medium">
-                          +{service.features.length - 3} more features
-                        </li>
-                      )}
-                    </ul>
-                  </div>
+              {/* Carousel Controls */}
+              <div className="mt-8 flex items-center justify-center gap-4">
+                <Button
+                  variant="outline"
+                  size="icon"
+                  className="rounded-full bg-white shadow-md hover:bg-slate-50"
+                  onClick={() => emblaApi?.scrollPrev()}
+                  aria-label="Previous slide"
+                >
+                  <ChevronLeft className="h-5 w-5" />
+                </Button>
 
-                  {/* Pricing */}
-                  <div className="mb-6">
-                    <div className="flex items-baseline gap-2 mb-1">
-                      <span className="text-3xl font-bold text-slate-900">{service.price}</span>
-                      <span className="text-lg text-slate-400 line-through">{service.originalPrice}</span>
-                      <span className="text-sm font-normal text-slate-500">{service.billing}</span>
-                    </div>
-                    <p className="text-sm text-green-600 font-medium">You save ₹{savings.toLocaleString()}!</p>
-                    <div className="flex items-center gap-1 mt-2 text-sm text-red-600">
-                      <AlertCircle className="w-4 h-4" />
-                      <span>Government fee excluded</span>
-                    </div>
-                  </div>
-
-                  {/* CTA Button */}
-                  <Link href={`/services/${service.slug}`} className="mt-auto">
-                    <Button
-                      className={`w-full group/btn transition-all duration-300 ${
-                        service.mostPopular
-                          ? "bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 shadow-lg hover:shadow-xl"
-                          : "bg-slate-900 hover:bg-slate-800"
+                {/* Dots Indicators */}
+                <div className="flex items-center gap-2">
+                  {filteredServices.map((_, idx) => (
+                    <button
+                      key={idx}
+                      onClick={() => emblaApi?.scrollTo(idx)}
+                      className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                        currentSlide === idx ? "bg-blue-600 w-4" : "bg-slate-300"
                       }`}
-                      size="lg"
-                    >
-                      Get Started Now
-                      <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
-                    </Button>
-                  </Link>
+                      aria-label={`Go to slide ${idx + 1}`}
+                    />
+                  ))}
                 </div>
 
-                {/* Hover Effect Overlay */}
-                <div
-                  className={`absolute inset-0 bg-gradient-to-br from-blue-600/5 to-transparent transition-opacity duration-300 pointer-events-none ${
-                    hoveredCard === idx ? "opacity-100" : "opacity-0"
-                  }`}
-                />
-              </div>
-            )
-          })}
-        </div>
+                <Button
+                  variant="outline"
+                  size="icon"
+                  className="rounded-full bg-white shadow-md hover:bg-slate-50"
+                  onClick={() => emblaApi?.scrollNext()}
+                  aria-label="Next slide"
+                >
+                  <ChevronRight className="h-5 w-5" />
+                </Button>
 
-        {/* No Results State */}
-        {filteredServices.length === 0 && (
-          <div className="text-center py-12">
-            <div className="w-24 h-24 mx-auto mb-4 bg-slate-100 rounded-full flex items-center justify-center">
-              <Search className="w-8 h-8 text-slate-400" />
+               
+              </div>
+            </>
+          ) : (
+            /* No Results State */
+            <div className="text-center py-12">
+              <div className="w-24 h-24 mx-auto mb-4 bg-slate-100 rounded-full flex items-center justify-center">
+                <Search className="w-8 h-8 text-slate-400" />
+              </div>
+              <h3 className="text-xl font-semibold mb-2">No services found</h3>
+              <p className="text-slate-600 mb-4">Try adjusting your search or filter criteria</p>
+              <Button
+                variant="outline"
+                onClick={() => {
+                  setSearchTerm("")
+                  setSelectedCategory("all")
+                }}
+              >
+                Clear Filters
+              </Button>
             </div>
-            <h3 className="text-xl font-semibold mb-2">No services found</h3>
-            <p className="text-slate-600 mb-4">Try adjusting your search or filter criteria</p>
-            <Button
-              variant="outline"
-              onClick={() => {
-                setSearchTerm("")
-                setSelectedCategory("all")
-              }}
-            >
-              Clear Filters
-            </Button>
-          </div>
-        )}
+          )}
+        </div>
 
         {/* View More Services Button */}
         <div className="mt-12 text-center">
@@ -403,5 +435,99 @@ export default function EnhancedServicesSection() {
         </div>
       </div>
     </section>
+  )
+}
+
+// Service Card Component
+function ServiceCard({ service, idx, hoveredCard, setHoveredCard }: ServiceCardProps) {
+  const IconComponent = service.icon
+  const savings =
+    Number.parseInt(service.originalPrice.replace(/[₹,]/g, "")) - Number.parseInt(service.price.replace(/[₹,]/g, ""))
+  const savingsPercent = Math.round((savings / Number.parseInt(service.originalPrice.replace(/[₹,]/g, ""))) * 100)
+
+  return (
+    <div
+      className={`group relative rounded-2xl bg-white shadow-lg border-2 transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 ${
+        service.mostPopular ? "border-blue-500 shadow-blue-100" : "border-slate-100 hover:border-blue-200"
+      } flex flex-col overflow-hidden h-full`}
+      onMouseEnter={() => setHoveredCard(idx)}
+      onMouseLeave={() => setHoveredCard(null)}
+    >
+      {/* Savings Badge */}
+      <div className="absolute top-1 right-1 z-10">
+        <Badge variant="destructive" className="bg-green-600 hover:bg-green-700">
+          Save {savingsPercent}%
+        </Badge>
+      </div>
+
+      <div className="p-6 flex-1 flex flex-col">
+        {/* Service Header */}
+        <div className="flex items-start gap-4 mb-4">
+          <div
+            className={`p-3 rounded-xl ${service.mostPopular ? "bg-blue-100" : "bg-slate-100"} group-hover:scale-110 transition-transform duration-300`}
+          >
+            <IconComponent className={`w-6 h-6 ${service.mostPopular ? "text-blue-600" : "text-slate-600"}`} />
+          </div>
+          <div className="flex-1">
+            <h3 className="text-base font-semibold text-slate-900 mb-2 group-hover:text-blue-600 transition-colors">
+              {service.title}
+            </h3>
+            <p className="text-xs text-slate-600 text-sm leading-relaxed">{service.description}</p>
+          </div>
+        </div>
+
+        {/* Features List */}
+        <div className="mb-6 flex-1">
+          <h4 className="text-sm font-semibold mb-3 text-slate-700">What's included:</h4>
+          <ul className="space-y-2">
+            {service.features.slice(0, 3).map((feature, featureIdx) => (
+              <li key={featureIdx} className="flex items-center gap-2 text-sm text-slate-600">
+                <CheckCircle className="w-4 h-4 text-green-500 flex-shrink-0" />
+                <span>{feature}</span>
+              </li>
+            ))}
+            {service.features.length > 3 && (
+              <li className="text-sm text-blue-600 font-medium">+{service.features.length - 3} more features</li>
+            )}
+          </ul>
+        </div>
+
+        {/* Pricing */}
+        <div className="mb-6">
+          <div className="flex items-baseline gap-2 mb-1">
+            <span className="text-3xl font-bold text-slate-900">{service.price}</span>
+            <span className="text-lg text-slate-400 line-through">{service.originalPrice}</span>
+            <span className="text-sm font-normal text-slate-500">{service.billing}</span>
+          </div>
+          <p className="text-sm text-green-600 font-medium">You save ₹{savings.toLocaleString()}!</p>
+          <div className="flex items-center gap-1 mt-2 text-sm text-red-600">
+            <AlertCircle className="w-4 h-4" />
+            <span>Government fee excluded</span>
+          </div>
+        </div>
+
+        {/* CTA Button */}
+        <Link href={`/services/${service.slug}`} className="mt-auto">
+          <Button
+            className={`w-full group/btn transition-all duration-300 ${
+              service.mostPopular
+                ? "bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 shadow-lg hover:shadow-xl"
+                : "bg-slate-900 hover:bg-slate-800"
+            }`}
+            size="lg"
+          >
+            Get Started Now
+            <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
+          </Button>
+        </Link>
+      </div>
+
+      {/* Hover Effect Overlay */}
+      <div
+        className={`absolute inset-0 bg-gradient-to-br from-blue-600/5 to-transparent transition-opacity duration-300 pointer-events-none ${
+          hoveredCard === idx ? "opacity-100" : "opacity-0"
+        }`}
+      />
+    </div>
   )
 }

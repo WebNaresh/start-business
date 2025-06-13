@@ -90,7 +90,7 @@ export default function TrustStatsSection() {
   ]
 
   return (
-    <section className="py-8 relative overflow-hidden  via-white to-blue-50/30">
+    <section className="py-4 relative overflow-hidden  via-white to-blue-50/30">
       {/* Background Elements */}
       <div className="absolute top-0 left-0 w-96 h-96  rounded-full -ml-48 -mt-48 opacity-40 blur-3xl" />
       <div className="absolute bottom-0 right-0 w-80 h-80  rounded-full -mr-40 -mb-40 opacity-30 blur-2xl" />
