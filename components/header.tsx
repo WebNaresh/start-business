@@ -468,32 +468,6 @@ export default function Header() {
 
               
 
-              
-
-                    <SheetClose asChild>
-                      <Link
-                        href="/calculators"
-                        className={`rounded-md px-4 py-3 text-base font-medium transition-colors ${
-                          isActive("/calculators")
-                            ? "bg-blue-50 text-blue-600"
-                            : "text-slate-700 hover:bg-slate-50 hover:text-blue-600"
-                        }`}
-                      >
-                        Tools
-                      </Link>
-                    </SheetClose>
-                    <SheetClose asChild>
-                      <Link
-                        href="/blog"
-                        className={`rounded-md px-4 py-3 text-base font-medium transition-colors ${
-                          isActive("/blog")
-                            ? "bg-blue-50 text-blue-600"
-                            : "text-slate-700 hover:bg-slate-50 hover:text-blue-600"
-                        }`}
-                      >
-                        Blogs
-                      </Link>
-                    </SheetClose>
 
                     {/* Mobile Service Categories */}
                     {serviceCategories.map((category) => (
@@ -559,6 +533,20 @@ export default function Header() {
                         </AnimatePresence>
                       </div>
                     ))}
+                    
+          
+                    <SheetClose asChild>
+                      <Link
+                        href="/blog"
+                        className={`rounded-md px-4 py-3 text-base font-medium transition-colors ${
+                          isActive("/blog")
+                            ? "bg-blue-50 text-blue-600"
+                            : "text-slate-700 hover:bg-slate-50 hover:text-blue-600"
+                        }`}
+                      >
+                        Blogs
+                      </Link>
+                    </SheetClose>
                   </nav>
                 </div>
 
