@@ -375,16 +375,6 @@ export default function EnhancedFooter() {
             </div>
           </div>
 
-          {/* Enhanced Scroll to Top Button */}
-          <button
-            onClick={scrollToTop}
-            className={`fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 p-2 sm:p-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 ${
-              showScrollTop ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10 pointer-events-none"
-            }`}
-            aria-label="Scroll to top"
-          >
-            <ChevronUp className="h-4 w-4 sm:h-5 sm:w-5" />
-          </button>
         </div>
       </div>
     </footer>
