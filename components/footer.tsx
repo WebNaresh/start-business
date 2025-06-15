@@ -250,7 +250,7 @@ export default function EnhancedFooter() {
             </div>
 
             {/* Government Portals - Hidden on mobile, shown on larger screens */}
-            <div className="hidden lg:block lg:col-span-1">
+            <div className=" lg:block lg:col-span-1">
               <h3 className="mb-4 lg:mb-6 text-base sm:text-lg font-bold text-white relative">
                 Government Portals
                 <span className="absolute -bottom-2 left-0 w-12 h-1 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full"></span>
