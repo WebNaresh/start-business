@@ -22,11 +22,6 @@ export default function FixedHeroCarousel() {
       title: "Expert Guidance For Your Business Growth",
       description: "Get personalized consultation and support for all your business compliance needs",
     },
-    {
-      image: "/hero/hero_new_2.png",
-      title: "Launch Your Business With Strategic Support",
-      description: "Comprehensive solutions to navigate complex regulatory requirements and focus on your growth",
-    },
   ]
 
   const [currentSlide, setCurrentSlide] = useState(0)

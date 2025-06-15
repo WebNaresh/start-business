@@ -21,7 +21,7 @@ export default function WhyChooseUs() {
     {
       icon: Zap,
       title: "Accelerated Processing",
-      shortDesc: "50% faster than industry standard",
+      shortDesc: "30% faster than industry standard",
       benefit: "Lightning-fast delivery",
       color: "from-orange-500 to-orange-600",
       bgColor: "bg-orange-50",
@@ -56,8 +56,8 @@ export default function WhyChooseUs() {
     },
     {
       icon: Headphones,
-      title: "24/7 Human Support",
-      shortDesc: "Round-the-clock assistance and guidance",
+      title: "Real Human Support",
+      shortDesc: "No ticketing, No bots",
       benefit: "Always available",
       color: "from-pink-500 to-pink-600",
       bgColor: "bg-pink-50",
