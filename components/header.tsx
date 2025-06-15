@@ -466,62 +466,34 @@ export default function Header() {
                       </Link>
                     </SheetClose>
 
-                    {/* More dropdown in mobile */}
-                    <div className="space-y-1">
-                      <button
-                        onClick={() => setExpandedMobileCategory(expandedMobileCategory === "More" ? null : "More")}
-                        className={`w-full rounded-md px-4 py-3 text-base font-medium transition-colors flex items-center justify-between ${
-                          isActive("/about") || isActive("/contact") || isActive("/calculators")
+              
+
+              
+
+                    <SheetClose asChild>
+                      <Link
+                        href="/calculators"
+                        className={`rounded-md px-4 py-3 text-base font-medium transition-colors ${
+                          isActive("/calculators")
                             ? "bg-blue-50 text-blue-600"
                             : "text-slate-700 hover:bg-slate-50 hover:text-blue-600"
                         }`}
                       >
-                        <span>More</span>
-                        <ChevronDown
-                          className={`w-5 h-5 transition-transform duration-200 ${
-                            expandedMobileCategory === "More" ? "rotate-180" : ""
-                          }`}
-                        />
-                      </button>
-                      <AnimatePresence>
-                        {expandedMobileCategory === "More" && (
-                          <motion.div
-                            initial={{ height: 0, opacity: 0 }}
-                            animate={{ height: "auto", opacity: 1 }}
-                            exit={{ height: 0, opacity: 0 }}
-                            transition={{ duration: 0.2 }}
-                            className="overflow-hidden"
-                          >
-                            <div className="pl-4 space-y-1">
-                              <SheetClose asChild>
-                                <Link
-                                  href="/about"
-                                  className="block px-4 py-2.5 text-sm text-slate-600 hover:text-blue-600 hover:bg-blue-50 rounded-md transition-colors"
-                                >
-                                  About Us
-                                </Link>
-                              </SheetClose>
-                              <SheetClose asChild>
-                                <Link
-                                  href="/contact"
-                                  className="block px-4 py-2.5 text-sm text-slate-600 hover:text-blue-600 hover:bg-blue-50 rounded-md transition-colors"
-                                >
-                                  Contact
-                                </Link>
-                              </SheetClose>
-                              <SheetClose asChild>
-                                <Link
-                                  href="/calculators"
-                                  className="block px-4 py-2.5 text-sm text-slate-600 hover:text-blue-600 hover:bg-blue-50 rounded-md transition-colors"
-                                >
-                                  Tools
-                                </Link>
-                              </SheetClose>
-                            </div>
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
-                    </div>
+                        Tools
+                      </Link>
+                    </SheetClose>
+                    <SheetClose asChild>
+                      <Link
+                        href="/blog"
+                        className={`rounded-md px-4 py-3 text-base font-medium transition-colors ${
+                          isActive("/blog")
+                            ? "bg-blue-50 text-blue-600"
+                            : "text-slate-700 hover:bg-slate-50 hover:text-blue-600"
+                        }`}
+                      >
+                        Blogs
+                      </Link>
+                    </SheetClose>
 
                     {/* Mobile Service Categories */}
                     {serviceCategories.map((category) => (
