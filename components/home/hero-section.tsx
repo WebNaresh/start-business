@@ -23,7 +23,7 @@ export default function FixedHeroCarousel() {
   const slides = [
     {
       image: "/hero/hero_new_1.png",
-      title: "Start Your Business Journey in India with Expert Guidance",
+      title: "Start Your Business with Expert Guidance",
       description: "Professional business registration, compliance, and legal services to help your business thrive in India's growing market",
     },
     {
