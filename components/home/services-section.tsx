@@ -5,6 +5,7 @@ import type React from "react"
 import { useState, useRef, useCallback, useEffect } from "react"
 import Link from "next/link"
 import useEmblaCarousel from "embla-carousel-react"
+import Script from "next/script"
 import {
   ArrowRight,
   Building2,
@@ -277,16 +278,73 @@ export default function ServicesCarousel() {
     return matchesCategory && matchesSearch
   })
 
+  // Generate structured data for services
+  const servicesStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "itemListElement": services.map((service, index) => ({
+      "@type": "Service",
+      "position": index + 1,
+      "name": service.title,
+      "description": service.description,
+      "provider": {
+        "@type": "Organization",
+        "name": "Start Business"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": service.price.replace(/[₹,]/g, ""),
+        "priceCurrency": "INR",
+        "availability": "https://schema.org/InStock"
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": service.rating,
+        "reviewCount": service.completedProjects
+      },
+      "serviceType": service.category,
+      "areaServed": "IN",
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Service Features",
+        "itemListElement": service.features.map((feature, idx) => ({
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": feature
+          }
+        }))
+      }
+    }))
+  }
+
   return (
-    <section className="py-4">
+    <section 
+      className="py-4"
+      aria-labelledby="services-heading"
+    >
+      <Script
+        id="services-structured-data"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(servicesStructuredData) }}
+      />
       <div className="container mx-auto px-4">
         {/* Enhanced Header */}
         <div className="mb-8 text-center">
-          <Badge variant="secondary" className="mb-4 bg-blue-100 text-blue-700 px-4 py-2">
-            <Sparkles className="w-4 h-4 mr-2" />
+          <Badge 
+            variant="secondary" 
+            className="mb-4 bg-blue-100 text-blue-700 px-4 py-2"
+            aria-label="Services section badge"
+          >
+            <Sparkles className="w-4 h-4 mr-2" aria-hidden="true" />
             Our Services
           </Badge>
-          <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-3">Our Popular Services</h2>
+          <h2 
+            id="services-heading"
+            className="text-2xl md:text-3xl font-bold text-slate-900 mb-3"
+          >
+            Our Popular Services
+          </h2>
           <p className="text-sm text-slate-600 mb-8 max-w-2xl mx-auto">
             Everything you need to start, run, and grow your business with confidence
           </p>
@@ -296,7 +354,11 @@ export default function ServicesCarousel() {
         <div className="mb-12">
           <div className="flex flex-col lg:flex-row gap-6 items-center justify-between">
             {/* Category Filters */}
-            <div className="flex flex-wrap gap-2">
+            <div 
+              className="flex flex-wrap gap-2"
+              role="list"
+              aria-label="Service categories"
+            >
               {categories.map((category) => (
                 <Button
                   key={category.id}
@@ -308,8 +370,10 @@ export default function ServicesCarousel() {
                       ? "bg-blue-600 hover:bg-blue-700 shadow-lg"
                       : "hover:bg-blue-50 hover:border-blue-200"
                   }`}
+                  aria-pressed={selectedCategory === category.id}
+                  role="listitem"
                 >
-                  <Filter className="w-4 h-4 mr-2" />
+                  <Filter className="w-4 h-4 mr-2" aria-hidden="true" />
                   {category.name} ({category.count})
                 </Button>
               ))}
@@ -317,13 +381,14 @@ export default function ServicesCarousel() {
 
             {/* Search */}
             <div className="relative w-full lg:w-80">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 w-4 h-4" />
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 w-4 h-4" aria-hidden="true" />
               <Input
                 type="text"
                 placeholder="Search services..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="pl-10 pr-10 border-slate-200 focus:border-blue-300 focus:ring-blue-200"
+                aria-label="Search services"
               />
               {searchTerm && (
                 <Button
@@ -331,24 +396,34 @@ export default function ServicesCarousel() {
                   size="sm"
                   onClick={() => setSearchTerm("")}
                   className="absolute right-1 top-1/2 transform -translate-y-1/2 h-8 w-8 p-0"
+                  aria-label="Clear search"
                 >
-                  <X className="w-4 h-4" />
+                  <X className="w-4 h-4" aria-hidden="true" />
                 </Button>
               )}
             </div>
           </div>
         </div>
 
-        {/* Services Carousel - Now used for all screen sizes */}
+        {/* Services Carousel */}
         <div className="relative">
           {filteredServices.length > 0 ? (
             <>
-              <div className="overflow-hidden" ref={emblaRef}>
+              <div 
+                className="overflow-hidden" 
+                ref={emblaRef}
+                role="region"
+                aria-roledescription="carousel"
+                aria-label="Services carousel"
+              >
                 <div className="flex">
                   {filteredServices.map((service, idx) => (
                     <div
                       key={service.title}
                       className="flex-[0_0_100%] sm:flex-[0_0_85%] md:flex-[0_0_50%] lg:flex-[0_0_33.333%] min-w-0 px-4"
+                      role="group"
+                      aria-roledescription="slide"
+                      aria-label={`Slide ${idx + 1} of ${filteredServices.length}`}
                     >
                       <ServiceCard
                         service={service}
@@ -362,7 +437,11 @@ export default function ServicesCarousel() {
               </div>
 
               {/* Carousel Controls */}
-              <div className="mt-8 flex items-center justify-center gap-4">
+              <div 
+                className="mt-8 flex items-center justify-center gap-4"
+                role="group"
+                aria-label="Carousel controls"
+              >
                 <Button
                   variant="outline"
                   size="icon"
@@ -370,11 +449,15 @@ export default function ServicesCarousel() {
                   onClick={() => emblaApi?.scrollPrev()}
                   aria-label="Previous slide"
                 >
-                  <ChevronLeft className="h-5 w-5" />
+                  <ChevronLeft className="h-5 w-5" aria-hidden="true" />
                 </Button>
 
                 {/* Dots Indicators */}
-                <div className="flex items-center gap-2">
+                <div 
+                  className="flex items-center gap-2"
+                  role="tablist"
+                  aria-label="Slide indicators"
+                >
                   {filteredServices.map((_, idx) => (
                     <button
                       key={idx}
@@ -382,6 +465,8 @@ export default function ServicesCarousel() {
                       className={`w-2 h-2 rounded-full transition-all duration-300 ${
                         currentSlide === idx ? "bg-blue-600 w-4" : "bg-slate-300"
                       }`}
+                      role="tab"
+                      aria-selected={currentSlide === idx}
                       aria-label={`Go to slide ${idx + 1}`}
                     />
                   ))}
@@ -394,17 +479,19 @@ export default function ServicesCarousel() {
                   onClick={() => emblaApi?.scrollNext()}
                   aria-label="Next slide"
                 >
-                  <ChevronRight className="h-5 w-5" />
+                  <ChevronRight className="h-5 w-5" aria-hidden="true" />
                 </Button>
-
-               
               </div>
             </>
           ) : (
             /* No Results State */
-            <div className="text-center py-12">
+            <div 
+              className="text-center py-12"
+              role="alert"
+              aria-live="polite"
+            >
               <div className="w-24 h-24 mx-auto mb-4 bg-slate-100 rounded-full flex items-center justify-center">
-                <Search className="w-8 h-8 text-slate-400" />
+                <Search className="w-8 h-8 text-slate-400" aria-hidden="true" />
               </div>
               <h3 className="text-xl font-semibold mb-2">No services found</h3>
               <p className="text-slate-600 mb-4">Try adjusting your search or filter criteria</p>
@@ -414,6 +501,7 @@ export default function ServicesCarousel() {
                   setSearchTerm("")
                   setSelectedCategory("all")
                 }}
+                aria-label="Clear all filters"
               >
                 Clear Filters
               </Button>
@@ -427,9 +515,10 @@ export default function ServicesCarousel() {
             <Button
               size="lg"
               className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 shadow-lg hover:shadow-xl transition-all duration-300"
+              aria-label="View all services"
             >
               View All Services
-              <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+              <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" aria-hidden="true" />
             </Button>
           </Link>
         </div>
@@ -446,7 +535,7 @@ function ServiceCard({ service, idx, hoveredCard, setHoveredCard }: ServiceCardP
   const savingsPercent = Math.round((savings / Number.parseInt(service.originalPrice.replace(/[₹,]/g, ""))) * 100)
 
   return (
-    <div
+    <article
       className={`group relative rounded-2xl bg-white shadow-lg border-2 transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 ${
         service.mostPopular ? "border-blue-500 shadow-blue-100" : "border-slate-100 hover:border-blue-200"
       } flex flex-col overflow-hidden h-full`}
@@ -455,7 +544,11 @@ function ServiceCard({ service, idx, hoveredCard, setHoveredCard }: ServiceCardP
     >
       {/* Savings Badge */}
       <div className="absolute top-1 right-1 z-10">
-        <Badge variant="destructive" className="bg-green-600 hover:bg-green-700">
+        <Badge 
+          variant="destructive" 
+          className="bg-green-600 hover:bg-green-700"
+          aria-label={`Save ${savingsPercent}%`}
+        >
           Save {savingsPercent}%
         </Badge>
       </div>
@@ -465,6 +558,7 @@ function ServiceCard({ service, idx, hoveredCard, setHoveredCard }: ServiceCardP
         <div className="flex items-start gap-4 mb-4">
           <div
             className={`p-3 rounded-xl ${service.mostPopular ? "bg-blue-100" : "bg-slate-100"} group-hover:scale-110 transition-transform duration-300`}
+            aria-hidden="true"
           >
             <IconComponent className={`w-6 h-6 ${service.mostPopular ? "text-blue-600" : "text-slate-600"}`} />
           </div>
@@ -479,15 +573,17 @@ function ServiceCard({ service, idx, hoveredCard, setHoveredCard }: ServiceCardP
         {/* Features List */}
         <div className="mb-6 flex-1">
           <h4 className="text-sm font-semibold mb-3 text-slate-700">What's included:</h4>
-          <ul className="space-y-2">
+          <ul className="space-y-2" role="list">
             {service.features.slice(0, 3).map((feature, featureIdx) => (
-              <li key={featureIdx} className="flex items-center gap-2 text-sm text-slate-600">
-                <CheckCircle className="w-4 h-4 text-green-500 flex-shrink-0" />
+              <li key={featureIdx} className="flex items-center gap-2 text-sm text-slate-600" role="listitem">
+                <CheckCircle className="w-4 h-4 text-green-500 flex-shrink-0" aria-hidden="true" />
                 <span>{feature}</span>
               </li>
             ))}
             {service.features.length > 3 && (
-              <li className="text-sm text-blue-600 font-medium">+{service.features.length - 3} more features</li>
+              <li className="text-sm text-blue-600 font-medium">
+                +{service.features.length - 3} more features
+              </li>
             )}
           </ul>
         </div>
@@ -499,9 +595,11 @@ function ServiceCard({ service, idx, hoveredCard, setHoveredCard }: ServiceCardP
             <span className="text-lg text-slate-400 line-through">{service.originalPrice}</span>
             <span className="text-sm font-normal text-slate-500">{service.billing}</span>
           </div>
-          <p className="text-sm text-green-600 font-medium">You save ₹{savings.toLocaleString()}!</p>
+          <p className="text-sm text-green-600 font-medium">
+            You save ₹{savings.toLocaleString()}!
+          </p>
           <div className="flex items-center gap-1 mt-2 text-sm text-red-600">
-            <AlertCircle className="w-4 h-4" />
+            <AlertCircle className="w-4 h-4" aria-hidden="true" />
             <span>Government fee excluded</span>
           </div>
         </div>
@@ -515,9 +613,10 @@ function ServiceCard({ service, idx, hoveredCard, setHoveredCard }: ServiceCardP
                 : "bg-slate-900 hover:bg-slate-800"
             }`}
             size="lg"
+            aria-label={`Get started with ${service.title}`}
           >
             Get Started Now
-            <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
+            <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover/btn:translate-x-1" aria-hidden="true" />
           </Button>
         </Link>
       </div>
@@ -527,7 +626,8 @@ function ServiceCard({ service, idx, hoveredCard, setHoveredCard }: ServiceCardP
         className={`absolute inset-0 bg-gradient-to-br from-blue-600/5 to-transparent transition-opacity duration-300 pointer-events-none ${
           hoveredCard === idx ? "opacity-100" : "opacity-0"
         }`}
+        aria-hidden="true"
       />
-    </div>
+    </article>
   )
 }

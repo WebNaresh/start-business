@@ -7,6 +7,17 @@ import { ArrowRight, ChevronLeft, ChevronRight, Play, Pause } from "lucide-react
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import Script from "next/script"
+import useEmblaCarousel from 'embla-carousel-react'
+import Autoplay from 'embla-carousel-autoplay'
+import type { EmblaCarouselType } from 'embla-carousel'
+
+// Extend EmblaCarouselType to include autoplay
+interface EmblaCarouselTypeWithAutoplay extends EmblaCarouselType {
+  autoplay?: {
+    play: () => void
+    stop: () => void
+  }
+}
 
 export default function FixedHeroCarousel() {
   const slides = [
@@ -49,77 +60,43 @@ export default function FixedHeroCarousel() {
     }
   }
 
-  const [currentSlide, setCurrentSlide] = useState(0)
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [Autoplay({ delay: 5000, stopOnInteraction: false })])
+  const [selectedIndex, setSelectedIndex] = useState(0)
   const [isPaused, setIsPaused] = useState(false)
-  const [progress, setProgress] = useState(0)
-  const [touchStart, setTouchStart] = useState(0)
-  const [touchEnd, setTouchEnd] = useState(0)
-  const autoplayIntervalRef = useRef<NodeJS.Timeout | null>(null)
   const heroRef = useRef<HTMLElement>(null)
 
-  const nextSlide = useCallback(() => {
-    setCurrentSlide((prev) => (prev === slides.length - 1 ? 0 : prev + 1))
-    setProgress(0)
-  }, [slides.length])
+  const onSelect = useCallback(() => {
+    if (!emblaApi) return
+    setSelectedIndex(emblaApi.selectedScrollSnap())
+  }, [emblaApi])
 
-  const prevSlide = useCallback(() => {
-    setCurrentSlide((prev) => (prev === 0 ? slides.length - 1 : prev - 1))
-    setProgress(0)
-  }, [slides.length])
+  useEffect(() => {
+    if (!emblaApi) return
+    onSelect()
+    emblaApi.on('select', onSelect)
+    return () => {
+      emblaApi.off('select', onSelect)
+    }
+  }, [emblaApi, onSelect])
 
-  const handleDotClick = (index: number) => {
-    setCurrentSlide(index)
-    setProgress(0)
-  }
+  const scrollPrev = useCallback(() => {
+    if (emblaApi) emblaApi.scrollPrev()
+  }, [emblaApi])
+
+  const scrollNext = useCallback(() => {
+    if (emblaApi) emblaApi.scrollNext()
+  }, [emblaApi])
 
   const togglePlayPause = () => {
-    setIsPaused((prev) => !prev)
-  }
-
-  // Touch handlers for mobile swipe
-  const handleTouchStart = (e: React.TouchEvent) => {
-    setTouchStart(e.targetTouches[0].clientX)
-  }
-
-  const handleTouchMove = (e: React.TouchEvent) => {
-    setTouchEnd(e.targetTouches[0].clientX)
-  }
-
-  const handleTouchEnd = () => {
-    if (!touchStart || !touchEnd) return
-    const distance = touchStart - touchEnd
-    const isLeftSwipe = distance > 50
-    const isRightSwipe = distance < -50
-
-    if (isLeftSwipe) nextSlide()
-    if (isRightSwipe) prevSlide()
-  }
-
-  // Reliable auto-advance implementation
-  useEffect(() => {
-    if (autoplayIntervalRef.current) {
-      clearInterval(autoplayIntervalRef.current)
+    if (!emblaApi) return
+    const emblaWithAutoplay = emblaApi as EmblaCarouselTypeWithAutoplay
+    if (isPaused) {
+      emblaWithAutoplay.autoplay?.play()
+    } else {
+      emblaWithAutoplay.autoplay?.stop()
     }
-
-    if (!isPaused) {
-      autoplayIntervalRef.current = setInterval(() => {
-        setProgress((prev) => {
-          const newProgress = prev + 1
-          if (newProgress >= 100) {
-            nextSlide()
-            return 0
-          }
-          return newProgress
-        })
-      }, 50)
-    }
-
-    return () => {
-      if (autoplayIntervalRef.current) {
-        clearInterval(autoplayIntervalRef.current)
-      }
-    }
-  }, [isPaused, nextSlide])
+    setIsPaused(!isPaused)
+  }
 
   return (
     <section
@@ -146,11 +123,11 @@ export default function FixedHeroCarousel() {
           <div className="flex flex-col justify-center">
             <div className="transition-opacity duration-500 ease-in-out">
               <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-4">
-                {slides[currentSlide].title}
+                {slides[selectedIndex].title}
               </h1>
 
               <p className="text-sm md:text-base text-slate-600 mb-6 max-w-2xl">
-                {slides[currentSlide].description}
+                {slides[selectedIndex].description}
               </p>
             </div>
 
@@ -198,25 +175,34 @@ export default function FixedHeroCarousel() {
                 className="relative rounded-xl overflow-hidden shadow-sm z-10 aspect-[4/3] bg-gradient-to-br from-white to-slate-50"
                 onMouseEnter={() => setIsPaused(true)}
                 onMouseLeave={() => setIsPaused(false)}
-                onTouchStart={handleTouchStart}
-                onTouchMove={handleTouchMove}
-                onTouchEnd={handleTouchEnd}
                 role="region"
                 aria-label="Business services showcase"
               >
-                <div className="relative w-full h-full transition-opacity duration-500 ease-in-out">
-                  <Image
-                    src={slides[currentSlide].image || "/placeholder.svg"}
-                    alt={slides[currentSlide].title}
-                    fill
-                    className="object-contain p-6 transition-transform duration-500 ease-in-out"
-                    priority={currentSlide === 0}
-                  />
+                <div className="overflow-hidden" ref={emblaRef}>
+                  <div className="flex">
+                    {slides.map((slide, index) => (
+                      <div
+                        key={index}
+                        className="relative flex-[0_0_100%] min-w-0 aspect-[4/3]"
+                      >
+                        <div className="relative w-full h-full">
+                          <Image
+                            src={slide.image || "/placeholder.svg"}
+                            alt={slide.title}
+                            fill
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                            className="object-contain p-6"
+                            priority={index === 0}
+                          />
+                        </div>
+                      </div>
+                    ))}
+                  </div>
                 </div>
 
                 {/* Navigation */}
                 <button
-                  onClick={prevSlide}
+                  onClick={scrollPrev}
                   className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white rounded-full p-3 shadow-lg z-20 transition-all duration-300 hover:scale-110 active:scale-95"
                   aria-label="Previous slide"
                 >
@@ -224,7 +210,7 @@ export default function FixedHeroCarousel() {
                 </button>
 
                 <button
-                  onClick={nextSlide}
+                  onClick={scrollNext}
                   className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white rounded-full p-3 shadow-lg z-20 transition-all duration-300 hover:scale-110 active:scale-95"
                   aria-label="Next slide"
                 >
@@ -244,18 +230,24 @@ export default function FixedHeroCarousel() {
                   )}
                 </button>
 
-                {/* Progress bar */}
+                {/* Slide indicators */}
                 <div 
-                  className="absolute bottom-0 left-0 right-0 h-1 bg-white/30 z-20"
-                  role="progressbar"
-                  aria-valuenow={progress}
-                  aria-valuemin={0}
-                  aria-valuemax={100}
+                  className="absolute -bottom-8 left-1/2 -translate-x-1/2 flex space-x-3 z-20"
+                  role="tablist"
+                  aria-label="Slide navigation"
                 >
-                  <div
-                    className="h-full bg-gradient-to-r from-blue-500 to-blue-600 transition-all duration-100"
-                    style={{ width: `${progress}%` }}
-                  />
+                  {slides.map((_, index) => (
+                    <button
+                      key={index}
+                      onClick={() => emblaApi?.scrollTo(index)}
+                      className={`relative overflow-hidden rounded-full transition-all duration-300 hover:scale-110 active:scale-95 ${
+                        index === selectedIndex ? "bg-blue-600 w-10 h-3" : "bg-slate-300 hover:bg-blue-400 w-3 h-3"
+                      }`}
+                      role="tab"
+                      aria-selected={index === selectedIndex}
+                      aria-label={`Go to slide ${index + 1}`}
+                    />
+                  ))}
                 </div>
               </div>
 
@@ -268,33 +260,6 @@ export default function FixedHeroCarousel() {
                 className="absolute -top-6 -right-6 h-20 w-20 rounded-full bg-gradient-to-br from-slate-100 to-slate-200 z-0 opacity-50 animate-spin-slow-reverse"
                 aria-hidden="true"
               />
-
-              {/* Slide indicators */}
-              <div 
-                className="absolute -bottom-8 left-1/2 -translate-x-1/2 flex space-x-3 z-20"
-                role="tablist"
-                aria-label="Slide navigation"
-              >
-                {slides.map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => handleDotClick(index)}
-                    className={`relative overflow-hidden rounded-full transition-all duration-300 hover:scale-110 active:scale-95 ${
-                      index === currentSlide ? "bg-blue-600 w-10 h-3" : "bg-slate-300 hover:bg-blue-400 w-3 h-3"
-                    }`}
-                    role="tab"
-                    aria-selected={index === currentSlide}
-                    aria-label={`Go to slide ${index + 1}`}
-                  >
-                    {index === currentSlide && !isPaused && (
-                      <div
-                        className="absolute inset-0 bg-blue-700 transition-all duration-100"
-                        style={{ width: `${progress}%` }}
-                      />
-                    )}
-                  </button>
-                ))}
-              </div>
             </div>
           </div>
         </div>
