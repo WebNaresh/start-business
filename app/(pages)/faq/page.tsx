@@ -178,7 +178,7 @@ const companyRegistrationFaqs = [
   {
     question: "How long does it take to register a Private Limited Company in India?",
     answer:
-      "The process typically takes 10-15 working days, depending on the completeness of documentation and government processing times. This includes name approval, submission of incorporation documents, and receipt of the Certificate of Incorporation.",
+      "The process typically takes 10-15 working days, depending on the completeness of documentation and government processing times. This includes Name Reservation, submission of incorporation documents, and receipt of the Certificate of Incorporation.",
   },
   {
     question: "What is the minimum capital requirement for a Private Limited Company?",

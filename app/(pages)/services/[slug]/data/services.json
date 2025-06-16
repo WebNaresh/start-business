@@ -13,20 +13,21 @@
         "currency": "₹",
         "gst": true,
         "includes": [
-          "Name approval fees",
-          "ROC filing fees",
-          "DSC for one director",
+          "Company Name Reservation",
+          "All Govt. Fees (Capital of Rs. 1 Lac)",
+          "eMoA & eAoA",
+          "DSC for two directors",
           "DIN for two directors",
-          "Professional charges",
-          "Company incorporation certificate"
+          "Incorporation Certificate",
+          "PAN + TAN + PF + ESIC + Professional Tax"
         ]
       },
       "timeline": {
         "total": "15-20 working days",
         "steps": [
-          { "name": "Name Approval", "duration": "2-3 days" },
+          { "name": "Name Reservation", "duration": "2-3 days" },
           { "name": "DSC & DIN", "duration": "3-4 days" },
-          { "name": "Document Filing", "duration": "5-7 days" },
+          { "name": "Drafting of  eMoA & eAoA", "duration": "5-7 days" },
           { "name": "Final Approval", "duration": "5-6 days" }
         ]
       },
@@ -53,27 +54,27 @@
       "process": [
         {
           "step": 1,
-          "title": "Name Approval",
-          "description": "Apply for name approval through MCA portal with up to 2 name options."
+          "title": "Name Reservation",
+          "description": "Apply for Name Reservation through MCA portal with up to 2 name options."
         },
         {
           "step": 2,
-          "title": "DSC & DIN Application",
+          "title": "Obtain Digital Signature Certificate (DSC)",
           "description": "Obtain Digital Signature Certificate and Director Identification Number."
         },
         {
           "step": 3,
-          "title": "Document Filing",
+          "title": "Drafting of  eMoA & eAoA",
           "description": "Submit incorporation documents including MOA, AOA, and other forms."
         },
         {
           "step": 4,
-          "title": "Registration Approval",
+          "title": "Filing SPICe+ Form",
           "description": "Receive Certificate of Incorporation from MCA."
         },
         {
           "step": 5,
-          "title": "Post Registration",
+          "title": "Certificate of Registration ",
           "description": "Complete PAN, TAN, GST, and bank account opening formalities."
         }
       ],
@@ -101,16 +102,44 @@
           "answer": "There is no minimum capital requirement as per the Companies Act 2013. You can start with a nominal paid-up capital of ₹1 lakh or even less."
         },
         {
-          "question": "How many directors are required?",
+          "question": "How many directors are required to start Private Limited Company?",
           "answer": "A minimum of 2 and maximum of 15 directors are required. At least one director must be a resident Indian."
+        },
+        {
+          "question": "How many shareholders are required to register a Private Limited Company?",
+          "answer": "Private Limited Company must have a minimum of 2 shareholders and a maximum of 200 shareholders."
         },
         {
           "question": "Can a salaried person be a director?",
           "answer": "Yes, a salaried person can be a director unless their employment contract specifically prohibits it."
         },
         {
-          "question": "What are the annual compliance requirements?",
-          "answer": "Annual compliances include filing annual returns, financial statements, income tax returns, GST returns, and conducting annual general meetings."
+          "question": "How long does it take to register a Private Limited Company in India?",
+          "answer": "The registration process for a Private Limited Company can typically take anywhere from 15 to 20 days, depending on various factors."
+        },
+        {
+          "question": "Can foreign nationals be shareholders in a Private Limited Company in India?",
+          "answer": "Yes, foreign nationals are allowed to be shareholders in a Private Limited Company as long as they comply with the Foreign Exchange Management Act (FEMA) guidelines."
+        },
+        {
+          "question": "Is a physical office address mandatory for registration?",
+          "answer": "Yes, a registered office address in India is mandatory for all official communications and must be provided with proof (e.g., utility bill, rent agreement + NOC)."
+        },
+        {
+          "question": "What is a Corporate Identification Number (CIN)?",
+          "answer": "The Corporate Identification Number (CIN) is a unique identifier issued by the Registrar of Companies (RoC) upon a company's incorporation, serving as its official identity."
+        },
+        {
+          "question": "Can I register a Private Limited Company from my residential address?",
+          "answer": "Yes, a Private Limited Company can be registered at a residential address in India, provided you submit valid address proof like a recent utility bill or a rental agreement with an NOC from the landlord."
+        },
+        {
+          "question": "Why the Memorandum of Association (MOA) and Articles of Association (AOA) are crucial legal documents?",
+          "answer": "The Memorandum of Association (MOA) defines the company's objectives and scope, while the Articles of Association (AOA) outlines its internal rules and regulations. Both are crucial for legal operation and must be submitted during registration."
+        },
+        {
+          "question": "Why Digital Signature Certificates (DSC) and Director Identification Numbers (DIN) are mandatory?",
+          "answer": "DSCs are mandatory for directors and subscribers to digitally sign online forms on the MCA portal. DINs are unique identification numbers required for all company directors, essential for the online registration process."
         }
       ]
     },
@@ -128,7 +157,7 @@
         "currency": "₹",
         "gst": true,
         "includes": [
-          "Name approval fees",
+          "Name Reservation fees",
           "ROC filing fees",
           "DSC for director",
           "DIN for director",
@@ -139,9 +168,9 @@
       "timeline": {
         "total": "12-15 working days",
         "steps": [
-          { "name": "Name Approval", "duration": "2-3 days" },
+          { "name": "Name Reservation", "duration": "2-3 days" },
           { "name": "DSC & DIN", "duration": "2-3 days" },
-          { "name": "Document Filing", "duration": "4-5 days" },
+          { "name": "Drafting of  eMoA & eAoA", "duration": "4-5 days" },
           { "name": "Final Approval", "duration": "4-5 days" }
         ]
       },
@@ -168,27 +197,27 @@
       "process": [
         {
           "step": 1,
-          "title": "Name Approval",
-          "description": "Apply for name approval through MCA portal with up to 2 name options."
+          "title": "Name Reservation",
+          "description": "Apply for Name Reservation through MCA portal with up to 2 name options."
         },
         {
           "step": 2,
-          "title": "DSC & DIN Application",
+          "title": "Obtain Digital Signature Certificate (DSC)",
           "description": "Obtain Digital Signature Certificate and Director Identification Number."
         },
         {
           "step": 3,
-          "title": "Document Filing",
+          "title": "Drafting of  eMoA & eAoA",
           "description": "Submit incorporation documents including MOA, AOA, and other forms."
         },
         {
           "step": 4,
-          "title": "Registration Approval",
+          "title": "Filing SPICe+ Form",
           "description": "Receive Certificate of Incorporation from MCA."
         },
         {
           "step": 5,
-          "title": "Post Registration",
+          "title": "Certificate of Registration ",
           "description": "Complete PAN, TAN, GST, and bank account opening formalities."
         }
       ],
@@ -243,7 +272,7 @@
         "currency": "₹",
         "gst": true,
         "includes": [
-          "Name approval fees",
+          "Name Reservation fees",
           "LLP registration fees",
           "DSC for partners",
           "DIN for designated partners",
@@ -254,9 +283,9 @@
       "timeline": {
         "total": "12-18 working days",
         "steps": [
-          { "name": "Name Approval", "duration": "2-3 days" },
+          { "name": "Name Reservation", "duration": "2-3 days" },
           { "name": "DSC & DIN", "duration": "3-4 days" },
-          { "name": "Document Filing", "duration": "4-6 days" },
+          { "name": "Drafting of  eMoA & eAoA", "duration": "4-6 days" },
           { "name": "Final Approval", "duration": "3-5 days" }
         ]
       },
@@ -283,8 +312,8 @@
       "process": [
         {
           "step": 1,
-          "title": "Name Approval",
-          "description": "Apply for LLP name approval through MCA portal."
+          "title": "Name Reservation",
+          "description": "Apply for LLP Name Reservation through MCA portal."
         },
         {
           "step": 2,
@@ -1684,7 +1713,7 @@
         "currency": "₹",
         "gst": true,
         "includes": [
-          "Name approval",
+          "Name Reservation",
           "MOA & AOA drafting",
           "Company incorporation",
           "PAN & TAN application",
@@ -1696,7 +1725,7 @@
         "total": "20-25 working days",
         "steps": [
           { "name": "Document Collection", "duration": "3-4 days" },
-          { "name": "Name Approval", "duration": "5-7 days" },
+          { "name": "Name Reservation", "duration": "5-7 days" },
           { "name": "Incorporation", "duration": "7-10 days" },
           { "name": "Post-registration", "duration": "5-7 days" }
         ]
@@ -1729,8 +1758,8 @@
         },
         {
           "step": 2,
-          "title": "Name Approval",
-          "description": "Apply for name approval with the Registrar of Companies."
+          "title": "Name Reservation",
+          "description": "Apply for Name Reservation with the Registrar of Companies."
         },
         {
           "step": 3,
@@ -1799,7 +1828,7 @@
         "currency": "₹",
         "gst": true,
         "includes": [
-          "Name approval",
+          "Name Reservation",
           "MOA & AOA drafting",
           "Company incorporation",
           "Nidhi license application",
@@ -1811,7 +1840,7 @@
         "total": "30-35 working days",
         "steps": [
           { "name": "Document Collection", "duration": "3-4 days" },
-          { "name": "Name Approval", "duration": "5-7 days" },
+          { "name": "Name Reservation", "duration": "5-7 days" },
           { "name": "Incorporation", "duration": "7-10 days" },
           { "name": "Nidhi License", "duration": "15-20 days" }
         ]
@@ -1844,8 +1873,8 @@
         },
         {
           "step": 2,
-          "title": "Name Approval",
-          "description": "Apply for name approval with the Registrar of Companies."
+          "title": "Name Reservation",
+          "description": "Apply for Name Reservation with the Registrar of Companies."
         },
         {
           "step": 3,
@@ -2272,7 +2301,7 @@
         "steps": [
           { "name": "Analysis", "duration": "2-3 days" },
           { "name": "Response Preparation", "duration": "3-5 days" },
-          { "name": "Document Filing", "duration": "2-3 days" },
+          { "name": "Drafting of  eMoA & eAoA", "duration": "2-3 days" },
           { "name": "Follow-up", "duration": "3-5 days" }
         ]
       },

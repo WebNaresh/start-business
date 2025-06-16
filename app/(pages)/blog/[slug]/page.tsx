@@ -40,7 +40,7 @@ const mockBlogPost = {
     <ol>
       <li>Obtain Digital Signature Certificate (DSC)</li>
       <li>Apply for Director Identification Number (DIN)</li>
-      <li>Name approval from MCA</li>
+      <li>Name Reservation from MCA</li>
       <li>File incorporation documents</li>
       <li>Obtain Certificate of Incorporation</li>
     </ol>

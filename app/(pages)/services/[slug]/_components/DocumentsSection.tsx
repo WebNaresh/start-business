@@ -14,6 +14,7 @@ import {
 } from "lucide-react"
 import type { ServiceData } from "./service-types"
 import { Badge } from "@/components/ui/badge"
+import Script from "next/script"
 
 interface DocumentsSectionProps {
   service: ServiceData
@@ -42,24 +43,49 @@ export default function DocumentsSection({ service }: DocumentsSectionProps) {
     return FileText
   }
 
+  // Generate structured data for document checklist
+  const documentStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "itemListElement": Object.entries(service.requiredDocuments || {}).flatMap(([category, documents], categoryIndex) => 
+      (documents as string[]).map((doc, docIndex) => ({
+        "@type": "ListItem",
+        "position": categoryIndex * 100 + docIndex + 1,
+        "item": {
+          "@type": "Thing",
+          "name": doc,
+          "description": `Required document for ${category} in ${service.shortTitle} registration`,
+          "category": category
+        }
+      }))
+    )
+  }
+
   return (
-    <section id="documents" className="py-4 bg-white">
+    <section id="documents" className="py-4 bg-white" aria-labelledby="documents-heading">
+      <Script
+        id="documents-structured-data"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(documentStructuredData) }}
+      />
       <div className="container mx-auto px-4">
         <div className="max-w-5xl mx-auto">
           {/* Header */}
           <div className="text-center mb-8">
             <Badge className="mb-3 bg-blue-50 text-blue-600 border-blue-200 px-3 py-1.5 text-xs">
-              <FileText className="w-3 h-3 mr-1.5" />
+              <FileText className="w-3 h-3 mr-1.5" aria-hidden="true" />
               Document Checklist
             </Badge>
-            <h2 className="text-xl md:text-2xl font-bold text-slate-800 mb-2">Required Documents</h2>
+            <h2 id="documents-heading" className="text-xl md:text-2xl font-bold text-slate-800 mb-2">
+              Documents Required for <span className="text-blue-600">{service.shortTitle.includes("Registration") ? service.shortTitle : `${service.shortTitle} Registration`}</span> in India
+            </h2>
             <p className="text-xs text-slate-600 max-w-xl mx-auto">
               Prepare these documents to ensure a smooth registration process
             </p>
           </div>
 
           {/* Documents by Category */}
-          <div className="space-y-6">
+          <div className="space-y-6" role="list">
             {Object.entries(service.requiredDocuments || {}).map(([category, documents], categoryIndex) => {
               const CategoryIcon = getCategoryIcon(category)
 
@@ -67,10 +93,11 @@ export default function DocumentsSection({ service }: DocumentsSectionProps) {
                 <div
                   key={category}
                   className="bg-white rounded-xl p-6 shadow-md border border-blue-200"
+                  role="listitem"
                 >
                   {/* Category Header */}
                   <div className="flex items-center gap-3 mb-4">
-                    <div className="bg-blue-50 w-10 h-10 rounded-lg flex items-center justify-center">
+                    <div className="bg-blue-50 w-10 h-10 rounded-lg flex items-center justify-center" aria-hidden="true">
                       <CategoryIcon className="w-5 h-5 text-blue-600" />
                     </div>
                     <div className="flex-1">
@@ -84,7 +111,7 @@ export default function DocumentsSection({ service }: DocumentsSectionProps) {
                   </div>
 
                   {/* Documents Grid */}
-                  <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-3">
+                  <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-3" role="list">
                     {(documents as string[]).map((doc, docIndex) => {
                       const DocIcon = getDocumentIcon(doc)
 
@@ -92,9 +119,10 @@ export default function DocumentsSection({ service }: DocumentsSectionProps) {
                         <div
                           key={docIndex}
                           className="p-3 rounded-lg border border-blue-200 hover:border-blue-300 hover:shadow-sm transition-all duration-300"
+                          role="listitem"
                         >
                           <div className="flex items-start gap-2">
-                            <DocIcon className="w-4 h-4 text-blue-600" />
+                            <DocIcon className="w-4 h-4 text-blue-600" aria-hidden="true" />
                             <span className="text-xs text-slate-700 font-medium">
                               {doc}
                             </span>
@@ -114,7 +142,7 @@ export default function DocumentsSection({ service }: DocumentsSectionProps) {
               <h3 className="text-sm font-semibold text-slate-800 mb-1.5">Need Help with Documents?</h3>
               <p className="text-xs text-slate-600 mb-2">Our experts can guide you through the document preparation process</p>
               <Badge className="bg-blue-50 text-blue-600 border-blue-200 text-xs">
-                <Phone className="w-3 h-3 mr-1" />
+                <Phone className="w-3 h-3 mr-1" aria-hidden="true" />
                 Expert Support Available
               </Badge>
             </div>

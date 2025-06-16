@@ -13,6 +13,7 @@ import {
   Zap,
 } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
+import Script from "next/script"
 
 interface ProcessSectionProps {
   service: ServiceData
@@ -28,14 +29,38 @@ export default function ProcessSection({ service }: ProcessSectionProps) {
     return null
   }
 
+  // Generate structured data for process steps
+  const processStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": `${service.shortTitle} Registration Process in India`,
+    "description": "Step-by-step process for registering your business in India",
+    "step": service.process.map((step, index) => ({
+      "@type": "HowToStep",
+      "position": index + 1,
+      "name": step.title,
+      "text": step.description,
+      "image": {
+        "@type": "ImageObject",
+        "url": `https://example.com/process-step-${index + 1}.png`
+      }
+    }))
+  }
+
   return (
     <section
       ref={sectionRef}
       id="process"
       className="py-4 relative overflow-hidden bg-white"
+      aria-labelledby="process-heading"
     >
+      <Script
+        id="process-structured-data"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(processStructuredData) }}
+      />
       {/* Background Elements */}
-      <div className="absolute inset-0 opacity-5">
+      <div className="absolute inset-0 opacity-5" aria-hidden="true">
         <div className="absolute top-0 right-0 w-72 h-72 bg-blue-100 rounded-full -mr-36 -mt-36 blur-3xl" />
         <div className="absolute bottom-0 left-0 w-64 h-64 bg-blue-50 rounded-full -ml-32 -mb-32 blur-2xl" />
       </div>
@@ -45,15 +70,12 @@ export default function ProcessSection({ service }: ProcessSectionProps) {
           {/* Header */}
           <div className="text-center mb-12">
             <Badge className="mb-4 bg-blue-50 text-blue-600 border-blue-200 px-4 py-2 text-xs">
-              <Sparkles className="w-3 h-3 mr-1.5" />
+              <Sparkles className="w-3 h-3 mr-1.5" aria-hidden="true" />
               Step-by-Step Process
             </Badge>
 
-            <h2 className="text-xl md:text-2xl lg:text-3xl font-bold mb-3">
-              <span className="text-slate-800">Simple</span>{" "}
-              <span className="text-blue-600">
-                Registration Process
-              </span>
+            <h2 id="process-heading" className="text-xl md:text-2xl lg:text-3xl font-bold mb-3">
+              Step for <span className="text-blue-600">{service.shortTitle.includes("Registration") ? service.shortTitle : `${service.shortTitle} Registration`}</span> in India
             </h2>
 
             <p className="text-xs md:text-sm text-slate-600 leading-relaxed max-w-3xl mx-auto mb-4">
@@ -62,7 +84,7 @@ export default function ProcessSection({ service }: ProcessSectionProps) {
           </div>
 
           {/* Desktop Process Grid */}
-          <div className="hidden lg:block mb-12">
+          <div className="hidden lg:block mb-12" role="list" aria-label="Registration process steps">
             <div className="grid lg:grid-cols-3 xl:grid-cols-4 gap-6">
               {service.process.map((step, index) => {
                 const IconComponent = stepIcons[index % stepIcons.length]
@@ -71,10 +93,11 @@ export default function ProcessSection({ service }: ProcessSectionProps) {
                   <div
                     key={index}
                     className="relative group"
+                    role="listitem"
                   >
                     {/* Connection Line */}
                     {index < service.process.length - 1 && (
-                      <div className="hidden xl:block absolute top-10 -right-3 w-6 h-0.5 bg-slate-200 z-0">
+                      <div className="hidden xl:block absolute top-10 -right-3 w-6 h-0.5 bg-slate-200 z-0" aria-hidden="true">
                         <div className="h-full bg-blue-600" />
                       </div>
                     )}
@@ -87,10 +110,11 @@ export default function ProcessSection({ service }: ProcessSectionProps) {
                       <div className="flex items-center justify-between mb-4">
                         <div
                           className="w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-300 bg-blue-600 text-white shadow-md"
+                          aria-hidden="true"
                         >
                           <IconComponent className="w-6 h-6" />
                         </div>
-                        <div className="text-2xl font-bold text-blue-600">
+                        <div className="text-2xl font-bold text-blue-600" aria-label={`Step ${step.step}`}>
                           {step.step}
                         </div>
                       </div>
@@ -108,10 +132,10 @@ export default function ProcessSection({ service }: ProcessSectionProps) {
           </div>
 
           {/* Mobile Timeline */}
-          <div className="lg:hidden">
+          <div className="lg:hidden" role="list" aria-label="Registration process steps">
             <div className="relative max-w-xl mx-auto">
               {/* Timeline Line */}
-              <div className="absolute left-6 top-0 bottom-0 w-0.5 bg-slate-200">
+              <div className="absolute left-6 top-0 bottom-0 w-0.5 bg-slate-200" aria-hidden="true">
                 <div className="w-full bg-blue-600" />
               </div>
 
@@ -122,11 +146,13 @@ export default function ProcessSection({ service }: ProcessSectionProps) {
                   <div
                     key={index}
                     className="relative flex items-start mb-8 last:mb-0"
+                    role="listitem"
                   >
                     {/* Timeline Node */}
                     <div className="relative z-10 mr-4">
                       <div
                         className="w-12 h-12 rounded-xl flex items-center justify-center border-3 transition-all duration-300 bg-blue-600 border-white text-white shadow-md ring-2 ring-blue-200"
+                        aria-hidden="true"
                       >
                         <IconComponent className="w-6 h-6" />
                       </div>
@@ -134,6 +160,7 @@ export default function ProcessSection({ service }: ProcessSectionProps) {
                       {/* Step Number Badge */}
                       <div
                         className="absolute -top-1.5 -right-1.5 w-5 h-5 rounded-full flex items-center justify-center text-xs font-bold bg-white text-blue-600"
+                        aria-label={`Step ${step.step}`}
                       >
                         {step.step}
                       </div>
@@ -148,7 +175,7 @@ export default function ProcessSection({ service }: ProcessSectionProps) {
                           {step.title}
                         </h3>
                         <p className="text-xs text-slate-600 leading-relaxed">{step.description}</p>
-                        <ArrowRight className="w-3 h-3 text-slate-400 ml-auto mt-2" />
+                        <ArrowRight className="w-3 h-3 text-slate-400 ml-auto mt-2" aria-hidden="true" />
                       </div>
                     </div>
                   </div>

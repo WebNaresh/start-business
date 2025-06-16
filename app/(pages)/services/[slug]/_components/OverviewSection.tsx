@@ -10,6 +10,7 @@ import { Label } from "@/components/ui/label"
 import WhatsAppCTAButton from "@/components/whatsapp-cta-button"
 import { ArrowRight, CheckCircle, Phone, Mail, User, Send, Sparkles } from "lucide-react"
 import type { ServiceData } from "./service-types"
+import Script from "next/script"
 
 interface OverviewSectionProps {
   service: ServiceData
@@ -45,10 +46,38 @@ export default function OverviewSection({ service }: OverviewSectionProps) {
     }, 1500)
   }
 
+  // Generate structured data for the service
+  const serviceStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": service.title,
+    "description": service.description,
+    "provider": {
+      "@type": "Organization",
+      "name": "Your Company Name",
+      "telephone": "+919699214195"
+    },
+    "offers": {
+      "@type": "Offer",
+      "availability": "https://schema.org/InStock"
+    },
+    "featureList": [
+      "Quick Turnaround Time",
+      "Expert Legal Guidance",
+      "End-to-End Solutions",
+      "100% Compliance Assured"
+    ]
+  }
+
   return (
-    <section id="overview" className="relative py-4 md:py-8 bg-white overflow-hidden">
+    <section id="overview" className="relative py-4 md:py-8 bg-white overflow-hidden" aria-labelledby="overview-heading">
+      <Script
+        id="service-structured-data"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceStructuredData) }}
+      />
       {/* Enhanced Background Elements */}
-      <div className="absolute inset-0 opacity-5">
+      <div className="absolute inset-0 opacity-5" aria-hidden="true">
         <motion.div
           className="absolute top-0 right-0 w-96 h-96 bg-blue-100 rounded-full -mr-48 -mt-48 blur-3xl"
           animate={{
@@ -85,6 +114,7 @@ export default function OverviewSection({ service }: OverviewSectionProps) {
             className="text-center lg:text-left"
           >
             <motion.h1
+              id="overview-heading"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.3 }}
@@ -109,6 +139,8 @@ export default function OverviewSection({ service }: OverviewSectionProps) {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.7 }}
               className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8"
+              role="list"
+              aria-label="Service features"
             >
               {[
                 "⏱️ Quick Turnaround Time",
@@ -122,6 +154,7 @@ export default function OverviewSection({ service }: OverviewSectionProps) {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.5, delay: 0.8 + index * 0.1 }}
                   className="flex items-center p-3 rounded-lg bg-blue-50 border border-blue-100 hover:bg-blue-100 transition-all duration-300"
+                  role="listitem"
                 >
                   <span className="text-slate-700 text-sm font-medium">{feature}</span>
                 </motion.div>
@@ -143,8 +176,9 @@ export default function OverviewSection({ service }: OverviewSectionProps) {
                 variant="default"
                 className=""
                 onClick={() => (window.location.href = "tel:+919699214195")}
+                aria-label="Call expert for consultation"
               >
-                <Phone className="w-5 h-5 mr-2" />
+                <Phone className="w-5 h-5 mr-2" aria-hidden="true" />
                 Call Expert
               </Button>
             </motion.div>
@@ -159,7 +193,7 @@ export default function OverviewSection({ service }: OverviewSectionProps) {
           >
             <div className="bg-white rounded-3xl p-8 shadow-lg border border-slate-200 relative overflow-hidden">
               {/* Form Background Pattern */}
-              <div className="absolute inset-0 opacity-5">
+              <div className="absolute inset-0 opacity-5" aria-hidden="true">
                 <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500 rounded-full -mr-16 -mt-16"></div>
                 <div className="absolute bottom-0 left-0 w-24 h-24 bg-blue-400 rounded-full -ml-12 -mb-12"></div>
               </div>
@@ -169,15 +203,15 @@ export default function OverviewSection({ service }: OverviewSectionProps) {
                   <>
                     {/* Form Header */}
                     <div className="text-center mb-6">
-                   
-                      <h3 className="text-lg font-bold text-slate-800 mb-2">Get Free Consultation</h3>
-                   
+                      <h3 className="text-lg font-bold text-slate-800 mb-2">
+                        Register For <span className="text-blue-600">{service.shortTitle.replace("Registration", "").trim()}</span> Today
+                      </h3>
                     </div>
 
                     {/* Form */}
-                    <form onSubmit={handleSubmit} className="space-y-6">
+                    <form onSubmit={handleSubmit} className="space-y-6" aria-label="Registration form">
                       <div className="space-y-2">
-                 
+                        <Label htmlFor="name" className="sr-only">Full Name</Label>
                         <Input
                           id="name"
                           type="text"
@@ -186,11 +220,12 @@ export default function OverviewSection({ service }: OverviewSectionProps) {
                           onChange={(e) => handleInputChange("name", e.target.value)}
                           className="h-12 border-slate-200 focus:border-blue-500 focus:ring-blue-200 rounded-xl"
                           required
+                          aria-required="true"
                         />
                       </div>
 
                       <div className="space-y-2">
-                 
+                        <Label htmlFor="mobile" className="sr-only">Mobile Number</Label>
                         <Input
                           id="mobile"
                           type="tel"
@@ -199,11 +234,14 @@ export default function OverviewSection({ service }: OverviewSectionProps) {
                           onChange={(e) => handleInputChange("mobile", e.target.value)}
                           className="h-12 border-slate-200 focus:border-blue-500 focus:ring-blue-200 rounded-xl"
                           required
+                          aria-required="true"
+                          pattern="[0-9]{10}"
+                          aria-label="Mobile number (10 digits)"
                         />
                       </div>
 
                       <div className="space-y-2">
-                    
+                        <Label htmlFor="email" className="sr-only">Email Address</Label>
                         <Input
                           id="email"
                           type="email"
@@ -212,6 +250,7 @@ export default function OverviewSection({ service }: OverviewSectionProps) {
                           onChange={(e) => handleInputChange("email", e.target.value)}
                           className="h-12 border-slate-200 focus:border-blue-500 focus:ring-blue-200 rounded-xl"
                           required
+                          aria-required="true"
                         />
                       </div>
 
@@ -219,6 +258,7 @@ export default function OverviewSection({ service }: OverviewSectionProps) {
                         type="submit"
                         disabled={isSubmitting}
                         className="w-full h-12 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
+                        aria-label={isSubmitting ? "Processing your request" : "Submit registration form"}
                       >
                         {isSubmitting ? (
                           <>
@@ -226,12 +266,13 @@ export default function OverviewSection({ service }: OverviewSectionProps) {
                               animate={{ rotate: 360 }}
                               transition={{ duration: 1, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
                               className="w-5 h-5 border-2 border-white border-t-transparent rounded-full mr-2"
+                              aria-hidden="true"
                             />
                             Processing...
                           </>
                         ) : (
                           <>
-                            <Send className="w-5 h-5 mr-2" />
+                            <Send className="w-5 h-5 mr-2" aria-hidden="true" />
                             Get Free Consultation
                           </>
                         )}
@@ -244,12 +285,15 @@ export default function OverviewSection({ service }: OverviewSectionProps) {
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
                     className="text-center py-8"
+                    role="alert"
+                    aria-live="polite"
                   >
                     <motion.div
                       initial={{ scale: 0 }}
                       animate={{ scale: 1 }}
                       transition={{ delay: 0.2, type: "spring", bounce: 0.5 }}
                       className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4"
+                      aria-hidden="true"
                     >
                       <CheckCircle className="w-8 h-8 text-white" />
                     </motion.div>
