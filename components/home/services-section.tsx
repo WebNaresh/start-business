@@ -84,7 +84,7 @@ export default function ServicesCarousel() {
     if (autoplayRef.current) clearInterval(autoplayRef.current)
     autoplayRef.current = setInterval(() => {
       if (emblaApi) emblaApi.scrollNext()
-    }, 3000) // Change slide every 3 seconds
+    }, 5000) // Change slide every 5 seconds
   }, [emblaApi, isPlaying])
 
   // Handle autoplay on mount and cleanup

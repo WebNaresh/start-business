@@ -13,6 +13,7 @@ import ProcessSection from "./ProcessSection"
 import DocumentsSection from "./DocumentsSection"
 import PricingSection from "./PricingSection"
 import FaqSection from "./FaqSection"
+import RelatedServicesSection from "./RelatedServicesSection"
 
 interface ServiceData {
   title: string
@@ -213,23 +214,7 @@ export default function DynamicServicePage({ service, slug }: DynamicServicePage
     Number.parseInt(service.pricing.amount.replace(/,/g, ""))
   const savingsPercent = Math.round((savings / Number.parseInt(service.pricing.originalAmount.replace(/,/g, ""))) * 100)
 
-  // Sample testimonials (would come from props in real implementation)
-  const testimonials = [
-    {
-      name: "Rajesh Kumar",
-      company: "Tech Startup",
-      rating: 5,
-      text: "Excellent service! Got my company registered in just 12 days. The team was very professional and guided me through every step.",
-      avatar: "/placeholder.svg?height=40&width=40&query=business+person",
-    },
-    {
-      name: "Priya Sharma",
-      company: "E-commerce Business",
-      rating: 5,
-      text: "Highly recommend StartBusiness! They made the entire process so simple and transparent. Great value for money.",
-      avatar: "/placeholder.svg?height=40&width=40&query=business+woman",
-    },
-  ]
+
 
   return (
     <TooltipProvider>
@@ -250,6 +235,7 @@ export default function DynamicServicePage({ service, slug }: DynamicServicePage
         <ProcessSection service={service} />
         <DocumentsSection service={service}/>
         <PricingSection service={service} />
+        <RelatedServicesSection currentService={slug} />
         <FaqSection service={service} openFAQs={openFAQs} toggleFAQ={toggleFAQ} />
       </div>
     </TooltipProvider>

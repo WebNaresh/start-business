@@ -104,7 +104,7 @@ export default function ProcessSection({ service }: ProcessSectionProps) {
 
                     {/* Step Card */}
                     <div
-                      className="relative bg-white rounded-2xl p-6 border-2 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 border-blue-200"
+                      className="relative bg-white rounded-2xl p-6 border-2 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 border-blue-200 h-[200px] flex flex-col"
                     >
                       {/* Step Number & Icon */}
                       <div className="flex items-center justify-between mb-4">
@@ -120,10 +120,12 @@ export default function ProcessSection({ service }: ProcessSectionProps) {
                       </div>
 
                       {/* Step Content */}
-                      <h3 className="text-sm font-bold mb-1.5 text-blue-600">
-                        {step.title}
-                      </h3>
-                      <p className="text-xs text-slate-600 leading-relaxed">{step.description}</p>
+                      <div className="flex-1 flex flex-col">
+                        <h3 className="text-sm font-bold mb-1.5 text-blue-600 line-clamp-1">
+                          {step.title}
+                        </h3>
+                        <p className="text-xs text-slate-600 leading-relaxed line-clamp-3">{step.description}</p>
+                      </div>
                     </div>
                   </div>
                 )
@@ -169,13 +171,13 @@ export default function ProcessSection({ service }: ProcessSectionProps) {
                     {/* Step Content */}
                     <div className="flex-1 pt-1">
                       <div
-                        className="bg-white rounded-xl p-4 border-2 transition-all duration-300 border-blue-200 bg-blue-50 shadow-md"
+                        className="bg-white rounded-xl p-4 border-2 transition-all duration-300 border-blue-200 bg-blue-50 shadow-md h-[120px] flex flex-col"
                       >
-                        <h3 className="text-sm font-bold mb-1.5 text-blue-600">
+                        <h3 className="text-sm font-bold mb-1.5 text-blue-600 line-clamp-1">
                           {step.title}
                         </h3>
-                        <p className="text-xs text-slate-600 leading-relaxed">{step.description}</p>
-                        <ArrowRight className="w-3 h-3 text-slate-400 ml-auto mt-2" aria-hidden="true" />
+                        <p className="text-xs text-slate-600 leading-relaxed line-clamp-2">{step.description}</p>
+                        <ArrowRight className="w-3 h-3 text-slate-400 ml-auto mt-auto" aria-hidden="true" />
                       </div>
                     </div>
                   </div>
