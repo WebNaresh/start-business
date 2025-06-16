@@ -1,22 +1,25 @@
 "use client"
 
-import { Mail, MapPin, Phone, MessageSquare } from "lucide-react"
+import { Mail, MapPin, Phone, MessageSquare, Building2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import CallCTAButton from "@/components/call-cta-button"
 import Script from "next/script"
 
 export default function ContactSection() {
-  // Generate structured data for contact information
+  // Enhanced structured data for better SEO
   const contactStructuredData = {
     "@context": "https://schema.org",
     "@type": "Organization",
     "name": "Start Business",
     "description": "Professional business registration and compliance services in India",
+    "url": "https://startbusiness.co.in",
+    "logo": "https://startbusiness.co.in/logo.png",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "Office No 7, 3rd Floor, Saraswati Heights, Deccan Gymkhana, Behind Goodluck Café",
       "addressLocality": "Pune",
       "postalCode": "411004",
+      "addressRegion": "Maharashtra",
       "addressCountry": "IN"
     },
     "contactPoint": [
@@ -25,7 +28,9 @@ export default function ContactSection() {
         "telephone": "+919168499520",
         "contactType": "customer service",
         "email": "start@startbusiness.co.in",
-        "availableLanguage": ["English", "Hindi", "Marathi"]
+        "availableLanguage": ["English", "Hindi", "Marathi"],
+        "areaServed": "IN",
+        "hoursAvailable": "Mo-Fr 10:00-19:00"
       }
     ],
     "sameAs": [
@@ -33,12 +38,24 @@ export default function ContactSection() {
       "https://twitter.com/startbusiness",
       "https://linkedin.com/company/startbusiness",
       "https://instagram.com/startbusiness"
-    ]
+    ],
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday"
+      ],
+      "opens": "10:00",
+      "closes": "19:00"
+    }
   }
 
   return (
     <section 
-      className="bg-slate-50 py-8 md:py-16"
+      className="bg-gradient-to-br from-slate-50 to-blue-50/30 py-12 sm:py-8 md:py-8"
       aria-labelledby="contact-heading"
     >
       <Script
@@ -47,59 +64,90 @@ export default function ContactSection() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(contactStructuredData) }}
       />
       <div className="container mx-auto px-4">
-        <div className="grid gap-8 md:grid-cols-2">
-          <div>
-            <h2 
-              id="contact-heading"
-              className="text-2xl md:text-3xl font-bold text-slate-900 mb-3"
-            >
-              Get in Touch
-            </h2>
-            <p className="text-sm text-slate-600 mb-8 max-w-2xl mx-auto">
-              Have questions about our services? We're here to help. Reach out to us through any of the following channels.
-            </p>
-            <div className="mb-6 space-y-4" role="list" aria-label="Contact information">
-              <div className="flex items-center" role="listitem">
-                <div className="mr-3 rounded-full bg-blue-100 p-2" aria-hidden="true">
+        <div className="text-center max-w-3xl mx-auto mb-4">
+          <h2 
+            id="contact-heading"
+            className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 mb-4"
+          >
+            Contact Us
+          </h2>
+        
+        </div>
+
+        <div className="grid gap-8 lg:grid-cols-2">
+          {/* Contact Information */}
+          <div className="bg-white rounded-xl p-6 sm:p-8 shadow-lg border border-slate-100">
+            <div className="mb-8 space-y-4" role="list" aria-label="Contact information">
+              <div className="flex items-center p-3 rounded-lg bg-slate-50 hover:bg-blue-50 transition-colors duration-300" role="listitem">
+                <div className="mr-4 rounded-full bg-blue-100 p-2.5" aria-hidden="true">
                   <Phone className="h-5 w-5 text-blue-600" />
                 </div>
-                <a 
-                  href="tel:+919168499520" 
-                  className="text-slate-700 hover:text-blue-600"
-                  aria-label="Call us at +91 91684 99520"
-                >
-                  +91 91684 99520
-                </a>
+                <div>
+                  <p className="text-sm text-slate-500 mb-1">Phone Support</p>
+                  <a 
+                    href="tel:+919168499520" 
+                    className="text-base font-semibold text-slate-700 hover:text-blue-600 transition-colors"
+                    aria-label="Call us at +91 91684 99520"
+                  >
+                    +91 91684 99520
+                  </a>
+                </div>
               </div>
-              <div className="flex items-center" role="listitem">
-                <div className="mr-3 rounded-full bg-blue-100 p-2" aria-hidden="true">
+              <div className="flex items-center p-3 rounded-lg bg-slate-50 hover:bg-blue-50 transition-colors duration-300" role="listitem">
+                <div className="mr-4 rounded-full bg-blue-100 p-2.5" aria-hidden="true">
                   <Mail className="h-5 w-5 text-blue-600" />
                 </div>
-                <a 
-                  href="mailto:start@startbusiness.co.in" 
-                  className="text-slate-700 hover:text-blue-600"
-                  aria-label="Email us at start@startbusiness.co.in"
-                >
-                  start@startbusiness.co.in
-                </a>
+                <div>
+                  <p className="text-sm text-slate-500 mb-1">Email Support</p>
+                  <a 
+                    href="mailto:start@startbusiness.co.in" 
+                    className="text-base font-semibold text-slate-700 hover:text-blue-600 transition-colors"
+                    aria-label="Email us at start@startbusiness.co.in"
+                  >
+                    start@startbusiness.co.in
+                  </a>
+                </div>
               </div>
-              <div className="flex items-start" role="listitem">
-                <div className="mr-3 rounded-full bg-blue-100 p-2" aria-hidden="true">
+              <div className="flex items-start p-3 rounded-lg bg-slate-50 hover:bg-blue-50 transition-colors duration-300" role="listitem">
+                <div className="mr-4 rounded-full bg-blue-100 p-2.5" aria-hidden="true">
                   <MapPin className="h-5 w-5 text-blue-600" />
                 </div>
-                <address className="text-xs text-slate-600 not-italic">
-                  Office No 7, 3rd Floor, Saraswati Heights, Deccan Gymkhana, Behind Goodluck Café, Pune 411004
-                </address>
+                <div>
+                  <p className="text-sm text-slate-500 mb-1">Office Location</p>
+                  <address className="text-base font-semibold text-slate-700 not-italic">
+                    Office No 7, 3rd Floor, Saraswati Heights, Deccan Gymkhana, Behind Goodluck Café, Pune 411004
+                  </address>
+                </div>
               </div>
             </div>
+
+            {/* Business Hours */}
+            <div className="mb-8 p-4 rounded-lg bg-blue-50 border border-blue-100">
+              <h3 className="text-base font-semibold text-slate-800 mb-3 flex items-center">
+                <Building2 className="h-4 w-4 mr-2 text-blue-600" />
+                Business Hours
+              </h3>
+              <div className="space-y-2">
+                <div className="flex justify-between text-sm">
+                  <span className="text-slate-600">Monday - Friday</span>
+                  <span className="font-medium text-slate-800">10:00 AM - 7:00 PM</span>
+                </div>
+                <div className="flex justify-between text-sm">
+                  <span className="text-slate-600">Saturday - Sunday</span>
+                  <span className="font-medium text-slate-800">Closed</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Social Links */}
             <div 
-              className="flex space-x-4"
+              className="flex justify-center space-x-3"
               role="list"
               aria-label="Social media links"
             >
               <a
                 href="#"
-                className="rounded-full bg-slate-200 p-2 text-slate-600 transition-colors hover:bg-blue-600 hover:text-white"
+                className="rounded-full bg-slate-100 p-2.5 text-slate-600 transition-all hover:bg-blue-600 hover:text-white hover:scale-110"
                 aria-label="Visit our Facebook page"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -108,7 +156,7 @@ export default function ContactSection() {
               </a>
               <a
                 href="#"
-                className="rounded-full bg-slate-200 p-2 text-slate-600 transition-colors hover:bg-blue-600 hover:text-white"
+                className="rounded-full bg-slate-100 p-2.5 text-slate-600 transition-all hover:bg-blue-600 hover:text-white hover:scale-110"
                 aria-label="Follow us on Twitter"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -117,7 +165,7 @@ export default function ContactSection() {
               </a>
               <a
                 href="#"
-                className="rounded-full bg-slate-200 p-2 text-slate-600 transition-colors hover:bg-blue-600 hover:text-white"
+                className="rounded-full bg-slate-100 p-2.5 text-slate-600 transition-all hover:bg-blue-600 hover:text-white hover:scale-110"
                 aria-label="Connect with us on LinkedIn"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -126,7 +174,7 @@ export default function ContactSection() {
               </a>
               <a
                 href="#"
-                className="rounded-full bg-slate-200 p-2 text-slate-600 transition-colors hover:bg-blue-600 hover:text-white"
+                className="rounded-full bg-slate-100 p-2.5 text-slate-600 transition-all hover:bg-blue-600 hover:text-white hover:scale-110"
                 aria-label="Follow us on Instagram"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -135,16 +183,18 @@ export default function ContactSection() {
               </a>
             </div>
           </div>
-          <div className="rounded-lg bg-white p-6 shadow-lg w-full overflow-hidden">
+
+          {/* Contact Form */}
+          <div className="bg-white rounded-xl p-6 sm:p-8 shadow-lg border border-slate-100">
             <form 
               className="space-y-4"
               aria-labelledby="contact-form-heading"
             >
               <h3 
                 id="contact-form-heading"
-                className="sr-only"
+                className="text-xl font-semibold text-slate-800 mb-6"
               >
-                Contact Form
+                Send us a Message
               </h3>
               <div className="grid gap-4 md:grid-cols-2">
                 <div>
@@ -155,7 +205,7 @@ export default function ContactSection() {
                     type="text"
                     id="name"
                     name="name"
-                    className="w-full rounded-lg border border-slate-300 p-2.5 text-slate-900 focus:border-blue-500 focus:ring-blue-500"
+                    className="w-full rounded-lg border border-slate-300 p-2.5 text-slate-900 focus:border-blue-500 focus:ring-blue-500 transition-colors"
                     placeholder="Your name"
                     required
                     aria-required="true"
@@ -169,7 +219,7 @@ export default function ContactSection() {
                     type="email"
                     id="email"
                     name="email"
-                    className="w-full rounded-lg border border-slate-300 p-2.5 text-slate-900 focus:border-blue-500 focus:ring-blue-500"
+                    className="w-full rounded-lg border border-slate-300 p-2.5 text-slate-900 focus:border-blue-500 focus:ring-blue-500 transition-colors"
                     placeholder="your@email.com"
                     required
                     aria-required="true"
@@ -184,7 +234,7 @@ export default function ContactSection() {
                   type="tel"
                   id="phone"
                   name="phone"
-                  className="w-full rounded-lg border border-slate-300 p-2.5 text-slate-900 focus:border-blue-500 focus:ring-blue-500"
+                  className="w-full rounded-lg border border-slate-300 p-2.5 text-slate-900 focus:border-blue-500 focus:ring-blue-500 transition-colors"
                   placeholder="+91 91684 99520"
                   required
                   aria-required="true"
@@ -197,7 +247,7 @@ export default function ContactSection() {
                 <select
                   id="service"
                   name="service"
-                  className="w-full rounded-lg border border-slate-300 p-2.5 text-slate-900 focus:border-blue-500 focus:ring-blue-500"
+                  className="w-full rounded-lg border border-slate-300 p-2.5 text-slate-900 focus:border-blue-500 focus:ring-blue-500 transition-colors"
                   aria-label="Select a service you are interested in"
                 >
                   <option value="">Select a service</option>
@@ -215,21 +265,21 @@ export default function ContactSection() {
                   id="message"
                   name="message"
                   rows={4}
-                  className="w-full rounded-lg border border-slate-300 p-2.5 text-slate-900 focus:border-blue-500 focus:ring-blue-500"
+                  className="w-full rounded-lg border border-slate-300 p-2.5 text-slate-900 focus:border-blue-500 focus:ring-blue-500 transition-colors resize-none"
                   placeholder="Tell us about your requirements"
                   aria-label="Your message"
                 ></textarea>
               </div>
-              <div className="flex flex-col sm:flex-row gap-3">
+              <div className="flex flex-col sm:flex-row gap-3 pt-2">
                 <CallCTAButton 
-                  className="w-full sm:flex-1"
+                  className="w-full sm:flex-1 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2.5 rounded-lg transition-all duration-300 hover:shadow-lg"
                   aria-label="Call us now for immediate assistance"
                 >
                   Call Us Now
                 </CallCTAButton>
                 <Button 
                   type="submit" 
-                  className="w-full sm:flex-1 bg-blue-600 hover:bg-blue-700 transition-colors"
+                  className="w-full sm:flex-1 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2.5 rounded-lg transition-all duration-300 hover:shadow-lg"
                   aria-label="Submit your message"
                 >
                   <span className="mr-2">Send Message</span>

@@ -1,9 +1,7 @@
 "use client"
 
 import type React from "react"
-
 import { useState } from "react"
-import { motion } from "framer-motion"
 import { Send, CheckCircle, AlertCircle, User, Mail, Phone, MessageSquare, Building } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -39,7 +37,6 @@ export default function ContactForm() {
     { value: "trademark", label: "Trademark Registration" },
     { value: "compliance", label: "Compliance Services" },
     { value: "llp", label: "LLP Registration" },
-   
     { value: "tax-services", label: "Tax Services" },
     { value: "other", label: "Other Services" },
   ]
@@ -95,42 +92,27 @@ export default function ContactForm() {
 
   if (isSubmitted) {
     return (
-      <motion.div
-        initial={{ opacity: 0, scale: 0.9 }}
-        animate={{ opacity: 1, scale: 1 }}
-        className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl p-8 text-center border border-green-200"
-      >
-        <motion.div
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
-          transition={{ delay: 0.2, type: "spring", bounce: 0.5 }}
-          className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4"
-        >
-          <CheckCircle className="w-8 h-8 text-white" />
-        </motion.div>
-        <h3 className="text-2xl font-bold text-green-800 mb-2">Message Sent Successfully!</h3>
-        <p className="text-green-600 mb-6">
+      <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-lg p-6 text-center border border-green-200">
+        <div className="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-3">
+          <CheckCircle className="w-6 h-6 text-white" />
+        </div>
+        <h3 className="text-xl font-bold text-green-800 mb-2">Message Sent Successfully!</h3>
+        <p className="text-green-600 mb-4">
           Thank you for contacting us. Our team will get back to you within 24 hours.
         </p>
         <WhatsAppCTAButton className="bg-green-500 hover:bg-green-600">Continue on WhatsApp</WhatsAppCTAButton>
-      </motion.div>
+      </div>
     )
   }
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.6 }}
-      className="bg-white rounded-2xl p-8 shadow-2xl border border-slate-100"
-    >
-      <div className="mb-8">
-        <h3 className="text-2xl font-bold text-slate-800 mb-2">Send us a Message</h3>
+    <div className="bg-white rounded-lg p-6 shadow-lg border border-slate-100">
+      <div className="mb-6">
+        <h3 className="text-xl font-bold text-slate-800 mb-2">Send us a Message</h3>
         <p className="text-slate-600">Fill out the form below and we'll get back to you within 24 hours.</p>
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-6">
+      <form onSubmit={handleSubmit} className="space-y-4">
         {/* Name Fields */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="space-y-2">
@@ -149,14 +131,10 @@ export default function ContactForm() {
               }`}
             />
             {errors.firstName && (
-              <motion.p
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="text-red-500 text-sm flex items-center"
-              >
+              <p className="text-red-500 text-sm flex items-center">
                 <AlertCircle className="w-4 h-4 mr-1" />
                 {errors.firstName}
-              </motion.p>
+              </p>
             )}
           </div>
 
@@ -176,14 +154,10 @@ export default function ContactForm() {
               }`}
             />
             {errors.lastName && (
-              <motion.p
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="text-red-500 text-sm flex items-center"
-              >
+              <p className="text-red-500 text-sm flex items-center">
                 <AlertCircle className="w-4 h-4 mr-1" />
                 {errors.lastName}
-              </motion.p>
+              </p>
             )}
           </div>
         </div>
@@ -205,14 +179,10 @@ export default function ContactForm() {
             }`}
           />
           {errors.email && (
-            <motion.p
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="text-red-500 text-sm flex items-center"
-            >
+            <p className="text-red-500 text-sm flex items-center">
               <AlertCircle className="w-4 h-4 mr-1" />
               {errors.email}
-            </motion.p>
+            </p>
           )}
         </div>
 
@@ -233,14 +203,10 @@ export default function ContactForm() {
             }`}
           />
           {errors.phone && (
-            <motion.p
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="text-red-500 text-sm flex items-center"
-            >
+            <p className="text-red-500 text-sm flex items-center">
               <AlertCircle className="w-4 h-4 mr-1" />
               {errors.phone}
-            </motion.p>
+            </p>
           )}
         </div>
 
@@ -267,14 +233,10 @@ export default function ContactForm() {
             </SelectContent>
           </Select>
           {errors.service && (
-            <motion.p
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="text-red-500 text-sm flex items-center"
-            >
+            <p className="text-red-500 text-sm flex items-center">
               <AlertCircle className="w-4 h-4 mr-1" />
               {errors.service}
-            </motion.p>
+            </p>
           )}
         </div>
 
@@ -286,7 +248,7 @@ export default function ContactForm() {
           </Label>
           <Textarea
             id="message"
-            rows={5}
+            rows={4}
             placeholder="Please describe your requirements..."
             value={formData.message}
             onChange={(e) => handleInputChange("message", e.target.value)}
@@ -295,35 +257,26 @@ export default function ContactForm() {
             }`}
           />
           {errors.message && (
-            <motion.p
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="text-red-500 text-sm flex items-center"
-            >
+            <p className="text-red-500 text-sm flex items-center">
               <AlertCircle className="w-4 h-4 mr-1" />
               {errors.message}
-            </motion.p>
+            </p>
           )}
         </div>
 
         {/* Submit Buttons */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
           <WhatsAppCTAButton className="order-2 sm:order-1">
-          
             Call Us
           </WhatsAppCTAButton>
           <Button
             type="submit"
             disabled={isSubmitting}
-            className="order-1 sm:order-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-xl transition-all duration-300 hover:shadow-lg"
+            className="order-1 sm:order-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2.5 rounded-lg transition-all duration-300 hover:shadow-lg"
           >
             {isSubmitting ? (
               <>
-                <motion.div
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 1, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
-                  className="w-4 h-4 border-2 border-white border-t-transparent rounded-full mr-2"
-                />
+                <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full mr-2 animate-spin" />
                 Sending...
               </>
             ) : (
@@ -335,6 +288,6 @@ export default function ContactForm() {
           </Button>
         </div>
       </form>
-    </motion.div>
+    </div>
   )
 }

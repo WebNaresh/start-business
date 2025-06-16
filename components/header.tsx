@@ -4,7 +4,6 @@ import { useState, useEffect } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { Menu, Phone, Mail, X, MapPin, ChevronDown, ChevronRight, Building2, FileText, Gavel, Shield, Search } from "lucide-react"
-import { motion, AnimatePresence } from "framer-motion"
 import { usePathname } from "next/navigation"
 
 import { Button } from "@/components/ui/button"
@@ -275,29 +274,20 @@ export default function Header() {
 
   return (
     <header className={`sticky top-0 z-50 w-full transition-all duration-300 shadow-lg ${scrolled ? "shadow-lg bg-white/95 backdrop-blur-sm" : "bg-white"}`}>
-      {/* Top bar with contact info */}
-     
-
-     
-
       {/* Main navigation */}
       <div className={`transition-all duration-300 ${scrolled ? "py-2" : "py-3"}`}>
         <div className="container mx-auto flex items-end justify-between px-4">
           <div className="flex flex-1 items-center">
-            {/* Logo with animation */}
+            {/* Logo */}
             <Link href="/" className="flex items-center group">
-              <motion.div 
-                className="relative h-8 w-8 mr-2 overflow-hidden"
-                whileHover={{ scale: 1.1 }}
-                transition={{ type: "spring", stiffness: 400, damping: 10 }}
-              >
+              <div className="relative h-8 w-8 mr-2 overflow-hidden">
                 <Image
                   src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/startbusiness_icon_transparent-u5NDFsSQarqF4PBI4Y5RxkT51hJhDI.png"
                   alt="StartBusiness"
                   fill
                   className="object-contain"
                 />
-              </motion.div>
+              </div>
               <div>
                 <span className="text-xl font-bold bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent group-hover:from-blue-700 group-hover:to-blue-900 transition-all duration-300">
                   StartBusiness
@@ -306,7 +296,7 @@ export default function Header() {
             </Link>
           </div>
           <div className="flex items-center flex-shrink-0">
-            {/* Desktop Navigation with improved hover effects */}
+            {/* Desktop Navigation */}
             <nav className="hidden lg:flex items-center justify-end space-x-1">
               <Link
                 href="/"
@@ -318,13 +308,7 @@ export default function Header() {
               >
                 Home
                 {isActive("/") && (
-                  <motion.div
-                    layoutId="activeIndicator"
-                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-600 rounded-full"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 0.3 }}
-                  />
+                  <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-600 rounded-full" />
                 )}
               </Link>
 
@@ -346,53 +330,45 @@ export default function Header() {
                     <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${openCategory === category.id ? "rotate-180" : ""}`} />
                   </button>
 
-                  <AnimatePresence>
-                    {openCategory === category.id && (
-                      <motion.div
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: 10 }}
-                        transition={{ duration: 0.2 }}
-                        className="absolute top-full left-0 mt-1 w-[300px] bg-white rounded-xl shadow-xl border border-slate-200 overflow-hidden"
-                      >
-                        <div className="p-4">
-                          <div className="flex items-center gap-2 mb-3">
-                            <div className={`p-2 rounded-lg ${category.bgColor}`}>
-                              <category.icon className={`w-4 h-4 ${category.color}`} />
-                            </div>
-                            <h3 className="text-sm font-semibold text-slate-800">{category.name}</h3>
+                  {openCategory === category.id && (
+                    <div className="absolute top-full left-0 mt-1 w-[300px] bg-white rounded-xl shadow-xl border border-slate-200 overflow-hidden">
+                      <div className="p-4">
+                        <div className="flex items-center gap-2 mb-3">
+                          <div className={`p-2 rounded-lg ${category.bgColor}`}>
+                            <category.icon className={`w-4 h-4 ${category.color}`} />
                           </div>
-                          <div className="space-y-1">
-                            {category.subServices.map((service) => (
-                              <Link
-                                key={service.href}
-                                href={service.href}
-                                className="block px-2 py-1.5 text-sm text-slate-600 hover:text-blue-600 hover:bg-blue-50 rounded-md transition-all duration-200"
-                              >
-                                <div className="flex items-center justify-between">
-                                  <span>{service.name}</span>
-                                  {service.popular && (
-                                    <Badge className="bg-amber-50 text-amber-600 hover:bg-amber-100 border-none text-[10px] px-1.5 py-0">
-                                      Popular
-                                    </Badge>
-                                  )}
-                                </div>
-                              </Link>
-                            ))}
-                          </div>
+                          <h3 className="text-sm font-semibold text-slate-800">{category.name}</h3>
                         </div>
-                        <div className="bg-slate-50 px-4 py-3 border-t border-slate-200">
-                          <Link
-                            href={`/services/${category.id}`}
-                            className="text-sm font-medium text-blue-600 hover:text-blue-700 flex items-center gap-1 group"
-                          >
-                            View all {category.name} services
-                            <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                          </Link>
+                        <div className="space-y-1">
+                          {category.subServices.map((service) => (
+                            <Link
+                              key={service.href}
+                              href={service.href}
+                              className="block px-2 py-1.5 text-sm text-slate-600 hover:text-blue-600 hover:bg-blue-50 rounded-md transition-all duration-200"
+                            >
+                              <div className="flex items-center justify-between">
+                                <span>{service.name}</span>
+                                {service.popular && (
+                                  <Badge className="bg-amber-50 text-amber-600 hover:bg-amber-100 border-none text-[10px] px-1.5 py-0">
+                                    Popular
+                                  </Badge>
+                                )}
+                              </div>
+                            </Link>
+                          ))}
                         </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
+                      </div>
+                      <div className="bg-slate-50 px-4 py-3 border-t border-slate-200">
+                        <Link
+                          href={`/services/${category.id}`}
+                          className="text-sm font-medium text-blue-600 hover:text-blue-700 flex items-center gap-1 group"
+                        >
+                          View all {category.name} services
+                          <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                        </Link>
+                      </div>
+                    </div>
+                  )}
                 </div>
               ))}
 
@@ -406,32 +382,19 @@ export default function Header() {
               >
                 Blogs
                 {isActive("/blog") && (
-                  <motion.div
-                    layoutId="activeIndicator"
-                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-600 rounded-full"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 0.3 }}
-                  />
+                  <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-600 rounded-full" />
                 )}
               </Link>
             </nav>
           </div>
 
-     
-
-          {/* Mobile menu button with animation */}
+          {/* Mobile menu button */}
           <Sheet>
             <SheetTrigger asChild>
-              <motion.div
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-              >
-                <Button variant="outline" size="icon" className="lg:hidden border-none">
-                  <Menu className="h-5 w-5" />
-                  <span className="sr-only">Toggle menu</span>
-                </Button>
-              </motion.div>
+              <Button variant="outline" size="icon" className="lg:hidden border-none">
+                <Menu className="h-5 w-5" />
+                <span className="sr-only">Toggle menu</span>
+              </Button>
             </SheetTrigger>
             <SheetContent side="right" className="w-[85%] sm:w-[350px] p-0">
               <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
@@ -466,9 +429,6 @@ export default function Header() {
                       </Link>
                     </SheetClose>
 
-              
-
-
                     {/* Mobile Service Categories */}
                     {serviceCategories.map((category) => (
                       <div key={category.id} className="space-y-1">
@@ -492,49 +452,53 @@ export default function Header() {
                             }`}
                           />
                         </button>
-                        <AnimatePresence>
-                          {expandedMobileCategory === category.id && (
-                            <motion.div
-                              initial={{ height: 0, opacity: 0 }}
-                              animate={{ height: "auto", opacity: 1 }}
-                              exit={{ height: 0, opacity: 0 }}
-                              transition={{ duration: 0.2 }}
-                              className="overflow-hidden"
-                            >
-                              <div className="pl-4 space-y-1">
-                                {category.subServices.map((service) => (
-                                  <SheetClose asChild key={service.href}>
-                                    <Link
-                                      href={service.href}
-                                      className="block px-4 py-2.5 text-sm text-slate-600 hover:text-blue-600 hover:bg-blue-50 rounded-md transition-colors"
-                                    >
-                                      <div className="flex items-center justify-between">
-                                        <span>{service.name}</span>
-                                        {service.popular && (
-                                          <Badge className="bg-amber-50 text-amber-600 hover:bg-amber-100 border-none text-[10px] px-1.5 py-0">
-                                            Popular
-                                          </Badge>
-                                        )}
-                                      </div>
-                                    </Link>
-                                  </SheetClose>
-                                ))}
-                                <SheetClose asChild>
+                        {expandedMobileCategory === category.id && (
+                          <div className="overflow-hidden">
+                            <div className="pl-4 space-y-1">
+                              {category.subServices.map((service) => (
+                                <SheetClose asChild key={service.href}>
                                   <Link
-                                    href={`/services/${category.id}`}
-                                    className="block px-4 py-2.5 text-sm font-medium text-blue-600 hover:text-blue-700"
+                                    href={service.href}
+                                    className="block px-4 py-2.5 text-sm text-slate-600 hover:text-blue-600 hover:bg-blue-50 rounded-md transition-colors"
                                   >
-                                    View all {category.name} services
+                                    <div className="flex items-center justify-between">
+                                      <span>{service.name}</span>
+                                      {service.popular && (
+                                        <Badge className="bg-amber-50 text-amber-600 hover:bg-amber-100 border-none text-[10px] px-1.5 py-0">
+                                          Popular
+                                        </Badge>
+                                      )}
+                                    </div>
                                   </Link>
                                 </SheetClose>
-                              </div>
-                            </motion.div>
-                          )}
-                        </AnimatePresence>
+                              ))}
+                              <SheetClose asChild>
+                                <Link
+                                  href={`/services/${category.id}`}
+                                  className="block px-4 py-2.5 text-sm font-medium text-blue-600 hover:text-blue-700"
+                                >
+                                  View all {category.name} services
+                                </Link>
+                              </SheetClose>
+                            </div>
+                          </div>
+                        )}
                       </div>
                     ))}
                     
-          
+                    <SheetClose asChild>
+                      <Link
+                        href="/contact"
+                        className={`rounded-md px-4 py-3 text-base font-medium transition-colors ${
+                          isActive("/")
+                            ? "bg-blue-50 text-blue-600"
+                            : "text-slate-700 hover:bg-slate-50 hover:text-blue-600"
+                        }`}
+                      >
+                        Contact Us
+                      </Link>
+                    </SheetClose>
+
                     <SheetClose asChild>
                       <Link
                         href="/blog"

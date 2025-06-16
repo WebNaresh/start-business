@@ -5,6 +5,7 @@ import ContactForm from "./_components/contact-form"
 import ContactMap from "./_components/contact-map"
 import ContactFAQ from "./_components/contact-faq"
 import ContactLocationInfo from "./_components/contact-location-info"
+import ContactSection from "@/components/home/contact-section"
 
 
 export const metadata: Metadata = {
@@ -85,17 +86,17 @@ export default function ContactPage() {
   return (
     <div className="flex min-h-screen flex-col">
 
-      <section className="py-8 bg-white">
+      {/* <section className="py-8 bg-white">
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-12 items-start">
             <ContactInfo />
             <ContactForm />
           </div>
         </div>
-      </section>
-
+      </section> */}
+<ContactSection/>
       <ContactMap />
-  <ContactLocationInfo/>
+
     </div>
   )
 }
