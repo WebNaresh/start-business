@@ -1,54 +1,73 @@
 "use client"
 
 import type React from "react"
-
 import { useState, useEffect, useCallback, useRef } from "react"
 import Image from "next/image"
 import { ArrowRight, ChevronLeft, ChevronRight, Play, Pause } from "lucide-react"
-import { motion, AnimatePresence, useInView } from "framer-motion"
-
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
+import Script from "next/script"
 
 export default function FixedHeroCarousel() {
   const slides = [
     {
       image: "/hero/hero_new_1.png",
-      title: "Start Your Business Journey Now",
-      description: "Registration, compliance, and legal services to help your business thrive",
+      title: "Start Your Business Journey in India with Expert Guidance",
+      description: "Professional business registration, compliance, and legal services to help your business thrive in India's growing market",
     },
     {
       image: "/hero/hero_new_2.png",
-      title: "Expert Guidance For Your Business Growth",
-      description: "Get personalized consultation and support for all your business compliance needs",
+      title: "Expert Business Solutions for Indian Entrepreneurs",
+      description: "Get personalized consultation and comprehensive support for all your business compliance and legal requirements in India",
     },
   ]
 
+  // Generate structured data for the hero section
+  const heroStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Business Registration and Compliance Services in India",
+    "description": "Professional business registration, compliance, and legal services to help your business thrive in India's growing market",
+    "mainEntity": {
+      "@type": "Service",
+      "name": "Business Registration Services",
+      "provider": {
+        "@type": "Organization",
+        "name": "Your Company Name",
+        "description": "Leading provider of business registration and compliance services in India"
+      },
+      "offers": {
+        "@type": "Offer",
+        "availability": "https://schema.org/InStock"
+      },
+      "featureList": [
+        "Quick turnaround time",
+        "Expert legal guidance",
+        "End-to-end business solutions",
+        "100% compliance assured"
+      ]
+    }
+  }
+
   const [currentSlide, setCurrentSlide] = useState(0)
-  const [direction, setDirection] = useState(0)
   const [isPaused, setIsPaused] = useState(false)
   const [progress, setProgress] = useState(0)
   const [touchStart, setTouchStart] = useState(0)
   const [touchEnd, setTouchEnd] = useState(0)
   const autoplayIntervalRef = useRef<NodeJS.Timeout | null>(null)
-
-  const heroRef = useRef(null)
-  const isInView = useInView(heroRef, { once: true, margin: "-100px" })
+  const heroRef = useRef<HTMLElement>(null)
 
   const nextSlide = useCallback(() => {
-    setDirection(1)
     setCurrentSlide((prev) => (prev === slides.length - 1 ? 0 : prev + 1))
     setProgress(0)
   }, [slides.length])
 
   const prevSlide = useCallback(() => {
-    setDirection(-1)
     setCurrentSlide((prev) => (prev === 0 ? slides.length - 1 : prev - 1))
     setProgress(0)
   }, [slides.length])
 
   const handleDotClick = (index: number) => {
-    setDirection(index > currentSlide ? 1 : -1)
     setCurrentSlide(index)
     setProgress(0)
   }
@@ -78,12 +97,10 @@ export default function FixedHeroCarousel() {
 
   // Reliable auto-advance implementation
   useEffect(() => {
-    // Clear any existing interval
     if (autoplayIntervalRef.current) {
       clearInterval(autoplayIntervalRef.current)
     }
 
-    // Only set up interval if not paused
     if (!isPaused) {
       autoplayIntervalRef.current = setInterval(() => {
         setProgress((prev) => {
@@ -94,10 +111,9 @@ export default function FixedHeroCarousel() {
           }
           return newProgress
         })
-      }, 50) // Update progress more frequently for smoother animation
+      }, 50)
     }
 
-    // Cleanup function
     return () => {
       if (autoplayIntervalRef.current) {
         clearInterval(autoplayIntervalRef.current)
@@ -105,133 +121,78 @@ export default function FixedHeroCarousel() {
     }
   }, [isPaused, nextSlide])
 
-  // Debug logging
-  useEffect(() => {
-    console.log("Carousel state:", {
-      currentSlide,
-      isPaused,
-      progress,
-      slidesCount: slides.length,
-    })
-  }, [currentSlide, isPaused, progress, slides.length])
-
-  const slideVariants = {
-    enter: (direction: number) => ({
-      x: direction > 0 ? 300 : -300,
-      opacity: 0,
-      scale: 0.8,
-    }),
-    center: {
-      x: 0,
-      opacity: 1,
-      scale: 1,
-    },
-    exit: (direction: number) => ({
-      x: direction < 0 ? 300 : -300,
-      opacity: 0,
-      scale: 0.8,
-    }),
-  }
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.2,
-      },
-    },
-  }
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0 },
-  }
-
   return (
     <section
       ref={heroRef}
       className="relative py-8 md:py-12 overflow-hidden bg-gradient-to-br from-white via-blue-50/30 to-slate-50"
+      aria-label="Hero section"
     >
+      <Script
+        id="hero-structured-data"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(heroStructuredData) }}
+      />
       {/* Enhanced background elements */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-blue-100 to-transparent rounded-full -mr-48 -mt-48 opacity-60 blur-3xl"></div>
-      <div className="absolute bottom-0 left-0 w-80 h-80 bg-gradient-to-tr from-slate-100 to-transparent rounded-full -ml-40 -mb-40 opacity-50 blur-2xl"></div>
+      <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-blue-100 to-transparent rounded-full -mr-48 -mt-48 opacity-60 blur-3xl" aria-hidden="true"></div>
+      <div className="absolute bottom-0 left-0 w-80 h-80 bg-gradient-to-tr from-slate-100 to-transparent rounded-full -ml-40 -mb-40 opacity-50 blur-2xl" aria-hidden="true"></div>
 
       {/* Floating elements */}
-      <motion.div
-        className="absolute top-20 right-20 w-4 h-4 bg-blue-400 rounded-full opacity-60"
-        animate={{ y: [0, -10, 0] }}
-        transition={{ duration: 3, repeat: Number.POSITIVE_INFINITY }}
-      />
-      <motion.div
-        className="absolute bottom-32 left-16 w-6 h-6 bg-slate-300 rounded-full opacity-40"
-        animate={{ y: [0, 15, 0] }}
-        transition={{ duration: 4, repeat: Number.POSITIVE_INFINITY, delay: 1 }}
-      />
+      <div className="absolute top-20 right-20 w-4 h-4 bg-blue-400 rounded-full opacity-60 animate-float-slow" aria-hidden="true" />
+      <div className="absolute bottom-32 left-16 w-6 h-6 bg-slate-300 rounded-full opacity-40 animate-float-slow-delayed" aria-hidden="true" />
 
       <div className="container mx-auto px-4 relative z-10">
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
-          className="grid gap-4 lg:grid-cols-2 lg:gap-16 items-center"
-        >
+        <div className="grid gap-4 lg:grid-cols-2 lg:gap-16 items-center">
           {/* Content Section */}
           <div className="flex flex-col justify-center">
-            <AnimatePresence mode="wait" custom={direction}>
-              <motion.div
-                key={currentSlide}
-                custom={direction}
-                variants={slideVariants}
-                initial="enter"
-                animate="center"
-                exit="exit"
-                transition={{ duration: 0.6, type: "spring", bounce: 0.3 }}
-              >
-                <motion.h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-4">
-                  {slides[currentSlide].title}
-                </motion.h1>
+            <div className="transition-opacity duration-500 ease-in-out">
+              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-4">
+                {slides[currentSlide].title}
+              </h1>
 
-                <motion.p className="text-sm md:text-base text-slate-600 mb-6 max-w-2xl">
-                  {slides[currentSlide].description}
-                </motion.p>
-              </motion.div>
-            </AnimatePresence>
+              <p className="text-sm md:text-base text-slate-600 mb-6 max-w-2xl">
+                {slides[currentSlide].description}
+              </p>
+            </div>
 
-            <motion.div variants={itemVariants} className="mb-8 hidden md:grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="mb-8 hidden md:grid grid-cols-1 sm:grid-cols-2 gap-4">
               {[
-                "⚡ Quick turnaround time",
-                "🎯 Expert legal guidance",
-                "🔄 End-to-end business solutions",
-                "✅ 100% compliance assured",
+                "⚡ Fast and Efficient Processing",
+                "🎯 Expert Legal Consultation",
+                "🔄 Comprehensive Business Solutions",
+                "✅ Guaranteed Compliance",
               ].map((feature, index) => (
-                <motion.div
+                <div
                   key={index}
-                  className="flex items-center p-3 rounded-lg bg-white/60 backdrop-blur-sm border border-slate-100"
-                  whileHover={{ scale: 1.02, backgroundColor: "rgba(255,255,255,0.8)" }}
-                  transition={{ duration: 0.2 }}
+                  className="flex items-center p-3 rounded-lg bg-white/60 backdrop-blur-sm border border-slate-100 transition-all duration-300 hover:scale-[1.02] hover:bg-white/80"
+                  role="listitem"
                 >
                   <span className="text-slate-700 text-sm font-medium">{feature}</span>
-                </motion.div>
+                </div>
               ))}
-            </motion.div>
+            </div>
 
-            <motion.div variants={itemVariants} className="flex items-center gap-4">
-              <Button className="bg-blue-600 hover:bg-blue-700">
+            <div className="flex items-center gap-4">
+              <Button 
+                className="bg-blue-600 hover:bg-blue-700 transition-all duration-300"
+                aria-label="Start your business registration process"
+              >
                 Get Started Now
-                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true" />
               </Button>
               <Link href="/services">
-                <Button variant="outline" className="border-slate-200 hover:bg-slate-50">
+                <Button 
+                  variant="outline" 
+                  className="border-slate-200 hover:bg-slate-50 transition-all duration-300"
+                  aria-label="Explore our business services"
+                >
                   View Our Services
                 </Button>
               </Link>
-            </motion.div>
+            </div>
           </div>
 
           {/* Image Carousel */}
-          <motion.div variants={itemVariants} className="flex items-center justify-center">
+          <div className="flex items-center justify-center">
             <div className="relative w-full max-w-lg md:max-w-xl lg:max-w-2xl">
               <div
                 className="relative rounded-xl overflow-hidden shadow-sm z-10 aspect-[4/3] bg-gradient-to-br from-white to-slate-50"
@@ -240,108 +201,103 @@ export default function FixedHeroCarousel() {
                 onTouchStart={handleTouchStart}
                 onTouchMove={handleTouchMove}
                 onTouchEnd={handleTouchEnd}
+                role="region"
+                aria-label="Business services showcase"
               >
-                <AnimatePresence mode="wait" custom={direction}>
-                  <motion.div
-                    key={currentSlide}
-                    custom={direction}
-                    variants={slideVariants}
-                    initial="enter"
-                    animate="center"
-                    exit="exit"
-                    transition={{ duration: 0.6, type: "spring", bounce: 0.2 }}
-                    className="absolute inset-0"
-                  >
-                    <Image
-                      src={slides[currentSlide].image || "/placeholder.svg"}
-                      alt={slides[currentSlide].title}
-                      fill
-                      className="object-contain p-6"
-                      priority={currentSlide === 0}
-                    />
-                  </motion.div>
-                </AnimatePresence>
+                <div className="relative w-full h-full transition-opacity duration-500 ease-in-out">
+                  <Image
+                    src={slides[currentSlide].image || "/placeholder.svg"}
+                    alt={slides[currentSlide].title}
+                    fill
+                    className="object-contain p-6 transition-transform duration-500 ease-in-out"
+                    priority={currentSlide === 0}
+                  />
+                </div>
 
                 {/* Navigation */}
-                <motion.button
+                <button
                   onClick={prevSlide}
-                  className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white rounded-full p-3 shadow-lg z-20 transition-all hover:scale-110"
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.95 }}
+                  className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white rounded-full p-3 shadow-lg z-20 transition-all duration-300 hover:scale-110 active:scale-95"
                   aria-label="Previous slide"
                 >
-                  <ChevronLeft className="h-5 w-5 text-blue-600" />
-                </motion.button>
+                  <ChevronLeft className="h-5 w-5 text-blue-600" aria-hidden="true" />
+                </button>
 
-                <motion.button
+                <button
                   onClick={nextSlide}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white rounded-full p-3 shadow-lg z-20 transition-all hover:scale-110"
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.95 }}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white rounded-full p-3 shadow-lg z-20 transition-all duration-300 hover:scale-110 active:scale-95"
                   aria-label="Next slide"
                 >
-                  <ChevronRight className="h-5 w-5 text-blue-600" />
-                </motion.button>
+                  <ChevronRight className="h-5 w-5 text-blue-600" aria-hidden="true" />
+                </button>
 
                 {/* Play/Pause Button */}
-                <motion.button
+                <button
                   onClick={togglePlayPause}
-                  className="absolute bottom-4 right-4 bg-white/90 hover:bg-white rounded-full p-2 shadow-lg z-20 transition-all hover:scale-110"
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.95 }}
+                  className="absolute bottom-4 right-4 bg-white/90 hover:bg-white rounded-full p-2 shadow-lg z-20 transition-all duration-300 hover:scale-110 active:scale-95"
                   aria-label={isPaused ? "Play slideshow" : "Pause slideshow"}
                 >
-                  {isPaused ? <Play className="h-4 w-4 text-blue-600" /> : <Pause className="h-4 w-4 text-blue-600" />}
-                </motion.button>
+                  {isPaused ? (
+                    <Play className="h-4 w-4 text-blue-600" aria-hidden="true" />
+                  ) : (
+                    <Pause className="h-4 w-4 text-blue-600" aria-hidden="true" />
+                  )}
+                </button>
 
                 {/* Progress bar */}
-                <div className="absolute bottom-0 left-0 right-0 h-1 bg-white/30 z-20">
-                  <motion.div
-                    className="h-full bg-gradient-to-r from-blue-500 to-blue-600"
+                <div 
+                  className="absolute bottom-0 left-0 right-0 h-1 bg-white/30 z-20"
+                  role="progressbar"
+                  aria-valuenow={progress}
+                  aria-valuemin={0}
+                  aria-valuemax={100}
+                >
+                  <div
+                    className="h-full bg-gradient-to-r from-blue-500 to-blue-600 transition-all duration-100"
                     style={{ width: `${progress}%` }}
-                    transition={{ duration: 0.1 }}
                   />
                 </div>
               </div>
 
               {/* Decorative elements */}
-              <motion.div
-                className="absolute -bottom-6 -left-6 h-32 w-32 rounded-full bg-gradient-to-br from-blue-100 to-blue-200 z-0 opacity-60"
-                animate={{ rotate: 360 }}
-                transition={{ duration: 20, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
+              <div
+                className="absolute -bottom-6 -left-6 h-32 w-32 rounded-full bg-gradient-to-br from-blue-100 to-blue-200 z-0 opacity-60 animate-spin-slow"
+                aria-hidden="true"
               />
-              <motion.div
-                className="absolute -top-6 -right-6 h-20 w-20 rounded-full bg-gradient-to-br from-slate-100 to-slate-200 z-0 opacity-50"
-                animate={{ rotate: -360 }}
-                transition={{ duration: 15, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
+              <div
+                className="absolute -top-6 -right-6 h-20 w-20 rounded-full bg-gradient-to-br from-slate-100 to-slate-200 z-0 opacity-50 animate-spin-slow-reverse"
+                aria-hidden="true"
               />
 
               {/* Slide indicators */}
-              <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 flex space-x-3 z-20">
+              <div 
+                className="absolute -bottom-8 left-1/2 -translate-x-1/2 flex space-x-3 z-20"
+                role="tablist"
+                aria-label="Slide navigation"
+              >
                 {slides.map((_, index) => (
-                  <motion.button
+                  <button
                     key={index}
                     onClick={() => handleDotClick(index)}
-                    className={`relative overflow-hidden rounded-full transition-all ${
+                    className={`relative overflow-hidden rounded-full transition-all duration-300 hover:scale-110 active:scale-95 ${
                       index === currentSlide ? "bg-blue-600 w-10 h-3" : "bg-slate-300 hover:bg-blue-400 w-3 h-3"
                     }`}
-                    whileHover={{ scale: 1.2 }}
-                    whileTap={{ scale: 0.9 }}
+                    role="tab"
+                    aria-selected={index === currentSlide}
                     aria-label={`Go to slide ${index + 1}`}
                   >
                     {index === currentSlide && !isPaused && (
-                      <motion.div
-                        className="absolute inset-0 bg-blue-700"
+                      <div
+                        className="absolute inset-0 bg-blue-700 transition-all duration-100"
                         style={{ width: `${progress}%` }}
-                        transition={{ duration: 0.1 }}
                       />
                     )}
-                  </motion.button>
+                  </button>
                 ))}
               </div>
             </div>
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
       </div>
     </section>
   )
