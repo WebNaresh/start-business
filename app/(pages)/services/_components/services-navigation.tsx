@@ -206,7 +206,7 @@ export default function EnhancedServicesNavigation() {
     },
     {
       id: "intellectual-property",
-      name: "Trademark & IP",
+      name: "Trademark Services",
       shortName: "IP",
       icon: Shield,
       description: "Protect your brand and intellectual property",
@@ -243,7 +243,7 @@ export default function EnhancedServicesNavigation() {
     },
     {
       id: "licenses-registrations",
-      name: "Licenses & Registrations",
+      name: "Important Registrations",
       shortName: "Licenses",
       icon: Gavel,
       description: "Various business licenses and regulatory approvals",
