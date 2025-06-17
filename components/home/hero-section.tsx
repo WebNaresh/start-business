@@ -22,7 +22,7 @@ interface EmblaCarouselTypeWithAutoplay extends EmblaCarouselType {
 export default function FixedHeroCarousel() {
   const slides = [
     {
-      image: "/hero/hero-latest.png",
+      image: "/hero/hero-latest-1.png",
       title: "Start Your Business with Expert Guidance",
       description: "Professional business registration, compliance, and legal services to help your business thrive in India's growing market",
     },
@@ -171,34 +171,28 @@ export default function FixedHeroCarousel() {
           {/* Image Carousel */}
           <div className="flex items-center justify-center">
             <div className="relative w-full max-w-lg md:max-w-xl lg:max-w-2xl">
-              <div
-                className="relative rounded-xl overflow-hidden shadow-sm z-10 aspect-[4/3] bg-gradient-to-br from-white to-slate-50"
-                onMouseEnter={() => setIsPaused(true)}
-                onMouseLeave={() => setIsPaused(false)}
-                role="region"
-                aria-label="Business services showcase"
-              >
+             
                 <div className="overflow-hidden" ref={emblaRef}>
                   <div className="flex">
                     {slides.map((slide, index) => (
                       <div
                         key={index}
-                        className="relative flex-[0_0_100%] min-w-0 aspect-[4/3]"
+                        className="relative rounded-xl flex-[0_0_100%] min-w-0 aspect-[4/3]"
                       >
-                        <div className="relative w-full h-full">
+                        <div className="relative rounded-xl w-full h-full">
                           <Image
                             src={slide.image || "/placeholder.svg"}
                             alt={slide.title}
                             fill
                             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                            className="object-contain p-6"
+                            className="object-contain p-6 rounded-xl"
                             priority={index === 0}
                           />
                         </div>
                       </div>
                     ))}
                   </div>
-                </div>
+           
 
                 {/* Navigation */}
                 <button
