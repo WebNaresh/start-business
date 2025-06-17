@@ -78,6 +78,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         <meta name="apple-mobile-web-app-title" content="Start Business" />
+        <meta name="google-site-verification" content="VjHph2u3tld04cEok8zvpPBA-TEtxikvfvGo7hW-NBE" />
         {/* Google Analytics */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-2T86HZSNGB"
