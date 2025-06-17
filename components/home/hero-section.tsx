@@ -3,7 +3,7 @@
 import type React from "react"
 import { useState, useEffect, useCallback, useRef } from "react"
 import Image from "next/image"
-import { ArrowRight, ChevronLeft, ChevronRight, Play, Pause } from "lucide-react"
+import { ArrowRight  } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import Script from "next/script"
@@ -27,7 +27,7 @@ export default function FixedHeroCarousel() {
       description: "Professional business registration, compliance, and legal services to help your business thrive in India's growing market",
     },
     {
-      image: "/hero/hero_new_2.png",
+      image: "/hero/hero-latest-3.png",
       title: "Expert Business Solutions for Indian Entrepreneurs",
       description: "Get personalized consultation and comprehensive support for all your business compliance and legal requirements in India",
     },
@@ -179,13 +179,13 @@ export default function FixedHeroCarousel() {
                         key={index}
                         className="relative rounded-xl flex-[0_0_100%] min-w-0 aspect-[4/3]"
                       >
-                        <div className="relative rounded-xl w-full h-full">
+                        <div className="relative rounded-xl w-full h-full overflow-hidden">
                           <Image
                             src={slide.image || "/placeholder.svg"}
                             alt={slide.title}
                             fill
                             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                            className="object-contain p-6 rounded-xl"
+                            className="object-contain p-6"
                             priority={index === 0}
                           />
                         </div>
