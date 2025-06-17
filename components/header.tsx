@@ -411,7 +411,7 @@ export default function Header() {
                 <div className="p-4 border-b flex items-center justify-between">
                   <Link href="/" className="flex items-center">
                     <Image
-                      src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/startbusiness_icon_transparent-u5NDFsSQarqF4PBI4Y5RxkT51hJhDI.png"
+                      src="/logos/logo_icon.png"
                       alt="StartBusiness"
                       width={32}
                       height={32}
