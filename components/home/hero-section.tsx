@@ -22,7 +22,7 @@ interface EmblaCarouselTypeWithAutoplay extends EmblaCarouselType {
 export default function FixedHeroCarousel() {
   const slides = [
     {
-      image: "/hero/hero_new_1.png",
+      image: "/hero/hero-latest.png",
       title: "Start Your Business with Expert Guidance",
       description: "Professional business registration, compliance, and legal services to help your business thrive in India's growing market",
     },

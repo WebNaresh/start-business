@@ -88,7 +88,7 @@ const FloatingNavbar = ({
         opacity: showStickyNav ? 1 : 0,
       }}
       transition={{ duration: 0.3, ease: "easeInOut" }}
-      className="fixed top-1/5 left-0 md:left-1/3 transform -translate-x-1/2 z-50"
+      className="fixed top-1/5 left-0 md:left-1/3 transform -translate-x-1/2 z-30"
     >
       <div className="bg-white backdrop-blur-md border border-slate-200 rounded-2xl shadow-lg shadow-slate-900/5">
         <div className="px-2 py-2">

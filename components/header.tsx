@@ -120,18 +120,6 @@ export default function Header() {
       gradientTo: "to-green-400",
       subServices: [
         {
-          name: "GST Registration",
-          href: "/services/gst-registration",
-          popular: true,
-          description: "Register for Goods and Services Tax (GST) for your business",
-        },
-        {
-          name: "ITR-4 Filing",
-          href: "/services/itr-4-filing",
-          popular: true,
-          description: "File your income tax returns under presumptive taxation scheme",
-        },
-        {
           name: "ROC Annual Compliances",
           href: "/services/roc-annual-compliances",
           description: "Stay compliant with all ROC requirements including annual returns",
@@ -140,11 +128,6 @@ export default function Header() {
           name: "GST Filing",
           href: "/services/gst-filing",
           description: "File your GST returns accurately and on time",
-        },
-        {
-          name: "GST Cancellation and Revocation",
-          href: "/services/gst-cancellation",
-          description: "Cancel or revoke your GST registration",
         },
         {
           name: "Income Tax Filing",
@@ -156,11 +139,6 @@ export default function Header() {
           name: "TDS Return Filing",
           href: "/services/tds-filing",
           description: "File your Tax Deducted at Source (TDS) returns",
-        },
-        {
-          name: "Annual Compliance",
-          href: "/services/annual-compliance",
-          description: "Manage all your annual compliance requirements",
         },
       ],
     },
@@ -209,6 +187,12 @@ export default function Header() {
       gradientFrom: "from-amber-600",
       gradientTo: "to-orange-400",
       subServices: [
+        {
+          name: "GST Registration",
+          href: "/services/gst-registration",
+          popular: true,
+          description: "Register for Goods and Services Tax (GST) for your business",
+        },
         {
           name: "Import Export Code",
           href: "/services/iec-license",
@@ -316,7 +300,7 @@ export default function Header() {
               {serviceCategories.map((category) => (
                 <div 
                   key={category.id} 
-                  className="relative" 
+                  className="relative group" 
                   onMouseEnter={() => setOpenCategory(category.id)} 
                   onMouseLeave={() => setOpenCategory(null)}
                 >
@@ -332,7 +316,7 @@ export default function Header() {
                   </button>
 
                   {openCategory === category.id && (
-                    <div className="absolute top-full left-0 mt-1 w-[300px] bg-white rounded-xl shadow-xl border border-slate-200 overflow-hidden">
+                    <div className="absolute top-full left-0 mt-1 w-[300px] bg-white rounded-xl shadow-xl border border-slate-200 overflow-hidden transform origin-top transition-all duration-200 ease-out opacity-100 scale-100 z-50">
                       <div className="p-4">
                         <div className="flex items-center gap-2 mb-3">
                           <div className={`p-2 rounded-lg ${category.bgColor}`}>
@@ -435,7 +419,7 @@ export default function Header() {
                       <div key={category.id} className="space-y-1">
                         <button
                           onClick={() => setExpandedMobileCategory(expandedMobileCategory === category.id ? null : category.id)}
-                          className={`w-full rounded-md px-4 py-3 text-base font-medium transition-colors flex items-center justify-between ${
+                          className={`w-full rounded-md px-4 py-3 text-base font-medium transition-all duration-200 flex items-center justify-between ${
                             isActive(`/services/${category.id}`)
                               ? "bg-blue-50 text-blue-600"
                               : "text-slate-700 hover:bg-slate-50 hover:text-blue-600"
@@ -454,13 +438,13 @@ export default function Header() {
                           />
                         </button>
                         {expandedMobileCategory === category.id && (
-                          <div className="overflow-hidden">
+                          <div className="overflow-hidden transition-all duration-200 ease-out">
                             <div className="pl-4 space-y-1">
                               {category.subServices.map((service) => (
                                 <SheetClose asChild key={service.href}>
                                   <Link
                                     href={service.href}
-                                    className="block px-4 py-2.5 text-sm text-slate-600 hover:text-blue-600 hover:bg-blue-50 rounded-md transition-colors"
+                                    className="block px-4 py-2.5 text-sm text-slate-600 hover:text-blue-600 hover:bg-blue-50 rounded-md transition-all duration-200"
                                   >
                                     <div className="flex items-center justify-between">
                                       <span>{service.name}</span>
@@ -476,7 +460,7 @@ export default function Header() {
                               <SheetClose asChild>
                                 <Link
                                   href={`/services/${category.id}`}
-                                  className="block px-4 py-2.5 text-sm font-medium text-blue-600 hover:text-blue-700"
+                                  className="block px-4 py-2.5 text-sm font-medium text-blue-600 hover:text-blue-700 transition-all duration-200"
                                 >
                                   View all {category.name} services
                                 </Link>
