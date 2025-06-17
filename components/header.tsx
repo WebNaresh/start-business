@@ -280,11 +280,12 @@ export default function Header() {
           <div className="flex flex-1 items-center">
             {/* Logo */}
             <Link href="/" className="flex items-center group">
-              <div className="relative h-8 w-8 mr-2 overflow-hidden">
+              <div className="relative h-12 w-12  overflow-hidden">
                 <Image
-                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/startbusiness_icon_transparent-u5NDFsSQarqF4PBI4Y5RxkT51hJhDI.png"
+                  src="/logos/logo_icon.png"
                   alt="StartBusiness"
-                  fill
+                  width={100}
+                  height={100}
                   className="object-contain"
                 />
               </div>
@@ -490,7 +491,7 @@ export default function Header() {
                       <Link
                         href="/contact"
                         className={`rounded-md px-4 py-3 text-base font-medium transition-colors ${
-                          isActive("/")
+                          isActive("/contact")
                             ? "bg-blue-50 text-blue-600"
                             : "text-slate-700 hover:bg-slate-50 hover:text-blue-600"
                         }`}
@@ -518,7 +519,7 @@ export default function Header() {
                 <div className="border-t p-4 space-y-4">
                   <div className="flex flex-col space-y-3">
                     <a
-                      href="https://wa.me/919699214195"
+                      href="tel:+919168499520"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex items-center text-slate-700 hover:text-blue-600 transition-colors"

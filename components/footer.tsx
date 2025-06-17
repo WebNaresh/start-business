@@ -89,14 +89,14 @@ export default function EnhancedFooter() {
               <Link href="/" className="mb-4 lg:mb-6 flex items-center group">
                 <div className="relative h-10 w-10 sm:h-12 sm:w-12 mr-3 overflow-hidden rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 p-2 group-hover:scale-110 transition-transform duration-300">
                   <Image
-                    src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/startbusiness_icon_transparent-u5NDFsSQarqF4PBI4Y5RxkT51hJhDI.png"
+                    src="/logos/logo_icon.png"
                     alt="StartBusiness"
                     fill
                     className="object-contain filter brightness-0 invert"
                   />
                 </div>
                 <div>
-                  <span className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">
+                  <span className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-blue-600 to-blue-600 bg-clip-text text-transparent">
                     StartBusiness
                   </span>
                 </div>
