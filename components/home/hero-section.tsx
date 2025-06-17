@@ -101,7 +101,7 @@ export default function FixedHeroCarousel() {
   return (
     <section
       ref={heroRef}
-      className="relative py-8 md:py-12 overflow-hidden bg-gradient-to-br from-white via-blue-50/30 to-slate-50"
+      className="relative py-8 md:py-12 overflow-hidden "
       aria-label="Hero section"
     >
       <Script
@@ -110,12 +110,12 @@ export default function FixedHeroCarousel() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(heroStructuredData) }}
       />
       {/* Enhanced background elements */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-blue-100 to-transparent rounded-full -mr-48 -mt-48 opacity-60 blur-3xl" aria-hidden="true"></div>
-      <div className="absolute bottom-0 left-0 w-80 h-80 bg-gradient-to-tr from-slate-100 to-transparent rounded-full -ml-40 -mb-40 opacity-50 blur-2xl" aria-hidden="true"></div>
+      {/* <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-blue-100 to-transparent rounded-full -mr-48 -mt-48 opacity-60 blur-3xl" aria-hidden="true"></div>
+      <div className="absolute bottom-0 left-0 w-80 h-80 bg-gradient-to-tr from-slate-100 to-transparent rounded-full -ml-40 -mb-40 opacity-50 blur-2xl" aria-hidden="true"></div> */}
 
       {/* Floating elements */}
-      <div className="absolute top-20 right-20 w-4 h-4 bg-blue-400 rounded-full opacity-60 animate-float-slow" aria-hidden="true" />
-      <div className="absolute bottom-32 left-16 w-6 h-6 bg-slate-300 rounded-full opacity-40 animate-float-slow-delayed" aria-hidden="true" />
+      {/* <div className="absolute top-20 right-20 w-4 h-4 bg-blue-400 rounded-full opacity-60 animate-float-slow" aria-hidden="true" />
+      <div className="absolute bottom-32 left-16 w-6 h-6 bg-slate-300 rounded-full opacity-40 animate-float-slow-delayed" aria-hidden="true" /> */}
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="grid gap-4 lg:grid-cols-2 lg:gap-16 items-center">
@@ -194,36 +194,6 @@ export default function FixedHeroCarousel() {
                   </div>
            
 
-                {/* Navigation */}
-                <button
-                  onClick={scrollPrev}
-                  className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white rounded-full p-3 shadow-lg z-20 transition-all duration-300 hover:scale-110 active:scale-95"
-                  aria-label="Previous slide"
-                >
-                  <ChevronLeft className="h-5 w-5 text-blue-600" aria-hidden="true" />
-                </button>
-
-                <button
-                  onClick={scrollNext}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white rounded-full p-3 shadow-lg z-20 transition-all duration-300 hover:scale-110 active:scale-95"
-                  aria-label="Next slide"
-                >
-                  <ChevronRight className="h-5 w-5 text-blue-600" aria-hidden="true" />
-                </button>
-
-                {/* Play/Pause Button */}
-                <button
-                  onClick={togglePlayPause}
-                  className="absolute bottom-4 right-4 bg-white/90 hover:bg-white rounded-full p-2 shadow-lg z-20 transition-all duration-300 hover:scale-110 active:scale-95"
-                  aria-label={isPaused ? "Play slideshow" : "Pause slideshow"}
-                >
-                  {isPaused ? (
-                    <Play className="h-4 w-4 text-blue-600" aria-hidden="true" />
-                  ) : (
-                    <Pause className="h-4 w-4 text-blue-600" aria-hidden="true" />
-                  )}
-                </button>
-
                 {/* Slide indicators */}
                 <div 
                   className="absolute -bottom-8 left-1/2 -translate-x-1/2 flex space-x-3 z-20"
@@ -246,14 +216,14 @@ export default function FixedHeroCarousel() {
               </div>
 
               {/* Decorative elements */}
-              <div
+              {/* <div
                 className="absolute -bottom-6 -left-6 h-32 w-32 rounded-full bg-gradient-to-br from-blue-100 to-blue-200 z-0 opacity-60 animate-spin-slow"
                 aria-hidden="true"
               />
               <div
                 className="absolute -top-6 -right-6 h-20 w-20 rounded-full bg-gradient-to-br from-slate-100 to-slate-200 z-0 opacity-50 animate-spin-slow-reverse"
                 aria-hidden="true"
-              />
+              /> */}
             </div>
           </div>
         </div>
