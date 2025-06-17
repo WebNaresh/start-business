@@ -3,14 +3,13 @@
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import Image from "next/image"
-import { Menu, Phone, Mail, X, MapPin, ChevronDown, ChevronRight, Building2, FileText, Gavel, Shield, Search } from "lucide-react"
+import { Menu, Phone, Mail, ChevronDown, ChevronRight, Building2, FileText, Gavel, Shield } from "lucide-react"
 import { usePathname } from "next/navigation"
 
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger, SheetClose, SheetTitle } from "@/components/ui/sheet"
 import WhatsAppCTAButton from "@/components/whatsapp-cta-button"
 import { Badge } from "@/components/ui/badge"
-import { Input } from "@/components/ui/input"
 
 interface SubService {
   name: string
@@ -51,6 +50,7 @@ export default function Header() {
   const [expandedMobileCategory, setExpandedMobileCategory] = useState<string | null>(null)
   const [showSearch, setShowSearch] = useState(false)
   const pathname = usePathname()
+  const [hoverTimeout, setHoverTimeout] = useState<NodeJS.Timeout | null>(null)
 
   const serviceCategories: Service[] = [
     {
@@ -241,9 +241,7 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
-  const navLinks: NavLink[] = [
-    { name: "Home", href: "/" },
-  ]
+  const navLinks: NavLink[] = [{ name: "Home", href: "/" }]
 
   const isActive = (href: string) => {
     if (href === "/") {
@@ -252,12 +250,37 @@ export default function Header() {
     return pathname.startsWith(href)
   }
 
+  const handleMouseEnter = (categoryId: string) => {
+    if (hoverTimeout) {
+      clearTimeout(hoverTimeout)
+      setHoverTimeout(null)
+    }
+    setOpenCategory(categoryId)
+  }
+
+  const handleMouseLeave = () => {
+    const timeout = setTimeout(() => {
+      setOpenCategory(null)
+    }, 150) // 150ms delay before closing
+    setHoverTimeout(timeout)
+  }
+
+  useEffect(() => {
+    return () => {
+      if (hoverTimeout) {
+        clearTimeout(hoverTimeout)
+      }
+    }
+  }, [hoverTimeout])
+
   if (!mounted) {
     return null
   }
 
   return (
-    <header className={`sticky top-0 z-50 w-full transition-all duration-300 shadow-lg ${scrolled ? "shadow-lg bg-white/95 backdrop-blur-sm" : "bg-white"}`}>
+    <header
+      className={`sticky top-0 z-50 w-full transition-all duration-300 shadow-lg ${scrolled ? "shadow-lg bg-white/95 backdrop-blur-sm" : "bg-white"}`}
+    >
       {/* Main navigation */}
       <div className={`transition-all duration-300 ${scrolled ? "py-2" : "py-3"}`}>
         <div className="container mx-auto flex items-end justify-between px-4">
@@ -286,37 +309,39 @@ export default function Header() {
               <Link
                 href="/"
                 className={`relative px-2 py-2 text-sm font-medium rounded-md transition-all duration-200 ${
-                  isActive("/") 
-                    ? "text-blue-600" 
-                    : "text-slate-700 hover:text-blue-600 hover:bg-blue-50"
+                  isActive("/") ? "text-blue-600" : "text-slate-700 hover:text-blue-600 hover:bg-blue-50"
                 }`}
               >
                 Home
-                {isActive("/") && (
-                  <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-600 rounded-full" />
-                )}
+                {isActive("/") && <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-600 rounded-full" />}
               </Link>
 
               {serviceCategories.map((category) => (
-                <div 
-                  key={category.id} 
-                  className="relative group" 
-                  onMouseEnter={() => setOpenCategory(category.id)} 
-                  onMouseLeave={() => setOpenCategory(null)}
+                <div
+                  key={category.id}
+                  className="relative group"
+                  onMouseEnter={() => handleMouseEnter(category.id)}
+                  onMouseLeave={handleMouseLeave}
                 >
                   <button
                     className={`relative px-2 py-2 text-sm font-medium rounded-md transition-all duration-200 flex items-center gap-1 ${
-                      isActive(`/services/${category.id}`) 
-                        ? "text-blue-600" 
+                      isActive(`/services/${category.id}`)
+                        ? "text-blue-600"
                         : "text-slate-700 hover:text-blue-600 hover:bg-blue-50"
                     }`}
                   >
                     {category.name}
-                    <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${openCategory === category.id ? "rotate-180" : ""}`} />
+                    <ChevronDown
+                      className={`w-4 h-4 transition-transform duration-200 ${openCategory === category.id ? "rotate-180" : ""}`}
+                    />
                   </button>
 
                   {openCategory === category.id && (
-                    <div className="absolute top-full left-0 mt-1 w-[300px] bg-white rounded-xl shadow-xl border border-slate-200 overflow-hidden transform origin-top transition-all duration-200 ease-out opacity-100 scale-100 z-50">
+                    <div
+                      className="absolute top-full left-0 mt-1 w-[300px] bg-white rounded-xl shadow-xl border border-slate-200 overflow-hidden transform origin-top transition-all duration-200 ease-out opacity-100 scale-100 z-50"
+                      onMouseEnter={() => handleMouseEnter(category.id)}
+                      onMouseLeave={handleMouseLeave}
+                    >
                       <div className="p-4">
                         <div className="flex items-center gap-2 mb-3">
                           <div className={`p-2 rounded-lg ${category.bgColor}`}>
@@ -360,9 +385,7 @@ export default function Header() {
               <Link
                 href="/blog"
                 className={`relative px-2 py-2 text-sm font-medium rounded-md transition-all duration-200 ${
-                  isActive("/blog") 
-                    ? "text-blue-600" 
-                    : "text-slate-700 hover:text-blue-600 hover:bg-blue-50"
+                  isActive("/blog") ? "text-blue-600" : "text-slate-700 hover:text-blue-600 hover:bg-blue-50"
                 }`}
               >
                 Blogs
@@ -418,7 +441,9 @@ export default function Header() {
                     {serviceCategories.map((category) => (
                       <div key={category.id} className="space-y-1">
                         <button
-                          onClick={() => setExpandedMobileCategory(expandedMobileCategory === category.id ? null : category.id)}
+                          onClick={() =>
+                            setExpandedMobileCategory(expandedMobileCategory === category.id ? null : category.id)
+                          }
                           className={`w-full rounded-md px-4 py-3 text-base font-medium transition-all duration-200 flex items-center justify-between ${
                             isActive(`/services/${category.id}`)
                               ? "bg-blue-50 text-blue-600"
@@ -470,7 +495,7 @@ export default function Header() {
                         )}
                       </div>
                     ))}
-                    
+
                     <SheetClose asChild>
                       <Link
                         href="/contact"
