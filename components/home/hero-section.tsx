@@ -183,10 +183,14 @@ export default function FixedHeroCarousel() {
                           <Image
                             src={slide.image || "/placeholder.svg"}
                             alt={slide.title}
-                            fill
+                            fill={true}
                             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                             className="object-contain p-6"
-                            priority={index === 0}
+                            priority={true}
+                            quality={50}
+                            loading="eager"
+                            placeholder="blur"
+                            blurDataURL="/placeholder.svg"
                           />
                         </div>
                       </div>
