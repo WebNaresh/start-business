@@ -9,6 +9,7 @@ import Script from "next/script"
 import { Analytics } from "@vercel/analytics/next"
 import FloatingCallButton from "@/components/floating-call-button"
 import Chatbot from "@/components/Chatbot"
+import { Toaster } from 'sonner'
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -110,6 +111,12 @@ export default function RootLayout({
              <Chatbot/>
             </UIProvider>
           </div>
+          <Toaster 
+            position="top-center"
+            expand={true}
+            richColors
+            closeButton
+          />
         </ThemeProvider>
       </body>
     </html>

@@ -1,92 +1,97 @@
 import { NextResponse } from "next/server"
-import { Resend } from "resend"
+import nodemailer from "nodemailer"
 
-const resend = new Resend(process.env.RESEND_API_KEY)
-
-async function verifyRecaptcha(token: string) {
-    const response = await fetch(
-        `https://www.google.com/recaptcha/api/siteverify?secret=${process.env.RECAPTCHA_SECRET_KEY}&response=${token}`,
-        {
-            method: "POST",
-        }
-    )
-
-    const data = await response.json()
-    return data.success && data.score >= 0.5
-}
-
-export async function POST(request: Request) {
+export async function POST(req: Request) {
     try {
-        const body = await request.json()
-        const { name, email, phone, message, service, recaptchaToken } = body
+        const { name, email, phone, service, message } = await req.json()
 
-        // Validate input
-        if (!name || !email || !message) {
+        // Validate required fields
+        if (!name || !email || !phone || !service || !message) {
             return NextResponse.json(
-                { error: "Name, email and message are required" },
+                { error: "All fields are required" },
                 { status: 400 }
             )
         }
 
-        // Verify reCAPTCHA
-        if (!recaptchaToken || !(await verifyRecaptcha(recaptchaToken))) {
+        // Validate email format
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+        if (!emailRegex.test(email)) {
             return NextResponse.json(
-                { error: "Invalid reCAPTCHA token" },
+                { error: "Invalid email format" },
                 { status: 400 }
             )
         }
 
-        // Rate limiting check (implement your preferred rate limiting solution)
-        // This is a simple example using a timestamp check
-        const timestamp = Date.now()
-        const lastSubmission = await fetch("https://api.yourdomain.com/rate-limit", {
-            method: "POST",
-            body: JSON.stringify({ email, timestamp }),
+        // Log environment variables (without sensitive data)
+        console.log('SMTP Configuration:', {
+            host: process.env.SMTP_HOST,
+            port: process.env.SMTP_PORT,
+            user: process.env.SMTP_USER ? 'Configured' : 'Not configured',
+            fromEmail: process.env.SMTP_FROM_EMAIL,
+            toEmail: process.env.CONTACT_EMAIL
         })
 
-        if (!lastSubmission.ok) {
+        // Create a transporter using SMTP
+        const transporter = nodemailer.createTransport({
+            host: process.env.SMTP_HOST,
+            port: Number(process.env.SMTP_PORT),
+            secure: true,
+            auth: {
+                user: process.env.SMTP_USER,
+                pass: process.env.SMTP_PASSWORD,
+            },
+            debug: true, // Enable debug logging
+            logger: true // Enable logger
+        })
+
+        // Verify SMTP connection
+        try {
+            await transporter.verify()
+            console.log('SMTP connection verified successfully')
+        } catch (verifyError) {
+            console.error('SMTP connection verification failed:', verifyError)
             return NextResponse.json(
-                { error: "Too many requests. Please try again later." },
-                { status: 429 }
+                { error: "Email service configuration error" },
+                { status: 500 }
             )
         }
 
-        // Send email to admin
-        await resend.emails.send({
-            from: "contact@yourdomain.com",
-            to: process.env.ADMIN_EMAIL || "admin@yourdomain.com",
-            subject: `New Contact Form Submission${service ? ` - ${service}` : ""}`,
-            text: `
-Name: ${name}
-Email: ${email}
-Phone: ${phone || "Not provided"}
-Service: ${service || "Not specified"}
+        // Email content
+        const mailOptions = {
+            from: `"Contact Form" <${process.env.SMTP_FROM_EMAIL}>`,
+            to: process.env.CONTACT_EMAIL,
+            replyTo: email,
+            subject: `New Contact Form Submission - ${service}`,
+            html: `
+                <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+                    <h2 style="color: #2563eb;">New Contact Form Submission</h2>
+                    <div style="background-color: #f8fafc; padding: 20px; border-radius: 8px;">
+                        <p><strong>Name:</strong> ${name}</p>
+                        <p><strong>Email:</strong> ${email}</p>
+                        <p><strong>Phone:</strong> ${phone}</p>
+                        <p><strong>Service Interested In:</strong> ${service}</p>
+                        <p><strong>Message:</strong></p>
+                        <p style="white-space: pre-wrap;">${message}</p>
+                    </div>
+                    <p style="color: #64748b; font-size: 12px; margin-top: 20px;">
+                        This email was sent from your website's contact form.
+                    </p>
+                </div>
+            `,
+        }
 
-Message:
-${message}
-      `,
-        })
+        // Send email
+        const info = await transporter.sendMail(mailOptions)
+        console.log('Email sent successfully:', info.messageId)
 
-        // Send confirmation email to user
-        await resend.emails.send({
-            from: "noreply@yourdomain.com",
-            to: email,
-            subject: "Thank you for contacting us",
-            text: `
-Dear ${name},
-
-Thank you for reaching out to us. We have received your message and will get back to you as soon as possible.
-
-Best regards,
-Your Company Name
-      `,
-        })
-
-        return NextResponse.json({ success: true })
+        return NextResponse.json(
+            { message: "Email sent successfully", messageId: info.messageId },
+            { status: 200 }
+        )
     } catch (error) {
         console.error("Error sending email:", error)
         return NextResponse.json(
-            { error: "Failed to send message" },
+            { error: "Failed to send email. Please try again later." },
             { status: 500 }
         )
     }
