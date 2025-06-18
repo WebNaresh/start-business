@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion"
 import { Shield, Lock, Eye, FileText } from "lucide-react"
+import Link from "next/link"
 
 export default function PrivacyPolicy() {
   const formattedDate = new Date("2025-05-28").toLocaleDateString("en-US", {
@@ -113,16 +114,12 @@ export default function PrivacyPolicy() {
               </ul>
 
               <h2 className="text-2xl font-bold text-slate-800 mb-6">6. Contact Us</h2>
-              <p className="text-slate-600 mb-6">
-                If you have any questions about this Privacy Policy, please contact us at:
-              </p>
-              <div className="bg-slate-50 rounded-lg p-6">
+              <div className="mt-4">
                 <p className="text-slate-600">
-                  Email: start@startbusiness.co.in<br />
-                  Phone: +91 91684 99520<br />
-                  Address: Office No 7, 3rd Floor, Saraswati Heights,<br />
-                  Deccan Gymkhana, Behind Goodluck Café,<br />
-                  Pune 411004, Maharashtra
+                  For any questions or concerns regarding our Privacy Policy, please{" "}
+                  <Link href="/contact" className="text-blue-600 hover:text-blue-800">
+                    contact us
+                  </Link>
                 </p>
               </div>
             </div>

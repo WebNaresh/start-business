@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion"
 import { Scale, AlertCircle, FileCheck, HelpCircle } from "lucide-react"
+import Link from "next/link"
 
 export default function TermsAndConditions() {
   const formattedDate = new Date("2025-05-28").toLocaleDateString("en-US", {
@@ -111,12 +112,10 @@ export default function TermsAndConditions() {
               <h2 className="text-2xl font-bold text-slate-800 mb-6">8. Contact Information</h2>
               <div className="bg-slate-50 rounded-lg p-6">
                 <p className="text-slate-600">
-                  For any questions regarding these Terms & Conditions, please contact us at:<br />
-                  Email: start@startbusiness.co.in<br />
-                  Phone: +91 91684 99520<br />
-                  Address: Office No 7, 3rd Floor, Saraswati Heights,<br />
-                  Deccan Gymkhana, Behind Goodluck Café,<br />
-                  Pune 411004, Maharashtra
+                  For any questions or concerns regarding these Terms and Conditions, please{" "}
+                  <Link href="/contact" className="text-blue-600 hover:text-blue-800">
+                    contact us
+                  </Link>
                 </p>
               </div>
             </div>

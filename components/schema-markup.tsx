@@ -19,7 +19,6 @@ export default function SchemaMarkup() {
       "longitude": "73.8567"
     },
     "telephone": "+919699214195",
-    "email": "start@startbusiness.co.in",
     "openingHoursSpecification": [
       {
         "@type": "OpeningHoursSpecification",
@@ -70,7 +69,16 @@ export default function SchemaMarkup() {
           }
         }
       ]
-    }
+    },
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "+91 91684 99520",
+      "contactType": "customer service",
+      "contactOption": "TollFree",
+      "areaServed": "IN",
+      "availableLanguage": ["English", "Hindi", "Marathi"]
+    },
+    "url": "https://startbusiness.co.in/contact"
   }
 
   return (

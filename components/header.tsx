@@ -507,13 +507,11 @@ export default function Header() {
                     <SheetClose asChild>
                       <Link
                         href="/contact"
-                        className={`rounded-md px-4 py-3 text-base font-medium transition-colors ${
-                          isActive("/contact")
-                            ? "bg-blue-50 text-blue-600"
-                            : "text-slate-700 hover:bg-slate-50 hover:text-blue-600"
-                        }`}
+                        className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors"
+                        aria-label="Contact us"
                       >
-                        Contact Us
+                        <Mail className="h-4 w-4" />
+                        <span>Contact Us</span>
                       </Link>
                     </SheetClose>
 
@@ -544,13 +542,14 @@ export default function Header() {
                       <Phone className="mr-2 h-4 w-4 text-blue-600" />
                       <span>+91 91684 99520</span>
                     </a>
-                    <a
-                      href="mailto:start@startbusiness.co.in"
-                      className="flex items-center text-slate-700 hover:text-blue-600 transition-colors"
+                    <Link
+                      href="/contact"
+                      className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors"
+                      aria-label="Contact us"
                     >
-                      <Mail className="mr-2 h-4 w-4 text-blue-600" />
-                      <span>start@startbusiness.co.in</span>
-                    </a>
+                      <Mail className="h-4 w-4" />
+                      <span>Contact Us</span>
+                    </Link>
                   </div>
                   <WhatsAppCTAButton className="w-full rounded-md">Call Now</WhatsAppCTAButton>
                 </div>

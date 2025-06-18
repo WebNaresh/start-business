@@ -329,16 +329,14 @@ export default function EnhancedFooter() {
 
                 <div className="flex items-center group">
                   <div className="mr-3 p-2 bg-slate-700 rounded-lg group-hover:bg-slate-600 transition-colors">
-                    <Mail className="h-4 w-4 text-purple-400" />
-                  </div>
-                  <div>
-                    <p className="text-xs sm:text-sm font-medium text-slate-300 mb-1">Email Address</p>
-                    <a
-                      href="mailto:start@startbusiness.co.in"
-                      className="text-slate-400 hover:text-purple-400 transition-colors text-xs sm:text-sm break-all"
+                    <Link
+                      href="/contact"
+                      className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors"
+                      aria-label="Contact us"
                     >
-                      start@startbusiness.co.in
-                    </a>
+                      <Mail className="h-4 w-4" />
+                      <span>Contact Us</span>
+                    </Link>
                   </div>
                 </div>
               </div>
