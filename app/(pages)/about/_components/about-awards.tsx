@@ -78,7 +78,9 @@ export default function AboutAwards() {
               className="flex flex-col items-center rounded-lg bg-white p-6 shadow-md hover:shadow-lg transition-shadow text-center"
             >
               <div className="mb-4 h-32 w-32 relative">
-                <Image src={award.image || "/placeholder.svg"} alt={award.title} fill className="object-contain" />
+                <Image src={award.image || "/placeholder.svg"} alt={award.title} fill className="object-contain" quality={75} // Reduce if needed
+  priority={true} 
+  placeholder="blur"     blurDataURL="/placeholder.svg"/>
               </div>
               <div className="mb-2 rounded-full bg-blue-600 px-4 py-1 text-sm font-semibold text-white">
                 {award.year}

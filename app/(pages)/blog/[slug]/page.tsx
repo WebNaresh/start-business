@@ -347,6 +347,10 @@ export default function BlogPostPage({ params }: { params: Promise<{ slug: strin
                     width={48}
                     height={48}
                     className="rounded-full mr-3"
+                    quality={75} // Reduce if needed
+  priority={true} // For LCP image
+  placeholder="blur" // Optional blur-up
+      blurDataURL="/placeholder.svg"
                   />
                   <div>
                     <p className="font-medium text-gray-900">{blogPost.author.name}</p>

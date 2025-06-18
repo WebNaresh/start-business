@@ -139,7 +139,12 @@ export default function TestimonialsSection() {
                         alt={testimonial.author}
                         width={56}
                         height={56}
+                        sizes="(max-width: 768px) 100vw, 50vw"
                         className="h-full w-full object-cover"
+                        quality={75} // Reduce if needed
+  priority={true} // For LCP image
+  placeholder="blur" // Optional blur-up
+     blurDataURL="/placeholder.svg"
                       />
                     </div>
                     <div>

@@ -106,7 +106,9 @@ export default function AboutHero() {
             className="relative"
           >
             <div className="relative h-[450px] w-full rounded-lg overflow-hidden shadow-2xl">
-              <Image src="/about-hero-image.png" alt="Our team" fill className="object-cover" />
+              <Image src="/about-hero-image.png" alt="Our team" fill className="object-cover" quality={75} // Reduce if needed
+  priority={true} 
+  placeholder="blur"     blurDataURL="/placeholder.svg"/>
               <div className="absolute inset-0 bg-gradient-to-t from-[#2563eb]/80 to-transparent"></div>
               <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
                 <p className="text-2xl font-bold">Building Business </p>

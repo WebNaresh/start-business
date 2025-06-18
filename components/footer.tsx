@@ -93,6 +93,10 @@ export default function EnhancedFooter() {
                     alt="StartBusiness"
                     fill
                     className="object-contain filter brightness-0 invert"
+                    quality={75} // Reduce if needed
+  priority={true} // For LCP image
+  placeholder="blur" // Optional blur-up
+      blurDataURL="/placeholder.svg"
                   />
                 </div>
                 <div>

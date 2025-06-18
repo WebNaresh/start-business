@@ -191,6 +191,7 @@ export default function FixedHeroCarousel() {
                             loading="eager"
                             placeholder="blur"
                             blurDataURL="/placeholder.svg"
+                            
                           />
                         </div>
                       </div>

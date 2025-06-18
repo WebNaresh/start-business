@@ -239,6 +239,10 @@ export default function Chatbot() {
                         alt="StartBusiness"
                         fill
                         className="object-contain"
+                        quality={75} // Reduce if needed
+  priority={true} // For LCP image
+  placeholder="blur" // Optional blur-up
+      blurDataURL="/placeholder.svg"
                       />
                     </div>
                   </AvatarFallback>

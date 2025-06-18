@@ -102,6 +102,10 @@ export default function AboutTeam() {
                   alt={member.name}
                   width={500}
                   height={500}
+                  quality={75} // Reduce if needed
+  priority={true} // For LCP image
+  placeholder="blur" // Optional blur-up
+      blurDataURL="/placeholder.svg"
                   className="h-80 w-full object-cover transition-transform duration-500 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-navy-900/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">

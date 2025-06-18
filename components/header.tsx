@@ -294,6 +294,10 @@ export default function Header() {
                   width={100}
                   height={100}
                   className="object-contain"
+                  quality={75} // Reduce if needed
+  priority={true} // For LCP image
+  placeholder="blur" // Optional blur-up
+      blurDataURL="/placeholder.svg"
                 />
               </div>
               <div>
@@ -415,6 +419,10 @@ export default function Header() {
                       alt="StartBusiness"
                       width={32}
                       height={32}
+                          blurDataURL="/placeholder.svg"
+                          quality={75} // Reduce if needed
+  priority={true} // For LCP image
+  placeholder="blur" // Optional blur-up
                       className="mr-2"
                     />
                     <span className="text-lg font-bold text-slate-900">StartBusiness</span>
