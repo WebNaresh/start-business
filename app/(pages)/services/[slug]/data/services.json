@@ -59,23 +59,28 @@
         },
         {
           "step": 2,
-          "title": "Obtain Digital Signature Certificate (DSC)",
+          "title": "Obtain DSC & DIN",
           "description": "Obtain Digital Signature Certificate and Director Identification Number."
         },
         {
           "step": 3,
-          "title": "Drafting of  eMoA & eAoA",
-          "description": "Submit incorporation documents including MOA, AOA, and other forms."
+          "title": "Drafting of eMoA & eAoA",
+          "description": "Prepare MOA and AOA for Business."
         },
         {
           "step": 4,
           "title": "Filing SPICe+ Form",
-          "description": "Receive Certificate of Incorporation from MCA."
+          "description": "File incorporation forms with MCA."
         },
         {
           "step": 5,
-          "title": "Certificate of Registration ",
-          "description": "Complete PAN, TAN, GST, and bank account opening formalities."
+          "title": "Certificate of Registration",
+          "description": "Receive Certificate of Incorporation from MCA."
+        },
+        {
+          "step": 6,
+          "title": "Obtain other Registration",
+          "description": "Obtain PAN, TAN, PF, ESIC and Profession Tax."
         }
       ],
       "requiredDocuments": {

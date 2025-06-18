@@ -6,9 +6,10 @@ export const contactInfo = {
         href: "tel:+919168499520",
         display: "+91 91684 99520"
     },
-    email: {
-        value: "start@startbusiness.co.in",
-        href: "mailto:start@startbusiness.co.in"
+    contact: {
+        value: "Contact Us",
+        href: "/contact",
+        display: "Contact Form"
     },
     address: {
         value: "Office No 7, 3rd Floor, Saraswati Heights, Deccan Gymkhana, Behind Goodluck Café, Pune 411004",
@@ -28,10 +29,10 @@ export const contactMethods = [
     },
     {
         icon: Mail,
-        title: "Email Support",
+        title: "Contact Form",
         description: "Send us detailed inquiries",
-        value: contactInfo.email.value,
-        href: contactInfo.email.href,
+        value: contactInfo.contact.value,
+        href: contactInfo.contact.href,
         color: "bg-purple-100 text-purple-600",
         hoverColor: "hover:bg-purple-200",
     },

@@ -27,7 +27,6 @@ export default function ContactSection() {
         "@type": "ContactPoint",
         "telephone": "+919168499520",
         "contactType": "customer service",
-        "email": "start@startbusiness.co.in",
         "availableLanguage": ["English", "Hindi", "Marathi"],
         "areaServed": "IN",
         "hoursAvailable": "Mo-Fr 10:00-19:00"
@@ -95,16 +94,16 @@ export default function ContactSection() {
               </div>
               <div className="flex items-center p-3 rounded-lg bg-slate-50 hover:bg-blue-50 transition-colors duration-300" role="listitem">
                 <div className="mr-4 rounded-full bg-blue-100 p-2.5" aria-hidden="true">
-                  <Mail className="h-5 w-5 text-blue-600" />
+                  <MessageSquare className="h-5 w-5 text-blue-600" />
                 </div>
                 <div>
-                  <p className="text-sm text-slate-500 mb-1">Email Support</p>
+                  <p className="text-sm text-slate-500 mb-1">Contact Form</p>
                   <a 
-                    href="mailto:start@startbusiness.co.in" 
+                    href="/contact" 
                     className="text-base font-semibold text-slate-700 hover:text-blue-600 transition-colors"
-                    aria-label="Email us at start@startbusiness.co.in"
+                    aria-label="Send us a message through our contact form"
                   >
-                    start@startbusiness.co.in
+                    Send us a Message
                   </a>
                 </div>
               </div>

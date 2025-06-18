@@ -85,7 +85,7 @@ export default function ProcessSection({ service }: ProcessSectionProps) {
 
           {/* Desktop Process Grid */}
           <div className="hidden lg:block mb-12" role="list" aria-label="Registration process steps">
-            <div className="grid lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <div className="grid grid-cols-3 gap-6">
               {service.process.map((step, index) => {
                 const IconComponent = stepIcons[index % stepIcons.length]
 
@@ -95,16 +95,9 @@ export default function ProcessSection({ service }: ProcessSectionProps) {
                     className="relative group"
                     role="listitem"
                   >
-                    {/* Connection Line */}
-                    {index < service.process.length - 1 && (
-                      <div className="hidden xl:block absolute top-10 -right-3 w-6 h-0.5 bg-slate-200 z-0" aria-hidden="true">
-                        <div className="h-full bg-blue-600" />
-                      </div>
-                    )}
-
                     {/* Step Card */}
                     <div
-                      className="relative bg-white rounded-2xl p-6 border-2 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 border-blue-200 h-[200px] flex flex-col"
+                      className="relative bg-white rounded-2xl p-6 border-2 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 border-blue-200 h-[220px] flex flex-col"
                     >
                       {/* Step Number & Icon */}
                       <div className="flex items-center justify-between mb-4">
@@ -121,10 +114,10 @@ export default function ProcessSection({ service }: ProcessSectionProps) {
 
                       {/* Step Content */}
                       <div className="flex-1 flex flex-col">
-                        <h3 className="text-sm font-bold mb-1.5 text-blue-600 line-clamp-1">
+                        <h3 className="text-sm font-bold mb-2 text-blue-600 line-clamp-1">
                           {step.title}
                         </h3>
-                        <p className="text-xs text-slate-600 leading-relaxed line-clamp-3">{step.description}</p>
+                        <p className="text-xs text-slate-600 leading-relaxed line-clamp-4">{step.description}</p>
                       </div>
                     </div>
                   </div>

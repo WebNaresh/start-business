@@ -78,7 +78,7 @@ export default function SchemaMarkup() {
       "areaServed": "IN",
       "availableLanguage": ["English", "Hindi", "Marathi"]
     },
-    "url": "https://startbusiness.co.in/contact"
+ 
   }
 
   return (

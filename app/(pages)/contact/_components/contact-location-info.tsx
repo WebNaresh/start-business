@@ -69,7 +69,7 @@ export default function ContactLocationInfo() {
                   className="flex items-start gap-3 p-3 bg-white/70 rounded-lg border border-green-100"
                 >
                   <div className="p-2 rounded-lg bg-green-100">
-                    <landmark.icon className="w-4 h-4 text-green-600" />
+                    {landmark.icon && <landmark.icon className="w-4 h-4 text-green-600" />}
                   </div>
                   <div className="flex-1">
                     <div className="flex items-center justify-between">
@@ -79,7 +79,9 @@ export default function ContactLocationInfo() {
                       </Badge>
                     </div>
                     <p className="text-xs text-slate-500 mt-1">{landmark.type}</p>
-                    <p className="text-xs text-green-600 mt-1">{landmark.walkTime}</p>
+                    {landmark.walkTime && (
+                      <p className="text-xs text-green-600 mt-1">{landmark.walkTime}</p>
+                    )}
                   </div>
                 </div>
               ))}
@@ -121,7 +123,7 @@ export default function ContactLocationInfo() {
                     <p className="text-sm text-slate-600 mb-1">Distance: {info.distance}</p>
                   )}
                   {info.cost && <p className="text-sm text-slate-600 mb-1">Cost: {info.cost}</p>}
-                  <p className="text-sm text-amber-600">{info.notes}</p>
+                  {info.notes && <p className="text-sm text-amber-600">{info.notes}</p>}
                 </div>
               ))}
             </div>
