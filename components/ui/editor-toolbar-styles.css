@@ -1,0 +1,203 @@
+/* Enhanced Editor Toolbar Styles */
+
+.editor-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+}
+
+.editor-toolbar:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Toolbar button animations */
+.editor-toolbar button {
+  transition: all 0.15s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.editor-toolbar button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.editor-toolbar button:active {
+  transform: translateY(0);
+}
+
+/* Button ripple effect */
+.editor-toolbar button::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(59, 130, 246, 0.3);
+  transition: width 0.3s, height 0.3s, top 0.3s, left 0.3s;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+}
+
+.editor-toolbar button:active::before {
+  width: 100%;
+  height: 100%;
+}
+
+/* Group separators */
+.toolbar-group {
+  position: relative;
+}
+
+.toolbar-group:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  right: -1px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1px;
+  height: 60%;
+  background: linear-gradient(to bottom, transparent, #e2e8f0, transparent);
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 768px) {
+  .editor-toolbar {
+    position: static;
+    margin-bottom: 1rem;
+  }
+  
+  .editor-toolbar button {
+    min-width: 36px;
+    min-height: 36px;
+  }
+}
+
+/* Tooltip enhancements */
+.tooltip-content {
+  background: rgba(0, 0, 0, 0.9);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-size: 12px;
+  font-weight: 500;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.tooltip-content::before {
+  border-bottom-color: rgba(0, 0, 0, 0.9);
+}
+
+/* Active state for inline tools */
+.editor-toolbar button[data-active="true"] {
+  background: #3b82f6;
+  color: white;
+}
+
+.editor-toolbar button[data-active="true"]:hover {
+  background: #2563eb;
+}
+
+/* Loading state */
+.editor-toolbar button[data-loading="true"] {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.editor-toolbar button[data-loading="true"]::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 12px;
+  height: 12px;
+  border: 2px solid transparent;
+  border-top: 2px solid currentColor;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  transform: translate(-50%, -50%);
+}
+
+@keyframes spin {
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+/* Focus styles for accessibility */
+.editor-toolbar button:focus-visible {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+/* Smooth transitions for all interactive elements */
+.editor-toolbar * {
+  transition: all 0.15s ease;
+}
+
+/* Enhanced group labels */
+.toolbar-group-label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #64748b;
+  margin-right: 8px;
+  white-space: nowrap;
+}
+
+/* Responsive typography */
+@media (max-width: 640px) {
+  .toolbar-group-label {
+    display: none;
+  }
+}
+
+/* Enhanced mobile layout */
+@media (max-width: 768px) {
+  .editor-toolbar {
+    padding: 12px;
+  }
+  
+  .mobile-toolbar-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .mobile-toolbar-row:not(:last-child) {
+    margin-bottom: 8px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #e2e8f0;
+  }
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  .editor-toolbar,
+  .editor-toolbar *,
+  .editor-toolbar button,
+  .editor-toolbar button::before {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .editor-toolbar {
+    border: 2px solid;
+  }
+  
+  .editor-toolbar button {
+    border: 1px solid;
+  }
+}
