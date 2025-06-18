@@ -139,12 +139,7 @@ export default function EnhancedServicesNavigation() {
           href: "/services/partnership-firm",
           description: "Create a partnership between two or more individuals",
         },
-        {
-          name: "Startup India Registration",
-          href: "/services/startup-india",
-          new: true,
-          description: "Register under Startup India to access government benefits and incentives",
-        },
+      
       ],
     },
     {
@@ -258,11 +253,7 @@ export default function EnhancedServicesNavigation() {
           href: "/services/iec-license",
           description: "Get IEC code for import/export business activities",
         },
-        {
-          name: "Digital Signature Certificate",
-          href: "/services/digital-signature",
-          description: "Obtain DSC for secure electronic transactions",
-        },
+
    
         {
           name: "MSME Registration",
@@ -279,6 +270,12 @@ export default function EnhancedServicesNavigation() {
           name: "Professional Tax Registration",
           href: "/services/professional-tax",
           description: "Register for professional tax in your state",
+        },
+        {
+          name: "Startup India Registration",
+          href: "/services/startup-india",
+          new: true,
+          description: "Register under Startup India to access government benefits and incentives",
         },
       ],
     },
