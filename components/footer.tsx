@@ -1,8 +1,5 @@
 "use client"
 
-import type React from "react"
-
-import { useState, useEffect } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import {
@@ -14,78 +11,21 @@ import {
   Phone,
   MapPin,
   ArrowRight,
-  ChevronUp,
-  Clock,
   Shield,
   Globe,
 } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
-import WhatsAppCTAButton from "@/components/whatsapp-cta-button"
 
 export default function EnhancedFooter() {
-  const [email, setEmail] = useState("")
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [isSubmitted, setIsSubmitted] = useState(false)
-  const [showScrollTop, setShowScrollTop] = useState(false)
-  const [currentTime, setCurrentTime] = useState(new Date())
-
-  // Update current time every minute
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentTime(new Date())
-    }, 60000)
-    return () => clearInterval(timer)
-  }, [])
-
-  // Show scroll to top button
-  useEffect(() => {
-    const handleScroll = () => {
-      setShowScrollTop(window.scrollY > 400)
-    }
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    if (!email) return
-
-    setIsSubmitting(true)
-
-    // Simulate API call
-    setTimeout(() => {
-      setIsSubmitting(false)
-      setIsSubmitted(true)
-      setEmail("")
-
-      // Reset success message after 3 seconds
-      setTimeout(() => {
-        setIsSubmitted(false)
-      }, 3000)
-    }, 1000)
-  }
-
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" })
-  }
-
-  const isBusinessOpen = () => {
-    const now = new Date()
-    const day = now.getDay()
-    const hour = now.getHours()
-
-    if (day === 0 || day === 6) return false // Saturday and Sunday closed
-    return hour >= 10 && hour < 19 // Monday-Friday 10-7
-  }
 
   return (
     <footer className="relative overflow-hidden">
       {/* Enhanced Main Footer */}
       <div className="bg-slate-800 py-8 lg:py-12 text-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
-            {/* Company Info - Full width on mobile, spans 2 cols on xl */}
-            <div className="sm:col-span-2 lg:col-span-1 xl:col-span-2">
+          <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+            {/* Company Info - Full width on mobile, spans 2 cols on sm, 1 col on lg */}
+            <div className="sm:col-span-2 lg:col-span-1">
               <Link href="/" className="mb-4 lg:mb-6 flex items-center group">
                 <div className="relative h-10 w-10 sm:h-12 sm:w-12 mr-3 overflow-hidden rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 p-2 group-hover:scale-110 transition-transform duration-300">
                   <Image
@@ -206,6 +146,10 @@ export default function EnhancedFooter() {
               </ul>
             </div>
 
+          </div>
+
+          {/* Second Row - Calculator Tools, Government Portals, and Contact */}
+          <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-8">
             {/* Calculator Tools */}
             <div className="lg:col-span-1">
               <h3 className="mb-4 lg:mb-6 text-base sm:text-lg font-bold text-white relative">
@@ -253,8 +197,8 @@ export default function EnhancedFooter() {
               </ul>
             </div>
 
-            {/* Government Portals - Hidden on mobile, shown on larger screens */}
-            <div className=" lg:block lg:col-span-1">
+            {/* Government Portals */}
+            <div className="lg:col-span-1">
               <h3 className="mb-4 lg:mb-6 text-base sm:text-lg font-bold text-white relative">
                 Government Portals
                 <span className="absolute -bottom-2 left-0 w-12 h-1 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full"></span>
@@ -286,8 +230,8 @@ export default function EnhancedFooter() {
               </ul>
             </div>
 
-            {/* Contact & Business Hours - Combined on mobile, separate on larger screens */}
-            <div className="sm:col-span-2 lg:col-span-3 xl:col-span-1">
+            {/* Contact & Business Hours */}
+            <div className="lg:col-span-1">
               <h3 className="mb-4 lg:mb-6 text-base sm:text-lg font-bold text-white relative">
                 Get In Touch
                 <span className="absolute -bottom-2 left-0 w-12 h-1 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full"></span>

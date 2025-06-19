@@ -280,7 +280,7 @@ export default function Header() {
     >
       {/* Main navigation */}
       <div className={`transition-all duration-300 ${scrolled ? "py-2" : "py-3"}`}>
-        <div className="container mx-auto flex items-end justify-between px-4">
+        <div className="container mx-auto flex items-center justify-between px-4">
           <div className="flex flex-1 items-center">
             {/* Logo */}
             <Link href="/" className="flex items-center group">
