@@ -7,17 +7,51 @@ import BlogRenderer from "@/components/blog/blog-renderer"
 import RelatedPosts from "@/components/blog/related-posts"
 import { notFound } from 'next/navigation'
 import type { Blog } from '@/lib/types'
+import { prisma } from '@/lib/prisma'
+
+async function getBlogPostDirect(slug: string): Promise<Blog | null> {
+  try {
+    const blog = await prisma.blog.findUnique({
+      where: { slug }
+    })
+    return blog
+  } catch (error) {
+    console.error('Error fetching blog post from database:', error)
+    return null
+  }
+}
 
 async function getBlogPost(slug: string): Promise<Blog | null> {
+  // In production, use direct database query for better reliability
+  if (process.env.NODE_ENV === 'production') {
+    console.log('Production mode: Using direct database query')
+    return await getBlogPostDirect(slug)
+  }
+
   try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/blogs/${slug}`, {
-      cache: 'no-store'
+    // Development mode: try API first, fallback to database
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'
+    const url = `${baseUrl}/api/blogs/${slug}`
+    console.log('Fetching blog from:', url)
+
+    const response = await fetch(url, {
+      cache: 'no-store',
+      headers: {
+        'Content-Type': 'application/json',
+      }
     })
-    if (!response.ok) return null
-    return await response.json()
+
+    if (!response.ok) {
+      console.error(`Failed to fetch blog via API: ${response.status} ${response.statusText}`)
+      return await getBlogPostDirect(slug)
+    }
+
+    const data = await response.json()
+    console.log('Blog data received:', data.title)
+    return data
   } catch (error) {
-    console.error('Error fetching blog post:', error)
-    return null
+    console.error('Error fetching blog post via API:', error)
+    return await getBlogPostDirect(slug)
   }
 }
 

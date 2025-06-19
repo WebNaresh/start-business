@@ -13,6 +13,11 @@
     "analyze": "node scripts/analyze-bundle.js",
     "perf:test": "node scripts/performance-test.js",
     "perf:single": "node scripts/performance-test.js",
+    "blog:check": "node scripts/check-blog-production.js",
+    "blog:check-slug": "node scripts/check-blog-production.js",
+    "blog:fix": "node scripts/fix-blog-404.js",
+    "minify:check": "node scripts/check-minification.js",
+    "minify:remote": "node scripts/check-minification.js",
     "db:migrate": "prisma migrate dev",
     "db:generate": "prisma generate",
     "db:push": "prisma db push"
