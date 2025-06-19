@@ -144,8 +144,8 @@ export default function Home() {
   return (
     <div className="flex min-h-screen flex-col">
       <HeroSection />
-      <StatsSection />
       <ServicesSection />
+      <StatsSection />
       <FeaturesSection />
       <ProcessSection />
       <LatestIncorporationsTicker/>

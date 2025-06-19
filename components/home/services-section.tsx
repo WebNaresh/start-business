@@ -65,17 +65,15 @@ export default function ServicesCarousel() {
   const [currentSlide, setCurrentSlide] = useState(0)
   const autoplayRef = useRef<NodeJS.Timeout | null>(null)
 
-  // Configure Embla Carousel with options for all screen sizes
+  // Configure Embla Carousel - show multiple but scroll one at a time
   const [emblaRef, emblaApi] = useEmblaCarousel({
-    align: "center",
+    align: "start",
     containScroll: "trimSnaps",
-    dragFree: true,
+    dragFree: false,
     loop: true,
-    slidesToScroll: 1,
-    breakpoints: {
-      "(min-width: 768px)": { slidesToScroll: 2 },
-      "(min-width: 1024px)": { slidesToScroll: 3 },
-    },
+    slidesToScroll: 1, // Always scroll one slide at a time
+    skipSnaps: false,
+    // This ensures smooth one-by-one scrolling while showing multiple services
   })
 
   // Autoplay functionality
@@ -420,7 +418,7 @@ export default function ServicesCarousel() {
                   {filteredServices.map((service, idx) => (
                     <div
                       key={service.title}
-                      className="flex-[0_0_100%] sm:flex-[0_0_85%] md:flex-[0_0_50%] lg:flex-[0_0_33.333%] min-w-0 px-4"
+                      className="flex-[0_0_100%] sm:flex-[0_0_50%] lg:flex-[0_0_33.333%] min-w-0 px-4"
                       role="group"
                       aria-roledescription="slide"
                       aria-label={`Slide ${idx + 1} of ${filteredServices.length}`}
