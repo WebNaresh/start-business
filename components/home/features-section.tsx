@@ -110,8 +110,9 @@ export default function WhyChooseUs() {
             id="features-heading"
             className="text-2xl md:text-3xl font-bold text-slate-900 mb-3"
           >
+           Why Choose {""}
             <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-              Why Choose Us?
+              StartBusiness
             </span>
           </h2>
           <p className="text-sm text-slate-600 mb-8 max-w-2xl mx-auto">

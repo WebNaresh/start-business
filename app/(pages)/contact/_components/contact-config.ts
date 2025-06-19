@@ -97,13 +97,7 @@ export const nearbyLandmarks = [
         type: "Shopping Street",
         walkTime: "3 min walk",
     },
-    {
-        name: "Local Restaurants",
-        distance: "100m",
-        icon: Utensils,
-        type: "Dining",
-        walkTime: "2 min walk",
-    },
+
 ]
 
 export const parkingInfo = [
