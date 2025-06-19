@@ -149,13 +149,14 @@ export default function FixedHeroCarousel() {
             </div>
 
             <div className="flex items-center gap-4">
+              <Link href="/contact">
               <Button 
                 className="bg-blue-600 hover:bg-blue-700 transition-all duration-300"
                 aria-label="Start your business registration process"
               >
                 Get Started Now
                 <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true" />
-              </Button>
+              </Button></Link>
               <Link href="/services">
                 <Button 
                   variant="outline" 

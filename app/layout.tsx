@@ -14,8 +14,8 @@ import { Toaster } from 'sonner'
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "StartBusiness - Business Registration, Compliance & Legal Services in India",
-  description: "Professional company registration, trademark, GST, FSSAI, compliance, and legal services for startups and businesses in India. Fast, affordable, and expert support.",
+  title: "StartBusiness - Company Registration,MCA,GST,Income Tax Services,Trademark",
+  description: "Platform for company registration, trademark filing, GST registration, GST filing and income tax filing in India. Simplify your compliance and tax filing.",
   keywords: "best online company registration,best CA firm in India,Best CA firm in Pune,Best ca frim near me,company registration,startup registration,private limited company registration,limited company registration,gst,business registration, startup, trademark, GST, FSSAI, compliance, legal services, India, Pune, online incorporation, business consultant, MSME, LLP, private limited, ngo registration, tax filing, business support",
   authors: [{ name: "StartBusiness", url: "https://startbusiness.co.in" }],
   creator: "StartBusiness",

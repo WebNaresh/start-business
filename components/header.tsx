@@ -32,23 +32,13 @@ interface Service {
   subServices: SubService[]
 }
 
-interface SubLink {
-  name: string
-  href: string
-}
 
-interface NavLink {
-  name: string
-  href: string
-  subLinks?: SubLink[]
-}
 
 export default function Header() {
   const [mounted, setMounted] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [openCategory, setOpenCategory] = useState<string | null>(null)
   const [expandedMobileCategory, setExpandedMobileCategory] = useState<string | null>(null)
-  const [showSearch, setShowSearch] = useState(false)
   const pathname = usePathname()
   const [hoverTimeout, setHoverTimeout] = useState<NodeJS.Timeout | null>(null)
 
@@ -69,6 +59,11 @@ export default function Header() {
           href: "/services/private-limited-company",
           popular: true,
           description: "Register your business as a Private Limited Company with limited liability protection",
+        },
+        {
+          name: "Public Limited Company",
+          href: "/services/public-limited-company",
+          description: "Incorporate a Public Limited Company for raising capital from the public",
         },
         {
           name: "Limited Liability Partnership",
@@ -223,7 +218,6 @@ export default function Header() {
   // Handle scroll effect with improved performance
   useEffect(() => {
     setMounted(true)
-    let lastScrollY = window.scrollY
     const handleScroll = () => {
       const currentScrollY = window.scrollY
       if (currentScrollY > 10) {
@@ -231,14 +225,11 @@ export default function Header() {
       } else {
         setScrolled(false)
       }
-      lastScrollY = currentScrollY
     }
 
     window.addEventListener("scroll", handleScroll, { passive: true })
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
-
-  const navLinks: NavLink[] = [{ name: "Home", href: "/" }]
 
   const isActive = (href: string) => {
     if (href === "/") {
@@ -391,6 +382,17 @@ export default function Header() {
               >
                 Blogs
                 {isActive("/blog") && (
+                  <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-600 rounded-full" />
+                )}
+              </Link>
+              <Link
+                href="/contact"
+                className={`relative px-2 py-2 text-sm font-medium rounded-md transition-all duration-200 ${
+                  isActive("/contact") ? "text-blue-600" : "text-slate-700 hover:text-blue-600 hover:bg-blue-50"
+                }`}
+              >
+                Contact
+                {isActive("/contact") && (
                   <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-600 rounded-full" />
                 )}
               </Link>

@@ -4,10 +4,13 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
+    "dev:webpack": "next dev",
     "build": "prisma generate && next build",
+    "build:analyze": "npm run build && npm run analyze",
     "start": "next start",
     "lint": "next lint",
-    "postinstall": "prisma generate"
+    "postinstall": "prisma generate",
+    "analyze": "node scripts/analyze-bundle.js"
   },
   "dependencies": {
     "@editorjs/code": "^2.9.3",
