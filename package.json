@@ -10,7 +10,12 @@
     "start": "next start",
     "lint": "next lint",
     "postinstall": "prisma generate",
-    "analyze": "node scripts/analyze-bundle.js"
+    "analyze": "node scripts/analyze-bundle.js",
+    "perf:test": "node scripts/performance-test.js",
+    "perf:single": "node scripts/performance-test.js",
+    "db:migrate": "prisma migrate dev",
+    "db:generate": "prisma generate",
+    "db:push": "prisma db push"
   },
   "dependencies": {
     "@editorjs/code": "^2.9.3",

@@ -1,9 +1,18 @@
 import { NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 
-export async function GET() {
+export async function GET(request: Request) {
     try {
+        const { searchParams } = new URL(request.url)
+        const limit = parseInt(searchParams.get('limit') || '10')
+        const offset = parseInt(searchParams.get('offset') || '0')
+        const status = searchParams.get('status') || 'published'
+
+        // Optimized query with pagination and selective fields
         const blogs = await prisma.blog.findMany({
+            where: {
+                status: status
+            },
             orderBy: {
                 publishedAt: 'desc'
             },
@@ -11,20 +20,28 @@ export async function GET() {
                 id: true,
                 title: true,
                 slug: true,
-                content: true,
-                editorData: true,
                 excerpt: true,
                 featuredImage: true,
                 author: true,
                 publishedAt: true,
-                updatedAt: true,
                 status: true,
                 metaTitle: true,
                 metaDescription: true,
                 tags: true
+                // Exclude heavy fields like content and editorData for list view
+            },
+            take: limit,
+            skip: offset
+        })
+
+        // Add cache headers for better performance
+        return NextResponse.json(blogs, {
+            headers: {
+                'Cache-Control': 'public, s-maxage=300, stale-while-revalidate=600',
+                'CDN-Cache-Control': 'public, s-maxage=300',
+                'Vercel-CDN-Cache-Control': 'public, s-maxage=300'
             }
         })
-        return NextResponse.json(blogs)
     } catch (error) {
         console.error('Error fetching blogs:', error)
         return NextResponse.json(

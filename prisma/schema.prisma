@@ -21,4 +21,10 @@ model Blog {
   metaTitle      String?
   metaDescription String?
   tags           String?
+
+  // Performance indexes
+  @@index([status, publishedAt(sort: Desc)], name: "blog_status_published_idx")
+  @@index([author], name: "blog_author_idx")
+  @@index([publishedAt(sort: Desc)], name: "blog_published_idx")
+  @@index([status], name: "blog_status_idx")
 }

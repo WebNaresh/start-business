@@ -44,16 +44,18 @@ export async function POST(req: Request) {
             logger: true // Enable logger
         })
 
-        // Verify SMTP connection
-        try {
-            await transporter.verify()
-            console.log('SMTP connection verified successfully')
-        } catch (verifyError) {
-            console.error('SMTP connection verification failed:', verifyError)
-            return NextResponse.json(
-                { error: "Email service configuration error" },
-                { status: 500 }
-            )
+        // Skip SMTP verification in production for faster response
+        if (process.env.NODE_ENV === 'development') {
+            try {
+                await transporter.verify()
+                console.log('SMTP connection verified successfully')
+            } catch (verifyError) {
+                console.error('SMTP connection verification failed:', verifyError)
+                return NextResponse.json(
+                    { error: "Email service configuration error" },
+                    { status: 500 }
+                )
+            }
         }
 
         // Email content

@@ -7,9 +7,27 @@ export async function GET(
 ) {
     try {
         const resolvedParams = await params
+
+        // Optimized query with selective fields and caching
         const blog = await prisma.blog.findUnique({
             where: {
                 slug: resolvedParams.slug
+            },
+            select: {
+                id: true,
+                title: true,
+                slug: true,
+                content: true,
+                editorData: true,
+                excerpt: true,
+                featuredImage: true,
+                author: true,
+                publishedAt: true,
+                updatedAt: true,
+                status: true,
+                metaTitle: true,
+                metaDescription: true,
+                tags: true
             }
         })
 
@@ -20,7 +38,15 @@ export async function GET(
             )
         }
 
-        return NextResponse.json(blog)
+        // Add aggressive caching for individual blog posts
+        return NextResponse.json(blog, {
+            headers: {
+                'Cache-Control': 'public, s-maxage=3600, stale-while-revalidate=86400',
+                'CDN-Cache-Control': 'public, s-maxage=3600',
+                'Vercel-CDN-Cache-Control': 'public, s-maxage=3600',
+                'ETag': `"${blog.slug}-${blog.updatedAt.getTime()}"`
+            }
+        })
     } catch (error) {
         console.error('Error fetching blog:', error)
         return NextResponse.json(
