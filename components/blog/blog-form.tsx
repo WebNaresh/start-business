@@ -9,14 +9,18 @@ import { editorDataToHtml, htmlToEditorData } from '@/lib/editor-utils'
 import dynamic from 'next/dynamic'
 import { OutputData } from '@editorjs/editorjs'
 import type { Blog } from '@/lib/types'
-import type { EditorRef } from '@/components/ui/editor'
+import type { EditorRef } from '@/components/ui/enhanced-editor'
+import ContentImportDialog from '@/components/blog/content-import-dialog'
 
-// Dynamically import Editor to avoid SSR issues
-const Editor = dynamic(() => import('@/components/ui/editor'), {
+// Dynamically import Enhanced Editor to avoid SSR issues
+const EnhancedEditor = dynamic(() => import('@/components/ui/enhanced-editor'), {
   ssr: false,
   loading: () => (
     <div className="min-h-[400px] p-4 border border-slate-200 rounded-lg bg-gray-50 animate-pulse flex items-center justify-center">
-      <p className="text-gray-500">Loading editor...</p>
+      <div className="text-center">
+        <div className="w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto mb-2"></div>
+        <p className="text-gray-500">Loading enhanced editor...</p>
+      </div>
     </div>
   )
 })
@@ -98,14 +102,20 @@ export default function BlogForm({ initialData, isEditing = false, onSubmit }: B
           body: JSON.stringify(blogData),
         })
 
-        if (!response.ok) throw new Error(`Failed to ${isEditing ? 'update' : 'create'} blog`)
+        if (!response.ok) {
+          const errorData = await response.json().catch(() => ({}))
+          const errorMessage = errorData.error || `Failed to ${isEditing ? 'update' : 'create'} blog`
+          throw new Error(errorMessage)
+        }
 
+        const result = await response.json()
         toast.success(`Blog ${isEditing ? 'updated' : 'created'} successfully`)
         router.push('/admin/blogs')
       }
     } catch (error) {
       console.error('Error saving blog:', error)
-      toast.error(`Failed to ${isEditing ? 'update' : 'create'} blog`)
+      const errorMessage = error instanceof Error ? error.message : `Failed to ${isEditing ? 'update' : 'create'} blog`
+      toast.error(errorMessage)
     } finally {
       setIsSaving(false)
     }
@@ -133,14 +143,34 @@ export default function BlogForm({ initialData, isEditing = false, onSubmit }: B
         const htmlContent = editorDataToHtml(data)
         // Extract plain text and limit to 160 characters
         const plainText = htmlContent.replace(/<[^>]*>/g, '').trim()
-        const excerpt = plainText.length > 160 
+        const excerpt = plainText.length > 160
           ? plainText.substring(0, 157) + '...'
           : plainText
-        
+
         setBlog(prev => ({ ...prev, excerpt }))
         toast.success('Excerpt generated from content')
       } catch (error) {
         toast.error('Failed to generate excerpt')
+      }
+    }
+  }
+
+  const handleContentImport = async (blocks: any[]) => {
+    if (editorRef.current) {
+      try {
+        // Convert blocks to EditorJS format and insert
+        const editorData: OutputData = {
+          time: Date.now(),
+          blocks: blocks,
+          version: "2.28.2"
+        }
+
+        await editorRef.current.render(editorData)
+        setEditorData(editorData)
+        toast.success(`Imported ${blocks.length} content blocks`)
+      } catch (error) {
+        console.error('Error importing content:', error)
+        toast.error('Failed to import content')
       }
     }
   }
@@ -257,20 +287,34 @@ export default function BlogForm({ initialData, isEditing = false, onSubmit }: B
           </div>
         </div>
 
-        {/* Content Editor */}
+        {/* Enhanced Content Editor */}
         <div className="bg-white rounded-lg border border-slate-200 p-6">
-          <h2 className="text-lg font-medium text-slate-900 mb-4">Content</h2>
-          <div className="bg-gray-50 p-4 rounded-lg border border-gray-200 mb-4">
-            <p className="text-sm text-gray-600">
-              <strong>Enhanced Editor:</strong> Use the formatting toolbar below for quick access to all formatting options.
-              You can also use keyboard shortcuts or press "/" for the traditional EditorJS menu.
-            </p>
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-lg font-medium text-slate-900">Content Editor</h2>
+            <ContentImportDialog onImport={handleContentImport} />
           </div>
-          <Editor
+          <div className="bg-gradient-to-r from-blue-50 to-purple-50 p-4 rounded-lg border border-blue-200 mb-6">
+            <div className="flex items-start gap-3">
+              <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center flex-shrink-0">
+                <span className="text-white text-sm font-bold">✨</span>
+              </div>
+              <div>
+                <h3 className="font-semibold text-blue-900 mb-2">Enhanced Editor Features</h3>
+                <ul className="text-sm text-blue-800 space-y-1">
+                  <li>• <strong>Smart Paste:</strong> Copy formatted content from ChatGPT, Gemini, Word, or any website</li>
+                  <li>• <strong>Persistent Toolbar:</strong> Always-visible formatting controls like Microsoft Word</li>
+                  <li>• <strong>Format Detection:</strong> Automatically converts headings, lists, quotes, and code blocks</li>
+                  <li>• <strong>Quick Formatting:</strong> Select text and click toolbar buttons for instant formatting</li>
+                  <li>• <strong>Keyboard Shortcuts:</strong> Ctrl+B (Bold), Ctrl+I (Italic), Ctrl+U (Underline)</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <EnhancedEditor
             ref={editorRef}
             data={editorData}
             onChange={handleEditorChange}
-            placeholder="Start writing your blog post..."
+            placeholder="Start writing your blog post... Try pasting formatted content from AI tools!"
             showToolbar={true}
             className="min-h-[500px]"
           />

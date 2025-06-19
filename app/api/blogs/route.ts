@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
+import { generateSlug } from '@/lib/utils'
 
 export async function GET(request: Request) {
     try {
@@ -54,34 +55,59 @@ export async function GET(request: Request) {
 export async function POST(req: Request) {
     try {
         const body = await req.json()
-        const newBlog = await prisma.blog.create({
-            data: {
-                title: body.title,
-                slug: body.slug || generateSlug(body.title),
-                content: body.content,
-                editorData: body.editorData,
-                excerpt: body.excerpt,
-                featuredImage: body.featuredImage,
-                author: body.author,
-                status: body.status || 'draft',
-                metaTitle: body.metaTitle,
-                metaDescription: body.metaDescription,
-                tags: Array.isArray(body.tags) ? body.tags.join(',') : body.tags
-            }
+
+        // Validate required fields
+        if (!body.title || !body.author) {
+            return NextResponse.json(
+                { error: 'Title and author are required' },
+                { status: 400 }
+            )
+        }
+
+        // Generate slug if not provided
+        const slug = body.slug || generateSlug(body.title)
+
+        // Check if slug already exists
+        const existingBlog = await prisma.blog.findUnique({
+            where: { slug }
         })
-        return NextResponse.json(newBlog)
+
+        if (existingBlog) {
+            return NextResponse.json(
+                { error: 'A blog with this slug already exists' },
+                { status: 409 }
+            )
+        }
+
+        // Prepare data for creation
+        const blogData = {
+            title: body.title,
+            slug: slug,
+            content: body.content || '',
+            editorData: body.editorData || '',
+            excerpt: body.excerpt || '',
+            featuredImage: body.featuredImage || null,
+            author: body.author,
+            status: body.status || 'draft',
+            metaTitle: body.metaTitle || body.title,
+            metaDescription: body.metaDescription || body.excerpt || '',
+            tags: typeof body.tags === 'string' ? body.tags : (Array.isArray(body.tags) ? body.tags.join(',') : ''),
+            publishedAt: body.status === 'published' ? new Date() : null
+        }
+
+        const newBlog = await prisma.blog.create({
+            data: blogData
+        })
+
+        return NextResponse.json(newBlog, { status: 201 })
     } catch (error) {
         console.error('Error creating blog:', error)
         return NextResponse.json(
-            { error: 'Failed to create blog' },
+            {
+                error: 'Failed to create blog',
+                details: error instanceof Error ? error.message : 'Unknown error'
+            },
             { status: 500 }
         )
     }
-}
-
-function generateSlug(title: string): string {
-    return title
-        .toLowerCase()
-        .replace(/[^a-z0-9]+/g, '-')
-        .replace(/(^-|-$)/g, '')
 }

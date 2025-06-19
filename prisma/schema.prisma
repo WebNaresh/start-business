@@ -15,7 +15,7 @@ model Blog {
   excerpt        String?
   featuredImage  String?
   author         String
-  publishedAt    DateTime @default(now())
+  publishedAt    DateTime?
   updatedAt      DateTime @updatedAt
   status         String   @default("draft")
   metaTitle      String?
