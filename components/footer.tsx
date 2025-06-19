@@ -79,11 +79,11 @@ export default function EnhancedFooter() {
               </h3>
               <ul className="space-y-2 lg:space-y-3">
                 {[
-                  { name: "Startup Registration", href: "/services/startup-registration", popular: true },
-                  { name: "Trademark & Copyright", href: "/services/trademark-copyright", popular: false },
-                  { name: "Company Compliance", href: "/services/company-compliance", popular: true },
-                  { name: "LLP Registration", href: "/services/llp-compliance", popular: false },
-                  { name: "Tax Services", href: "/services/tax-services", popular: true },
+                  { name: "Private Limited Company", href: "/services/private-limited-company", popular: true },
+                  { name: "Limited Liability Partnership", href: "/services/llp", popular: false },
+                  { name: "GST Registration", href: "/services/gst-registration", popular: true },
+                  { name: "Trademark Registration", href: "/services/trademark-registration", popular: false },
+                  { name: "Income Tax Filing", href: "/services/income-tax-filing", popular: true },
                 ].map((service, index) => (
                   <li key={index}>
                     <Link
@@ -128,9 +128,9 @@ export default function EnhancedFooter() {
                   { name: "About Us", href: "/about" },
                   { name: "Tools", href: "/calculators" },
                   { name: "Contact Us", href: "/contact" },
-                  { name: "Success Stories", href: "/testimonials" },
+        
                   { name: "Blog & Resources", href: "/blog" },
-                  { name: "Career Opportunities", href: "/careers" },
+               
                   { name: "Help & FAQs", href: "/faq" },
                 ].map((link, index) => (
                   <li key={index}>
@@ -163,7 +163,7 @@ export default function EnhancedFooter() {
                   { name: "Income Tax Calculator", href: "/calculators/income-tax", popular: true },
                   { name: "HRA Calculator", href: "/calculators/hra" },
                   { name: "Gratuity Calculator", href: "/calculators/gratuity" },
-                  { name: "EPF Calculator", href: "/calculators/epf", popular: true },
+                  { name: "PPF Calculator", href: "/calculators/ppf", popular: true },
                 ].map((tool, index) => (
                   <li key={index}>
                     <Link
