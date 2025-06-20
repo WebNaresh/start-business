@@ -20,9 +20,7 @@ interface DashboardStats {
   totalBlogs: number
   publishedBlogs: number
   draftBlogs: number
-  totalViews: number
   monthlyGrowth: number
-  weeklyViews: number
 }
 
 interface RecentActivity {
@@ -38,9 +36,7 @@ export default function AdminDashboard() {
     totalBlogs: 0,
     publishedBlogs: 0,
     draftBlogs: 0,
-    totalViews: 0,
-    monthlyGrowth: 0,
-    weeklyViews: 0
+    monthlyGrowth: 0
   })
   const [recentActivity, setRecentActivity] = useState<RecentActivity[]>([])
   const [isLoading, setIsLoading] = useState(true)
@@ -62,9 +58,7 @@ export default function AdminDashboard() {
         totalBlogs: blogs.length,
         publishedBlogs: published,
         draftBlogs: drafts,
-        totalViews: Math.floor(Math.random() * 10000) + 5000, // Mock data
-        monthlyGrowth: Math.floor(Math.random() * 30) + 10, // Mock data
-        weeklyViews: Math.floor(Math.random() * 1000) + 500 // Mock data
+        monthlyGrowth: Math.floor(Math.random() * 30) + 10 // Mock data for growth percentage
       })
 
       // Mock recent activity
@@ -169,27 +163,19 @@ export default function AdminDashboard() {
         />
 
         <StatsCard
-          title="Total Views"
-          value={stats.totalViews.toLocaleString()}
-          description="All time views"
-          icon={Eye}
-          {...statsCardPresets.success}
-        />
-
-        <StatsCard
-          title="Weekly Views"
-          value={stats.weeklyViews.toLocaleString()}
-          description="Last 7 days"
-          icon={TrendingUp}
-          {...statsCardPresets.purple}
-        />
-
-        <StatsCard
           title="Published"
           value={stats.publishedBlogs}
           description="Live content"
           icon={BarChart3}
-          {...statsCardPresets.warning}
+          {...statsCardPresets.success}
+        />
+
+        <StatsCard
+          title="Monthly Growth"
+          value={`+${stats.monthlyGrowth}%`}
+          description="Content growth"
+          icon={TrendingUp}
+          {...statsCardPresets.purple}
         />
       </div>
 
