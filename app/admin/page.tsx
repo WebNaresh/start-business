@@ -14,6 +14,7 @@ import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import StatsCard, { statsCardPresets } from '@/components/admin/stats-card'
+import AdminNavigation from '@/components/admin/admin-navigation'
 
 interface DashboardStats {
   totalBlogs: number
@@ -137,29 +138,17 @@ export default function AdminDashboard() {
   }
 
   return (
-    <div className="space-y-6">
-      {/* Header - only show on mobile or when no layout title */}
-      <div className="lg:hidden">
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
-          <div>
-            <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Dashboard</h1>
-            <p className="text-gray-600 dark:text-gray-400 mt-1">Welcome back! Here's what's happening with your content.</p>
-          </div>
-          <div className="mt-4 sm:mt-0">
-            <Link href="/admin/blogs/new">
-              <Button className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800">
-                <Plus className="w-4 h-4 mr-2" />
-                Create New Blog
-              </Button>
-            </Link>
-          </div>
-        </div>
-      </div>
+    <div className="space-y-8">
+      {/* Admin Navigation Header */}
+      <AdminNavigation />
 
-      {/* Desktop quick action */}
-      <div className="hidden lg:block">
-        <div className="flex justify-between items-center">
-          <p className="text-gray-600 dark:text-gray-400">Welcome back! Here's what's happening with your content.</p>
+      {/* Page Header */}
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+        <div>
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">Admin Dashboard</h1>
+          <p className="text-gray-600 dark:text-gray-400 mt-1">Welcome back! Here's what's happening with your content.</p>
+        </div>
+        <div className="mt-4 sm:mt-0">
           <Link href="/admin/blogs/new">
             <Button className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800">
               <Plus className="w-4 h-4 mr-2" />

@@ -2,10 +2,11 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { Plus, Pencil, Trash2, Eye } from 'lucide-react'
+import { Plus, Pencil, Trash2, Eye, FileText } from 'lucide-react'
 import { toast } from 'sonner'
 import { Button } from '@/components/ui/button'
 import type { Blog } from '@/lib/types'
+import AdminNavigation from '@/components/admin/admin-navigation'
 
 export default function AdminBlogsPage() {
   const [blogs, setBlogs] = useState<Blog[]>([])
@@ -58,100 +59,129 @@ export default function AdminBlogsPage() {
   }
 
   return (
-    <div>
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-semibold text-slate-900">Manage Blogs</h1>
-        <Link href="/admin/blogs/new">
-          <Button className="flex items-center gap-2">
-            <Plus className="w-4 h-4" />
-            New Blog
-          </Button>
-        </Link>
+    <div className="space-y-8">
+      {/* Admin Navigation Header */}
+      <AdminNavigation />
+
+      {/* Page Header */}
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+        <div>
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">Blog Management</h1>
+          <p className="text-gray-600 dark:text-gray-400 mt-1">Create, edit, and manage your blog posts</p>
+        </div>
+        <div className="mt-4 sm:mt-0">
+          <Link href="/admin/blogs/new">
+            <Button className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800">
+              <Plus className="w-4 h-4 mr-2" />
+              Create New Blog
+            </Button>
+          </Link>
+        </div>
       </div>
 
-      {isLoading ? (
-        <div className="text-center py-8">Loading...</div>
-      ) : blogs.length === 0 ? (
-        <div className="text-center py-8 text-slate-500">
-          No blogs found. Create your first blog!
-        </div>
-      ) : (
-        <div className="bg-white rounded-lg border border-slate-200">
-          <div className="overflow-x-auto">
-            <table className="w-full">
-              <thead>
-                <tr className="border-b border-slate-200">
-                  <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">
-                    Title
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">
-                    Author
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">
-                    Status
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">
-                    Published
-                  </th>
-                  <th className="px-6 py-3 text-right text-xs font-medium text-slate-500 uppercase tracking-wider">
-                    Actions
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-slate-200">
-                {blogs.map((blog) => (
-                  <tr key={blog.id} className="hover:bg-slate-50">
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm font-medium text-slate-900">
-                        {blog.title}
-                      </div>
-                      <div className="text-sm text-slate-500">{blog.slug}</div>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-500">
-                      {blog.author}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
-                        blog.status === 'published'
-                          ? 'bg-green-100 text-green-800'
-                          : 'bg-yellow-100 text-yellow-800'
-                      }`}>
-                        {blog.status}
-                      </span>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-500">
-                      {formatDate(blog.publishedAt)}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                      <div className="flex justify-end gap-2">
-                        <Link
-                          href={`/blog/${blog.slug}`}
-                          className="text-blue-600 hover:text-blue-900"
-                          target="_blank"
-                        >
-                          <Eye className="w-4 h-4" />
-                        </Link>
-                        <Link
-                          href={`/admin/blogs/${blog.slug}/edit`}
-                          className="text-indigo-600 hover:text-indigo-900"
-                        >
-                          <Pencil className="w-4 h-4" />
-                        </Link>
-                        <button
-                          onClick={() => handleDelete(blog.slug)}
-                          className="text-red-600 hover:text-red-900"
-                        >
-                          <Trash2 className="w-4 h-4" />
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+      {/* Content */}
+      <div>
+
+        {isLoading ? (
+          <div className="bg-white rounded-2xl border border-slate-200/50 shadow-sm p-12 text-center">
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto mb-4"></div>
+            <p className="text-gray-600">Loading blogs...</p>
           </div>
-        </div>
-      )}
+        ) : blogs.length === 0 ? (
+          <div className="bg-white rounded-2xl border border-slate-200/50 shadow-sm p-12 text-center">
+            <div className="w-16 h-16 mx-auto mb-6 bg-gray-100 rounded-full flex items-center justify-center">
+              <FileText className="w-8 h-8 text-gray-400" />
+            </div>
+            <h3 className="text-xl font-semibold text-gray-900 mb-2">No blogs found</h3>
+            <p className="text-gray-600 mb-6">Get started by creating your first blog post!</p>
+            <Link href="/admin/blogs/new">
+              <Button className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800">
+                <Plus className="w-4 h-4 mr-2" />
+                Create Your First Blog
+              </Button>
+            </Link>
+          </div>
+        ) : (
+          <div className="bg-white rounded-2xl border border-slate-200/50 shadow-sm overflow-hidden">
+            <div className="overflow-x-auto">
+              <table className="w-full">
+                <thead>
+                  <tr className="border-b border-slate-200 bg-slate-50">
+                    <th className="px-6 py-4 text-left text-xs font-semibold text-slate-700 uppercase tracking-wider">
+                      Title
+                    </th>
+                    <th className="px-6 py-4 text-left text-xs font-semibold text-slate-700 uppercase tracking-wider">
+                      Author
+                    </th>
+                    <th className="px-6 py-4 text-left text-xs font-semibold text-slate-700 uppercase tracking-wider">
+                      Status
+                    </th>
+                    <th className="px-6 py-4 text-left text-xs font-semibold text-slate-700 uppercase tracking-wider">
+                      Published
+                    </th>
+                    <th className="px-6 py-4 text-right text-xs font-semibold text-slate-700 uppercase tracking-wider">
+                      Actions
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-200">
+                  {blogs.map((blog) => (
+                    <tr key={blog.id} className="hover:bg-slate-50 transition-colors">
+                      <td className="px-6 py-4">
+                        <div className="text-sm font-semibold text-slate-900">
+                          {blog.title}
+                        </div>
+                        <div className="text-sm text-slate-500">{blog.slug}</div>
+                      </td>
+                      <td className="px-6 py-4 text-sm text-slate-600 font-medium">
+                        {blog.author}
+                      </td>
+                      <td className="px-6 py-4">
+                        <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold ${
+                          blog.status === 'published'
+                            ? 'bg-green-100 text-green-800 border border-green-200'
+                            : 'bg-yellow-100 text-yellow-800 border border-yellow-200'
+                        }`}>
+                          {blog.status}
+                        </span>
+                      </td>
+                      <td className="px-6 py-4 text-sm text-slate-600">
+                        {formatDate(blog.publishedAt)}
+                      </td>
+                      <td className="px-6 py-4 text-right">
+                        <div className="flex justify-end gap-2">
+                          <Link
+                            href={`/blog/${blog.slug}`}
+                            className="p-2 text-blue-600 hover:text-blue-800 hover:bg-blue-50 rounded-lg transition-colors"
+                            target="_blank"
+                            title="View Blog"
+                          >
+                            <Eye className="w-4 h-4" />
+                          </Link>
+                          <Link
+                            href={`/admin/blogs/${blog.slug}/edit`}
+                            className="p-2 text-indigo-600 hover:text-indigo-800 hover:bg-indigo-50 rounded-lg transition-colors"
+                            title="Edit Blog"
+                          >
+                            <Pencil className="w-4 h-4" />
+                          </Link>
+                          <button
+                            onClick={() => handleDelete(blog.slug)}
+                            className="p-2 text-red-600 hover:text-red-800 hover:bg-red-50 rounded-lg transition-colors"
+                            title="Delete Blog"
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   )
 } 
