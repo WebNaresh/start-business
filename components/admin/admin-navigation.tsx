@@ -2,9 +2,17 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Home, FileText, User, Bell } from 'lucide-react'
+import { Home, FileText, User, Bell, LogOut } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import ThemeToggle from '@/components/admin/theme-toggle'
+import { useAuth } from '@/contexts/auth-context'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu'
 
 interface AdminNavigationProps {
   className?: string
@@ -12,6 +20,7 @@ interface AdminNavigationProps {
 
 export default function AdminNavigation({ className = '' }: AdminNavigationProps) {
   const pathname = usePathname()
+  const { logout } = useAuth()
 
   const isActive = (href: string) => {
     if (href === '/admin') {
@@ -24,6 +33,12 @@ export default function AdminNavigation({ className = '' }: AdminNavigationProps
     if (pathname === '/admin') return 'Dashboard'
     if (pathname.startsWith('/admin/blogs')) return 'Blogs'
     return 'Admin'
+  }
+
+  const handleLogout = () => {
+    if (confirm('Are you sure you want to logout?')) {
+      logout()
+    }
   }
 
   return (
@@ -73,9 +88,28 @@ export default function AdminNavigation({ className = '' }: AdminNavigationProps
             <Bell className="w-5 h-5" />
             <span className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full"></span>
           </Button>
-          <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full flex items-center justify-center">
-            <User className="w-4 h-4 text-white" />
-          </div>
+
+          {/* User Menu */}
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" size="sm" className="w-8 h-8 p-0">
+                <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full flex items-center justify-center">
+                  <User className="w-4 h-4 text-white" />
+                </div>
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="w-56">
+              <div className="px-3 py-2">
+                <p className="text-sm font-medium text-gray-900">Admin User</p>
+                <p className="text-xs text-gray-500">admin@example.com</p>
+              </div>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem onClick={handleLogout} className="text-red-600 hover:text-red-700 hover:bg-red-50">
+                <LogOut className="w-4 h-4 mr-2" />
+                Logout
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
       </div>
     </div>
