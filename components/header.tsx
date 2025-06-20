@@ -503,16 +503,7 @@ export default function Header() {
                       </div>
                     ))}
 
-                    <SheetClose asChild>
-                      <Link
-                        href="/contact"
-                        className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors"
-                        aria-label="Contact us"
-                      >
-                        <Mail className="h-4 w-4" />
-                        <span>Contact Us</span>
-                      </Link>
-                    </SheetClose>
+                  
 
                     <SheetClose asChild>
                       <Link
@@ -526,6 +517,19 @@ export default function Header() {
                         Blogs
                       </Link>
                     </SheetClose>
+                        <SheetClose asChild>
+                      <Link
+                        href="/contact"
+                        className={`rounded-md px-4 py-3 text-base font-medium transition-colors ${
+                          isActive("/contact")
+                            ? "bg-blue-50 text-blue-600"
+                            : "text-slate-700 hover:bg-slate-50 hover:text-blue-600"
+                        }`}
+                      >
+                        Contact
+                      </Link>
+                        </SheetClose>
+
                   </nav>
                 </div>
 
