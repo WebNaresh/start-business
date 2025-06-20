@@ -2968,6 +2968,129 @@
           "answer": "Late payment or non-payment can attract penalties, interest, and legal action. The exact penalties vary by state but can include fines and prosecution."
         }
       ]
+    },
+    "public-limited-company": {
+      "title": "Public Limited Company Registration",
+      "shortTitle": "Public Limited Company",
+      "description": "Register your business as a Public Limited Company to raise capital from the public, enjoy limited liability, and boost your corporate credibility.",
+      "category": "business-setup",
+      "icon": "BuildingSkyscraper",
+      "color": "cyan",
+      "popular": true,
+      "pricing": {
+        "amount": "25,000",
+        "originalAmount": "30,000",
+        "currency": "₹",
+        "gst": true,
+        "includes": [
+          "Company Name Reservation",
+          "All Govt. Fees (Capital of Rs. 5 Lac)",
+          "eMoA & eAoA",
+          "DSC for three directors",
+          "DIN for three directors",
+          "Incorporation Certificate",
+          "PAN + TAN + PF + ESIC + Professional Tax",
+          "Listing support (if required)"
+        ]
+      },
+      "timeline": {
+        "total": "25-35 working days",
+        "steps": [
+          { "name": "Name Reservation", "duration": "3-5 days" },
+          { "name": "DSC & DIN", "duration": "4-5 days" },
+          { "name": "Drafting of eMoA & eAoA", "duration": "7-10 days" },
+          { "name": "Final Approval & Certificate", "duration": "8-15 days" }
+        ]
+      },
+      "whatIs": {
+        "title": "What is a Public Limited Company?",
+        "description": "A Public Limited Company is a business entity that can offer shares to the public and is listed on a stock exchange. It provides limited liability to its shareholders, has a separate legal identity, and is ideal for large businesses seeking to raise capital from the public."
+      },
+      "keyFeatures": [
+        "Can raise capital from public",
+        "Limited liability protection",
+        "Separate legal entity",
+        "Perpetual succession",
+        "Enhanced corporate credibility",
+        "Mandatory statutory compliance"
+      ],
+      "idealFor": [
+        "Large businesses",
+        "Companies planning IPO",
+        "Businesses seeking public investment",
+        "Enterprises with large-scale operations"
+      ],
+      "process": [
+        {
+          "step": 1,
+          "title": "Name Reservation",
+          "description": "Apply for Name Reservation through MCA portal with up to 2 name options."
+        },
+        {
+          "step": 2,
+          "title": "Obtain DSC & DIN",
+          "description": "Obtain Digital Signature Certificate and Director Identification Number for directors."
+        },
+        {
+          "step": 3,
+          "title": "Drafting of eMoA & eAoA",
+          "description": "Prepare Memorandum and Articles of Association for the company."
+        },
+        {
+          "step": 4,
+          "title": "Filing SPICe+ Form",
+          "description": "File incorporation forms and required documents with MCA."
+        },
+        {
+          "step": 5,
+          "title": "Certificate of Incorporation",
+          "description": "Receive Certificate of Incorporation from MCA."
+        },
+        {
+          "step": 6,
+          "title": "Post-Incorporation Compliances",
+          "description": "Obtain PAN, TAN, open bank account, and complete listing formalities if required."
+        }
+      ],
+      "requiredDocuments": {
+        "forDirectors": [
+          "PAN Card",
+          "Aadhaar Card",
+          "Passport size photographs",
+          "Bank statement/utility bill for address proof",
+          "Mobile number linked with Aadhaar",
+          "Email ID"
+        ],
+        "forRegisteredOffice": [
+          "Rent agreement/ownership deed",
+          "Utility bills (not older than 2 months)",
+          "NOC from property owner",
+          "Property tax receipt",
+          "Municipality trade license",
+          "Office photographs"
+        ]
+      },
+      "faqs": [
+        {
+          "question": "What is the minimum capital required for a Public Limited Company?",
+          "answer": "The minimum paid-up capital required is ₹5 lakhs, but this may vary as per the latest MCA guidelines."
+        },
+        {
+          "question": "How many directors and shareholders are required?",
+          "answer": "A Public Limited Company must have at least 3 directors and 7 shareholders. There is no maximum limit on shareholders."
+        },
+        {
+          "question": "Can a Public Limited Company be listed on a stock exchange?",
+          "answer": "Yes, after meeting SEBI and stock exchange requirements, a Public Limited Company can be listed and raise funds from the public."
+        },
+        {
+          "question": "Is it mandatory to appoint independent directors?",
+          "answer": "Yes, listed Public Limited Companies must appoint independent directors as per Companies Act, 2013."
+        },
+        {
+          "question": "What are the annual compliance requirements?",
+          "answer": "Annual compliances include filing annual returns, financial statements, holding board and general meetings, and complying with SEBI and MCA regulations."
+        }
+      ]
     }
-}
-  
+  }
