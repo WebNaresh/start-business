@@ -143,15 +143,15 @@ export default function AdminDashboard() {
       <AdminNavigation />
 
       {/* Page Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
-        <div>
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">Admin Dashboard</h1>
-          <p className="text-gray-600 dark:text-gray-400 mt-1">Welcome back! Here's what's happening with your content.</p>
+      <div className="flex flex-col space-y-4 sm:space-y-0 sm:flex-row sm:items-center sm:justify-between">
+        <div className="text-center sm:text-left">
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-gray-100">Admin Dashboard</h1>
+          <p className="text-gray-600 dark:text-gray-400 mt-1 text-sm sm:text-base">Welcome back! Here's what's happening with your content.</p>
         </div>
-        <div className="mt-4 sm:mt-0">
-          <Link href="/admin/blogs/new">
-            <Button className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800">
-              <Plus className="w-4 h-4 mr-2" />
+        <div className="w-full sm:w-auto">
+          <Link href="/admin/blogs/new" className="block">
+            <Button className="w-full sm:w-auto bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 h-12 sm:h-auto text-base sm:text-sm font-medium">
+              <Plus className="w-5 h-5 sm:w-4 sm:h-4 mr-2" />
               Create New Blog
             </Button>
           </Link>
@@ -159,7 +159,7 @@ export default function AdminDashboard() {
       </div>
 
       {/* Stats Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
         <StatsCard
           title="Total Blogs"
           value={stats.totalBlogs}
@@ -194,20 +194,20 @@ export default function AdminDashboard() {
       </div>
 
       {/* Content Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
         {/* Recent Activity */}
         <Card className="lg:col-span-2 dark:bg-slate-800 dark:border-slate-700">
-          <CardHeader>
-            <CardTitle className="flex items-center text-gray-900 dark:text-gray-100">
-              <Activity className="w-5 h-5 mr-2 text-blue-600" />
+          <CardHeader className="pb-3 sm:pb-6">
+            <CardTitle className="flex items-center text-gray-900 dark:text-gray-100 text-lg sm:text-xl">
+              <Activity className="w-4 h-4 sm:w-5 sm:h-5 mr-2 text-blue-600" />
               Recent Activity
             </CardTitle>
-            <CardDescription className="dark:text-gray-400">Latest updates and changes to your content</CardDescription>
+            <CardDescription className="dark:text-gray-400 text-sm">Latest updates and changes to your content</CardDescription>
           </CardHeader>
-          <CardContent>
-            <div className="space-y-4">
+          <CardContent className="pt-0">
+            <div className="space-y-3 sm:space-y-4">
               {recentActivity.map((activity) => (
-                <div key={activity.id} className="flex items-center space-x-4 p-3 rounded-lg bg-gray-50 dark:bg-slate-700 hover:bg-gray-100 dark:hover:bg-slate-600 transition-colors">
+                <div key={activity.id} className="flex items-center space-x-3 sm:space-x-4 p-3 rounded-lg bg-gray-50 dark:bg-slate-700 hover:bg-gray-100 dark:hover:bg-slate-600 transition-colors">
                   <div className="flex-shrink-0">
                     {getActivityIcon(activity.type)}
                   </div>
@@ -227,29 +227,29 @@ export default function AdminDashboard() {
 
         {/* Quick Actions */}
         <Card className="dark:bg-slate-800 dark:border-slate-700">
-          <CardHeader>
-            <CardTitle className="text-gray-900 dark:text-gray-100">Quick Actions</CardTitle>
-            <CardDescription className="dark:text-gray-400">Common tasks and shortcuts</CardDescription>
+          <CardHeader className="pb-3 sm:pb-6">
+            <CardTitle className="text-gray-900 dark:text-gray-100 text-lg sm:text-xl">Quick Actions</CardTitle>
+            <CardDescription className="dark:text-gray-400 text-sm">Common tasks and shortcuts</CardDescription>
           </CardHeader>
-          <CardContent className="space-y-3">
+          <CardContent className="pt-0 space-y-3">
             <Link href="/admin/blogs/new" className="block">
-              <Button variant="outline" className="w-full justify-start">
-                <Plus className="w-4 h-4 mr-2" />
+              <Button variant="outline" className="w-full justify-start h-12 sm:h-auto text-base sm:text-sm font-medium">
+                <Plus className="w-5 h-5 sm:w-4 sm:h-4 mr-3 sm:mr-2" />
                 Create New Blog
               </Button>
             </Link>
             <Link href="/admin/blogs" className="block">
-              <Button variant="outline" className="w-full justify-start">
-                <FileText className="w-4 h-4 mr-2" />
+              <Button variant="outline" className="w-full justify-start h-12 sm:h-auto text-base sm:text-sm font-medium">
+                <FileText className="w-5 h-5 sm:w-4 sm:h-4 mr-3 sm:mr-2" />
                 Manage Blogs
               </Button>
             </Link>
-            <Button variant="outline" className="w-full justify-start" onClick={() => window.open('/blog', '_blank')}>
-              <Eye className="w-4 h-4 mr-2" />
+            <Button variant="outline" className="w-full justify-start h-12 sm:h-auto text-base sm:text-sm font-medium" onClick={() => window.open('/blog', '_blank')}>
+              <Eye className="w-5 h-5 sm:w-4 sm:h-4 mr-3 sm:mr-2" />
               View Public Blog
             </Button>
-            <Button variant="outline" className="w-full justify-start" onClick={() => window.location.href = '/'}>
-              <Home className="w-4 h-4 mr-2" />
+            <Button variant="outline" className="w-full justify-start h-12 sm:h-auto text-base sm:text-sm font-medium" onClick={() => window.location.href = '/'}>
+              <Home className="w-5 h-5 sm:w-4 sm:h-4 mr-3 sm:mr-2" />
               Back to Main Site
             </Button>
           </CardContent>

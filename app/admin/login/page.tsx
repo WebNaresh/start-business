@@ -86,7 +86,7 @@ export default function AdminLoginPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 flex items-center justify-center p-3 sm:p-4">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-20">
         <div className="absolute inset-0" style={{
@@ -97,36 +97,36 @@ export default function AdminLoginPage() {
 
       <div className="relative w-full max-w-md">
         {/* Back to Main Site Link */}
-        <div className="mb-8">
-          <Link 
-            href="/" 
-            className="inline-flex items-center text-gray-600 hover:text-gray-900 transition-colors"
+        <div className="mb-6 sm:mb-8">
+          <Link
+            href="/"
+            className="inline-flex items-center text-gray-600 hover:text-gray-900 transition-colors touch-manipulation p-2 -m-2"
           >
             <ArrowLeft className="w-4 h-4 mr-2" />
-            Back to Main Site
+            <span className="text-sm sm:text-base">Back to Main Site</span>
           </Link>
         </div>
 
         {/* Login Card */}
-        <div className="bg-white/80 backdrop-blur-xl rounded-2xl border border-slate-200/50 shadow-xl p-8">
+        <div className="bg-white/80 backdrop-blur-xl rounded-2xl border border-slate-200/50 shadow-xl p-6 sm:p-8">
           {/* Header */}
-          <div className="text-center mb-8">
-            <div className="w-16 h-16 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
-              <Shield className="w-8 h-8 text-white" />
+          <div className="text-center mb-6 sm:mb-8">
+            <div className="w-14 h-14 sm:w-16 sm:h-16 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
+              <Shield className="w-7 h-7 sm:w-8 sm:h-8 text-white" />
             </div>
-            <h1 className="text-2xl font-bold text-gray-900 mb-2">Admin Login</h1>
-            <p className="text-gray-600">Sign in to access the admin dashboard</p>
+            <h1 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2">Admin Login</h1>
+            <p className="text-gray-600 text-sm sm:text-base">Sign in to access the admin dashboard</p>
           </div>
 
           {/* Error Message */}
           {errors.general && (
-            <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-xl">
+            <div className="mb-4 sm:mb-6 p-3 sm:p-4 bg-red-50 border border-red-200 rounded-xl">
               <p className="text-red-700 text-sm">{errors.general}</p>
             </div>
           )}
 
           {/* Login Form */}
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
             {/* Username Field */}
             <div>
               <Label htmlFor="username" className="text-gray-700 font-medium">
@@ -183,15 +183,15 @@ export default function AdminLoginPage() {
             <Button
               type="submit"
               disabled={isLoading}
-              className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-medium py-3 px-4 rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl"
+              className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-medium py-3 sm:py-3 px-4 rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl h-12 sm:h-auto text-base sm:text-sm touch-manipulation"
             >
               {isLoading ? (
                 <div className="flex items-center justify-center">
                   <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
-                  Signing in...
+                  <span className="text-sm sm:text-base">Signing in...</span>
                 </div>
               ) : (
-                'Sign In'
+                <span className="text-base sm:text-sm">Sign In</span>
               )}
             </Button>
           </form>

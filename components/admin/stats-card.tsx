@@ -27,13 +27,13 @@ export default function StatsCard({
 }: StatsCardProps) {
   return (
     <Card className={`${gradient} border-opacity-50 ${className}`}>
-      <CardContent className="p-6">
+      <CardContent className="p-4 sm:p-6">
         <div className="flex items-center justify-between">
-          <div className="flex-1">
-            <p className="text-sm font-medium opacity-90 mb-1">{title}</p>
-            <p className="text-2xl font-bold mb-1">{value}</p>
+          <div className="flex-1 min-w-0">
+            <p className="text-xs sm:text-sm font-medium opacity-90 mb-1 truncate">{title}</p>
+            <p className="text-xl sm:text-2xl font-bold mb-1">{value}</p>
             {description && (
-              <p className="text-xs opacity-75">{description}</p>
+              <p className="text-xs opacity-75 truncate">{description}</p>
             )}
             {trend && (
               <div className={`flex items-center text-xs mt-2 ${
@@ -42,12 +42,12 @@ export default function StatsCard({
                 <span className={`mr-1 ${trend.isPositive ? '↗' : '↘'}`}>
                   {trend.isPositive ? '↗' : '↘'}
                 </span>
-                {trend.value}
+                <span className="truncate">{trend.value}</span>
               </div>
             )}
           </div>
-          <div className={`p-3 rounded-full ${iconColor.replace('text-', 'bg-').replace('-600', '-100')}`}>
-            <Icon className={`h-6 w-6 ${iconColor}`} />
+          <div className={`p-2 sm:p-3 rounded-full flex-shrink-0 ml-3 ${iconColor.replace('text-', 'bg-').replace('-600', '-100')}`}>
+            <Icon className={`h-5 w-5 sm:h-6 sm:w-6 ${iconColor}`} />
           </div>
         </div>
       </CardContent>
