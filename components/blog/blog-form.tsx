@@ -12,6 +12,8 @@ import type { Blog } from '@/lib/types'
 import type { EditorRef } from '@/components/ui/enhanced-editor'
 import ContentImportDialog from '@/components/blog/content-import-dialog'
 import ImageUpload from '@/components/ui/image-upload'
+import AIContentGenerator from '@/components/blog/ai-content-generator'
+import { htmlToEditorJSServer } from '@/lib/html-to-editorjs'
 
 // Dynamically import Enhanced Editor to avoid SSR issues
 const EnhancedEditor = dynamic(() => import('@/components/ui/enhanced-editor'), {
@@ -176,6 +178,71 @@ export default function BlogForm({ initialData, isEditing = false, onSubmit }: B
     }
   }
 
+  const handleAIContentGenerated = async (generatedContent: {
+    title: string
+    content: string
+    excerpt: string
+    metaTitle: string
+    metaDescription: string
+    tags: string
+    slug: string
+  }) => {
+    // Update all form fields with generated content
+    setBlog(prev => ({
+      ...prev,
+      title: generatedContent.title,
+      excerpt: generatedContent.excerpt,
+      metaTitle: generatedContent.metaTitle,
+      metaDescription: generatedContent.metaDescription,
+      tags: generatedContent.tags,
+      slug: generatedContent.slug,
+    }))
+
+    // Convert HTML content to proper EditorJS blocks
+    if (editorRef.current) {
+      try {
+        console.log('Converting HTML to EditorJS blocks...')
+        console.log('Original HTML:', generatedContent.content.substring(0, 200) + '...')
+
+        // Convert HTML to structured EditorJS blocks
+        const editorData = htmlToEditorJSServer(generatedContent.content)
+
+        console.log('Converted to EditorJS blocks:', editorData.blocks.length, 'blocks')
+        console.log('Block types:', editorData.blocks.map(b => b.type).join(', '))
+
+        // Render the structured content in the editor
+        await editorRef.current.render(editorData)
+        setEditorData(editorData)
+
+        toast.success(`AI content applied! Generated ${editorData.blocks.length} content blocks.`)
+      } catch (error) {
+        console.error('Error converting HTML to EditorJS:', error)
+
+        // Fallback: create a single paragraph block
+        const fallbackData: OutputData = {
+          time: Date.now(),
+          blocks: [
+            {
+              id: "ai-generated-fallback",
+              type: "paragraph",
+              data: {
+                text: generatedContent.content.replace(/<[^>]*>/g, '') // Strip HTML tags
+              }
+            }
+          ],
+          version: "2.28.2"
+        }
+
+        await editorRef.current.render(fallbackData)
+        setEditorData(fallbackData)
+
+        toast.error('Content applied but formatting may need adjustment')
+      }
+    }
+
+    console.log('AI content generation completed successfully')
+  }
+
   return (
     <div>
       <div className="mb-6">
@@ -188,6 +255,14 @@ export default function BlogForm({ initialData, isEditing = false, onSubmit }: B
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-6">
+        {/* AI Content Generator */}
+        {!isEditing && (
+          <AIContentGenerator
+            onContentGenerated={handleAIContentGenerated}
+            disabled={isSaving}
+          />
+        )}
+
         {/* Basic Information */}
         <div className="bg-white rounded-lg border border-slate-200 p-6">
           <h2 className="text-lg font-medium text-slate-900 mb-4">Basic Information</h2>

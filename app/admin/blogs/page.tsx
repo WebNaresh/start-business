@@ -55,7 +55,11 @@ export default function AdminBlogsPage() {
 
   const formatDate = (date: Date | null) => {
     if (!date) return 'Not published'
-    return new Date(date).toLocaleDateString()
+    return new Date(date).toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric'
+    })
   }
 
   return (

@@ -82,7 +82,11 @@ export default function OptimizedBlogList({
             <div className="flex items-center gap-4">
               <div className="flex items-center gap-1">
                 <Calendar className="h-4 w-4" />
-                <span>{new Date(post.publishedAt).toLocaleDateString()}</span>
+                <span>{post.publishedAt ? new Date(post.publishedAt).toLocaleDateString('en-US', {
+                  year: 'numeric',
+                  month: 'short',
+                  day: 'numeric'
+                }) : 'Not published'}</span>
               </div>
               <div className="flex items-center gap-1">
                 <Clock className="h-4 w-4" />

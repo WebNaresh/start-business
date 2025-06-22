@@ -15,7 +15,7 @@ const config = {
     // Disable unused core plugins to reduce CSS size
     preflight: true,
     container: true,
-    accessibility: false, // Disable if not using screen reader utilities
+    accessibility: true, // Enable for screen reader utilities (sr-only)
     pointerEvents: false, // Disable if not using pointer-events utilities
     resize: false, // Disable if not using resize utilities
     userSelect: false, // Disable if not using user-select utilities

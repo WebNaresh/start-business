@@ -23,34 +23,34 @@ function blockToHtml(block: EditorBlock): string {
   switch (block.type) {
     case 'header':
       return headerToHtml(block.data)
-    
+
     case 'paragraph':
       return paragraphToHtml(block.data)
-    
+
     case 'list':
       return listToHtml(block.data)
-    
+
     case 'quote':
       return quoteToHtml(block.data)
-    
+
     case 'code':
       return codeToHtml(block.data)
-    
+
     case 'delimiter':
       return delimiterToHtml()
-    
+
     case 'table':
       return tableToHtml(block.data)
-    
+
     case 'linkTool':
       return linkToHtml(block.data)
-    
+
     case 'embed':
       return embedToHtml(block.data)
-    
+
     case 'image':
       return imageToHtml(block.data)
-    
+
     default:
       console.warn(`Unknown block type: ${block.type}`)
       return ''
@@ -71,9 +71,22 @@ function paragraphToHtml(data: any): string {
 function listToHtml(data: any): string {
   const style = data.style || 'unordered'
   const items = data.items || []
-  
-  const listItems = items.map((item: string) => `<li class="mb-2">${item}</li>`).join('')
-  
+
+  // Clean and filter list items to prevent [object Object] issues
+  const cleanItems = items
+    .map((item: any) => {
+      // Convert to string and clean object references
+      const itemStr = typeof item === 'string' ? item : String(item)
+      return itemStr
+        .replace(/\[object Object\]/g, '') // Remove object references
+        .replace(/\[object [^\]]+\]/g, '') // Remove any object patterns
+        .replace(/undefined/g, '') // Remove undefined values
+        .trim()
+    })
+    .filter((item: string) => item.length > 0) // Remove empty items
+
+  const listItems = cleanItems.map((item: string) => `<li class="mb-2">${item}</li>`).join('')
+
   if (style === 'ordered') {
     return `<ol class="list-decimal list-inside mb-4 space-y-2">${listItems}</ol>`
   } else {
@@ -84,7 +97,7 @@ function listToHtml(data: any): string {
 function quoteToHtml(data: any): string {
   const text = data.text || ''
   const caption = data.caption || ''
-  
+
   return `
     <blockquote class="border-l-4 border-blue-500 pl-4 py-2 mb-4 italic bg-gray-50 rounded-r-lg">
       <p class="text-lg mb-2">${text}</p>
@@ -116,22 +129,22 @@ function delimiterToHtml(): string {
 
 function tableToHtml(data: any): string {
   const content = data.content || []
-  
+
   if (content.length === 0) return ''
-  
+
   const headerRow = content[0]
   const bodyRows = content.slice(1)
-  
-  const headerHtml = headerRow.map((cell: string) => 
+
+  const headerHtml = headerRow.map((cell: string) =>
     `<th class="border border-gray-300 px-4 py-2 bg-gray-50 font-semibold text-left">${cell}</th>`
   ).join('')
-  
-  const bodyHtml = bodyRows.map((row: string[]) => 
-    `<tr>${row.map((cell: string) => 
+
+  const bodyHtml = bodyRows.map((row: string[]) =>
+    `<tr>${row.map((cell: string) =>
       `<td class="border border-gray-300 px-4 py-2">${cell}</td>`
     ).join('')}</tr>`
   ).join('')
-  
+
   return `
     <div class="overflow-x-auto mb-4">
       <table class="min-w-full border-collapse border border-gray-300">
@@ -150,7 +163,7 @@ function linkToHtml(data: any): string {
   const title = meta.title || link
   const description = meta.description || ''
   const image = meta.image?.url || ''
-  
+
   return `
     <div class="border border-gray-200 rounded-lg p-4 mb-4 hover:shadow-md transition-shadow">
       <a href="${link}" target="_blank" rel="noopener noreferrer" class="block">
@@ -169,10 +182,10 @@ function embedToHtml(data: any): string {
   const embed = data.embed || ''
   const width = data.width || 580
   const height = data.height || 320
-  
+
   return `
     <div class="mb-4">
-      <div class="relative" style="padding-bottom: ${(height/width) * 100}%">
+      <div class="relative" style="padding-bottom: ${(height / width) * 100}%">
         <iframe 
           src="${embed}" 
           class="absolute top-0 left-0 w-full h-full rounded-lg"
@@ -192,7 +205,7 @@ function imageToHtml(data: any): string {
   const withBorder = data.withBorder || false
   const withBackground = data.withBackground || false
   const stretched = data.stretched || false
-  
+
   const classes = [
     'mb-4',
     stretched ? 'w-full' : 'max-w-full h-auto',
@@ -200,7 +213,7 @@ function imageToHtml(data: any): string {
     withBackground ? 'bg-gray-50 p-4' : '',
     'rounded-lg'
   ].filter(Boolean).join(' ')
-  
+
   return `
     <figure class="mb-4">
       <img src="${url}" alt="${caption}" class="${classes}">
@@ -220,53 +233,183 @@ function escapeHtml(text: string): string {
     '"': '&quot;',
     "'": '&#039;'
   }
-  
+
   return text.replace(/[&<>"']/g, (m) => map[m])
 }
 
 /**
- * Convert HTML back to EditorJS data (basic implementation)
+ * Convert HTML back to EditorJS data with object cleaning
  */
 export function htmlToEditorData(html: string): OutputData {
-  // This is a basic implementation - you might want to use a proper HTML parser
-  // for more complex conversions
-  
+  // Clean the HTML content to remove any object references
+  const cleanHtml = html
+    .replace(/\[object Object\]/g, '') // Remove [object Object]
+    .replace(/\[object [^\]]+\]/g, '') // Remove any [object ...] patterns
+    .replace(/undefined/g, '') // Remove undefined values
+    .replace(/\s+/g, ' ') // Clean up extra whitespace
+    .trim()
+
   const blocks: EditorBlock[] = []
-  
-  // Simple regex-based parsing (you might want to improve this)
-  const paragraphs = html.split(/<\/p>|<\/h[1-6]>|<\/blockquote>|<\/pre>|<\/ul>|<\/ol>|<\/table>/).filter(p => p.trim())
-  
-  paragraphs.forEach(p => {
-    const trimmed = p.trim()
+  let blockId = 1
+
+  // Handle both multi-line and inline HTML by first normalizing the content
+  const normalizedHtml = cleanHtml
+    .replace(/></g, '>\n<') // Add line breaks between tags
+    .replace(/(<\/[^>]+>)([^<])/g, '$1\n$2') // Add line breaks after closing tags
+    .replace(/([^>])(<[^\/])/g, '$1\n$2') // Add line breaks before opening tags
+    .split('\n')
+    .map(line => line.trim())
+    .filter(line => line)
+    .join('\n')
+
+  // Split HTML into blocks
+  let htmlBlocks: string[] = []
+  let currentBlock = ''
+  let inBlockquote = false
+
+  const lines = normalizedHtml.split('\n')
+  for (const line of lines) {
+    const trimmedLine = line.trim()
+
+    if (trimmedLine.includes('<blockquote')) {
+      if (currentBlock.trim()) {
+        htmlBlocks.push(currentBlock.trim())
+        currentBlock = ''
+      }
+      inBlockquote = true
+      currentBlock += line + '\n'
+    } else if (trimmedLine.includes('</blockquote>')) {
+      currentBlock += line + '\n'
+      htmlBlocks.push(currentBlock.trim())
+      currentBlock = ''
+      inBlockquote = false
+    } else if (inBlockquote) {
+      currentBlock += line + '\n'
+    } else if (trimmedLine.match(/^<(h[1-6]|p|ul|ol|div)/)) {
+      if (currentBlock.trim()) {
+        htmlBlocks.push(currentBlock.trim())
+      }
+      currentBlock = line + '\n'
+    } else {
+      currentBlock += line + '\n'
+    }
+  }
+
+  if (currentBlock.trim()) {
+    htmlBlocks.push(currentBlock.trim())
+  }
+
+  htmlBlocks = htmlBlocks.filter(block => block.trim())
+
+  htmlBlocks.forEach((htmlBlock) => {
+    const trimmed = htmlBlock.trim()
     if (!trimmed) return
-    
-    if (trimmed.includes('<h1')) {
-      blocks.push({
-        type: 'header',
-        data: {
-          text: trimmed.replace(/<[^>]*>/g, ''),
-          level: 1
-        }
-      })
-    } else if (trimmed.includes('<h2')) {
-      blocks.push({
-        type: 'header',
-        data: {
-          text: trimmed.replace(/<[^>]*>/g, ''),
-          level: 2
-        }
-      })
-    } else if (trimmed.includes('<p')) {
+
+    // Extract heading levels
+    const headingMatch = trimmed.match(/<h([1-6])[^>]*>(.*?)<\/h[1-6]>/i)
+    if (headingMatch) {
+      const level = parseInt(headingMatch[1])
+      const text = headingMatch[2]
+        .replace(/<[^>]*>/g, '') // Remove HTML tags
+        .replace(/\[object Object\]/g, '') // Remove object references
+        .replace(/\[object [^\]]+\]/g, '') // Remove any object patterns
+        .trim()
+
+      if (text) {
+        blocks.push({
+          type: 'header',
+          data: { text, level }
+        })
+      }
+      return
+    }
+
+    // Extract unordered lists
+    const ulMatch = trimmed.match(/<ul[^>]*>(.*?)<\/ul>/is)
+    if (ulMatch) {
+      const items = ulMatch[1].match(/<li[^>]*>(.*?)<\/li>/gi)?.map(li =>
+        li.replace(/<\/?li[^>]*>/gi, '')
+          .replace(/<[^>]*>/g, '')
+          .replace(/\[object Object\]/g, '') // Remove object references
+          .replace(/\[object [^\]]+\]/g, '') // Remove any object patterns
+          .trim()
+      ).filter(item => item.length > 0) || []
+
+      if (items.length > 0) {
+        blocks.push({
+          type: 'list',
+          data: { style: 'unordered', items }
+        })
+      }
+      return
+    }
+
+    // Extract ordered lists
+    const olMatch = trimmed.match(/<ol[^>]*>(.*?)<\/ol>/is)
+    if (olMatch) {
+      const items = olMatch[1].match(/<li[^>]*>(.*?)<\/li>/gi)?.map(li =>
+        li.replace(/<\/?li[^>]*>/gi, '')
+          .replace(/<[^>]*>/g, '')
+          .replace(/\[object Object\]/g, '') // Remove object references
+          .replace(/\[object [^\]]+\]/g, '') // Remove any object patterns
+          .trim()
+      ).filter(item => item.length > 0) || []
+
+      if (items.length > 0) {
+        blocks.push({
+          type: 'list',
+          data: { style: 'ordered', items }
+        })
+      }
+      return
+    }
+
+    // Extract blockquotes
+    const quoteMatch = trimmed.match(/<blockquote[^>]*>(.*?)<\/blockquote>/is)
+    if (quoteMatch) {
+      // Handle nested <p> tags within blockquote
+      let text = quoteMatch[1]
+      if (text.includes('<p>')) {
+        text = text.replace(/<p[^>]*>(.*?)<\/p>/gi, '$1').trim()
+      }
+      text = text.replace(/<[^>]*>/g, '').trim()
+
+      if (text) {
+        blocks.push({
+          type: 'quote',
+          data: { text, caption: '', alignment: 'left' }
+        })
+      }
+      return
+    }
+
+    // Extract paragraphs
+    const pMatch = trimmed.match(/<p[^>]*>(.*?)<\/p>/is)
+    if (pMatch) {
+      const text = pMatch[1]
+        .replace(/\[object Object\]/g, '') // Remove object references
+        .replace(/\[object [^\]]+\]/g, '') // Remove any object patterns
+        .trim()
+
+      if (text) {
+        blocks.push({
+          type: 'paragraph',
+          data: { text }
+        })
+      }
+      return
+    }
+
+    // Handle any remaining content as paragraph
+    const cleanText = trimmed.replace(/<[^>]*>/g, '').trim()
+    if (cleanText) {
       blocks.push({
         type: 'paragraph',
-        data: {
-          text: trimmed.replace(/<[^>]*>/g, '')
-        }
+        data: { text: cleanText }
       })
     }
-    // Add more parsing logic as needed
   })
-  
+
   return {
     time: Date.now(),
     blocks: blocks,

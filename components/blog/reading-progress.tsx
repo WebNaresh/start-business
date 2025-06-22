@@ -149,28 +149,28 @@ export default function ReadingProgress({
       {showScrollTop && (
         <button
           onClick={scrollToTop}
-          className="fixed bottom-6 right-6 z-40 w-12 h-12 bg-blue-600 hover:bg-blue-700 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center group"
+          className="fixed bottom-20 right-3 sm:bottom-6 sm:right-6 z-50 w-10 h-10 sm:w-12 sm:h-12 bg-blue-600 hover:bg-blue-700 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center group"
           aria-label="Scroll to top"
         >
-          <ArrowUp className="w-5 h-5 group-hover:-translate-y-0.5 transition-transform" />
+          <ArrowUp className="w-4 h-4 sm:w-5 sm:h-5 group-hover:-translate-y-0.5 transition-transform" />
         </button>
       )}
 
       {/* Mobile Progress Indicator */}
       {isVisible && (
-        <div className="fixed bottom-4 left-4 right-4 z-40 lg:hidden">
-          <div className="bg-white/90 backdrop-blur-sm rounded-xl border border-gray-200 shadow-lg p-3">
+        <div className="fixed bottom-3 left-3 right-3 z-40 lg:hidden max-w-sm mx-auto">
+          <div className="bg-white/95 backdrop-blur-sm rounded-xl border border-gray-200 shadow-lg p-3">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-sm font-medium text-gray-900">Reading Progress</span>
-              <span className="text-sm text-blue-600 font-semibold">{Math.round(progress)}%</span>
+              <span className="text-sm font-medium text-gray-900 truncate">Reading Progress</span>
+              <span className="text-sm text-blue-600 font-semibold ml-2">{Math.round(progress)}%</span>
             </div>
             <div className="w-full bg-gray-200 rounded-full h-2">
-              <div 
+              <div
                 className="bg-gradient-to-r from-blue-500 to-indigo-600 h-2 rounded-full transition-all duration-300"
                 style={{ width: `${progress}%` }}
               />
             </div>
-            <p className="text-xs text-gray-600 mt-1">{getEstimatedTimeLeft()}</p>
+            <p className="text-xs text-gray-600 mt-1 truncate">{getEstimatedTimeLeft()}</p>
           </div>
         </div>
       )}

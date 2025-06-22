@@ -403,8 +403,12 @@ export default function Header() {
           {/* Mobile menu button */}
           <Sheet>
             <SheetTrigger asChild>
-              <Button variant="outline" size="icon" className="lg:hidden border-none">
-                <Menu className="h-5 w-5" />
+              <Button
+                variant="outline"
+                size="icon"
+                className="lg:hidden border-none hover:bg-slate-50"
+              >
+                <Menu className="h-5 w-5 text-slate-700" />
                 <span className="sr-only">Toggle menu</span>
               </Button>
             </SheetTrigger>

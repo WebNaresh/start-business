@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navbar Mobile Menu Test</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <style>
+        /* Ensure sr-only class works properly */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 p-8">
+    <div class="max-w-4xl mx-auto">
+        <h1 class="text-2xl font-bold mb-6">Mobile Navbar Menu Button Test</h1>
+        
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+            <h2 class="text-lg font-semibold mb-4">Fixed Mobile Menu Button</h2>
+            <p class="text-gray-600 mb-4">This should show a hamburger icon, not text:</p>
+            
+            <!-- Fixed version -->
+            <button class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 w-10 lg:hidden border-none hover:bg-slate-50">
+                <svg class="h-5 w-5 text-slate-700" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="4" x2="20" y1="6" y2="6"/>
+                    <line x1="4" x2="20" y1="12" y2="12"/>
+                    <line x1="4" x2="20" y1="18" y2="18"/>
+                </svg>
+                <span class="sr-only">Toggle menu</span>
+            </button>
+        </div>
+        
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+            <h2 class="text-lg font-semibold mb-4">Problematic Version (for comparison)</h2>
+            <p class="text-gray-600 mb-4">This would show "Toggle menu" text if sr-only wasn't working:</p>
+            
+            <!-- Problematic version without proper sr-only -->
+            <button class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 w-10 lg:hidden border-none hover:bg-slate-50">
+                <svg class="h-5 w-5 text-slate-700" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+                    <line x1="4" x2="20" y1="6" y2="6"/>
+                    <line x1="4" x2="20" y1="12" y2="12"/>
+                    <line x1="4" x2="20" y1="18" y2="18"/>
+                </svg>
+                <span>Toggle menu</span>
+            </button>
+        </div>
+        
+        <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
+            <h3 class="font-semibold text-blue-900 mb-2">✅ Fix Applied</h3>
+            <ul class="text-blue-800 space-y-1 text-sm">
+                <li>• <strong>Enabled accessibility utilities</strong> in Tailwind config</li>
+                <li>• <strong>Fixed sr-only class</strong> to properly hide screen reader text</li>
+                <li>• <strong>Improved button styling</strong> with proper hover states</li>
+                <li>• <strong>Added explicit text color</strong> for the hamburger icon</li>
+            </ul>
+        </div>
+        
+        <div class="mt-6 p-4 bg-gray-50 rounded-lg">
+            <h3 class="font-semibold mb-2">How to Test:</h3>
+            <ol class="list-decimal list-inside space-y-1 text-sm text-gray-700">
+                <li>Resize your browser window to mobile size (< 1024px width)</li>
+                <li>The mobile menu button should show a hamburger icon (three horizontal lines)</li>
+                <li>The text "Toggle menu" should be hidden from visual display</li>
+                <li>Screen readers will still read "Toggle menu" for accessibility</li>
+            </ol>
+        </div>
+    </div>
+    
+    <script>
+        // Add some interactivity for testing
+        document.querySelectorAll('button').forEach(button => {
+            button.addEventListener('click', function() {
+                alert('Mobile menu button clicked! In the real app, this would open the navigation menu.');
+            });
+        });
+    </script>
+</body>
+</html>
