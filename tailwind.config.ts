@@ -3,11 +3,12 @@ import type { Config } from "tailwindcss"
 const config = {
   darkMode: ["class"],
   content: [
-    "./pages/**/*.{ts,tsx}",
-    "./components/**/*.{ts,tsx}",
-    "./app/**/*.{ts,tsx}",
-    "./src/**/*.{ts,tsx}",
-    "*.{js,ts,jsx,tsx,mdx}",
+    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/**/*.{js,ts,jsx,tsx,mdx}",
+    "./lib/**/*.{js,ts,jsx,tsx,mdx}",
+    "./*.{js,ts,jsx,tsx,mdx}",
   ],
   prefix: "",
   // Optimize CSS output
@@ -22,18 +23,8 @@ const config = {
     fill: false, // Disable if not using SVG fill utilities
     stroke: false, // Disable if not using SVG stroke utilities
   },
-  // Safelist only essential classes that might be dynamically generated
-  safelist: [
-    'animate-pulse',
-    'animate-spin',
-    'animate-bounce',
-    'bg-blue-50',
-    'bg-blue-100',
-    'bg-blue-600',
-    'text-blue-600',
-    'border-blue-600',
-    // Add only classes that are dynamically generated
-  ],
+  // Remove safelist - Tailwind's built-in purging is more reliable
+  // and properly handles responsive variants without manual configuration
   theme: {
     container: {
       center: true,
