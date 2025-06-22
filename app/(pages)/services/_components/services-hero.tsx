@@ -47,7 +47,7 @@ export default function ServicesHero() {
             {/* Search Bar */}
             <div className="max-w-2xl mx-auto mb-8">
               <div className="relative">
-                <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-slate-400 w-5 h-5" />
+                <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-blue-300 w-5 h-5" />
                 <Input
                   type="text"
                   placeholder="Search for services (e.g., Company Registration, GST Filing...)"

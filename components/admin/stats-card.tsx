@@ -63,7 +63,7 @@ export const statsCardPresets = {
   },
   success: {
     gradient: 'bg-gradient-to-br from-green-50 to-green-100 border-green-200',
-    iconColor: 'text-green-600'
+    iconColor: 'text-green-700'
   },
   warning: {
     gradient: 'bg-gradient-to-br from-orange-50 to-orange-100 border-orange-200',

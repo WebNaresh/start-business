@@ -458,7 +458,7 @@ export default function EnhancedEditorToolbar({
       {/* Help Text */}
       <div className="mt-2 text-xs text-slate-500 bg-slate-50 rounded-lg p-3">
         <div className="flex items-start gap-2">
-          <FileText className="w-4 h-4 mt-0.5 text-slate-400" />
+          <FileText className="w-4 h-4 mt-0.5 text-slate-500" />
           <div>
             <p className="font-medium mb-1">Enhanced Editor Tips:</p>
             <ul className="space-y-1 text-slate-600">

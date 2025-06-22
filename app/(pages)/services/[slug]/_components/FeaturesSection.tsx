@@ -132,7 +132,7 @@ export default function FeaturesSection({ service }: FeaturesSectionProps) {
                             </span>
                           </div>
                           <ArrowRight
-                            className="w-3 h-3 text-slate-400 group-hover/item:text-blue-600 group-hover/item:translate-x-1 transition-all duration-300"
+                            className="w-3 h-3 text-slate-500 group-hover/item:text-blue-600 group-hover/item:translate-x-1 transition-all duration-300"
                             aria-hidden="true"
                           />
                         </div>
@@ -210,7 +210,7 @@ export default function FeaturesSection({ service }: FeaturesSectionProps) {
                             </span>
                           </div>
                           <ArrowRight 
-                            className="w-3 h-3 text-slate-400 group-hover/item:text-blue-600 group-hover/item:translate-x-1 transition-all duration-300"
+                            className="w-3 h-3 text-slate-500 group-hover/item:text-blue-600 group-hover/item:translate-x-1 transition-all duration-300"
                             aria-hidden="true"
                           />
                         </div>

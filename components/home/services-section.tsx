@@ -589,10 +589,10 @@ function ServiceCard({ service, idx, hoveredCard, setHoveredCard }: ServiceCardP
         <div className="mb-6">
           <div className="flex items-baseline gap-2 mb-1">
             <span className="text-3xl font-bold text-slate-900">{service.price}</span>
-            <span className="text-lg text-slate-400 line-through">{service.originalPrice}</span>
+            <span className="text-lg text-slate-500 line-through">{service.originalPrice}</span>
             <span className="text-sm font-normal text-slate-500">{service.billing}</span>
           </div>
-          <p className="text-sm text-green-600 font-medium">
+          <p className="text-sm text-green-700 font-medium">
             You save ₹{savings.toLocaleString()}!
           </p>
           <div className="flex items-center gap-1 mt-2 text-sm text-red-600">

@@ -300,7 +300,7 @@ export default function EnhancedFooter() {
             <div className="flex flex-col lg:flex-row items-center justify-between gap-4">
               <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4 text-xs sm:text-sm text-center sm:text-left">
                 <p className="text-slate-300">&copy; {new Date().getFullYear()} StartBusiness - All rights reserved.</p>
-                <div className="flex items-center gap-2 text-slate-400">
+                <div className="flex items-center gap-2 text-slate-300">
                   <Shield className="w-3 h-3 sm:w-4 sm:h-4" />
                   <span>SSL Secured</span>
                 </div>

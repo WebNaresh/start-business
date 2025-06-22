@@ -110,7 +110,7 @@ export default function PricingSection() {
               />
             </button>
             <span className={`text-sm font-medium ${isAnnual ? "text-[#2563eb]" : "text-slate-500"}`}>
-              Annual <span className="text-green-600 font-medium">(Save 20%)</span>
+              Annual <span className="text-green-700 font-medium">(Save 20%)</span>
             </span>
           </div>
         </div>
@@ -158,7 +158,7 @@ export default function PricingSection() {
                     ) : (
                       <X className="h-5 w-5 text-slate-300 mr-3 mt-0.5 flex-shrink-0" />
                     )}
-                    <span className={feature.included ? "text-slate-700" : "text-slate-400"}>{feature.name}</span>
+                    <span className={feature.included ? "text-slate-700" : "text-slate-500"}>{feature.name}</span>
                   </li>
                 ))}
               </ul>

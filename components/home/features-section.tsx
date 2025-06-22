@@ -1,13 +1,13 @@
 "use client"
 
-import { useState } from "react"
+// import { useState } from "react" // Unused for now
 import { Eye, Zap, Shield, Smartphone, GraduationCap, ArrowRight, CheckCircle, Star, Headphones } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import WhatsAppCTAButton from "@/components/whatsapp-cta-button"
 import Script from "next/script"
 
 export default function WhyChooseUs() {
-  const [activeFeature, setActiveFeature] = useState<number>(0)
+  // const [activeFeature, setActiveFeature] = useState<number>(0) // Unused for now
 
   const features = [
     {
@@ -35,7 +35,7 @@ export default function WhyChooseUs() {
       benefit: "Risk-free guarantee",
       color: "from-green-500 to-green-600",
       bgColor: "bg-green-50",
-      iconColor: "text-green-600",
+      iconColor: "text-green-700",
     },
     {
       icon: Smartphone,
@@ -131,7 +131,7 @@ export default function WhyChooseUs() {
               <article
                 key={index}
                 className="group relative p-4 md:p-6 bg-white rounded-2xl border border-slate-200 hover:border-slate-300 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 cursor-pointer"
-                onMouseEnter={() => setActiveFeature(index)}
+                // onMouseEnter={() => setActiveFeature(index)} // Disabled for now
                 role="listitem"
               >
                 {/* Icon */}

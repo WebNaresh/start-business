@@ -201,7 +201,7 @@ export default function AIContentGenerator({ onContentGenerated, disabled = fals
         {/* Success Display */}
         {lastGenerated && !error && (
           <Alert className="border-green-200 bg-green-50">
-            <CheckCircle className="h-4 w-4 text-green-600" />
+            <CheckCircle className="h-4 w-4 text-green-700" />
             <AlertDescription className="text-green-800">
               <div className="space-y-2">
                 <p className="font-medium">Content generated successfully!</p>

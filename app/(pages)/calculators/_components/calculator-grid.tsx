@@ -276,7 +276,7 @@ export default function CalculatorGrid() {
             className="mb-8"
           >
             <div className="relative max-w-md mx-auto">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 w-4 h-4" />
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-500 w-4 h-4" />
               <Input
                 type="text"
                 placeholder="Search calculators..."
@@ -383,7 +383,7 @@ export default function CalculatorGrid() {
                   {filteredCalculators.length === 0 && searchQuery && (
                     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-center py-12">
                       <div className="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <Search className="w-8 h-8 text-slate-400" />
+                        <Search className="w-8 h-8 text-slate-500" />
                       </div>
                       <h3 className="text-lg font-semibold text-slate-800 mb-2">No calculators found</h3>
                       <p className="text-slate-600 mb-4">Try adjusting your search terms or browse all calculators.</p>

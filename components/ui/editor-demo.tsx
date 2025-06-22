@@ -289,7 +289,7 @@ export default function EditorDemo() {
             
             <div className="text-center">
               <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mx-auto mb-3">
-                <Type className="w-6 h-6 text-green-600" />
+                <Type className="w-6 h-6 text-green-700" />
               </div>
               <h4 className="font-medium text-gray-900 mb-2">Faster Creation</h4>
               <p className="text-sm text-gray-600">
