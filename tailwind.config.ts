@@ -10,6 +10,30 @@ const config = {
     "*.{js,ts,jsx,tsx,mdx}",
   ],
   prefix: "",
+  // Optimize CSS output
+  corePlugins: {
+    // Disable unused core plugins to reduce CSS size
+    preflight: true,
+    container: true,
+    accessibility: false, // Disable if not using screen reader utilities
+    pointerEvents: false, // Disable if not using pointer-events utilities
+    resize: false, // Disable if not using resize utilities
+    userSelect: false, // Disable if not using user-select utilities
+    fill: false, // Disable if not using SVG fill utilities
+    stroke: false, // Disable if not using SVG stroke utilities
+  },
+  // Safelist only essential classes that might be dynamically generated
+  safelist: [
+    'animate-pulse',
+    'animate-spin',
+    'animate-bounce',
+    'bg-blue-50',
+    'bg-blue-100',
+    'bg-blue-600',
+    'text-blue-600',
+    'border-blue-600',
+    // Add only classes that are dynamically generated
+  ],
   theme: {
     container: {
       center: true,

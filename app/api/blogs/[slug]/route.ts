@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
+import { cleanupOldFeaturedImage, cleanupBlogImages } from '@/lib/image-cleanup'
 
 export async function GET(
     req: Request,
@@ -63,6 +64,13 @@ export async function PUT(
     try {
         const resolvedParams = await params
         const body = await req.json()
+
+        // Get current blog to check for image changes
+        const currentBlog = await prisma.blog.findUnique({
+            where: { slug: resolvedParams.slug },
+            select: { featuredImage: true }
+        })
+
         const updatedBlog = await prisma.blog.update({
             where: {
                 slug: resolvedParams.slug
@@ -81,6 +89,13 @@ export async function PUT(
                 tags: body.tags
             }
         })
+
+        // Clean up old featured image if it changed
+        if (currentBlog?.featuredImage !== body.featuredImage) {
+            cleanupOldFeaturedImage(currentBlog?.featuredImage, body.featuredImage)
+                .catch(error => console.error('Image cleanup failed:', error))
+        }
+
         return NextResponse.json(updatedBlog)
     } catch (error) {
         console.error('Error updating blog:', error)
@@ -97,11 +112,25 @@ export async function DELETE(
 ) {
     try {
         const resolvedParams = await params
+
+        // Get blog data before deletion for image cleanup
+        const blogToDelete = await prisma.blog.findUnique({
+            where: { slug: resolvedParams.slug },
+            select: { featuredImage: true, content: true }
+        })
+
         await prisma.blog.delete({
             where: {
                 slug: resolvedParams.slug
             }
         })
+
+        // Clean up associated images
+        if (blogToDelete) {
+            cleanupBlogImages(blogToDelete)
+                .catch(error => console.error('Image cleanup failed:', error))
+        }
+
         return NextResponse.json({ message: 'Blog deleted successfully' })
     } catch (error) {
         console.error('Error deleting blog:', error)
@@ -110,4 +139,4 @@ export async function DELETE(
             { status: 500 }
         )
     }
-} 
+}

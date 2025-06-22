@@ -11,6 +11,7 @@ import { OutputData } from '@editorjs/editorjs'
 import type { Blog } from '@/lib/types'
 import type { EditorRef } from '@/components/ui/enhanced-editor'
 import ContentImportDialog from '@/components/blog/content-import-dialog'
+import ImageUpload from '@/components/ui/image-upload'
 
 // Dynamically import Enhanced Editor to avoid SSR issues
 const EnhancedEditor = dynamic(() => import('@/components/ui/enhanced-editor'), {
@@ -242,18 +243,20 @@ export default function BlogForm({ initialData, isEditing = false, onSubmit }: B
             </div>
 
             <div>
-              <label htmlFor="featuredImage" className="block text-sm font-medium text-slate-700">
-                Featured Image URL
+              <label className="block text-sm font-medium text-slate-700 mb-3">
+                Featured Image
               </label>
-              <input
-                type="url"
-                id="featuredImage"
-                name="featuredImage"
-                value={blog.featuredImage || ''}
-                onChange={handleChange}
-                className="mt-1 block w-full rounded-md border border-slate-300 px-3 py-2 text-slate-900 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
-                placeholder="https://example.com/image.jpg"
+              <ImageUpload
+                onImageUploaded={(imageUrl) => {
+                  setBlog(prev => ({ ...prev, featuredImage: imageUrl }))
+                }}
+                currentImageUrl={blog.featuredImage}
+                disabled={isSaving}
+                maxSizeText="Max 5MB • JPEG, PNG, WebP • Optimized to WebP automatically"
               />
+              <p className="mt-2 text-xs text-slate-500">
+                Upload an image or leave empty to use a default placeholder. Images are automatically optimized and stored securely.
+              </p>
             </div>
 
             <div>

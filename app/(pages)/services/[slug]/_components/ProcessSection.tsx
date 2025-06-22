@@ -42,7 +42,7 @@ export default function ProcessSection({ service }: ProcessSectionProps) {
       "text": step.description,
       "image": {
         "@type": "ImageObject",
-        "url": `https://example.com/process-step-${index + 1}.png`
+        "url": `https://www.startbusiness.co.in/process-step-${index + 1}.png`
       }
     }))
   }
