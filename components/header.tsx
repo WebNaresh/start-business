@@ -275,17 +275,18 @@ export default function Header() {
           <div className="flex flex-1 items-center">
             {/* Logo */}
             <Link href="/" className="flex items-center group">
-              <div className="relative h-12 w-12  overflow-hidden">
+              <div className="relative h-12 w-12 overflow-hidden">
                 <Image
                   src="/logos/logo_icon.png"
                   alt="StartBusiness"
-                  width={100}
-                  height={100}
-                  className="object-contain"
-                  quality={75} // Reduce if needed
-  priority={true} // For LCP image
-  placeholder="blur" // Optional blur-up
-      blurDataURL="/placeholder.svg"
+                  width={48}
+                  height={48}
+                  sizes="48px"
+                  className="object-contain w-full h-full"
+                  quality={80}
+                  priority={true}
+                  placeholder="blur"
+                  blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
                 />
               </div>
               <div>

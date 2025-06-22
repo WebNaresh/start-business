@@ -237,12 +237,15 @@ export default function Chatbot() {
                       <Image
                         src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/startbusiness_icon_transparent-u5NDFsSQarqF4PBI4Y5RxkT51hJhDI.png"
                         alt="StartBusiness"
-                        fill
-                        className="object-contain"
-                        quality={75} // Reduce if needed
-  priority={true} // For LCP image
-  placeholder="blur" // Optional blur-up
-      blurDataURL="/placeholder.svg"
+                        width={40}
+                        height={40}
+                        sizes="40px"
+                        className="object-contain w-full h-full"
+                        quality={75}
+                        priority={false}
+                        loading="lazy"
+                        placeholder="blur"
+                        blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
                       />
                     </div>
                   </AvatarFallback>
@@ -332,8 +335,12 @@ export default function Chatbot() {
                         <Image
                           src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/startbusiness_icon_transparent-u5NDFsSQarqF4PBI4Y5RxkT51hJhDI.png"
                           alt="StartBusiness"
-                          fill
-                          className="object-contain"
+                          width={32}
+                          height={32}
+                          sizes="32px"
+                          className="object-contain w-full h-full"
+                          quality={75}
+                          loading="lazy"
                         />
                       </div>
                     </AvatarFallback>
@@ -399,8 +406,12 @@ export default function Chatbot() {
                             <Image
                               src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/startbusiness_icon_transparent-u5NDFsSQarqF4PBI4Y5RxkT51hJhDI.png"
                               alt="StartBusiness"
-                              fill
-                              className="object-contain"
+                              width={32}
+                              height={32}
+                              sizes="32px"
+                              className="object-contain w-full h-full"
+                              quality={75}
+                              loading="lazy"
                             />
                           </div>
                         </AvatarFallback>

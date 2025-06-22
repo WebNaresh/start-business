@@ -31,12 +31,15 @@ export default function EnhancedFooter() {
                   <Image
                     src="/logos/logo_icon.png"
                     alt="StartBusiness"
-                    fill
-                    className="object-contain filter brightness-0 invert"
-                    quality={75} // Reduce if needed
-  priority={true} // For LCP image
-  placeholder="blur" // Optional blur-up
-      blurDataURL="/placeholder.svg"
+                    width={48}
+                    height={48}
+                    sizes="(max-width: 640px) 40px, 48px"
+                    className="object-contain filter brightness-0 invert w-full h-full"
+                    quality={75}
+                    priority={false}
+                    loading="lazy"
+                    placeholder="blur"
+                    blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
                   />
                 </div>
                 <div>

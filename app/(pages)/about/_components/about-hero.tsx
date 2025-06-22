@@ -106,9 +106,19 @@ export default function AboutHero() {
             className="relative"
           >
             <div className="relative h-[450px] w-full rounded-lg overflow-hidden shadow-2xl">
-              <Image src="/about-hero-image.png" alt="Our team" fill className="object-cover" quality={75} // Reduce if needed
-  priority={true} 
-  placeholder="blur"     blurDataURL="/placeholder.svg"/>
+              <Image
+                src="/about-hero-image.png"
+                alt="Our team"
+                width={600}
+                height={450}
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 40vw"
+                className="object-cover w-full h-full"
+                quality={75}
+                priority={false}
+                loading="lazy"
+                placeholder="blur"
+                blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
+              />
               <div className="absolute inset-0 bg-gradient-to-t from-[#2563eb]/80 to-transparent"></div>
               <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
                 <p className="text-2xl font-bold">Building Business </p>
