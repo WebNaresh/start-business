@@ -6,6 +6,15 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
+  // SWC compiler optimizations (swcMinify is enabled by default in Next.js 15)
+  compiler: {
+    // Remove console.log in production
+    removeConsole: process.env.NODE_ENV === 'production',
+  },
+  // Modern JavaScript optimizations for Turbopack
+  experimental: {
+    // Let Turbopack handle optimizations with our .swcrc config
+  },
   images: {
     // Enable image optimization for better performance
     formats: ['image/webp', 'image/avif'],

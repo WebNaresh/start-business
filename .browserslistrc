@@ -1,0 +1,30 @@
+# Browsers that we support
+
+# Production browsers
+# Target modern browsers that support ES2022 features natively
+> 0.2%
+not dead
+not op_mini all
+
+# Modern Chrome (supports all ES2022 features)
+Chrome >= 91
+
+# Modern Firefox (supports all ES2022 features)
+Firefox >= 90
+
+# Modern Safari (supports most ES2022 features)
+Safari >= 14
+
+# Modern Edge (Chromium-based)
+Edge >= 91
+
+# Exclude very old browsers that would require heavy polyfills
+not IE 11
+not Chrome < 91
+not Firefox < 90
+not Safari < 14
+not Edge < 91
+
+# Mobile browsers
+iOS >= 14
+Android >= 91
