@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useMemo, useCallback } from 'react'
+import { useCallback } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Calendar, Clock } from 'lucide-react'
@@ -40,6 +40,7 @@ export default function OptimizedBlogList({
                 quality={75}
                 priority={index < 3}
                 loading={index < 3 ? "eager" : "lazy"}
+                fetchPriority={index < 3 ? "high" : "auto"}
               />
             ) : (
               <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-50">

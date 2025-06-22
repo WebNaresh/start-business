@@ -216,6 +216,8 @@ export default function BlogListClient() {
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       quality={85}
                       priority={index < 3}
+                      loading={index < 3 ? "eager" : "lazy"}
+                      fetchPriority={index < 3 ? "high" : "auto"}
                     />
                   ) : (
                     <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-50">
