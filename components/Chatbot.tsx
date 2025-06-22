@@ -231,7 +231,12 @@ export default function Chatbot() {
             <CardContent className="p-4">
               <div className="flex items-start gap-3">
                 <Avatar className="h-10 w-10 border-2 border-blue-100">
-                  <AvatarImage src="/bot-avatar.png" alt="Business Assistant" />
+                  <AvatarImage
+                    src="/bot-avatar.png"
+                    alt="Business Assistant"
+                    width={40}
+                    height={40}
+                  />
                   <AvatarFallback className="text-white relative">
                     <div className="relative w-full h-full">
                       <Image
@@ -329,7 +334,12 @@ export default function Chatbot() {
               <div className="flex justify-between items-center">
                 <div className="flex items-center gap-2">
                   <Avatar className="h-8 w-8 border-2 border-white/20">
-                    <AvatarImage src="/bot-avatar.png" alt="Business Assistant" />
+                    <AvatarImage
+                      src="/bot-avatar.png"
+                      alt="Business Assistant"
+                      width={32}
+                      height={32}
+                    />
                     <AvatarFallback className="text-white relative">
                       <div className="relative w-full h-full">
                         <Image
@@ -400,7 +410,12 @@ export default function Chatbot() {
                   >
                     {message.role === "assistant" && (
                       <Avatar className="h-8 w-8 mr-2 mt-1 flex-shrink-0">
-                        <AvatarImage src="/bot-avatar.png" alt="Business Assistant" />
+                        <AvatarImage
+                          src="/bot-avatar.png"
+                          alt="Business Assistant"
+                          width={32}
+                          height={32}
+                        />
                         <AvatarFallback className="text-white relative">
                           <div className="relative w-full h-full">
                             <Image
@@ -458,7 +473,12 @@ export default function Chatbot() {
                     className="flex justify-start"
                   >
                     <Avatar className="h-8 w-8 mr-2 mt-1">
-                      <AvatarImage src="/bot-avatar.png" alt="Business Assistant" />
+                      <AvatarImage
+                        src="/bot-avatar.png"
+                        alt="Business Assistant"
+                        width={32}
+                        height={32}
+                      />
                       <AvatarFallback className="bg-blue-600 text-white">BA</AvatarFallback>
                     </Avatar>
 

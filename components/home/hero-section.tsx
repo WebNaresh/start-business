@@ -2,10 +2,11 @@
 
 import type React from "react"
 import { useState, useEffect, useCallback, useRef } from "react"
-import Image from "next/image"
+
 import { ArrowRight  } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
+import ResponsiveHeroImage from "@/components/ui/responsive-hero-image"
 import Script from "next/script"
 import useEmblaCarousel from 'embla-carousel-react'
 import Autoplay from 'embla-carousel-autoplay'
@@ -181,18 +182,12 @@ export default function FixedHeroCarousel() {
                         className="relative rounded-xl flex-[0_0_100%] min-w-0 aspect-[4/3]"
                       >
                         <div className="relative rounded-xl w-full h-full overflow-hidden">
-                          <Image
+                          <ResponsiveHeroImage
                             src={slide.image || "/placeholder.svg"}
                             alt={slide.title}
-                            width={800}
-                            height={600}
-                            sizes="(max-width: 640px) 100vw, (max-width: 768px) 90vw, (max-width: 1024px) 50vw, 40vw"
                             className="object-contain p-6 w-full h-full"
                             priority={index === 0}
-                            quality={75}
-                            loading={index === 0 ? "eager" : "lazy"}
-                            placeholder="blur"
-                            blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
+                            quality={80}
                           />
                         </div>
                       </div>
