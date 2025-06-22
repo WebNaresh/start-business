@@ -304,7 +304,7 @@ export default function ServicesCarousel() {
       "hasOfferCatalog": {
         "@type": "OfferCatalog",
         "name": "Service Features",
-        "itemListElement": service.features.map((feature, idx) => ({
+        "itemListElement": service.features.map((feature) => ({
           "@type": "Offer",
           "itemOffered": {
             "@type": "Service",
