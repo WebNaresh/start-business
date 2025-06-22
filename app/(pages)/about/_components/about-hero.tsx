@@ -4,6 +4,7 @@ import Image from "next/image"
 import { motion } from "framer-motion"
 import { useInView } from "react-intersection-observer"
 import { Clock, Users, Award, CheckCircle } from "lucide-react"
+import CSSPatternBackground from "@/components/ui/css-pattern-background"
 
 export default function AboutHero() {
   const { ref, inView } = useInView({
@@ -37,7 +38,7 @@ export default function AboutHero() {
   return (
     <section className="relative bg-white py-8 overflow-hidden" ref={ref}>
       <div className="absolute inset-0 bg-white"></div>
-      <div className="absolute inset-0 bg-[url('/pattern-bg.png')] opacity-[0.02]"></div>
+      <CSSPatternBackground pattern="dots" opacity={0.02} />
       <div className="absolute top-0 right-0 w-64 h-64 bg-blue-50 rounded-full -mr-32 -mt-32 opacity-50"></div>
       <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-50 rounded-full -ml-48 -mb-48 opacity-40"></div>
 

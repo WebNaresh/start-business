@@ -16,7 +16,10 @@ export default function AboutCta() {
   return (
     <section className="relative py-20 overflow-hidden" ref={ref}>
       <div className="absolute inset-0 bg-gradient-to-r from-blue-900 to-blue-800"></div>
-      <div className="absolute inset-0 bg-[url('/pattern-bg.png')] opacity-5"></div>
+      <div className="absolute inset-0 opacity-5" style={{
+        backgroundImage: `radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.3) 1px, transparent 0)`,
+        backgroundSize: '20px 20px'
+      }}></div>
 
       <div className="container relative z-10 mx-auto px-4">
         <motion.div

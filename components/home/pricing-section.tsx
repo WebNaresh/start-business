@@ -74,7 +74,10 @@ export default function PricingSection() {
       <div className="absolute inset-0 bg-gradient-to-b from-white to-blue-50"></div>
       <div className="absolute top-0 right-0 w-64 h-64 bg-blue-100 rounded-full -mr-32 -mt-32 opacity-30"></div>
       <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-100 rounded-full -ml-48 -mb-48 opacity-30"></div>
-      <div className="absolute inset-0 bg-[url('/pattern-bg.png')] opacity-[0.03]"></div>
+      <div className="absolute inset-0 opacity-[0.03]" style={{
+        backgroundImage: `radial-gradient(circle at 1px 1px, rgba(59, 130, 246, 0.3) 1px, transparent 0)`,
+        backgroundSize: '20px 20px'
+      }}></div>
 
       <div className="container mx-auto px-4 relative z-10">
         {/* Section Header */}

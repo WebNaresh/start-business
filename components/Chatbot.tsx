@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/components/ui/card"
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar"
+import OptimizedAvatar from "@/components/ui/optimized-avatar"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 import { Badge } from "@/components/ui/badge"
 import Image from "next/image"
@@ -230,31 +231,13 @@ export default function Chatbot() {
           <Card className="w-72 shadow-xl border border-blue-100">
             <CardContent className="p-4">
               <div className="flex items-start gap-3">
-                <Avatar className="h-10 w-10 border-2 border-blue-100">
-                  <AvatarImage
-                    src="/bot-avatar.png"
-                    alt="Business Assistant"
-                    width={40}
-                    height={40}
-                  />
-                  <AvatarFallback className="text-white relative">
-                    <div className="relative w-full h-full">
-                      <Image
-                        src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/startbusiness_icon_transparent-u5NDFsSQarqF4PBI4Y5RxkT51hJhDI.png"
-                        alt="Business assistant avatar"
-                        width={40}
-                        height={40}
-                        sizes="40px"
-                        className="object-contain w-full h-full"
-                        quality={75}
-                        priority={false}
-                        loading="lazy"
-                        placeholder="blur"
-                        blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
-                      />
-                    </div>
-                  </AvatarFallback>
-                </Avatar>
+                <OptimizedAvatar
+                  src="/bot-avatar.png"
+                  alt="Business Assistant"
+                  size={40}
+                  fallbackSrc="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/startbusiness_icon_transparent-u5NDFsSQarqF4PBI4Y5RxkT51hJhDI.png"
+                  className="border-2 border-blue-100"
+                />
                 <div className="flex-1">
                   <div className="flex items-center gap-2 mb-1">
                     <h3 className="text-sm font-semibold text-slate-900">Business Assistant</h3>
@@ -416,8 +399,6 @@ export default function Chatbot() {
                         <AvatarImage
                           src="/bot-avatar.png"
                           alt="Business Assistant"
-                          width={32}
-                          height={32}
                         />
                         <AvatarFallback className="text-white relative">
                           <div className="relative w-full h-full">
@@ -479,8 +460,6 @@ export default function Chatbot() {
                       <AvatarImage
                         src="/bot-avatar.png"
                         alt="Business Assistant"
-                        width={32}
-                        height={32}
                       />
                       <AvatarFallback className="bg-blue-600 text-white">BA</AvatarFallback>
                     </Avatar>
