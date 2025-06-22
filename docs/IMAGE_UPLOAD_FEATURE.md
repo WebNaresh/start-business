@@ -25,11 +25,11 @@ This document describes the comprehensive image upload feature implemented for t
 - ✅ **Error Handling**: Comprehensive error responses
 - ✅ **CORS Support**: Proper headers for cross-origin requests
 
-### 4. Image Cleanup (`lib/image-cleanup.ts`)
-- ✅ **Automatic Cleanup**: Removes old images when updated
-- ✅ **Batch Operations**: Efficient bulk image deletion
-- ✅ **S3 Detection**: Only cleans up S3-hosted images
-- ✅ **Content Parsing**: Extracts images from blog content
+### 4. Image Management
+- ✅ **S3 Lifecycle Policies**: Automatic cleanup of unused images
+- ✅ **Optimized Storage**: WebP format with compression
+- ✅ **CDN Integration**: Fast global image delivery
+- ✅ **Secure Access**: Presigned URLs for uploads
 
 ### 5. Blog Form Integration
 - ✅ **Seamless Integration**: Replaces URL input with upload component
@@ -43,8 +43,7 @@ This document describes the comprehensive image upload feature implemented for t
 ├── components/ui/
 │   └── image-upload.tsx          # Main upload component
 ├── lib/
-│   ├── aws-s3.ts                 # S3 configuration and utilities
-│   └── image-cleanup.ts          # Image cleanup utilities
+│   └── aws-s3.ts                 # S3 configuration and utilities
 ├── app/api/upload/image/
 │   └── route.ts                  # Upload API endpoint
 └── docs/
@@ -104,15 +103,10 @@ if (result.success) {
 }
 ```
 
-### Image Cleanup
+### Image Management
 ```typescript
-import { cleanupBlogImages } from '@/lib/image-cleanup'
-
-// Clean up all images when deleting a blog
-await cleanupBlogImages({
-  featuredImage: blog.featuredImage,
-  content: blog.content
-})
+// Images are automatically managed through S3 lifecycle policies
+// No manual cleanup required - S3 handles unused image removal
 ```
 
 ## 🔒 Security Features

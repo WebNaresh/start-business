@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
-import { cleanupOldFeaturedImage, cleanupBlogImages } from '@/lib/image-cleanup'
 
 export async function GET(
     req: Request,
@@ -90,11 +89,8 @@ export async function PUT(
             }
         })
 
-        // Clean up old featured image if it changed
-        if (currentBlog?.featuredImage !== body.featuredImage) {
-            cleanupOldFeaturedImage(currentBlog?.featuredImage, body.featuredImage)
-                .catch(error => console.error('Image cleanup failed:', error))
-        }
+        // Note: Image cleanup removed for simplicity
+        // Featured images are managed through S3 lifecycle policies
 
         return NextResponse.json(updatedBlog)
     } catch (error) {
@@ -113,11 +109,8 @@ export async function DELETE(
     try {
         const resolvedParams = await params
 
-        // Get blog data before deletion for image cleanup
-        const blogToDelete = await prisma.blog.findUnique({
-            where: { slug: resolvedParams.slug },
-            select: { featuredImage: true, content: true }
-        })
+        // Note: Image cleanup removed for simplicity
+        // Images are managed through S3 lifecycle policies
 
         await prisma.blog.delete({
             where: {
@@ -125,11 +118,7 @@ export async function DELETE(
             }
         })
 
-        // Clean up associated images
-        if (blogToDelete) {
-            cleanupBlogImages(blogToDelete)
-                .catch(error => console.error('Image cleanup failed:', error))
-        }
+        // Note: Image cleanup handled by S3 lifecycle policies
 
         return NextResponse.json({ message: 'Blog deleted successfully' })
     } catch (error) {

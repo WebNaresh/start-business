@@ -21,8 +21,6 @@ import {
   AlertCircle,
   ChevronLeft,
   ChevronRight,
-  Pause,
-  Play,
 } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
@@ -61,7 +59,7 @@ export default function ServicesCarousel() {
   const [selectedCategory, setSelectedCategory] = useState("all")
   const [searchTerm, setSearchTerm] = useState("")
   const [hoveredCard, setHoveredCard] = useState<number | null>(null)
-  const [isPlaying, setIsPlaying] = useState(true)
+  // const [isPlaying, setIsPlaying] = useState(true) // Unused for now
   const [currentSlide, setCurrentSlide] = useState(0)
   const autoplayRef = useRef<NodeJS.Timeout | null>(null)
 
@@ -76,14 +74,15 @@ export default function ServicesCarousel() {
     // This ensures smooth one-by-one scrolling while showing multiple services
   })
 
-  // Autoplay functionality
+  // Autoplay functionality (disabled for now)
   const autoplay = useCallback(() => {
-    if (!emblaApi || !isPlaying) return
+    if (!emblaApi) return
     if (autoplayRef.current) clearInterval(autoplayRef.current)
-    autoplayRef.current = setInterval(() => {
-      if (emblaApi) emblaApi.scrollNext()
-    }, 5000) // Change slide every 5 seconds
-  }, [emblaApi, isPlaying])
+    // Autoplay disabled - can be re-enabled by uncommenting below
+    // autoplayRef.current = setInterval(() => {
+    //   if (emblaApi) emblaApi.scrollNext()
+    // }, 5000) // Change slide every 5 seconds
+  }, [emblaApi])
 
   // Handle autoplay on mount and cleanup
   useEffect(() => {
@@ -106,10 +105,10 @@ export default function ServicesCarousel() {
     }
   }, [emblaApi, autoplay])
 
-  // Toggle autoplay
-  const toggleAutoplay = () => {
-    setIsPlaying(!isPlaying)
-  }
+  // Toggle autoplay (currently unused but kept for future functionality)
+  // const toggleAutoplay = () => {
+  //   setIsPlaying(!isPlaying)
+  // }
 
   // Enhanced service data with more details
   const services = [
@@ -352,10 +351,10 @@ export default function ServicesCarousel() {
         <div className="mb-12">
           <div className="flex flex-col lg:flex-row gap-6 items-center justify-between">
             {/* Category Filters */}
-            <div 
+            <div
               className="flex flex-wrap gap-2"
-              role="list"
-              aria-label="Service categories"
+              role="group"
+              aria-label="Service category filters"
             >
               {categories.map((category) => (
                 <Button
@@ -369,7 +368,7 @@ export default function ServicesCarousel() {
                       : "hover:bg-blue-50 hover:border-blue-200"
                   }`}
                   aria-pressed={selectedCategory === category.id}
-                  role="listitem"
+                  role="button"
                 >
                   <Filter className="w-4 h-4 mr-2" aria-hidden="true" />
                   {category.name} ({category.count})
