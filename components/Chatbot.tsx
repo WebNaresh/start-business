@@ -241,7 +241,7 @@ export default function Chatbot() {
                     <div className="relative w-full h-full">
                       <Image
                         src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/startbusiness_icon_transparent-u5NDFsSQarqF4PBI4Y5RxkT51hJhDI.png"
-                        alt="StartBusiness"
+                        alt="Business assistant avatar"
                         width={40}
                         height={40}
                         sizes="40px"
@@ -346,7 +346,7 @@ export default function Chatbot() {
                       <div className="relative w-full h-full">
                         <Image
                           src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/startbusiness_icon_transparent-u5NDFsSQarqF4PBI4Y5RxkT51hJhDI.png"
-                          alt="StartBusiness"
+                          alt="Business assistant avatar"
                           width={32}
                           height={32}
                           sizes="32px"
@@ -423,7 +423,7 @@ export default function Chatbot() {
                           <div className="relative w-full h-full">
                             <Image
                               src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/startbusiness_icon_transparent-u5NDFsSQarqF4PBI4Y5RxkT51hJhDI.png"
-                              alt="StartBusiness"
+                              alt="Business assistant avatar"
                               width={32}
                               height={32}
                               sizes="32px"

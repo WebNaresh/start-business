@@ -30,7 +30,7 @@ export default function EnhancedFooter() {
                 <div className="relative h-10 w-10 sm:h-12 sm:w-12 mr-3 overflow-hidden rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 p-2 group-hover:scale-110 transition-transform duration-300">
                   <Image
                     src="/logos/logo_icon.png"
-                    alt="StartBusiness"
+                    alt="StartBusiness logo"
                     width={48}
                     height={48}
                     sizes="(max-width: 640px) 40px, 48px"

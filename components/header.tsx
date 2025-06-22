@@ -278,7 +278,7 @@ export default function Header() {
               <div className="relative h-12 w-12 overflow-hidden">
                 <Image
                   src="/logos/logo_icon.png"
-                  alt="StartBusiness"
+                  alt="StartBusiness logo"
                   width={48}
                   height={48}
                   sizes="48px"
@@ -420,7 +420,7 @@ export default function Header() {
                   <Link href="/" className="flex items-center">
                     <Image
                       src="/logos/logo_icon.png"
-                      alt="StartBusiness"
+                      alt="StartBusiness logo"
                       width={32}
                       height={32}
                           blurDataURL="/placeholder.svg"
