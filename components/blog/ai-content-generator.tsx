@@ -183,6 +183,7 @@ export default function AIContentGenerator({ onContentGenerated, disabled = fals
               onClick={handleRegenerate}
               disabled={disabled || isGenerating}
               variant="outline"
+              aria-label="Regenerate content"
             >
               <RefreshCw className="h-4 w-4" />
             </Button>

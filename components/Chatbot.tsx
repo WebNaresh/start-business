@@ -289,6 +289,7 @@ export default function Chatbot() {
                   size="icon"
                   className="h-6 w-6 -mt-1 -mr-1"
                   onClick={() => setShowHelpPopup(false)}
+                  aria-label="Close help popup"
                 >
                   <X className="h-4 w-4" />
                 </Button>
@@ -305,6 +306,7 @@ export default function Chatbot() {
             onClick={toggleExpand}
             size="icon"
             className="rounded-full h-14 w-14 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 shadow-lg"
+            aria-label="Open business assistant chat"
           >
             <Bot className="h-6 w-6" />
           </Button>
@@ -369,6 +371,7 @@ export default function Chatbot() {
                           size="icon"
                           onClick={clearChat}
                           className="h-8 w-8 rounded-full hover:bg-blue-800/20 text-white"
+                          aria-label="Clear chat history"
                         >
                           <Trash className="h-4 w-4" />
                         </Button>
@@ -521,6 +524,7 @@ export default function Chatbot() {
                   type="submit"
                   disabled={isLoading || !input.trim()}
                   className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800"
+                  aria-label="Send message"
                 >
                   {isLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}
                   <span className="ml-2 hidden sm:inline">Send</span>

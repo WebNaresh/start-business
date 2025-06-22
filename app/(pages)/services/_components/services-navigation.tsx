@@ -354,6 +354,7 @@ export default function EnhancedServicesNavigation() {
               size="icon"
               className="rounded-full h-8 w-8 border-slate-200"
               onClick={() => setShowRecentlyViewed(!showRecentlyViewed)}
+              aria-label="Show recently viewed services"
             >
               <Clock className="h-4 w-4 text-slate-600" />
             </Button>
@@ -362,6 +363,7 @@ export default function EnhancedServicesNavigation() {
               size="icon"
               className="rounded-full h-8 w-8 border-slate-200"
               onClick={() => setIsSearching(!isSearching)}
+              aria-label="Toggle search"
             >
               <Search className="h-4 w-4 text-slate-600" />
             </Button>
@@ -370,6 +372,7 @@ export default function EnhancedServicesNavigation() {
               size="icon"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="rounded-full h-8 w-8"
+              aria-label={isMobileMenuOpen ? "Close mobile menu" : "Open mobile menu"}
             >
               {isMobileMenuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
             </Button>
