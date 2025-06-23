@@ -78,9 +78,9 @@ export default function ServicesCarousel() {
     if (!emblaApi) return
     if (autoplayRef.current) clearInterval(autoplayRef.current)
     // Autoplay disabled - can be re-enabled by uncommenting below
-    // autoplayRef.current = setInterval(() => {
-    //   if (emblaApi) emblaApi.scrollNext()
-    // }, 5000) // Change slide every 5 seconds
+    autoplayRef.current = setInterval(() => {
+      if (emblaApi) emblaApi.scrollNext()
+    }, 5000) // Change slide every 5 seconds
   }, [emblaApi])
 
   // Handle autoplay on mount and cleanup

@@ -2,17 +2,13 @@ import React, { useCallback, useEffect, useRef } from "react"
 import { Building2, TrendingUp, ArrowRight } from "lucide-react"
 import useEmblaCarousel from 'embla-carousel-react'
 
-const dummyCompanies = [
-  "Acme Technologies Pvt Ltd",
-  "BlueSky Innovations LLP",
-  "GreenLeaf Organics",
-  "UrbanNest Realty",
-  "FinEdge Solutions",
-  "PixelCraft Studios",
-  "NextGen Retailers",
-  "BrightPath Consulting",
-  "Sunrise Foods Pvt Ltd",
-  "Quantum Logistics LLP",
+const latestIncorporations = [
+  "Apaha Institute Of Construction Project Management LLP",
+  "Apaha Overseas Study LLP",
+  "Lightnet Technology Private Limited",
+  "Mangesha'z Salon & Academy Private Limited",
+  "Octogle Technologies Private Limited",
+  "Multicare Health Services And Consultancy LLP",
 ]
 
 export default function LatestIncorporationsTicker() {
@@ -73,7 +69,7 @@ export default function LatestIncorporationsTicker() {
         <div className="relative w-full max-w-6xl mx-auto overflow-hidden rounded-2xl bg-white shadow-xl border border-slate-100">
           <div className="embla" ref={emblaRef}>
             <div className="embla__container flex">
-              {[...dummyCompanies, ...dummyCompanies].map((name, idx) => (
+              {[...latestIncorporations, ...latestIncorporations].map((name, idx) => (
                 <div
                   className="embla__slide flex-shrink-0 px-3 md:px-6 py-3 md:py-4 flex items-center"
                   style={{ minWidth: 'auto', width: 'auto' }}
