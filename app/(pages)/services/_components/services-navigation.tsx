@@ -1,27 +1,29 @@
 "use client"
 
-import { useState, useEffect, useRef } from "react"
-import { motion, AnimatePresence, useInView } from "framer-motion"
+import { useState, useEffect } from "react"
+import { motion } from "framer-motion"
 import {
   ChevronRight,
   Building2,
   FileText,
   Gavel,
   Shield,
-  Menu,
-  X,
   Search,
   ArrowRight,
   Star,
   Clock,
   Sparkles,
-  Zap,
+  Grid3X3,
+  List,
+  TrendingUp,
+  CheckCircle,
+  ExternalLink,
 } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { cn } from "@/lib/utils"
-import MobileQuickActions from "@/components/services/mobile-quick-actions"
+import Link from "next/link"
 
 interface SubService {
   name: string
@@ -29,6 +31,9 @@ interface SubService {
   popular?: boolean
   new?: boolean
   description?: string
+  price?: string
+  timeline?: string
+  features?: string[]
 }
 
 interface Service {
@@ -42,55 +47,66 @@ interface Service {
   gradientFrom: string
   gradientTo: string
   subServices: SubService[]
+  totalServices?: number
 }
 
-export default function EnhancedServicesNavigation() {
-  const [activeCategory, setActiveCategory] = useState<string>("business-setup")
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-  const [isMobile, setIsMobile] = useState(false)
+type ViewMode = 'grid' | 'list'
+type SortBy = 'popular' | 'name' | 'newest'
+
+export default function AllServicesPage() {
+  const [activeCategory, setActiveCategory] = useState<string>("all")
   const [searchQuery, setSearchQuery] = useState("")
-  const [searchResults, setSearchResults] = useState<{ service: Service; subServices: SubService[] }[]>([])
-  const [isSearching, setIsSearching] = useState(false)
-  const [recentlyViewed, setRecentlyViewed] = useState<SubService[]>([])
-  const [showRecentlyViewed, setShowRecentlyViewed] = useState(false)
-  const searchRef = useRef<HTMLDivElement>(null)
-  const navRef = useRef<HTMLDivElement>(null)
-  const isNavInView = useInView(navRef)
+  const [viewMode, setViewMode] = useState<ViewMode>('grid')
+  const [sortBy, setSortBy] = useState<SortBy>('popular')
+  const [filteredServices, setFilteredServices] = useState<SubService[]>([])
 
-  // Detect mobile screen size
+  // Initialize and filter services
   useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768)
+    const allServices = serviceCategories.flatMap(category =>
+      category.subServices.map(service => ({
+        ...service,
+        category: category.name,
+        categoryId: category.id,
+        categoryColor: category.color,
+        categoryBg: category.bgColor
+      }))
+    )
+
+    let filtered = allServices
+
+    // Filter by category
+    if (activeCategory !== "all") {
+      filtered = filtered.filter(service => service.categoryId === activeCategory)
     }
 
-    checkMobile()
-    window.addEventListener("resize", checkMobile)
-    return () => window.removeEventListener("resize", checkMobile)
-  }, [])
+    // Filter by search query
+    if (searchQuery.trim()) {
+      filtered = filtered.filter(service =>
+        service.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        service.description?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        service.category.toLowerCase().includes(searchQuery.toLowerCase())
+      )
+    }
 
-  // Handle click outside search results
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (searchRef.current && !searchRef.current.contains(event.target as Node)) {
-        setIsSearching(false)
+    // Sort services
+    filtered.sort((a, b) => {
+      switch (sortBy) {
+        case 'popular':
+          if (a.popular && !b.popular) return -1
+          if (!a.popular && b.popular) return 1
+          return a.name.localeCompare(b.name)
+        case 'newest':
+          if (a.new && !b.new) return -1
+          if (!a.new && b.new) return 1
+          return a.name.localeCompare(b.name)
+        case 'name':
+        default:
+          return a.name.localeCompare(b.name)
       }
-    }
+    })
 
-    document.addEventListener("mousedown", handleClickOutside)
-    return () => document.removeEventListener("mousedown", handleClickOutside)
-  }, [])
-
-  // Load recently viewed from localStorage
-  useEffect(() => {
-    const storedRecent = localStorage.getItem("recentlyViewedServices")
-    if (storedRecent) {
-      try {
-        setRecentlyViewed(JSON.parse(storedRecent))
-      } catch (e) {
-        console.error("Failed to parse recently viewed services")
-      }
-    }
-  }, [])
+    setFilteredServices(filtered)
+  }, [activeCategory, searchQuery, sortBy])
 
   const serviceCategories: Service[] = [
     {
@@ -103,44 +119,65 @@ export default function EnhancedServicesNavigation() {
       bgColor: "bg-blue-50",
       gradientFrom: "from-blue-600",
       gradientTo: "to-blue-400",
+      totalServices: 7,
       subServices: [
         {
           name: "Private Limited Company",
           href: "/services/private-limited-company",
           popular: true,
           description: "Register your business as a Private Limited Company with limited liability protection",
+          price: "₹6,999",
+          timeline: "7-10 days",
+          features: ["Limited Liability", "Separate Legal Entity", "Easy Fund Raising"]
         },
         {
           name: "Limited Liability Partnership",
           href: "/services/llp",
           description: "Form an LLP with the benefits of partnership and limited liability",
+          price: "₹5,999",
+          timeline: "5-7 days",
+          features: ["Partnership Benefits", "Limited Liability", "Tax Advantages"]
         },
         {
           name: "One Person Company",
           href: "/services/opc",
           description: "Start a company with a single person as shareholder and director",
+          price: "₹5,499",
+          timeline: "7-10 days",
+          features: ["Single Owner", "Limited Liability", "Corporate Benefits"]
         },
         {
           name: "Sole Proprietorship",
           href: "/services/sole-proprietorship",
           description: "Register as a sole proprietor for simple business structure",
+          price: "₹2,999",
+          timeline: "3-5 days",
+          features: ["Simple Structure", "Easy Setup", "Full Control"]
         },
         {
           name: "Nidhi Company",
           href: "/services/nidhi-company",
           description: "Establish a Nidhi Company for borrowing and lending among members",
+          price: "₹12,999",
+          timeline: "15-20 days",
+          features: ["Member Lending", "RBI Regulated", "Mutual Benefit"]
         },
         {
           name: "Producer Company",
           href: "/services/producer-company",
           description: "Form a company owned by primary producers or farmers",
+          price: "₹8,999",
+          timeline: "10-15 days",
+          features: ["Farmer Owned", "Collective Benefits", "Agricultural Focus"]
         },
         {
           name: "Partnership Firm",
           href: "/services/partnership-firm",
           description: "Create a partnership between two or more individuals",
+          price: "₹3,999",
+          timeline: "5-7 days",
+          features: ["Shared Ownership", "Flexible Structure", "Easy Formation"]
         },
-      
       ],
     },
     {
@@ -153,50 +190,74 @@ export default function EnhancedServicesNavigation() {
       bgColor: "bg-emerald-50",
       gradientFrom: "from-emerald-600",
       gradientTo: "to-green-400",
+      totalServices: 8,
       subServices: [
         {
           name: "GST Registration",
           href: "/services/gst-registration",
           popular: true,
           description: "Register for Goods and Services Tax (GST) for your business",
+          price: "₹2,999",
+          timeline: "3-5 days",
+          features: ["GST Number", "Input Tax Credit", "Legal Compliance"]
         },
         {
           name: "ITR-4 Filing",
           href: "/services/itr-4-filing",
           popular: true,
           description: "File your income tax returns under presumptive taxation scheme",
+          price: "₹1,999",
+          timeline: "2-3 days",
+          features: ["Presumptive Taxation", "Simple Filing", "Expert Support"]
         },
         {
           name: "ROC Annual Compliances",
           href: "/services/roc-annual-compliances",
           description: "Stay compliant with all ROC requirements including annual returns",
+          price: "₹4,999",
+          timeline: "5-7 days",
+          features: ["Annual Returns", "ROC Compliance", "Penalty Avoidance"]
         },
         {
           name: "GST Filing",
           href: "/services/gst-filing",
           description: "File your GST returns accurately and on time",
+          price: "₹999/month",
+          timeline: "Monthly",
+          features: ["Monthly Returns", "GSTR-1/3B", "Timely Filing"]
         },
-    
         {
           name: "GST Cancellation and Revocation",
           href: "/services/gst-cancellation",
           description: "Cancel or revoke your GST registration",
+          price: "₹1,499",
+          timeline: "7-10 days",
+          features: ["Cancellation Process", "Documentation", "Legal Support"]
         },
         {
           name: "Income Tax Filing",
           href: "/services/income-tax-filing",
           popular: true,
           description: "File your income tax returns accurately and on time",
+          price: "₹1,499",
+          timeline: "2-3 days",
+          features: ["ITR Filing", "Tax Calculation", "Refund Processing"]
         },
         {
           name: "TDS Return Filing",
           href: "/services/tds-filing",
           description: "File your Tax Deducted at Source (TDS) returns",
+          price: "₹2,499",
+          timeline: "3-5 days",
+          features: ["TDS Returns", "Quarterly Filing", "Compliance"]
         },
         {
           name: "Annual Compliance",
           href: "/services/annual-compliance",
           description: "Manage all your annual compliance requirements",
+          price: "₹8,999",
+          timeline: "10-15 days",
+          features: ["Complete Compliance", "All Filings", "Expert Management"]
         },
       ],
     },
@@ -210,31 +271,41 @@ export default function EnhancedServicesNavigation() {
       bgColor: "bg-purple-50",
       gradientFrom: "from-purple-600",
       gradientTo: "to-indigo-400",
+      totalServices: 4,
       subServices: [
         {
           name: "Trademark Registration",
           href: "/services/trademark-registration",
           popular: true,
           description: "Protect your brand identity with trademark registration",
+          price: "₹6,999",
+          timeline: "12-18 months",
+          features: ["Brand Protection", "Legal Rights", "Nationwide Coverage"]
         },
         {
           name: "Trademark Search",
           href: "/services/trademark-search",
           description: "Check if your desired trademark is available",
+          price: "₹1,499",
+          timeline: "1-2 days",
+          features: ["Comprehensive Search", "Detailed Report", "Expert Analysis"]
         },
         {
           name: "Respond to TM Objection",
           href: "/services/trademark-objection",
           description: "Get help responding to trademark objections",
+          price: "₹4,999",
+          timeline: "30 days",
+          features: ["Legal Response", "Expert Drafting", "Follow-up Support"]
         },
         {
           name: "Copyright Registration",
           href: "/services/copyright-registration",
           description: "Protect your creative works with copyright registration",
+          price: "₹3,999",
+          timeline: "6-8 months",
+          features: ["Creative Protection", "Legal Rights", "Infringement Protection"]
         },
-
-    
-   
       ],
     },
     {
@@ -247,556 +318,373 @@ export default function EnhancedServicesNavigation() {
       bgColor: "bg-amber-50",
       gradientFrom: "from-amber-600",
       gradientTo: "to-orange-400",
+      totalServices: 5,
       subServices: [
-  
         {
           name: "Import Export Code",
           href: "/services/iec-license",
           description: "Get IEC code for import/export business activities",
+          price: "₹2,999",
+          timeline: "7-10 days",
+          features: ["Import/Export Rights", "Global Trade", "Government Approval"]
         },
-
-   
         {
           name: "MSME Registration",
           href: "/services/msme-registration",
           popular: true,
           description: "Register as a Micro, Small, or Medium Enterprise",
+          price: "₹1,999",
+          timeline: "3-5 days",
+          features: ["Government Benefits", "Loan Advantages", "Tax Benefits"]
         },
         {
           name: "Shop & Establishment License",
           href: "/services/shop-establishment",
           description: "Obtain mandatory license for your business premises",
+          price: "₹2,499",
+          timeline: "7-15 days",
+          features: ["Legal Operation", "Employee Rights", "Compliance"]
         },
         {
           name: "Professional Tax Registration",
           href: "/services/professional-tax",
           description: "Register for professional tax in your state",
+          price: "₹1,499",
+          timeline: "5-7 days",
+          features: ["State Compliance", "Employee Tax", "Legal Requirement"]
         },
         {
           name: "Startup India Registration",
           href: "/services/startup-india",
           new: true,
           description: "Register under Startup India to access government benefits and incentives",
+          price: "₹4,999",
+          timeline: "15-20 days",
+          features: ["Government Benefits", "Tax Exemptions", "Funding Support"]
         },
       ],
     },
   ]
 
-  const handleCategoryClick = (categoryId: string) => {
-    setActiveCategory(categoryId)
-    if (isMobile) {
-      setIsMobileMenuOpen(false)
-    }
+  // Get category statistics
+  const getCategoryStats = () => {
+    const totalServices = serviceCategories.reduce((sum, cat) => sum + cat.subServices.length, 0)
+    const popularServices = serviceCategories.reduce((sum, cat) =>
+      sum + cat.subServices.filter(service => service.popular).length, 0
+    )
+    const newServices = serviceCategories.reduce((sum, cat) =>
+      sum + cat.subServices.filter(service => service.new).length, 0
+    )
+
+    return { totalServices, popularServices, newServices }
   }
 
-  const handleSearch = (query: string) => {
-    setSearchQuery(query)
+  const stats = getCategoryStats()
 
-    if (query.length > 1) {
-      setIsSearching(true)
-
-      // Search through all services and subservices
-      const results = serviceCategories
-        .map((service) => {
-          const matchingSubServices = service.subServices.filter(
-            (subService) =>
-              subService.name.toLowerCase().includes(query.toLowerCase()) ||
-              (subService.description && subService.description.toLowerCase().includes(query.toLowerCase())),
-          )
-
-          return {
-            service,
-            subServices: matchingSubServices,
-          }
-        })
-        .filter((result) => result.subServices.length > 0)
-
-      setSearchResults(results)
-    } else {
-      setIsSearching(false)
-      setSearchResults([])
-    }
-  }
-
-  const handleServiceClick = (service: SubService) => {
-    // Add to recently viewed
-    const updatedRecent = [service, ...recentlyViewed.filter((item) => item.href !== service.href)].slice(0, 4)
-    setRecentlyViewed(updatedRecent)
-    localStorage.setItem("recentlyViewedServices", JSON.stringify(updatedRecent))
-
-    // Close search
-    setIsSearching(false)
-    setSearchQuery("")
-  }
-
-  const activeService = serviceCategories.find((cat) => cat.id === activeCategory)
+  // Category filter options
+  const categoryOptions = [
+    { id: "all", name: "All Services", count: stats.totalServices, icon: null },
+    ...serviceCategories.map(cat => ({
+      id: cat.id,
+      name: cat.name,
+      count: cat.subServices.length,
+      icon: cat.icon,
+      color: cat.color,
+      bgColor: cat.bgColor
+    }))
+  ]
 
   return (
-    <div className="bg-white border-b border-slate-200 sticky top-[55px] z-40 shadow-sm" ref={navRef}>
-      <div className="container mx-auto px-4">
-        {/* Mobile Header */}
-        <div className="md:hidden flex items-center justify-between py-3">
-          <div className="flex items-center gap-3">
-            {activeService && (
-              <>
-                <div className={`${activeService.bgColor} p-2 rounded-lg`}>
-                  <activeService.icon className={`w-5 h-5 ${activeService.color}`} />
-                </div>
-                <div>
-                  <h3 className="font-semibold text-slate-800 text-sm">{activeService.name}</h3>
-                  <p className="text-xs text-slate-500">{activeService.subServices.length} services</p>
-                </div>
-              </>
-            )}
-          </div>
-          <div className="flex items-center gap-2">
-            <Button
-              variant="outline"
-              size="icon"
-              className="rounded-full h-8 w-8 border-slate-200"
-              onClick={() => setShowRecentlyViewed(!showRecentlyViewed)}
-              aria-label="Show recently viewed services"
-            >
-              <Clock className="h-4 w-4 text-slate-600" />
-            </Button>
-            <Button
-              variant="outline"
-              size="icon"
-              className="rounded-full h-8 w-8 border-slate-200"
-              onClick={() => setIsSearching(!isSearching)}
-              aria-label="Toggle search"
-            >
-              <Search className="h-4 w-4 text-slate-600" />
-            </Button>
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="rounded-full h-8 w-8"
-              aria-label={isMobileMenuOpen ? "Close mobile menu" : "Open mobile menu"}
-            >
-              {isMobileMenuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
-            </Button>
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-white">
+      {/* Hero Section */}
+      <section className="relative py-8 sm:py-8 md:py-8 lg:py-8 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-white to-purple-50" />
+        <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-blue-100 to-transparent rounded-full -mr-48 -mt-48 opacity-60 blur-3xl" />
+
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="text-center max-w-4xl mx-auto">
+       
+
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 mb-4 sm:mb-6 leading-tight">
+              All Business Services
+              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
+                In One Place
+              </span>
+            </h1>
+
+         
+            
           </div>
         </div>
+      </section>
 
-        {/* Search Bar - Desktop */}
-        <div className="hidden md:flex items-center justify-between py-3 border-b border-slate-100">
-          <div className="flex items-center gap-6">
-            {serviceCategories.map((category) => (
-              <button
-                key={category.id}
-                onClick={() => handleCategoryClick(category.id)}
-                className={`flex items-center gap-2 py-2 text-sm font-medium whitespace-nowrap transition-all duration-200 rounded-full px-4 ${
-                  activeCategory === category.id
-                    ? `bg-gradient-to-r ${category.gradientFrom} ${category.gradientTo} text-white shadow-md`
-                    : "text-slate-600 hover:text-slate-900 hover:bg-slate-50"
-                }`}
-              >
-                <category.icon className="w-4 h-4" />
-                <span>{isMobile ? category.shortName : category.name}</span>
-              </button>
-            ))}
-          </div>
+      {/* Filters and Search Section */}
+      <section className="py-6 sm:py-8 bg-white border-b border-slate-200 sticky top-0 z-40">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col lg:flex-row gap-4 lg:gap-6 items-start lg:items-center justify-between">
 
-          <div className="relative" ref={searchRef}>
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-slate-400" />
-              <Input
-                type="text"
-                placeholder="Search services..."
-                value={searchQuery}
-                onChange={(e) => handleSearch(e.target.value)}
-                onFocus={() => recentlyViewed.length > 0 && setShowRecentlyViewed(true)}
-                className="w-64 pl-10 pr-4 py-2 rounded-full border-slate-200 focus:border-slate-300 focus:ring-slate-200"
-              />
-            </div>
-
-            {/* Search Results Dropdown */}
-            <AnimatePresence>
-              {isSearching && searchResults.length > 0 && (
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 10 }}
-                  transition={{ duration: 0.2 }}
-                  className="absolute right-0 mt-2 w-80 bg-white rounded-xl shadow-xl border border-slate-200 overflow-hidden z-50"
-                >
-                  <div className="p-3 border-b border-slate-100">
-                    <h3 className="text-sm font-medium text-slate-700">Search Results</h3>
-                  </div>
-                  <div className="max-h-80 overflow-y-auto p-2">
-                    {searchResults.map((result, idx) => (
-                      <div key={idx} className="mb-3">
-                        <div className="flex items-center gap-2 px-3 py-1.5">
-                          <div className={`p-1.5 rounded-md ${result.service.bgColor}`}>
-                            <result.service.icon className={`w-3.5 h-3.5 ${result.service.color}`} />
-                          </div>
-                          <span className="text-xs font-medium text-slate-500">{result.service.name}</span>
-                        </div>
-                        {result.subServices.map((subService, subIdx) => (
-                          <a
-                            key={subIdx}
-                            href={subService.href}
-                            className="flex items-center justify-between px-3 py-2 rounded-lg hover:bg-slate-50 transition-colors"
-                            onClick={() => handleServiceClick(subService)}
-                          >
-                            <div>
-                              <div className="text-sm font-medium text-slate-800">{subService.name}</div>
-                              {subService.description && (
-                                <div className="text-xs text-slate-500 line-clamp-1">{subService.description}</div>
-                              )}
-                            </div>
-                            <ChevronRight className="w-4 h-4 text-slate-400" />
-                          </a>
-                        ))}
-                      </div>
-                    ))}
-                  </div>
-                </motion.div>
-              )}
-
-              {/* Recently Viewed Dropdown */}
-              {showRecentlyViewed && recentlyViewed.length > 0 && !isSearching && (
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 10 }}
-                  transition={{ duration: 0.2 }}
-                  className="absolute right-0 mt-2 w-80 bg-white rounded-xl shadow-xl border border-slate-200 overflow-hidden z-50"
-                >
-                  <div className="p-3 border-b border-slate-100 flex items-center justify-between">
-                    <h3 className="text-sm font-medium text-slate-700">Recently Viewed</h3>
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      className="h-7 text-xs text-slate-500 hover:text-slate-700"
-                      onClick={() => setShowRecentlyViewed(false)}
-                    >
-                      Close
-                    </Button>
-                  </div>
-                  <div className="p-2">
-                    {recentlyViewed.map((service, idx) => (
-                      <a
-                        key={idx}
-                        href={service.href}
-                        className="flex items-center justify-between px-3 py-2 rounded-lg hover:bg-slate-50 transition-colors"
-                      >
-                        <div className="flex items-center gap-2">
-                          <Clock className="w-3.5 h-3.5 text-slate-400" />
-                          <span className="text-sm text-slate-800">{service.name}</span>
-                        </div>
-                        <ChevronRight className="w-4 h-4 text-slate-400" />
-                      </a>
-                    ))}
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
-        </div>
-
-        {/* Mobile Search Overlay */}
-        <AnimatePresence>
-          {isSearching && isMobile && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.3 }}
-              className="md:hidden border-t border-slate-200 py-3"
-            >
+            {/* Search Bar */}
+            <div className="w-full lg:w-96 order-2 lg:order-1">
               <div className="relative">
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-slate-400" />
                 <Input
                   type="text"
                   placeholder="Search services..."
                   value={searchQuery}
-                  onChange={(e) => handleSearch(e.target.value)}
-                  className="w-full pl-10 pr-4 py-2 rounded-full border-slate-200"
-                  autoFocus
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full pl-10 pr-4 py-2.5 rounded-xl border-slate-200 focus:border-blue-300 focus:ring-blue-200 text-sm"
                 />
               </div>
+            </div>
 
-              {searchQuery.length > 1 ? (
-                <div className="mt-3 max-h-64 overflow-y-auto">
-                  {searchResults.length > 0 ? (
-                    searchResults.map((result, idx) => (
-                      <div key={idx} className="mb-3">
-                        <div className="flex items-center gap-2 px-2 py-1.5">
-                          <div className={`p-1.5 rounded-md ${result.service.bgColor}`}>
-                            <result.service.icon className={`w-3.5 h-3.5 ${result.service.color}`} />
-                          </div>
-                          <span className="text-xs font-medium text-slate-500">{result.service.name}</span>
-                        </div>
-                        {result.subServices.map((subService, subIdx) => (
-                          <a
-                            key={subIdx}
-                            href={subService.href}
-                            className="flex items-center justify-between px-3 py-2 rounded-lg hover:bg-slate-50 transition-colors"
-                            onClick={() => handleServiceClick(subService)}
-                          >
-                            <div className="text-sm font-medium text-slate-800">{subService.name}</div>
-                            <ChevronRight className="w-4 h-4 text-slate-400" />
-                          </a>
-                        ))}
-                      </div>
-                    ))
-                  ) : (
-                    <div className="text-center py-6">
-                      <p className="text-sm text-slate-500">No services found for "{searchQuery}"</p>
-                    </div>
-                  )}
-                </div>
-              ) : searchQuery.length === 0 && recentlyViewed.length > 0 ? (
-                <div className="mt-3">
-                  <div className="flex items-center justify-between px-2 py-1.5">
-                    <span className="text-xs font-medium text-slate-500">Recently Viewed</span>
-                  </div>
-                  {recentlyViewed.map((service, idx) => (
-                    <a
-                      key={idx}
-                      href={service.href}
-                      className="flex items-center justify-between px-3 py-2 rounded-lg hover:bg-slate-50 transition-colors"
-                    >
-                      <div className="flex items-center gap-2">
-                        <Clock className="w-3.5 h-3.5 text-slate-400" />
-                        <span className="text-sm text-slate-800">{service.name}</span>
-                      </div>
-                      <ChevronRight className="w-4 h-4 text-slate-400" />
-                    </a>
-                  ))}
-                </div>
-              ) : null}
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        {/* Recently Viewed Mobile */}
-        <AnimatePresence>
-          {showRecentlyViewed && isMobile && recentlyViewed.length > 0 && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.3 }}
-              className="md:hidden border-t border-slate-200 py-3"
-            >
-              <div className="flex items-center justify-between px-2 py-1.5">
-                <span className="text-xs font-medium text-slate-500">Recently Viewed</span>
+            {/* Category Filters */}
+            <div className="flex flex-wrap gap-2 order-1 lg:order-2">
+              {categoryOptions.map((option) => (
                 <Button
-                  variant="ghost"
+                  key={option.id}
+                  variant={activeCategory === option.id ? "default" : "outline"}
                   size="sm"
-                  className="h-7 text-xs text-slate-500"
-                  onClick={() => setShowRecentlyViewed(false)}
+                  onClick={() => setActiveCategory(option.id)}
+                  className={`transition-all duration-300 text-xs sm:text-sm ${
+                    activeCategory === option.id
+                      ? "bg-blue-600 hover:bg-blue-700 shadow-lg"
+                      : "hover:bg-blue-50 hover:border-blue-200"
+                  }`}
                 >
-                  Close
+                  {option.icon && <option.icon className="w-3 h-3 sm:w-4 sm:h-4 mr-1.5" />}
+                  <span className="hidden sm:inline">{option.name}</span>
+                  <span className="sm:hidden">{option.name.split(' ')[0]}</span>
+                  <Badge variant="secondary" className="ml-1.5 text-xs px-1.5 py-0">
+                    {option.count}
+                  </Badge>
+                </Button>
+              ))}
+            </div>
+
+            {/* View Mode and Sort */}
+            <div className="flex items-center gap-2 order-3">
+              <div className="flex items-center border border-slate-200 rounded-lg p-1">
+                <Button
+                  variant={viewMode === 'grid' ? 'default' : 'ghost'}
+                  size="sm"
+                  onClick={() => setViewMode('grid')}
+                  className="h-8 w-8 p-0"
+                >
+                  <Grid3X3 className="w-4 h-4" />
+                </Button>
+                <Button
+                  variant={viewMode === 'list' ? 'default' : 'ghost'}
+                  size="sm"
+                  onClick={() => setViewMode('list')}
+                  className="h-8 w-8 p-0"
+                >
+                  <List className="w-4 h-4" />
                 </Button>
               </div>
-              {recentlyViewed.map((service, idx) => (
-                <a
-                  key={idx}
-                  href={service.href}
-                  className="flex items-center justify-between px-3 py-2 rounded-lg hover:bg-slate-50 transition-colors"
+
+              <select
+                value={sortBy}
+                onChange={(e) => setSortBy(e.target.value as SortBy)}
+                className="text-sm border border-slate-200 rounded-lg px-3 py-2 bg-white focus:border-blue-300 focus:ring-blue-200"
+              >
+                <option value="popular">Popular First</option>
+                <option value="name">Name A-Z</option>
+                <option value="newest">Newest First</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Services Display Section */}
+      <section className="py-8 sm:py-12">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+
+          {/* Results Header */}
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 sm:mb-8">
+            <div>
+              <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-slate-900 mb-2">
+                {activeCategory === "all" ? "All Services" : categoryOptions.find(cat => cat.id === activeCategory)?.name}
+              </h2>
+              <p className="text-sm sm:text-base text-slate-600">
+                {filteredServices.length} service{filteredServices.length !== 1 ? 's' : ''} found
+                {searchQuery && ` for "${searchQuery}"`}
+              </p>
+            </div>
+
+            {filteredServices.length > 0 && (
+              <div className="flex items-center gap-2 mt-4 sm:mt-0">
+                <Badge variant="outline" className="text-xs">
+                  <TrendingUp className="w-3 h-3 mr-1" />
+                  {filteredServices.filter(s => s.popular).length} Popular
+                </Badge>
+                {filteredServices.filter(s => s.new).length > 0 && (
+                  <Badge variant="outline" className="text-xs">
+                    <Sparkles className="w-3 h-3 mr-1" />
+                    {filteredServices.filter(s => s.new).length} New
+                  </Badge>
+                )}
+              </div>
+            )}
+          </div>
+
+          {/* Services Grid/List */}
+          {filteredServices.length > 0 ? (
+            <div className={cn(
+              "transition-all duration-300",
+              viewMode === 'grid'
+                ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6"
+                : "space-y-4"
+            )}>
+              {filteredServices.map((service, index) => (
+                <motion.div
+                  key={service.href}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.3, delay: index * 0.05 }}
+                  className={cn(
+                    "group relative bg-white rounded-xl border border-slate-200 hover:border-slate-300 hover:shadow-lg transition-all duration-300",
+                    viewMode === 'list' && "flex items-center p-4 sm:p-6"
+                  )}
                 >
-                  <div className="flex items-center gap-2">
-                    <Clock className="w-3.5 h-3.5 text-slate-400" />
-                    <span className="text-sm text-slate-800">{service.name}</span>
-                  </div>
-                  <ChevronRight className="w-4 h-4 text-slate-400" />
-                </a>
-              ))}
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        {/* Mobile Category Selector */}
-        <AnimatePresence>
-          {isMobileMenuOpen && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.3 }}
-              className="md:hidden overflow-hidden bg-slate-50 border-t border-slate-200"
-            >
-              {/* Mobile Quick Actions */}
-              <div className="p-4 border-b border-slate-200">
-                <MobileQuickActions />
-              </div>
-
-              {/* Category List */}
-              <div className="py-2">
-                {serviceCategories.map((category) => (
-                  <button
-                    key={category.id}
-                    onClick={() => handleCategoryClick(category.id)}
-                    className={`w-full flex items-center gap-3 px-4 py-3 text-left transition-all duration-200 ${
-                      activeCategory === category.id
-                        ? `${category.bgColor} ${category.color}`
-                        : "text-slate-600 hover:bg-white"
-                    }`}
-                  >
-                    <category.icon className="w-5 h-5" />
-                    <div className="flex-1">
-                      <div className="font-medium text-sm">{category.name}</div>
-                      <div className="text-xs text-slate-500">{category.description}</div>
+                  {/* Popular/New Badge */}
+                  {(service.popular || service.new) && (
+                    <div className="absolute top-3 right-3 z-10">
+                      <Badge
+                        className={cn(
+                          "text-xs px-2 py-1",
+                          service.popular
+                            ? "bg-amber-50 text-amber-600 hover:bg-amber-100 border-amber-200"
+                            : "bg-blue-50 text-blue-600 hover:bg-blue-100 border-blue-200"
+                        )}
+                      >
+                        {service.popular && <Star className="w-3 h-3 mr-1" />}
+                        {service.new && <Sparkles className="w-3 h-3 mr-1" />}
+                        {service.popular ? "Popular" : "New"}
+                      </Badge>
                     </div>
-                    <Badge variant="secondary" className="text-xs">
-                      {category.subServices.length}
-                    </Badge>
-                  </button>
-                ))}
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+                  )}
 
-        {/* Dropdown Content */}
-        <AnimatePresence mode="wait">
-          {activeCategory && (
-            <motion.div
-              key={activeCategory}
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.3 }}
-              className="overflow-hidden"
-            >
-              {serviceCategories
-                .filter((cat) => cat.id === activeCategory)
-                .map((category) => (
-                  <div key={category.id} className="py-4 md:py-6">
-                    <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 md:gap-8">
-                      {/* Category Info - Hidden on mobile, shown on desktop */}
-                      <div className="hidden lg:block lg:col-span-1">
-                        <div className={`rounded-xl overflow-hidden relative`}>
-                          <div
-                            className={`bg-gradient-to-br ${category.gradientFrom} ${category.gradientTo} p-6 text-white`}
-                          >
-                            <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-16 -mt-16 blur-2xl"></div>
-                            <div className="absolute bottom-0 left-0 w-24 h-24 bg-black/10 rounded-full -ml-12 -mb-12 blur-xl"></div>
-
-                            <div className="bg-white/20 backdrop-blur-sm w-12 h-12 rounded-lg flex items-center justify-center mb-4">
-                              <category.icon className="w-6 h-6 text-white" />
-                            </div>
-                            <h3 className="text-lg font-semibold mb-2">{category.name}</h3>
-                            <p className="text-sm text-white/80 mb-4">{category.description}</p>
-                            <Badge className="bg-white/20 hover:bg-white/30 text-white border-none text-xs">
-                              {category.subServices.length} Services
-                            </Badge>
-                          </div>
-
-                          <div className="bg-gradient-to-br from-slate-50 to-white p-4 border-t border-white/20">
-                            <div className="flex items-center justify-between mb-3">
-                              <h4 className="text-sm font-medium text-slate-700">Popular Services</h4>
-                              <ArrowRight className="w-3.5 h-3.5 text-slate-400" />
-                            </div>
-                            <div className="space-y-2">
-                              {category.subServices
-                                .filter((service) => service.popular)
-                                .slice(0, 2)
-                                .map((service, idx) => (
-                                  <a
-                                    key={idx}
-                                    href={service.href}
-                                    className="flex items-center gap-2 p-2 rounded-lg hover:bg-slate-100 transition-colors"
-                                  >
-                                    <Star className="w-3.5 h-3.5 text-amber-500" />
-                                    <span className="text-xs font-medium text-slate-700">{service.name}</span>
-                                  </a>
-                                ))}
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Services Grid */}
-                      <div className="col-span-1 lg:col-span-3">
-                        <div className="flex items-center justify-between mb-4">
-                          <h3 className="text-lg font-semibold text-slate-800 md:hidden">{category.name}</h3>
-                          <div className="flex items-center gap-2">
-                            <Badge variant="outline" className="text-xs border-slate-200 text-slate-600 hidden md:flex">
-                              <Zap className="mr-1 h-3 w-3 text-amber-500" />
-                              Popular
-                            </Badge>
-                            <Badge variant="outline" className="text-xs border-slate-200 text-slate-600 hidden md:flex">
-                              <Sparkles className="mr-1 h-3 w-3 text-blue-500" />
-                              New
-                            </Badge>
-                          </div>
+                  <Link href={service.href} className="block">
+                    {viewMode === 'grid' ? (
+                      <div className="p-4 sm:p-6">
+                        <div className="flex items-start justify-between mb-3">
+                          <h3 className="font-semibold text-slate-900 group-hover:text-blue-600 transition-colors text-sm sm:text-base leading-tight pr-8">
+                            {service.name}
+                          </h3>
                         </div>
 
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
-                          {category.subServices.map((service, index) => (
-                            <motion.a
-                              key={index}
-                              href={service.href}
-                              initial={{ opacity: 0, y: 20 }}
-                              animate={{ opacity: 1, y: 0 }}
-                              transition={{ duration: 0.3, delay: index * 0.05 }}
-                              className={cn(
-                                "group p-3 md:p-4 rounded-xl border transition-all duration-300 bg-white hover:shadow-md relative",
-                                service.popular
-                                  ? "border-amber-200"
-                                  : service.new
-                                    ? "border-blue-200"
-                                    : "border-slate-200 hover:border-slate-300",
-                              )}
-                              onClick={() => handleServiceClick(service)}
-                            >
-                              {service.popular && (
-                                <div className="absolute top-2 right-2">
-                                  <Badge className="bg-amber-50 text-amber-600 hover:bg-amber-100 border-none text-[10px] px-1.5 py-0">
-                                    <Star className="mr-0.5 h-2.5 w-2.5" />
-                                    Popular
-                                  </Badge>
-                                </div>
-                              )}
+                        {service.description && (
+                          <p className="text-xs sm:text-sm text-slate-600 mb-4 line-clamp-2 leading-relaxed">
+                            {service.description}
+                          </p>
+                        )}
 
-                              {service.new && (
-                                <div className="absolute top-2 right-2">
-                                  <Badge className="bg-blue-50 text-blue-600 hover:bg-blue-100 border-none text-[10px] px-1.5 py-0">
-                                    <Sparkles className="mr-0.5 h-2.5 w-2.5" />
-                                    New
-                                  </Badge>
-                                </div>
-                              )}
-
-                              <div className="flex items-start justify-between mb-2">
-                                <h4 className="font-medium text-slate-800 group-hover:text-blue-600 transition-colors text-sm md:text-base leading-tight">
-                                  {service.name}
-                                </h4>
-                                <div className="w-6 h-6 rounded-full bg-slate-100 group-hover:bg-blue-100 flex items-center justify-center transition-colors ml-2 flex-shrink-0">
-                                  <ChevronRight className="w-3.5 h-3.5 text-slate-400 group-hover:text-blue-500 group-hover:translate-x-0.5 transition-all duration-300" />
-                                </div>
+                        {service.price && (
+                          <div className="flex items-center justify-between mb-4">
+                            <div className="text-lg sm:text-xl font-bold text-emerald-600">
+                              {service.price}
+                            </div>
+                            {service.timeline && (
+                              <div className="flex items-center text-xs text-slate-500">
+                                <Clock className="w-3 h-3 mr-1" />
+                                {service.timeline}
                               </div>
+                            )}
+                          </div>
+                        )}
 
-                              {service.description && (
-                                <p className="text-xs text-slate-500 line-clamp-2 mt-1">{service.description}</p>
-                              )}
-                            </motion.a>
-                          ))}
+                        {service.features && service.features.length > 0 && (
+                          <div className="space-y-1.5 mb-4">
+                            {service.features.slice(0, 3).map((feature, idx) => (
+                              <div key={idx} className="flex items-center text-xs text-slate-600">
+                                <CheckCircle className="w-3 h-3 text-green-500 mr-2 flex-shrink-0" />
+                                {feature}
+                              </div>
+                            ))}
+                          </div>
+                        )}
+
+                        <div className="flex items-center justify-between">
+                          <Button size="sm" className="bg-blue-600 hover:bg-blue-700 text-white">
+                            Get Started
+                            <ArrowRight className="w-3 h-3 ml-1.5" />
+                          </Button>
+                          <ExternalLink className="w-4 h-4 text-slate-400 group-hover:text-blue-500 transition-colors" />
                         </div>
                       </div>
-                    </div>
-                  </div>
-                ))}
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
+                    ) : (
+                      <div className="flex-1">
+                        <div className="flex items-start justify-between mb-2">
+                          <h3 className="font-semibold text-slate-900 group-hover:text-blue-600 transition-colors text-base sm:text-lg">
+                            {service.name}
+                          </h3>
+                          {service.price && (
+                            <div className="text-lg font-bold text-emerald-600 ml-4">
+                              {service.price}
+                            </div>
+                          )}
+                        </div>
 
-      {/* Sticky Indicator */}
-      {isNavInView && (
-        <motion.div
-          className="h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 w-full absolute bottom-0 left-0"
-          initial={{ scaleX: 0 }}
-          animate={{ scaleX: 1 }}
-          transition={{ duration: 0.5 }}
-        />
-      )}
+                        {service.description && (
+                          <p className="text-sm text-slate-600 mb-3 line-clamp-1">
+                            {service.description}
+                          </p>
+                        )}
+
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center gap-4 text-xs text-slate-500">
+                            {service.timeline && (
+                              <div className="flex items-center">
+                                <Clock className="w-3 h-3 mr-1" />
+                                {service.timeline}
+                              </div>
+                            )}
+                            {service.features && (
+                              <div className="flex items-center">
+                                <CheckCircle className="w-3 h-3 mr-1" />
+                                {service.features.length} features
+                              </div>
+                            )}
+                          </div>
+                          <Button size="sm" variant="outline">
+                            View Details
+                            <ChevronRight className="w-3 h-3 ml-1" />
+                          </Button>
+                        </div>
+                      </div>
+                    )}
+                  </Link>
+                </motion.div>
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-12 sm:py-16">
+              <div className="max-w-md mx-auto">
+                <div className="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Search className="w-8 h-8 text-slate-400" />
+                </div>
+                <h3 className="text-lg font-semibold text-slate-900 mb-2">No services found</h3>
+                <p className="text-slate-600 mb-6">
+                  {searchQuery
+                    ? `No services match "${searchQuery}". Try adjusting your search or browse by category.`
+                    : "No services available in this category."
+                  }
+                </p>
+                <Button
+                  onClick={() => {
+                    setSearchQuery("")
+                    setActiveCategory("all")
+                  }}
+                  variant="outline"
+                >
+                  View All Services
+                </Button>
+              </div>
+            </div>
+          )}
+        </div>
+      </section>
     </div>
   )
 }

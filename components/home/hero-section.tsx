@@ -29,7 +29,7 @@ export default function FixedHeroCarousel() {
     },
     {
       image: "/hero/hero-latest-3.png",
-      title: "Expert Business Solutions for Indian Entrepreneurs",
+      title: "GST, Income Tax, and Trademark Services",
       description: "Get personalized consultation and comprehensive support for all your business compliance and legal requirements in India",
     },
   ]
@@ -102,7 +102,7 @@ export default function FixedHeroCarousel() {
   return (
     <section
       ref={heroRef}
-      className="relative py-8 md:py-12 overflow-hidden "
+      className="relative py-6 sm:py-8 md:py-10 lg:py-12 xl:py-16 overflow-hidden"
       aria-label="Hero section"
     >
       <Script
@@ -118,21 +118,22 @@ export default function FixedHeroCarousel() {
       {/* <div className="absolute top-20 right-20 w-4 h-4 bg-blue-400 rounded-full opacity-60 animate-float-slow" aria-hidden="true" />
       <div className="absolute bottom-32 left-16 w-6 h-6 bg-slate-300 rounded-full opacity-40 animate-float-slow-delayed" aria-hidden="true" /> */}
 
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="grid gap-4 lg:grid-cols-2 lg:gap-16 items-center">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="grid gap-6 sm:gap-8 lg:grid-cols-2 lg:gap-12 xl:gap-16 items-center">
           {/* Content Section */}
-          <div className="flex flex-col justify-center">
+          <div className="flex flex-col justify-center order-2 lg:order-1">
             <div className="transition-opacity duration-500 ease-in-out">
-              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-4">
+              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-slate-900 mb-3 sm:mb-4 md:mb-6 leading-tight sm:leading-tight">
                 {slides[selectedIndex].title}
               </h1>
 
-              <p className="text-sm md:text-base text-slate-600 mb-6 max-w-2xl">
+              <p className="text-sm sm:text-base md:text-lg lg:text-xl text-slate-600 mb-6 sm:mb-8 max-w-2xl leading-relaxed">
                 {slides[selectedIndex].description}
               </p>
             </div>
 
-            <div className="mb-8 hidden md:grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {/* Features Grid - Hidden on mobile, visible on tablet+ */}
+            <div className="mb-6 sm:mb-8 hidden sm:grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
               {[
                 "⚡ Fast and Efficient Processing",
                 "🎯 Expert Legal Consultation",
@@ -141,54 +142,76 @@ export default function FixedHeroCarousel() {
               ].map((feature, index) => (
                 <div
                   key={index}
-                  className="flex items-center p-3 rounded-lg bg-white/60 backdrop-blur-sm border border-slate-100 transition-all duration-300 hover:scale-[1.02] hover:bg-white/80"
+                  className="flex items-center p-2.5 sm:p-3 md:p-4 rounded-lg bg-white/60 backdrop-blur-sm border border-slate-100 transition-all duration-300 hover:scale-[1.02] hover:bg-white/80"
                   role="listitem"
                 >
-                  <span className="text-slate-700 text-sm font-medium">{feature}</span>
+                  <span className="text-slate-700 text-xs sm:text-sm md:text-base font-medium leading-tight">{feature}</span>
                 </div>
               ))}
             </div>
 
-            <div className="flex items-center gap-4">
+            {/* Mobile Features - Compact version for mobile */}
+            <div className="mb-6 sm:hidden flex flex-wrap gap-2">
+              {[
+                "⚡ Fast Processing",
+                "🎯 Expert Consultation",
+                "🔄 Complete Solutions",
+                "✅ Guaranteed Compliance",
+              ].map((feature, index) => (
+                <div
+                  key={index}
+                  className="flex items-center px-3 py-1.5 rounded-full bg-white/70 backdrop-blur-sm border border-slate-100 text-xs text-slate-700 font-medium"
+                  role="listitem"
+                >
+                  {feature}
+                </div>
+              ))}
+            </div>
+
+            {/* CTA Buttons */}
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
               <Button
                 asChild
-                className="bg-blue-600 hover:bg-blue-700 transition-all duration-300"
+                size="lg"
+                className="bg-blue-600 hover:bg-blue-700 transition-all duration-300 text-sm sm:text-base px-6 sm:px-8 py-3 sm:py-4 font-semibold"
                 aria-label="Start your business registration process"
               >
-                <Link href="/contact">
+                <Link href="/contact" className="group">
                   Get Started Now
-                  <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true" />
+                  <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5 transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true" />
                 </Link>
               </Button>
               <Button
                 asChild
                 variant="outline"
-                className="border-slate-200 hover:bg-slate-50 transition-all duration-300"
+                size="lg"
+                className="border-slate-200 hover:bg-slate-50 transition-all duration-300 text-sm sm:text-base px-6 sm:px-8 py-3 sm:py-4 font-medium"
                 aria-label="Explore our business services"
               >
                 <Link href="/services">
-                  View Our Services
+                  <span className="hidden sm:inline">View Our Services</span>
+                  <span className="sm:hidden">Our Services</span>
                 </Link>
               </Button>
             </div>
           </div>
 
           {/* Image Carousel */}
-          <div className="flex items-center justify-center">
-            <div className="relative w-full max-w-lg md:max-w-xl lg:max-w-2xl">
+          <div className="flex items-center justify-center order-1 lg:order-2">
+            <div className="relative w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl">
              
                 <div className="overflow-hidden" ref={emblaRef}>
                   <div className="flex">
                     {slides.map((slide, index) => (
                       <div
                         key={index}
-                        className="relative rounded-xl flex-[0_0_100%] min-w-0 aspect-[4/3]"
+                        className="relative rounded-lg sm:rounded-xl flex-[0_0_100%] min-w-0 aspect-[4/3] sm:aspect-[5/4] md:aspect-[4/3]"
                       >
-                        <div className="relative rounded-xl w-full h-full overflow-hidden">
+                        <div className="relative rounded-lg sm:rounded-xl w-full h-full overflow-hidden">
                           <ResponsiveHeroImage
                             src={slide.image || "/placeholder.svg"}
                             alt={slide.title}
-                            className="object-contain p-6 w-full h-full"
+                            className="object-contain p-3 sm:p-4 md:p-6 w-full h-full"
                             priority={index === 0}
                             quality={80}
                           />
@@ -199,8 +222,8 @@ export default function FixedHeroCarousel() {
            
 
                 {/* Slide indicators */}
-                <div 
-                  className="absolute -bottom-8 left-1/2 -translate-x-1/2 flex space-x-3 z-20"
+                <div
+                  className="absolute -bottom-6 sm:-bottom-8 left-1/2 -translate-x-1/2 flex space-x-2 sm:space-x-3 z-20"
                   role="tablist"
                   aria-label="Slide navigation"
                 >
@@ -209,7 +232,9 @@ export default function FixedHeroCarousel() {
                       key={index}
                       onClick={() => emblaApi?.scrollTo(index)}
                       className={`relative overflow-hidden rounded-full transition-all duration-300 hover:scale-110 active:scale-95 ${
-                        index === selectedIndex ? "bg-blue-600 w-10 h-3" : "bg-slate-300 hover:bg-blue-400 w-3 h-3"
+                        index === selectedIndex
+                          ? "bg-blue-600 w-8 h-2.5 sm:w-10 sm:h-3"
+                          : "bg-slate-300 hover:bg-blue-400 w-2.5 h-2.5 sm:w-3 sm:h-3"
                       }`}
                       role="tab"
                       aria-selected={index === selectedIndex}

@@ -7,6 +7,7 @@ import ServiceComparisonTool from "@/components/services/service-comparison-tool
 import TrustSignals from "@/components/ui/trust-signals"
 import AccessibilityImprovements from "@/components/ui/accessibility-improvements"
 import VisualHierarchyImprovements from "@/components/ui/visual-hierarchy-improvements"
+import AllServicesPage from "./_components/services-navigation"
 
 
 export const metadata: Metadata = {
@@ -94,9 +95,8 @@ export default function ServicesPage() {
           </div>
         </section>
 
-        {/* Enhanced Services Section */}
-        <EnhancedServicesSection />
 
+<AllServicesPage/>
         {/* Service Comparison Tool */}
         <section
           className="py-8 sm:py-10 md:py-12 bg-slate-50"
