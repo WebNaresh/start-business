@@ -28,3 +28,4 @@ model Blog {
   @@index([publishedAt(sort: Desc)], name: "blog_published_idx")
   @@index([status], name: "blog_status_idx")
 }
+
