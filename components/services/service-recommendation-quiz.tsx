@@ -367,71 +367,71 @@ export default function ServiceRecommendationQuiz() {
             <span className="text-sm font-semibold text-blue-700">AI-Powered Recommendations</span>
           </div>
 
-          <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 bg-clip-text text-transparent mb-6">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 bg-clip-text text-transparent mb-4 md:mb-6 leading-tight">
             Find Your Perfect Business Service
           </h1>
 
-          <p className="text-xl text-slate-600 mb-8 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-base sm:text-lg md:text-xl text-slate-600 mb-6 md:mb-8 max-w-2xl mx-auto leading-relaxed px-4">
             Get personalized recommendations in under 2 minutes. Our smart quiz analyzes your business needs and suggests the ideal services to get you started.
           </p>
         </div>
 
         {/* Features Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 md:gap-6 mb-8 md:mb-12 px-4">
           {[
             { icon: Target, label: "Personalized", desc: "Tailored to your needs", color: "from-blue-400 to-blue-600" },
             { icon: Clock, label: "Quick", desc: "Under 2 minutes", color: "from-green-400 to-green-600" },
             { icon: Award, label: "Expert", desc: "Professional advice", color: "from-purple-400 to-purple-600" },
             { icon: Zap, label: "Accurate", desc: "95% match rate", color: "from-orange-400 to-orange-600" }
           ].map((feature, index) => (
-            <div key={index} className="group text-center p-6 rounded-2xl bg-white border border-slate-200 hover:border-slate-300 hover:shadow-lg transition-all duration-300">
-              <div className={`w-16 h-16 bg-gradient-to-br ${feature.color} rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300`}>
-                <feature.icon className="w-8 h-8 text-white" />
+            <div key={index} className="group text-center p-3 sm:p-4 md:p-6 rounded-xl md:rounded-2xl bg-white border border-slate-200 hover:border-slate-300 hover:shadow-lg transition-all duration-300">
+              <div className={`w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-gradient-to-br ${feature.color} rounded-xl md:rounded-2xl flex items-center justify-center mx-auto mb-2 sm:mb-3 md:mb-4 group-hover:scale-110 transition-transform duration-300`}>
+                <feature.icon className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-white" />
               </div>
-              <h3 className="font-semibold text-slate-900 mb-2">{feature.label}</h3>
-              <p className="text-sm text-slate-600">{feature.desc}</p>
+              <h3 className="text-sm sm:text-base font-semibold text-slate-900 mb-1 sm:mb-2">{feature.label}</h3>
+              <p className="text-xs sm:text-sm text-slate-600 leading-tight">{feature.desc}</p>
             </div>
           ))}
         </div>
 
         {/* CTA Section */}
-        <div className="text-center">
-          <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-3xl p-8 border border-blue-100">
+        <div className="text-center px-4">
+          <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-2xl md:rounded-3xl p-4 sm:p-6 md:p-8 border border-blue-100">
             <div className="max-w-md mx-auto">
-              <div className="flex items-center justify-center gap-2 mb-4">
-                <div className="flex -space-x-2">
+              <div className="flex items-center justify-center gap-2 mb-3 md:mb-4">
+                <div className="flex -space-x-1 sm:-space-x-2">
                   {[1,2,3,4].map(i => (
-                    <div key={i} className="w-8 h-8 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full border-2 border-white flex items-center justify-center">
+                    <div key={i} className="w-6 h-6 sm:w-8 sm:h-8 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full border-2 border-white flex items-center justify-center">
                       <span className="text-xs text-white font-bold">{i}</span>
                     </div>
                   ))}
                 </div>
-                <span className="text-sm text-slate-600">4 simple questions</span>
+                <span className="text-xs sm:text-sm text-slate-600">4 simple questions</span>
               </div>
 
               <button
                 onClick={() => setIsStarted(true)}
-                className="group relative w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold py-4 px-8 rounded-2xl transition-all duration-300 hover:shadow-xl hover:scale-105 overflow-hidden"
+                className="group relative w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold py-3 sm:py-4 px-6 sm:px-8 rounded-xl md:rounded-2xl transition-all duration-300 hover:shadow-xl hover:scale-105 overflow-hidden"
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                <div className="relative flex items-center justify-center gap-3">
-                  <Play className="w-5 h-5" />
-                  <span className="text-lg">Start Your Journey</span>
-                  <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
+                <div className="relative flex items-center justify-center gap-2 sm:gap-3">
+                  <Play className="w-4 h-4 sm:w-5 sm:h-5" />
+                  <span className="text-base sm:text-lg">Start Your Journey</span>
+                  <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform duration-300" />
                 </div>
               </button>
 
-              <div className="flex items-center justify-center gap-4 mt-4 text-sm text-slate-500">
+              <div className="flex items-center justify-center gap-2 sm:gap-4 mt-3 md:mt-4 text-xs sm:text-sm text-slate-500">
                 <div className="flex items-center gap-1">
-                  <Clock className="w-4 h-4" />
+                  <Clock className="w-3 h-3 sm:w-4 sm:h-4" />
                   <span>2 min</span>
                 </div>
                 <div className="flex items-center gap-1">
-                  <Shield className="w-4 h-4" />
+                  <Shield className="w-3 h-3 sm:w-4 sm:h-4" />
                   <span>100% Free</span>
                 </div>
                 <div className="flex items-center gap-1">
-                  <Star className="w-4 h-4 text-yellow-500 fill-current" />
+                  <Star className="w-3 h-3 sm:w-4 sm:h-4 text-yellow-500 fill-current" />
                   <span>4.9/5 rating</span>
                 </div>
               </div>
@@ -593,15 +593,15 @@ export default function ServiceRecommendationQuiz() {
   const progress = ((currentStep + 1) / questions.length) * 100
 
   return (
-    <div className="max-w-4xl mx-auto">
+    <div className="max-w-4xl mx-auto px-4">
       {/* Progress Header */}
-      <div className="text-center mb-8">
-        <div className="flex items-center justify-center gap-4 mb-6">
-          <Badge className="bg-gradient-to-r from-blue-500 to-purple-500 text-white px-4 py-2">
-            <Sparkles className="w-4 h-4 mr-2" />
+      <div className="text-center mb-6 md:mb-8">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4 mb-4 md:mb-6">
+          <Badge className="bg-gradient-to-r from-blue-500 to-purple-500 text-white px-3 py-1.5 md:px-4 md:py-2 text-xs md:text-sm">
+            <Sparkles className="w-3 h-3 md:w-4 md:h-4 mr-1.5 md:mr-2" />
             Question {currentStep + 1} of {questions.length}
           </Badge>
-          <div className="text-sm font-medium text-slate-600">
+          <div className="text-xs sm:text-sm font-medium text-slate-600">
             {Math.round(progress)}% complete
           </div>
         </div>
@@ -637,21 +637,21 @@ export default function ServiceRecommendationQuiz() {
         "transition-all duration-300",
         isAnimating ? "opacity-0 transform translate-y-4" : "opacity-100 transform translate-y-0"
       )}>
-        <div className="bg-gradient-to-br from-white to-slate-50 rounded-3xl border border-slate-200 shadow-xl p-8 mb-8">
-          <div className="text-center mb-8">
-            <div className="text-4xl mb-4">{currentQuestion.emoji}</div>
-            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
+        <div className="bg-gradient-to-br from-white to-slate-50 rounded-2xl md:rounded-3xl border border-slate-200 shadow-xl p-4 sm:p-6 md:p-8 mb-6 md:mb-8">
+          <div className="text-center mb-6 md:mb-8">
+            <div className="text-3xl sm:text-4xl mb-3 md:mb-4">{currentQuestion.emoji}</div>
+            <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-slate-900 mb-3 md:mb-4 leading-tight">
               {currentQuestion.question}
             </h2>
             {currentQuestion.description && (
-              <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+              <p className="text-sm sm:text-base md:text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed">
                 {currentQuestion.description}
               </p>
             )}
           </div>
 
           {/* Options Grid */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 mb-6 md:mb-8">
             {currentQuestion.options.map((option) => {
               const isSelected = answers[currentQuestion.id] === option.value
               const isCurrentSelection = selectedOption === option.value
@@ -662,7 +662,7 @@ export default function ServiceRecommendationQuiz() {
                   onClick={() => handleAnswer(currentQuestion.id, option.value)}
                   disabled={isAnimating}
                   className={cn(
-                    "group relative p-6 text-left border-2 rounded-2xl transition-all duration-300 hover:scale-105 hover:shadow-lg",
+                    "group relative p-4 sm:p-5 md:p-6 text-left border-2 rounded-xl md:rounded-2xl transition-all duration-300 hover:scale-105 hover:shadow-lg",
                     isSelected || isCurrentSelection
                       ? "border-blue-500 bg-gradient-to-br from-blue-50 to-purple-50 shadow-lg scale-105"
                       : "border-slate-200 bg-white hover:border-slate-300",
@@ -672,31 +672,32 @@ export default function ServiceRecommendationQuiz() {
                 >
                   {/* Popular Badge */}
                   {option.popular && (
-                    <div className="absolute -top-2 -right-2 bg-gradient-to-r from-yellow-400 to-orange-500 text-white text-xs font-bold px-2 py-1 rounded-full">
-                      <Star className="w-3 h-3 inline mr-1" />
-                      Popular
+                    <div className="absolute -top-1 -right-1 sm:-top-2 sm:-right-2 bg-gradient-to-r from-yellow-400 to-orange-500 text-white text-xs font-bold px-1.5 py-0.5 sm:px-2 sm:py-1 rounded-full">
+                      <Star className="w-2 h-2 sm:w-3 sm:h-3 inline mr-0.5 sm:mr-1" />
+                      <span className="hidden sm:inline">Popular</span>
+                      <span className="sm:hidden">★</span>
                     </div>
                   )}
 
                   {/* Icon */}
                   <div className={cn(
-                    "w-14 h-14 rounded-2xl flex items-center justify-center mb-4 transition-all duration-300",
+                    "w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-xl md:rounded-2xl flex items-center justify-center mb-3 md:mb-4 transition-all duration-300",
                     isSelected || isCurrentSelection
                       ? `bg-gradient-to-br ${option.gradient} text-white shadow-lg`
                       : "bg-slate-100 text-slate-600 group-hover:bg-slate-200"
                   )}>
-                    <option.icon className="w-7 h-7" />
+                    <option.icon className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7" />
                   </div>
 
                   {/* Content */}
-                  <div className="space-y-2">
+                  <div className="space-y-1 sm:space-y-2">
                     <h3 className={cn(
-                      "font-semibold text-lg transition-colors duration-300",
+                      "font-semibold text-sm sm:text-base md:text-lg transition-colors duration-300 leading-tight",
                       isSelected || isCurrentSelection ? "text-blue-700" : "text-slate-900 group-hover:text-blue-600"
                     )}>
                       {option.label}
                     </h3>
-                    <p className="text-sm text-slate-600 leading-relaxed">
+                    <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
                       {option.description}
                     </p>
                   </div>

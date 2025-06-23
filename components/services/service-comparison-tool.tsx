@@ -295,28 +295,28 @@ export default function ServiceComparisonTool({
           <div className="absolute inset-0 bg-gradient-to-r from-blue-600/10 to-purple-600/10 rounded-2xl"></div>
           <div className="relative p-8 text-center">
             <div className="animate-in slide-in-from-top duration-500">
-              <div className="flex items-center justify-center gap-3 mb-4">
-                <div className="p-3 bg-blue-600 rounded-full">
-                  <Target className="w-6 h-6 text-white" />
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-3 mb-3 md:mb-4">
+                <div className="p-2 sm:p-3 bg-blue-600 rounded-full">
+                  <Target className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                 </div>
-                <h3 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                <h3 className="text-xl sm:text-2xl md:text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent text-center sm:text-left">
                   Service Comparison
                 </h3>
               </div>
-              <p className="text-slate-600 mb-6 max-w-2xl mx-auto">
+              <p className="text-sm sm:text-base text-slate-600 mb-4 md:mb-6 max-w-2xl mx-auto text-center px-4">
                 Compare {selectedServiceData.length} services side by side to make the best decision for your business
               </p>
-              <div className="flex items-center justify-center gap-4">
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
                 <Button
                   variant="outline"
                   onClick={resetComparison}
-                  className="group hover:bg-red-50 hover:border-red-200 hover:text-red-600 transition-all duration-300"
+                  className="group hover:bg-red-50 hover:border-red-200 hover:text-red-600 transition-all duration-300 text-sm px-3 py-2"
                 >
-                  <RotateCcw className="w-4 h-4 mr-2 group-hover:rotate-180 transition-transform duration-300" />
+                  <RotateCcw className="w-3 h-3 sm:w-4 sm:h-4 mr-1.5 sm:mr-2 group-hover:rotate-180 transition-transform duration-300" />
                   Start Over
                 </Button>
-                <Badge variant="secondary" className="px-4 py-2">
-                  <Sparkles className="w-4 h-4 mr-2" />
+                <Badge variant="secondary" className="px-3 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm">
+                  <Sparkles className="w-3 h-3 sm:w-4 sm:h-4 mr-1.5 sm:mr-2" />
                   {selectedServiceData.length} Services Selected
                 </Badge>
               </div>
@@ -341,36 +341,36 @@ export default function ServiceComparisonTool({
                   {service.popular && (
                     <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 to-purple-500"></div>
                   )}
-                  <CardHeader className="text-center pb-4">
+                  <CardHeader className="text-center pb-3 md:pb-4">
                     {service.popular && (
-                      <Badge className="absolute -top-2 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-blue-500 to-purple-500 border-0">
-                        <Star className="w-3 h-3 mr-1" />
+                      <Badge className="absolute -top-2 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-blue-500 to-purple-500 border-0 text-xs px-2 py-1">
+                        <Star className="w-2 h-2 sm:w-3 sm:h-3 mr-1" />
                         Most Popular
                       </Badge>
                     )}
-                    <CardTitle className="text-xl">{service.shortTitle}</CardTitle>
-                    <p className="text-sm text-slate-600">{service.description}</p>
-                    <div className="mt-6 p-4 bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl">
-                      <div className="text-3xl font-bold text-green-600">{service.price}</div>
-                      <div className="text-sm text-slate-400 line-through">{service.originalPrice}</div>
-                      <div className="flex items-center justify-center gap-2 text-sm text-slate-600 mt-2">
-                        <Clock className="w-4 h-4" />
+                    <CardTitle className="text-lg sm:text-xl">{service.shortTitle}</CardTitle>
+                    <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">{service.description}</p>
+                    <div className="mt-4 sm:mt-6 p-3 sm:p-4 bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl">
+                      <div className="text-2xl sm:text-3xl font-bold text-green-600">{service.price}</div>
+                      <div className="text-xs sm:text-sm text-slate-400 line-through">{service.originalPrice}</div>
+                      <div className="flex items-center justify-center gap-1.5 sm:gap-2 text-xs sm:text-sm text-slate-600 mt-1.5 sm:mt-2">
+                        <Clock className="w-3 h-3 sm:w-4 sm:h-4" />
                         {service.timeline}
                       </div>
                     </div>
                   </CardHeader>
-                  <CardContent className="space-y-6">
+                  <CardContent className="space-y-4 sm:space-y-6 p-4 sm:p-6">
                     {/* Features */}
                     <div>
-                      <h4 className="font-semibold text-slate-800 mb-3 flex items-center gap-2">
-                        <CheckCircle className="w-4 h-4 text-green-500" />
+                      <h4 className="font-semibold text-slate-800 mb-2 sm:mb-3 flex items-center gap-2 text-sm sm:text-base">
+                        <CheckCircle className="w-3 h-3 sm:w-4 sm:h-4 text-green-500" />
                         Key Features
                       </h4>
-                      <ul className="space-y-2">
+                      <ul className="space-y-1.5 sm:space-y-2">
                         {service.features.map((feature, idx) => (
-                          <li key={idx} className="flex items-center gap-2 text-sm">
-                            <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                            {feature}
+                          <li key={idx} className="flex items-center gap-2 text-xs sm:text-sm">
+                            <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-green-500 rounded-full flex-shrink-0"></div>
+                            <span className="leading-tight">{feature}</span>
                           </li>
                         ))}
                       </ul>
@@ -382,7 +382,7 @@ export default function ServiceComparisonTool({
                       href={`/services/${service.slug}`}
                       variant={service.popular ? "primary" : "secondary"}
                       size="lg"
-                      className="w-full"
+                      className="w-full text-sm sm:text-base"
                       popular={service.popular}
                     >
                       Get Started Now

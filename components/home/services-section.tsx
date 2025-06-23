@@ -326,32 +326,32 @@ export default function ServicesCarousel() {
       />
       <div className="container mx-auto px-4">
         {/* Enhanced Header */}
-        <div className="mb-8 text-center">
-          <Badge 
-            variant="secondary" 
-            className="mb-4 bg-blue-100 text-blue-700 px-4 py-2"
+        <div className="mb-6 md:mb-8 text-center px-4">
+          <Badge
+            variant="secondary"
+            className="mb-3 md:mb-4 bg-blue-100 text-blue-700 px-3 py-1.5 md:px-4 md:py-2 text-xs md:text-sm"
             aria-label="Services section badge"
           >
-            <Sparkles className="w-4 h-4 mr-2" aria-hidden="true" />
+            <Sparkles className="w-3 h-3 md:w-4 md:h-4 mr-1.5 md:mr-2" aria-hidden="true" />
             Our Services
           </Badge>
-          <h2 
+          <h2
             id="services-heading"
-            className="text-2xl md:text-3xl font-bold text-slate-900 mb-3"
+            className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-slate-900 mb-2 md:mb-3 leading-tight"
           >
             Our Popular Services
           </h2>
-          <p className="text-sm text-slate-600 mb-8 max-w-2xl mx-auto">
+          <p className="text-sm sm:text-base md:text-lg text-slate-600 mb-6 md:mb-8 max-w-2xl mx-auto leading-relaxed">
             Everything you need to start, run, and grow your business with confidence
           </p>
         </div>
 
         {/* Enhanced Filters and Search */}
-        <div className="mb-12">
-          <div className="flex flex-col lg:flex-row gap-6 items-center justify-between">
+        <div className="mb-8 md:mb-12 px-4">
+          <div className="flex flex-col lg:flex-row gap-4 md:gap-6 items-center justify-between">
             {/* Category Filters */}
             <div
-              className="flex flex-wrap gap-2"
+              className="flex flex-wrap gap-1.5 md:gap-2 justify-center lg:justify-start"
               role="group"
               aria-label="Service category filters"
             >
@@ -361,7 +361,7 @@ export default function ServicesCarousel() {
                   variant={selectedCategory === category.id ? "default" : "outline"}
                   size="sm"
                   onClick={() => setSelectedCategory(category.id)}
-                  className={`transition-all duration-300 ${
+                  className={`transition-all duration-300 text-xs sm:text-sm px-2 sm:px-3 py-1.5 sm:py-2 ${
                     selectedCategory === category.id
                       ? "bg-blue-600 hover:bg-blue-700 shadow-lg"
                       : "hover:bg-blue-50 hover:border-blue-200"
@@ -369,8 +369,9 @@ export default function ServicesCarousel() {
                   aria-pressed={selectedCategory === category.id}
                   role="button"
                 >
-                  <Filter className="w-4 h-4 mr-2" aria-hidden="true" />
-                  {category.name} ({category.count})
+                  <Filter className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" aria-hidden="true" />
+                  <span className="hidden sm:inline">{category.name} ({category.count})</span>
+                  <span className="sm:hidden">{category.name}</span>
                 </Button>
               ))}
             </div>
@@ -379,8 +380,8 @@ export default function ServicesCarousel() {
             <div className="w-full lg:w-80">
               <EnhancedSearch
                 onSearch={setSearchTerm}
-                placeholder="Search services (e.g., company registration, GST filing...)"
-                className="w-full"
+                placeholder="Search services..."
+                className="w-full text-sm md:text-base"
               />
             </div>
           </div>
@@ -401,7 +402,7 @@ export default function ServicesCarousel() {
                   {filteredServices.map((service, idx) => (
                     <div
                       key={service.title}
-                      className="flex-[0_0_100%] sm:flex-[0_0_50%] lg:flex-[0_0_33.333%] min-w-0 px-4"
+                      className="flex-[0_0_100%] sm:flex-[0_0_50%] lg:flex-[0_0_33.333%] min-w-0 px-2 sm:px-3 md:px-4"
                       role="group"
                       aria-roledescription="slide"
                       aria-label={`Slide ${idx + 1} of ${filteredServices.length}`}
@@ -527,45 +528,45 @@ function ServiceCard({ service, idx, hoveredCard, setHoveredCard }: ServiceCardP
       onMouseLeave={() => setHoveredCard(null)}
     >
       {/* Savings Badge */}
-      <div className="absolute top-1 right-1 z-10">
-        <Badge 
-          variant="destructive" 
-          className="bg-green-600 hover:bg-green-700"
+      <div className="absolute top-2 right-2 z-10">
+        <Badge
+          variant="destructive"
+          className="bg-green-600 hover:bg-green-700 text-xs px-2 py-1"
           aria-label={`Save ${savingsPercent}%`}
         >
           Save {savingsPercent}%
         </Badge>
       </div>
 
-      <div className="p-6 flex-1 flex flex-col">
+      <div className="p-4 sm:p-5 md:p-6 flex-1 flex flex-col">
         {/* Service Header */}
-        <div className="flex items-start gap-4 mb-4">
+        <div className="flex items-start gap-3 md:gap-4 mb-3 md:mb-4">
           <div
-            className={`p-3 rounded-xl ${service.mostPopular ? "bg-blue-100" : "bg-slate-100"} group-hover:scale-110 transition-transform duration-300`}
+            className={`p-2 sm:p-2.5 md:p-3 rounded-lg md:rounded-xl ${service.mostPopular ? "bg-blue-100" : "bg-slate-100"} group-hover:scale-110 transition-transform duration-300`}
             aria-hidden="true"
           >
-            <IconComponent className={`w-6 h-6 ${service.mostPopular ? "text-blue-600" : "text-slate-600"}`} />
+            <IconComponent className={`w-5 h-5 md:w-6 md:h-6 ${service.mostPopular ? "text-blue-600" : "text-slate-600"}`} />
           </div>
-          <div className="flex-1">
-            <h3 className="text-base font-semibold text-slate-900 mb-2 group-hover:text-blue-600 transition-colors">
+          <div className="flex-1 min-w-0">
+            <h3 className="text-sm sm:text-base md:text-lg font-semibold text-slate-900 mb-1.5 md:mb-2 group-hover:text-blue-600 transition-colors leading-tight">
               {service.title}
             </h3>
-            <p className="text-xs text-slate-600 text-sm leading-relaxed">{service.description}</p>
+            <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">{service.description}</p>
           </div>
         </div>
 
         {/* Features List */}
-        <div className="mb-6 flex-1">
-          <h4 className="text-sm font-semibold mb-3 text-slate-700">What's included:</h4>
-          <ul className="space-y-2" role="list">
+        <div className="mb-4 md:mb-6 flex-1">
+          <h4 className="text-xs sm:text-sm font-semibold mb-2 md:mb-3 text-slate-700">What's included:</h4>
+          <ul className="space-y-1.5 md:space-y-2" role="list">
             {service.features.slice(0, 3).map((feature, featureIdx) => (
-              <li key={featureIdx} className="flex items-center gap-2 text-sm text-slate-600" role="listitem">
-                <CheckCircle className="w-4 h-4 text-green-500 flex-shrink-0" aria-hidden="true" />
-                <span>{feature}</span>
+              <li key={featureIdx} className="flex items-center gap-2 text-xs sm:text-sm text-slate-600" role="listitem">
+                <CheckCircle className="w-3 h-3 sm:w-4 sm:h-4 text-green-500 flex-shrink-0" aria-hidden="true" />
+                <span className="leading-tight">{feature}</span>
               </li>
             ))}
             {service.features.length > 3 && (
-              <li className="text-sm text-blue-600 font-medium">
+              <li className="text-xs sm:text-sm text-blue-600 font-medium">
                 +{service.features.length - 3} more features
               </li>
             )}
@@ -573,17 +574,17 @@ function ServiceCard({ service, idx, hoveredCard, setHoveredCard }: ServiceCardP
         </div>
 
         {/* Pricing */}
-        <div className="mb-6">
-          <div className="flex items-baseline gap-2 mb-1">
-            <span className="text-3xl font-bold text-slate-900">{service.price}</span>
-            <span className="text-lg text-slate-500 line-through">{service.originalPrice}</span>
-            <span className="text-sm font-normal text-slate-500">{service.billing}</span>
+        <div className="mb-4 md:mb-6">
+          <div className="flex items-baseline gap-1.5 md:gap-2 mb-1">
+            <span className="text-xl sm:text-2xl md:text-3xl font-bold text-slate-900">{service.price}</span>
+            <span className="text-sm sm:text-base md:text-lg text-slate-500 line-through">{service.originalPrice}</span>
+            <span className="text-xs sm:text-sm font-normal text-slate-500">{service.billing}</span>
           </div>
-          <p className="text-sm text-green-700 font-medium">
+          <p className="text-xs sm:text-sm text-green-700 font-medium">
             You save ₹{savings.toLocaleString()}!
           </p>
-          <div className="flex items-center gap-1 mt-2 text-sm text-red-600">
-            <AlertCircle className="w-4 h-4" aria-hidden="true" />
+          <div className="flex items-center gap-1 mt-1.5 md:mt-2 text-xs sm:text-sm text-red-600">
+            <AlertCircle className="w-3 h-3 sm:w-4 sm:h-4" aria-hidden="true" />
             <span>Government fee excluded</span>
           </div>
         </div>
