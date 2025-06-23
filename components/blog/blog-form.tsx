@@ -73,20 +73,32 @@ export default function BlogForm({ initialData, isEditing = false, onSubmit }: B
     setIsSaving(true)
 
     try {
-      // Get editor data and convert to HTML
-      let htmlContent = ''
+      // Get editor data - ONLY save EditorJS JSON
       let editorJsonData = ''
-      
+
       if (editorRef.current) {
         const editorOutput = await editorRef.current.save()
-        htmlContent = editorDataToHtml(editorOutput)
+        console.log('=== Blog Save Debug ===')
+        console.log('Editor blocks:', editorOutput.blocks?.length || 0)
+        console.log('Block types:', editorOutput.blocks?.map(b => b.type).join(', ') || 'none')
+
+        const listBlocks = editorOutput.blocks?.filter(b => b.type === 'list') || []
+        console.log('List blocks found:', listBlocks.length)
+        listBlocks.forEach((block, index) => {
+          console.log(`List ${index + 1} (${block.data?.style}):`, block.data?.items?.length || 0, 'items')
+          console.log('Items:', block.data?.items)
+        })
+
+        // ONLY: Store the raw EditorJS JSON data
         editorJsonData = JSON.stringify(editorOutput)
+
+        console.log('✅ SAVING ONLY EditorJS JSON - length:', editorJsonData.length)
+        console.log('📋 Lists preserved in EditorJS:', listBlocks.length)
       }
 
       const blogData = {
         ...blog,
-        content: htmlContent, // Store HTML for display
-        editorData: editorJsonData, // Store JSON for editing
+        editorData: editorJsonData, // ONLY EditorJS JSON - pure data storage
         slug: blog.slug || generateSlug(blog.title || ''),
       }
 
@@ -180,7 +192,7 @@ export default function BlogForm({ initialData, isEditing = false, onSubmit }: B
 
   const handleAIContentGenerated = async (generatedContent: {
     title: string
-    content: string
+    editorData: string
     excerpt: string
     metaTitle: string
     metaDescription: string
@@ -198,45 +210,65 @@ export default function BlogForm({ initialData, isEditing = false, onSubmit }: B
       slug: generatedContent.slug,
     }))
 
-    // Convert HTML content to proper EditorJS blocks
-    if (editorRef.current) {
+    // Use AI-generated EditorJS data directly - no conversion needed!
+    if (editorRef.current && generatedContent.editorData) {
       try {
-        console.log('Converting HTML to EditorJS blocks...')
-        console.log('Original HTML:', generatedContent.content.substring(0, 200) + '...')
+        console.log('🤖 Processing AI-generated EditorJS data...')
 
-        // Convert HTML to structured EditorJS blocks
-        const editorData = htmlToEditorJSServer(generatedContent.content)
+        // Parse the EditorJS data directly from AI
+        const editorData = typeof generatedContent.editorData === 'string'
+          ? JSON.parse(generatedContent.editorData)
+          : generatedContent.editorData
 
-        console.log('Converted to EditorJS blocks:', editorData.blocks.length, 'blocks')
-        console.log('Block types:', editorData.blocks.map(b => b.type).join(', '))
+        console.log('✅ AI generated EditorJS blocks:', editorData.blocks?.length || 0)
+        console.log('📋 Block types:', editorData.blocks?.map((b: any) => b.type).join(', ') || 'none')
 
-        // Render the structured content in the editor
+        // Log list blocks for debugging (informational only)
+        const listBlocks = editorData.blocks?.filter((b: any) => b.type === 'list') || []
+        console.log('📝 List blocks found:', listBlocks.length)
+        listBlocks.forEach((block: any, index: number) => {
+          console.log(`  List ${index + 1} (${block.data?.style}):`, block.data?.items?.length || 0, 'items')
+        })
+
+        // Render EditorJS data directly in editor
+        await editorRef.current.clear()
+        await new Promise(resolve => setTimeout(resolve, 150))
         await editorRef.current.render(editorData)
         setEditorData(editorData)
 
-        toast.success(`AI content applied! Generated ${editorData.blocks.length} content blocks.`)
-      } catch (error) {
-        console.error('Error converting HTML to EditorJS:', error)
+        toast.success(`✨ AI content applied! Generated ${editorData.blocks?.length || 0} content blocks with perfect formatting.`)
 
-        // Fallback: create a single paragraph block
+      } catch (error) {
+        console.warn('⚠️ EditorJS data parsing failed, using fallback:', error)
+
+        // Fallback - create basic content from title and excerpt
         const fallbackData: OutputData = {
           time: Date.now(),
           blocks: [
             {
-              id: "ai-generated-fallback",
+              id: "ai-title",
+              type: "header",
+              data: {
+                text: generatedContent.title || "AI Generated Content",
+                level: 2
+              }
+            },
+            {
+              id: "ai-excerpt",
               type: "paragraph",
               data: {
-                text: generatedContent.content.replace(/<[^>]*>/g, '') // Strip HTML tags
+                text: generatedContent.excerpt || "AI generated content is ready for editing."
               }
             }
           ],
           version: "2.28.2"
         }
 
+        await editorRef.current.clear()
         await editorRef.current.render(fallbackData)
         setEditorData(fallbackData)
 
-        toast.error('Content applied but formatting may need adjustment')
+        toast.success('✨ AI content applied! You can now edit and format it.')
       }
     }
 

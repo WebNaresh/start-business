@@ -11,7 +11,11 @@ import FloatingCallButton from "@/components/floating-call-button"
 import Chatbot from "@/components/Chatbot"
 import { Toaster } from 'sonner'
 
-const inter = Inter({ subsets: ["latin"] })
+const inter = Inter({
+  subsets: ["latin"],
+  display: 'swap',
+  fallback: ['system-ui', 'arial']
+})
 
 export const metadata: Metadata = {
   title: "StartBusiness - Company Registration,MCA,GST,Income Tax Services,Trademark",

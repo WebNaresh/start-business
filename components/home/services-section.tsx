@@ -3,11 +3,9 @@
 import type React from "react"
 
 import { useState, useRef, useCallback, useEffect } from "react"
-import Link from "next/link"
 import useEmblaCarousel from "embla-carousel-react"
 import Script from "next/script"
 import {
-  ArrowRight,
   Building2,
   Shield,
   FileCheck,
@@ -17,7 +15,6 @@ import {
   Sparkles,
   Filter,
   Search,
-  X,
   AlertCircle,
   ChevronLeft,
   ChevronRight,
@@ -25,7 +22,9 @@ import {
 
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { Input } from "@/components/ui/input"
+import EnhancedCTAButton from "@/components/ui/enhanced-cta-button"
+import TrustSignals from "@/components/ui/trust-signals"
+import EnhancedSearch from "@/components/services/enhanced-search"
 
 // Type definitions
 type Service = {
@@ -376,28 +375,13 @@ export default function ServicesCarousel() {
               ))}
             </div>
 
-            {/* Search */}
-            <div className="relative w-full lg:w-80">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 w-4 h-4" aria-hidden="true" />
-              <Input
-                type="text"
-                placeholder="Search services..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-10 pr-10 border-slate-200 focus:border-blue-300 focus:ring-blue-200"
-                aria-label="Search services"
+            {/* Enhanced Search */}
+            <div className="w-full lg:w-80">
+              <EnhancedSearch
+                onSearch={setSearchTerm}
+                placeholder="Search services (e.g., company registration, GST filing...)"
+                className="w-full"
               />
-              {searchTerm && (
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => setSearchTerm("")}
-                  className="absolute right-1 top-1/2 transform -translate-y-1/2 h-8 w-8 p-0"
-                  aria-label="Clear search"
-                >
-                  <X className="w-4 h-4" aria-hidden="true" />
-                </Button>
-              )}
             </div>
           </div>
         </div>
@@ -506,18 +490,21 @@ export default function ServicesCarousel() {
           )}
         </div>
 
+        {/* Trust Signals */}
+        <div className="mt-12">
+          <TrustSignals variant="compact" className="justify-center" />
+        </div>
+
         {/* View More Services Button */}
-        <div className="mt-12 text-center">
-          <Link href="/services">
-            <Button
-              size="lg"
-              className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 shadow-lg hover:shadow-xl transition-all duration-300"
-              aria-label="View all services"
-            >
-              View All Services
-              <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" aria-hidden="true" />
-            </Button>
-          </Link>
+        <div className="mt-8 text-center">
+          <EnhancedCTAButton
+            href="/services"
+            variant="primary"
+            size="lg"
+            className="inline-flex"
+          >
+            View All Services
+          </EnhancedCTAButton>
         </div>
       </div>
     </section>
@@ -601,21 +588,20 @@ function ServiceCard({ service, idx, hoveredCard, setHoveredCard }: ServiceCardP
           </div>
         </div>
 
-        {/* CTA Button */}
-        <Link href={`/services/${service.slug}`} className="mt-auto">
-          <Button
-            className={`w-full group/btn transition-all duration-300 ${
-              service.mostPopular
-                ? "bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 shadow-lg hover:shadow-xl"
-                : "bg-slate-900 hover:bg-slate-800"
-            }`}
+        {/* Enhanced CTA Button */}
+        <div className="mt-auto">
+          <EnhancedCTAButton
+            href={`/services/${service.slug}`}
+            variant={service.mostPopular ? "primary" : "secondary"}
             size="lg"
-            aria-label={`Get started with ${service.title}`}
+            className="w-full"
+            savings={`Save ₹${savings.toLocaleString()}`}
+            popular={service.mostPopular}
+            guarantee={true}
           >
             Get Started Now
-            <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover/btn:translate-x-1" aria-hidden="true" />
-          </Button>
-        </Link>
+          </EnhancedCTAButton>
+        </div>
       </div>
 
       {/* Hover Effect Overlay */}

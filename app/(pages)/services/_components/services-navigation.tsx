@@ -21,6 +21,7 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { cn } from "@/lib/utils"
+import MobileQuickActions from "@/components/services/mobile-quick-actions"
 
 interface SubService {
   name: string
@@ -620,6 +621,12 @@ export default function EnhancedServicesNavigation() {
               transition={{ duration: 0.3 }}
               className="md:hidden overflow-hidden bg-slate-50 border-t border-slate-200"
             >
+              {/* Mobile Quick Actions */}
+              <div className="p-4 border-b border-slate-200">
+                <MobileQuickActions />
+              </div>
+
+              {/* Category List */}
               <div className="py-2">
                 {serviceCategories.map((category) => (
                   <button

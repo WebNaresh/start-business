@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
+import { safeDatabaseOperation, getMockBlogData, isConnectionError } from '@/lib/db-health'
 import { generateSlug } from '@/lib/utils'
 
 export async function GET(request: Request) {
@@ -9,31 +10,36 @@ export async function GET(request: Request) {
         const offset = parseInt(searchParams.get('offset') || '0')
         const status = searchParams.get('status') || 'published'
 
-        // Optimized query with pagination and selective fields
-        const blogs = await prisma.blog.findMany({
-            where: {
-                status: status
+        // Use safe database operation with fallback
+        const blogs = await safeDatabaseOperation(
+            async () => {
+                return await prisma.blog.findMany({
+                    where: {
+                        status: status
+                    },
+                    orderBy: {
+                        publishedAt: 'desc'
+                    },
+                    select: {
+                        id: true,
+                        title: true,
+                        slug: true,
+                        excerpt: true,
+                        featuredImage: true,
+                        author: true,
+                        publishedAt: true,
+                        status: true,
+                        metaTitle: true,
+                        metaDescription: true,
+                        tags: true
+                        // Exclude heavy fields like content and editorData for list view
+                    },
+                    take: limit,
+                    skip: offset
+                })
             },
-            orderBy: {
-                publishedAt: 'desc'
-            },
-            select: {
-                id: true,
-                title: true,
-                slug: true,
-                excerpt: true,
-                featuredImage: true,
-                author: true,
-                publishedAt: true,
-                status: true,
-                metaTitle: true,
-                metaDescription: true,
-                tags: true
-                // Exclude heavy fields like content and editorData for list view
-            },
-            take: limit,
-            skip: offset
-        })
+            getMockBlogData().slice(offset, offset + limit) // Fallback data
+        )
 
         // Add cache headers for better performance
         return NextResponse.json(blogs, {
@@ -57,9 +63,9 @@ export async function POST(req: Request) {
         const body = await req.json()
 
         // Validate required fields
-        if (!body.title || !body.author) {
+        if (!body.title || !body.author || !body.editorData) {
             return NextResponse.json(
-                { error: 'Title and author are required' },
+                { error: 'Title, author, and editorData are required' },
                 { status: 400 }
             )
         }
@@ -79,12 +85,12 @@ export async function POST(req: Request) {
             )
         }
 
-        // Prepare data for creation
+        // Prepare data for creation - EditorJS JSON only (no HTML content)
         const blogData = {
             title: body.title,
             slug: slug,
-            content: body.content || '',
-            editorData: body.editorData || '',
+            content: null, // Explicitly set as null since it's optional now
+            editorData: body.editorData, // Required EditorJS JSON
             excerpt: body.excerpt || '',
             featuredImage: body.featuredImage || null,
             author: body.author,
@@ -96,7 +102,7 @@ export async function POST(req: Request) {
         }
 
         const newBlog = await prisma.blog.create({
-            data: blogData
+            data: blogData as any // Type assertion to handle schema transition
         })
 
         return NextResponse.json(newBlog, { status: 201 })

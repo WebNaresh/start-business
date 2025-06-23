@@ -122,3 +122,192 @@ html {
 }
 
 /* Line clamp utilities are provided by Tailwind CSS */
+
+/* Enhanced List Styling - Ensure lists are always visible */
+.prose ul,
+.prose ol {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  margin: 1rem 0 !important;
+  padding-left: 1.5rem !important;
+}
+
+.prose ul li,
+.prose ol li {
+  display: list-item !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  margin: 0.5rem 0 !important;
+  padding: 0.25rem 0 !important;
+  line-height: 1.6 !important;
+  position: relative !important;
+}
+
+.prose ul {
+  list-style-type: disc !important;
+}
+
+.prose ol {
+  list-style-type: decimal !important;
+}
+
+.prose ul li::marker,
+.prose ol li::marker {
+  color: #3b82f6 !important;
+  font-weight: bold !important;
+}
+
+/* Nested lists */
+.prose ul ul,
+.prose ol ol,
+.prose ul ol,
+.prose ol ul {
+  margin: 0.5rem 0 !important;
+  padding-left: 1.5rem !important;
+}
+
+.prose ul ul {
+  list-style-type: circle !important;
+}
+
+.prose ul ul ul {
+  list-style-type: square !important;
+}
+
+/* Blog content specific list styling */
+.blog-content ul,
+.blog-content ol {
+  display: block !important;
+  visibility: visible !important;
+  margin: 1rem 0 !important;
+  padding-left: 2rem !important;
+}
+
+.blog-content ul li,
+.blog-content ol li {
+  display: list-item !important;
+  visibility: visible !important;
+  margin: 0.75rem 0 !important;
+  padding: 0.25rem 0 !important;
+  line-height: 1.7 !important;
+}
+
+.blog-content ul {
+  list-style: disc outside !important;
+}
+
+.blog-content ol {
+  list-style: decimal outside !important;
+}
+
+/* EditorJS list styling */
+.ce-block__content ul,
+.ce-block__content ol {
+  display: block !important;
+  visibility: visible !important;
+  margin: 1rem 0 !important;
+  padding-left: 1.5rem !important;
+}
+
+.ce-block__content ul li,
+.ce-block__content ol li {
+  display: list-item !important;
+  visibility: visible !important;
+  margin: 0.5rem 0 !important;
+  padding: 0.25rem 0 !important;
+  line-height: 1.6 !important;
+}
+
+/* Force list visibility in all contexts */
+ul[class*="list-"],
+ol[class*="list-"] {
+  display: block !important;
+  visibility: visible !important;
+}
+
+ul[class*="list-"] li,
+ol[class*="list-"] li {
+  display: list-item !important;
+  visibility: visible !important;
+}
+
+/* Tailwind prose overrides */
+.prose .list-disc {
+  list-style-type: disc !important;
+}
+
+.prose .list-decimal {
+  list-style-type: decimal !important;
+}
+
+.prose .list-inside {
+  list-style-position: inside !important;
+}
+
+.prose .list-outside {
+  list-style-position: outside !important;
+}
+
+/* Enhanced list item styling for better readability */
+.prose li {
+  color: #374151 !important;
+  font-size: 1rem !important;
+}
+
+.prose li strong {
+  color: #111827 !important;
+  font-weight: 600 !important;
+}
+
+.prose li code {
+  background-color: #f3f4f6 !important;
+  padding: 0.125rem 0.25rem !important;
+  border-radius: 0.25rem !important;
+  font-size: 0.875rem !important;
+}
+
+/* EditorJS List Styling - Force visibility in editor */
+.cdx-list {
+  display: block !important;
+  margin: 1rem 0 !important;
+  padding-left: 0 !important;
+}
+
+.cdx-list__item {
+  display: list-item !important;
+  list-style: inherit !important;
+  margin: 0.5rem 0 0.5rem 1.5rem !important;
+  padding: 0.25rem 0 !important;
+  line-height: 1.6 !important;
+  position: relative !important;
+}
+
+.cdx-list--unordered .cdx-list__item {
+  list-style-type: disc !important;
+}
+
+.cdx-list--ordered .cdx-list__item {
+  list-style-type: decimal !important;
+}
+
+.cdx-list__item-content {
+  display: block !important;
+}
+
+/* Additional EditorJS list fixes */
+.ce-block--selected .cdx-list__item,
+.ce-block--focused .cdx-list__item {
+  list-style: inherit !important;
+}
+
+/* Ensure EditorJS lists are visible during editing */
+.codex-editor .cdx-list {
+  display: block !important;
+  visibility: visible !important;
+}
+
+.codex-editor .cdx-list__item {
+  display: list-item !important;
+  visibility: visible !important;
+}

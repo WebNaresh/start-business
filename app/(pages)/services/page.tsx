@@ -2,6 +2,11 @@ import type { Metadata } from "next"
 import ServicesHero from "./_components/services-hero"
 import ServicesNavigation from "./_components/services-navigation"
 import EnhancedServicesSection from "@/components/home/services-section"
+import ServiceRecommendationQuiz from "@/components/services/service-recommendation-quiz"
+import ServiceComparisonTool from "@/components/services/service-comparison-tool"
+import TrustSignals from "@/components/ui/trust-signals"
+import AccessibilityImprovements from "@/components/ui/accessibility-improvements"
+import VisualHierarchyImprovements from "@/components/ui/visual-hierarchy-improvements"
 
 
 export const metadata: Metadata = {
@@ -73,11 +78,37 @@ const servicesFaqs = [
 
 export default function ServicesPage() {
   return (
-    <div className="flex min-h-screen flex-col">
-      <ServicesNavigation />
-      {/* <ServicesHero /> */}
-   
-  <EnhancedServicesSection/>
-    </div>
+    <AccessibilityImprovements>
+      <VisualHierarchyImprovements />
+      <div className="flex min-h-screen flex-col">
+        {/* <ServicesNavigation /> */}
+        {/* <ServicesHero /> */}
+
+        {/* Service Recommendation Quiz */}
+        <section
+          className="py-12 bg-gradient-to-br from-blue-50 to-indigo-50"
+          aria-labelledby="quiz-heading"
+        >
+          <div className="container mx-auto px-4">
+            <ServiceRecommendationQuiz />
+          </div>
+        </section>
+
+        {/* Enhanced Services Section */}
+        <EnhancedServicesSection />
+
+        {/* Service Comparison Tool */}
+        <section
+          className="py-12 bg-slate-50"
+          aria-labelledby="comparison-heading"
+        >
+          <div className="container mx-auto px-4">
+            <ServiceComparisonTool />
+          </div>
+        </section>
+
+
+      </div>
+    </AccessibilityImprovements>
   )
 }

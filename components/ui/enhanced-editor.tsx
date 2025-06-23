@@ -415,7 +415,11 @@ const EnhancedEditor = forwardRef<EditorRef, EditorProps>(({
           list: {
             class: List,
             inlineToolbar: true,
-            config: { defaultStyle: 'unordered' }
+            config: {
+              defaultStyle: 'unordered',
+              // Ensure list items are properly rendered
+              shortcut: 'CMD+SHIFT+L'
+            }
           },
           quote: {
             class: Quote,
@@ -530,6 +534,33 @@ const EnhancedEditor = forwardRef<EditorRef, EditorProps>(({
         .enhanced-editor-wrapper .ce-inline-tool--active {
           background: #3b82f6 !important;
           color: white !important;
+        }
+
+        /* Enhanced List Styling for EditorJS */
+        .enhanced-editor-wrapper .cdx-list {
+          margin: 1rem 0 !important;
+        }
+
+        .enhanced-editor-wrapper .cdx-list__item {
+          display: list-item !important;
+          list-style: inherit !important;
+          margin: 0.5rem 0 !important;
+          padding: 0.25rem 0 !important;
+          line-height: 1.6 !important;
+        }
+
+        .enhanced-editor-wrapper .cdx-list--unordered .cdx-list__item {
+          list-style-type: disc !important;
+          margin-left: 1.5rem !important;
+        }
+
+        .enhanced-editor-wrapper .cdx-list--ordered .cdx-list__item {
+          list-style-type: decimal !important;
+          margin-left: 1.5rem !important;
+        }
+
+        .enhanced-editor-wrapper .cdx-list__item-content {
+          display: block !important;
         }
       `}</style>
     </div>

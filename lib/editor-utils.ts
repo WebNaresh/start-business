@@ -69,15 +69,32 @@ function paragraphToHtml(data: any): string {
 }
 
 function listToHtml(data: any): string {
+  console.log('🔄 Converting list to HTML:', data)
+
   const style = data.style || 'unordered'
   const items = data.items || []
 
-  // Clean and filter list items to prevent [object Object] issues
+  console.log(`📋 List style: ${style}, Items count: ${items.length}`)
+  console.log('📝 List items:', items)
+
+  // Handle both old format (strings) and new format (objects with content property)
   const cleanItems = items
     .map((item: any) => {
-      // Convert to string and clean object references
-      const itemStr = typeof item === 'string' ? item : String(item)
-      return itemStr
+      let itemText = ''
+
+      if (typeof item === 'string') {
+        // Old format: direct string
+        itemText = item
+      } else if (item && typeof item === 'object' && item.content) {
+        // New format: object with content property
+        itemText = item.content
+      } else {
+        // Fallback: convert to string
+        itemText = String(item)
+      }
+
+      // Clean the text
+      return itemText
         .replace(/\[object Object\]/g, '') // Remove object references
         .replace(/\[object [^\]]+\]/g, '') // Remove any object patterns
         .replace(/undefined/g, '') // Remove undefined values
@@ -85,13 +102,25 @@ function listToHtml(data: any): string {
     })
     .filter((item: string) => item.length > 0) // Remove empty items
 
-  const listItems = cleanItems.map((item: string) => `<li class="mb-2">${item}</li>`).join('')
+  console.log('🧹 Cleaned items:', cleanItems)
 
-  if (style === 'ordered') {
-    return `<ol class="list-decimal list-inside mb-4 space-y-2">${listItems}</ol>`
-  } else {
-    return `<ul class="list-disc list-inside mb-4 space-y-2">${listItems}</ul>`
+  // Ensure we have items to display
+  if (cleanItems.length === 0) {
+    console.log('❌ No items to display after cleaning')
+    return ''
   }
+
+  // Create list items with enhanced styling to ensure visibility
+  const listItems = cleanItems.map((item: string) =>
+    `<li style="display: list-item !important; visibility: visible !important; margin: 0.5rem 0; padding: 0.25rem 0; line-height: 1.6;">${item}</li>`
+  ).join('')
+
+  const htmlOutput = style === 'ordered'
+    ? `<ol style="display: block !important; visibility: visible !important; list-style-type: decimal !important; margin: 1rem 0; padding-left: 1.5rem;" class="list-decimal list-outside mb-4 space-y-2">${listItems}</ol>`
+    : `<ul style="display: block !important; visibility: visible !important; list-style-type: disc !important; margin: 1rem 0; padding-left: 1.5rem;" class="list-disc list-outside mb-4 space-y-2">${listItems}</ul>`
+
+  console.log('✅ Generated list HTML:', htmlOutput)
+  return htmlOutput
 }
 
 function quoteToHtml(data: any): string {

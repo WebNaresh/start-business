@@ -175,6 +175,7 @@ export default function BlogDetailClient({ blogPost }: BlogDetailClientProps) {
                       content={blogPost.content}
                       editorData={blogPost.editorData || undefined}
                       className="prose-headings:text-slate-900 prose-headings:font-bold prose-p:text-slate-700 prose-p:leading-relaxed prose-a:text-blue-600 hover:prose-a:text-blue-800 prose-strong:text-slate-900 prose-blockquote:border-blue-500 prose-blockquote:bg-blue-50 prose-blockquote:text-slate-700"
+                      debug={true}
                     />
                   </article>
 

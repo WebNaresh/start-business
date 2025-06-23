@@ -11,7 +11,7 @@ import { toast } from 'sonner'
 
 interface GeneratedContent {
   title: string
-  content: string
+  editorData: string // EditorJS JSON data
   excerpt: string
   metaTitle: string
   metaDescription: string
@@ -27,6 +27,7 @@ interface AIContentGeneratorProps {
 export default function AIContentGenerator({ onContentGenerated, disabled = false }: AIContentGeneratorProps) {
   const [prompt, setPrompt] = useState('')
   const [businessFocus, setBusinessFocus] = useState('general business')
+  const [contentLength, setContentLength] = useState('medium')
   const [isGenerating, setIsGenerating] = useState(false)
   const [lastGenerated, setLastGenerated] = useState<GeneratedContent | null>(null)
   const [error, setError] = useState<string | null>(null)
@@ -42,6 +43,41 @@ export default function AIContentGenerator({ onContentGenerated, disabled = fals
     { value: 'digital business', label: 'Digital Business' }
   ]
 
+  const contentLengthOptions = [
+    {
+      value: 'short',
+      label: 'Short (800-1,200 characters)',
+      description: 'Quick read, perfect for social media or brief updates',
+      characters: '800-1,200'
+    },
+    {
+      value: 'medium',
+      label: 'Medium (1,500-2,500 characters)',
+      description: 'Standard blog post length, good for most topics',
+      characters: '1,500-2,500'
+    },
+    {
+      value: 'long',
+      label: 'Long (3,000-4,500 characters)',
+      description: 'Comprehensive guide, detailed explanations',
+      characters: '3,000-4,500'
+    },
+    {
+      value: 'extra-long',
+      label: 'Extra Long (5,000-7,000 characters)',
+      description: 'In-depth article, complete resource guide',
+      characters: '5,000-7,000'
+    },
+    {
+      value: 'custom',
+      label: 'Custom Length',
+      description: 'Specify exact character count',
+      characters: 'Custom'
+    }
+  ]
+
+  const [customLength, setCustomLength] = useState(2000)
+
   const handleGenerate = async () => {
     if (!prompt.trim()) {
       toast.error('Please enter a content prompt')
@@ -52,6 +88,14 @@ export default function AIContentGenerator({ onContentGenerated, disabled = fals
     setError(null)
 
     try {
+      // Calculate target character count
+      let targetLength = 2000 // default
+      if (contentLength === 'short') targetLength = 1000
+      else if (contentLength === 'medium') targetLength = 2000
+      else if (contentLength === 'long') targetLength = 3750
+      else if (contentLength === 'extra-long') targetLength = 6000
+      else if (contentLength === 'custom') targetLength = customLength
+
       const response = await fetch('/api/generate-blog-content', {
         method: 'POST',
         headers: {
@@ -59,7 +103,9 @@ export default function AIContentGenerator({ onContentGenerated, disabled = fals
         },
         body: JSON.stringify({
           prompt: prompt.trim(),
-          businessFocus
+          businessFocus,
+          contentLength: contentLength,
+          targetCharacters: targetLength
         }),
       })
 
@@ -158,6 +204,83 @@ export default function AIContentGenerator({ onContentGenerated, disabled = fals
           </select>
         </div>
 
+        {/* Content Length */}
+        <div className="space-y-3">
+          <Label className="text-sm font-medium">
+            Content Length
+          </Label>
+          <div className="grid grid-cols-1 gap-3">
+            {contentLengthOptions.map((option) => (
+              <div key={option.value} className="relative">
+                <input
+                  type="radio"
+                  id={`length-${option.value}`}
+                  name="contentLength"
+                  value={option.value}
+                  checked={contentLength === option.value}
+                  onChange={(e) => setContentLength(e.target.value)}
+                  disabled={disabled || isGenerating}
+                  className="sr-only"
+                />
+                <label
+                  htmlFor={`length-${option.value}`}
+                  className={`block p-3 border rounded-lg cursor-pointer transition-all duration-200 ${
+                    contentLength === option.value
+                      ? 'border-blue-500 bg-blue-50 ring-2 ring-blue-200'
+                      : 'border-gray-200 hover:border-gray-300 hover:bg-gray-50'
+                  } ${disabled || isGenerating ? 'opacity-50 cursor-not-allowed' : ''}`}
+                >
+                  <div className="flex items-start justify-between">
+                    <div className="flex-1">
+                      <div className="font-medium text-sm text-gray-900">
+                        {option.label}
+                      </div>
+                      <div className="text-xs text-gray-600 mt-1">
+                        {option.description}
+                      </div>
+                    </div>
+                    <div className={`w-4 h-4 rounded-full border-2 flex items-center justify-center ${
+                      contentLength === option.value
+                        ? 'border-blue-500 bg-blue-500'
+                        : 'border-gray-300'
+                    }`}>
+                      {contentLength === option.value && (
+                        <div className="w-2 h-2 bg-white rounded-full"></div>
+                      )}
+                    </div>
+                  </div>
+                </label>
+              </div>
+            ))}
+          </div>
+
+          {/* Custom Length Input */}
+          {contentLength === 'custom' && (
+            <div className="mt-3 p-3 bg-blue-50 border border-blue-200 rounded-lg">
+              <Label htmlFor="custom-length" className="text-sm font-medium text-blue-800">
+                Custom Character Count
+              </Label>
+              <div className="flex items-center gap-3 mt-2">
+                <input
+                  type="number"
+                  id="custom-length"
+                  value={customLength}
+                  onChange={(e) => setCustomLength(Math.max(500, Math.min(10000, parseInt(e.target.value) || 2000)))}
+                  disabled={disabled || isGenerating}
+                  min="500"
+                  max="10000"
+                  step="100"
+                  className="w-32 px-3 py-2 border border-blue-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                />
+                <span className="text-sm text-blue-700">characters</span>
+              </div>
+              <p className="text-xs text-blue-600 mt-1">
+                Range: 500 - 10,000 characters (recommended: 1,000 - 5,000)
+              </p>
+            </div>
+          )}
+        </div>
+
         {/* Generate Button */}
         <div className="flex gap-2">
           <Button
@@ -207,7 +330,27 @@ export default function AIContentGenerator({ onContentGenerated, disabled = fals
                 <p className="font-medium">Content generated successfully!</p>
                 <div className="text-sm space-y-1">
                   <p><strong>Title:</strong> {lastGenerated.title}</p>
-                  <p><strong>Content Length:</strong> {lastGenerated.content.length} characters</p>
+                  <div className="flex items-center gap-4">
+                    <p><strong>Content Length:</strong> {lastGenerated.editorData?.length?.toLocaleString() || 'N/A'} characters (EditorJS JSON)</p>
+                    {(() => {
+                      const targetLength = contentLength === 'custom' ? customLength :
+                        contentLength === 'short' ? 1000 :
+                        contentLength === 'medium' ? 2000 :
+                        contentLength === 'long' ? 3750 :
+                        contentLength === 'extra-long' ? 6000 : 2000;
+                      const editorDataLength = lastGenerated.editorData?.length || 0;
+                      const difference = Math.abs(editorDataLength - targetLength);
+                      const isOnTarget = difference <= 200;
+
+                      return (
+                        <span className={`px-2 py-1 rounded text-xs font-medium ${
+                          isOnTarget ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'
+                        }`}>
+                          {isOnTarget ? '✓ Target achieved' : `±${difference} chars from target`}
+                        </span>
+                      );
+                    })()}
+                  </div>
                   <p><strong>Tags:</strong> {lastGenerated.tags}</p>
                 </div>
                 <Button
@@ -235,6 +378,11 @@ export default function AIContentGenerator({ onContentGenerated, disabled = fals
             <div className="text-xs text-gray-500 space-y-1">
               <p>• Analyzing your prompt and business focus</p>
               <p>• Generating SEO-optimized title and content</p>
+              <p>• Creating {contentLength === 'custom' ? customLength :
+                contentLength === 'short' ? '1,000' :
+                contentLength === 'medium' ? '2,000' :
+                contentLength === 'long' ? '3,750' :
+                contentLength === 'extra-long' ? '6,000' : '2,000'} character content</p>
               <p>• Creating meta descriptions and tags</p>
               <p>• Formatting content for your blog</p>
             </div>

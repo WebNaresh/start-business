@@ -10,8 +10,8 @@ model Blog {
   id             Int      @id @default(autoincrement())
   title          String
   slug           String   @unique
-  content        String   // HTML content for display
-  editorData     String?  // JSON data for EditorJS
+  content        String?  // Optional: HTML content (generated on-demand for SEO)
+  editorData     String   // PRIMARY: EditorJS JSON data - source of truth for content
   excerpt        String?
   featuredImage  String?
   author         String

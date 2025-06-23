@@ -42,6 +42,17 @@ export interface ButtonProps
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant, size, asChild = false, leftIcon, rightIcon, children, ...props }, ref) => {
     const Comp = asChild ? Slot : "button"
+
+    // When using asChild, we can't add leftIcon/rightIcon as separate children
+    // The consumer should include icons directly in their child element
+    if (asChild) {
+      return (
+        <Comp className={cn(buttonVariants({ variant, size, className }))} ref={ref} {...props}>
+          {children}
+        </Comp>
+      )
+    }
+
     return (
       <Comp className={cn(buttonVariants({ variant, size, className }))} ref={ref} {...props}>
         {leftIcon && <span className="mr-2">{leftIcon}</span>}
