@@ -90,53 +90,14 @@ export default function TrustSignals({
     }
   ]
 
-  if (variant === "compact") {
-    return (
-      <div className={cn("flex items-center gap-4 text-sm text-slate-600", className)}>
-        <div className="flex items-center gap-1">
-          <Users className="w-4 h-4 text-blue-600" />
-          <span className="font-semibold">10,000+</span> businesses
-        </div>
-        <div className="flex items-center gap-1">
-          <Star className="w-4 h-4 text-yellow-500 fill-current" />
-          <span className="font-semibold">4.9/5</span> rating
-        </div>
-        <div className="flex items-center gap-1">
-          <Shield className="w-4 h-4 text-green-600" />
-          <span className="font-semibold">100%</span> secure
-        </div>
-      </div>
-    )
-  }
+  
 
-  if (variant === "inline") {
-    return (
-      <div className={cn("flex flex-wrap items-center gap-3", className)}>
-        {trustMetrics.slice(0, 2).map((metric, index) => (
-          <Badge key={index} variant="secondary" className="flex items-center gap-1 px-3 py-1">
-            <metric.icon className={cn("w-3 h-3", metric.color)} />
-            <span className="font-semibold">{metric.value}</span>
-            <span className="text-xs">{metric.label}</span>
-          </Badge>
-        ))}
-      </div>
-    )
-  }
+
 
   return (
     <div className={cn("space-y-6", className)}>
       {/* Trust Metrics */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        {trustMetrics.map((metric, index) => (
-          <div key={index} className="text-center p-4 bg-white rounded-lg border border-slate-200 hover:border-slate-300 transition-colors">
-            <div className="flex justify-center mb-2">
-              <metric.icon className={cn("w-6 h-6", metric.color)} />
-            </div>
-            <div className="text-2xl font-bold text-slate-900">{metric.value}</div>
-            <div className="text-sm text-slate-600">{metric.label}</div>
-          </div>
-        ))}
-      </div>
+    
 
       {/* Security Badges */}
       <div className="flex flex-wrap justify-center gap-4">

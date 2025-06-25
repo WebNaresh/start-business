@@ -23,7 +23,7 @@ import {
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import EnhancedCTAButton from "@/components/ui/enhanced-cta-button"
-import TrustSignals from "@/components/ui/trust-signals"
+
 import EnhancedSearch from "@/components/services/enhanced-search"
 
 // Type definitions
@@ -491,11 +491,7 @@ export default function ServicesCarousel() {
           )}
         </div>
 
-        {/* Trust Signals */}
-        <div className="mt-12">
-          <TrustSignals variant="compact" className="justify-center" />
-        </div>
-
+   
         {/* View More Services Button */}
         <div className="mt-8 text-center">
           <EnhancedCTAButton

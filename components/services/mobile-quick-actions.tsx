@@ -150,21 +150,7 @@ export default function MobileQuickActions({ className = "" }: MobileQuickAction
         </Button>
       </div>
 
-      {/* Trust Indicator */}
-      <div className="mt-4 text-center">
-        <div className="flex items-center justify-center gap-2 text-xs text-slate-600">
-          <div className="flex items-center gap-1">
-            <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-            <span>10,000+ businesses registered</span>
-          </div>
-        </div>
-        <div className="flex items-center justify-center gap-1 mt-1">
-          {[...Array(5)].map((_, i) => (
-            <Star key={i} className="w-3 h-3 text-yellow-500 fill-current" />
-          ))}
-          <span className="text-xs text-slate-600 ml-1">4.9/5 rating</span>
-        </div>
-      </div>
+    
     </div>
   )
 }
