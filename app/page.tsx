@@ -12,6 +12,7 @@ import FAQSection from "@/components/home/faq-section"
 import { useState, useEffect } from 'react'
 import { subscribeUser, unsubscribeUser, sendNotification } from './actions'
 import LatestIncorporationsTicker from "@/components/home/LatestIncorporationsTicker"
+import ServiceRecommendationQuiz from "@/components/services/service-recommendation-quiz"
 
 function urlBase64ToUint8Array(base64String: string) {
   const padding = '='.repeat((4 - (base64String.length % 4)) % 4)
@@ -146,6 +147,14 @@ export default function Home() {
       <HeroSection />
       <ServicesSection />
       <StatsSection />
+          <section
+                className="py-8 sm:py-10 md:py-12 bg-gradient-to-br from-blue-50 to-indigo-50"
+                aria-labelledby="quiz-heading"
+              >
+                <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+                  <ServiceRecommendationQuiz />
+                </div>
+              </section>
       <FeaturesSection />
       <ProcessSection />
       <LatestIncorporationsTicker/>

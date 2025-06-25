@@ -1,10 +1,7 @@
 import type { Metadata } from "next"
-import ServicesHero from "./_components/services-hero"
-import ServicesNavigation from "./_components/services-navigation"
-import EnhancedServicesSection from "@/components/home/services-section"
-import ServiceRecommendationQuiz from "@/components/services/service-recommendation-quiz"
+
 import ServiceComparisonTool from "@/components/services/service-comparison-tool"
-import TrustSignals from "@/components/ui/trust-signals"
+
 import AccessibilityImprovements from "@/components/ui/accessibility-improvements"
 import VisualHierarchyImprovements from "@/components/ui/visual-hierarchy-improvements"
 import AllServicesPage from "./_components/services-navigation"
@@ -85,15 +82,8 @@ export default function ServicesPage() {
         {/* <ServicesNavigation /> */}
         {/* <ServicesHero /> */}
 
-        {/* Service Recommendation Quiz */}
-        <section
-          className="py-8 sm:py-10 md:py-12 bg-gradient-to-br from-blue-50 to-indigo-50"
-          aria-labelledby="quiz-heading"
-        >
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <ServiceRecommendationQuiz />
-          </div>
-        </section>
+     
+    
 
 
 <AllServicesPage/>

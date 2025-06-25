@@ -419,7 +419,7 @@ export default function AllServicesPage() {
       </section>
 
       {/* Filters and Search Section */}
-      <section className="py-6 sm:py-8 bg-white border-b border-slate-200 sticky top-0 z-40">
+      <section className="py-6 sm:py-8 bg-white border-b border-slate-200 sticky top-16 z-40">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col lg:flex-row gap-4 lg:gap-6 items-start lg:items-center justify-between">
 
