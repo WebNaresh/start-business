@@ -5,6 +5,32 @@ export interface EditorBlock extends OutputBlockData {
   data: any
 }
 
+// Utility function to clean asterisks from text content
+export function cleanAsterisks(text: string): string {
+  if (!text || typeof text !== 'string') return text
+
+  // More aggressive asterisk cleaning
+  return text
+    // First handle markdown-style formatting
+    .replace(/\*\*\*(.*?)\*\*\*/g, '<strong><em>$1</em></strong>') // Bold + Italic
+    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') // Bold
+    .replace(/\*(.*?)\*/g, '<em>$1</em>') // Italic
+    // Remove bullet point asterisks
+    .replace(/^\*\s+/gm, '') // Remove bullet point asterisks at start of lines
+    .replace(/^\*+\s*/gm, '') // Remove multiple asterisks at start of lines
+    // Remove standalone asterisks
+    .replace(/\s\*\s/g, ' ') // Remove standalone asterisks between spaces
+    .replace(/\s\*+\s/g, ' ') // Remove multiple standalone asterisks
+    // Remove asterisks at the beginning or end
+    .replace(/^\*+/gm, '') // Remove asterisks at start of lines
+    .replace(/\*+$/gm, '') // Remove asterisks at end of lines
+    // Remove any remaining isolated asterisks
+    .replace(/\*+/g, '') // Remove any remaining asterisks
+    // Clean up extra spaces
+    .replace(/\s+/g, ' ') // Replace multiple spaces with single space
+    .trim()
+}
+
 /**
  * Convert EditorJS output data to HTML
  */
@@ -60,12 +86,14 @@ function blockToHtml(block: EditorBlock): string {
 function headerToHtml(data: any): string {
   const level = data.level || 2
   const text = data.text || ''
-  return `<h${level} class="text-${level === 1 ? '4xl' : level === 2 ? '3xl' : level === 3 ? '2xl' : level === 4 ? 'xl' : 'lg'} font-bold mb-4 mt-6">${text}</h${level}>`
+  const cleanedText = cleanAsterisks(text)
+  return `<h${level} class="text-${level === 1 ? '4xl' : level === 2 ? '3xl' : level === 3 ? '2xl' : level === 4 ? 'xl' : 'lg'} font-bold mb-4 mt-6">${cleanedText}</h${level}>`
 }
 
 function paragraphToHtml(data: any): string {
   const text = data.text || ''
-  return `<p class="mb-4 leading-relaxed">${text}</p>`
+  const cleanedText = cleanAsterisks(text)
+  return `<p class="mb-4 leading-relaxed">${cleanedText}</p>`
 }
 
 function listToHtml(data: any): string {
@@ -93,8 +121,9 @@ function listToHtml(data: any): string {
         itemText = String(item)
       }
 
-      // Clean the text
-      return itemText
+      // Clean the text and asterisks
+      const cleanedText = cleanAsterisks(itemText)
+      return cleanedText
         .replace(/\[object Object\]/g, '') // Remove object references
         .replace(/\[object [^\]]+\]/g, '') // Remove any object patterns
         .replace(/undefined/g, '') // Remove undefined values

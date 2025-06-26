@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, use as usePromise } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { ArrowLeft } from 'lucide-react'
@@ -10,18 +10,19 @@ import BlogForm from '@/components/blog/blog-form'
 import type { Blog } from '@/lib/types'
 import AdminNavigation from '@/components/admin/admin-navigation'
 
-export default function EditBlogPage({ params }: { params: { slug: string } }) {
+export default function EditBlogPage({ params }: { params: Promise<{ slug: string }> }) {
   const router = useRouter()
+  const { slug } = usePromise(params) as { slug: string }
   const [isLoading, setIsLoading] = useState(true)
   const [blog, setBlog] = useState<Partial<Blog> | undefined>()
 
   useEffect(() => {
     fetchBlog()
-  }, [params.slug])
+  }, [slug])
 
   const fetchBlog = async () => {
     try {
-      const response = await fetch(`/api/blogs/${params.slug}`)
+      const response = await fetch(`/api/blogs/${slug}`)
       if (!response.ok) throw new Error('Blog not found')
       const data = await response.json()
       setBlog({
@@ -29,6 +30,8 @@ export default function EditBlogPage({ params }: { params: { slug: string } }) {
         metaTitle: data.metaTitle || '',
         metaDescription: data.metaDescription || '',
         excerpt: data.excerpt || '',
+        content: data.content || '',
+        editorData: data.editorData || '',
       })
     } catch (error) {
       toast.error('Failed to fetch blog')
@@ -40,7 +43,7 @@ export default function EditBlogPage({ params }: { params: { slug: string } }) {
 
   const handleSubmit = async (blogData: Partial<Blog>) => {
     try {
-      const response = await fetch(`/api/blogs/${params.slug}`, {
+      const response = await fetch(`/api/blogs/${slug}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

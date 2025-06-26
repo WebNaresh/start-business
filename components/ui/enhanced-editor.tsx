@@ -390,6 +390,9 @@ const EnhancedEditor = forwardRef<EditorRef, EditorProps>(({
         holderRef.current.id = editorId.current
       }
 
+      console.log('🎯 Enhanced Editor initializing with data:', data)
+      console.log('📊 Data blocks count:', data?.blocks?.length || 0)
+
       const editor = new EditorJS({
         holder: editorId.current,
         data: data || {

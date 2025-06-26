@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
 import { Button } from '@/components/ui/button'
 import { generateSlug } from '@/lib/utils'
-import { editorDataToHtml, htmlToEditorData } from '@/lib/editor-utils'
+import { editorDataToHtml, htmlToEditorData, cleanAsterisks } from '@/lib/editor-utils'
 import dynamic from 'next/dynamic'
 import { OutputData } from '@editorjs/editorjs'
 import type { Blog } from '@/lib/types'
@@ -50,21 +50,44 @@ export default function BlogForm({ initialData, isEditing = false, onSubmit }: B
     metaDescription: '',
     tags: '',
     featuredImage: '',
+    editorData: '',
     ...initialData,
   })
 
-  // Convert HTML content to EditorJS data on mount
+  // Convert content to EditorJS data on mount
   useEffect(() => {
-    if (initialData?.content && typeof initialData.content === 'string') {
+    console.log('🔄 BlogForm initialData:', initialData)
+    console.log('🔍 editorData field:', initialData?.editorData)
+    console.log('🔍 content field:', initialData?.content)
+
+    // Priority 1: Use editorData if available (new format)
+    if (initialData?.editorData && typeof initialData.editorData === 'string' && initialData.editorData.trim()) {
+      try {
+        const parsedData = JSON.parse(initialData.editorData)
+        console.log('✅ Using editorData (JSON):', parsedData)
+        console.log('📊 Blocks count:', parsedData.blocks?.length || 0)
+        setEditorData(parsedData)
+        return
+      } catch (error) {
+        console.error('❌ Failed to parse editorData:', error)
+      }
+    }
+
+    // Priority 2: Use content field if editorData is not available (legacy format)
+    if (initialData?.content && typeof initialData.content === 'string' && initialData.content.trim()) {
       try {
         // Try to parse as JSON first (EditorJS data)
         const parsedData = JSON.parse(initialData.content)
+        console.log('✅ Using content as JSON:', parsedData)
         setEditorData(parsedData)
       } catch {
         // If not JSON, convert HTML to EditorJS data
+        console.log('🔄 Converting HTML content to EditorJS')
         const convertedData = htmlToEditorData(initialData.content)
         setEditorData(convertedData)
       }
+    } else {
+      console.log('ℹ️ No content data found, using empty editor')
     }
   }, [initialData])
 
@@ -149,6 +172,66 @@ export default function BlogForm({ initialData, isEditing = false, onSubmit }: B
 
   const handleEditorChange = (data: OutputData) => {
     setEditorData(data)
+  }
+
+  const handleCleanContent = async () => {
+    if (!editorRef.current) return
+
+    try {
+      // Get current editor data
+      const currentData = await editorRef.current.save()
+
+      // Clean asterisks from all blocks
+      const cleanedBlocks = currentData.blocks.map(block => {
+        if (block.type === 'paragraph' && block.data?.text) {
+          return {
+            ...block,
+            data: {
+              ...block.data,
+              text: cleanAsterisks(block.data.text)
+            }
+          }
+        }
+
+        if (block.type === 'header' && block.data?.text) {
+          return {
+            ...block,
+            data: {
+              ...block.data,
+              text: cleanAsterisks(block.data.text)
+            }
+          }
+        }
+
+        if (block.type === 'list' && block.data?.items) {
+          return {
+            ...block,
+            data: {
+              ...block.data,
+              items: block.data.items.map((item: any) =>
+                typeof item === 'string' ? cleanAsterisks(item) : item
+              )
+            }
+          }
+        }
+
+        return block
+      })
+
+      // Update editor with cleaned content
+      const cleanedData = {
+        ...currentData,
+        blocks: cleanedBlocks
+      }
+
+      await editorRef.current.render(cleanedData)
+      setEditorData(cleanedData)
+
+      toast.success('Content cleaned! Asterisks removed from text.')
+    } catch (error) {
+      console.error('Error cleaning content:', error)
+      toast.error('Failed to clean content')
+    }
   }
 
   const generateExcerpt = async () => {
@@ -357,7 +440,7 @@ export default function BlogForm({ initialData, isEditing = false, onSubmit }: B
                 onImageUploaded={(imageUrl) => {
                   setBlog(prev => ({ ...prev, featuredImage: imageUrl }))
                 }}
-                currentImageUrl={blog.featuredImage}
+                currentImageUrl={blog.featuredImage || undefined}
                 disabled={isSaving}
                 maxSizeText="Max 5MB • JPEG, PNG, WebP • Optimized to WebP automatically"
               />
@@ -401,7 +484,20 @@ export default function BlogForm({ initialData, isEditing = false, onSubmit }: B
         <div className="bg-white rounded-lg border border-slate-200 p-6">
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-lg font-medium text-slate-900">Content Editor</h2>
-            <ContentImportDialog onImport={handleContentImport} />
+            <div className="flex items-center gap-2">
+              {isEditing && (
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="sm"
+                  onClick={handleCleanContent}
+                  className="text-orange-600 border-orange-200 hover:bg-orange-50"
+                >
+                  Clean Asterisks
+                </Button>
+              )}
+              <ContentImportDialog onImport={handleContentImport} />
+            </div>
           </div>
           <div className="bg-gradient-to-r from-blue-50 to-purple-50 p-4 rounded-lg border border-blue-200 mb-6">
             <div className="flex items-start gap-3">
