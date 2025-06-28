@@ -1,0 +1,14 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 📚 Documentation
+    url: https://github.com/WebNaresh/demand_to_karo_v2/wiki
+    about: Check our documentation for common questions and setup guides
+  - name: 💬 Discussions
+    url: https://github.com/WebNaresh/demand_to_karo_v2/discussions
+    about: Ask questions, share ideas, and discuss features with the community
+  - name: 🔒 Security Issues
+    url: mailto:security@demandtokaro.com
+    about: Please report security vulnerabilities privately via email
+  - name: 📞 Support
+    url: mailto:support@demandtokaro.com
+    about: Contact our support team for urgent issues or account-related questions

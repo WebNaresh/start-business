@@ -1,26 +1,29 @@
-import type { Metadata } from "next"
-import { Inter } from "next/font/google"
-import "./globals.css"
-import { UIProvider } from "@/context/ui-context"
-import { ThemeProvider } from "@/components/theme-provider"
-import Header from "@/components/header"
-import Footer from "@/components/footer"
-import Script from "next/script"
-import { Analytics } from "@vercel/analytics/next"
-import FloatingCallButton from "@/components/floating-call-button"
-import Chatbot from "@/components/Chatbot"
-import { Toaster } from 'sonner'
+import Chatbot from "@/components/Chatbot";
+import FloatingCallButton from "@/components/floating-call-button";
+import Footer from "@/components/footer";
+import Header from "@/components/header";
+import { ThemeProvider } from "@/components/theme-provider";
+import { UIProvider } from "@/contexts/ui-context";
+import { Analytics } from "@vercel/analytics/next";
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+import Script from "next/script";
+import { Toaster } from "sonner";
+import "./globals.css";
 
 const inter = Inter({
   subsets: ["latin"],
-  display: 'swap',
-  fallback: ['system-ui', 'arial']
-})
+  display: "swap",
+  fallback: ["system-ui", "arial"],
+});
 
 export const metadata: Metadata = {
-  title: "StartBusiness - Company Registration,MCA,GST,Income Tax Services,Trademark",
-  description: "Platform for company registration, trademark filing, GST registration, GST filing and income tax filing in India. Simplify your compliance and tax filing.",
-  keywords: "best online company registration,best CA firm in India,Best CA firm in Pune,Best ca frim near me,company registration,startup registration,private limited company registration,limited company registration,gst,business registration, startup, trademark, GST, FSSAI, compliance, legal services, India, Pune, online incorporation, business consultant, MSME, LLP, private limited, ngo registration, tax filing, business support",
+  title:
+    "StartBusiness - Company Registration,MCA,GST,Income Tax Services,Trademark",
+  description:
+    "Platform for company registration, trademark filing, GST registration, GST filing and income tax filing in India. Simplify your compliance and tax filing.",
+  keywords:
+    "best online company registration,best CA firm in India,Best CA firm in Pune,Best ca frim near me,company registration,startup registration,private limited company registration,limited company registration,gst,business registration, startup, trademark, GST, FSSAI, compliance, legal services, India, Pune, online incorporation, business consultant, MSME, LLP, private limited, ngo registration, tax filing, business support",
   authors: [{ name: "StartBusiness", url: "https://startbusiness.co.in" }],
   creator: "StartBusiness",
   publisher: "StartBusiness",
@@ -32,14 +35,16 @@ export const metadata: Metadata = {
       index: true,
       follow: true,
       noimageindex: false,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
     },
   },
   openGraph: {
-    title: "StartBusiness - Business Registration, Compliance & Legal Services in India",
-    description: "Professional company registration, trademark, GST, FSSAI, compliance, and legal services for startups and businesses in India. Fast, affordable, and expert support.",
+    title:
+      "StartBusiness - Business Registration, Compliance & Legal Services in India",
+    description:
+      "Professional company registration, trademark, GST, FSSAI, compliance, and legal services for startups and businesses in India. Fast, affordable, and expert support.",
     url: "https://www.startbusiness.co.in",
     siteName: "StartBusiness",
     images: [
@@ -55,8 +60,10 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "StartBusiness - Business Registration, Compliance & Legal Services in India",
-    description: "Professional company registration, trademark, GST, FSSAI, compliance, and legal services for startups and businesses in India. Fast, affordable, and expert support.",
+    title:
+      "StartBusiness - Business Registration, Compliance & Legal Services in India",
+    description:
+      "Professional company registration, trademark, GST, FSSAI, compliance, and legal services for startups and businesses in India. Fast, affordable, and expert support.",
     images: ["/hero_og.png"],
     creator: "@startbusinessin",
     site: "@startbusinessin",
@@ -72,18 +79,21 @@ export const metadata: Metadata = {
   applicationName: "StartBusiness",
   generator: "Next.js, Vercel",
   referrer: "origin-when-cross-origin",
-}
+};
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode
+  children: React.ReactNode;
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
         <meta name="apple-mobile-web-app-title" content="Start Business" />
-        <meta name="google-site-verification" content="VjHph2u3tld04cEok8zvpPBA-TEtxikvfvGo7hW-NBE" />
+        <meta
+          name="google-site-verification"
+          content="VjHph2u3tld04cEok8zvpPBA-TEtxikvfvGo7hW-NBE"
+        />
         {/* Google Analytics */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-2T86HZSNGB"
@@ -111,18 +121,13 @@ export default function RootLayout({
               <Header />
               <main className="flex-1">{children}</main>
               <Footer />
-             <FloatingCallButton/>
-             <Chatbot/>
+              <FloatingCallButton />
+              <Chatbot />
             </UIProvider>
           </div>
-          <Toaster 
-            position="top-center"
-            expand={true}
-            richColors
-            closeButton
-          />
+          <Toaster position="top-center" expand={true} richColors closeButton />
         </ThemeProvider>
       </body>
     </html>
-  )
+  );
 }
