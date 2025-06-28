@@ -17,13 +17,13 @@ export interface DatabaseHealth {
  */
 export async function checkDatabaseHealth(): Promise<DatabaseHealth> {
   const startTime = Date.now()
-  
+
   try {
     // Simple query to test connection
     await prisma.$queryRaw`SELECT 1`
-    
+
     const latency = Date.now() - startTime
-    
+
     return {
       isConnected: true,
       latency,
@@ -31,7 +31,7 @@ export async function checkDatabaseHealth(): Promise<DatabaseHealth> {
     }
   } catch (error) {
     console.error('Database health check failed:', error)
-    
+
     return {
       isConnected: false,
       error: error instanceof Error ? error.message : 'Unknown database error',
@@ -49,25 +49,25 @@ export async function retryDatabaseConnection(
   baseDelay: number = 1000
 ): Promise<any> {
   let lastError: Error | null = null
-  
+
   for (let attempt = 1; attempt <= maxRetries; attempt++) {
     try {
       return await operation()
     } catch (error) {
       lastError = error instanceof Error ? error : new Error('Unknown error')
-      
+
       if (attempt === maxRetries) {
         throw lastError
       }
-      
+
       // Exponential backoff
       const delay = baseDelay * Math.pow(2, attempt - 1)
       console.log(`Database operation failed (attempt ${attempt}/${maxRetries}), retrying in ${delay}ms...`)
-      
+
       await new Promise(resolve => setTimeout(resolve, delay))
     }
   }
-  
+
   throw lastError
 }
 
@@ -92,7 +92,7 @@ export async function safeDatabaseOperation<T>(
  */
 export function isConnectionError(error: any): boolean {
   if (!error) return false
-  
+
   const errorMessage = error.message?.toLowerCase() || ''
   const connectionErrors = [
     'can\'t reach database server',
@@ -103,7 +103,7 @@ export function isConnectionError(error: any): boolean {
     'econnrefused',
     'etimedout'
   ]
-  
+
   return connectionErrors.some(pattern => errorMessage.includes(pattern))
 }
 
@@ -113,32 +113,30 @@ export function isConnectionError(error: any): boolean {
 export function getMockBlogData() {
   return [
     {
-      id: 'mock-1',
+      id: 1,
       title: 'How to Start a Private Limited Company in India',
       slug: 'how-to-start-private-limited-company-india',
       excerpt: 'A comprehensive guide to registering your private limited company in India with all the required documents and procedures.',
-      content: '<h2>Starting Your Private Limited Company</h2><p>This is mock content displayed when the database is unavailable.</p>',
+      featuredImage: null,
+      author: 'StartBusiness Team',
       status: 'published',
-      createdAt: new Date(),
-      updatedAt: new Date(),
+      publishedAt: new Date(),
       metaTitle: 'How to Start a Private Limited Company in India',
       metaDescription: 'Learn the complete process of starting a private limited company in India',
-      tags: 'business registration, private limited company, india',
-      imageUrl: null
+      tags: 'business registration, private limited company, india'
     },
     {
-      id: 'mock-2',
+      id: 2,
       title: 'GST Registration Process Made Simple',
       slug: 'gst-registration-process-simple',
       excerpt: 'Step-by-step guide to GST registration for your business with required documents and online process.',
-      content: '<h2>GST Registration Guide</h2><p>This is mock content displayed when the database is unavailable.</p>',
+      featuredImage: null,
+      author: 'StartBusiness Team',
       status: 'published',
-      createdAt: new Date(),
-      updatedAt: new Date(),
+      publishedAt: new Date(),
       metaTitle: 'GST Registration Process Made Simple',
       metaDescription: 'Complete guide to GST registration for businesses in India',
-      tags: 'gst registration, tax compliance, business',
-      imageUrl: null
+      tags: 'gst registration, tax compliance, business'
     }
   ]
 }

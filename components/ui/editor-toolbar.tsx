@@ -1,247 +1,277 @@
-"use client"
+"use client";
 
-import React from 'react'
-import {
-  Type,
-  Bold,
-  Italic,
-  Underline,
-  List,
-  ListOrdered,
-  Quote,
-  Code,
-  Link,
-  Image,
-  Minus,
-  Table,
-  Video
-} from 'lucide-react'
-import { Button } from '@/components/ui/button'
+import { Button } from "@/components/ui/button";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@/components/ui/tooltip"
-import { uploadImage, createImageInput } from '@/lib/image-upload'
+} from "@/components/ui/tooltip";
+import { createImageInput, uploadImage } from "@/lib/image-upload";
+import {
+  Bold,
+  Code,
+  Image,
+  Italic,
+  Link,
+  List,
+  ListOrdered,
+  Minus,
+  Quote,
+  Table,
+  Type,
+  Underline,
+  Video,
+} from "lucide-react";
+import React from "react";
 
 interface EditorToolbarProps {
-  onInsertBlock: (blockType: string, data?: any) => void
-  onToggleInline: (tool: string) => void
-  className?: string
+  onInsertBlock: (blockType: string, data?: any) => void;
+  onToggleInline: (tool: string) => void;
+  className?: string;
 }
 
 interface ToolbarGroup {
-  id: string
-  label: string
-  buttons: ToolbarButton[]
+  id: string;
+  label: string;
+  buttons: ToolbarButton[];
 }
 
 interface ToolbarButton {
-  id: string
-  label: string
-  icon: React.ReactNode
-  action: () => void
-  type: 'block' | 'inline'
-  shortcut?: string
+  id: string;
+  label: string;
+  icon: React.ReactNode;
+  action: () => void;
+  type: "block" | "inline";
+  shortcut?: string;
 }
 
-export default function EditorToolbar({ onInsertBlock, onToggleInline, className = "" }: EditorToolbarProps) {
-
+export default function EditorToolbar({
+  onInsertBlock,
+  onToggleInline,
+  className = "",
+}: EditorToolbarProps) {
   const handleImageUpload = async () => {
     const input = createImageInput(async (file) => {
       try {
-        const uploadedImage = await uploadImage(file)
-        onInsertBlock('image', {
+        const uploadedImage = await uploadImage(file);
+        onInsertBlock("image", {
           file: {
-            url: uploadedImage.url
+            url: uploadedImage.url,
           },
-          caption: '',
+          caption: "",
           withBorder: false,
           withBackground: false,
-          stretched: false
-        })
+          stretched: false,
+        });
       } catch (error) {
-        console.error('Error uploading image:', error)
-        alert(error instanceof Error ? error.message : 'Failed to upload image')
+        console.error("Error uploading image:", error);
+        alert(
+          error instanceof Error ? error.message : "Failed to upload image"
+        );
       }
-    })
+    });
 
-    document.body.appendChild(input)
-    input.click()
-    document.body.removeChild(input)
-  }
+    document.body.appendChild(input);
+    input.click();
+    document.body.removeChild(input);
+  };
 
   const handleLinkInsertion = () => {
-    const url = prompt('Enter the URL:')
+    const url = prompt("Enter the URL:");
     if (url) {
-      onInsertBlock('linkTool', { link: url })
+      onInsertBlock("linkTool", { link: url });
     }
-  }
+  };
 
   const toolbarGroups: ToolbarGroup[] = [
     {
-      id: 'headers',
-      label: 'Headers',
+      id: "headers",
+      label: "Headers",
       buttons: [
         {
-          id: 'header-1',
-          label: 'Heading 1',
+          id: "header-1",
+          label: "Heading 1",
           icon: <Type className="w-4 h-4 font-bold" />,
-          action: () => onInsertBlock('header', { text: '', level: 1 }),
-          type: 'block',
-          shortcut: 'Ctrl+Alt+1'
+          action: () => onInsertBlock("header", { text: "", level: 1 }),
+          type: "block",
+          shortcut: "Ctrl+Alt+1",
         },
         {
-          id: 'header-2',
-          label: 'Heading 2',
+          id: "header-2",
+          label: "Heading 2",
           icon: <Type className="w-3.5 h-3.5" />,
-          action: () => onInsertBlock('header', { text: '', level: 2 }),
-          type: 'block',
-          shortcut: 'Ctrl+Alt+2'
+          action: () => onInsertBlock("header", { text: "", level: 2 }),
+          type: "block",
+          shortcut: "Ctrl+Alt+2",
         },
         {
-          id: 'header-3',
-          label: 'Heading 3',
+          id: "header-3",
+          label: "Heading 3",
           icon: <Type className="w-3 h-3" />,
-          action: () => onInsertBlock('header', { text: '', level: 3 }),
-          type: 'block',
-          shortcut: 'Ctrl+Alt+3'
-        }
-      ]
+          action: () => onInsertBlock("header", { text: "", level: 3 }),
+          type: "block",
+          shortcut: "Ctrl+Alt+3",
+        },
+      ],
     },
     {
-      id: 'formatting',
-      label: 'Format',
+      id: "formatting",
+      label: "Format",
       buttons: [
         {
-          id: 'bold',
-          label: 'Bold',
+          id: "bold",
+          label: "Bold",
           icon: <Bold className="w-4 h-4" />,
-          action: () => onToggleInline('bold'),
-          type: 'inline',
-          shortcut: 'Ctrl+B'
+          action: () => onToggleInline("bold"),
+          type: "inline",
+          shortcut: "Ctrl+B",
         },
         {
-          id: 'italic',
-          label: 'Italic',
+          id: "italic",
+          label: "Italic",
           icon: <Italic className="w-4 h-4" />,
-          action: () => onToggleInline('italic'),
-          type: 'inline',
-          shortcut: 'Ctrl+I'
+          action: () => onToggleInline("italic"),
+          type: "inline",
+          shortcut: "Ctrl+I",
         },
         {
-          id: 'underline',
-          label: 'Underline',
+          id: "underline",
+          label: "Underline",
           icon: <Underline className="w-4 h-4" />,
-          action: () => onToggleInline('underline'),
-          type: 'inline',
-          shortcut: 'Ctrl+U'
-        }
-      ]
+          action: () => onToggleInline("underline"),
+          type: "inline",
+          shortcut: "Ctrl+U",
+        },
+      ],
     },
     {
-      id: 'lists',
-      label: 'Lists',
+      id: "lists",
+      label: "Lists",
       buttons: [
         {
-          id: 'list-unordered',
-          label: 'Bullet List',
+          id: "list-unordered",
+          label: "Bullet List",
           icon: <List className="w-4 h-4" />,
-          action: () => onInsertBlock('list', { style: 'unordered', items: [''] }),
-          type: 'block',
-          shortcut: 'Ctrl+Shift+8'
+          action: () =>
+            onInsertBlock("list", { style: "unordered", items: [""] }),
+          type: "block",
+          shortcut: "Ctrl+Shift+8",
         },
         {
-          id: 'list-ordered',
-          label: 'Numbered List',
+          id: "list-ordered",
+          label: "Numbered List",
           icon: <ListOrdered className="w-4 h-4" />,
-          action: () => onInsertBlock('list', { style: 'ordered', items: [''] }),
-          type: 'block',
-          shortcut: 'Ctrl+Shift+7'
-        }
-      ]
+          action: () =>
+            onInsertBlock("list", { style: "ordered", items: [""] }),
+          type: "block",
+          shortcut: "Ctrl+Shift+7",
+        },
+      ],
     },
     {
-      id: 'blocks',
-      label: 'Blocks',
+      id: "blocks",
+      label: "Blocks",
       buttons: [
         {
-          id: 'quote',
-          label: 'Quote',
+          id: "quote",
+          label: "Quote",
           icon: <Quote className="w-4 h-4" />,
-          action: () => onInsertBlock('quote', { text: '', caption: '' }),
-          type: 'block',
-          shortcut: 'Ctrl+Shift+Q'
+          action: () => onInsertBlock("quote", { text: "", caption: "" }),
+          type: "block",
+          shortcut: "Ctrl+Shift+Q",
         },
         {
-          id: 'code',
-          label: 'Code Block',
+          id: "code",
+          label: "Code Block",
           icon: <Code className="w-4 h-4" />,
-          action: () => onInsertBlock('code', { code: '' }),
-          type: 'block',
-          shortcut: 'Ctrl+Shift+C'
+          action: () => onInsertBlock("code", { code: "" }),
+          type: "block",
+          shortcut: "Ctrl+Shift+C",
         },
         {
-          id: 'delimiter',
-          label: 'Divider',
+          id: "delimiter",
+          label: "Divider",
           icon: <Minus className="w-4 h-4" />,
-          action: () => onInsertBlock('delimiter'),
-          type: 'block'
+          action: () => onInsertBlock("delimiter"),
+          type: "block",
         },
         {
-          id: 'table',
-          label: 'Table',
+          id: "table",
+          label: "Table",
           icon: <Table className="w-4 h-4" />,
-          action: () => onInsertBlock('table', { content: [['', ''], ['', '']] }),
-          type: 'block'
-        }
-      ]
+          action: () =>
+            onInsertBlock("table", {
+              content: [
+                ["", ""],
+                ["", ""],
+              ],
+            }),
+          type: "block",
+        },
+      ],
     },
     {
-      id: 'media',
-      label: 'Media',
+      id: "media",
+      label: "Media",
       buttons: [
         {
-          id: 'link',
-          label: 'Link',
+          id: "link",
+          label: "Link",
           icon: <Link className="w-4 h-4" />,
           action: handleLinkInsertion,
-          type: 'block',
-          shortcut: 'Ctrl+K'
+          type: "block",
+          shortcut: "Ctrl+K",
         },
         {
-          id: 'image',
-          label: 'Image',
+          id: "image",
+          label: "Image",
           icon: <Image className="w-4 h-4" />,
           action: handleImageUpload,
-          type: 'block'
+          type: "block",
         },
         {
-          id: 'embed',
-          label: 'Embed',
+          id: "embed",
+          label: "Embed",
           icon: <Video className="w-4 h-4" />,
-          action: () => onInsertBlock('embed', { service: '', source: '', embed: '', width: 580, height: 320 }),
-          type: 'block'
-        }
-      ]
-    }
-  ]
+          action: () =>
+            onInsertBlock("embed", {
+              service: "",
+              source: "",
+              embed: "",
+              width: 580,
+              height: 320,
+            }),
+          type: "block",
+        },
+      ],
+    },
+  ];
 
-  const toolbarButtons: ToolbarButton[] = toolbarGroups.flatMap(group => group.buttons)
-
+  const toolbarButtons: ToolbarButton[] = toolbarGroups.flatMap(
+    (group) => group.buttons
+  );
 
   const renderToolbarButton = (button: ToolbarButton) => (
     <TooltipProvider key={button.id}>
       <Tooltip>
         <TooltipTrigger asChild>
           <Button
+            type="button"
             variant="ghost"
             size="sm"
-            onClick={button.action}
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              button.action();
+            }}
             className={`
               h-9 w-9 p-0 hover:bg-slate-100 hover:text-slate-900 transition-colors
-              ${button.type === 'inline' ? 'border-r border-slate-200 last:border-r-0' : ''}
+              ${
+                button.type === "inline"
+                  ? "border-r border-slate-200 last:border-r-0"
+                  : ""
+              }
             `}
             aria-label={button.label}
           >
@@ -258,18 +288,26 @@ export default function EditorToolbar({ onInsertBlock, onToggleInline, className
         </TooltipContent>
       </Tooltip>
     </TooltipProvider>
-  )
+  );
 
   return (
-    <div className={`editor-toolbar bg-white border border-slate-200 rounded-lg p-2 shadow-sm ${className}`}>
+    <div
+      className={`editor-toolbar bg-white border border-slate-200 rounded-lg p-2 shadow-sm ${className}`}
+    >
       {/* Desktop Toolbar */}
       <div className="hidden md:flex items-center gap-1">
         {toolbarGroups.map((group, groupIndex) => (
           <div
             key={group.id}
-            className={`flex items-center ${groupIndex < toolbarGroups.length - 1 ? 'border-r border-slate-200 pr-2 mr-2' : ''}`}
+            className={`flex items-center ${
+              groupIndex < toolbarGroups.length - 1
+                ? "border-r border-slate-200 pr-2 mr-2"
+                : ""
+            }`}
           >
-            <span className="text-xs text-slate-500 mr-2 font-medium">{group.label}</span>
+            <span className="text-xs text-slate-500 mr-2 font-medium">
+              {group.label}
+            </span>
             {group.buttons.map(renderToolbarButton)}
           </div>
         ))}
@@ -285,14 +323,14 @@ export default function EditorToolbar({ onInsertBlock, onToggleInline, className
               toolbarGroups[0].buttons[1], // H2
               toolbarGroups[1].buttons[0], // Bold
               toolbarGroups[1].buttons[1], // Italic
-              toolbarGroups[2].buttons[0]  // Bullet List
+              toolbarGroups[2].buttons[0], // Bullet List
             ].map(renderToolbarButton)}
           </div>
           <div className="flex items-center gap-1">
             {/* Media tools: Link, Image */}
             {[
               toolbarGroups[4].buttons[0], // Link
-              toolbarGroups[4].buttons[1]  // Image
+              toolbarGroups[4].buttons[1], // Image
             ].map(renderToolbarButton)}
           </div>
         </div>
@@ -304,7 +342,7 @@ export default function EditorToolbar({ onInsertBlock, onToggleInline, className
             {[
               toolbarGroups[3].buttons[0], // Quote
               toolbarGroups[3].buttons[1], // Code
-              toolbarGroups[3].buttons[2]  // Divider
+              toolbarGroups[3].buttons[2], // Divider
             ].map(renderToolbarButton)}
           </div>
           <div className="flex items-center gap-1">
@@ -312,11 +350,11 @@ export default function EditorToolbar({ onInsertBlock, onToggleInline, className
             {[
               toolbarGroups[2].buttons[1], // Numbered List
               toolbarGroups[3].buttons[3], // Table
-              toolbarGroups[4].buttons[2]  // Embed
+              toolbarGroups[4].buttons[2], // Embed
             ].map(renderToolbarButton)}
           </div>
         </div>
       </div>
     </div>
-  )
+  );
 }

@@ -103,7 +103,9 @@ const config = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [require("tailwindcss-animate"), require('@tailwindcss/typography')({
+    className: 'editorjs-typography-fix',
+  }),],
 } satisfies Config
 
 export default config

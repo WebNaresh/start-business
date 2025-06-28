@@ -1,35 +1,38 @@
-import type { Metadata } from "next"
-import { notFound } from "next/navigation"
-import servicesData from "./data/services.json"
-import DynamicServicePage from "./_components/dynamic-service-page"
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+import DynamicServicePage from "./_components/dynamic-service-page";
+import servicesData from "./data/services.json";
 
 interface ServicePageProps {
-  params: {
-    slug: string
-  }
+  params: Promise<{
+    slug: string;
+  }>;
 }
 
 // Main component that handles the actual page content
 async function ServicePageContent({ slug }: { slug: string }) {
-  const service = servicesData[slug as keyof typeof servicesData]
+  const service = servicesData[slug as keyof typeof servicesData];
 
   if (!service) {
-    notFound()
+    notFound();
   }
 
-  return <DynamicServicePage service={service} slug={slug} />
+  return <DynamicServicePage service={service} slug={slug} />;
 }
 
 // Enhanced metadata generation
-export async function generateMetadata({ params }: ServicePageProps): Promise<Metadata> {
-  const param = await params
-  const service = servicesData[param.slug as keyof typeof servicesData]
+export async function generateMetadata({
+  params,
+}: ServicePageProps): Promise<Metadata> {
+  const param = await params;
+  const service = servicesData[param.slug as keyof typeof servicesData];
 
   if (!service) {
     return {
       title: "Service Not Found - StartBusiness",
-      description: "The requested service could not be found. Please check the URL or browse our available services.",
-    }
+      description:
+        "The requested service could not be found. Please check the URL or browse our available services.",
+    };
   }
 
   // Generate keywords based on service details
@@ -48,7 +51,7 @@ export async function generateMetadata({ params }: ServicePageProps): Promise<Me
     "business documentation",
     "professional services",
     "business consulting",
-  ]
+  ];
 
   // Generate structured data for rich snippets
   const structuredData = {
@@ -63,7 +66,7 @@ export async function generateMetadata({ params }: ServicePageProps): Promise<Me
     },
     areaServed: "India",
     serviceType: service.category,
-  }
+  };
 
   return {
     title: `${service.title} - StartBusiness | Expert Business Services`,
@@ -108,18 +111,18 @@ export async function generateMetadata({ params }: ServicePageProps): Promise<Me
     other: {
       "structured-data": JSON.stringify(structuredData),
     },
-  }
+  };
 }
 
 // Static parameter generation
 export async function generateStaticParams() {
   return Object.keys(servicesData).map((slug) => ({
     slug,
-  }))
+  }));
 }
 
 // Page component that handles the route
 export default async function ServicePage({ params }: ServicePageProps) {
-  const param = await params
-  return <ServicePageContent slug={param.slug} />
+  const param = await params;
+  return <ServicePageContent slug={param.slug} />;
 }
