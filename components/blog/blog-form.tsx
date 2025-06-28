@@ -5,9 +5,11 @@ import ContentImportDialog from "@/components/blog/content-import-dialog";
 import { Button } from "@/components/ui/button";
 import type { EditorRef } from "@/components/ui/enhanced-editor";
 import ImageUpload from "@/components/ui/image-upload";
-import { editorDataToHtml, htmlToEditorData } from "@/lib/editor-utils";
+import { Skeleton } from "@/components/ui/skeleton";
+import { htmlToEditorData } from "@/lib/editor-utils";
 import type { Blog } from "@/lib/types";
 import { generateSlug } from "@/lib/utils";
+import { useQuery } from "@tanstack/react-query";
 import { OutputData } from "@editorjs/editorjs";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
@@ -34,18 +36,46 @@ interface BlogFormProps {
   initialData?: Partial<Blog>;
   isEditing?: boolean;
   onSubmit?: (data: Partial<Blog>) => Promise<void>;
+  slug?: string; // For fetching data when editing
 }
+
+// Fetch blog data function
+const fetchBlogData = async (slug: string): Promise<Blog> => {
+  const response = await fetch(`/api/blogs/${slug}`);
+  if (!response.ok) {
+    throw new Error("Failed to fetch blog data");
+  }
+  return response.json();
+};
 
 export default function BlogForm({
   initialData,
   isEditing = false,
   onSubmit,
+  slug,
 }: BlogFormProps) {
   const router = useRouter();
   const editorRef = useRef<EditorRef>(null);
   const [isSaving, setIsSaving] = useState(false);
   const [editorData, setEditorData] = useState<OutputData | undefined>();
   console.log(`🚀 ~ editorData:`, editorData);
+
+  // Use TanStack Query to fetch blog data when editing
+  const {
+    data: fetchedBlogData,
+    isLoading: isLoadingBlogData,
+    error,
+  } = useQuery({
+    queryKey: ["blog", slug],
+    queryFn: () => fetchBlogData(slug!),
+    enabled: isEditing && !!slug, // Only fetch when editing and slug is provided
+    staleTime: 5 * 60 * 1000, // 5 minutes
+    gcTime: 10 * 60 * 1000, // 10 minutes
+  });
+
+  // Determine the data source (fetched data takes priority over initialData)
+  const blogData = fetchedBlogData || initialData;
+  const isLoading = isEditing ? isLoadingBlogData : false;
 
   const [blog, setBlog] = useState<Partial<Blog>>({
     title: "",
@@ -58,25 +88,27 @@ export default function BlogForm({
     tags: "",
     featuredImage: "",
     editorData: "",
-    ...initialData,
+    ...blogData,
   });
 
-  // Convert content to EditorJS data on mount
+  // Convert content to EditorJS data when data is available
   useEffect(() => {
-    console.log("🔄 BlogForm initialData:", initialData);
-    console.log("🔍 editorData field:", initialData?.editorData);
-    console.log("🔍 content field:", initialData?.content);
+    if (!blogData) return;
+
+    // Update blog state when data changes
+    setBlog((prev) => ({
+      ...prev,
+      ...blogData,
+    }));
 
     // Priority 1: Use editorData if available (new format)
     if (
-      initialData?.editorData &&
-      typeof initialData.editorData === "string" &&
-      initialData.editorData.trim()
+      blogData?.editorData &&
+      typeof blogData.editorData === "string" &&
+      blogData.editorData.trim()
     ) {
       try {
-        const parsedData = JSON.parse(initialData.editorData);
-        console.log("✅ Using editorData (JSON):", parsedData);
-        console.log("📊 Blocks count:", parsedData.blocks?.length || 0);
+        const parsedData = JSON.parse(blogData.editorData);
         setEditorData(parsedData);
         return;
       } catch (error) {
@@ -86,25 +118,21 @@ export default function BlogForm({
 
     // Priority 2: Use content field if editorData is not available (legacy format)
     if (
-      initialData?.content &&
-      typeof initialData.content === "string" &&
-      initialData.content.trim()
+      blogData?.content &&
+      typeof blogData.content === "string" &&
+      blogData.content.trim()
     ) {
       try {
         // Try to parse as JSON first (EditorJS data)
-        const parsedData = JSON.parse(initialData.content);
-        console.log("✅ Using content as JSON:", parsedData);
+        const parsedData = JSON.parse(blogData.content);
         setEditorData(parsedData);
       } catch {
         // If not JSON, convert HTML to EditorJS data
-        console.log("🔄 Converting HTML content to EditorJS");
-        const convertedData = htmlToEditorData(initialData.content);
+        const convertedData = htmlToEditorData(blogData.content);
         setEditorData(convertedData);
       }
-    } else {
-      console.log("ℹ️ No content data found, using empty editor");
     }
-  }, [initialData]);
+  }, [blogData]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -116,33 +144,12 @@ export default function BlogForm({
 
       if (editorRef.current) {
         const editorOutput = await editorRef.current.save();
-        console.log("=== Blog Save Debug ===");
-        console.log("Editor blocks:", editorOutput.blocks?.length || 0);
-        console.log(
-          "Block types:",
-          editorOutput.blocks?.map((b) => b.type).join(", ") || "none"
-        );
 
         const listBlocks =
           editorOutput.blocks?.filter((b) => b.type === "list") || [];
-        console.log("List blocks found:", listBlocks.length);
-        listBlocks.forEach((block, index) => {
-          console.log(
-            `List ${index + 1} (${block.data?.style}):`,
-            block.data?.items?.length || 0,
-            "items"
-          );
-          console.log("Items:", block.data?.items);
-        });
 
         // ONLY: Store the raw EditorJS JSON data
         editorJsonData = JSON.stringify(editorOutput);
-
-        console.log(
-          "✅ SAVING ONLY EditorJS JSON - length:",
-          editorJsonData.length
-        );
-        console.log("📋 Lists preserved in EditorJS:", listBlocks.length);
       }
 
       const blogData = {
@@ -211,9 +218,28 @@ export default function BlogForm({
     if (editorRef.current) {
       try {
         const data = await editorRef.current.save();
-        const htmlContent = editorDataToHtml(data);
+
+        // Simple conversion to extract text
+        const textContent =
+          data.blocks
+            ?.map((block) => {
+              switch (block.type) {
+                case "paragraph":
+                  return block.data.text || "";
+                case "header":
+                  return block.data.text || "";
+                case "list":
+                  return block.data.items?.join(" ") || "";
+                case "quote":
+                  return block.data.text || "";
+                default:
+                  return block.data.text || "";
+              }
+            })
+            .join(" ") || "";
+
         // Extract plain text and limit to 160 characters
-        const plainText = htmlContent.replace(/<[^>]*>/g, "").trim();
+        const plainText = textContent.replace(/<[^>]*>/g, "").trim();
         const excerpt =
           plainText.length > 160
             ? plainText.substring(0, 157) + "..."
@@ -270,34 +296,16 @@ export default function BlogForm({
     // Use AI-generated EditorJS data directly - no conversion needed!
     if (editorRef.current && generatedContent.editorData) {
       try {
-        console.log("🤖 Processing AI-generated EditorJS data...");
-
         // Parse the EditorJS data directly from AI
         const editorData =
           typeof generatedContent.editorData === "string"
             ? JSON.parse(generatedContent.editorData)
             : generatedContent.editorData;
 
-        console.log(
-          "✅ AI generated EditorJS blocks:",
-          editorData.blocks?.length || 0
-        );
-        console.log(
-          "📋 Block types:",
-          editorData.blocks?.map((b: any) => b.type).join(", ") || "none"
-        );
-
         // Log list blocks for debugging (informational only)
         const listBlocks =
           editorData.blocks?.filter((b: any) => b.type === "list") || [];
-        console.log("📝 List blocks found:", listBlocks.length);
-        listBlocks.forEach((block: any, index: number) => {
-          console.log(
-            `  List ${index + 1} (${block.data?.style}):`,
-            block.data?.items?.length || 0,
-            "items"
-          );
-        });
+        listBlocks.forEach((block: any, index: number) => {});
 
         // Render EditorJS data directly in editor
         await editorRef.current.clear();
@@ -345,9 +353,20 @@ export default function BlogForm({
         toast.success("✨ AI content applied! You can now edit and format it.");
       }
     }
-
-    console.log("AI content generation completed successfully");
   };
+
+  // Handle error state
+  if (error) {
+    return (
+      <div className="text-center py-12">
+        <div className="text-red-600 mb-4">
+          <p className="text-lg font-semibold">Error loading blog data</p>
+          <p className="text-sm">{error.message}</p>
+        </div>
+        <Button onClick={() => window.location.reload()}>Try Again</Button>
+      </div>
+    );
+  }
 
   return (
     <div>
@@ -383,16 +402,20 @@ export default function BlogForm({
               >
                 Title *
               </label>
-              <input
-                type="text"
-                id="title"
-                name="title"
-                value={blog.title || ""}
-                onChange={handleChange}
-                className="mt-1 block w-full rounded-md border border-slate-300 px-3 py-2 text-slate-900 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
-                required
-                placeholder="Enter blog title..."
-              />
+              {isLoading ? (
+                <Skeleton className="h-10 w-full mt-1" />
+              ) : (
+                <input
+                  type="text"
+                  id="title"
+                  name="title"
+                  value={blog.title || ""}
+                  onChange={handleChange}
+                  className="mt-1 block w-full rounded-md border border-slate-300 px-3 py-2 text-slate-900 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                  required
+                  placeholder="Enter blog title..."
+                />
+              )}
             </div>
 
             <div>
@@ -402,15 +425,19 @@ export default function BlogForm({
               >
                 Slug
               </label>
-              <input
-                type="text"
-                id="slug"
-                name="slug"
-                value={blog.slug || ""}
-                onChange={handleChange}
-                className="mt-1 block w-full rounded-md border border-slate-300 px-3 py-2 text-slate-900 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
-                placeholder="auto-generated-from-title"
-              />
+              {isLoading ? (
+                <Skeleton className="h-10 w-full mt-1" />
+              ) : (
+                <input
+                  type="text"
+                  id="slug"
+                  name="slug"
+                  value={blog.slug || ""}
+                  onChange={handleChange}
+                  className="mt-1 block w-full rounded-md border border-slate-300 px-3 py-2 text-slate-900 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                  placeholder="auto-generated-from-title"
+                />
+              )}
               <p className="mt-1 text-xs text-slate-500">
                 URL-friendly version of the title. Leave blank to auto-generate.
               </p>
@@ -423,16 +450,20 @@ export default function BlogForm({
               >
                 Author *
               </label>
-              <input
-                type="text"
-                id="author"
-                name="author"
-                value={blog.author || ""}
-                onChange={handleChange}
-                className="mt-1 block w-full rounded-md border border-slate-300 px-3 py-2 text-slate-900 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
-                required
-                placeholder="Author name..."
-              />
+              {isLoading ? (
+                <Skeleton className="h-10 w-full mt-1" />
+              ) : (
+                <input
+                  type="text"
+                  id="author"
+                  name="author"
+                  value={blog.author || ""}
+                  onChange={handleChange}
+                  className="mt-1 block w-full rounded-md border border-slate-300 px-3 py-2 text-slate-900 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                  required
+                  placeholder="Author name..."
+                />
+              )}
             </div>
 
             <div>
@@ -538,6 +569,7 @@ export default function BlogForm({
             placeholder="Start writing your blog post... Try pasting formatted content from AI tools!"
             showToolbar={true}
             className="min-h-[500px]"
+            isLoading={isLoading}
           />
         </div>
 

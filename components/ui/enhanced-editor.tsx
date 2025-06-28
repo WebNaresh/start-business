@@ -22,15 +22,16 @@ export interface EditorRef {
 }
 
 interface EditorProps {
-  data?: OutputData;
+  data?: OutputData | undefined;
   onChange?: (data: OutputData) => void;
   placeholder?: string;
   showToolbar?: boolean;
   className?: string;
+  isLoading: boolean; // Required prop
 }
 
 const EnhancedEditor = forwardRef<EditorRef, EditorProps>(
-  ({ data, onChange, placeholder, showToolbar, className }, ref) => {
+  ({ data, onChange, placeholder, showToolbar, className, isLoading }, ref) => {
     const editorRef = useRef<EditorJS | null>(null);
     const holderRef = useRef<HTMLDivElement>(null);
     const editorId = useRef(
@@ -127,11 +128,36 @@ const EnhancedEditor = forwardRef<EditorRef, EditorProps>(
       };
     }, []);
 
+    // Show skeleton while loading
+    if (isLoading) {
+      return (
+        <div
+          className={`editorjs-typography-fix w-full max-w-[-webkit-fill-available] min-h-[400px] p-4 border border-slate-200 rounded-lg ${
+            className || ""
+          }`}
+          style={{
+            width: "100%",
+            minHeight: "400px",
+          }}
+        >
+          <div className="animate-pulse space-y-4">
+            <div className="h-4 bg-slate-200 rounded w-3/4"></div>
+            <div className="h-4 bg-slate-200 rounded w-1/2"></div>
+            <div className="h-4 bg-slate-200 rounded w-5/6"></div>
+            <div className="h-4 bg-slate-200 rounded w-2/3"></div>
+            <div className="h-4 bg-slate-200 rounded w-4/5"></div>
+            <div className="h-4 bg-slate-200 rounded w-1/3"></div>
+            <div className="h-4 bg-slate-200 rounded w-3/5"></div>
+          </div>
+        </div>
+      );
+    }
+
     return (
       <div
         ref={holderRef}
         id={editorId}
-        className={`editorjs-typography-fix w-full min-h-[400px] p-4 border border-slate-200 rounded-lg focus-within:border-blue-500 focus-within:ring-1 focus-within:ring-blue-500 ${
+        className={`editorjs-typography-fix w-full max-w-[-webkit-fill-available] min-h-[400px] p-4 border border-slate-200 rounded-lg focus-within:border-blue-500 focus-within:ring-1 focus-within:ring-blue-500 ${
           className || ""
         }`}
         style={{

@@ -2,6 +2,7 @@ import Chatbot from "@/components/Chatbot";
 import FloatingCallButton from "@/components/floating-call-button";
 import Footer from "@/components/footer";
 import Header from "@/components/header";
+import QueryProvider from "@/components/providers/query-provider";
 import { ThemeProvider } from "@/components/theme-provider";
 import { UIProvider } from "@/contexts/ui-context";
 import { Analytics } from "@vercel/analytics/next";
@@ -116,15 +117,17 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <Analytics />
-          <div className="relative min-h-screen flex flex-col">
-            <UIProvider>
-              <Header />
-              <main className="flex-1">{children}</main>
-              <Footer />
-              <FloatingCallButton />
-              <Chatbot />
-            </UIProvider>
-          </div>
+          <QueryProvider>
+            <div className="relative min-h-screen flex flex-col">
+              <UIProvider>
+                <Header />
+                <main className="flex-1">{children}</main>
+                <Footer />
+                <FloatingCallButton />
+                <Chatbot />
+              </UIProvider>
+            </div>
+          </QueryProvider>
           <Toaster position="top-center" expand={true} richColors closeButton />
         </ThemeProvider>
       </body>

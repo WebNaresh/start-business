@@ -112,3 +112,19 @@ html {
 ::-webkit-scrollbar-thumb:hover {
   background: #94a3b8;
 }
+
+/* Ensure links are properly styled and visible in blog content */
+.blog-content a,
+.prose a {
+  color: #2563eb !important;
+  text-decoration: underline !important;
+  cursor: pointer !important;
+  display: inline !important;
+  visibility: visible !important;
+}
+
+.blog-content a:hover,
+.prose a:hover {
+  color: #1d4ed8 !important;
+  text-decoration: underline !important;
+}
