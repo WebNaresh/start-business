@@ -92,7 +92,13 @@ export async function PUT(
         // Note: Image cleanup removed for simplicity
         // Featured images are managed through S3 lifecycle policies
 
-        return NextResponse.json(updatedBlog)
+        return NextResponse.json(updatedBlog, {
+            headers: {
+                'Cache-Control': 'no-cache, no-store, must-revalidate',
+                'Pragma': 'no-cache',
+                'Expires': '0'
+            }
+        })
     } catch (error) {
         console.error('Error updating blog:', error)
         return NextResponse.json(
@@ -120,7 +126,13 @@ export async function DELETE(
 
         // Note: Image cleanup handled by S3 lifecycle policies
 
-        return NextResponse.json({ message: 'Blog deleted successfully' })
+        return NextResponse.json({ message: 'Blog deleted successfully' }, {
+            headers: {
+                'Cache-Control': 'no-cache, no-store, must-revalidate',
+                'Pragma': 'no-cache',
+                'Expires': '0'
+            }
+        })
     } catch (error) {
         console.error('Error deleting blog:', error)
         return NextResponse.json(
