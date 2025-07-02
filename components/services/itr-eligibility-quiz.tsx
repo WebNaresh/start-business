@@ -526,51 +526,51 @@ export default function ITREligibilityQuiz() {
     const result = getITRResult()
 
     return (
-      <div className="p-6 space-y-6">
+      <div className="p-3 sm:p-4 md:p-6 space-y-4 sm:space-y-6">
         {/* Results Header */}
         <div className="text-center">
           <div className={cn(
-            "inline-flex items-center gap-2 px-4 py-2 rounded-full mb-4",
-            result.eligible 
-              ? "bg-gradient-to-r from-orange-100 to-red-100" 
+            "inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full mb-3 sm:mb-4",
+            result.eligible
+              ? "bg-gradient-to-r from-orange-100 to-red-100"
               : "bg-gradient-to-r from-green-100 to-blue-100"
           )}>
             {result.eligible ? (
-              <AlertCircle className="w-5 h-5 text-orange-600" />
+              <AlertCircle className="w-4 h-4 sm:w-5 sm:h-5 text-orange-600" />
             ) : (
-              <CheckCircle className="w-5 h-5 text-green-600" />
+              <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 text-green-600" />
             )}
             <span className={cn(
-              "text-sm font-semibold",
+              "text-xs sm:text-sm font-semibold",
               result.eligible ? "text-orange-700" : "text-green-700"
             )}>
               Analysis Complete
             </span>
           </div>
 
-          <h3 className="text-2xl md:text-3xl font-bold text-slate-900 mb-3">
+          <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-slate-900 mb-2 sm:mb-3 px-2">
             {result.title}
           </h3>
 
-          <p className="text-slate-600 mb-6 max-w-2xl mx-auto">
+          <p className="text-sm sm:text-base text-slate-600 mb-4 sm:mb-6 max-w-2xl mx-auto px-2">
             {result.description}
           </p>
         </div>
 
         {/* Result Details */}
-        <div className="bg-gradient-to-br from-white to-slate-50 rounded-xl border border-slate-200 p-6">
-          <div className="grid md:grid-cols-2 gap-6">
+        <div className="bg-gradient-to-br from-white to-slate-50 rounded-lg sm:rounded-xl border border-slate-200 p-4 sm:p-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
             {/* Requirements */}
             <div>
-              <h4 className="font-semibold text-slate-900 mb-3 flex items-center gap-2">
-                <Info className="w-5 h-5 text-blue-500" />
-                Key Points
+              <h4 className="font-semibold text-slate-900 mb-2 sm:mb-3 flex items-center gap-2">
+                <Info className="w-4 h-4 sm:w-5 sm:h-5 text-blue-500" />
+                <span className="text-sm sm:text-base">Key Points</span>
               </h4>
-              <ul className="space-y-2">
+              <ul className="space-y-1.5 sm:space-y-2">
                 {result.requirements.map((req, i) => (
-                  <li key={i} className="flex items-start gap-2 text-sm text-slate-600">
-                    <CheckCircle className="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" />
-                    <span>{req}</span>
+                  <li key={i} className="flex items-start gap-2 text-xs sm:text-sm text-slate-600">
+                    <CheckCircle className="w-3 h-3 sm:w-4 sm:h-4 text-green-500 mt-0.5 flex-shrink-0" />
+                    <span className="leading-relaxed">{req}</span>
                   </li>
                 ))}
               </ul>
@@ -578,15 +578,15 @@ export default function ITREligibilityQuiz() {
 
             {/* Next Steps */}
             <div>
-              <h4 className="font-semibold text-slate-900 mb-3 flex items-center gap-2">
-                <Target className="w-5 h-5 text-purple-500" />
-                Next Steps
+              <h4 className="font-semibold text-slate-900 mb-2 sm:mb-3 flex items-center gap-2 mt-4 md:mt-0">
+                <Target className="w-4 h-4 sm:w-5 sm:h-5 text-purple-500" />
+                <span className="text-sm sm:text-base">Next Steps</span>
               </h4>
-              <ul className="space-y-2">
+              <ul className="space-y-1.5 sm:space-y-2">
                 {result.nextSteps.map((step, i) => (
-                  <li key={i} className="flex items-start gap-2 text-sm text-slate-600">
-                    <ArrowRight className="w-4 h-4 text-blue-500 mt-0.5 flex-shrink-0" />
-                    <span>{step}</span>
+                  <li key={i} className="flex items-start gap-2 text-xs sm:text-sm text-slate-600">
+                    <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 text-blue-500 mt-0.5 flex-shrink-0" />
+                    <span className="leading-relaxed">{step}</span>
                   </li>
                 ))}
               </ul>
@@ -594,15 +594,17 @@ export default function ITREligibilityQuiz() {
           </div>
 
           {/* ITR Form Info */}
-          <div className="mt-6 p-4 bg-blue-50 rounded-lg border border-blue-200">
-            <div className="flex items-center gap-3">
-              <FileText className="w-6 h-6 text-blue-600" />
-              <div>
-                <h5 className="font-semibold text-blue-900">Recommended ITR Form</h5>
-                <p className="text-blue-700 text-sm">{result.itrForm}</p>
+          <div className="mt-4 sm:mt-6 p-3 sm:p-4 bg-blue-50 rounded-lg border border-blue-200">
+            <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3">
+              <div className="flex items-center gap-2 sm:gap-3 flex-1">
+                <FileText className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600 flex-shrink-0" />
+                <div className="min-w-0">
+                  <h5 className="font-semibold text-blue-900 text-sm sm:text-base">Recommended ITR Form</h5>
+                  <p className="text-blue-700 text-xs sm:text-sm truncate">{result.itrForm}</p>
+                </div>
               </div>
-              <div className="ml-auto">
-                <div className="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm font-bold">
+              <div className="self-start sm:self-auto">
+                <div className="bg-blue-100 text-blue-700 px-2 py-1 sm:px-3 sm:py-1 rounded-full text-xs sm:text-sm font-bold">
                   {result.confidence}% confidence
                 </div>
               </div>
@@ -611,22 +613,22 @@ export default function ITREligibilityQuiz() {
         </div>
 
         {/* Action Buttons */}
-        <div className="flex flex-col sm:flex-row gap-4">
-          <Link href="/services/income-tax-filing" className="flex-1">
-            <Button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700">
+        <div className="flex flex-col gap-3 sm:gap-4">
+          <Link href="/services/income-tax-filing" className="w-full">
+            <Button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 py-2.5 sm:py-3">
               <FileText className="w-4 h-4 mr-2" />
-              Get ITR Filing Help
+              <span className="text-sm sm:text-base">Get ITR Filing Help</span>
               <ArrowRight className="w-4 h-4 ml-2" />
             </Button>
           </Link>
-          
+
           <Button
             variant="outline"
             onClick={resetQuiz}
-            className="flex items-center gap-2"
+            className="flex items-center justify-center gap-2 py-2.5 sm:py-3"
           >
             <RotateCcw className="w-4 h-4" />
-            Take Quiz Again
+            <span className="text-sm sm:text-base">Take Quiz Again</span>
           </Button>
         </div>
 
@@ -644,22 +646,22 @@ export default function ITREligibilityQuiz() {
   const progress = ((currentStep + 1) / questions.length) * 100
 
   return (
-    <div className="p-6">
+    <div className="p-3 sm:p-4 md:p-6">
       {/* Progress Header */}
-      <div className="text-center mb-6">
-        <div className="flex items-center justify-center gap-4 mb-4">
-          <Badge className="bg-gradient-to-r from-green-500 to-emerald-500 text-white px-4 py-2">
-            <Sparkles className="w-4 h-4 mr-2" />
+      <div className="text-center mb-4 sm:mb-6">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4 mb-3 sm:mb-4">
+          <Badge className="bg-gradient-to-r from-green-500 to-emerald-500 text-white px-3 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm">
+            <Sparkles className="w-3 h-3 sm:w-4 sm:h-4 mr-1.5 sm:mr-2" />
             Question {currentStep + 1} of {questions.length}
           </Badge>
-          <div className="text-sm font-medium text-slate-600">
+          <div className="text-xs sm:text-sm font-medium text-slate-600">
             {Math.round(progress)}% complete
           </div>
         </div>
 
         {/* Progress Bar */}
-        <div className="w-full max-w-md mx-auto">
-          <div className="w-full bg-slate-200 rounded-full h-3 overflow-hidden">
+        <div className="w-full max-w-xs sm:max-w-md mx-auto">
+          <div className="w-full bg-slate-200 rounded-full h-2 sm:h-3 overflow-hidden">
             <div
               className="h-full bg-gradient-to-r from-green-500 to-emerald-500 rounded-full transition-all duration-700"
               style={{ width: `${progress}%` }}
@@ -673,21 +675,21 @@ export default function ITREligibilityQuiz() {
         "transition-all duration-300",
         isAnimating ? "opacity-0 transform translate-y-4" : "opacity-100 transform translate-y-0"
       )}>
-        <div className="bg-gradient-to-br from-white to-slate-50 rounded-xl border border-slate-200 p-6 mb-6">
-          <div className="text-center mb-6">
-            <div className="text-4xl mb-4">{currentQuestion.emoji}</div>
-            <h3 className="text-2xl font-bold text-slate-900 mb-3">
+        <div className="bg-gradient-to-br from-white to-slate-50 rounded-lg sm:rounded-xl border border-slate-200 p-3 sm:p-4 md:p-6 mb-4 sm:mb-6">
+          <div className="text-center mb-4 sm:mb-6">
+            <div className="text-2xl sm:text-3xl md:text-4xl mb-2 sm:mb-3 md:mb-4">{currentQuestion.emoji}</div>
+            <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-slate-900 mb-2 sm:mb-3 leading-tight px-2">
               {currentQuestion.question}
             </h3>
             {currentQuestion.description && (
-              <p className="text-slate-600 max-w-xl mx-auto">
+              <p className="text-sm sm:text-base text-slate-600 max-w-xl mx-auto px-2">
                 {currentQuestion.description}
               </p>
             )}
           </div>
 
           {/* Options */}
-          <div className="grid gap-4 mb-6">
+          <div className="grid gap-3 sm:gap-4 mb-4 sm:mb-6">
             {currentQuestion.options.map((option) => {
               const isSelected = answers[currentQuestion.id] === option.value
               const isCurrentSelection = selectedOption === option.value
@@ -698,50 +700,51 @@ export default function ITREligibilityQuiz() {
                   onClick={() => handleAnswer(currentQuestion.id, option.value)}
                   disabled={isAnimating}
                   className={cn(
-                    "group relative p-4 text-left border-2 rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-lg",
+                    "group relative p-3 sm:p-4 text-left border-2 rounded-lg sm:rounded-xl transition-all duration-300 hover:scale-[1.02] sm:hover:scale-105 hover:shadow-lg",
                     isSelected || isCurrentSelection
-                      ? "border-green-500 bg-gradient-to-br from-green-50 to-emerald-50 shadow-lg scale-105"
+                      ? "border-green-500 bg-gradient-to-br from-green-50 to-emerald-50 shadow-lg scale-[1.02] sm:scale-105"
                       : "border-slate-200 bg-white hover:border-slate-300",
-                    option.popular && "ring-2 ring-yellow-400 ring-offset-2",
+                    option.popular && "ring-1 sm:ring-2 ring-yellow-400 ring-offset-1 sm:ring-offset-2",
                     isAnimating && "pointer-events-none"
                   )}
                 >
                   {/* Popular Badge */}
                   {option.popular && (
-                    <div className="absolute -top-2 -right-2 bg-gradient-to-r from-yellow-400 to-orange-500 text-white text-xs font-bold px-2 py-1 rounded-full">
-                      <Star className="w-3 h-3 inline mr-1" />
-                      Popular
+                    <div className="absolute -top-1 -right-1 sm:-top-2 sm:-right-2 bg-gradient-to-r from-yellow-400 to-orange-500 text-white text-xs font-bold px-1.5 py-0.5 sm:px-2 sm:py-1 rounded-full">
+                      <Star className="w-2 h-2 sm:w-3 sm:h-3 inline mr-0.5 sm:mr-1" />
+                      <span className="hidden sm:inline">Popular</span>
+                      <span className="sm:hidden">★</span>
                     </div>
                   )}
 
-                  <div className="flex items-center gap-4">
+                  <div className="flex items-center gap-3 sm:gap-4">
                     {/* Icon */}
                     <div className={cn(
-                      "w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-300",
+                      "w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl flex items-center justify-center transition-all duration-300 flex-shrink-0",
                       isSelected || isCurrentSelection
                         ? `bg-gradient-to-br ${option.gradient} text-white shadow-lg`
                         : "bg-slate-100 text-slate-600 group-hover:bg-slate-200"
                     )}>
-                      <option.icon className="w-6 h-6" />
+                      <option.icon className="w-5 h-5 sm:w-6 sm:h-6" />
                     </div>
 
                     {/* Content */}
-                    <div className="flex-1">
+                    <div className="flex-1 min-w-0">
                       <h4 className={cn(
-                        "font-semibold text-lg transition-colors duration-300",
+                        "font-semibold text-sm sm:text-base md:text-lg transition-colors duration-300 leading-tight",
                         isSelected || isCurrentSelection ? "text-green-700" : "text-slate-900 group-hover:text-green-600"
                       )}>
                         {option.label}
                       </h4>
-                      <p className="text-sm text-slate-600">
+                      <p className="text-xs sm:text-sm text-slate-600 leading-relaxed mt-1">
                         {option.description}
                       </p>
                     </div>
 
                     {/* Selection Indicator */}
                     {(isSelected || isCurrentSelection) && (
-                      <div className="w-6 h-6 bg-gradient-to-br from-green-500 to-emerald-500 rounded-full flex items-center justify-center">
-                        <CheckCircle className="w-4 h-4 text-white" />
+                      <div className="w-5 h-5 sm:w-6 sm:h-6 bg-gradient-to-br from-green-500 to-emerald-500 rounded-full flex items-center justify-center flex-shrink-0">
+                        <CheckCircle className="w-3 h-3 sm:w-4 sm:h-4 text-white" />
                       </div>
                     )}
                   </div>
@@ -751,30 +754,33 @@ export default function ITREligibilityQuiz() {
           </div>
 
           {/* Navigation */}
-          <div className="flex items-center justify-between">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-0">
             <Button
               variant="outline"
               onClick={prevStep}
               disabled={currentStep === 0 || isAnimating}
-              className="flex items-center gap-2"
+              className="flex items-center gap-1 sm:gap-2 px-3 sm:px-4 py-2 text-sm order-2 sm:order-1"
             >
-              <ArrowLeft className="w-4 h-4" />
-              Previous
+              <ArrowLeft className="w-3 h-3 sm:w-4 sm:h-4" />
+              <span className="hidden sm:inline">Previous</span>
+              <span className="sm:hidden">Back</span>
             </Button>
 
-            <div className="flex items-center gap-2 text-sm text-slate-500">
-              <Clock className="w-4 h-4" />
-              <span>{questions.length - currentStep - 1} questions left</span>
+            <div className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm text-slate-500 order-1 sm:order-2">
+              <Clock className="w-3 h-3 sm:w-4 sm:h-4" />
+              <span>{questions.length - currentStep - 1} left</span>
             </div>
 
             {!selectedOption && (
               <Button
                 onClick={nextStep}
                 disabled={!answers[currentQuestion.id] || isAnimating}
-                className="flex items-center gap-2 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700"
+                className="flex items-center gap-1 sm:gap-2 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 px-4 sm:px-6 py-2 text-sm sm:text-base order-3 w-full sm:w-auto"
               >
-                {currentStep === questions.length - 1 ? "Get Results" : "Next"}
-                <ArrowRight className="w-4 h-4" />
+                <span className="truncate">
+                  {currentStep === questions.length - 1 ? "Get Results" : "Next"}
+                </span>
+                <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
               </Button>
             )}
           </div>
