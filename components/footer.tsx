@@ -161,12 +161,12 @@ export default function EnhancedFooter() {
               </h3>
               <ul className="space-y-2 lg:space-y-3">
                 {[
-                  { name: "GST Calculator", href: "/calculators/gst", popular: true },
-                  { name: "TDS Calculator", href: "/calculators/tds" },
-                  { name: "Income Tax Calculator", href: "/calculators/income-tax", popular: true },
-                  { name: "HRA Calculator", href: "/calculators/hra" },
-                  { name: "Gratuity Calculator", href: "/calculators/gratuity" },
-                  { name: "PPF Calculator", href: "/calculators/ppf", popular: true },
+                  { name: "GST Calculator", href: "/calculators/gst-calculator", popular: true },
+                  { name: "TDS Calculator", href: "/calculators/tds-calculator" },
+                  { name: "Income Tax Calculator", href: "/calculators/income-tax-calculator", popular: true },
+                  { name: "HRA Calculator", href: "/calculators/hra-calculator" },
+                  { name: "Gratuity Calculator", href: "/calculators/gratuity-calculator" },
+                  { name: "PPF Calculator", href: "/calculators/ppf-calculator", popular: true },
                 ].map((tool, index) => (
                   <li key={index}>
                     <Link

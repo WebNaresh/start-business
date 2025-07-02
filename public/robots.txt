@@ -1,0 +1,98 @@
+# Robots.txt for StartBusiness Website
+# This file tells search engine crawlers which pages they can and cannot access
+
+# Allow all web crawlers to access the site
+User-agent: *
+Allow: /
+
+# Block access to admin routes
+Disallow: /admin/
+Disallow: /admin/*
+
+# Block access to API routes
+Disallow: /api/
+Disallow: /api/*
+
+# Block access to private/internal routes
+Disallow: /_next/
+Disallow: /_vercel/
+Disallow: /private/
+
+# Block access to temporary or development files
+Disallow: /*.json$
+Disallow: /*.xml$
+Disallow: /*.txt$
+Disallow: /*.log$
+
+# Allow access to important files
+Allow: /sitemap.xml
+Allow: /robots.txt
+Allow: /favicon.ico
+Allow: /*.css
+Allow: /*.js
+Allow: /*.png
+Allow: /*.jpg
+Allow: /*.jpeg
+Allow: /*.gif
+Allow: /*.webp
+Allow: /*.svg
+
+# Specific rules for major search engines
+
+# Google
+User-agent: Googlebot
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Crawl-delay: 1
+
+# Bing
+User-agent: Bingbot
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Crawl-delay: 1
+
+# Yahoo
+User-agent: Slurp
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Crawl-delay: 2
+
+# Yandex
+User-agent: YandexBot
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Crawl-delay: 2
+
+# DuckDuckGo
+User-agent: DuckDuckBot
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Crawl-delay: 1
+
+# Block bad bots and scrapers
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+# Sitemap location
+Sitemap: https://yourdomain.com/sitemap.xml
+
+# Additional sitemaps (if you have them)
+# Sitemap: https://yourdomain.com/sitemap-images.xml
+# Sitemap: https://yourdomain.com/sitemap-news.xml
+
+# Host directive (optional - specify your preferred domain)
+# Host: https://yourdomain.com

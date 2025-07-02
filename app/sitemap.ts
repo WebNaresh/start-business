@@ -1,5 +1,8 @@
 import { MetadataRoute } from 'next'
+import { PrismaClient } from '@prisma/client'
 import services from '@/app/(pages)/services/[slug]/data/services.json'
+
+const prisma = new PrismaClient()
 
 // Define types for better type safety
 type ChangeFrequency = 'always' | 'hourly' | 'daily' | 'weekly' | 'monthly' | 'yearly' | 'never'
@@ -11,7 +14,20 @@ type SitemapEntry = {
     images?: string[]
 }
 
-export default function sitemap(): MetadataRoute.Sitemap {
+// Safe database operation with fallback
+async function safeDatabaseOperation<T>(
+    operation: () => Promise<T>,
+    fallback: T
+): Promise<T> {
+    try {
+        return await operation()
+    } catch (error) {
+        console.error('Database operation failed in sitemap generation:', error)
+        return fallback
+    }
+}
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const baseUrl = 'https://www.startbusiness.co.in/'
     const currentDate = new Date()
 
@@ -56,13 +72,34 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
     // Calculator routes
     const calculatorRoutes: SitemapEntry[] = [
-        'gst',
-        'tds',
-        'income-tax',
-        'hra',
-        'gratuity',
-        'epf'
-    ].map(calc => createEntry(`calculators/${calc}`, 'monthly', 0.7))
+        // Tax Calculators
+        'gst-calculator',
+        'income-tax-calculator',
+        'tds-calculator',
+        'hra-calculator',
+        'gratuity-calculator',
+        'salary-calculator',
+        'gstr-3b-interest-calculator',
+        'hra-rent-receipt-calculator',
+
+        // Financial Calculators
+        'emi-calculator',
+        'sip-calculator',
+        'ppf-calculator',
+        'fixed-deposit-calculator',
+        'rd-calculator',
+        'nps-calculator',
+        'ssy-calculator',
+        'retirement-corpus-calculator',
+
+        // Loan Calculators
+        'home-loan-calculator',
+        'car-loan-calculator',
+        'business-loan-calculator'
+    ].map(calc => {
+        const priority = ['gst-calculator', 'income-tax-calculator', 'emi-calculator', 'sip-calculator', 'home-loan-calculator', 'business-loan-calculator'].includes(calc) ? 0.7 : 0.6
+        return createEntry(`calculators/${calc}`, 'monthly', priority)
+    })
 
     // Blog category routes with enhanced metadata
     const blogCategories: SitemapEntry[] = [
@@ -112,6 +149,39 @@ export default function sitemap(): MetadataRoute.Sitemap {
         )
     )
 
+    // Fetch published blog posts from database
+    const blogPosts = await safeDatabaseOperation(
+        async () => {
+            return await prisma.blog.findMany({
+                where: {
+                    status: 'published'
+                },
+                select: {
+                    slug: true,
+                    updatedAt: true,
+                    publishedAt: true,
+                    featuredImage: true
+                },
+                orderBy: {
+                    publishedAt: 'desc'
+                }
+            })
+        },
+        [] // Fallback to empty array if database fails
+    )
+
+    // Convert blog posts to sitemap entries
+    const blogPostRoutes: SitemapEntry[] = blogPosts.map(post => ({
+        url: `${baseUrl}blog/${post.slug}`,
+        lastModified: post.updatedAt || post.publishedAt || currentDate,
+        changeFrequency: 'weekly' as const,
+        priority: 0.7,
+        images: post.featuredImage ? [post.featuredImage] : undefined
+    }))
+
+    // Clean up Prisma connection
+    await prisma.$disconnect()
+
     // Combine all routes
     return [
         ...staticRoutes,
@@ -119,6 +189,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         ...calculatorRoutes,
         ...blogCategories,
         ...blogTags,
-        ...locationRoutes
+        ...locationRoutes,
+        ...blogPostRoutes
     ]
 } 
