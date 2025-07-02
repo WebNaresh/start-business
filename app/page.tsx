@@ -4,7 +4,7 @@ import HeroSection from "@/components/home/hero-section"
 import FeaturesSection from "@/components/home/features-section"
 import StatsSection from "@/components/home/stats-section"
 import ServicesSection from "@/components/home/services-section"
-import TestimonialsSection from "@/components/home/testimonials-section"
+import TestimonialsBlogSection from "@/components/home/testimonials-blog-section"
 import ContactSection from "@/components/home/contact-section"
 import ProcessSection from "@/components/home/process-section"
 import FAQSection from "@/components/home/faq-section"
@@ -158,7 +158,7 @@ export default function Home() {
       <FeaturesSection />
       <ProcessSection />
       <LatestIncorporationsTicker/>
-      <TestimonialsSection />
+      <TestimonialsBlogSection />
       <FAQSection />
       <ContactSection />
       {/* <PushNotificationManager />
