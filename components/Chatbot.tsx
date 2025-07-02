@@ -256,7 +256,7 @@ export default function Chatbot() {
                   src="/bot-avatar.png"
                   alt="Business Assistant"
                   size={40}
-                  fallbackSrc="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/startbusiness_icon_transparent-u5NDFsSQarqF4PBI4Y5RxkT51hJhDI.png"
+                  fallbackSrc="/bot-avatar.png"
                   className="border-2 border-blue-100"
                 />
                 <div className="flex-1">
@@ -362,7 +362,7 @@ export default function Chatbot() {
                     <AvatarFallback className="text-white relative">
                       <div className="relative w-full h-full">
                         <Image
-                          src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/startbusiness_icon_transparent-u5NDFsSQarqF4PBI4Y5RxkT51hJhDI.png"
+                          src="/bot-avatar.png"
                           alt="Business assistant avatar"
                           width={32}
                           height={32}
@@ -451,7 +451,7 @@ export default function Chatbot() {
                         <AvatarFallback className="text-white relative">
                           <div className="relative w-full h-full">
                             <Image
-                              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/startbusiness_icon_transparent-u5NDFsSQarqF4PBI4Y5RxkT51hJhDI.png"
+                              src="/bot-avatar.png"
                               alt="Business assistant avatar"
                               width={32}
                               height={32}
