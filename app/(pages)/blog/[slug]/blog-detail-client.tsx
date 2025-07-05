@@ -6,6 +6,9 @@ import type { Blog } from "@/lib/types";
 import { ArrowLeft, Calendar, Clock } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import Breadcrumbs from "@/components/ui/breadcrumbs";
+import ContextualLinks from "@/components/seo/contextual-links";
+import { RelatedArticles } from "@/components/seo/related-services";
 
 interface BlogDetailClientProps {
   blogPost: Blog;
@@ -56,6 +59,9 @@ export default function BlogDetailClient({ blogPost }: BlogDetailClientProps) {
   return (
     <>
       <article className="min-h-screen bg-white">
+        {/* Breadcrumbs */}
+        <Breadcrumbs className="bg-slate-50 border-b border-slate-200" />
+
         {/* Header Section */}
         <div className="bg-gradient-to-b from-slate-50 to-white border-b border-slate-200">
           <div className="container mx-auto px-4 py-6">
@@ -236,6 +242,14 @@ export default function BlogDetailClient({ blogPost }: BlogDetailClientProps) {
                       debug={true}
                     />
                   </article>
+
+                  {/* Contextual Internal Links */}
+                  <ContextualLinks
+                    content={blogPost.content || blogPost.excerpt || ""}
+                    maxLinks={3}
+                    variant="callout"
+                    className="my-8"
+                  />
 
                   {/* Tags Section */}
                   {blogPost.tags && (
@@ -452,6 +466,13 @@ export default function BlogDetailClient({ blogPost }: BlogDetailClientProps) {
                 </div>
               </div>
             </div>
+          </div>
+        </section>
+
+        {/* Related Articles Section */}
+        <section className="py-16 bg-slate-50">
+          <div className="container mx-auto px-4">
+            <RelatedPosts currentPost={blogPost} />
           </div>
         </section>
       </article>

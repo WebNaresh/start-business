@@ -22,7 +22,12 @@ async function safeDatabaseOperation<T>(
     try {
         return await operation()
     } catch (error) {
-        console.error('Database operation failed in sitemap generation:', error)
+        // Only log detailed error in development, use warning in production builds
+        if (process.env.NODE_ENV === 'development') {
+            console.error('Database operation failed in sitemap generation:', error)
+        } else {
+            console.warn('Database unavailable during sitemap generation - using static routes only')
+        }
         return fallback
     }
 }

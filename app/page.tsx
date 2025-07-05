@@ -8,6 +8,7 @@ import TestimonialsBlogSection from "@/components/home/testimonials-blog-section
 import ContactSection from "@/components/home/contact-section"
 import ProcessSection from "@/components/home/process-section"
 import FAQSection from "@/components/home/faq-section"
+import RelatedServices from "@/components/seo/related-services"
 
 import { useState, useEffect } from 'react'
 import { subscribeUser, unsubscribeUser, sendNotification } from './actions'
@@ -157,6 +158,27 @@ export default function Home() {
               </section>
       <FeaturesSection />
       <ProcessSection />
+
+      {/* Strategic Internal Linking Section */}
+      <section className="py-16 bg-slate-50">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
+              Explore Our Business Services
+            </h2>
+            <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+              Comprehensive solutions for every stage of your business journey
+            </p>
+          </div>
+          <RelatedServices
+            title="Popular Business Services"
+            description="Start your business journey with our most requested services"
+            showClusterLinks={false}
+            variant="default"
+          />
+        </div>
+      </section>
+
       <LatestIncorporationsTicker/>
       <TestimonialsBlogSection />
       <FAQSection />

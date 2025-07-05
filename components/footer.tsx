@@ -23,9 +23,10 @@ export default function EnhancedFooter() {
       {/* Enhanced Main Footer */}
       <div className="bg-slate-800 py-8 lg:py-12 text-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-            {/* Company Info - Full width on mobile, spans 2 cols on sm, 1 col on lg */}
-            <div className="sm:col-span-2 lg:col-span-1">
+          {/* First Row - Company Info + Main Services */}
+          <div className="grid gap-8 grid-cols-1 md:grid-cols-3 mb-8">
+            {/* Company Info */}
+            <div>
               <Link href="/" className="mb-4 lg:mb-6 flex items-center group">
                 <div className="relative h-10 w-10 sm:h-12 sm:w-12 mr-3 overflow-hidden rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 p-2 group-hover:scale-110 transition-transform duration-300">
                   <Image
@@ -74,24 +75,25 @@ export default function EnhancedFooter() {
               </div>
             </div>
 
-            {/* Services */}
-            <div className="lg:col-span-1">
+            {/* Company Registration Services */}
+            <div>
               <h3 className="mb-4 lg:mb-6 text-base sm:text-lg font-bold text-white relative">
-                Our Services
+                Company Registration
                 <span className="absolute -bottom-2 left-0 w-12 h-1 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full"></span>
               </h3>
               <ul className="space-y-2 lg:space-y-3">
                 {[
                   { name: "Private Limited Company", href: "/services/private-limited-company", popular: true },
-                  { name: "Limited Liability Partnership", href: "/services/llp", popular: false },
-                  { name: "GST Registration", href: "/services/gst-registration", popular: true },
-                  { name: "Trademark Registration", href: "/services/trademark-registration", popular: false },
-                  { name: "Income Tax Filing", href: "/services/income-tax-filing", popular: true },
+                  { name: "Limited Liability Partnership", href: "/services/llp-registration", popular: false },
+                  { name: "One Person Company", href: "/services/opc-registration", popular: false },
+                  { name: "Partnership Firm", href: "/services/partnership-firm", popular: false },
+                  { name: "Sole Proprietorship", href: "/services/sole-proprietorship", popular: false },
                 ].map((service, index) => (
                   <li key={index}>
                     <Link
                       href={service.href}
                       className="group flex items-center text-slate-300 hover:text-blue-400 transition-all duration-300 text-sm sm:text-base"
+                      title={`${service.name} registration services`}
                     >
                       <span className="mr-2 lg:mr-3 h-1.5 w-1.5 rounded-full bg-blue-500 group-hover:bg-blue-400 group-hover:scale-150 transition-all duration-300"></span>
                       <span className="group-hover:translate-x-1 transition-transform duration-300 flex-1">
@@ -120,60 +122,75 @@ export default function EnhancedFooter() {
               </ul>
             </div>
 
-            {/* Quick Links */}
-            <div className="lg:col-span-1">
+            {/* Tax & Compliance Services */}
+            <div>
               <h3 className="mb-4 lg:mb-6 text-base sm:text-lg font-bold text-white relative">
-                Quick Links
-                <span className="absolute -bottom-2 left-0 w-12 h-1 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full"></span>
+                Tax & Compliance
+                <span className="absolute -bottom-2 left-0 w-12 h-1 bg-gradient-to-r from-green-500 to-green-600 rounded-full"></span>
               </h3>
               <ul className="space-y-2 lg:space-y-3">
                 {[
-                  { name: "About Us", href: "/about" },
-                  { name: "Tools", href: "/calculators" },
-                  { name: "Contact Us", href: "/contact" },
-        
-                  { name: "Blog & Resources", href: "/blog" },
-               
-                  { name: "Help & FAQs", href: "/faq" },
-                ].map((link, index) => (
+                  { name: "Income Tax Filing", href: "/services/income-tax-filing", popular: true },
+                  { name: "GST Registration", href: "/services/gst-registration", popular: true },
+                  { name: "GST Return Filing", href: "/services/gst-return-filing", popular: false },
+                  { name: "TDS Return Filing", href: "/services/tds-return-filing", popular: false },
+                  { name: "Annual Compliance", href: "/services/annual-compliance", popular: false },
+                ].map((service, index) => (
                   <li key={index}>
                     <Link
-                      href={link.href}
-                      className="group flex items-center text-slate-300 hover:text-blue-400 transition-all duration-300 text-sm sm:text-base"
+                      href={service.href}
+                      className="group flex items-center text-slate-300 hover:text-green-400 transition-all duration-300 text-sm sm:text-base"
+                      title={`${service.name} services`}
                     >
-                      <span className="mr-2 lg:mr-3 h-1.5 w-1.5 rounded-full bg-blue-500 group-hover:bg-blue-400 group-hover:scale-150 transition-all duration-300"></span>
-                      <span className="group-hover:translate-x-1 transition-transform duration-300">{link.name}</span>
+                      <span className="mr-2 lg:mr-3 h-1.5 w-1.5 rounded-full bg-green-500 group-hover:bg-green-400 group-hover:scale-150 transition-all duration-300"></span>
+                      <span className="group-hover:translate-x-1 transition-transform duration-300 flex-1">
+                        {service.name}
+                      </span>
+                      {service.popular && (
+                        <Badge variant="secondary" className="ml-2 text-xs bg-green-100 text-green-700 border-green-200">
+                          Popular
+                        </Badge>
+                      )}
                     </Link>
                   </li>
                 ))}
+                <li>
+                  <Link
+                    href="/services/tax-compliance"
+                    className="group flex items-center text-green-400 hover:text-green-300 font-medium transition-colors text-sm sm:text-base"
+                  >
+                    <span className="mr-2">View All Tax Services</span>
+                    <ArrowRight className="h-3 w-3 group-hover:translate-x-1 transition-transform duration-300" />
+                  </Link>
+                </li>
               </ul>
             </div>
 
           </div>
 
-          {/* Second Row - Calculator Tools, Government Portals, and Contact */}
-          <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-8">
-            {/* Calculator Tools */}
-            <div className="lg:col-span-1">
+          {/* Second Row - Business Tools & Resources */}
+          <div className="grid gap-8 grid-cols-1 md:grid-cols-3 mb-8">
+            {/* Business Calculators */}
+            <div>
               <h3 className="mb-4 lg:mb-6 text-base sm:text-lg font-bold text-white relative">
-                Calculator Tools
-                <span className="absolute -bottom-2 left-0 w-12 h-1 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full"></span>
+                Business Calculators
+                <span className="absolute -bottom-2 left-0 w-12 h-1 bg-gradient-to-r from-purple-500 to-purple-600 rounded-full"></span>
               </h3>
               <ul className="space-y-2 lg:space-y-3">
                 {[
                   { name: "GST Calculator", href: "/calculators/gst-calculator", popular: true },
-                  { name: "TDS Calculator", href: "/calculators/tds-calculator" },
                   { name: "Income Tax Calculator", href: "/calculators/income-tax-calculator", popular: true },
-                  { name: "HRA Calculator", href: "/calculators/hra-calculator" },
-                  { name: "Gratuity Calculator", href: "/calculators/gratuity-calculator" },
-                  { name: "PPF Calculator", href: "/calculators/ppf-calculator", popular: true },
+                  { name: "EMI Calculator", href: "/calculators/emi-calculator", popular: false },
+                  { name: "Business Loan Calculator", href: "/calculators/business-loan-calculator", popular: false },
+                  { name: "Salary Calculator", href: "/calculators/salary-calculator", popular: false },
                 ].map((tool, index) => (
                   <li key={index}>
                     <Link
                       href={tool.href}
-                      className="group flex items-center text-slate-300 hover:text-blue-400 transition-all duration-300 text-sm sm:text-base"
+                      className="group flex items-center text-slate-300 hover:text-purple-400 transition-all duration-300 text-sm sm:text-base"
+                      title={`Free ${tool.name} for business calculations`}
                     >
-                      <span className="mr-2 lg:mr-3 h-1.5 w-1.5 rounded-full bg-blue-500 group-hover:bg-blue-400 group-hover:scale-150 transition-all duration-300"></span>
+                      <span className="mr-2 lg:mr-3 h-1.5 w-1.5 rounded-full bg-purple-500 group-hover:bg-purple-400 group-hover:scale-150 transition-all duration-300"></span>
                       <span className="group-hover:translate-x-1 transition-transform duration-300 flex-1">
                         {tool.name}
                       </span>
@@ -191,7 +208,7 @@ export default function EnhancedFooter() {
                 <li>
                   <Link
                     href="/calculators"
-                    className="group flex items-center text-blue-400 hover:text-blue-300 font-medium transition-colors text-sm sm:text-base"
+                    className="group flex items-center text-purple-400 hover:text-purple-300 font-medium transition-colors text-sm sm:text-base"
                   >
                     <span className="mr-2">View All Calculators</span>
                     <ArrowRight className="h-3 w-3 group-hover:translate-x-1 transition-transform duration-300" />
@@ -200,54 +217,143 @@ export default function EnhancedFooter() {
               </ul>
             </div>
 
-            {/* Government Portals */}
-            <div className="lg:col-span-1">
+            {/* Legal Services */}
+            <div>
               <h3 className="mb-4 lg:mb-6 text-base sm:text-lg font-bold text-white relative">
-                Government Portals
-                <span className="absolute -bottom-2 left-0 w-12 h-1 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full"></span>
+                Legal Services
+                <span className="absolute -bottom-2 left-0 w-12 h-1 bg-gradient-to-r from-red-500 to-red-600 rounded-full"></span>
               </h3>
               <ul className="space-y-2 lg:space-y-3">
                 {[
-                  { name: "MCA Portal", href: "https://www.mca.gov.in", external: true },
-                  { name: "GST Portal", href: "https://www.gst.gov.in", external: true },
-                  { name: "Income Tax Portal", href: "https://www.incometax.gov.in", external: true },
-                  { name: "MSME Portal", href: "https://udyamregistration.gov.in", external: true },
-                  { name: "EPF Portal", href: "https://www.epfindia.gov.in", external: true },
-                  { name: "Startup India", href: "https://www.startupindia.gov.in", external: true },
-                ].map((portal, index) => (
+                  { name: "Trademark Registration", href: "/services/trademark-registration", popular: false },
+                  { name: "Copyright Registration", href: "/services/copyright-registration", popular: false },
+                  { name: "Patent Registration", href: "/services/patent-registration", popular: false },
+                  { name: "Legal Documentation", href: "/services/legal-documentation", popular: false },
+                  { name: "Contract Drafting", href: "/services/contract-drafting", popular: false },
+                ].map((service, index) => (
                   <li key={index}>
-                    <a
-                      href={portal.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="group flex items-center text-slate-300 hover:text-blue-400 transition-all duration-300 text-sm sm:text-base"
+                    <Link
+                      href={service.href}
+                      className="group flex items-center text-slate-300 hover:text-red-400 transition-all duration-300 text-sm sm:text-base"
+                      title={`${service.name} services`}
                     >
-                      <span className="mr-2 lg:mr-3 h-1.5 w-1.5 rounded-full bg-blue-500 group-hover:bg-blue-400 group-hover:scale-150 transition-all duration-300"></span>
+                      <span className="mr-2 lg:mr-3 h-1.5 w-1.5 rounded-full bg-red-500 group-hover:bg-red-400 group-hover:scale-150 transition-all duration-300"></span>
                       <span className="group-hover:translate-x-1 transition-transform duration-300 flex-1">
-                        {portal.name}
+                        {service.name}
                       </span>
-                      <Globe className="ml-2 h-3 w-3 text-blue-400" />
-                    </a>
+                      {service.popular && (
+                        <Badge
+                          variant="secondary"
+                          className="ml-2 text-xs bg-red-100 text-red-700 border-red-200"
+                        >
+                          Popular
+                        </Badge>
+                      )}
+                    </Link>
+                  </li>
+                ))}
+                <li>
+                  <Link
+                    href="/services"
+                    className="group flex items-center text-red-400 hover:text-red-300 font-medium transition-colors text-sm sm:text-base"
+                  >
+                    <span className="mr-2">View All Legal Services</span>
+                    <ArrowRight className="h-3 w-3 group-hover:translate-x-1 transition-transform duration-300" />
+                  </Link>
+                </li>
+              </ul>
+            </div>
+
+            {/* Business Setup */}
+            <div>
+              <h3 className="mb-4 lg:mb-6 text-base sm:text-lg font-bold text-white relative">
+                Business Setup
+                <span className="absolute -bottom-2 left-0 w-12 h-1 bg-gradient-to-r from-indigo-500 to-indigo-600 rounded-full"></span>
+              </h3>
+              <ul className="space-y-2 lg:space-y-3">
+                {[
+                  { name: "Business License", href: "/services/business-license", popular: false },
+                  { name: "FSSAI Registration", href: "/services/fssai-registration", popular: false },
+                  { name: "Import Export Code", href: "/services/import-export-code", popular: false },
+                  { name: "Digital Signature", href: "/services/digital-signature", popular: false },
+                  { name: "MSME Registration", href: "/services/msme-registration", popular: false },
+                ].map((service, index) => (
+                  <li key={index}>
+                    <Link
+                      href={service.href}
+                      className="group flex items-center text-slate-300 hover:text-indigo-400 transition-all duration-300 text-sm sm:text-base"
+                      title={`${service.name} services`}
+                    >
+                      <span className="mr-2 lg:mr-3 h-1.5 w-1.5 rounded-full bg-indigo-500 group-hover:bg-indigo-400 group-hover:scale-150 transition-all duration-300"></span>
+                      <span className="group-hover:translate-x-1 transition-transform duration-300 flex-1">
+                        {service.name}
+                      </span>
+                      {service.popular && (
+                        <Badge
+                          variant="secondary"
+                          className="ml-2 text-xs bg-indigo-100 text-indigo-700 border-indigo-200"
+                        >
+                          Popular
+                        </Badge>
+                      )}
+                    </Link>
+                  </li>
+                ))}
+                <li>
+                  <Link
+                    href="/services"
+                    className="group flex items-center text-indigo-400 hover:text-indigo-300 font-medium transition-colors text-sm sm:text-base"
+                  >
+                    <span className="mr-2">View All Setup Services</span>
+                    <ArrowRight className="h-3 w-3 group-hover:translate-x-1 transition-transform duration-300" />
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          {/* Third Row - Additional Services and Contact */}
+          <div className="grid gap-8 grid-cols-1 md:grid-cols-3 mb-8">
+            {/* Resources & Guides */}
+            <div>
+              <h3 className="mb-4 text-base font-bold text-white relative">
+                Resources & Guides
+                <span className="absolute -bottom-2 left-0 w-8 h-1 bg-gradient-to-r from-orange-500 to-orange-600 rounded-full"></span>
+              </h3>
+              <ul className="space-y-2">
+                {[
+                  { name: "Business Blog", href: "/blog" },
+                  { name: "Startup Guide", href: "/blog/startup-guide" },
+                  { name: "Tax Filing Guide", href: "/blog/tax-filing-guide" },
+                  { name: "Company Registration Guide", href: "/blog/company-registration-guide" },
+                ].map((resource, index) => (
+                  <li key={index}>
+                    <Link
+                      href={resource.href}
+                      className="text-slate-300 hover:text-orange-400 transition-colors text-sm"
+                      title={`${resource.name} - Free business resources`}
+                    >
+                      {resource.name}
+                    </Link>
                   </li>
                 ))}
               </ul>
             </div>
 
-            {/* Contact & Business Hours */}
-            <div className="lg:col-span-1">
-              <h3 className="mb-4 lg:mb-6 text-base sm:text-lg font-bold text-white relative">
+            {/* Get In Touch */}
+            <div>
+              <h3 className="mb-4 text-base font-bold text-white relative">
                 Get In Touch
-                <span className="absolute -bottom-2 left-0 w-12 h-1 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full"></span>
+                <span className="absolute -bottom-2 left-0 w-8 h-1 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full"></span>
               </h3>
-
-              <div className="space-y-3 lg:space-y-4 mb-4 lg:mb-6">
+              <div className="space-y-3 mb-4">
                 <div className="flex items-start group">
                   <div className="mr-3 p-2 bg-slate-700 rounded-lg group-hover:bg-slate-600 transition-colors">
                     <MapPin className="h-4 w-4 text-blue-400" />
                   </div>
                   <div>
-                    <p className="text-xs sm:text-sm font-medium text-slate-300 mb-1">Office Address</p>
-                    <p className="text-slate-400 text-xs sm:text-sm leading-relaxed">
+                    <p className="text-xs font-medium text-slate-300 mb-1">Office Address</p>
+                    <p className="text-slate-400 text-xs leading-relaxed">
                       Office No 7, 3rd Floor, Saraswati Heights,
                       <br />
                       Deccan Gymkhana, Behind Goodluck Café,
@@ -256,40 +362,52 @@ export default function EnhancedFooter() {
                     </p>
                   </div>
                 </div>
-
                 <div className="flex items-center group">
                   <div className="mr-3 p-2 bg-slate-700 rounded-lg group-hover:bg-slate-600 transition-colors">
                     <Phone className="h-4 w-4 text-green-400" />
                   </div>
                   <div>
-                    <p className="text-xs sm:text-sm font-medium text-slate-300 mb-1">Phone Number</p>
+                    <p className="text-xs font-medium text-slate-300 mb-1">Phone Number</p>
                     <a
                       href="https://wa.me/919699214195"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-slate-400 hover:text-green-400 transition-colors text-xs sm:text-sm font-medium"
+                      className="text-slate-400 hover:text-green-400 transition-colors text-xs font-medium"
                     >
                       +91 91684 99520
                     </a>
                   </div>
                 </div>
-
-                <div className="flex items-center group">
-                  <div className="mr-3 p-2 bg-slate-700 rounded-lg group-hover:bg-slate-600 transition-colors">
-                    <Link
-                      href="/contact"
-                      className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors"
-                      aria-label="Contact us"
-                    >
-                      <Mail className="h-4 w-4" />
-                      <span>Contact Us</span>
-                    </Link>
-                  </div>
-                </div>
               </div>
-
-              {/* Business Hours Card removed */}
             </div>
+
+            {/* Quick Links */}
+            <div>
+              <h3 className="mb-4 text-base font-bold text-white relative">
+                Quick Links
+                <span className="absolute -bottom-2 left-0 w-8 h-1 bg-gradient-to-r from-yellow-500 to-yellow-600 rounded-full"></span>
+              </h3>
+              <ul className="space-y-2">
+                {[
+                  { name: "About Us", href: "/about" },
+                  { name: "Contact Us", href: "/contact" },
+                  { name: "FAQ", href: "/faq" },
+                  { name: "Sitemap", href: "/sitemap-page" },
+                  { name: "Privacy Policy", href: "/legal/privacy-policy" },
+                ].map((link, index) => (
+                  <li key={index}>
+                    <Link
+                      href={link.href}
+                      className="text-slate-300 hover:text-yellow-400 transition-colors text-sm"
+                    >
+                      {link.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+
           </div>
 
           {/* Divider for separation */}

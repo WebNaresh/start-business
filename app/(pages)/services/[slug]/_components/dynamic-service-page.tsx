@@ -14,6 +14,8 @@ import DocumentsSection from "./DocumentsSection"
 import PricingSection from "./PricingSection"
 import FaqSection from "./FaqSection"
 import RelatedServicesSection from "./RelatedServicesSection"
+import Breadcrumbs from "@/components/ui/breadcrumbs"
+import RelatedServices from "@/components/seo/related-services"
 
 interface ServiceData {
   title: string
@@ -229,13 +231,26 @@ export default function DynamicServicePage({ service, slug }: DynamicServicePage
         <div className="fixed top-0 left-0 right-0 z-50">
           <Progress value={readingProgress} className="h-1 rounded-none bg-blue-100" />
         </div>
+
+        {/* Breadcrumbs */}
+        <Breadcrumbs className="bg-slate-50 border-b border-slate-200" />
+
         {/* Section Components */}
         <OverviewSection service={service} />
         <FeaturesSection service={service} />
         <ProcessSection service={service} />
         <DocumentsSection service={service}/>
         <PricingSection service={service} />
-        <RelatedServicesSection currentService={slug} />
+        <div className="py-16 bg-slate-50">
+          <div className="container mx-auto px-4">
+            <RelatedServices
+              title="Related Business Services"
+              description="Explore other services that complement your business registration"
+              showClusterLinks={true}
+              className="mb-8"
+            />
+          </div>
+        </div>
         <FaqSection service={service} openFAQs={openFAQs} toggleFAQ={toggleFAQ} />
       </div>
     </TooltipProvider>
