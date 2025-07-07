@@ -15,6 +15,7 @@ import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
+import axios from "axios";
 
 // Dynamically import Enhanced Editor to avoid SSR issues
 const EnhancedEditor = dynamic(
@@ -41,11 +42,9 @@ interface BlogFormProps {
 
 // Fetch blog data function
 const fetchBlogData = async (slug: string): Promise<Blog> => {
-  const response = await fetch(`/api/blogs/${slug}`);
-  if (!response.ok) {
-    throw new Error("Failed to fetch blog data");
-  }
-  return response.json();
+  const response = await axios.get(`/api/blogs/${slug}`);
+
+  return response.data;
 };
 
 export default function BlogForm({
@@ -562,15 +561,17 @@ export default function BlogForm({
               </div>
             </div>
           </div>
-          <EnhancedEditor
-            ref={editorRef}
-            data={editorData}
-            onChange={handleEditorChange}
-            placeholder="Start writing your blog post... Try pasting formatted content from AI tools!"
-            showToolbar={true}
-            className="min-h-[500px]"
-            isLoading={isLoading}
-          />
+          {editorData && (
+            <EnhancedEditor
+              ref={editorRef}
+              data={editorData}
+              onChange={handleEditorChange}
+              placeholder="Start writing your blog post... Try pasting formatted content from AI tools!"
+              showToolbar={true}
+              className="min-h-[500px]"
+              isLoading={isLoading}
+            />
+          )}
         </div>
 
         {/* SEO & Metadata */}
