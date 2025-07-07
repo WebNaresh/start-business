@@ -561,17 +561,15 @@ export default function BlogForm({
               </div>
             </div>
           </div>
-          {editorData && (
-            <EnhancedEditor
-              ref={editorRef}
-              data={editorData}
-              onChange={handleEditorChange}
-              placeholder="Start writing your blog post... Try pasting formatted content from AI tools!"
-              showToolbar={true}
-              className="min-h-[500px]"
-              isLoading={isLoading}
-            />
-          )}
+          <EnhancedEditor
+            ref={editorRef}
+            data={editorData}
+            onChange={handleEditorChange}
+            placeholder="Start writing your blog post... Try pasting formatted content from AI tools!"
+            showToolbar={true}
+            className="min-h-[500px]"
+            isLoading={isLoading}
+          />
         </div>
 
         {/* SEO & Metadata */}
