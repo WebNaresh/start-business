@@ -128,7 +128,7 @@ export function InlineServiceLink({
     'section-8-company': '/services/section-8-company',
     'producer-company': '/services/producer-company',
 
-    // Tax & Compliance Services
+    // Compliances Services
     'income-tax-filing': '/services/income-tax-filing',
     'gst-registration': '/services/gst-registration',
     'gst-return-filing': '/services/gst-return-filing',
