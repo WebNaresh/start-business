@@ -50,7 +50,7 @@ export default function ServicesHero() {
                 <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-blue-300 w-5 h-5" />
                 <Input
                   type="text"
-                  placeholder="Search for services (e.g., Company Registration, GST Filing...)"
+                  placeholder="Search for services (e.g., Company Registration, Trademark Registration...)"
                   className="pl-12 pr-4 py-4 text-lg bg-white/10 border-white/20 text-white placeholder:text-blue-200 focus:bg-white/20 focus:border-white/40 rounded-xl"
                 />
                 <Button className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-white text-blue-600 hover:bg-blue-50 rounded-lg">

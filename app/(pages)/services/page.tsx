@@ -10,7 +10,7 @@ import AllServicesPage from "./_components/services-navigation"
 export const metadata: Metadata = {
   title: "Business Services - StartBusiness | Complete Business Solutions in India",
   description:
-    "Comprehensive business services including company registration, GST filing, trademark registration, compliance management, and more. Expert guidance for entrepreneurs across India.",
+    "Comprehensive business services including company registration, trademark registration, MCA compliance, RBI compliance, and business registration. Expert guidance for entrepreneurs across India.",
   keywords: [
     "business services India",
     "company registration",

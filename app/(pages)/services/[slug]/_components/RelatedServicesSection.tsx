@@ -72,24 +72,6 @@ export default function RelatedServicesSection({ currentService }: RelatedServic
       slug: "gst-registration",
       color: "green" as ServiceColor,
     },
-    {
-      title: "ITR-4 Filing",
-      description: "File your income tax returns under presumptive taxation scheme",
-      slug: "itr-4-filing",
-      color: "green" as ServiceColor,
-    },
-    {
-      title: "Income Tax Filing",
-      description: "File your income tax returns accurately and on time",
-      slug: "income-tax-filing",
-      color: "green" as ServiceColor,
-    },
-    {
-      title: "TDS Return Filing",
-      description: "File your Tax Deducted at Source (TDS) returns",
-      slug: "tds-filing",
-      color: "green" as ServiceColor,
-    },
     // Intellectual Property Services
     {
       title: "Trademark Registration",

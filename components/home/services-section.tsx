@@ -172,7 +172,7 @@ export default function ServicesCarousel() {
       billing: "/one-time",
       slug: "gst-registration",
       mostPopular: false,
-      category: "tax",
+      category: "registration",
       icon: Calculator,
       rating: 4.9,
       completedProjects: 3200,

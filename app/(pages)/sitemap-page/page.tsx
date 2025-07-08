@@ -78,11 +78,6 @@ const sitemapSections: SitemapSection[] = [
     icon: FileText,
     links: [
       {
-        title: "Income Tax Filing (ITR)",
-        href: "/services/income-tax-filing",
-        description: "Professional ITR filing services for individuals and businesses"
-      },
-      {
         title: "GST Registration",
         href: "/services/gst-registration",
         description: "Complete GST registration and compliance"

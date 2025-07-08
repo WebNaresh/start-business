@@ -109,7 +109,7 @@ export default function ServiceComparisonTool({
         "Annual Return Filing",
         "Board Meetings",
         "Financial Statements",
-        "Income Tax Returns"
+        "Regulatory Compliance"
       ]
     },
     {
@@ -148,7 +148,7 @@ export default function ServiceComparisonTool({
       compliance: [
         "Annual Return Filing",
         "Financial Statements",
-        "Income Tax Returns"
+        "Regulatory Compliance"
       ]
     },
     {
@@ -187,7 +187,7 @@ export default function ServiceComparisonTool({
       compliance: [
         "Annual Return Filing",
         "Statement of Accounts",
-        "Income Tax Returns"
+        "Regulatory Compliance"
       ]
     },
     {

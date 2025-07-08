@@ -202,15 +202,6 @@ export default function AllServicesPage() {
           features: ["GST Number", "Input Tax Credit", "Legal Compliance"]
         },
         {
-          name: "ITR-4 Filing",
-          href: "/services/itr-4-filing",
-          popular: true,
-          description: "File your income tax returns under presumptive taxation scheme",
-          price: "₹1,999",
-          timeline: "2-3 days",
-          features: ["Presumptive Taxation", "Simple Filing", "Expert Support"]
-        },
-        {
           name: "ROC Annual Compliances",
           href: "/services/roc-annual-compliances",
           description: "Stay compliant with all ROC requirements including annual returns",
@@ -219,37 +210,12 @@ export default function AllServicesPage() {
           features: ["Annual Returns", "ROC Compliance", "Penalty Avoidance"]
         },
         {
-          name: "GST Filing",
-          href: "/services/gst-filing",
-          description: "File your GST returns accurately and on time",
-          price: "₹999/month",
-          timeline: "Monthly",
-          features: ["Monthly Returns", "GSTR-1/3B", "Timely Filing"]
-        },
-        {
           name: "GST Cancellation and Revocation",
           href: "/services/gst-cancellation",
           description: "Cancel or revoke your GST registration",
           price: "₹1,499",
           timeline: "7-10 days",
           features: ["Cancellation Process", "Documentation", "Legal Support"]
-        },
-        {
-          name: "Income Tax Filing",
-          href: "/services/income-tax-filing",
-          popular: true,
-          description: "File your income tax returns accurately and on time",
-          price: "₹1,499",
-          timeline: "2-3 days",
-          features: ["ITR Filing", "Tax Calculation", "Refund Processing"]
-        },
-        {
-          name: "TDS Return Filing",
-          href: "/services/tds-filing",
-          description: "File your Tax Deducted at Source (TDS) returns",
-          price: "₹2,499",
-          timeline: "3-5 days",
-          features: ["TDS Returns", "Quarterly Filing", "Compliance"]
         },
         {
           name: "Annual Compliance",

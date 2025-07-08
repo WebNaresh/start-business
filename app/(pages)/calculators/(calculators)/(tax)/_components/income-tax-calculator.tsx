@@ -621,10 +621,9 @@ export default function IncomeTaxCalculator() {
                   </div>
 
                   <div className="bg-teal-50 p-4 rounded-lg">
-                    <h3 className="font-semibold text-teal-800 mb-2">File Returns Timely</h3>
+                    <h3 className="font-semibold text-teal-800 mb-2">Maintain Compliance</h3>
                     <p className="text-sm text-slate-600">
-                      File ITR before due date to avoid penalties. Use ITR-1 for salary income or ITR-2 for multiple
-                      income sources.
+                      Ensure proper compliance with applicable tax regulations and maintain accurate financial records for your business.
                     </p>
                   </div>
                 </div>

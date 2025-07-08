@@ -76,14 +76,6 @@ export const coreServices: InternalLink[] = [
 
   // Compliances Services
   {
-    href: '/services/income-tax-filing',
-    title: 'Income Tax Return (ITR) Filing',
-    description: 'Expert ITR filing services for individuals and businesses with maximum refunds',
-    category: 'service',
-    keywords: ['itr filing', 'income tax return', 'tax filing', 'tax compliance'],
-    priority: 'high'
-  },
-  {
     href: '/services/gst-registration',
     title: 'GST Registration Services',
     description: 'Complete GST registration and compliance services for your business',

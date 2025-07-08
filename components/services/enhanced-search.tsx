@@ -33,7 +33,7 @@ interface EnhancedSearchProps {
 export default function EnhancedSearch({
   onSearch,
   onFilter,
-  placeholder = "Search services (e.g., company registration, GST filing...)",
+  placeholder = "Search services (e.g., company registration, trademark registration...)",
   className = ""
 }: EnhancedSearchProps) {
   const [query, setQuery] = useState("")
@@ -66,9 +66,8 @@ export default function EnhancedSearch({
     { id: "7", text: "Tax Compliance", type: "category" },
     { id: "8", text: "Legal Services", type: "category" },
     { id: "9", text: "company registration", type: "keyword" },
-    { id: "10", text: "gst filing", type: "keyword" },
-    { id: "11", text: "trademark protection", type: "keyword" },
-    { id: "12", text: "business license", type: "keyword" }
+    { id: "10", text: "trademark protection", type: "keyword" },
+    { id: "11", text: "business license", type: "keyword" }
   ]
 
   // Load recent searches from localStorage

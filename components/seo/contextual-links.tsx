@@ -129,12 +129,8 @@ export function InlineServiceLink({
     'producer-company': '/services/producer-company',
 
     // Compliances Services
-    'income-tax-filing': '/services/income-tax-filing',
     'gst-registration': '/services/gst-registration',
-    'gst-return-filing': '/services/gst-return-filing',
-    'tds-return-filing': '/services/tds-return-filing',
     'annual-compliance': '/services/annual-compliance',
-    'tax-audit': '/services/tax-audit',
 
     // Legal & IP Services
     'trademark-registration': '/services/trademark-registration',
@@ -238,13 +234,9 @@ export function ServiceCTA({
     'section-8-company': '/services/section-8-company',
     'producer-company': '/services/producer-company',
 
-    // Tax & Compliance Services
-    'income-tax-filing': '/services/income-tax-filing',
+    // Compliances Services
     'gst-registration': '/services/gst-registration',
-    'gst-return-filing': '/services/gst-return-filing',
-    'tds-return-filing': '/services/tds-return-filing',
     'annual-compliance': '/services/annual-compliance',
-    'tax-audit': '/services/tax-audit',
 
     // Legal & IP Services
     'trademark-registration': '/services/trademark-registration',

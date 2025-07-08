@@ -114,22 +114,6 @@ export default function Header() {
           href: "/services/roc-annual-compliances",
           description: "Stay compliant with all ROC requirements including annual returns",
         },
-        {
-          name: "GST Filing",
-          href: "/services/gst-filing",
-          description: "File your GST returns accurately and on time",
-        },
-        {
-          name: "Income Tax Filing",
-          href: "/services/income-tax-filing",
-          popular: true,
-          description: "File your income tax returns accurately and on time",
-        },
-        {
-          name: "TDS Return Filing",
-          href: "/services/tds-filing",
-          description: "File your Tax Deducted at Source (TDS) returns",
-        },
       ],
     },
     {

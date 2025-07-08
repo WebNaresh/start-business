@@ -229,7 +229,7 @@ const complianceFaqs = [
   {
     question: "What are the annual compliance requirements for a Private Limited Company?",
     answer:
-      "Private Limited Companies must file Annual Returns (MGT-7), Financial Statements (AOC-4), conduct Annual General Meetings, maintain statutory registers, file Income Tax Returns, and comply with GST requirements if registered. Additionally, they must file Director KYC (DIR-3 KYC) annually.",
+      "Private Limited Companies must file Annual Returns (MGT-7), Financial Statements (AOC-4), conduct Annual General Meetings, maintain statutory registers, and comply with applicable regulatory requirements. Additionally, they must file Director KYC (DIR-3 KYC) annually.",
   },
   {
     question: "What happens if I miss compliance deadlines?",
@@ -249,7 +249,7 @@ const complianceFaqs = [
   {
     question: "What are the compliance requirements for LLPs?",
     answer:
-      "LLPs must file Annual Returns (Form 11) and Statement of Accounts & Solvency (Form 8) annually. They must maintain proper books of accounts, file Income Tax Returns, and comply with GST requirements if registered. LLPs must also update any changes in partners or the LLP agreement through appropriate forms.",
+      "LLPs must file Annual Returns (Form 11) and Statement of Accounts & Solvency (Form 8) annually. They must maintain proper books of accounts and comply with applicable regulatory requirements. LLPs must also update any changes in partners or the LLP agreement through appropriate forms.",
   },
 ]
 
@@ -257,7 +257,7 @@ const generalFaqs = [
   {
     question: "What services do you offer?",
     answer:
-      "We offer a comprehensive range of business services including company registration, trademark registration, compliance services, GST registration, FSSAI registration, MSME registration, and various other business-related services to help entrepreneurs start and run their businesses efficiently.",
+      "We offer a comprehensive range of business services including company registration, trademark registration, MCA compliance, RBI compliance, business registration, FSSAI registration, MSME registration, and various other business-related services to help entrepreneurs start and run their businesses efficiently.",
   },
   {
     question: "How much do your services cost?",
