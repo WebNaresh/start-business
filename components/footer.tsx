@@ -122,10 +122,10 @@ export default function EnhancedFooter() {
               </ul>
             </div>
 
-            {/* Tax & Compliance Services */}
+            {/* Compliances Services */}
             <div>
               <h3 className="mb-4 lg:mb-6 text-base sm:text-lg font-bold text-white relative">
-                Tax & Compliance
+                Compliances
                 <span className="absolute -bottom-2 left-0 w-12 h-1 bg-gradient-to-r from-green-500 to-green-600 rounded-full"></span>
               </h3>
               <ul className="space-y-2 lg:space-y-3">

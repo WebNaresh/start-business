@@ -100,7 +100,7 @@ export default function Header() {
     },
     {
       id: "tax-compliance",
-      name: "Tax & Compliance",
+      name: "Compliances",
       shortName: "Tax",
       icon: FileText,
       description: "GST, tax filing, and compliance management",

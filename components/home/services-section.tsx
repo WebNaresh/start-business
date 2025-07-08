@@ -236,25 +236,6 @@ export default function ServicesCarousel() {
         author: "Vikram Singh",
       },
     },
-    {
-      title: "ITR-4 Return Filing",
-      description: "Specialized tax filing service for businesses under presumptive taxation scheme",
-      price: "₹2,999",
-      originalPrice: "₹4,000",
-      billing: "/year",
-      slug: "itr-4-filing",
-      mostPopular: false,
-      category: "tax",
-      icon: Calculator,
-      rating: 4.9,
-      completedProjects: 800,
-      deliveryTime: "2-3 days",
-      features: ["Income Computation", "Tax Calculation", "Form Preparation", "E-filing Support", "Tax Planning Tips"],
-      testimonial: {
-        text: "Saved us time and money!",
-        author: "Dr. Sunita Rao",
-      },
-    },
   ]
 
   const categories = [

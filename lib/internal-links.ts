@@ -74,7 +74,7 @@ export const coreServices: InternalLink[] = [
     priority: 'low'
   },
 
-  // Tax & Compliance Services
+  // Compliances Services
   {
     href: '/services/income-tax-filing',
     title: 'Income Tax Return (ITR) Filing',
