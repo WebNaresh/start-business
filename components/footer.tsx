@@ -132,8 +132,11 @@ export default function EnhancedFooter() {
                 {[
                   { name: "Income Tax Filing", href: "/services/income-tax-filing", popular: true },
                   { name: "GST Registration", href: "/services/gst-registration", popular: true },
-                  { name: "GST Return Filing", href: "/services/gst-return-filing", popular: false },
-                  { name: "TDS Return Filing", href: "/services/tds-return-filing", popular: false },
+                  { name: "Company Annual ROC Compliance", href: "/services/roc-annual-compliances", popular: true },
+                  { name: "LLP Annual ROC Compliance", href: "/services/llp-annual-roc", popular: false },
+                  { name: "FEMA Compliance", href: "/services/fema-compliance", popular: false },
+                  { name: "FEMA Compliance", href: "/services/fema-compliance", popular: false },
+                  { name: "CSR Compliance", href: "/services/csr-compliance", popular: false },
                   { name: "Annual Compliance", href: "/services/annual-compliance", popular: false },
                 ].map((service, index) => (
                   <li key={index}>

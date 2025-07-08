@@ -160,7 +160,7 @@ const faqCategories = [
   {
     id: "compliance",
     title: "Compliance Services",
-    items: ["Annual Filings", "GST Compliance", "FEMA Compliance", "Director KYC", "Statutory Registers"],
+    items: ["Annual Filings", "MCA Compliance", "FEMA Compliance", "Director KYC", "Statutory Registers"],
   },
   {
     id: "general",
@@ -237,11 +237,6 @@ const complianceFaqs = [
       "Missing compliance deadlines can result in penalties, late fees, and legal consequences. For example, late filing of Annual Returns can incur penalties of ₹100 per day of delay. Continued non-compliance can lead to the company being marked as 'Active Non-Compliant' or even struck off from the Register of Companies.",
   },
   {
-    question: "How often do I need to file GST returns?",
-    answer:
-      "The frequency of GST return filing depends on your business category. Regular businesses typically file monthly (GSTR-3B) and quarterly (GSTR-1) returns. Businesses under the Composition Scheme file quarterly returns. Annual returns (GSTR-9) are required for all GST-registered businesses.",
-  },
-  {
     question: "What is Director KYC and when is it required?",
     answer:
       "Director KYC (DIR-3 KYC) is an annual compliance requirement where all directors with a Director Identification Number (DIN) must verify their details with the Ministry of Corporate Affairs. It must be filed every year by September 30th, regardless of whether there are changes in the director's information.",
@@ -257,7 +252,7 @@ const generalFaqs = [
   {
     question: "What services do you offer?",
     answer:
-      "We offer a comprehensive range of business services including company registration, trademark registration, MCA compliance, RBI compliance, business registration, FSSAI registration, MSME registration, and various other business-related services to help entrepreneurs start and run their businesses efficiently.",
+      "We offer a comprehensive range of business services including company registration, trademark registration, MCA compliance, RBI compliance, business registration, and various other business-related services to help entrepreneurs start and run their businesses efficiently.",
   },
   {
     question: "How much do your services cost?",

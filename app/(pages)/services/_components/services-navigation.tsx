@@ -119,7 +119,7 @@ export default function AllServicesPage() {
       bgColor: "bg-blue-50",
       gradientFrom: "from-blue-600",
       gradientTo: "to-blue-400",
-      totalServices: 7,
+      totalServices: 9,
       subServices: [
         {
           name: "Private Limited Company",
@@ -178,19 +178,35 @@ export default function AllServicesPage() {
           timeline: "5-7 days",
           features: ["Shared Ownership", "Flexible Structure", "Easy Formation"]
         },
+        {
+          name: "Section 8 Company",
+          href: "/services/section-8-company",
+          description: "Register a non-profit company for charitable and social welfare activities",
+          price: "₹18,000",
+          timeline: "30-45 days",
+          features: ["Non-profit", "Tax Exemptions", "Social Impact"]
+        },
+        {
+          name: "Subsidiary of Foreign Company",
+          href: "/services/subsidiary-foreign-company",
+          description: "Establish Indian subsidiary of your foreign company with complete compliance",
+          price: "₹35,000",
+          timeline: "25-35 days",
+          features: ["100% Foreign Ownership", "Local Presence", "FEMA Compliance"]
+        },
       ],
     },
     {
       id: "tax-compliance",
       name: "Compliances",
-      shortName: "Tax",
+      shortName: "Compliance",
       icon: FileText,
-      description: "GST, tax filing, and compliance management",
+      description: "MCA, RBI and regulatory compliance management",
       color: "text-emerald-600",
       bgColor: "bg-emerald-50",
       gradientFrom: "from-emerald-600",
       gradientTo: "to-green-400",
-      totalServices: 8,
+      totalServices: 10,
       subServices: [
         {
           name: "GST Registration",
@@ -202,12 +218,61 @@ export default function AllServicesPage() {
           features: ["GST Number", "Input Tax Credit", "Legal Compliance"]
         },
         {
-          name: "ROC Annual Compliances",
+          name: "Company Annual ROC Compliance",
           href: "/services/roc-annual-compliances",
+          popular: true,
           description: "Stay compliant with all ROC requirements including annual returns",
-          price: "₹4,999",
-          timeline: "5-7 days",
+          price: "₹15,000",
+          timeline: "10-15 days",
           features: ["Annual Returns", "ROC Compliance", "Penalty Avoidance"]
+        },
+        {
+          name: "LLP Annual ROC Compliance",
+          href: "/services/llp-annual-roc",
+          description: "Complete annual compliance for LLP with ROC filings",
+          price: "₹8,000",
+          timeline: "10-12 days",
+          features: ["Form 11 & 8 Filing", "ITR Filing", "Expert Support"]
+        },
+        {
+          name: "FEMA Compliance Services",
+          href: "/services/fema-compliance",
+          description: "FDI/ODI reporting with RBI and FLA return filing services",
+          price: "₹25,000",
+          timeline: "15-20 days",
+          features: ["FDI Reporting", "ODI Reporting", "FLA Returns"]
+        },
+        {
+          name: "CSR Compliances",
+          href: "/services/csr-compliance",
+          description: "CSR consultancy, CSR-1 and CSR-2 filing services",
+          price: "₹18,000",
+          timeline: "10-15 days",
+          features: ["CSR Strategy", "CSR-1 Filing", "CSR-2 Filing"]
+        },
+        {
+          name: "Maintenance of Statutory Registers",
+          href: "/services/statutory-registers",
+          description: "Maintain all mandatory statutory registers and minutes",
+          price: "₹12,000",
+          timeline: "5-7 days",
+          features: ["Register Maintenance", "Minutes Recording", "Compliance Updates"]
+        },
+        {
+          name: "Shifting of Registered Office",
+          href: "/services/registered-office-shifting",
+          description: "Change registered office address with all regulatory compliances",
+          price: "₹15,000",
+          timeline: "15-25 days",
+          features: ["Address Change", "ROC Filing", "Regulatory Updates"]
+        },
+        {
+          name: "Dematerialisation of Securities",
+          href: "/services/dematerialisation-securities",
+          description: "Convert physical securities to electronic form with NSDL/CDSL",
+          price: "₹20,000",
+          timeline: "20-30 days",
+          features: ["NSDL/CDSL Process", "Electronic Conversion", "SEBI Compliance"]
         },
         {
           name: "GST Cancellation and Revocation",
@@ -237,7 +302,7 @@ export default function AllServicesPage() {
       bgColor: "bg-purple-50",
       gradientFrom: "from-purple-600",
       gradientTo: "to-indigo-400",
-      totalServices: 4,
+      totalServices: 7,
       subServices: [
         {
           name: "Trademark Registration",
@@ -265,12 +330,36 @@ export default function AllServicesPage() {
           features: ["Legal Response", "Expert Drafting", "Follow-up Support"]
         },
         {
+          name: "Trademark Hearing",
+          href: "/services/trademark-hearing",
+          description: "Professional representation for trademark hearings",
+          price: "₹8,000",
+          timeline: "As per hearing date",
+          features: ["Legal Representation", "Expert Arguments", "Documentation Support"]
+        },
+        {
+          name: "Trademark Rectification",
+          href: "/services/trademark-rectification",
+          description: "Rectify or remove conflicting trademarks from registry",
+          price: "₹25,000",
+          timeline: "12-18 months",
+          features: ["Legal Proceedings", "Expert Representation", "Registry Removal"]
+        },
+        {
           name: "Copyright Registration",
           href: "/services/copyright-registration",
           description: "Protect your creative works with copyright registration",
           price: "₹3,999",
           timeline: "6-8 months",
           features: ["Creative Protection", "Legal Rights", "Infringement Protection"]
+        },
+        {
+          name: "Copyright Objection",
+          href: "/services/copyright-objection",
+          description: "Handle copyright objections and disputes professionally",
+          price: "₹12,000",
+          timeline: "3-6 months",
+          features: ["Legal Response", "Expert Handling", "Dispute Resolution"]
         },
       ],
     },
@@ -284,7 +373,7 @@ export default function AllServicesPage() {
       bgColor: "bg-amber-50",
       gradientFrom: "from-amber-600",
       gradientTo: "to-orange-400",
-      totalServices: 5,
+      totalServices: 7,
       subServices: [
         {
           name: "Import Export Code",
@@ -327,6 +416,22 @@ export default function AllServicesPage() {
           price: "₹4,999",
           timeline: "15-20 days",
           features: ["Government Benefits", "Tax Exemptions", "Funding Support"]
+        },
+        {
+          name: "NGO Darpan Registration",
+          href: "/services/ngo-darpan",
+          description: "Register your NGO on NITI Aayog's NGO Darpan portal for government funding",
+          price: "₹5,999",
+          timeline: "10-15 days",
+          features: ["Government Recognition", "Funding Eligibility", "Credibility Enhancement"]
+        },
+        {
+          name: "GeM Portal Registration",
+          href: "/services/gem-portal",
+          description: "Register on Government e-Marketplace to sell to government organizations",
+          price: "₹8,999",
+          timeline: "7-12 days",
+          features: ["Government Contracts", "Direct Sales", "Digital Marketplace"]
         },
       ],
     },

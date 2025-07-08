@@ -84,19 +84,67 @@ export const coreServices: InternalLink[] = [
     priority: 'high'
   },
   {
-    href: '/services/gst-return-filing',
-    title: 'GST Return Filing',
-    description: 'Monthly and quarterly GST return filing services with expert assistance',
+    href: '/services/roc-annual-compliances',
+    title: 'Company Annual ROC Compliance',
+    description: 'Stay compliant with all ROC requirements including annual returns and financial statements',
     category: 'service',
-    keywords: ['gst return filing', 'gst compliance', 'monthly gst return', 'quarterly gst return'],
+    keywords: ['roc compliance', 'annual compliance', 'company compliance', 'mca compliance'],
     priority: 'high'
   },
   {
-    href: '/services/tds-return-filing',
-    title: 'TDS Return Filing',
-    description: 'Professional TDS return filing and compliance services for businesses',
+    href: '/services/llp-annual-roc',
+    title: 'LLP Annual ROC Compliance',
+    description: 'Complete annual compliance for LLP with all ROC filings and requirements',
     category: 'service',
-    keywords: ['tds return filing', 'tds compliance', 'tax deducted at source', 'tds return'],
+    keywords: ['llp compliance', 'llp annual filing', 'llp roc compliance', 'partnership compliance'],
+    priority: 'medium'
+  },
+  {
+    href: '/services/fema-compliance',
+    title: 'FEMA Compliance Services',
+    description: 'FDI/ODI reporting with RBI and FLA return filing services',
+    category: 'service',
+    keywords: ['fema compliance', 'fdi reporting', 'odi reporting', 'rbi compliance'],
+    priority: 'medium'
+  },
+  {
+    href: '/services/csr-compliance',
+    title: 'CSR Compliances',
+    description: 'CSR consultancy, CSR-1 and CSR-2 filing services for corporate social responsibility',
+    category: 'service',
+    keywords: ['csr compliance', 'corporate social responsibility', 'csr filing', 'csr consultancy'],
+    priority: 'medium'
+  },
+  {
+    href: '/services/statutory-registers',
+    title: 'Maintenance of Statutory Registers',
+    description: 'Maintain all mandatory statutory registers and minutes for companies',
+    category: 'service',
+    keywords: ['statutory registers', 'company registers', 'register maintenance', 'compliance registers'],
+    priority: 'medium'
+  },
+  {
+    href: '/services/registered-office-shifting',
+    title: 'Shifting of Registered Office',
+    description: 'Change registered office address with complete regulatory compliance',
+    category: 'service',
+    keywords: ['registered office change', 'office shifting', 'address change', 'roc filing'],
+    priority: 'medium'
+  },
+  {
+    href: '/services/dematerialisation-securities',
+    title: 'Dematerialisation of Securities',
+    description: 'Convert physical securities to electronic form with NSDL/CDSL compliance',
+    category: 'service',
+    keywords: ['dematerialisation', 'demat securities', 'electronic securities', 'nsdl cdsl'],
+    priority: 'low'
+  },
+  {
+    href: '/services/subsidiary-foreign-company',
+    title: 'Subsidiary of Foreign Company',
+    description: 'Establish Indian subsidiary of foreign company with complete FEMA compliance',
+    category: 'service',
+    keywords: ['foreign subsidiary', 'foreign company subsidiary', 'fema compliance', 'foreign investment'],
     priority: 'medium'
   },
   {
@@ -126,11 +174,35 @@ export const coreServices: InternalLink[] = [
     priority: 'medium'
   },
   {
+    href: '/services/trademark-hearing',
+    title: 'Trademark Hearing',
+    description: 'Professional representation for trademark hearings and proceedings',
+    category: 'service',
+    keywords: ['trademark hearing', 'trademark representation', 'legal hearing', 'trademark proceedings'],
+    priority: 'medium'
+  },
+  {
+    href: '/services/trademark-rectification',
+    title: 'Trademark Rectification',
+    description: 'Rectify or remove conflicting trademarks from the registry',
+    category: 'service',
+    keywords: ['trademark rectification', 'trademark removal', 'trademark opposition', 'registry rectification'],
+    priority: 'medium'
+  },
+  {
     href: '/services/copyright-registration',
     title: 'Copyright Registration',
     description: 'Protect your creative works and content with copyright registration',
     category: 'service',
     keywords: ['copyright registration', 'intellectual property', 'creative protection', 'content protection'],
+    priority: 'medium'
+  },
+  {
+    href: '/services/copyright-objection',
+    title: 'Copyright Objection',
+    description: 'Handle copyright objections and disputes professionally',
+    category: 'service',
+    keywords: ['copyright objection', 'copyright dispute', 'copyright legal', 'copyright response'],
     priority: 'medium'
   },
   {
@@ -197,6 +269,22 @@ export const coreServices: InternalLink[] = [
     description: 'Register your startup with Startup India for government benefits and recognition',
     category: 'service',
     keywords: ['startup india', 'startup registration', 'startup benefits', 'government startup'],
+    priority: 'medium'
+  },
+  {
+    href: '/services/ngo-darpan',
+    title: 'NGO Darpan Registration',
+    description: 'Register your NGO on NITI Aayog NGO Darpan portal for government funding eligibility',
+    category: 'service',
+    keywords: ['ngo darpan', 'ngo registration', 'niti aayog', 'ngo funding'],
+    priority: 'medium'
+  },
+  {
+    href: '/services/gem-portal',
+    title: 'GeM Portal Registration',
+    description: 'Register on Government e-Marketplace to sell to government organizations',
+    category: 'service',
+    keywords: ['gem portal', 'government marketplace', 'government contracts', 'gem registration'],
     priority: 'medium'
   },
 
@@ -655,25 +743,27 @@ export const topicClusters = {
   'tax-compliance': {
     pillarPage: '/services/tax-compliance',
     clusterPages: [
-      '/services/income-tax-filing',
       '/services/gst-registration',
-      '/services/gst-return-filing',
-      '/services/tds-return-filing',
+      '/services/roc-annual-compliances',
+      '/services/llp-annual-roc',
+      '/services/fema-compliance',
+      '/services/csr-compliance',
       '/services/annual-compliance',
-      '/services/tax-audit',
       '/calculators/income-tax-calculator',
       '/calculators/gst-calculator',
-      '/calculators/tds-calculator',
       '/calculators/advance-tax-calculator',
-      '/blog/tax-filing-guide',
-      '/blog/gst-compliance-checklist'
+      '/blog/compliance-guide',
+      '/blog/roc-compliance-checklist'
     ]
   },
   'intellectual-property': {
     pillarPage: '/services/trademark-registration',
     clusterPages: [
       '/services/trademark-registration',
+      '/services/trademark-hearing',
+      '/services/trademark-rectification',
       '/services/copyright-registration',
+      '/services/copyright-objection',
       '/services/patent-registration',
       '/services/design-registration',
       '/blog/intellectual-property-guide',
@@ -688,6 +778,8 @@ export const topicClusters = {
       '/services/import-export-code',
       '/services/msme-registration',
       '/services/startup-india-registration',
+      '/services/ngo-darpan',
+      '/services/gem-portal',
       '/blog/business-license-guide',
       '/blog/fssai-registration-process'
     ]

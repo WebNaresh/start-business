@@ -479,8 +479,8 @@
       ]
     },
     "roc-annual-compliances": {
-      "title": "ROC Annual Compliances",
-      "shortTitle": "ROC Compliances",
+      "title": "Company Annual ROC Compliance",
+      "shortTitle": "Company ROC Compliance",
       "description": "Stay compliant with all ROC requirements including annual returns and financial statements.",
       "category": "compliance",
       "icon": "FileCheck",
@@ -945,7 +945,7 @@
       },
       "whatIs": {
         "title": "What is ROC Compliance?",
-        "description": "ROC (Registrar of Companies) Compliance refers to the mandatory requirements that companies must fulfill with the Ministry of Corporate Affairs. This includes filing annual returns, financial statements, and maintaining proper corporate governance."
+        "description": "ROC (Registrar of Companies) Compliance refers to the mandatory requirements that companies must fulfill with the Ministry of Corporate Affairs. This includes filing annual returns, financial statements, board meeting minutes, director's report, and maintaining statutory registers."
       },
       "keyFeatures": [
         "Annual return filing",
@@ -1024,811 +1024,6 @@
         {
           "question": "Do I need to conduct board meetings?",
           "answer": "Yes, companies must conduct at least 4 board meetings in a year, with a maximum gap of 120 days between two meetings."
-        }
-      ]
-    },
-    "msme-registration": {
-      "title": "MSME Registration Services",
-      "shortTitle": "MSME Registration",
-      "description": "Register your business under MSME to avail government benefits, subsidies, and priority sector lending - boost your business growth with official recognition.",
-      "category": "business-setup",
-      "icon": "Building",
-      "color": "green",
-      "popular": true,
-      "pricing": {
-        "amount": "1,999",
-        "originalAmount": "2,999",
-        "currency": "₹",
-        "gst": true,
-        "includes": [
-          "MSME registration application",
-          "Document preparation",
-          "Government liaison",
-          "MSME certificate",
-          "Professional charges",
-          "Post-registration support"
-        ]
-      },
-      "timeline": {
-        "total": "3-5 working days",
-        "steps": [
-          { "name": "Document Collection", "duration": "1 day" },
-          { "name": "Application Filing", "duration": "1-2 days" },
-          { "name": "Verification", "duration": "1-2 days" },
-          { "name": "Certificate Issuance", "duration": "1 day" }
-        ]
-      },
-      "whatIs": {
-        "title": "What is MSME Registration?",
-        "description": "MSME (Micro, Small and Medium Enterprises) registration is a government recognition that provides various benefits to businesses including subsidies, tax benefits, and easier access to loans. It helps businesses establish their credibility and access government schemes."
-      },
-      "keyFeatures": [
-        "Government recognition",
-        "Priority sector lending",
-        "Tax benefits",
-        "Subsidy eligibility",
-        "Tender benefits",
-        "Business credibility"
-      ],
-      "idealFor": [
-        "Manufacturing units",
-        "Service providers",
-        "Small businesses",
-        "Startups",
-        "Retailers",
-        "Traders"
-      ],
-      "process": [
-        {
-          "step": 1,
-          "title": "Document Collection",
-          "description": "Gather required documents including business proof, bank statements, and investment details."
-        },
-        {
-          "step": 2,
-          "title": "Application Preparation",
-          "description": "Prepare MSME registration application with proper documentation."
-        },
-        {
-          "step": 3,
-          "title": "Filing & Verification",
-          "description": "Submit application and handle verification process."
-        },
-        {
-          "step": 4,
-          "title": "Certificate Issuance",
-          "description": "Obtain MSME registration certificate upon approval."
-        },
-        {
-          "step": 5,
-          "title": "Post-registration Support",
-          "description": "Provide guidance on utilizing MSME benefits and schemes."
-        }
-      ],
-      "requiredDocuments": {
-        "forBusiness": [
-          "Business registration proof",
-          "PAN Card",
-          "Aadhaar Card",
-          "Bank statements",
-          "Investment details",
-          "Business address proof"
-        ],
-        "forVerification": [
-          "Rent agreement/ownership proof",
-          "Utility bills",
-          "Business plan",
-          "Financial statements",
-          "Previous registrations",
-          "Employee details"
-        ]
-      },
-      "faqs": [
-        {
-          "question": "What are the investment limits for MSME registration?",
-          "answer": "For manufacturing: Micro (up to ₹1 crore), Small (₹1-10 crore), Medium (₹10-50 crore). For services: Micro (up to ₹10 lakhs), Small (₹10 lakhs-2 crore), Medium (₹2-5 crore)."
-        },
-        {
-          "question": "What benefits do I get with MSME registration?",
-          "answer": "Benefits include priority sector lending, tax benefits, government subsidies, tender benefits, and easier access to loans and credit facilities."
-        },
-        {
-          "question": "Is MSME registration mandatory?",
-          "answer": "While not mandatory, MSME registration is highly recommended as it provides various benefits and recognition for your business."
-        },
-        {
-          "question": "How long is the MSME registration valid?",
-          "answer": "MSME registration is valid for a lifetime unless there are changes in investment or turnover that change your category."
-        }
-      ]
-    },
-    "startup-india": {
-      "title": "Startup India Registration Services",
-      "shortTitle": "Startup India",
-      "description": "Register your business under Startup India to access tax benefits, funding opportunities, and government support - accelerate your startup's growth with official recognition.",
-      "category": "business-setup",
-      "icon": "Rocket",
-      "color": "blue",
-      "popular": true,
-      "pricing": {
-        "amount": "4,999",
-        "originalAmount": "6,999",
-        "currency": "₹",
-        "gst": true,
-        "includes": [
-          "Startup India registration",
-          "DPIIT recognition",
-          "Tax benefit application",
-          "Document preparation",
-          "Professional charges",
-          "Post-registration support"
-        ]
-      },
-      "timeline": {
-        "total": "15-20 working days",
-        "steps": [
-          { "name": "Document Collection", "duration": "2-3 days" },
-          { "name": "Application Filing", "duration": "5-7 days" },
-          { "name": "DPIIT Recognition", "duration": "5-7 days" },
-          { "name": "Tax Benefits", "duration": "3-5 days" }
-        ]
-      },
-      "whatIs": {
-        "title": "What is Startup India Registration?",
-        "description": "Startup India is a flagship initiative of the Government of India that provides tax benefits, funding opportunities, and various other benefits to recognized startups. It aims to build a strong ecosystem for nurturing innovation and startups in India."
-      },
-      "keyFeatures": [
-        "Tax benefits for 3 years",
-        "Self-certification compliance",
-        "IPR fast-tracking",
-        "Government tenders access",
-        "Funding opportunities",
-        "Networking benefits"
-      ],
-      "idealFor": [
-        "Innovative startups",
-        "Technology companies",
-        "Product-based businesses",
-        "Social enterprises",
-        "Research-based startups",
-        "Growth-stage startups"
-      ],
-      "process": [
-        {
-          "step": 1,
-          "title": "Eligibility Check",
-          "description": "Verify startup eligibility based on age, innovation, and business model."
-        },
-        {
-          "step": 2,
-          "title": "Document Preparation",
-          "description": "Prepare required documents including business plan, pitch deck, and incorporation proof."
-        },
-        {
-          "step": 3,
-          "title": "DPIIT Recognition",
-          "description": "Apply for DPIIT recognition through Startup India portal."
-        },
-        {
-          "step": 4,
-          "title": "Tax Benefits",
-          "description": "Apply for tax benefits and other government schemes."
-        },
-        {
-          "step": 5,
-          "title": "Post-registration Support",
-          "description": "Guidance on utilizing benefits and compliance requirements."
-        }
-      ],
-      "requiredDocuments": {
-        "forRegistration": [
-          "Company incorporation certificate",
-          "Business plan",
-          "Pitch deck",
-          "Financial projections",
-          "Innovation proof",
-          "Founder details"
-        ],
-        "forVerification": [
-          "PAN Card",
-          "Aadhaar Card",
-          "Bank statements",
-          "Patent/trademark details",
-          "Investment details",
-          "Previous funding rounds"
-        ]
-      },
-      "faqs": [
-        {
-          "question": "What are the eligibility criteria for Startup India?",
-          "answer": "Your business should be less than 10 years old, have annual turnover less than ₹100 crore, be working towards innovation/improvement, and be a private limited company, partnership firm, or LLP."
-        },
-        {
-          "question": "What tax benefits do I get?",
-          "answer": "Startups get tax exemption for 3 consecutive years out of 10 years since incorporation, subject to conditions. They also get tax benefits on investments above fair market value."
-        },
-        {
-          "question": "Is Startup India registration mandatory?",
-          "answer": "While not mandatory, registration provides significant benefits including tax exemptions, easier compliance, and access to government schemes and funding opportunities."
-        },
-        {
-          "question": "How long is the recognition valid?",
-          "answer": "Startup India recognition is valid for 10 years from the date of incorporation, subject to maintaining eligibility criteria."
-        }
-      ]
-    },
-    "partnership-firm": {
-      "title": "Partnership Firm Registration Services",
-      "shortTitle": "Partnership Firm",
-      "description": "Register your partnership firm to establish a formal business structure with shared ownership and responsibilities - perfect for small to medium-sized businesses.",
-      "category": "business-setup",
-      "icon": "Handshake",
-      "color": "amber",
-      "popular": true,
-      "pricing": {
-        "amount": "3,999",
-        "originalAmount": "5,999",
-        "currency": "₹",
-        "gst": true,
-        "includes": [
-          "Partnership deed drafting",
-          "Firm registration",
-          "PAN & TAN application",
-          "Document preparation",
-          "Professional charges",
-          "Post-registration support"
-        ]
-      },
-      "timeline": {
-        "total": "7-10 working days",
-        "steps": [
-          { "name": "Document Collection", "duration": "1-2 days" },
-          { "name": "Deed Preparation", "duration": "2-3 days" },
-          { "name": "Registration", "duration": "2-3 days" },
-          { "name": "PAN & TAN", "duration": "2-3 days" }
-        ]
-      },
-      "whatIs": {
-        "title": "What is a Partnership Firm?",
-        "description": "A Partnership Firm is a business structure where two or more individuals come together to carry on a business with a view to profit. It's governed by the Indian Partnership Act, 1932, and offers a simple way to start a business with shared ownership and responsibilities."
-      },
-      "keyFeatures": [
-        "Easy formation",
-        "Shared ownership",
-        "Flexible management",
-        "Lower compliance",
-        "Shared resources",
-        "Tax benefits"
-      ],
-      "idealFor": [
-        "Small businesses",
-        "Professional services",
-        "Retail shops",
-        "Consulting firms",
-        "Family businesses",
-        "Joint ventures"
-      ],
-      "process": [
-        {
-          "step": 1,
-          "title": "Partnership Deed",
-          "description": "Draft and execute partnership deed with terms and conditions."
-        },
-        {
-          "step": 2,
-          "title": "Document Collection",
-          "description": "Gather required documents from all partners."
-        },
-        {
-          "step": 3,
-          "title": "Registration Application",
-          "description": "Submit registration application to the Registrar of Firms."
-        },
-        {
-          "step": 4,
-          "title": "PAN & TAN",
-          "description": "Apply for PAN and TAN for the partnership firm."
-        },
-        {
-          "step": 5,
-          "title": "Post-registration",
-          "description": "Assist with bank account opening and other formalities."
-        }
-      ],
-      "requiredDocuments": {
-        "forPartners": [
-          "PAN Card",
-          "Aadhaar Card",
-          "Passport size photographs",
-          "Address proof",
-          "Bank statement",
-          "Email ID"
-        ],
-        "forFirm": [
-          "Partnership deed",
-          "Business address proof",
-          "Rent agreement/ownership proof",
-          "Business plan",
-          "Investment details",
-          "Expected turnover"
-        ]
-      },
-      "faqs": [
-        {
-          "question": "How many partners can be there in a partnership firm?",
-          "answer": "A partnership firm can have a minimum of 2 and a maximum of 50 partners. For professional firms, the maximum limit is 100 partners."
-        },
-        {
-          "question": "What is the minimum capital required?",
-          "answer": "There is no minimum capital requirement for starting a partnership firm. Partners can contribute any amount as per their agreement."
-        },
-        {
-          "question": "Is partnership firm registration mandatory?",
-          "answer": "While not mandatory, registration is recommended as it provides legal recognition, makes it easier to open bank accounts, and helps in obtaining loans and licenses."
-        },
-        {
-          "question": "What are the tax implications?",
-          "answer": "Partnership firms are taxed at 30% on their profits. Partners are also taxed on their share of profits as per their individual tax slabs."
-        }
-      ]
-    },
-    "producer-company": {
-      "title": "Producer Company Registration Services",
-      "shortTitle": "Producer Company",
-      "description": "Register your Producer Company to empower farmers, artisans, and primary producers with a corporate structure - combine the benefits of a company with cooperative principles.",
-      "category": "business-setup",
-      "icon": "Users",
-      "color": "green",
-      "popular": true,
-      "pricing": {
-        "amount": "15,000",
-        "originalAmount": "18,000",
-        "currency": "₹",
-        "gst": true,
-        "includes": [
-          "Name Reservation",
-          "MOA & AOA drafting",
-          "Company incorporation",
-          "PAN & TAN application",
-          "Professional charges",
-          "Post-registration support"
-        ]
-      },
-      "timeline": {
-        "total": "20-25 working days",
-        "steps": [
-          { "name": "Document Collection", "duration": "3-4 days" },
-          { "name": "Name Reservation", "duration": "5-7 days" },
-          { "name": "Incorporation", "duration": "7-10 days" },
-          { "name": "Post-registration", "duration": "5-7 days" }
-        ]
-      },
-      "whatIs": {
-        "title": "What is a Producer Company?",
-        "description": "A Producer Company is a hybrid between a private limited company and a cooperative society, specifically designed for farmers, artisans, and primary producers. It combines the benefits of a corporate structure with the principles of cooperation, enabling producers to improve their economic status."
-      },
-      "keyFeatures": [
-        "Limited liability protection",
-        "Democratic management",
-        "Tax benefits",
-        "Government support",
-        "Easy access to credit",
-        "Better market access"
-      ],
-      "idealFor": [
-        "Farmers",
-        "Artisans",
-        "Primary producers",
-        "Agricultural cooperatives",
-        "Handicraft producers",
-        "Rural entrepreneurs"
-      ],
-      "process": [
-        {
-          "step": 1,
-          "title": "Initial Setup",
-          "description": "Gather minimum 10 primary producers and prepare initial documents."
-        },
-        {
-          "step": 2,
-          "title": "Name Reservation",
-          "description": "Apply for Name Reservation with the Registrar of Companies."
-        },
-        {
-          "step": 3,
-          "title": "Document Preparation",
-          "description": "Prepare MOA, AOA, and other incorporation documents."
-        },
-        {
-          "step": 4,
-          "title": "Incorporation",
-          "description": "Submit incorporation application to ROC."
-        },
-        {
-          "step": 5,
-          "title": "Post-registration",
-          "description": "Complete PAN, TAN, and bank account formalities."
-        }
-      ],
-      "requiredDocuments": {
-        "forProducers": [
-          "PAN Card",
-          "Aadhaar Card",
-          "Address proof",
-          "Producer certificate",
-          "Bank statements",
-          "Passport size photographs"
-        ],
-        "forCompany": [
-          "MOA & AOA",
-          "Registered office proof",
-          "Director details",
-          "Producer details",
-          "Business plan",
-          "Expected turnover"
-        ]
-      },
-      "faqs": [
-        {
-          "question": "What is the minimum number of members required?",
-          "answer": "A minimum of 10 primary producers or 2 producer institutions or a combination of both is required to form a Producer Company."
-        },
-        {
-          "question": "What are the main objectives of a Producer Company?",
-          "answer": "Main objectives include production, harvesting, procurement, grading, pooling, handling, marketing, selling, and export of primary produce, and providing education and technical services to members."
-        },
-        {
-          "question": "What are the tax benefits?",
-          "answer": "Producer Companies enjoy various tax benefits including lower tax rates, exemptions on certain incomes, and special deductions for agricultural activities."
-        },
-        {
-          "question": "Can a Producer Company raise capital?",
-          "answer": "Yes, a Producer Company can raise capital through member contributions, loans, and investments. It can also issue equity shares to members and raise funds through various government schemes."
-        }
-      ]
-    },
-    "nidhi-company": {
-      "title": "Nidhi Company Registration Services",
-      "shortTitle": "Nidhi Company",
-      "description": "Register your Nidhi Company to operate as a mutual benefit society - perfect for providing financial services to members through deposits and loans.",
-      "category": "business-setup",
-      "icon": "PiggyBank",
-      "color": "blue",
-      "popular": true,
-      "pricing": {
-        "amount": "25,000",
-        "originalAmount": "30,000",
-        "currency": "₹",
-        "gst": true,
-        "includes": [
-          "Name Reservation",
-          "MOA & AOA drafting",
-          "Company incorporation",
-          "Nidhi license application",
-          "Professional charges",
-          "Post-registration support"
-        ]
-      },
-      "timeline": {
-        "total": "30-35 working days",
-        "steps": [
-          { "name": "Document Collection", "duration": "3-4 days" },
-          { "name": "Name Reservation", "duration": "5-7 days" },
-          { "name": "Incorporation", "duration": "7-10 days" },
-          { "name": "Nidhi License", "duration": "15-20 days" }
-        ]
-      },
-      "whatIs": {
-        "title": "What is a Nidhi Company?",
-        "description": "A Nidhi Company is a type of non-banking financial company (NBFC) that operates as a mutual benefit society. It's designed to cultivate the habit of thrift and savings among its members and provide loans to members at reasonable rates of interest."
-      },
-      "keyFeatures": [
-        "Mutual benefit society",
-        "Member-focused operations",
-        "Regulated by MCA",
-        "Limited to members only",
-        "Savings and loans",
-        "Stable business model"
-      ],
-      "idealFor": [
-        "Community savings groups",
-        "Financial cooperatives",
-        "Thrift societies",
-        "Local financial institutions",
-        "Member-based organizations",
-        "Community development"
-      ],
-      "process": [
-        {
-          "step": 1,
-          "title": "Initial Setup",
-          "description": "Gather minimum 200 members and prepare initial documents."
-        },
-        {
-          "step": 2,
-          "title": "Name Reservation",
-          "description": "Apply for Name Reservation with the Registrar of Companies."
-        },
-        {
-          "step": 3,
-          "title": "Company Incorporation",
-          "description": "Incorporate the company with MOA and AOA."
-        },
-        {
-          "step": 4,
-          "title": "Nidhi License",
-          "description": "Apply for Nidhi license from MCA."
-        },
-        {
-          "step": 5,
-          "title": "Post-registration",
-          "description": "Complete compliance requirements and start operations."
-        }
-      ],
-      "requiredDocuments": {
-        "forCompany": [
-          "MOA & AOA",
-          "Registered office proof",
-          "Director details",
-          "Member list",
-          "Business plan",
-          "Financial projections"
-        ],
-        "forDirectors": [
-          "PAN Card",
-          "Aadhaar Card",
-          "Address proof",
-          "Bank statements",
-          "Educational qualifications",
-          "Experience certificates"
-        ]
-      },
-      "faqs": [
-        {
-          "question": "What are the minimum requirements for a Nidhi Company?",
-          "answer": "Minimum 200 members, ₹10 lakhs paid-up capital, and net owned funds of ₹10 lakhs. The company must have 'Nidhi Limited' as part of its name."
-        },
-        {
-          "question": "What are the main restrictions on Nidhi Companies?",
-          "answer": "Nidhi Companies can only accept deposits from and lend to their members. They cannot issue preference shares or debentures, and cannot carry on any other business except the business of borrowing and lending."
-        },
-        {
-          "question": "What are the compliance requirements?",
-          "answer": "Annual filing of returns, maintenance of member registers, compliance with deposit and lending limits, and adherence to prudential norms set by MCA."
-        },
-        {
-          "question": "Can a Nidhi Company accept deposits from non-members?",
-          "answer": "No, a Nidhi Company can only accept deposits from its members. Non-members cannot deposit money with a Nidhi Company."
-        }
-      ]
-    },
-    "annual-compliance": {
-      "title": "Annual Compliance Services",
-      "shortTitle": "Annual Compliance",
-      "description": "Stay compliant with all annual regulatory requirements including ROC filings, tax returns, and statutory audits - ensure your business maintains good standing with authorities.",
-      "category": "compliance",
-      "icon": "FileCheck",
-      "color": "purple",
-      "popular": true,
-      "pricing": {
-        "amount": "12,000",
-        "originalAmount": "15,000",
-        "currency": "₹",
-        "gst": true,
-        "includes": [
-          "Annual return filing",
-          "Financial statements",
-          "Board meeting minutes",
-          "Tax return filing",
-          "Professional charges",
-          "Compliance calendar"
-        ]
-      },
-      "timeline": {
-        "total": "15-20 working days",
-        "steps": [
-          { "name": "Document Collection", "duration": "3-4 days" },
-          { "name": "Financial Preparation", "duration": "5-7 days" },
-          { "name": "Board Meeting", "duration": "2-3 days" },
-          { "name": "Filing", "duration": "5-7 days" }
-        ]
-      },
-      "whatIs": {
-        "title": "What are Annual Compliances?",
-        "description": "Annual compliances are mandatory requirements that businesses must fulfill with various regulatory authorities including ROC, Income Tax Department, and GST Department. These include filing annual returns, financial statements, tax returns, and conducting statutory audits."
-      },
-      "keyFeatures": [
-        "ROC compliance",
-        "Tax return filing",
-        "Financial statements",
-        "Board meetings",
-        "Statutory audits",
-        "Compliance tracking"
-      ],
-      "idealFor": [
-        "Private Limited Companies",
-        "Public Limited Companies",
-        "One Person Companies",
-        "LLPs",
-        "Small Companies",
-        "Startups"
-      ],
-      "process": [
-        {
-          "step": 1,
-          "title": "Document Collection",
-          "description": "Gather financial statements, bank statements, and other required documents."
-        },
-        {
-          "step": 2,
-          "title": "Financial Preparation",
-          "description": "Prepare and review financial statements and annual returns."
-        },
-        {
-          "step": 3,
-          "title": "Board Meeting",
-          "description": "Conduct board meeting and prepare minutes."
-        },
-        {
-          "step": 4,
-          "title": "Return Filing",
-          "description": "File annual returns with ROC and tax returns with ITD."
-        },
-        {
-          "step": 5,
-          "title": "Post-filing Support",
-          "description": "Provide filing acknowledgments and handle any queries."
-        }
-      ],
-      "requiredDocuments": {
-        "forCompany": [
-          "Financial statements",
-          "Bank statements",
-          "Board meeting minutes",
-          "Shareholder details",
-          "Director details",
-          "Previous year's returns"
-        ],
-        "forFiling": [
-          "Digital signature certificate",
-          "Board resolution",
-          "Auditor's report",
-          "Annual return form",
-          "Financial statements",
-          "Director's report"
-        ]
-      },
-      "faqs": [
-        {
-          "question": "What is the due date for filing annual returns?",
-          "answer": "Annual returns must be filed within 60 days from the date of Annual General Meeting (AGM). For companies requiring audit, the due date is 30 days from AGM."
-        },
-        {
-          "question": "What happens if I miss the filing deadline?",
-          "answer": "Late filing attracts additional fees and penalties. For ROC filings, the late fee is ₹100 per day. For tax returns, there's a penalty of up to ₹10,000."
-        },
-        {
-          "question": "Do I need to conduct board meetings?",
-          "answer": "Yes, companies must conduct at least 4 board meetings in a year, with a maximum gap of 120 days between two meetings. Small companies and OPCs need only 2 meetings."
-        },
-        {
-          "question": "What are the key annual compliance requirements?",
-          "answer": "Key requirements include filing annual returns, financial statements, tax returns, conducting board meetings, maintaining statutory registers, and complying with audit requirements."
-        }
-      ]
-    },
-    "gst-cancellation": {
-      "title": "GST Registration Cancellation Services",
-      "shortTitle": "GST Cancellation",
-      "description": "Cancel your GST registration smoothly with our expert services - handle the process efficiently whether due to business closure, transfer, or other reasons.",
-      "category": "tax-compliance",
-      "icon": "FileX",
-      "color": "red",
-      "popular": true,
-      "pricing": {
-        "amount": "2,999",
-        "originalAmount": "3,999",
-        "currency": "₹",
-        "gst": true,
-        "includes": [
-          "Cancellation application",
-          "Final return filing",
-          "Document preparation",
-          "Government liaison",
-          "Professional charges",
-          "Post-cancellation support"
-        ]
-      },
-      "timeline": {
-        "total": "15-20 working days",
-        "steps": [
-          { "name": "Document Collection", "duration": "2-3 days" },
-          { "name": "Final Return", "duration": "3-5 days" },
-          { "name": "Application Filing", "duration": "5-7 days" },
-          { "name": "Cancellation", "duration": "5-7 days" }
-        ]
-      },
-      "whatIs": {
-        "title": "What is GST Cancellation?",
-        "description": "GST cancellation is the process of surrendering your GST registration when you no longer need it. This could be due to business closure, transfer of business, change in business structure, or when turnover falls below the threshold limit."
-      },
-      "keyFeatures": [
-        "Smooth cancellation",
-        "Final return filing",
-        "Document preparation",
-        "Government liaison",
-        "Compliance check",
-        "Post-cancellation support"
-      ],
-      "idealFor": [
-        "Closing businesses",
-        "Transferring businesses",
-        "Below threshold businesses",
-        "Changing business structure",
-        "Merging entities",
-        "Discontinuing operations"
-      ],
-      "process": [
-        {
-          "step": 1,
-          "title": "Initial Assessment",
-          "description": "Review business status and reason for cancellation."
-        },
-        {
-          "step": 2,
-          "title": "Final Return Filing",
-          "description": "File final GST returns and clear all pending dues."
-        },
-        {
-          "step": 3,
-          "title": "Application Preparation",
-          "description": "Prepare cancellation application with required documents."
-        },
-        {
-          "step": 4,
-          "title": "Cancellation Filing",
-          "description": "Submit cancellation application to GST department."
-        },
-        {
-          "step": 5,
-          "title": "Post-cancellation",
-          "description": "Handle any queries and provide cancellation certificate."
-        }
-      ],
-      "requiredDocuments": {
-        "forCancellation": [
-          "GST registration certificate",
-          "Final GST returns",
-          "Stock statement",
-          "Bank statements",
-          "Business closure proof",
-          "Authorization letter"
-        ],
-        "forVerification": [
-          "PAN Card",
-          "Aadhaar Card",
-          "Business proof",
-          "Address proof",
-          "Previous returns",
-          "Payment challans"
-        ]
-      },
-      "faqs": [
-        {
-          "question": "When can I apply for GST cancellation?",
-          "answer": "You can apply for cancellation when your business is closing, transferring, merging, or when your turnover falls below the threshold limit. You can also apply if you're changing your business structure."
-        },
-        {
-          "question": "What happens to pending GST returns?",
-          "answer": "All pending GST returns must be filed before cancellation. This includes GSTR-1, GSTR-3B, and annual returns. Any pending tax must also be paid."
-        },
-        {
-          "question": "Can I cancel GST registration voluntarily?",
-          "answer": "Yes, you can voluntarily cancel your GST registration if your turnover is below the threshold limit or if you're closing your business. However, you must file all pending returns and clear all dues."
-        },
-        {
-          "question": "What happens to input tax credit after cancellation?",
-          "answer": "Any unutilized input tax credit must be reversed and paid to the government at the time of cancellation. This should be reflected in your final return."
         }
       ]
     },
@@ -1947,702 +1142,1336 @@
         }
       ]
     },
-    "trademark-search": {
-      "title": "Trademark Search & Analysis Services",
-      "shortTitle": "Trademark Search",
-      "description": "Conduct thorough trademark searches before registration - identify potential conflicts, assess registrability, and make informed decisions about your brand protection strategy.",
-      "category": "intellectual-property",
-      "icon": "Search",
-      "color": "blue",
-      "popular": true,
-      "pricing": {
-        "amount": "2,999",
-        "originalAmount": "3,999",
-        "currency": "₹",
-        "gst": true,
-        "includes": [
-          "Comprehensive search",
-          "Similarity analysis",
-          "Risk assessment",
-          "Detailed report",
-          "Expert consultation",
-          "Registration guidance"
-        ]
-      },
-      "timeline": {
-        "total": "3-5 working days",
-        "steps": [
-          { "name": "Initial Search", "duration": "1-2 days" },
-          { "name": "Detailed Analysis", "duration": "1-2 days" },
-          { "name": "Report Preparation", "duration": "1 day" },
-          { "name": "Consultation", "duration": "1 day" }
-        ]
-      },
-      "whatIs": {
-        "title": "What is Trademark Search?",
-        "description": "Trademark search is a comprehensive analysis of existing trademarks to identify potential conflicts and assess the registrability of your proposed mark. It helps avoid rejection and legal disputes by checking similarity with existing marks across various classes."
-      },
-      "keyFeatures": [
-        "Comprehensive search",
-        "Similarity analysis",
-        "Risk assessment",
-        "Expert consultation",
-        "Detailed reporting",
-        "Registration guidance"
-      ],
-      "idealFor": [
-        "New businesses",
-        "Brand owners",
-        "Startups",
-        "Entrepreneurs",
-        "Product launches",
-        "Service providers"
-      ],
-      "process": [
-        {
-          "step": 1,
-          "title": "Initial Search",
-          "description": "Conduct preliminary search across trademark databases."
-        },
-        {
-          "step": 2,
-          "title": "Detailed Analysis",
-          "description": "Analyze similar marks and potential conflicts."
-        },
-        {
-          "step": 3,
-          "title": "Risk Assessment",
-          "description": "Evaluate registration risks and challenges."
-        },
-        {
-          "step": 4,
-          "title": "Report Preparation",
-          "description": "Prepare detailed search report with findings."
-        },
-        {
-          "step": 5,
-          "title": "Consultation",
-          "description": "Provide expert guidance on next steps."
-        }
-      ],
-      "requiredDocuments": {
-        "forSearch": [
-          "Proposed trademark",
-          "Business details",
-          "Product/service description",
-          "Target market",
-          "Industry information",
-          "Geographic scope"
-        ],
-        "forVerification": [
-          "Business registration",
-          "Brand guidelines",
-          "Market presence",
-          "Previous trademarks",
-          "Industry classification",
-          "Usage evidence"
-        ]
-      },
-      "faqs": [
-        {
-          "question": "Why is trademark search important?",
-          "answer": "Trademark search helps identify potential conflicts before filing, saving time and money. It reduces the risk of rejection and legal disputes, ensuring a smoother registration process."
-        },
-        {
-          "question": "What types of searches are conducted?",
-          "answer": "We conduct phonetic, visual, and conceptual similarity searches across all relevant classes. This includes exact matches, similar marks, and marks that might cause confusion."
-        },
-        {
-          "question": "Can I proceed if similar marks exist?",
-          "answer": "Similar marks don't always prevent registration. We analyze factors like class difference, market overlap, and distinctiveness to assess if your mark can be registered."
-        },
-        {
-          "question": "What happens after the search?",
-          "answer": "Based on the search results, we provide a detailed report and consultation on whether to proceed with registration, modify the mark, or consider alternative options."
-        }
-      ]
-    },
-    "iec-license": {
-      "title": "Import Export Code (IEC) Registration Services",
-      "shortTitle": "IEC License",
-      "description": "Obtain your Import Export Code (IEC) registration smoothly - essential for international trade, we handle the entire process from application to issuance.",
-      "category": "business-registration",
-      "icon": "Globe",
-      "color": "green",
-      "popular": true,
-      "pricing": {
-        "amount": "1,999",
-        "originalAmount": "2,999",
-        "currency": "₹",
-        "gst": true,
-        "includes": [
-          "Application preparation",
-          "Document processing",
-          "Government filing",
-          "IEC issuance",
-          "Professional charges",
-          "Post-registration support"
-        ]
-      },
-      "timeline": {
-        "total": "7-10 working days",
-        "steps": [
-          { "name": "Document Collection", "duration": "2-3 days" },
-          { "name": "Application Filing", "duration": "2-3 days" },
-          { "name": "Processing", "duration": "2-3 days" },
-          { "name": "IEC Issuance", "duration": "1-2 days" }
-        ]
-      },
-      "whatIs": {
-        "title": "What is IEC Registration?",
-        "description": "Import Export Code (IEC) is a unique 10-digit code issued by the Directorate General of Foreign Trade (DGFT) to businesses engaged in import/export activities. It's mandatory for international trade and serves as a primary business identification number for customs."
-      },
-      "keyFeatures": [
-        "Quick processing",
-        "Expert guidance",
-        "Document preparation",
-        "Government liaison",
-        "Lifetime validity",
-        "Post-registration support"
-      ],
-      "idealFor": [
-        "Importers",
-        "Exporters",
-        "Trading companies",
-        "Manufacturers",
-        "Service providers",
-        "E-commerce businesses"
-      ],
-      "process": [
-        {
-          "step": 1,
-          "title": "Document Collection",
-          "description": "Gather required documents and information."
-        },
-        {
-          "step": 2,
-          "title": "Application Preparation",
-          "description": "Prepare and verify IEC application."
-        },
-        {
-          "step": 3,
-          "title": "Filing",
-          "description": "Submit application to DGFT."
-        },
-        {
-          "step": 4,
-          "title": "Processing",
-          "description": "Monitor application status."
-        },
-        {
-          "step": 5,
-          "title": "IEC Issuance",
-          "description": "Receive and verify IEC certificate."
-        }
-      ],
-      "requiredDocuments": {
-        "forRegistration": [
-          "PAN Card",
-          "Aadhaar Card",
-          "Bank statement",
-          "Address proof",
-          "Business proof",
-          "Digital signature"
-        ],
-        "forVerification": [
-          "Business registration",
-          "Bank details",
-          "Office address",
-          "Contact information",
-          "Business type",
-          "Trade details"
-        ]
-      },
-      "faqs": [
-        {
-          "question": "Is IEC registration mandatory?",
-          "answer": "Yes, IEC registration is mandatory for any business engaged in import or export activities. It's required for customs clearance and international trade operations."
-        },
-        {
-          "question": "What is the validity of IEC?",
-          "answer": "IEC registration is valid for a lifetime and doesn't require renewal. However, it can be suspended or cancelled if the business violates foreign trade regulations."
-        },
-        {
-          "question": "Can I apply for IEC without a business?",
-          "answer": "No, you need to have a registered business entity (company, LLP, partnership, or proprietorship) to apply for IEC registration."
-        },
-        {
-          "question": "What are the benefits of IEC registration?",
-          "answer": "IEC enables international trade, customs clearance, foreign exchange transactions, and access to various export promotion schemes and benefits from the government."
-        }
-      ]
-    },
-    "digital-signature": {
-      "title": "Digital Signature Certificate (DSC) Services",
-      "shortTitle": "Digital Signature",
-      "description": "Get your Digital Signature Certificate (DSC) quickly - essential for e-filing, online transactions, and secure digital communications. We offer Class 2 and Class 3 DSCs for individuals and organizations.",
-      "category": "business-registration",
-      "icon": "Fingerprint",
-      "color": "purple",
-      "popular": true,
-      "pricing": {
-        "amount": "1,499",
-        "originalAmount": "1,999",
-        "currency": "₹",
-        "gst": true,
-        "includes": [
-          "DSC application",
-          "Document processing",
-          "Certificate issuance",
-          "Token delivery",
-          "Installation support",
-          "1-year validity"
-        ]
-      },
-      "timeline": {
-        "total": "2-3 working days",
-        "steps": [
-          { "name": "Document Collection", "duration": "1 day" },
-          { "name": "Application Filing", "duration": "1 day" },
-          { "name": "Verification", "duration": "1 day" },
-          { "name": "Issuance", "duration": "1 day" }
-        ]
-      },
-      "whatIs": {
-        "title": "What is Digital Signature Certificate?",
-        "description": "A Digital Signature Certificate (DSC) is a secure digital key that authenticates the identity of the certificate holder. It's used for signing documents electronically, filing returns, and conducting secure online transactions. DSCs are issued by Certifying Authorities licensed by the Controller of Certifying Authorities (CCA)."
-      },
-      "keyFeatures": [
-        "Quick processing",
-        "Secure authentication",
-        "Legal validity",
-        "Easy installation",
-        "Technical support",
-        "Multiple uses"
-      ],
-      "idealFor": [
-        "Companies",
-        "Directors",
-        "Professionals",
-        "Business owners",
-        "Government agencies",
-        "E-commerce businesses"
-      ],
-      "process": [
-        {
-          "step": 1,
-          "title": "Document Collection",
-          "description": "Gather required identity and address proofs."
-        },
-        {
-          "step": 2,
-          "title": "Application Filing",
-          "description": "Submit application to Certifying Authority."
-        },
-        {
-          "step": 3,
-          "title": "Verification",
-          "description": "Verify applicant's identity and documents."
-        },
-        {
-          "step": 4,
-          "title": "Issuance",
-          "description": "Generate and issue DSC."
-        },
-        {
-          "step": 5,
-          "title": "Installation",
-          "description": "Install DSC and provide usage guidance."
-        }
-      ],
-      "requiredDocuments": {
-        "forIndividuals": [
-          "PAN Card",
-          "Aadhaar Card",
-          "Address proof",
-          "Passport photo",
-          "Email ID",
-          "Mobile number"
-        ],
-        "forOrganizations": [
-          "Company registration",
-          "Board resolution",
-          "Authorized signatory ID",
-          "Address proof",
-          "Email ID",
-          "Mobile number"
-        ]
-      },
-      "faqs": [
-        {
-          "question": "What are the types of DSCs available?",
-          "answer": "We offer Class 2 and Class 3 DSCs. Class 2 is for e-filing and basic transactions, while Class 3 is for high-value transactions and sensitive communications. Both are valid for 1-2 years."
-        },
-        {
-          "question": "Where can I use my DSC?",
-          "answer": "DSC can be used for e-filing tax returns, company filings, e-tendering, e-procurement, online banking, and secure email communications. It's mandatory for many government and business transactions."
-        },
-        {
-          "question": "What happens if my DSC expires?",
-          "answer": "You'll need to renew your DSC before expiry to maintain continuous access to e-services. We can help you with the renewal process to ensure uninterrupted service."
-        },
-        {
-          "question": "Is DSC installation complicated?",
-          "answer": "No, we provide step-by-step installation guidance and technical support. The process is simple and can be completed in minutes. We also offer remote assistance if needed."
-        }
-      ]
-    },
-    "shop-establishment": {
-      "title": "Shop & Establishment License Services",
-      "shortTitle": "Shop Establishment",
-      "description": "Obtain your Shop & Establishment license efficiently - mandatory for all commercial establishments, we handle the entire registration process from application to issuance.",
-      "category": "business-registration",
-      "icon": "Store",
-      "color": "blue",
-      "popular": true,
-      "pricing": {
-        "amount": "2,999",
-        "originalAmount": "3,999",
-        "currency": "₹",
-        "gst": true,
-        "includes": [
-          "Application preparation",
-          "Document processing",
-          "Government filing",
-          "License issuance",
-          "Professional charges",
-          "Renewal support"
-        ]
-      },
-      "timeline": {
-        "total": "15-20 working days",
-        "steps": [
-          { "name": "Document Collection", "duration": "2-3 days" },
-          { "name": "Application Filing", "duration": "5-7 days" },
-          { "name": "Inspection", "duration": "5-7 days" },
-          { "name": "License Issuance", "duration": "3-5 days" }
-        ]
-      },
-      "whatIs": {
-        "title": "What is Shop & Establishment License?",
-        "description": "Shop & Establishment License is a mandatory registration for all commercial establishments, including shops, offices, restaurants, and other business premises. It's governed by state-specific Shop & Establishment Acts and ensures compliance with labor laws and working conditions."
-      },
-      "keyFeatures": [
-        "State-specific compliance",
-        "Quick processing",
-        "Expert guidance",
-        "Document preparation",
-        "Government liaison",
-        "Renewal support"
-      ],
-      "idealFor": [
-        "Retail shops",
-        "Restaurants",
-        "Offices",
-        "Service centers",
-        "Commercial establishments",
-        "Business premises"
-      ],
-      "process": [
-        {
-          "step": 1,
-          "title": "Document Collection",
-          "description": "Gather required documents and business details."
-        },
-        {
-          "step": 2,
-          "title": "Application Preparation",
-          "description": "Prepare and verify application forms."
-        },
-        {
-          "step": 3,
-          "title": "Filing",
-          "description": "Submit application to local authority."
-        },
-        {
-          "step": 4,
-          "title": "Inspection",
-          "description": "Coordinate with inspection officer."
-        },
-        {
-          "step": 5,
-          "title": "License Issuance",
-          "description": "Receive and verify license."
-        }
-      ],
-      "requiredDocuments": {
-        "forRegistration": [
-          "Business proof",
-          "Address proof",
-          "ID proof",
-          "Rent agreement",
-          "NOC from owner",
-          "Business plan"
-        ],
-        "forVerification": [
-          "Business registration",
-          "Property documents",
-          "Employee details",
-          "Working hours",
-          "Business type",
-          "Contact information"
-        ]
-      },
-      "faqs": [
-        {
-          "question": "Is Shop & Establishment license mandatory?",
-          "answer": "Yes, it's mandatory for all commercial establishments, including shops, offices, restaurants, and other business premises. It's required before starting operations."
-        },
-        {
-          "question": "What is the validity of the license?",
-          "answer": "The license is typically valid for 1-5 years, depending on the state. It needs to be renewed before expiry to maintain compliance."
-        },
-        {
-          "question": "What are the penalties for non-compliance?",
-          "answer": "Operating without a license can attract penalties, fines, and even closure of the establishment. The exact penalties vary by state."
-        },
-        {
-          "question": "Can I apply for multiple branches?",
-          "answer": "Yes, you need separate licenses for each branch or establishment. We can help you obtain licenses for all your locations."
-        }
-      ]
-    },
-    "professional-tax": {
-      "title": "Professional Tax Registration Services",
-      "shortTitle": "Professional Tax",
-      "description": "Get your Professional Tax registration done efficiently - mandatory for all professionals and businesses, we handle the entire process from application to compliance.",
-      "category": "tax-compliance",
-      "icon": "Receipt",
-      "color": "orange",
-      "popular": true,
-      "pricing": {
-        "amount": "1,999",
-        "originalAmount": "2,999",
-        "currency": "₹",
-        "gst": true,
-        "includes": [
-          "Registration application",
-          "Document processing",
-          "Government filing",
-          "Certificate issuance",
-          "Professional charges",
-          "Compliance support"
-        ]
-      },
-      "timeline": {
-        "total": "7-10 working days",
-        "steps": [
-          { "name": "Document Collection", "duration": "2-3 days" },
-          { "name": "Application Filing", "duration": "2-3 days" },
-          { "name": "Processing", "duration": "2-3 days" },
-          { "name": "Certificate Issuance", "duration": "1-2 days" }
-        ]
-      },
-      "whatIs": {
-        "title": "What is Professional Tax?",
-        "description": "Professional Tax is a state-level tax levied on professionals, traders, and employees. It's mandatory in most states and is collected by the state government. The tax amount varies by state and income level, with a maximum annual cap of ₹2,500."
-      },
-      "keyFeatures": [
-        "Quick registration",
-        "State-specific compliance",
-        "Expert guidance",
-        "Document preparation",
-        "Government liaison",
-        "Ongoing support"
-      ],
-      "idealFor": [
-        "Companies",
-        "Professionals",
-        "Business owners",
-        "Employees",
-        "Traders",
-        "Service providers"
-      ],
-      "process": [
-        {
-          "step": 1,
-          "title": "Document Collection",
-          "description": "Gather required documents and business details."
-        },
-        {
-          "step": 2,
-          "title": "Application Filing",
-          "description": "Prepare and verify registration forms."
-        },
-        {
-          "step": 3,
-          "title": "Filing",
-          "description": "Submit application to state authority."
-        },
-        {
-          "step": 4,
-          "title": "Processing",
-          "description": "Monitor application status."
-        },
-        {
-          "step": 5,
-          "title": "Certificate Issuance",
-          "description": "Receive and verify registration certificate."
-        }
-      ],
-      "requiredDocuments": {
-        "forRegistration": [
-          "PAN Card",
-          "Business proof",
-          "Address proof",
-          "Employee details",
-          "Bank statement",
-          "Previous returns"
-        ],
-        "forVerification": [
-          "Business registration",
-          "Employee records",
-          "Salary structure",
-          "State-specific documents",
-          "Contact information",
-          "Bank details"
-        ]
-      },
-      "faqs": [
-        {
-          "question": "Is Professional Tax mandatory?",
-          "answer": "Yes, Professional Tax is mandatory in most states for businesses and professionals. It's a state-level tax that must be paid by employers on behalf of their employees."
-        },
-        {
-          "question": "What is the tax amount?",
-          "answer": "The tax amount varies by state and income level. It's typically between ₹200-₹2,500 per year per employee. The exact amount depends on the state's slab rates."
-        },
-        {
-          "question": "When is the tax due?",
-          "answer": "Professional Tax is usually paid in two installments: April-September and October-March. The due dates vary by state, but generally fall in May and November."
-        },
-        {
-          "question": "What are the penalties for non-compliance?",
-          "answer": "Late payment or non-payment can attract penalties, interest, and legal action. The exact penalties vary by state but can include fines and prosecution."
-        }
-      ]
-    },
-    "public-limited-company": {
-      "title": "Public Limited Company Registration",
-      "shortTitle": "Public Limited Company",
-      "description": "Register your business as a Public Limited Company to raise capital from the public, enjoy limited liability, and boost your corporate credibility.",
+    "section-8-company": {
+      "title": "Section 8 Company Registration",
+      "shortTitle": "Section 8 Company",
+      "description": "Register a non-profit company under Section 8 to promote charitable activities, education, commerce, art, science, or social welfare.",
       "category": "business-setup",
-      "icon": "BuildingSkyscraper",
-      "color": "cyan",
-      "popular": true,
+      "icon": "Heart",
+      "color": "pink",
+      "popular": false,
       "pricing": {
-        "amount": "25,000",
-        "originalAmount": "30,000",
+        "amount": "18,000",
+        "originalAmount": "25,000",
         "currency": "₹",
         "gst": true,
         "includes": [
-          "Company Name Reservation",
-          "All Govt. Fees (Capital of Rs. 5 Lac)",
-          "eMoA & eAoA",
-          "DSC for three directors",
-          "DIN for three directors",
-          "Incorporation Certificate",
-          "PAN + TAN + PF + ESIC + Professional Tax",
-          "Listing support (if required)"
+          "Name reservation and approval",
+          "Drafting of Memorandum & Articles",
+          "Government fee payment",
+          "DSC for directors",
+          "DIN for directors",
+          "Incorporation certificate",
+          "License under Section 8"
+        ]
+      },
+      "timeline": {
+        "total": "30-45 working days",
+        "steps": [
+          { "name": "Name Reservation", "duration": "3-5 days" },
+          { "name": "Document Preparation", "duration": "7-10 days" },
+          { "name": "Government Processing", "duration": "15-20 days" },
+          { "name": "License Issuance", "duration": "5-10 days" }
+        ]
+      },
+      "whatIs": {
+        "title": "What is a Section 8 Company?",
+        "description": "A Section 8 Company is a non-profit organization incorporated under the Companies Act, 2013. It is formed to promote charitable activities, education, commerce, art, science, or any other useful object, and prohibits payment of dividends to its members."
+      },
+      "keyFeatures": [
+        "Non-profit organization",
+        "Limited liability protection",
+        "Tax exemptions available",
+        "Separate legal entity",
+        "Professional structure",
+        "Credibility for funding"
+      ],
+      "idealFor": [
+        "NGOs and charities",
+        "Educational institutions",
+        "Research organizations",
+        "Social welfare groups",
+        "Cultural organizations",
+        "Environmental groups"
+      ],
+      "documents": [
+        "PAN and Aadhaar of directors",
+        "Passport size photographs",
+        "Address proof of registered office",
+        "MOA and AOA drafts",
+        "Director consent letters",
+        "Project report for activities"
+      ],
+      "process": [
+        { "step": 1, "title": "Name Reservation", "description": "Apply for name approval with specific objects clause" },
+        { "step": 2, "title": "Document Preparation", "description": "Draft MOA, AOA and prepare incorporation documents" },
+        { "step": 3, "title": "Digital Signatures", "description": "Obtain DSC and DIN for proposed directors" },
+        { "step": 4, "title": "Filing Application", "description": "File incorporation application with ROC" },
+        { "step": 5, "title": "License Approval", "description": "Obtain Section 8 license from Central Government" }
+      ],
+      "benefits": [
+        "Tax exemptions under 80G and 12A",
+        "Limited liability protection",
+        "Enhanced credibility",
+        "Easier fundraising",
+        "Professional structure",
+        "Perpetual existence"
+      ],
+      "legalCompliance": [
+        "Companies Act, 2013",
+        "Section 8 provisions",
+        "Income Tax Act",
+        "FCRA regulations (if applicable)"
+      ],
+      "faqs": [
+        {
+          "question": "What is the difference between Section 8 Company and Trust?",
+          "answer": "Section 8 Company is incorporated under Companies Act with limited liability and better structure, while Trust is created under Indian Trusts Act with unlimited liability for trustees."
+        },
+        {
+          "question": "Can Section 8 Company distribute profits?",
+          "answer": "No, Section 8 Companies cannot distribute dividends or profits to members. All income must be used for promoting the stated objects."
+        },
+        {
+          "question": "Is there any minimum capital requirement?",
+          "answer": "There is no minimum paid-up capital requirement for Section 8 Companies."
+        }
+      ]
+    },
+    "subsidiary-foreign-company": {
+      "title": "Subsidiary of a Foreign Company Registration",
+      "shortTitle": "Foreign Subsidiary",
+      "description": "Establish a subsidiary of your foreign company in India to expand your business operations with complete legal compliance.",
+      "category": "business-setup",
+      "icon": "Globe",
+      "color": "indigo",
+      "popular": false,
+      "pricing": {
+        "amount": "35,000",
+        "originalAmount": "45,000",
+        "currency": "₹",
+        "gst": true,
+        "includes": [
+          "Company name reservation",
+          "Complete incorporation process",
+          "FEMA compliance",
+          "RBI reporting assistance",
+          "Director appointments",
+          "Statutory compliances setup",
+          "Post-incorporation support"
         ]
       },
       "timeline": {
         "total": "25-35 working days",
         "steps": [
           { "name": "Name Reservation", "duration": "3-5 days" },
-          { "name": "DSC & DIN", "duration": "4-5 days" },
-          { "name": "Drafting of eMoA & eAoA", "duration": "7-10 days" },
-          { "name": "Final Approval & Certificate", "duration": "8-15 days" }
+          { "name": "Document Preparation", "duration": "7-10 days" },
+          { "name": "Incorporation Filing", "duration": "10-15 days" },
+          { "name": "FEMA & RBI Compliance", "duration": "5-7 days" }
         ]
       },
       "whatIs": {
-        "title": "What is a Public Limited Company?",
-        "description": "A Public Limited Company is a business entity that can offer shares to the public and is listed on a stock exchange. It provides limited liability to its shareholders, has a separate legal identity, and is ideal for large businesses seeking to raise capital from the public."
+        "title": "What is a Subsidiary of Foreign Company?",
+        "description": "A subsidiary of a foreign company is an Indian company where the foreign company holds more than 50% of the paid-up share capital. It operates as a separate legal entity in India while being controlled by the foreign parent company."
       },
       "keyFeatures": [
-        "Can raise capital from public",
-        "Limited liability protection",
-        "Separate legal entity",
-        "Perpetual succession",
-        "Enhanced corporate credibility",
-        "Mandatory statutory compliance"
+        "100% foreign ownership allowed",
+        "Separate legal entity in India",
+        "Local presence and credibility",
+        "Access to Indian markets",
+        "FEMA compliance included",
+        "Tax benefits available"
       ],
       "idealFor": [
-        "Large businesses",
-        "Companies planning IPO",
-        "Businesses seeking public investment",
-        "Enterprises with large-scale operations"
+        "Foreign companies expanding to India",
+        "International businesses",
+        "MNCs setting up operations",
+        "Technology companies",
+        "Manufacturing companies",
+        "Service providers"
+      ],
+      "documents": [
+        "Certificate of incorporation of foreign company",
+        "Board resolution of foreign company",
+        "Financial statements of foreign company",
+        "Details of Indian directors",
+        "Registered office address proof",
+        "Fund transfer documents"
       ],
       "process": [
-        {
-          "step": 1,
-          "title": "Name Reservation",
-          "description": "Apply for Name Reservation through MCA portal with up to 2 name options."
-        },
-        {
-          "step": 2,
-          "title": "Obtain DSC & DIN",
-          "description": "Obtain Digital Signature Certificate and Director Identification Number for directors."
-        },
-        {
-          "step": 3,
-          "title": "Drafting of eMoA & eAoA",
-          "description": "Prepare Memorandum and Articles of Association for the company."
-        },
-        {
-          "step": 4,
-          "title": "Filing SPICe+ Form",
-          "description": "File incorporation forms and required documents with MCA."
-        },
-        {
-          "step": 5,
-          "title": "Certificate of Incorporation",
-          "description": "Receive Certificate of Incorporation from MCA."
-        },
-        {
-          "step": 6,
-          "title": "Post-Incorporation Compliances",
-          "description": "Obtain PAN, TAN, open bank account, and complete listing formalities if required."
-        }
+        { "step": 1, "title": "Structure Planning", "description": "Plan the subsidiary structure and compliance requirements" },
+        { "step": 2, "title": "Name Reservation", "description": "Reserve company name with ROC" },
+        { "step": 3, "title": "Incorporation", "description": "File incorporation documents and obtain certificate" },
+        { "step": 4, "title": "FEMA Compliance", "description": "Complete RBI reporting and FEMA formalities" },
+        { "step": 5, "title": "Banking & Operations", "description": "Open bank accounts and commence operations" }
       ],
-      "requiredDocuments": {
-        "forDirectors": [
-          "PAN Card",
-          "Aadhaar Card",
-          "Passport size photographs",
-          "Bank statement/utility bill for address proof",
-          "Mobile number linked with Aadhaar",
-          "Email ID"
-        ],
-        "forRegisteredOffice": [
-          "Rent agreement/ownership deed",
-          "Utility bills (not older than 2 months)",
-          "NOC from property owner",
-          "Property tax receipt",
-          "Municipality trade license",
-          "Office photographs"
-        ]
-      },
+      "benefits": [
+        "Easy access to Indian market",
+        "Local business presence",
+        "Compliance with Indian laws",
+        "Tax planning opportunities",
+        "Easier fund transfers",
+        "Enhanced credibility"
+      ],
+      "legalCompliance": [
+        "Companies Act, 2013",
+        "FEMA regulations",
+        "RBI guidelines",
+        "Income Tax Act"
+      ],
       "faqs": [
         {
-          "question": "What is the minimum capital required for a Public Limited Company?",
-          "answer": "The minimum paid-up capital required is ₹5 lakhs, but this may vary as per the latest MCA guidelines."
+          "question": "What is the minimum capital requirement?",
+          "answer": "There is no minimum capital requirement, but the investment must comply with FDI policy and FEMA regulations."
         },
         {
-          "question": "How many directors and shareholders are required?",
-          "answer": "A Public Limited Company must have at least 3 directors and 7 shareholders. There is no maximum limit on shareholders."
+          "question": "Can a foreign company own 100% of the subsidiary?",
+          "answer": "Yes, in most sectors, 100% foreign ownership is allowed. However, some sectors have FDI caps that must be followed."
         },
         {
-          "question": "Can a Public Limited Company be listed on a stock exchange?",
-          "answer": "Yes, after meeting SEBI and stock exchange requirements, a Public Limited Company can be listed and raise funds from the public."
+          "question": "What are the ongoing compliance requirements?",
+          "answer": "Regular RBI reporting, annual filings with ROC, tax compliance, and FEMA compliance for fund transfers."
+        }
+      ]
+    },
+    "fema-compliance": {
+      "title": "FEMA Compliance Services - FDI & ODI Reporting",
+      "shortTitle": "FEMA Compliance",
+      "description": "Comprehensive FEMA compliance services including FDI reporting with RBI, ODI reporting, and FLA return filing for seamless regulatory compliance.",
+      "category": "compliance",
+      "icon": "Globe",
+      "color": "emerald",
+      "popular": true,
+      "pricing": {
+        "amount": "25,000",
+        "originalAmount": "35,000",
+        "currency": "₹",
+        "gst": true,
+        "includes": [
+          "FDI reporting with RBI",
+          "ODI reporting assistance",
+          "FLA return filing",
+          "FC-GPR filing",
+          "LLP-I filing",
+          "Regulatory compliance review",
+          "Annual compliance calendar"
+        ]
+      },
+      "timeline": {
+        "total": "15-20 working days",
+        "steps": [
+          { "name": "Documentation Review", "duration": "3-5 days" },
+          { "name": "Report Preparation", "duration": "7-10 days" },
+          { "name": "RBI Filing", "duration": "3-5 days" },
+          { "name": "Compliance Verification", "duration": "2-3 days" }
+        ]
+      },
+      "whatIs": {
+        "title": "What is FEMA Compliance?",
+        "description": "FEMA (Foreign Exchange Management Act) compliance involves adhering to regulations governing foreign exchange transactions, FDI reporting, ODI investments, and other cross-border financial activities to ensure legal compliance with RBI guidelines."
+      },
+      "keyFeatures": [
+        "Complete FDI reporting",
+        "ODI compliance management",
+        "FLA return filing",
+        "RBI liaison support",
+        "Regulatory updates",
+        "Penalty avoidance"
+      ],
+      "idealFor": [
+        "Companies with foreign investment",
+        "Indian companies investing abroad",
+        "LLPs with foreign partners",
+        "Exporters and importers",
+        "Foreign subsidiaries",
+        "Joint ventures"
+      ],
+      "documents": [
+        "Foreign investment documents",
+        "Bank statements and certificates",
+        "Shareholding details",
+        "Board resolutions",
+        "Audited financial statements",
+        "Previous compliance records"
+      ],
+      "process": [
+        { "step": 1, "title": "Compliance Assessment", "description": "Review current status and identify reporting requirements" },
+        { "step": 2, "title": "Documentation", "description": "Gather and prepare required documents and data" },
+        { "step": 3, "title": "Report Filing", "description": "File FDI/ODI reports and returns with RBI" },
+        { "step": 4, "title": "Follow-up", "description": "Monitor acceptance and handle any queries" },
+        { "step": 5, "title": "Ongoing Compliance", "description": "Set up systems for regular compliance" }
+      ],
+      "benefits": [
+        "Avoid hefty penalties",
+        "Maintain regulatory compliance",
+        "Smooth foreign transactions",
+        "RBI approval facilitation",
+        "Expert guidance",
+        "Timely reporting"
+      ],
+      "legalCompliance": [
+        "FEMA Act, 1999",
+        "RBI Master Directions",
+        "FDI Policy guidelines",
+        "ODI regulations"
+      ],
+      "faqs": [
+        {
+          "question": "What is FDI reporting and when is it required?",
+          "answer": "FDI reporting involves informing RBI about foreign direct investment received. It's required within 30 days of receipt of funds or issue of shares to foreign investors."
         },
         {
-          "question": "Is it mandatory to appoint independent directors?",
-          "answer": "Yes, listed Public Limited Companies must appoint independent directors as per Companies Act, 2013."
+          "question": "What are the penalties for non-compliance?",
+          "answer": "Non-compliance can attract penalties up to 3 times the amount involved in contravention, along with other regulatory actions."
         },
         {
-          "question": "What are the annual compliance requirements?",
-          "answer": "Annual compliances include filing annual returns, financial statements, holding board and general meetings, and complying with SEBI and MCA regulations."
+          "question": "What is ODI and who needs to comply?",
+          "answer": "ODI (Overseas Direct Investment) refers to Indian companies investing abroad. Companies making overseas investments need to comply with ODI regulations."
+        }
+      ]
+    },
+    "csr-compliance": {
+      "title": "CSR Compliance Services - Consultancy & Filing",
+      "shortTitle": "CSR Compliance",
+      "description": "Complete CSR compliance solutions including consultancy, CSR-1 and CSR-2 filing to meet corporate social responsibility obligations effectively.",
+      "category": "compliance",
+      "icon": "Heart",
+      "color": "rose",
+      "popular": false,
+      "pricing": {
+        "amount": "20,000",
+        "originalAmount": "28,000",
+        "currency": "₹",
+        "gst": true,
+        "includes": [
+          "CSR policy drafting",
+          "CSR-1 annual filing",
+          "CSR-2 impact assessment",
+          "Project identification",
+          "Compliance monitoring",
+          "Board resolution drafting",
+          "Annual report preparation"
+        ]
+      },
+      "timeline": {
+        "total": "10-15 working days",
+        "steps": [
+          { "name": "CSR Assessment", "duration": "2-3 days" },
+          { "name": "Policy & Documentation", "duration": "5-7 days" },
+          { "name": "Filing Preparation", "duration": "2-3 days" },
+          { "name": "Submission & Follow-up", "duration": "1-2 days" }
+        ]
+      },
+      "whatIs": {
+        "title": "What is CSR Compliance?",
+        "description": "CSR (Corporate Social Responsibility) compliance involves fulfilling mandatory social responsibility obligations for eligible companies, including policy formulation, spending requirements, and annual reporting as per Companies Act, 2013."
+      },
+      "keyFeatures": [
+        "CSR policy development",
+        "Annual compliance filing",
+        "Impact assessment support",
+        "Project monitoring",
+        "Regulatory guidance",
+        "Board support"
+      ],
+      "idealFor": [
+        "Companies with net worth ≥ ₹500 crores",
+        "Companies with turnover ≥ ₹1000 crores",
+        "Companies with net profit ≥ ₹5 crores",
+        "Listed companies",
+        "Large corporations",
+        "Public sector enterprises"
+      ],
+      "documents": [
+        "Audited financial statements",
+        "Board resolutions",
+        "CSR policy document",
+        "Project implementation details",
+        "Utilization certificates",
+        "Impact assessment reports"
+      ],
+      "process": [
+        { "step": 1, "title": "Eligibility Assessment", "description": "Determine CSR applicability and spending requirement" },
+        { "step": 2, "title": "Policy Formulation", "description": "Draft CSR policy and get board approval" },
+        { "step": 3, "title": "Project Planning", "description": "Identify and plan CSR activities and projects" },
+        { "step": 4, "title": "Implementation", "description": "Execute projects and monitor progress" },
+        { "step": 5, "title": "Compliance Filing", "description": "File annual returns and reports" }
+      ],
+      "benefits": [
+        "Legal compliance assurance",
+        "Social impact creation",
+        "Brand reputation enhancement",
+        "Tax benefits optimization",
+        "Stakeholder satisfaction",
+        "Penalty avoidance"
+      ],
+      "legalCompliance": [
+        "Companies Act, 2013",
+        "CSR Rules, 2014",
+        "Income Tax Act",
+        "MCA notifications"
+      ],
+      "faqs": [
+        {
+          "question": "Which companies need to comply with CSR?",
+          "answer": "Companies with net worth ≥ ₹500 crores, turnover ≥ ₹1000 crores, or net profit ≥ ₹5 crores in any financial year need to comply with CSR."
+        },
+        {
+          "question": "How much do companies need to spend on CSR?",
+          "answer": "Companies must spend at least 2% of average net profits of the preceding three financial years on CSR activities."
+        },
+        {
+          "question": "What happens if CSR amount is not spent?",
+          "answer": "Unspent CSR amount must be transferred to specified funds or face penalties as per Companies Act."
+        }
+      ]
+    },
+    "statutory-registers": {
+      "title": "Maintenance of Statutory Registers and Minutes",
+      "shortTitle": "Statutory Registers",
+      "description": "Professional maintenance of all statutory registers and board meeting minutes to ensure complete compliance with Companies Act requirements.",
+      "category": "compliance",
+      "icon": "BookOpen",
+      "color": "purple",
+      "popular": false,
+      "pricing": {
+        "amount": "12,000",
+        "originalAmount": "18,000",
+        "currency": "₹",
+        "gst": true,
+        "includes": [
+          "Register of members",
+          "Register of directors",
+          "Register of charges",
+          "Board meeting minutes",
+          "General meeting minutes",
+          "Register of contracts",
+          "Annual maintenance"
+        ]
+      },
+      "timeline": {
+        "total": "Ongoing service",
+        "steps": [
+          { "name": "Initial Setup", "duration": "5-7 days" },
+          { "name": "Document Collection", "duration": "3-5 days" },
+          { "name": "Register Preparation", "duration": "7-10 days" },
+          { "name": "Ongoing Maintenance", "duration": "Monthly" }
+        ]
+      },
+      "whatIs": {
+        "title": "What are Statutory Registers?",
+        "description": "Statutory registers are mandatory books that every company must maintain as per Companies Act, 2013. These include registers of members, directors, charges, and minutes of meetings, which must be kept updated and available for inspection."
+      },
+      "keyFeatures": [
+        "Complete register maintenance",
+        "Regular updates",
+        "Compliance monitoring",
+        "Document management",
+        "Meeting minute preparation",
+        "Inspection readiness"
+      ],
+      "idealFor": [
+        "Private limited companies",
+        "Public limited companies",
+        "One person companies",
+        "Section 8 companies",
+        "Listed companies",
+        "Subsidiary companies"
+      ],
+      "documents": [
+        "Company incorporation documents",
+        "Share certificates",
+        "Board resolutions",
+        "Member details",
+        "Charge documents",
+        "Meeting agendas and proceedings"
+      ],
+      "process": [
+        { "step": 1, "title": "Initial Assessment", "description": "Review current status of registers and compliance" },
+        { "step": 2, "title": "Setup", "description": "Create and organize all required statutory registers" },
+        { "step": 3, "title": "Data Entry", "description": "Enter historical and current data into registers" },
+        { "step": 4, "title": "Maintenance", "description": "Regular updates and maintenance of registers" },
+        { "step": 5, "title": "Compliance Review", "description": "Periodic review for compliance and updates" }
+      ],
+      "benefits": [
+        "Legal compliance assurance",
+        "Organized record keeping",
+        "Inspection readiness",
+        "Penalty avoidance",
+        "Professional maintenance",
+        "Easy access to information"
+      ],
+      "legalCompliance": [
+        "Companies Act, 2013",
+        "Companies Rules, 2014",
+        "SEBI regulations (for listed companies)",
+        "ROC requirements"
+      ],
+      "faqs": [
+        {
+          "question": "Which registers are mandatory for companies?",
+          "answer": "Mandatory registers include register of members, directors, charges, contracts, foreign investments (if any), and minutes of board and general meetings."
+        },
+        {
+          "question": "Where should statutory registers be maintained?",
+          "answer": "Registers must be maintained at the registered office of the company and be available for inspection by members and authorities."
+        },
+        {
+          "question": "What are the penalties for not maintaining registers?",
+          "answer": "Non-maintenance can attract penalties and fines as prescribed under Companies Act, and may affect company's compliance status."
+        }
+      ]
+    },
+    "registered-office-shifting": {
+      "title": "Shifting of Registered Office of the Company",
+      "shortTitle": "Office Shifting",
+      "description": "Seamless registered office shifting services with complete documentation and compliance for local, inter-state, and within-state relocations.",
+      "category": "compliance",
+      "icon": "MapPin",
+      "color": "amber",
+      "popular": false,
+      "pricing": {
+        "amount": "8,000",
+        "originalAmount": "12,000",
+        "currency": "₹",
+        "gst": true,
+        "includes": [
+          "Board resolution drafting",
+          "Special resolution (if required)",
+          "Form filing with ROC",
+          "Address change documentation",
+          "Compliance verification",
+          "Updated certificates",
+          "Post-shifting support"
+        ]
+      },
+      "timeline": {
+        "total": "15-25 working days",
+        "steps": [
+          { "name": "Documentation", "duration": "3-5 days" },
+          { "name": "Board Resolution", "duration": "2-3 days" },
+          { "name": "ROC Filing", "duration": "7-10 days" },
+          { "name": "Approval & Updates", "duration": "3-7 days" }
+        ]
+      },
+      "whatIs": {
+        "title": "What is Registered Office Shifting?",
+        "description": "Registered office shifting involves changing the official address of a company's registered office, which requires specific procedures and approvals depending on whether the shift is within the same city, state, or to a different state."
+      },
+      "keyFeatures": [
+        "Local area shifting",
+        "Inter-state relocation",
+        "Documentation support",
+        "ROC compliance",
+        "Resolution drafting",
+        "Follow-up assistance"
+      ],
+      "idealFor": [
+        "Companies relocating operations",
+        "Businesses expanding to new locations",
+        "Companies seeking better facilities",
+        "Strategic location changes",
+        "Cost optimization moves",
+        "Compliance-driven shifts"
+      ],
+      "documents": [
+        "New office address proof",
+        "Rent agreement or ownership proof",
+        "NOC from landlord",
+        "Board resolution",
+        "Special resolution (if required)",
+        "ROC forms"
+      ],
+      "process": [
+        { "step": 1, "title": "Planning", "description": "Assess shifting requirements and compliance needs" },
+        { "step": 2, "title": "Documentation", "description": "Prepare board resolutions and required documents" },
+        { "step": 3, "title": "Approvals", "description": "Obtain necessary board and member approvals" },
+        { "step": 4, "title": "ROC Filing", "description": "File required forms with Registrar of Companies" },
+        { "step": 5, "title": "Updates", "description": "Update all records and obtain updated certificates" }
+      ],
+      "benefits": [
+        "Legal compliance maintained",
+        "Smooth business transition",
+        "Updated official records",
+        "Continued operations",
+        "Compliance with law",
+        "Professional handling"
+      ],
+      "legalCompliance": [
+        "Companies Act, 2013",
+        "Companies Rules, 2014",
+        "ROC requirements",
+        "State-specific regulations"
+      ],
+      "faqs": [
+        {
+          "question": "What approvals are needed for office shifting?",
+          "answer": "Board resolution is always required. Special resolution of members is needed for inter-state shifting or significant location changes."
+        },
+        {
+          "question": "How long does the shifting process take?",
+          "answer": "Local shifting takes 10-15 days, while inter-state shifting may take 20-30 days depending on approvals required."
+        },
+        {
+          "question": "What documents are required for new address?",
+          "answer": "Rent agreement, property ownership proof, NOC from landlord, and utility bills for address verification are required."
+        }
+      ]
+    },
+    "dematerialisation-securities": {
+      "title": "Dematerialisation of Securities",
+      "shortTitle": "Demat Services",
+      "description": "Convert physical share certificates to electronic form through professional dematerialisation services for enhanced security and easy trading.",
+      "category": "compliance",
+      "icon": "CreditCard",
+      "color": "teal",
+      "popular": false,
+      "pricing": {
+        "amount": "15,000",
+        "originalAmount": "22,000",
+        "currency": "₹",
+        "gst": true,
+        "includes": [
+          "ISIN number application",
+          "Depository agreement",
+          "DRF submission",
+          "Physical certificate verification",
+          "Electronic conversion",
+          "Account opening assistance",
+          "Post-demat support"
+        ]
+      },
+      "timeline": {
+        "total": "20-30 working days",
+        "steps": [
+          { "name": "ISIN Application", "duration": "7-10 days" },
+          { "name": "Depository Setup", "duration": "5-7 days" },
+          { "name": "DRF Processing", "duration": "5-8 days" },
+          { "name": "Conversion & Activation", "duration": "3-5 days" }
+        ]
+      },
+      "whatIs": {
+        "title": "What is Dematerialisation of Securities?",
+        "description": "Dematerialisation is the process of converting physical share certificates into electronic form, making them easier to trade, transfer, and maintain while reducing risks associated with physical certificates."
+      },
+      "keyFeatures": [
+        "Electronic securities",
+        "Safe and secure",
+        "Easy transferability",
+        "Reduced paperwork",
+        "Faster settlements",
+        "Lower costs"
+      ],
+      "idealFor": [
+        "Listed companies",
+        "Public limited companies",
+        "Companies planning IPO",
+        "Investors with physical shares",
+        "Companies seeking compliance",
+        "Securities market participants"
+      ],
+      "documents": [
+        "Physical share certificates",
+        "Company incorporation documents",
+        "Board resolution",
+        "Depository participant details",
+        "Identity and address proofs",
+        "Demat account information"
+      ],
+      "process": [
+        { "step": 1, "title": "ISIN Application", "description": "Apply for International Securities Identification Number" },
+        { "step": 2, "title": "Depository Agreement", "description": "Enter into agreement with depository (NSDL/CDSL)" },
+        { "step": 3, "title": "DRF Submission", "description": "Submit Dematerialisation Request Form with certificates" },
+        { "step": 4, "title": "Verification", "description": "Verification of physical certificates by depository" },
+        { "step": 5, "title": "Conversion", "description": "Electronic credit of securities to demat accounts" }
+      ],
+      "benefits": [
+        "Elimination of physical risks",
+        "Faster transaction processing",
+        "Reduced transaction costs",
+        "Easy portfolio management",
+        "Regulatory compliance",
+        "Market access facilitation"
+      ],
+      "legalCompliance": [
+        "SEBI regulations",
+        "Depositories Act, 1996",
+        "Companies Act, 2013",
+        "NSDL/CDSL rules"
+      ],
+      "faqs": [
+        {
+          "question": "What is ISIN and why is it required?",
+          "answer": "ISIN (International Securities Identification Number) is a unique code assigned to securities for dematerialisation and trading purposes."
+        },
+        {
+          "question": "Can all securities be dematerialised?",
+          "answer": "Most equity shares, bonds, and other securities can be dematerialised, subject to regulatory approvals and depository requirements."
+        },
+        {
+          "question": "Is dematerialisation mandatory?",
+          "answer": "For listed securities and market trading, dematerialisation is mandatory as per SEBI regulations."
+        }
+      ]
+    },
+    "llp-annual-compliance": {
+      "title": "LLP Annual ROC Compliance",
+      "shortTitle": "LLP Compliance",
+      "description": "Complete annual compliance services for Limited Liability Partnerships including Form 8, Form 11 filing, and statutory requirements.",
+      "category": "compliance",
+      "icon": "Users",
+      "color": "cyan",
+      "popular": false,
+      "pricing": {
+        "amount": "8,000",
+        "originalAmount": "12,000",
+        "currency": "₹",
+        "gst": true,
+        "includes": [
+          "Form 8 - Statement of Account & Solvency",
+          "Form 11 - Annual Return",
+          "Income tax return assistance",
+          "Compliance calendar",
+          "Document preparation",
+          "ROC filing support",
+          "Post-filing assistance"
+        ]
+      },
+      "timeline": {
+        "total": "10-15 working days",
+        "steps": [
+          { "name": "Document Collection", "duration": "3-5 days" },
+          { "name": "Form Preparation", "duration": "5-7 days" },
+          { "name": "Review & Filing", "duration": "2-3 days" },
+          { "name": "Acknowledgment", "duration": "1-2 days" }
+        ]
+      },
+      "whatIs": {
+        "title": "What is LLP Annual Compliance?",
+        "description": "LLP Annual Compliance involves filing mandatory annual returns and statement of accounts with the Registrar of Companies to maintain the LLP's legal status and comply with LLP Act, 2008 requirements."
+      },
+      "keyFeatures": [
+        "Form 8 filing",
+        "Form 11 filing",
+        "Compliance monitoring",
+        "Penalty avoidance",
+        "Professional preparation",
+        "Timely submission"
+      ],
+      "idealFor": [
+        "Limited Liability Partnerships",
+        "Professional service LLPs",
+        "Trading LLPs",
+        "Consulting firms",
+        "Partnership businesses",
+        "Service providers"
+      ],
+      "documents": [
+        "Statement of accounts",
+        "Solvency certificate",
+        "Partner details",
+        "LLP agreement",
+        "Bank statements",
+        "Previous year filings"
+      ],
+      "process": [
+        { "step": 1, "title": "Compliance Review", "description": "Review LLP's annual compliance requirements" },
+        { "step": 2, "title": "Document Preparation", "description": "Prepare statement of accounts and solvency" },
+        { "step": 3, "title": "Form Filing", "description": "File Form 8 and Form 11 with ROC" },
+        { "step": 4, "title": "Verification", "description": "Verify acceptance and handle queries" },
+        { "step": 5, "title": "Compliance Calendar", "description": "Set up next year's compliance schedule" }
+      ],
+      "benefits": [
+        "Legal compliance maintained",
+        "Avoid penalties and fines",
+        "Good standing with ROC",
+        "Business continuity",
+        "Professional handling",
+        "Peace of mind"
+      ],
+      "legalCompliance": [
+        "LLP Act, 2008",
+        "LLP Rules, 2009",
+        "Income Tax Act",
+        "MCA requirements"
+      ],
+      "faqs": [
+        {
+          "question": "What is the due date for LLP annual filings?",
+          "answer": "Form 8 must be filed within 6 months of financial year end, and Form 11 within 60 days from the due date of filing Form 8."
+        },
+        {
+          "question": "What are the penalties for late filing?",
+          "answer": "Late filing attracts penalties as prescribed under LLP Rules, which can be substantial for extended delays."
+        },
+        {
+          "question": "Is it mandatory to file even if LLP is inactive?",
+          "answer": "Yes, all LLPs must file annual returns regardless of business activity status."
+        }
+      ]
+    },
+    "trademark-hearing": {
+      "title": "Trademark Hearing Representation",
+      "shortTitle": "Trademark Hearing",
+      "description": "Professional representation in trademark hearings before the Trademark Registry to address objections and defend your trademark rights.",
+      "category": "intellectual-property",
+      "icon": "Scale",
+      "color": "red",
+      "popular": false,
+      "pricing": {
+        "amount": "12,000",
+        "originalAmount": "18,000",
+        "currency": "₹",
+        "gst": true,
+        "includes": [
+          "Case analysis and preparation",
+          "Legal representation at hearing",
+          "Written submission drafting",
+          "Evidence compilation",
+          "Registry interaction",
+          "Post-hearing follow-up",
+          "Status updates"
+        ]
+      },
+      "timeline": {
+        "total": "As per hearing schedule",
+        "steps": [
+          { "name": "Case Preparation", "duration": "5-7 days" },
+          { "name": "Documentation", "duration": "3-5 days" },
+          { "name": "Hearing Attendance", "duration": "1 day" },
+          { "name": "Follow-up", "duration": "2-3 days" }
+        ]
+      },
+      "whatIs": {
+        "title": "What is Trademark Hearing?",
+        "description": "A trademark hearing is a proceeding before the Trademark Registry where the applicant or their representative presents arguments to overcome objections raised by the Examiner or to defend against opposition proceedings."
+      },
+      "keyFeatures": [
+        "Expert legal representation",
+        "Comprehensive case preparation",
+        "Professional advocacy",
+        "Evidence presentation",
+        "Registry liaison",
+        "Strategic guidance"
+      ],
+      "idealFor": [
+        "Trademark applicants facing objections",
+        "Opposition proceedings",
+        "Rectification matters",
+        "Cancellation proceedings",
+        "Infringement cases",
+        "Appeals before IPAB"
+      ],
+      "documents": [
+        "Trademark application documents",
+        "Objection notice",
+        "Supporting evidence",
+        "Prior usage proof",
+        "Market evidence",
+        "Legal precedents"
+      ],
+      "process": [
+        { "step": 1, "title": "Case Analysis", "description": "Analyze objections and develop defense strategy" },
+        { "step": 2, "title": "Evidence Gathering", "description": "Compile supporting documents and evidence" },
+        { "step": 3, "title": "Preparation", "description": "Prepare written submissions and arguments" },
+        { "step": 4, "title": "Hearing", "description": "Represent at trademark hearing before Registry" },
+        { "step": 5, "title": "Follow-up", "description": "Monitor outcome and take further action if needed" }
+      ],
+      "benefits": [
+        "Professional representation",
+        "Higher success chances",
+        "Expert knowledge of law",
+        "Strategic approach",
+        "Time and effort saving",
+        "Peace of mind"
+      ],
+      "legalCompliance": [
+        "Trade Marks Act, 1999",
+        "Trade Mark Rules, 2017",
+        "Registry practice and procedure",
+        "IPAB regulations"
+      ],
+      "faqs": [
+        {
+          "question": "When is a trademark hearing required?",
+          "answer": "Hearings are scheduled when the Registry raises objections that cannot be resolved through written submissions, or in opposition/rectification proceedings."
+        },
+        {
+          "question": "Can I attend the hearing myself?",
+          "answer": "Yes, you can represent yourself, but professional representation increases chances of success due to legal expertise required."
+        },
+        {
+          "question": "What happens if I don't attend the hearing?",
+          "answer": "Non-attendance may result in adverse decision or abandonment of application, unless prior adjournment is obtained."
+        }
+      ]
+    },
+    "trademark-rectification": {
+      "title": "Trademark Rectification Services",
+      "shortTitle": "Trademark Rectification",
+      "description": "Professional trademark rectification services to remove or modify trademark registrations through legal proceedings before appropriate authorities.",
+      "category": "intellectual-property",
+      "icon": "FileX",
+      "color": "orange",
+      "popular": false,
+      "pricing": {
+        "amount": "35,000",
+        "originalAmount": "50,000",
+        "currency": "₹",
+        "gst": true,
+        "includes": [
+          "Grounds assessment",
+          "Petition drafting",
+          "Evidence compilation",
+          "Legal research",
+          "Hearing representation",
+          "Registry proceedings",
+          "Complete case management"
+        ]
+      },
+      "timeline": {
+        "total": "12-18 months",
+        "steps": [
+          { "name": "Case Assessment", "duration": "7-10 days" },
+          { "name": "Petition Filing", "duration": "15-20 days" },
+          { "name": "Registry Proceedings", "duration": "8-12 months" },
+          { "name": "Final Order", "duration": "2-4 months" }
+        ]
+      },
+      "whatIs": {
+        "title": "What is Trademark Rectification?",
+        "description": "Trademark rectification is a legal proceeding to remove or modify entries in the trademark register, typically filed when a trademark registration is invalid, conflicts with prior rights, or was obtained improperly."
+      },
+      "keyFeatures": [
+        "Complete legal proceedings",
+        "Expert case preparation",
+        "Evidence compilation",
+        "Registry representation",
+        "Appeals handling",
+        "Strategic guidance"
+      ],
+      "idealFor": [
+        "Prior trademark owners",
+        "Conflicting mark holders",
+        "Generic/descriptive mark challenges",
+        "Non-use cancellations",
+        "Fraudulent registration cases",
+        "Public interest matters"
+      ],
+      "documents": [
+        "Prior rights evidence",
+        "Usage and recognition proof",
+        "Registration documents",
+        "Market evidence",
+        "Legal precedents",
+        "Supporting affidavits"
+      ],
+      "process": [
+        { "step": 1, "title": "Grounds Assessment", "description": "Evaluate valid grounds for rectification" },
+        { "step": 2, "title": "Case Preparation", "description": "Prepare comprehensive petition with evidence" },
+        { "step": 3, "title": "Filing", "description": "File rectification petition with appropriate forum" },
+        { "step": 4, "title": "Proceedings", "description": "Manage hearing and evidence presentation" },
+        { "step": 5, "title": "Final Order", "description": "Obtain favorable order and implementation" }
+      ],
+      "benefits": [
+        "Remove conflicting marks",
+        "Protect prior rights",
+        "Clear marketplace confusion",
+        "Establish priority",
+        "Legal remedy access",
+        "Professional handling"
+      ],
+      "legalCompliance": [
+        "Trade Marks Act, 1999",
+        "Trade Mark Rules, 2017",
+        "IPAB procedures",
+        "High Court jurisdiction"
+      ],
+      "faqs": [
+        {
+          "question": "What are valid grounds for rectification?",
+          "answer": "Grounds include prior rights, genericness, descriptiveness, non-use, fraudulent registration, and conflict with earlier marks."
+        },
+        {
+          "question": "Where can rectification petitions be filed?",
+          "answer": "Petitions can be filed before IPAB (Intellectual Property Appellate Board) or appropriate High Court."
+        },
+        {
+          "question": "What is the success rate of rectification proceedings?",
+          "answer": "Success depends on the strength of grounds and evidence. Well-prepared cases with strong legal basis have higher success rates."
+        }
+      ]
+    },
+    "copyright-objection": {
+      "title": "Copyright Objection Response Services",
+      "shortTitle": "Copyright Objection",
+      "description": "Professional response to copyright objections raised by the Copyright Office to secure your copyright registration successfully.",
+      "category": "intellectual-property",
+      "icon": "Shield",
+      "color": "purple",
+      "popular": false,
+      "pricing": {
+        "amount": "8,000",
+        "originalAmount": "12,000",
+        "currency": "₹",
+        "gst": true,
+        "includes": [
+          "Objection analysis",
+          "Response drafting",
+          "Legal research",
+          "Supporting documentation",
+          "Registry submission",
+          "Follow-up support",
+          "Registration assistance"
+        ]
+      },
+      "timeline": {
+        "total": "15-25 working days",
+        "steps": [
+          { "name": "Objection Review", "duration": "2-3 days" },
+          { "name": "Response Preparation", "duration": "7-10 days" },
+          { "name": "Documentation", "duration": "3-5 days" },
+          { "name": "Filing & Follow-up", "duration": "3-7 days" }
+        ]
+      },
+      "whatIs": {
+        "title": "What is Copyright Objection Response?",
+        "description": "Copyright objection response involves addressing concerns raised by the Copyright Office during examination of your copyright application, providing clarifications and additional evidence to secure registration."
+      },
+      "keyFeatures": [
+        "Expert objection analysis",
+        "Professional response drafting",
+        "Legal compliance",
+        "Supporting evidence",
+        "Registry interaction",
+        "Success optimization"
+      ],
+      "idealFor": [
+        "Copyright applicants",
+        "Authors and creators",
+        "Publishers",
+        "Software developers",
+        "Artists and designers",
+        "Content creators"
+      ],
+      "documents": [
+        "Copyright application documents",
+        "Objection notice",
+        "Original work evidence",
+        "Authorship proof",
+        "Publication evidence",
+        "Supporting materials"
+      ],
+      "process": [
+        { "step": 1, "title": "Objection Analysis", "description": "Review and analyze grounds of objection" },
+        { "step": 2, "title": "Strategy Development", "description": "Develop response strategy and approach" },
+        { "step": 3, "title": "Response Drafting", "description": "Prepare comprehensive response with evidence" },
+        { "step": 4, "title": "Filing", "description": "Submit response to Copyright Office" },
+        { "step": 5, "title": "Follow-up", "description": "Monitor progress and pursue registration" }
+      ],
+      "benefits": [
+        "Higher registration chances",
+        "Expert legal guidance",
+        "Professional response",
+        "Time efficiency",
+        "Compliance assurance",
+        "Peace of mind"
+      ],
+      "legalCompliance": [
+        "Copyright Act, 1957",
+        "Copyright Rules, 2013",
+        "Copyright Office procedures",
+        "International conventions"
+      ],
+      "faqs": [
+        {
+          "question": "What are common copyright objections?",
+          "answer": "Common objections include lack of originality, insufficient authorship proof, improper classification, and inadequate work description."
+        },
+        {
+          "question": "How long do I have to respond to objections?",
+          "answer": "Typically, you have 30 days from the objection date to file a response, though this may vary."
+        },
+        {
+          "question": "What happens if objections are not addressed?",
+          "answer": "Failure to respond to objections may result in abandonment or rejection of the copyright application."
+        }
+      ]
+    },
+    "ngo-darpan": {
+      "title": "NGO Darpan Registration Services",
+      "shortTitle": "NGO Darpan",
+      "description": "Complete NGO Darpan registration services to get your organization registered on the government portal for accessing CSR funding and grants.",
+      "category": "registration",
+      "icon": "Heart",
+      "color": "pink",
+      "popular": false,
+      "pricing": {
+        "amount": "5,000",
+        "originalAmount": "8,000",
+        "currency": "₹",
+        "gst": true,
+        "includes": [
+          "NGO Darpan application",
+          "Document preparation",
+          "Portal registration",
+          "Verification support",
+          "Certificate issuance",
+          "Profile creation",
+          "Post-registration guidance"
+        ]
+      },
+      "timeline": {
+        "total": "15-20 working days",
+        "steps": [
+          { "name": "Document Preparation", "duration": "3-5 days" },
+          { "name": "Portal Registration", "duration": "2-3 days" },
+          { "name": "Application Submission", "duration": "5-7 days" },
+          { "name": "Verification & Approval", "duration": "5-7 days" }
+        ]
+      },
+      "whatIs": {
+        "title": "What is NGO Darpan?",
+        "description": "NGO Darpan is a government portal that maintains a database of NGOs/VOs engaged in development activities. Registration enables NGOs to access government schemes, CSR funding, and various development programs."
+      },
+      "keyFeatures": [
+        "Government recognition",
+        "CSR funding access",
+        "Grant opportunities",
+        "Credibility enhancement",
+        "Network participation",
+        "Transparency compliance"
+      ],
+      "idealFor": [
+        "Non-profit organizations",
+        "NGOs and charities",
+        "Voluntary organizations",
+        "Social welfare groups",
+        "Development organizations",
+        "Community groups"
+      ],
+      "documents": [
+        "Registration certificate",
+        "Memorandum of Association",
+        "PAN card of organization",
+        "Audited financial statements",
+        "Board resolution",
+        "Activity reports"
+      ],
+      "process": [
+        { "step": 1, "title": "Eligibility Check", "description": "Verify NGO eligibility for Darpan registration" },
+        { "step": 2, "title": "Documentation", "description": "Prepare and organize required documents" },
+        { "step": 3, "title": "Portal Registration", "description": "Create account and submit application on portal" },
+        { "step": 4, "title": "Verification", "description": "Support during verification process" },
+        { "step": 5, "title": "Activation", "description": "Complete registration and profile activation" }
+      ],
+      "benefits": [
+        "Access to CSR funding",
+        "Government scheme participation",
+        "Enhanced credibility",
+        "Transparency compliance",
+        "Network opportunities",
+        "Grant eligibility"
+      ],
+      "legalCompliance": [
+        "NITI Aayog guidelines",
+        "CSR Rules",
+        "Foreign Contribution Regulation Act",
+        "Income Tax Act"
+      ],
+      "faqs": [
+        {
+          "question": "Who can register on NGO Darpan?",
+          "answer": "NGOs registered as Trust, Society, or Section 8 Company and engaged in development activities for at least 3 years can register."
+        },
+        {
+          "question": "Is NGO Darpan registration mandatory?",
+          "answer": "It's not mandatory but required for accessing government schemes, CSR funding, and many grant opportunities."
+        },
+        {
+          "question": "What is the validity of NGO Darpan registration?",
+          "answer": "Registration is valid for a specific period and needs renewal with updated information and documents."
+        }
+      ]
+    },
+    "gem-portal": {
+      "title": "GeM Portal Registration Services",
+      "shortTitle": "GeM Registration",
+      "description": "Complete Government e-Marketplace (GeM) registration services to enable your business to sell products and services to government organizations.",
+      "category": "registration",
+      "icon": "Store",
+      "color": "green",
+      "popular": true,
+      "pricing": {
+        "amount": "3,000",
+        "originalAmount": "5,000",
+        "currency": "₹",
+        "gst": true,
+        "includes": [
+          "Seller registration on GeM",
+          "Product/service cataloguing",
+          "Documentation support",
+          "Profile optimization",
+          "Bank account setup",
+          "Training and guidance",
+          "Post-registration support"
+        ]
+      },
+      "timeline": {
+        "total": "7-10 working days",
+        "steps": [
+          { "name": "Document Preparation", "duration": "2-3 days" },
+          { "name": "Portal Registration", "duration": "1-2 days" },
+          { "name": "Profile Setup", "duration": "2-3 days" },
+          { "name": "Verification & Activation", "duration": "2-3 days" }
+        ]
+      },
+      "whatIs": {
+        "title": "What is GeM Portal?",
+        "description": "Government e-Marketplace (GeM) is an online platform for procurement of goods and services by government organizations. It provides a transparent, efficient, and inclusive marketplace for government purchases."
+      },
+      "keyFeatures": [
+        "Government marketplace access",
+        "Transparent procurement",
+        "Digital transactions",
+        "Wide customer base",
+        "Competitive pricing",
+        "Quality assurance"
+      ],
+      "idealFor": [
+        "Product manufacturers",
+        "Service providers",
+        "Suppliers and vendors",
+        "Technology companies",
+        "Consultants",
+        "Small and medium enterprises"
+      ],
+      "documents": [
+        "Business registration certificate",
+        "PAN and GST registration",
+        "Bank account details",
+        "Product/service details",
+        "Quality certifications",
+        "Authorization letters"
+      ],
+      "process": [
+        { "step": 1, "title": "Preparation", "description": "Gather required documents and business information" },
+        { "step": 2, "title": "Registration", "description": "Create seller account on GeM portal" },
+        { "step": 3, "title": "Profile Setup", "description": "Complete business profile and verification" },
+        { "step": 4, "title": "Cataloguing", "description": "Add products/services to marketplace" },
+        { "step": 5, "title": "Activation", "description": "Complete verification and start selling" }
+      ],
+      "benefits": [
+        "Access to government market",
+        "Transparent procurement process",
+        "Timely payments",
+        "Reduced marketing costs",
+        "Digital transaction benefits",
+        "Business growth opportunities"
+      ],
+      "legalCompliance": [
+        "GFR 2017 provisions",
+        "Public Procurement Policy",
+        "GeM portal guidelines",
+        "Government regulations"
+      ],
+      "faqs": [
+        {
+          "question": "Who can sell on GeM portal?",
+          "answer": "Any business entity registered in India with valid PAN, GST registration, and bank account can register as a seller on GeM."
+        },
+        {
+          "question": "Is there any registration fee for GeM?",
+          "answer": "Basic registration on GeM is free, but professional setup and cataloguing services may involve charges for better optimization."
+        },
+        {
+          "question": "What products/services can be sold on GeM?",
+          "answer": "Wide range of products and services used by government organizations can be listed, subject to GeM guidelines and quality standards."
+        }
+      ]
+    },
+    "llp-annual-roc": {
+      "title": "LLP Annual ROC Compliance",
+      "shortTitle": "LLP ROC Compliance",
+      "description": "Ensure complete annual compliance for your Limited Liability Partnership with all ROC requirements and statutory filings.",
+      "category": "compliance",
+      "icon": "FileCheck",
+      "color": "orange",
+      "popular": false,
+      "pricing": {
+        "amount": "8,000",
+        "originalAmount": "12,000",
+        "currency": "₹",
+        "gst": true,
+        "includes": [
+          "Annual return filing (Form 11)",
+          "Statement of accounts & solvency (Form 8)", 
+          "Income tax return filing",
+          "Professional charges",
+          "Expert compliance review",
+          "Post-filing support"
+        ]
+      },
+      "timeline": {
+        "total": "10-12 working days",
+        "steps": [
+          { "name": "Document Collection", "duration": "2-3 days" },
+          { "name": "Accounts Preparation", "duration": "3-4 days" },
+          { "name": "Form Preparation", "duration": "2-3 days" },
+          { "name": "Filing & Completion", "duration": "3-4 days" }
+        ]
+      },
+      "whatIs": {
+        "title": "What is LLP Annual ROC Compliance?",
+        "description": "LLP Annual ROC Compliance involves mandatory annual filings that every Limited Liability Partnership must submit to the Registrar of Companies, including annual returns and statement of accounts."
+      },
+      "keyFeatures": [
+        "Annual return filing",
+        "Statement of accounts preparation",
+        "Income tax compliance",
+        "Penalty avoidance",
+        "Professional expertise", 
+        "Timely filing guarantee"
+      ],
+      "idealFor": [
+        "All registered LLPs",
+        "Professional service LLPs",
+        "Trading LLPs",
+        "LLPs with annual turnover > 40 lakhs",
+        "Multi-partner LLPs",
+        "LLPs seeking compliance peace of mind"
+      ],
+      "documents": [
+        "Partnership deed",
+        "Previous year financial statements",
+        "Bank statements",
+        "Partner details and PAN",
+        "Business transaction records",
+        "Previous compliance certificates"
+      ],
+      "process": [
+        { "step": 1, "title": "Document Review", "description": "Review partnership deed and financial records" },
+        { "step": 2, "title": "Accounts Preparation", "description": "Prepare statement of accounts and solvency" },
+        { "step": 3, "title": "Form Filing", "description": "File Form 11 (Annual Return) and Form 8" },
+        { "step": 4, "title": "ITR Filing", "description": "File income tax return for the LLP" },
+        { "step": 5, "title": "Compliance Certificate", "description": "Provide compliance completion certificate" }
+      ],
+      "faqs": [
+        {
+          "question": "What is the due date for LLP annual filings?",
+          "answer": "Form 11 (Annual Return) must be filed within 60 days from the end of financial year, and Form 8 (Statement of Accounts) within 30 days from the end of 6 months of financial year."
+        },
+        {
+          "question": "What is the penalty for late filing of LLP returns?",
+          "answer": "Late filing attracts penalty of ₹100 per day of delay for Form 11 and Form 8, with additional consequences for prolonged non-compliance."
+        },
+        {
+          "question": "Is it mandatory for all LLPs to file annual returns?",
+          "answer": "Yes, all LLPs registered under the LLP Act, 2008 must file annual returns and statement of accounts regardless of business activity."
+        },
+        {
+          "question": "Can LLP annual compliance be done online?",
+          "answer": "Yes, all LLP annual filings are done online through the MCA portal using digital signatures of designated partners."
         }
       ]
     }

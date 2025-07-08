@@ -61,11 +61,6 @@ export default function Header() {
           description: "Register your business as a Private Limited Company with limited liability protection",
         },
         {
-          name: "Public Limited Company",
-          href: "/services/public-limited-company",
-          description: "Incorporate a Public Limited Company for raising capital from the public",
-        },
-        {
           name: "Limited Liability Partnership",
           href: "/services/llp",
           description: "Form an LLP with the benefits of partnership and limited liability",
@@ -95,24 +90,75 @@ export default function Header() {
           href: "/services/partnership-firm",
           description: "Create a partnership between two or more individuals",
         },
-    
+        {
+          name: "Section 8 Company",
+          href: "/services/section-8-company",
+          description: "Register a non-profit company for charitable and social welfare activities",
+        },
+        {
+          name: "Subsidiary of Foreign Company",
+          href: "/services/subsidiary-foreign-company",
+          description: "Establish Indian subsidiary of your foreign company with complete compliance",
+        },
       ],
     },
     {
       id: "tax-compliance",
       name: "Compliances",
-      shortName: "Tax",
+      shortName: "Compliance",
       icon: FileText,
-      description: "GST, tax filing, and compliance management",
+      description: "MCA, RBI and regulatory compliance management",
       color: "text-emerald-600",
       bgColor: "bg-emerald-50",
       gradientFrom: "from-emerald-600",
       gradientTo: "to-green-400",
       subServices: [
         {
-          name: "ROC Annual Compliances",
+          name: "GST Registration",
+          href: "/services/gst-registration",
+          popular: true,
+          description: "Register for Goods and Services Tax (GST) for your business",
+        },
+        {
+          name: "Company Annual ROC Compliance",
           href: "/services/roc-annual-compliances",
+          popular: true,
           description: "Stay compliant with all ROC requirements including annual returns",
+        },
+        {
+          name: "LLP Annual ROC Compliance",
+          href: "/services/llp-annual-roc",
+          description: "Complete annual compliance for LLP with ROC filings",
+        },
+        {
+          name: "FEMA Compliance Services",
+          href: "/services/fema-compliance",
+          description: "FDI/ODI reporting with RBI and FLA return filing services",
+        },
+        {
+          name: "CSR Compliances",
+          href: "/services/csr-compliance",
+          description: "CSR consultancy, CSR-1 and CSR-2 filing services",
+        },
+        {
+          name: "Maintenance of Statutory Registers",
+          href: "/services/statutory-registers",
+          description: "Maintain all mandatory statutory registers and minutes",
+        },
+        {
+          name: "Shifting of Registered Office",
+          href: "/services/registered-office-shifting",
+          description: "Change registered office address with complete regulatory compliance",
+        },
+        {
+          name: "Dematerialisation of Securities",
+          href: "/services/dematerialisation-securities",
+          description: "Convert physical securities to electronic form with NSDL/CDSL",
+        },
+        {
+          name: "Annual Compliance",
+          href: "/services/annual-compliance",
+          description: "Manage all your annual compliance requirements",
         },
       ],
     },
@@ -144,9 +190,24 @@ export default function Header() {
           description: "Get help responding to trademark objections",
         },
         {
+          name: "Trademark Hearing",
+          href: "/services/trademark-hearing",
+          description: "Professional representation for trademark hearings",
+        },
+        {
+          name: "Trademark Rectification",
+          href: "/services/trademark-rectification",
+          description: "Rectify or remove conflicting trademarks from registry",
+        },
+        {
           name: "Copyright Registration",
           href: "/services/copyright-registration",
           description: "Protect your creative works with copyright registration",
+        },
+        {
+          name: "Copyright Objection",
+          href: "/services/copyright-objection",
+          description: "Handle copyright objections and disputes professionally",
         },
       ],
     },
@@ -162,17 +223,10 @@ export default function Header() {
       gradientTo: "to-orange-400",
       subServices: [
         {
-          name: "GST Registration",
-          href: "/services/gst-registration",
-          popular: true,
-          description: "Register for Goods and Services Tax (GST) for your business",
-        },
-        {
           name: "Import Export Code",
           href: "/services/iec-license",
           description: "Get IEC code for import/export business activities",
         },
-  
         {
           name: "MSME Registration",
           href: "/services/msme-registration",
@@ -194,6 +248,16 @@ export default function Header() {
           href: "/services/startup-india",
           new: true,
           description: "Register under Startup India to access government benefits and incentives",
+        },
+        {
+          name: "NGO Darpan Registration",
+          href: "/services/ngo-darpan",
+          description: "Register your NGO on NITI Aayog NGO Darpan portal for government funding",
+        },
+        {
+          name: "GeM Portal Registration",
+          href: "/services/gem-portal",
+          description: "Register on Government e-Marketplace to sell to government organizations",
         }
       ],
     },

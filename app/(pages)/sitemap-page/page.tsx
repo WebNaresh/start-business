@@ -83,14 +83,19 @@ const sitemapSections: SitemapSection[] = [
         description: "Complete GST registration and compliance"
       },
       {
-        title: "GST Return Filing",
-        href: "/services/gst-return-filing",
-        description: "Monthly and quarterly GST return filing"
+        title: "Company Annual ROC Compliance",
+        href: "/services/roc-annual-compliances",
+        description: "Annual compliance for private limited companies"
       },
       {
-        title: "TDS Return Filing",
-        href: "/services/tds-return-filing",
-        description: "TDS compliance and return filing"
+        title: "LLP Annual ROC Compliance", 
+        href: "/services/llp-annual-roc",
+        description: "Annual compliance for limited liability partnerships"
+      },
+      {
+        title: "FEMA Compliance",
+        href: "/services/fema-compliance",
+        description: "FDI/ODI reporting and FLA return filing"
       },
       {
         title: "Annual Compliance",
