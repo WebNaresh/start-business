@@ -62,6 +62,19 @@ export default function AdminBlogsPage() {
     })
   }
 
+  const getStatusStyle = (status: string) => {
+    switch (status) {
+      case 'published':
+        return 'bg-green-100 text-green-800 border border-green-200'
+      case 'draft':
+        return 'bg-yellow-100 text-yellow-800 border border-yellow-200'
+      case 'archived':
+        return 'bg-gray-100 text-gray-800 border border-gray-200'
+      default:
+        return 'bg-blue-100 text-blue-800 border border-blue-200'
+    }
+  }
+
   return (
     <div className="space-y-8">
       {/* Admin Navigation Header */}
@@ -117,11 +130,7 @@ export default function AdminBlogsPage() {
                         <h3 className="text-sm font-semibold text-slate-900 truncate">{blog.title}</h3>
                         <p className="text-xs text-slate-500 mt-1">{blog.slug}</p>
                       </div>
-                      <span className={`ml-3 inline-flex items-center px-2 py-1 rounded-full text-xs font-semibold ${
-                        blog.status === 'published'
-                          ? 'bg-green-100 text-green-800 border border-green-200'
-                          : 'bg-yellow-100 text-yellow-800 border border-yellow-200'
-                      }`}>
+                      <span className={`ml-3 inline-flex items-center px-2 py-1 rounded-full text-xs font-semibold ${getStatusStyle(blog.status)}`}>
                         {blog.status}
                       </span>
                     </div>
@@ -193,11 +202,7 @@ export default function AdminBlogsPage() {
                         {blog.author}
                       </td>
                       <td className="px-4 lg:px-6 py-4">
-                        <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold ${
-                          blog.status === 'published'
-                            ? 'bg-green-100 text-green-800 border border-green-200'
-                            : 'bg-yellow-100 text-yellow-800 border border-yellow-200'
-                        }`}>
+                        <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold ${getStatusStyle(blog.status)}`}>
                           {blog.status}
                         </span>
                       </td>

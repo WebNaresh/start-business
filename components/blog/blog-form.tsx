@@ -64,12 +64,15 @@ export default function BlogForm({
     data: fetchedBlogData,
     isLoading: isLoadingBlogData,
     error,
+    refetch
   } = useQuery({
     queryKey: ["blog", slug],
     queryFn: () => fetchBlogData(slug!),
     enabled: isEditing && !!slug, // Only fetch when editing and slug is provided
-    staleTime: 5 * 60 * 1000, // 5 minutes
-    gcTime: 10 * 60 * 1000, // 10 minutes
+    staleTime: 0, // Always consider stale to ensure fresh data
+    gcTime: 5 * 60 * 1000, // 5 minutes
+    refetchOnMount: true, // Always refetch when component mounts
+    refetchOnWindowFocus: false, // Don't refetch on window focus to avoid disrupting editing
   });
 
   // Determine the data source (fetched data takes priority over initialData)
@@ -90,12 +93,31 @@ export default function BlogForm({
     ...blogData,
   });
 
+  // Reset state when slug changes (navigating between different blog edits)
+  useEffect(() => {
+    if (slug) {
+      setEditorData(undefined);
+      setBlog({
+        title: "",
+        content: "",
+        excerpt: "",
+        author: "",
+        status: "draft",
+        metaTitle: "",
+        metaDescription: "",
+        tags: "",
+        featuredImage: "",
+        editorData: "",
+      });
+    }
+  }, [slug]);
+
   // Convert content to EditorJS data when data is available
   useEffect(() => {
     if (!blogData) return;
 
     // Update blog state when data changes
-    setBlog((prev) => ({
+    setBlog((prev: Partial<Blog>) => ({
       ...prev,
       ...blogData,
     }));
@@ -202,7 +224,7 @@ export default function BlogForm({
     >
   ) => {
     const { name, value } = e.target;
-    setBlog((prev) => ({
+    setBlog((prev: Partial<Blog>) => ({
       ...prev,
       [name]: value,
       ...(name === "title" && { slug: generateSlug(value) }),
@@ -244,7 +266,7 @@ export default function BlogForm({
             ? plainText.substring(0, 157) + "..."
             : plainText;
 
-        setBlog((prev) => ({ ...prev, excerpt }));
+        setBlog((prev: Partial<Blog>) => ({ ...prev, excerpt }));
         toast.success("Excerpt generated from content");
       } catch (error) {
         toast.error("Failed to generate excerpt");
@@ -282,7 +304,7 @@ export default function BlogForm({
     slug: string;
   }) => {
     // Update all form fields with generated content
-    setBlog((prev) => ({
+    setBlog((prev: Partial<Blog>) => ({
       ...prev,
       title: generatedContent.title,
       excerpt: generatedContent.excerpt,
@@ -471,7 +493,13 @@ export default function BlogForm({
               </label>
               <ImageUpload
                 onImageUploaded={(imageUrl) => {
-                  setBlog((prev) => ({ ...prev, featuredImage: imageUrl }));
+                  console.log('Image uploaded successfully:', imageUrl);
+                  setBlog((prev: Partial<Blog>) => {
+                    const updated = { ...prev, featuredImage: imageUrl };
+                    console.log('Updated blog state with new image:', updated.featuredImage);
+                    return updated;
+                  });
+                  toast.success('Featured image updated successfully');
                 }}
                 currentImageUrl={blog.featuredImage || undefined}
                 disabled={isSaving}

@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useRef, useCallback } from 'react'
+import { useState, useRef, useCallback, useEffect } from 'react'
 import { Upload, X, Image as ImageIcon, Loader2, AlertCircle, Check } from 'lucide-react'
 import Image from 'next/image'
 import { Button } from '@/components/ui/button'
@@ -29,6 +29,11 @@ export default function ImageUpload({
   const [dragActive, setDragActive] = useState(false)
   const [previewUrl, setPreviewUrl] = useState<string | null>(currentImageUrl || null)
   const fileInputRef = useRef<HTMLInputElement>(null)
+
+  // Sync preview URL with currentImageUrl prop
+  useEffect(() => {
+    setPreviewUrl(currentImageUrl || null)
+  }, [currentImageUrl])
 
   const handleFileSelect = useCallback(async (file: File) => {
     if (disabled) return
