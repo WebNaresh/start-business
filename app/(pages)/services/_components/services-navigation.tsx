@@ -206,7 +206,7 @@ export default function AllServicesPage() {
       bgColor: "bg-emerald-50",
       gradientFrom: "from-emerald-600",
       gradientTo: "to-green-400",
-      totalServices: 10,
+      totalServices: 7,
       subServices: [
         {
           name: "GST Registration",
@@ -227,12 +227,12 @@ export default function AllServicesPage() {
           features: ["Annual Returns", "ROC Compliance", "Penalty Avoidance"]
         },
         {
-          name: "LLP Annual ROC Compliance",
-          href: "/services/llp-annual-roc",
-          description: "Complete annual compliance for LLP with ROC filings",
+          name: "LLP Annual Compliance",
+          href: "/services/llp-annual-compliance",
+          description: "Complete LLP annual compliance including Form 8 and Form 11",
           price: "₹8,000",
           timeline: "10-12 days",
-          features: ["Form 11 & 8 Filing", "ITR Filing", "Expert Support"]
+          features: ["Form 11 & 8 Filing", "Compliance Review", "Expert Support"]
         },
         {
           name: "FEMA Compliance Services",
@@ -274,22 +274,6 @@ export default function AllServicesPage() {
           timeline: "20-30 days",
           features: ["NSDL/CDSL Process", "Electronic Conversion", "SEBI Compliance"]
         },
-        {
-          name: "GST Cancellation and Revocation",
-          href: "/services/gst-cancellation",
-          description: "Cancel or revoke your GST registration",
-          price: "₹1,499",
-          timeline: "7-10 days",
-          features: ["Cancellation Process", "Documentation", "Legal Support"]
-        },
-        {
-          name: "Annual Compliance",
-          href: "/services/annual-compliance",
-          description: "Manage all your annual compliance requirements",
-          price: "₹8,999",
-          timeline: "10-15 days",
-          features: ["Complete Compliance", "All Filings", "Expert Management"]
-        },
       ],
     },
     {
@@ -302,7 +286,7 @@ export default function AllServicesPage() {
       bgColor: "bg-purple-50",
       gradientFrom: "from-purple-600",
       gradientTo: "to-indigo-400",
-      totalServices: 7,
+      totalServices: 6,
       subServices: [
         {
           name: "Trademark Registration",
@@ -312,14 +296,6 @@ export default function AllServicesPage() {
           price: "₹6,999",
           timeline: "12-18 months",
           features: ["Brand Protection", "Legal Rights", "Nationwide Coverage"]
-        },
-        {
-          name: "Trademark Search",
-          href: "/services/trademark-search",
-          description: "Check if your desired trademark is available",
-          price: "₹1,499",
-          timeline: "1-2 days",
-          features: ["Comprehensive Search", "Detailed Report", "Expert Analysis"]
         },
         {
           name: "Respond to TM Objection",

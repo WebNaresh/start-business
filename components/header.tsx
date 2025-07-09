@@ -126,9 +126,9 @@ export default function Header() {
           description: "Stay compliant with all ROC requirements including annual returns",
         },
         {
-          name: "LLP Annual ROC Compliance",
-          href: "/services/llp-annual-roc",
-          description: "Complete annual compliance for LLP with ROC filings",
+          name: "LLP Annual Compliance",
+          href: "/services/llp-annual-compliance",
+          description: "Complete LLP annual compliance including Form 8 and Form 11",
         },
         {
           name: "FEMA Compliance Services",
@@ -155,11 +155,6 @@ export default function Header() {
           href: "/services/dematerialisation-securities",
           description: "Convert physical securities to electronic form with NSDL/CDSL",
         },
-        {
-          name: "Annual Compliance",
-          href: "/services/annual-compliance",
-          description: "Manage all your annual compliance requirements",
-        },
       ],
     },
     {
@@ -180,9 +175,9 @@ export default function Header() {
           description: "Protect your brand identity with trademark registration",
         },
         {
-          name: "Trademark Search",
-          href: "/services/trademark-search",
-          description: "Check if your desired trademark is available",
+          name: "Trademark Rectification",
+          href: "/services/trademark-rectification",
+          description: "Remove or modify trademark registrations through legal proceedings",
         },
         {
           name: "Respond to TM Objection",
@@ -193,11 +188,6 @@ export default function Header() {
           name: "Trademark Hearing",
           href: "/services/trademark-hearing",
           description: "Professional representation for trademark hearings",
-        },
-        {
-          name: "Trademark Rectification",
-          href: "/services/trademark-rectification",
-          description: "Rectify or remove conflicting trademarks from registry",
         },
         {
           name: "Copyright Registration",

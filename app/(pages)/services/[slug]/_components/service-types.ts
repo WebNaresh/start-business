@@ -28,9 +28,10 @@ export interface ServiceData {
         title: string;
         description: string;
     }>;
-    requiredDocuments: {
+    requiredDocuments?: {
         [category: string]: string[];
     };
+    documents?: string[];
     faqs: Array<{
         question: string;
         answer: string;

@@ -1,7 +1,5 @@
 "use client"
 
-import { motion, useScroll } from "framer-motion"
-
 import { useState, useEffect, useRef } from "react"
 
 import { Progress } from "@/components/ui/progress"
@@ -47,9 +45,10 @@ interface ServiceData {
     title: string
     description: string
   }>
-  requiredDocuments: {
+  requiredDocuments?: {
     [key: string]: string[]
   }
+  documents?: string[]
   faqs: Array<{
     question: string
     answer: string
@@ -83,24 +82,20 @@ const FloatingNavbar = ({
   ]
 
   return (
-    <motion.div
-      initial={{ y: -100, opacity: 0 }}
-      animate={{
-        y: showStickyNav ? 0 : -100,
-        opacity: showStickyNav ? 1 : 0,
-      }}
-      transition={{ duration: 0.3, ease: "easeInOut" }}
-      className="fixed top-1/5 left-0 md:left-1/3 transform -translate-x-1/2 z-30"
+    <div
+      className={`fixed top-20 left-1/2 transform -translate-x-1/2 z-30 transition-all duration-300 ${
+        showStickyNav ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4 pointer-events-none"
+      }`}
     >
-      <div className="bg-white backdrop-blur-md border border-slate-200 rounded-2xl shadow-lg shadow-slate-900/5">
-        <div className="px-2 py-2">
+      <div className="bg-white/95 backdrop-blur-md border border-slate-200 rounded-2xl shadow-lg shadow-slate-900/5">
+        <div className="px-3 py-2">
           {/* Navigation Menu - Always visible */}
-          <nav className="flex items-center gap-1">
+          <nav className="flex items-center gap-1 overflow-x-auto">
             {navItems.map((item) => (
               <button
                 key={item.id}
                 onClick={() => scrollToSection(item.id)}
-                className={`px-2 py-1.5 text-xs font-medium rounded-lg transition-all duration-200 whitespace-nowrap ${
+                className={`px-3 py-2 text-xs font-medium rounded-lg transition-all duration-200 whitespace-nowrap flex-shrink-0 ${
                   activeSection === item.id
                     ? "text-blue-600 bg-blue-50"
                     : "text-slate-600 hover:text-blue-600 hover:bg-blue-50"
@@ -112,7 +107,7 @@ const FloatingNavbar = ({
           </nav>
         </div>
       </div>
-    </motion.div>
+    </div>
   )
 }
 
@@ -127,8 +122,6 @@ export default function DynamicServicePage({ service, slug }: DynamicServicePage
   const [isBookmarked, setIsBookmarked] = useState(false)
   const [showMobileNav, setShowMobileNav] = useState(false)
 
-  const { scrollY } = useScroll()
-  const heroRef = useRef<HTMLElement>(null)
   const pageRef = useRef<HTMLDivElement>(null)
 
   // Calculate reading progress
@@ -235,23 +228,28 @@ export default function DynamicServicePage({ service, slug }: DynamicServicePage
         {/* Breadcrumbs */}
         <Breadcrumbs className="bg-slate-50 border-b border-slate-200" />
 
-        {/* Section Components */}
-        <OverviewSection service={service} />
-        <FeaturesSection service={service} />
-        <ProcessSection service={service} />
-        <DocumentsSection service={service}/>
-        <PricingSection service={service} />
-        <div className="py-16 bg-slate-50">
-          <div className="container mx-auto px-4">
-            <RelatedServices
-              title="Related Business Services"
-              description="Explore other services that complement your business registration"
-              showClusterLinks={true}
-              className="mb-8"
-            />
-          </div>
+        {/* Section Components with improved spacing */}
+        <div className="space-y-0">
+          <OverviewSection service={service} />
+          <FeaturesSection service={service} />
+          <ProcessSection service={service} />
+          <DocumentsSection service={service}/>
+          <PricingSection service={service} />
+
+          {/* Related Services Section */}
+          <section className="py-12 md:py-16 bg-slate-50">
+            <div className="container mx-auto px-4">
+              <RelatedServices
+                title="Related Business Services"
+                description="Explore other services that complement your business registration"
+                showClusterLinks={true}
+                className="mb-8"
+              />
+            </div>
+          </section>
+
+          <FaqSection service={service} openFAQs={openFAQs} toggleFAQ={toggleFAQ} />
         </div>
-        <FaqSection service={service} openFAQs={openFAQs} toggleFAQ={toggleFAQ} />
       </div>
     </TooltipProvider>
   )

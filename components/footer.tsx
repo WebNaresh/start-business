@@ -84,8 +84,8 @@ export default function EnhancedFooter() {
               <ul className="space-y-2 lg:space-y-3">
                 {[
                   { name: "Private Limited Company", href: "/services/private-limited-company", popular: true },
-                  { name: "Limited Liability Partnership", href: "/services/llp-registration", popular: false },
-                  { name: "One Person Company", href: "/services/opc-registration", popular: false },
+                  { name: "Limited Liability Partnership", href: "/services/llp", popular: false },
+                  { name: "One Person Company", href: "/services/opc", popular: false },
                   { name: "Partnership Firm", href: "/services/partnership-firm", popular: false },
                   { name: "Sole Proprietorship", href: "/services/sole-proprietorship", popular: false },
                 ].map((service, index) => (
@@ -130,14 +130,11 @@ export default function EnhancedFooter() {
               </h3>
               <ul className="space-y-2 lg:space-y-3">
                 {[
-                  { name: "Income Tax Filing", href: "/services/income-tax-filing", popular: true },
                   { name: "GST Registration", href: "/services/gst-registration", popular: true },
                   { name: "Company Annual ROC Compliance", href: "/services/roc-annual-compliances", popular: true },
-                  { name: "LLP Annual ROC Compliance", href: "/services/llp-annual-roc", popular: false },
-                  { name: "FEMA Compliance", href: "/services/fema-compliance", popular: false },
+                  { name: "LLP Annual Compliance", href: "/services/llp-annual-compliance", popular: false },
                   { name: "FEMA Compliance", href: "/services/fema-compliance", popular: false },
                   { name: "CSR Compliance", href: "/services/csr-compliance", popular: false },
-                  { name: "Annual Compliance", href: "/services/annual-compliance", popular: false },
                 ].map((service, index) => (
                   <li key={index}>
                     <Link
@@ -220,19 +217,19 @@ export default function EnhancedFooter() {
               </ul>
             </div>
 
-            {/* Legal Services */}
+            {/* Intellectual Property */}
             <div>
               <h3 className="mb-4 lg:mb-6 text-base sm:text-lg font-bold text-white relative">
-                Legal Services
+                Intellectual Property
                 <span className="absolute -bottom-2 left-0 w-12 h-1 bg-gradient-to-r from-red-500 to-red-600 rounded-full"></span>
               </h3>
               <ul className="space-y-2 lg:space-y-3">
                 {[
-                  { name: "Trademark Registration", href: "/services/trademark-registration", popular: false },
+                  { name: "Trademark Registration", href: "/services/trademark-registration", popular: true },
                   { name: "Copyright Registration", href: "/services/copyright-registration", popular: false },
-                  { name: "Patent Registration", href: "/services/patent-registration", popular: false },
-                  { name: "Legal Documentation", href: "/services/legal-documentation", popular: false },
-                  { name: "Contract Drafting", href: "/services/contract-drafting", popular: false },
+                  { name: "Trademark Objection", href: "/services/trademark-objection", popular: false },
+                  { name: "Trademark Hearing", href: "/services/trademark-hearing", popular: false },
+                  { name: "Copyright Objection", href: "/services/copyright-objection", popular: false },
                 ].map((service, index) => (
                   <li key={index}>
                     <Link
@@ -275,11 +272,11 @@ export default function EnhancedFooter() {
               </h3>
               <ul className="space-y-2 lg:space-y-3">
                 {[
-                  { name: "Business License", href: "/services/business-license", popular: false },
-                  { name: "FSSAI Registration", href: "/services/fssai-registration", popular: false },
-                  { name: "Import Export Code", href: "/services/import-export-code", popular: false },
-                  { name: "Digital Signature", href: "/services/digital-signature", popular: false },
-                  { name: "MSME Registration", href: "/services/msme-registration", popular: false },
+                  { name: "IEC License", href: "/services/iec-license", popular: true },
+                  { name: "Shop & Establishment", href: "/services/shop-establishment", popular: false },
+                  { name: "Professional Tax", href: "/services/professional-tax", popular: false },
+                  { name: "Startup India", href: "/services/startup-india", popular: false },
+                  { name: "MSME Registration", href: "/services/msme-registration", popular: true },
                 ].map((service, index) => (
                   <li key={index}>
                     <Link

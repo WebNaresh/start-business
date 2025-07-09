@@ -22,9 +22,9 @@ export const metadata: Metadata = {
   title:
     "StartBusiness - Company Registration, MCA, RBI Compliance, Trademark Services",
   description:
-    "Platform for company registration, trademark registration, MCA compliance, RBI compliance and business registration services in India. Expert guidance for entrepreneurs.",
+    "Platform for company registration, trademark registration, MCA compliance, RBI compliance and business registration services in India. Search company information by CIN, LLPIN, or company name. Expert guidance for entrepreneurs.",
   keywords:
-    "best online company registration,best CA firm in India,Best CA firm in Pune,Best ca frim near me,company registration,startup registration,private limited company registration,limited company registration,gst,business registration, startup, trademark, GST, FSSAI, compliance, legal services, India, Pune, online incorporation, business consultant, MSME, LLP, private limited, ngo registration, tax filing, business support",
+    "company search, CIN lookup, LLPIN search, MCA company details, company information search, best online company registration,best CA firm in India,Best CA firm in Pune,Best ca frim near me,company registration,startup registration,private limited company registration,limited company registration,gst,business registration, startup, trademark, GST, FSSAI, compliance, legal services, India, Pune, online incorporation, business consultant, MSME, LLP, private limited, ngo registration, tax filing, business support",
   authors: [{ name: "StartBusiness", url: "https://startbusiness.co.in" }],
   creator: "StartBusiness",
   publisher: "StartBusiness",

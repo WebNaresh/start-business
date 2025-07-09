@@ -52,12 +52,12 @@ const sitemapSections: SitemapSection[] = [
       },
       {
         title: "Limited Liability Partnership (LLP)",
-        href: "/services/llp-registration", 
+        href: "/services/llp", 
         description: "Professional LLP registration for partnerships"
       },
       {
         title: "One Person Company (OPC)",
-        href: "/services/opc-registration",
+        href: "/services/opc",
         description: "Solo entrepreneur business registration"
       },
       {
@@ -89,7 +89,7 @@ const sitemapSections: SitemapSection[] = [
       },
       {
         title: "LLP Annual ROC Compliance", 
-        href: "/services/llp-annual-roc",
+        href: "/services/llp-annual-compliance",
         description: "Annual compliance for limited liability partnerships"
       },
       {
@@ -98,15 +98,15 @@ const sitemapSections: SitemapSection[] = [
         description: "FDI/ODI reporting and FLA return filing"
       },
       {
-        title: "Annual Compliance",
-        href: "/services/annual-compliance",
-        description: "Complete annual compliance for companies"
+        title: "LLP Annual Compliance",
+        href: "/services/llp-annual-compliance",
+        description: "Complete LLP annual compliance including Form 8 and Form 11"
       }
     ]
   },
   {
-    title: "Legal Services",
-    description: "Legal documentation and protection services",
+    title: "Intellectual Property",
+    description: "Trademark and copyright protection services",
     icon: Scale,
     links: [
       {
@@ -120,41 +120,41 @@ const sitemapSections: SitemapSection[] = [
         description: "Protect your creative works and content"
       },
       {
-        title: "Legal Documentation",
-        href: "/services/legal-documentation",
-        description: "Professional legal document drafting"
+        title: "Trademark Objection Response",
+        href: "/services/trademark-objection",
+        description: "Professional response to trademark objections"
       },
       {
-        title: "Contract Drafting",
-        href: "/services/contract-drafting",
-        description: "Business contract preparation and review"
+        title: "Trademark Hearing Representation",
+        href: "/services/trademark-hearing",
+        description: "Expert representation in trademark hearings"
       }
     ]
   },
   {
-    title: "Business Setup",
-    description: "Additional business setup services",
+    title: "Important Registration",
+    description: "Business licenses and regulatory registrations",
     icon: Briefcase,
     links: [
       {
-        title: "Business License",
-        href: "/services/business-license",
-        description: "Obtain required business licenses"
+        title: "IEC License",
+        href: "/services/iec-license",
+        description: "Import Export Code for international trade"
       },
       {
-        title: "FSSAI Registration",
-        href: "/services/fssai-registration",
-        description: "Food business license registration"
+        title: "Shop & Establishment License",
+        href: "/services/shop-establishment",
+        description: "Mandatory license for business premises"
       },
       {
-        title: "Import Export Code",
-        href: "/services/import-export-code",
-        description: "IEC for international trade"
+        title: "Professional Tax Registration",
+        href: "/services/professional-tax",
+        description: "State professional tax registration"
       },
       {
-        title: "Digital Signature",
-        href: "/services/digital-signature",
-        description: "Digital signature certificates"
+        title: "MSME Registration",
+        href: "/services/msme-registration",
+        description: "Udyam registration for micro, small & medium enterprises"
       }
     ]
   },

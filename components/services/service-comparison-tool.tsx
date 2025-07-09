@@ -233,14 +233,42 @@ export default function ServiceComparisonTool({
 
   const services = propServices || defaultServices
 
-  // Filter services based on search and category
+  // Enhanced filter services based on search and category
   const filteredServices = services.filter(service => {
     const matchesSearch = service.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         service.description.toLowerCase().includes(searchTerm.toLowerCase())
-    const matchesCategory = filterCategory === "all" ||
-                           service.id.includes(filterCategory) ||
-                           (filterCategory === "company" && ["pvt-ltd", "opc", "llp"].includes(service.id)) ||
-                           (filterCategory === "compliance" && ["gst"].includes(service.id))
+                         service.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         service.shortTitle.toLowerCase().includes(searchTerm.toLowerCase())
+
+    let matchesCategory = true
+    if (filterCategory !== "all") {
+      switch (filterCategory) {
+        case "company":
+          matchesCategory = ["pvt-ltd", "opc", "llp"].includes(service.id) ||
+                           service.title.toLowerCase().includes("company") ||
+                           service.title.toLowerCase().includes("llp") ||
+                           service.title.toLowerCase().includes("opc")
+          break
+        case "compliance":
+          matchesCategory = ["gst"].includes(service.id) ||
+                           service.title.toLowerCase().includes("gst") ||
+                           service.title.toLowerCase().includes("compliance") ||
+                           service.title.toLowerCase().includes("filing") ||
+                           service.title.toLowerCase().includes("return")
+          break
+        case "registration":
+          matchesCategory = service.title.toLowerCase().includes("registration") ||
+                           service.title.toLowerCase().includes("register")
+          break
+        case "legal":
+          matchesCategory = service.title.toLowerCase().includes("trademark") ||
+                           service.title.toLowerCase().includes("copyright") ||
+                           service.title.toLowerCase().includes("legal")
+          break
+        default:
+          matchesCategory = true
+      }
+    }
+
     return matchesSearch && matchesCategory
   })
 
@@ -568,13 +596,20 @@ export default function ServiceComparisonTool({
                 >
                   <option value="all">All Categories</option>
                   <option value="company">Company Formation</option>
-                  <option value="compliance">Compliance</option>
+                  <option value="compliance">Regulatory Compliance</option>
+                  <option value="registration">Business Registration</option>
+                  <option value="legal">Legal Services</option>
                 </select>
               </div>
             </div>
 
-            {/* Selection Status */}
-            <div className="flex items-center justify-center gap-4 flex-wrap">
+            {/* Filter Results & Selection Status */}
+            <div className="flex items-center justify-center gap-4 flex-wrap mb-4">
+              <div className="flex items-center gap-2">
+                <Badge variant="outline" className="text-xs">
+                  {filteredServices.length} service{filteredServices.length !== 1 ? 's' : ''} found
+                </Badge>
+              </div>
               <div className="flex items-center gap-2">
                 <div className={cn(
                   "w-3 h-3 rounded-full transition-colors duration-300",
@@ -623,9 +658,34 @@ export default function ServiceComparisonTool({
         </div>
       </div>
 
+      {/* No Results Message */}
+      {filteredServices.length === 0 && (
+        <div className="text-center py-12">
+          <div className="max-w-md mx-auto">
+            <Search className="w-16 h-16 text-slate-300 mx-auto mb-4" />
+            <h3 className="text-lg font-semibold text-slate-600 mb-2">No services found</h3>
+            <p className="text-slate-500 mb-4">
+              Try adjusting your search terms or filter category to find the services you're looking for.
+            </p>
+            <Button
+              variant="outline"
+              onClick={() => {
+                setSearchTerm("")
+                setFilterCategory("all")
+              }}
+              className="text-blue-600 border-blue-200 hover:bg-blue-50"
+            >
+              <RefreshCw className="w-4 h-4 mr-2" />
+              Clear Filters
+            </Button>
+          </div>
+        </div>
+      )}
+
       {/* Enhanced Service Cards Grid */}
-      <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-        {filteredServices.map((service, index) => {
+      {filteredServices.length > 0 && (
+        <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          {filteredServices.map((service, index) => {
           const isSelected = selectedServices.includes(service.id)
           const isDisabled = !isSelected && selectedServices.length >= maxComparisons
 
@@ -724,7 +784,8 @@ export default function ServiceComparisonTool({
               </div>
             )
           })}
-      </div>
+        </div>
+      )}
 
       {/* No Results Message */}
       {filteredServices.length === 0 && (

@@ -43,11 +43,14 @@ export default function DocumentsSection({ service }: DocumentsSectionProps) {
     return FileText
   }
 
+  // Handle both requiredDocuments and documents formats
+  const documentsData = service.requiredDocuments || (service.documents ? { "Required Documents": service.documents } : {})
+
   // Generate structured data for document checklist
   const documentStructuredData = {
     "@context": "https://schema.org",
     "@type": "ItemList",
-    "itemListElement": Object.entries(service.requiredDocuments || {}).flatMap(([category, documents], categoryIndex) => 
+    "itemListElement": Object.entries(documentsData).flatMap(([category, documents], categoryIndex) =>
       (documents as string[]).map((doc, docIndex) => ({
         "@type": "ListItem",
         "position": categoryIndex * 100 + docIndex + 1,
@@ -86,7 +89,7 @@ export default function DocumentsSection({ service }: DocumentsSectionProps) {
 
           {/* Documents by Category */}
           <div className="space-y-6" role="list">
-            {Object.entries(service.requiredDocuments || {}).map(([category, documents], categoryIndex) => {
+            {Object.entries(documentsData).map(([category, documents], categoryIndex) => {
               const CategoryIcon = getCategoryIcon(category)
 
               return (
