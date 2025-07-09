@@ -65,179 +65,39 @@ export default function CompanyRegistrationQuiz() {
 
   const questions: QuizQuestion[] = [
     {
-      id: "business_stage",
-      question: "What stage is your business in?",
-      description: "This helps us understand your current needs",
-      emoji: "🚀",
+      id: "team_structure",
+      question: "Are you starting the business alone?",
+      description: "This helps us understand your business partnership structure",
+      emoji: "�",
       options: [
         {
-          id: "idea",
-          label: "Just an idea",
-          description: "I have a business concept but haven't started yet",
-          icon: Lightbulb,
-          value: "idea",
-          gradient: "from-yellow-400 to-orange-500"
-        },
-        {
-          id: "planning",
-          label: "Planning stage",
-          description: "I'm ready to register and start operations",
-          icon: Rocket,
-          value: "planning",
-          gradient: "from-blue-400 to-blue-600",
-          popular: true
-        },
-        {
-          id: "operating",
-          label: "Already operating",
-          description: "I'm running a business but need compliance help",
-          icon: Building2,
-          value: "operating",
-          gradient: "from-green-400 to-green-600"
-        }
-      ]
-    },
-    {
-      id: "business_type",
-      question: "What type of business are you starting?",
-      description: "Different business types have different requirements",
-      emoji: "💼",
-      options: [
-        {
-          id: "tech",
-          label: "Technology/Software",
-          description: "SaaS, apps, IT services, or tech products",
-          icon: Laptop,
-          value: "tech",
-          gradient: "from-purple-400 to-purple-600",
-          popular: true
-        },
-        {
-          id: "service",
-          label: "Professional Services",
-          description: "Consulting, legal, accounting, or other services",
-          icon: Store,
-          value: "service",
-          gradient: "from-blue-400 to-blue-600"
-        },
-        {
-          id: "manufacturing",
-          label: "Manufacturing/Trading",
-          description: "Physical products, manufacturing, or trading",
-          icon: Factory,
-          value: "manufacturing",
-          gradient: "from-orange-400 to-red-600"
-        }
-      ]
-    },
-    {
-      id: "team_size",
-      question: "How many people will be involved?",
-      description: "This affects the type of company structure you need",
-      emoji: "👥",
-      options: [
-        {
-          id: "solo",
-          label: "Just me",
+          id: "alone",
+          label: "Yes, I'm starting alone",
           description: "I'm starting as a solo entrepreneur",
           icon: UserCheck,
-          value: "solo",
-          gradient: "from-green-400 to-green-600"
+          value: "alone",
+          gradient: "from-blue-400 to-blue-600",
+          popular: true
         },
         {
-          id: "small_team",
-          label: "2-5 people",
-          description: "Small team or partnership",
+          id: "with_partners",
+          label: "No, I have partners",
+          description: "I'm starting with business partners",
           icon: Users,
-          value: "small_team",
-          gradient: "from-blue-400 to-blue-600",
-          popular: true
-        },
-        {
-          id: "large_team",
-          label: "6+ people",
-          description: "Larger team with multiple stakeholders",
-          icon: Building2,
-          value: "large_team",
+          value: "with_partners",
           gradient: "from-purple-400 to-purple-600"
         }
       ]
     },
     {
-      id: "funding_plans",
-      question: "Do you plan to raise funding?",
-      description: "This determines the best structure for investors",
-      emoji: "💰",
-      options: [
-        {
-          id: "no_funding",
-          label: "No external funding",
-          description: "I'll bootstrap or use personal funds",
-          icon: UserCheck,
-          value: "no_funding",
-          gradient: "from-green-400 to-green-600"
-        },
-        {
-          id: "maybe_funding",
-          label: "Maybe in the future",
-          description: "I might seek funding later",
-          icon: Target,
-          value: "maybe_funding",
-          gradient: "from-blue-400 to-blue-600",
-          popular: true
-        },
-        {
-          id: "seeking_funding",
-          label: "Yes, actively seeking",
-          description: "I plan to raise investment soon",
-          icon: Banknote,
-          value: "seeking_funding",
-          gradient: "from-purple-400 to-purple-600"
-        }
-      ]
-    },
-    {
-      id: "liability_preference",
-      question: "How important is limited liability protection?",
-      description: "This affects your personal asset protection",
-      emoji: "🛡️",
-      options: [
-        {
-          id: "not_important",
-          label: "Not a priority",
-          description: "I'm comfortable with personal liability",
-          icon: UserCheck,
-          value: "not_important",
-          gradient: "from-gray-400 to-gray-600"
-        },
-        {
-          id: "somewhat_important",
-          label: "Moderately important",
-          description: "Some protection would be good",
-          icon: Shield,
-          value: "somewhat_important",
-          gradient: "from-yellow-400 to-orange-600",
-          popular: true
-        },
-        {
-          id: "very_important",
-          label: "Very important",
-          description: "I need maximum asset protection",
-          icon: Award,
-          value: "very_important",
-          gradient: "from-red-400 to-red-600"
-        }
-      ]
-    },
-    {
-      id: "compliance_comfort",
-      question: "How comfortable are you with compliance requirements?",
-      description: "Different structures have varying compliance needs",
+      id: "compliance_preference",
+      question: "What is your preference for compliance burden?",
+      description: "Different structures have varying compliance requirements",
       emoji: "📋",
       options: [
         {
           id: "minimal",
-          label: "Prefer minimal compliance",
+          label: "Minimal compliance, I prefer simplicity",
           description: "I want simple, easy-to-manage requirements",
           icon: Lightbulb,
           value: "minimal",
@@ -246,52 +106,36 @@ export default function CompanyRegistrationQuiz() {
         },
         {
           id: "moderate",
-          label: "Can handle moderate compliance",
-          description: "I'm okay with regular filings and meetings",
+          label: "I can handle moderate compliance for better structure",
+          description: "I'm okay with regular filings for better business structure",
           icon: Building2,
           value: "moderate",
-          gradient: "from-blue-400 to-blue-600"
-        },
-        {
-          id: "complex",
-          label: "Can manage complex compliance",
-          description: "I have resources for detailed requirements",
-          icon: Factory,
-          value: "complex",
-          gradient: "from-purple-400 to-purple-600"
+          gradient: "from-orange-400 to-orange-600"
         }
       ]
     },
     {
-      id: "business_location",
-      question: "Where will your business primarily operate?",
-      description: "Location affects registration requirements and benefits",
-      emoji: "🌍",
+      id: "liability_protection",
+      question: "Do you want limited liability protection for your solo business?",
+      description: "This affects your personal asset protection",
+      emoji: "🛡️",
       options: [
         {
-          id: "single_state",
-          label: "Single state/city",
-          description: "Operations limited to one location",
-          icon: Store,
-          value: "single_state",
-          gradient: "from-green-400 to-green-600"
-        },
-        {
-          id: "multiple_states",
-          label: "Multiple states in India",
-          description: "Pan-India operations planned",
-          icon: Building2,
-          value: "multiple_states",
-          gradient: "from-blue-400 to-blue-600",
+          id: "yes_protection",
+          label: "Yes, I want limited liability protection",
+          description: "I want to protect my personal assets from business risks",
+          icon: Shield,
+          value: "yes_protection",
+          gradient: "from-red-400 to-red-600",
           popular: true
         },
         {
-          id: "international",
-          label: "International operations",
-          description: "Global business or export/import",
-          icon: Globe,
-          value: "international",
-          gradient: "from-purple-400 to-purple-600"
+          id: "no_protection",
+          label: "No, I'm comfortable with unlimited liability",
+          description: "I'm comfortable with personal liability for business",
+          icon: UserCheck,
+          value: "no_protection",
+          gradient: "from-gray-400 to-gray-600"
         }
       ]
     }
@@ -318,25 +162,41 @@ export default function CompanyRegistrationQuiz() {
 
   const getRecommendations = (): CompanyRecommendation[] => {
     const {
-      business_stage,
-      business_type,
-      team_size,
-      funding_plans,
-      liability_preference,
-      compliance_comfort,
-      business_location
+      team_structure,
+      compliance_preference,
+      liability_protection
     } = answers
 
     const recommendations: CompanyRecommendation[] = []
-    let confidence = 70
+    let confidence = 80
 
-    // Enhanced logic for recommendations
+    // Enhanced logic for recommendations based on new questions
 
-    // One Person Company (OPC) - Best for solo entrepreneurs
-    if (team_size === "solo" && funding_plans === "no_funding" && compliance_comfort === "minimal") {
+    // Solo Proprietorship - For minimal compliance and no liability protection
+    if (team_structure === "alone" && compliance_preference === "minimal" && liability_protection === "no_protection") {
       confidence = 95
-      if (liability_preference === "very_important") confidence += 5
-      if (business_location === "single_state") confidence += 3
+
+      recommendations.push({
+        title: "Sole Proprietorship",
+        description: "Simplest business structure with minimal compliance",
+        price: "₹3,000",
+        originalPrice: "₹5,000",
+        slug: "sole-proprietorship",
+        confidence: Math.min(confidence, 98),
+        reasons: [
+          "You're starting alone",
+          "Minimal compliance requirements",
+          "No liability protection needed",
+          "Lowest cost structure",
+          "Easy to start and manage"
+        ]
+      })
+    }
+
+    // One Person Company (OPC) - For solo entrepreneurs with liability protection
+    if (team_structure === "alone" && liability_protection === "yes_protection") {
+      confidence = 92
+      if (compliance_preference === "minimal") confidence += 3
 
       recommendations.push({
         title: "One Person Company (OPC)",
@@ -347,131 +207,84 @@ export default function CompanyRegistrationQuiz() {
         confidence: Math.min(confidence, 98),
         reasons: [
           "You're operating solo",
-          "No external funding needed",
           "Limited liability protection",
-          "Minimal compliance requirements",
-          ...(business_location === "single_state" ? ["Ideal for local operations"] : [])
+          "Professional credibility",
+          "Can convert to Pvt Ltd later",
+          ...(compliance_preference === "minimal" ? ["Relatively simple compliance"] : ["Structured business approach"])
         ]
       })
     }
 
-    // Private Limited Company - Best for growth and funding
-    if (funding_plans === "seeking_funding" || funding_plans === "maybe_funding" ||
-        business_location === "international" || team_size === "large_team") {
-      confidence = 90
-      if (funding_plans === "seeking_funding") confidence += 8
-      if (liability_preference === "very_important") confidence += 5
-      if (business_location === "international") confidence += 5
-      if (team_size === "large_team") confidence += 3
+    // Partnership - For multiple partners with minimal compliance
+    if (team_structure === "with_partners" && compliance_preference === "minimal" && liability_protection === "no_protection") {
+      confidence = 88
 
       recommendations.push({
-        title: "Private Limited Company",
-        description: "Best for businesses seeking investment and growth",
-        price: "₹12,000",
-        originalPrice: "₹15,000",
-        slug: "private-limited-company",
-        confidence: Math.min(confidence, 98),
+        title: "Partnership Firm",
+        description: "Simple structure for multiple partners",
+        price: "₹5,000",
+        originalPrice: "₹7,000",
+        slug: "partnership-firm",
+        confidence: Math.min(confidence, 95),
         reasons: [
-          "Investor-friendly structure",
-          "Easy to raise capital",
-          "Professional credibility",
-          "Separate legal entity",
-          ...(business_location === "international" ? ["Perfect for global operations"] : []),
-          ...(liability_preference === "very_important" ? ["Maximum liability protection"] : [])
+          "You have business partners",
+          "Minimal compliance requirements",
+          "Easy to establish",
+          "Flexible profit sharing",
+          "Cost-effective structure"
         ]
       })
     }
 
-    // Limited Liability Partnership (LLP) - Best for professional services
-    if ((team_size === "small_team" && business_type === "service") ||
-        (business_type === "service" && compliance_comfort === "moderate" && funding_plans === "no_funding")) {
-      confidence = 85
-      if (business_type === "service") confidence += 8
-      if (liability_preference === "very_important") confidence += 5
-      if (compliance_comfort === "moderate") confidence += 3
+    // Limited Liability Partnership (LLP) - For partners with liability protection
+    if (team_structure === "with_partners" && liability_protection === "yes_protection") {
+      confidence = 90
+      if (compliance_preference === "moderate") confidence += 5
 
       recommendations.push({
         title: "Limited Liability Partnership (LLP)",
-        description: "Ideal for professional service partnerships",
+        description: "Ideal for partnerships with liability protection",
         price: "₹10,000",
         originalPrice: "₹13,000",
         slug: "llp-registration",
         confidence: Math.min(confidence, 98),
         reasons: [
           "Perfect for partnerships",
-          "Professional service friendly",
-          "Flexible management structure",
           "Limited liability protection",
-          "Moderate compliance requirements"
+          "Flexible management structure",
+          "Professional credibility",
+          ...(compliance_preference === "moderate" ? ["Manageable compliance"] : ["Structured approach"])
         ]
       })
     }
 
-    // Partnership Firm - For simple partnerships with minimal compliance
-    if (team_size === "small_team" && compliance_comfort === "minimal" &&
-        funding_plans === "no_funding" && liability_preference === "not_important") {
-      confidence = 80
+    // Private Limited Company - For those who want maximum structure and protection
+    if (compliance_preference === "moderate" && liability_protection === "yes_protection") {
+      confidence = 85
+      if (team_structure === "with_partners") confidence += 5
 
-      recommendations.push({
-        title: "Partnership Firm",
-        description: "Simple structure for small partnerships",
-        price: "₹6,000",
-        originalPrice: "₹8,000",
-        slug: "partnership-firm",
-        confidence,
-        reasons: [
-          "Simple registration process",
-          "Minimal compliance requirements",
-          "Cost-effective option",
-          "Suitable for small partnerships"
-        ]
-      })
-    }
-
-    // Sole Proprietorship - For very simple businesses
-    if (team_size === "solo" && compliance_comfort === "minimal" &&
-        funding_plans === "no_funding" && liability_preference === "not_important" &&
-        business_location === "single_state") {
-      confidence = 75
-
-      recommendations.push({
-        title: "Sole Proprietorship",
-        description: "Simplest business structure for individual entrepreneurs",
-        price: "₹3,000",
-        originalPrice: "₹5,000",
-        slug: "sole-proprietorship",
-        confidence,
-        reasons: [
-          "Simplest registration process",
-          "Lowest cost option",
-          "Complete control",
-          "Minimal compliance"
-        ]
-      })
-    }
-
-    // Sort by confidence and return top 2
-    recommendations.sort((a, b) => b.confidence - a.confidence)
-
-    // Add fallback recommendation if none match
-    if (recommendations.length === 0) {
       recommendations.push({
         title: "Private Limited Company",
-        description: "Most versatile business structure for growth",
+        description: "Most professional structure with maximum benefits",
         price: "₹12,000",
         originalPrice: "₹15,000",
         slug: "private-limited-company",
-        confidence: 80,
+        confidence: Math.min(confidence, 95),
         reasons: [
-          "Versatile business structure",
+          "Maximum liability protection",
           "Professional credibility",
-          "Growth-friendly",
-          "Investor ready"
+          "Easy to raise capital",
+          "Investor-friendly structure",
+          "Separate legal entity",
+          ...(team_structure === "with_partners" ? ["Great for multiple stakeholders"] : ["Can add partners later"])
         ]
       })
     }
 
-    return recommendations.slice(0, 2)
+    // Sort by confidence and return top 3
+    return recommendations
+      .sort((a, b) => b.confidence - a.confidence)
+      .slice(0, 3)
   }
 
   const handleAnswer = (questionId: string, value: string) => {
