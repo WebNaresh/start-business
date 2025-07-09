@@ -178,11 +178,11 @@ export default function EnhancedFooter() {
               </h3>
               <ul className="space-y-2 lg:space-y-3">
                 {[
-                  { name: "GST Calculator", href: "/calculators/gst-calculator", popular: true },
-                  { name: "Income Tax Calculator", href: "/calculators/income-tax-calculator", popular: true },
-                  { name: "EMI Calculator", href: "/calculators/emi-calculator", popular: false },
-                  { name: "Business Loan Calculator", href: "/calculators/business-loan-calculator", popular: false },
-                  { name: "Salary Calculator", href: "/calculators/salary-calculator", popular: false },
+                  { name: "GST Calculator", href: "/business-calculators/gst-calculator", popular: true },
+                  { name: "Income Tax Calculator", href: "/business-calculators/income-tax-calculator", popular: true },
+                  { name: "EMI Calculator", href: "/business-calculators/emi-calculator", popular: false },
+                  { name: "Business Loan Calculator", href: "/business-calculators/business-loan-calculator", popular: false },
+                  { name: "Salary Calculator", href: "/business-calculators/salary-calculator", popular: false },
                 ].map((tool, index) => (
                   <li key={index}>
                     <Link
@@ -207,7 +207,7 @@ export default function EnhancedFooter() {
                 ))}
                 <li>
                   <Link
-                    href="/calculators"
+                    href="/business-calculators"
                     className="group flex items-center text-purple-400 hover:text-purple-300 font-medium transition-colors text-sm sm:text-base"
                   >
                     <span className="mr-2">View All Calculators</span>
@@ -389,11 +389,11 @@ export default function EnhancedFooter() {
               </h3>
               <ul className="space-y-2">
                 {[
-                  { name: "About Us", href: "/about" },
+                  { name: "About Us", href: "/about-us" },
                   { name: "Contact Us", href: "/contact" },
                   { name: "FAQ", href: "/faq" },
                   { name: "Sitemap", href: "/sitemap-page" },
-                  { name: "Privacy Policy", href: "/legal/privacy-policy" },
+                  { name: "Privacy Policy", href: "/privacy-policy" },
                 ].map((link, index) => (
                   <li key={index}>
                     <Link
@@ -426,9 +426,9 @@ export default function EnhancedFooter() {
 
               <div className="flex flex-wrap justify-center gap-4 lg:gap-6 text-xs sm:text-sm">
                 {[
-                  { name: "Privacy Policy", href: "/legal/privacy-policy" },
-                  { name: "Terms of Service", href: "/legal/terms" },
-                  { name: "Refund Policy", href: "/legal/refund-policy" },
+                  { name: "Privacy Policy", href: "/privacy-policy" },
+                  { name: "Terms of Service", href: "/terms-of-service" },
+                  { name: "Refund Policy", href: "/refund-policy" },
                 ].map((link, index) => (
                   <Link
                     key={index}

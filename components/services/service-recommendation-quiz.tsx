@@ -66,7 +66,7 @@ export default function ServiceRecommendationQuiz() {
   const handleCategorySelect = (categoryId: string) => {
     if (categoryId === "business-calculators") {
       // Redirect to calculators page
-      window.open("/calculators", "_blank")
+      window.open("/business-calculators", "_blank")
       return
     }
     setSelectedQuiz(categoryId)

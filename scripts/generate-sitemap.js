@@ -56,7 +56,7 @@ const staticPages = [
     priority: 1.0
   },
   {
-    url: `${BASE_URL}/about`,
+    url: `${BASE_URL}/about-us`,
     lastmod: new Date().toISOString(),
     changefreq: 'weekly',
     priority: 0.8
@@ -80,25 +80,25 @@ const staticPages = [
     priority: 0.9
   },
   {
-    url: `${BASE_URL}/calculators`,
+    url: `${BASE_URL}/business-calculators`,
     lastmod: new Date().toISOString(),
     changefreq: 'weekly',
     priority: 0.8
   },
   {
-    url: `${BASE_URL}/legal/privacy-policy`,
+    url: `${BASE_URL}/privacy-policy`,
     lastmod: new Date().toISOString(),
     changefreq: 'monthly',
     priority: 0.3
   },
   {
-    url: `${BASE_URL}/legal/terms`,
+    url: `${BASE_URL}/terms-of-service`,
     lastmod: new Date().toISOString(),
     changefreq: 'monthly',
     priority: 0.3
   },
   {
-    url: `${BASE_URL}/legal/refund-policy`,
+    url: `${BASE_URL}/refund-policy`,
     lastmod: new Date().toISOString(),
     changefreq: 'monthly',
     priority: 0.3
@@ -125,7 +125,7 @@ function generateServiceUrls() {
 // Generate calculator URLs
 function generateCalculatorUrls() {
   return calculators.map(calc => ({
-    url: `${BASE_URL}/calculators/${calc}`,
+    url: `${BASE_URL}/business-calculators/${calc}`,
     lastmod: new Date().toISOString(),
     changefreq: 'monthly',
     priority: ['gst-calculator', 'income-tax-calculator', 'emi-calculator', 'sip-calculator', 'home-loan-calculator', 'business-loan-calculator'].includes(calc) ? 0.7 : 0.6

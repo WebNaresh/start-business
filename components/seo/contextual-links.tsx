@@ -156,41 +156,41 @@ export function InlineServiceLink({
     'moa-aoa-drafting': '/services/moa-aoa-drafting',
 
     // Tax Calculators
-    'gst-calculator': '/calculators/gst-calculator',
-    'income-tax-calculator': '/calculators/income-tax-calculator',
-    'tds-calculator': '/calculators/tds-calculator',
-    'advance-tax-calculator': '/calculators/advance-tax-calculator',
+    'gst-calculator': '/business-calculators/gst-calculator',
+    'income-tax-calculator': '/business-calculators/income-tax-calculator',
+    'tds-calculator': '/business-calculators/tds-calculator',
+    'advance-tax-calculator': '/business-calculators/advance-tax-calculator',
 
     // Loan & EMI Calculators
-    'emi-calculator': '/calculators/emi-calculator',
-    'home-loan-calculator': '/calculators/home-loan-calculator',
-    'personal-loan-calculator': '/calculators/personal-loan-calculator',
-    'business-loan-calculator': '/calculators/business-loan-calculator',
-    'car-loan-calculator': '/calculators/car-loan-calculator',
+    'emi-calculator': '/business-calculators/emi-calculator',
+    'home-loan-calculator': '/business-calculators/home-loan-calculator',
+    'personal-loan-calculator': '/business-calculators/personal-loan-calculator',
+    'business-loan-calculator': '/business-calculators/business-loan-calculator',
+    'car-loan-calculator': '/business-calculators/car-loan-calculator',
 
     // Investment Calculators
-    'sip-calculator': '/calculators/sip-calculator',
-    'fd-calculator': '/calculators/fd-calculator',
-    'rd-calculator': '/calculators/rd-calculator',
-    'ppf-calculator': '/calculators/ppf-calculator',
-    'nsc-calculator': '/calculators/nsc-calculator',
+    'sip-calculator': '/business-calculators/sip-calculator',
+    'fd-calculator': '/business-calculators/fd-calculator',
+    'rd-calculator': '/business-calculators/rd-calculator',
+    'ppf-calculator': '/business-calculators/ppf-calculator',
+    'nsc-calculator': '/business-calculators/nsc-calculator',
 
     // Salary & HR Calculators
-    'salary-calculator': '/calculators/salary-calculator',
-    'hra-calculator': '/calculators/hra-calculator',
-    'gratuity-calculator': '/calculators/gratuity-calculator',
-    'provident-fund-calculator': '/calculators/provident-fund-calculator',
+    'salary-calculator': '/business-calculators/salary-calculator',
+    'hra-calculator': '/business-calculators/hra-calculator',
+    'gratuity-calculator': '/business-calculators/gratuity-calculator',
+    'provident-fund-calculator': '/business-calculators/provident-fund-calculator',
 
     // Business Calculators
-    'compound-interest-calculator': '/calculators/compound-interest-calculator',
-    'simple-interest-calculator': '/calculators/simple-interest-calculator',
-    'margin-calculator': '/calculators/margin-calculator',
-    'break-even-calculator': '/calculators/break-even-calculator',
-    'roi-calculator': '/calculators/roi-calculator',
+    'compound-interest-calculator': '/business-calculators/compound-interest-calculator',
+    'simple-interest-calculator': '/business-calculators/simple-interest-calculator',
+    'margin-calculator': '/business-calculators/margin-calculator',
+    'break-even-calculator': '/business-calculators/break-even-calculator',
+    'roi-calculator': '/business-calculators/roi-calculator',
 
     // Insurance Calculators
-    'term-insurance-calculator': '/calculators/term-insurance-calculator',
-    'health-insurance-calculator': '/calculators/health-insurance-calculator'
+    'term-insurance-calculator': '/business-calculators/term-insurance-calculator',
+    'health-insurance-calculator': '/business-calculators/health-insurance-calculator'
   }
 
   const href = serviceUrls[service]

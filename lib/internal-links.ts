@@ -337,7 +337,7 @@ export const coreServices: InternalLink[] = [
 export const calculatorPages: InternalLink[] = [
   // Tax Calculators
   {
-    href: '/calculators/gst-calculator',
+    href: '/business-calculators/gst-calculator',
     title: 'GST Calculator',
     description: 'Calculate GST inclusive and exclusive amounts instantly with 18% GST rate',
     category: 'calculator',
@@ -345,7 +345,7 @@ export const calculatorPages: InternalLink[] = [
     priority: 'high'
   },
   {
-    href: '/calculators/income-tax-calculator',
+    href: '/business-calculators/income-tax-calculator',
     title: 'Income Tax Calculator',
     description: 'Calculate your income tax liability for the current financial year with latest tax slabs',
     category: 'calculator',
@@ -353,7 +353,7 @@ export const calculatorPages: InternalLink[] = [
     priority: 'high'
   },
   {
-    href: '/calculators/tds-calculator',
+    href: '/business-calculators/tds-calculator',
     title: 'TDS Calculator',
     description: 'Calculate Tax Deducted at Source (TDS) for salary, rent, and other payments',
     category: 'calculator',
@@ -361,7 +361,7 @@ export const calculatorPages: InternalLink[] = [
     priority: 'medium'
   },
   {
-    href: '/calculators/advance-tax-calculator',
+    href: '/business-calculators/advance-tax-calculator',
     title: 'Advance Tax Calculator',
     description: 'Calculate advance tax liability and payment schedule for businesses',
     category: 'calculator',
@@ -371,7 +371,7 @@ export const calculatorPages: InternalLink[] = [
 
   // Loan & EMI Calculators
   {
-    href: '/calculators/emi-calculator',
+    href: '/business-calculators/emi-calculator',
     title: 'EMI Calculator',
     description: 'Calculate loan EMI for home loans, personal loans, and business loans',
     category: 'calculator',
@@ -379,7 +379,7 @@ export const calculatorPages: InternalLink[] = [
     priority: 'high'
   },
   {
-    href: '/calculators/home-loan-calculator',
+    href: '/business-calculators/home-loan-calculator',
     title: 'Home Loan Calculator',
     description: 'Calculate home loan EMI, eligibility, and total interest payable',
     category: 'calculator',
@@ -387,7 +387,7 @@ export const calculatorPages: InternalLink[] = [
     priority: 'medium'
   },
   {
-    href: '/calculators/personal-loan-calculator',
+    href: '/business-calculators/personal-loan-calculator',
     title: 'Personal Loan Calculator',
     description: 'Calculate personal loan EMI and total interest for different loan amounts',
     category: 'calculator',
@@ -395,7 +395,7 @@ export const calculatorPages: InternalLink[] = [
     priority: 'medium'
   },
   {
-    href: '/calculators/business-loan-calculator',
+    href: '/business-calculators/business-loan-calculator',
     title: 'Business Loan Calculator',
     description: 'Calculate business loan EMI, eligibility, and working capital requirements',
     category: 'calculator',
@@ -403,7 +403,7 @@ export const calculatorPages: InternalLink[] = [
     priority: 'medium'
   },
   {
-    href: '/calculators/car-loan-calculator',
+    href: '/business-calculators/car-loan-calculator',
     title: 'Car Loan Calculator',
     description: 'Calculate car loan EMI and total cost of vehicle financing',
     category: 'calculator',
@@ -413,7 +413,7 @@ export const calculatorPages: InternalLink[] = [
 
   // Investment & Savings Calculators
   {
-    href: '/calculators/sip-calculator',
+    href: '/business-calculators/sip-calculator',
     title: 'SIP Calculator',
     description: 'Calculate Systematic Investment Plan returns and wealth creation potential',
     category: 'calculator',
@@ -421,7 +421,7 @@ export const calculatorPages: InternalLink[] = [
     priority: 'medium'
   },
   {
-    href: '/calculators/fd-calculator',
+    href: '/business-calculators/fd-calculator',
     title: 'Fixed Deposit Calculator',
     description: 'Calculate fixed deposit maturity amount and interest earnings',
     category: 'calculator',
@@ -429,7 +429,7 @@ export const calculatorPages: InternalLink[] = [
     priority: 'medium'
   },
   {
-    href: '/calculators/rd-calculator',
+    href: '/business-calculators/rd-calculator',
     title: 'Recurring Deposit Calculator',
     description: 'Calculate recurring deposit maturity amount and monthly savings',
     category: 'calculator',
@@ -437,7 +437,7 @@ export const calculatorPages: InternalLink[] = [
     priority: 'low'
   },
   {
-    href: '/calculators/ppf-calculator',
+    href: '/business-calculators/ppf-calculator',
     title: 'PPF Calculator',
     description: 'Calculate Public Provident Fund maturity amount and tax savings',
     category: 'calculator',
@@ -445,7 +445,7 @@ export const calculatorPages: InternalLink[] = [
     priority: 'medium'
   },
   {
-    href: '/calculators/nsc-calculator',
+    href: '/business-calculators/nsc-calculator',
     title: 'NSC Calculator',
     description: 'Calculate National Savings Certificate returns and tax benefits',
     category: 'calculator',
@@ -455,7 +455,7 @@ export const calculatorPages: InternalLink[] = [
 
   // Salary & HR Calculators
   {
-    href: '/calculators/salary-calculator',
+    href: '/business-calculators/salary-calculator',
     title: 'Salary Calculator',
     description: 'Calculate take-home salary, CTC breakdown, and tax deductions',
     category: 'calculator',
@@ -463,7 +463,7 @@ export const calculatorPages: InternalLink[] = [
     priority: 'high'
   },
   {
-    href: '/calculators/hra-calculator',
+    href: '/business-calculators/hra-calculator',
     title: 'HRA Calculator',
     description: 'Calculate House Rent Allowance exemption and tax savings',
     category: 'calculator',
@@ -471,7 +471,7 @@ export const calculatorPages: InternalLink[] = [
     priority: 'medium'
   },
   {
-    href: '/calculators/gratuity-calculator',
+    href: '/business-calculators/gratuity-calculator',
     title: 'Gratuity Calculator',
     description: 'Calculate gratuity amount for employees after 5 years of service',
     category: 'calculator',
@@ -479,7 +479,7 @@ export const calculatorPages: InternalLink[] = [
     priority: 'medium'
   },
   {
-    href: '/calculators/provident-fund-calculator',
+    href: '/business-calculators/provident-fund-calculator',
     title: 'Provident Fund Calculator',
     description: 'Calculate EPF balance, employer contribution, and retirement corpus',
     category: 'calculator',
@@ -489,7 +489,7 @@ export const calculatorPages: InternalLink[] = [
 
   // Business & Financial Calculators
   {
-    href: '/calculators/compound-interest-calculator',
+    href: '/business-calculators/compound-interest-calculator',
     title: 'Compound Interest Calculator',
     description: 'Calculate compound interest and investment growth over time',
     category: 'calculator',
@@ -497,7 +497,7 @@ export const calculatorPages: InternalLink[] = [
     priority: 'medium'
   },
   {
-    href: '/calculators/simple-interest-calculator',
+    href: '/business-calculators/simple-interest-calculator',
     title: 'Simple Interest Calculator',
     description: 'Calculate simple interest on loans and investments',
     category: 'calculator',
@@ -505,7 +505,7 @@ export const calculatorPages: InternalLink[] = [
     priority: 'low'
   },
   {
-    href: '/calculators/margin-calculator',
+    href: '/business-calculators/margin-calculator',
     title: 'Business Margin Calculator',
     description: 'Calculate profit margin, markup, and business profitability',
     category: 'calculator',
@@ -513,7 +513,7 @@ export const calculatorPages: InternalLink[] = [
     priority: 'medium'
   },
   {
-    href: '/calculators/break-even-calculator',
+    href: '/business-calculators/break-even-calculator',
     title: 'Break Even Calculator',
     description: 'Calculate break-even point for your business or product',
     category: 'calculator',
@@ -521,7 +521,7 @@ export const calculatorPages: InternalLink[] = [
     priority: 'medium'
   },
   {
-    href: '/calculators/roi-calculator',
+    href: '/business-calculators/roi-calculator',
     title: 'ROI Calculator',
     description: 'Calculate Return on Investment for business projects and investments',
     category: 'calculator',
@@ -531,7 +531,7 @@ export const calculatorPages: InternalLink[] = [
 
   // Insurance Calculators
   {
-    href: '/calculators/term-insurance-calculator',
+    href: '/business-calculators/term-insurance-calculator',
     title: 'Term Insurance Calculator',
     description: 'Calculate term insurance coverage needed and premium costs',
     category: 'calculator',
@@ -539,7 +539,7 @@ export const calculatorPages: InternalLink[] = [
     priority: 'medium'
   },
   {
-    href: '/calculators/health-insurance-calculator',
+    href: '/business-calculators/health-insurance-calculator',
     title: 'Health Insurance Calculator',
     description: 'Calculate health insurance premium and coverage requirements',
     category: 'calculator',
@@ -551,7 +551,7 @@ export const calculatorPages: InternalLink[] = [
 // Important informational pages
 export const informationalPages: InternalLink[] = [
   {
-    href: '/about',
+    href: '/about-us',
     title: 'About StartBusiness',
     description: 'Learn about our mission to simplify business registration and compliance in India',
     category: 'about',
@@ -749,9 +749,9 @@ export const topicClusters = {
       '/services/fema-compliance',
       '/services/csr-compliance',
       '/services/annual-compliance',
-      '/calculators/income-tax-calculator',
-      '/calculators/gst-calculator',
-      '/calculators/advance-tax-calculator',
+      '/business-calculators/income-tax-calculator',
+      '/business-calculators/gst-calculator',
+      '/business-calculators/advance-tax-calculator',
       '/blog/compliance-guide',
       '/blog/roc-compliance-checklist'
     ]
@@ -785,27 +785,27 @@ export const topicClusters = {
     ]
   },
   'financial-calculators': {
-    pillarPage: '/calculators',
+    pillarPage: '/business-calculators',
     clusterPages: [
-      '/calculators/emi-calculator',
-      '/calculators/home-loan-calculator',
-      '/calculators/personal-loan-calculator',
-      '/calculators/business-loan-calculator',
-      '/calculators/sip-calculator',
-      '/calculators/fd-calculator',
-      '/calculators/ppf-calculator',
-      '/calculators/compound-interest-calculator',
+      '/business-calculators/emi-calculator',
+      '/business-calculators/home-loan-calculator',
+      '/business-calculators/personal-loan-calculator',
+      '/business-calculators/business-loan-calculator',
+      '/business-calculators/sip-calculator',
+      '/business-calculators/fd-calculator',
+      '/business-calculators/ppf-calculator',
+      '/business-calculators/compound-interest-calculator',
       '/blog/loan-calculator-guide',
       '/blog/investment-planning'
     ]
   },
   'salary-hr-tools': {
-    pillarPage: '/calculators/salary-calculator',
+    pillarPage: '/business-calculators/salary-calculator',
     clusterPages: [
-      '/calculators/salary-calculator',
-      '/calculators/hra-calculator',
-      '/calculators/gratuity-calculator',
-      '/calculators/provident-fund-calculator',
+      '/business-calculators/salary-calculator',
+      '/business-calculators/hra-calculator',
+      '/business-calculators/gratuity-calculator',
+      '/business-calculators/provident-fund-calculator',
       '/blog/salary-structure-guide',
       '/blog/employee-benefits-guide'
     ]
@@ -815,10 +815,10 @@ export const topicClusters = {
     clusterPages: [
       '/services/business-loan',
       '/services/current-account-opening',
-      '/calculators/business-loan-calculator',
-      '/calculators/margin-calculator',
-      '/calculators/break-even-calculator',
-      '/calculators/roi-calculator',
+      '/business-calculators/business-loan-calculator',
+      '/business-calculators/margin-calculator',
+      '/business-calculators/break-even-calculator',
+      '/business-calculators/roi-calculator',
       '/blog/business-funding-guide',
       '/blog/working-capital-management'
     ]

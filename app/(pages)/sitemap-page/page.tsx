@@ -165,27 +165,27 @@ const sitemapSections: SitemapSection[] = [
     links: [
       {
         title: "GST Calculator",
-        href: "/calculators/gst-calculator",
+        href: "/business-calculators/gst-calculator",
         description: "Calculate GST inclusive and exclusive amounts"
       },
       {
         title: "Income Tax Calculator",
-        href: "/calculators/income-tax-calculator",
+        href: "/business-calculators/income-tax-calculator",
         description: "Calculate your income tax liability"
       },
       {
         title: "EMI Calculator",
-        href: "/calculators/emi-calculator",
+        href: "/business-calculators/emi-calculator",
         description: "Calculate loan EMI for business loans"
       },
       {
         title: "Business Loan Calculator",
-        href: "/calculators/business-loan-calculator",
+        href: "/business-calculators/business-loan-calculator",
         description: "Calculate business loan eligibility and EMI"
       },
       {
         title: "Salary Calculator",
-        href: "/calculators/salary-calculator",
+        href: "/business-calculators/salary-calculator",
         description: "Calculate take-home salary and deductions"
       }
     ]
@@ -229,7 +229,7 @@ const sitemapSections: SitemapSection[] = [
     links: [
       {
         title: "About Us",
-        href: "/about",
+        href: "/about-us",
         description: "Learn about StartBusiness and our mission"
       },
       {
@@ -239,12 +239,12 @@ const sitemapSections: SitemapSection[] = [
       },
       {
         title: "Privacy Policy",
-        href: "/legal/privacy-policy",
+        href: "/privacy-policy",
         description: "Our privacy policy and data protection"
       },
       {
         title: "Terms of Service",
-        href: "/legal/terms-of-service",
+        href: "/terms-of-service",
         description: "Terms and conditions of service"
       }
     ]
