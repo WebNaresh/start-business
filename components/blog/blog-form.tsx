@@ -64,12 +64,15 @@ export default function BlogForm({
     data: fetchedBlogData,
     isLoading: isLoadingBlogData,
     error,
+    refetch
   } = useQuery({
     queryKey: ["blog", slug],
     queryFn: () => fetchBlogData(slug!),
     enabled: isEditing && !!slug, // Only fetch when editing and slug is provided
-    staleTime: 5 * 60 * 1000, // 5 minutes
-    gcTime: 10 * 60 * 1000, // 10 minutes
+    staleTime: 0, // Always consider stale to ensure fresh data
+    gcTime: 5 * 60 * 1000, // 5 minutes
+    refetchOnMount: true, // Always refetch when component mounts
+    refetchOnWindowFocus: false, // Don't refetch on window focus to avoid disrupting editing
   });
 
   // Determine the data source (fetched data takes priority over initialData)
@@ -89,6 +92,25 @@ export default function BlogForm({
     editorData: "",
     ...blogData,
   });
+
+  // Reset state when slug changes (navigating between different blog edits)
+  useEffect(() => {
+    if (slug) {
+      setEditorData(undefined);
+      setBlog({
+        title: "",
+        content: "",
+        excerpt: "",
+        author: "",
+        status: "draft",
+        metaTitle: "",
+        metaDescription: "",
+        tags: "",
+        featuredImage: "",
+        editorData: "",
+      });
+    }
+  }, [slug]);
 
   // Convert content to EditorJS data when data is available
   useEffect(() => {
@@ -471,7 +493,13 @@ export default function BlogForm({
               </label>
               <ImageUpload
                 onImageUploaded={(imageUrl) => {
-                  setBlog((prev) => ({ ...prev, featuredImage: imageUrl }));
+                  console.log('Image uploaded successfully:', imageUrl);
+                  setBlog((prev) => {
+                    const updated = { ...prev, featuredImage: imageUrl };
+                    console.log('Updated blog state with new image:', updated.featuredImage);
+                    return updated;
+                  });
+                  toast.success('Featured image updated successfully');
                 }}
                 currentImageUrl={blog.featuredImage || undefined}
                 disabled={isSaving}

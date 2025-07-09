@@ -8,18 +8,20 @@ export async function GET(request: Request) {
         const { searchParams } = new URL(request.url)
         const limit = parseInt(searchParams.get('limit') || '10')
         const offset = parseInt(searchParams.get('offset') || '0')
-        const status = searchParams.get('status') || 'published'
+        const status = searchParams.get('status')
+
+        // Build where clause conditionally
+        const whereClause = status ? { status } : {}
 
         // Use safe database operation with fallback
         const blogs = await safeDatabaseOperation(
             async () => {
                 return await prisma.blog.findMany({
-                    where: {
-                        status: status
-                    },
-                    orderBy: {
-                        publishedAt: 'desc'
-                    },
+                    where: whereClause,
+                    orderBy: [
+                        { status: 'asc' }, // Show drafts first, then published
+                        { updatedAt: 'desc' } // Most recently updated first
+                    ],
                     select: {
                         id: true,
                         title: true,
