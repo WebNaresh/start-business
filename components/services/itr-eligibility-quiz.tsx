@@ -7,7 +7,6 @@ import {
   ArrowRight,
   ArrowLeft,
   CheckCircle,
-  Briefcase,
   Store,
   TrendingUp,
   Globe,
@@ -20,7 +19,10 @@ import {
   RotateCcw,
   FileText,
   AlertCircle,
-  Info
+  Info,
+  Building,
+  Home,
+  Coins
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import Link from "next/link"
@@ -33,7 +35,7 @@ interface QuizQuestion {
   options: {
     id: string
     label: string
-    description: string
+    description?: string
     icon: React.ElementType
     value: string
     gradient: string
@@ -60,51 +62,10 @@ export default function ITREligibilityQuiz() {
 
   const questions: QuizQuestion[] = [
     {
-      id: "income_sources",
-      question: "What are your primary income sources?",
-      description: "This helps determine your ITR filing requirements",
+      id: "total_income",
+      question: "What is your total income for FY 2024-25?",
+      description: "Enter your total annual income from all sources",
       emoji: "💰",
-      options: [
-        {
-          id: "salary",
-          label: "Salary Income",
-          description: "Income from employment or pension",
-          icon: Briefcase,
-          value: "salary",
-          gradient: "from-blue-400 to-blue-600",
-          popular: true
-        },
-        {
-          id: "business",
-          label: "Business Income",
-          description: "Income from business or profession",
-          icon: Store,
-          value: "business",
-          gradient: "from-green-400 to-green-600"
-        },
-        {
-          id: "capital_gains",
-          label: "Capital Gains",
-          description: "Income from sale of assets or investments",
-          icon: TrendingUp,
-          value: "capital_gains",
-          gradient: "from-purple-400 to-purple-600"
-        },
-        {
-          id: "multiple",
-          label: "Multiple Sources",
-          description: "Income from various sources",
-          icon: Globe,
-          value: "multiple",
-          gradient: "from-orange-400 to-orange-600"
-        }
-      ]
-    },
-    {
-      id: "annual_income",
-      question: "What's your annual income range?",
-      description: "This determines your tax obligations",
-      emoji: "📊",
       options: [
         {
           id: "below_250000",
@@ -132,144 +93,95 @@ export default function ITREligibilityQuiz() {
           popular: true
         },
         {
-          id: "above_1000000",
-          label: "Above ₹10L",
+          id: "1000000_5000000",
+          label: "₹10L - ₹50L",
           description: "30% tax rate applicable",
           icon: Award,
-          value: "above_1000000",
+          value: "1000000_5000000",
           gradient: "from-red-400 to-red-600"
-        }
-      ]
-    },
-    {
-      id: "age_category",
-      question: "What's your age category?",
-      description: "Age affects tax exemption limits",
-      emoji: "👤",
-      options: [
-        {
-          id: "below_60",
-          label: "Below 60 years",
-          description: "Standard tax exemption limit",
-          icon: Target,
-          value: "below_60",
-          gradient: "from-blue-400 to-blue-600",
-          popular: true
         },
         {
-          id: "60_to_80",
-          label: "60-80 years",
-          description: "Senior citizen benefits",
-          icon: Shield,
-          value: "60_to_80",
-          gradient: "from-green-400 to-green-600"
-        },
-        {
-          id: "above_80",
-          label: "Above 80 years",
-          description: "Super senior citizen benefits",
-          icon: Award,
-          value: "above_80",
+          id: "above_5000000",
+          label: "Above ₹50L",
+          description: "Higher tax rates and compliance",
+          icon: Star,
+          value: "above_5000000",
           gradient: "from-purple-400 to-purple-600"
         }
       ]
     },
     {
-      id: "tax_deductions",
-      question: "Do you have significant tax deductions?",
-      description: "Deductions can affect your filing requirements",
-      emoji: "💸",
+      id: "business_income",
+      question: "Do you have income from business or profession?",
+      description: "This includes freelancing, consultancy, trading, etc.",
+      emoji: "💼",
       options: [
         {
-          id: "no_deductions",
-          label: "No major deductions",
-          description: "Standard deductions only",
+          id: "yes_business",
+          label: "Yes, I have business/professional income",
+          description: "Income from business, profession, or freelancing",
+          icon: Store,
+          value: "yes_business",
+          gradient: "from-blue-400 to-blue-600"
+        },
+        {
+          id: "no_business",
+          label: "No, I don't have business income",
+          description: "Only salary, pension, or other sources",
           icon: Shield,
-          value: "no_deductions",
-          gradient: "from-gray-400 to-gray-600"
-        },
-        {
-          id: "some_deductions",
-          label: "Some deductions",
-          description: "80C, HRA, or medical insurance",
-          icon: Target,
-          value: "some_deductions",
-          gradient: "from-blue-400 to-blue-600",
-          popular: true
-        },
-        {
-          id: "many_deductions",
-          label: "Multiple deductions",
-          description: "Home loan, investments, donations, etc.",
-          icon: TrendingUp,
-          value: "many_deductions",
-          gradient: "from-green-400 to-green-600"
-        }
-      ]
-    },
-    {
-      id: "previous_filing",
-      question: "Have you filed ITR before?",
-      description: "Previous filing history affects requirements",
-      emoji: "📄",
-      options: [
-        {
-          id: "never_filed",
-          label: "Never filed",
-          description: "This would be my first time",
-          icon: FileText,
-          value: "never_filed",
-          gradient: "from-orange-400 to-red-600"
-        },
-        {
-          id: "filed_before",
-          label: "Filed in previous years",
-          description: "I have filing experience",
-          icon: CheckCircle,
-          value: "filed_before",
+          value: "no_business",
           gradient: "from-green-400 to-green-600",
           popular: true
-        },
-        {
-          id: "irregular_filing",
-          label: "Filed irregularly",
-          description: "Sometimes filed, sometimes not",
-          icon: AlertCircle,
-          value: "irregular_filing",
-          gradient: "from-yellow-400 to-orange-600"
         }
       ]
     },
     {
-      id: "financial_transactions",
-      question: "Do you have high-value financial transactions?",
-      description: "Large transactions may require mandatory filing",
-      emoji: "💳",
+      id: "director_status",
+      question: "Are you a director of any company?",
+      description: "Director status affects ITR filing requirements",
+      emoji: "👔",
       options: [
         {
-          id: "no_high_value",
-          label: "No high-value transactions",
-          description: "Regular day-to-day transactions only",
+          id: "yes_director",
+          label: "Yes, I am a director",
+          description: "Director of private/public company",
+          icon: Building,
+          value: "yes_director",
+          gradient: "from-purple-400 to-purple-600"
+        },
+        {
+          id: "no_director",
+          label: "No, I am not a director",
+          description: "Not a company director",
           icon: Shield,
-          value: "no_high_value",
-          gradient: "from-green-400 to-green-600"
-        },
-        {
-          id: "some_high_value",
-          label: "Some high-value transactions",
-          description: "Property purchase, large investments",
-          icon: TrendingUp,
-          value: "some_high_value",
-          gradient: "from-yellow-400 to-orange-600",
+          value: "no_director",
+          gradient: "from-green-400 to-green-600",
           popular: true
+        }
+      ]
+    },
+    {
+      id: "capital_gains",
+      question: "Do you have capital gains?",
+      description: "From sale of shares, property, or other assets",
+      emoji: "📈",
+      options: [
+        {
+          id: "yes_capital_gains",
+          label: "Yes, I have capital gains",
+          description: "From sale of shares, property, or investments",
+          icon: TrendingUp,
+          value: "yes_capital_gains",
+          gradient: "from-orange-400 to-orange-600"
         },
         {
-          id: "frequent_high_value",
-          label: "Frequent high-value transactions",
-          description: "Regular large transactions or investments",
-          icon: Award,
-          value: "frequent_high_value",
-          gradient: "from-red-400 to-red-600"
+          id: "no_capital_gains",
+          label: "No capital gains",
+          description: "No asset sales or capital gains",
+          icon: Shield,
+          value: "no_capital_gains",
+          gradient: "from-green-400 to-green-600",
+          popular: true
         }
       ]
     },
@@ -280,29 +192,104 @@ export default function ITREligibilityQuiz() {
       emoji: "🌍",
       options: [
         {
+          id: "yes_foreign",
+          label: "Yes, I have foreign assets/income",
+          description: "Foreign bank accounts, property, or income",
+          icon: Globe,
+          value: "yes_foreign",
+          gradient: "from-blue-400 to-blue-600"
+        },
+        {
           id: "no_foreign",
-          label: "No foreign assets",
+          label: "No foreign assets/income",
           description: "All assets and income are in India",
           icon: Shield,
           value: "no_foreign",
           gradient: "from-green-400 to-green-600",
           popular: true
+        }
+      ]
+    },
+    {
+      id: "crypto_esop",
+      question: "Do you have income from cryptocurrency or ESOPs?",
+      description: "Digital assets and employee stock options",
+      emoji: "₿",
+      options: [
+        {
+          id: "yes_crypto_esop",
+          label: "Yes, I have crypto/ESOP income",
+          description: "Income from cryptocurrency or employee stock options",
+          icon: Coins,
+          value: "yes_crypto_esop",
+          gradient: "from-yellow-400 to-orange-600"
         },
         {
-          id: "foreign_income",
-          label: "Foreign income",
-          description: "Income from foreign sources",
-          icon: Globe,
-          value: "foreign_income",
-          gradient: "from-blue-400 to-blue-600"
-        },
+          id: "no_crypto_esop",
+          label: "No crypto/ESOP income",
+          description: "No digital assets or stock options",
+          icon: Shield,
+          value: "no_crypto_esop",
+          gradient: "from-green-400 to-green-600",
+          popular: true
+        }
+      ]
+    },
+    {
+      id: "unlisted_shares",
+      question: "Do you hold unlisted equity shares?",
+      description: "Shares of private companies not listed on stock exchange",
+      emoji: "📊",
+      options: [
         {
-          id: "foreign_assets",
-          label: "Foreign assets",
-          description: "Bank accounts, property, or investments abroad",
+          id: "yes_unlisted",
+          label: "Yes, I hold unlisted shares",
+          description: "Shares in private companies",
           icon: TrendingUp,
-          value: "foreign_assets",
+          value: "yes_unlisted",
           gradient: "from-purple-400 to-purple-600"
+        },
+        {
+          id: "no_unlisted",
+          label: "No unlisted shares",
+          description: "Only listed shares or no shares",
+          icon: Shield,
+          value: "no_unlisted",
+          gradient: "from-green-400 to-green-600",
+          popular: true
+        }
+      ]
+    },
+    {
+      id: "house_properties",
+      question: "How many house properties do you own?",
+      description: "Property ownership affects tax calculations",
+      emoji: "🏠",
+      options: [
+        {
+          id: "no_property",
+          label: "None",
+          description: "No house property owned",
+          icon: Shield,
+          value: "no_property",
+          gradient: "from-gray-400 to-gray-600"
+        },
+        {
+          id: "one_property",
+          label: "One property",
+          description: "Single house property (self-occupied or rented)",
+          icon: Home,
+          value: "one_property",
+          gradient: "from-blue-400 to-blue-600",
+          popular: true
+        },
+        {
+          id: "multiple_properties",
+          label: "Multiple properties",
+          description: "More than one house property",
+          icon: Building,
+          value: "multiple_properties",
+          gradient: "from-orange-400 to-orange-600"
         }
       ]
     }
@@ -313,12 +300,9 @@ export default function ITREligibilityQuiz() {
     if (selectedOption && !isAnimating) {
       const timer = setTimeout(() => {
         if (currentStep < questions.length - 1) {
-          setIsAnimating(true)
-          setTimeout(() => {
-            setCurrentStep(currentStep + 1)
-            setSelectedOption(null)
-            setIsAnimating(false)
-          }, 300)
+          setCurrentStep(prev => prev + 1)
+          setSelectedOption(null)
+          setIsAnimating(false)
         } else {
           setShowResults(true)
         }
@@ -329,188 +313,146 @@ export default function ITREligibilityQuiz() {
 
   const getITRResult = (): ITRResult => {
     const {
-      income_sources,
-      annual_income,
-      age_category,
-      tax_deductions,
-      previous_filing,
-      financial_transactions,
-      foreign_assets
+      total_income,
+      business_income,
+      director_status,
+      capital_gains,
+      foreign_assets,
+      crypto_esop,
+      unlisted_shares,
+      house_properties
     } = answers
 
-    // Determine exemption limit based on age
-    let exemptionLimit = 250000
-    if (age_category === "60_to_80") exemptionLimit = 300000
-    if (age_category === "above_80") exemptionLimit = 500000
-
-    // Check if filing is required
+    // Determine if filing is required based on income
     const incomeValue = {
       "below_250000": 200000,
       "250000_500000": 375000,
       "500000_1000000": 750000,
-      "above_1000000": 1500000
-    }[annual_income] || 200000
+      "1000000_5000000": 2500000,
+      "above_5000000": 7500000
+    }[total_income] || 200000
 
-    // Enhanced eligibility logic
     let isEligible = false
     let confidence = 70
     let mandatoryReasons: string[] = []
     let itrForm = "ITR-1"
+    let title = ""
+    let description = ""
 
-    // Mandatory filing conditions
-    if (incomeValue > exemptionLimit) {
+    // Check mandatory filing conditions
+    if (incomeValue > 250000) {
       isEligible = true
-      mandatoryReasons.push("Annual income exceeds exemption limit")
+      mandatoryReasons.push("Your income is ≤ ₹50 lakhs")
       confidence += 25
     }
 
-    if (income_sources === "business") {
+    if (business_income === "yes_business") {
       isEligible = true
       itrForm = "ITR-3"
-      mandatoryReasons.push("Business income requires ITR filing")
+      mandatoryReasons.push("You are not a director")
+      mandatoryReasons.push("No business income")
       confidence += 20
     }
 
-    if (income_sources === "capital_gains" || income_sources === "multiple") {
+    if (director_status === "yes_director") {
       isEligible = true
       itrForm = "ITR-2"
-      mandatoryReasons.push("Multiple income sources require ITR filing")
+      mandatoryReasons.push("Director status requires ITR filing")
+      confidence += 20
+    }
+
+    if (capital_gains === "yes_capital_gains") {
+      isEligible = true
+      itrForm = "ITR-2"
+      mandatoryReasons.push("No capital gains")
       confidence += 15
     }
 
-    if (foreign_assets === "foreign_income" || foreign_assets === "foreign_assets") {
+    if (foreign_assets === "yes_foreign") {
       isEligible = true
       itrForm = "ITR-2"
-      mandatoryReasons.push("Foreign assets/income mandate ITR filing")
-      confidence += 30
+      mandatoryReasons.push("No foreign assets")
+      confidence += 25
     }
 
-    if (financial_transactions === "frequent_high_value") {
+    if (crypto_esop === "yes_crypto_esop") {
       isEligible = true
-      mandatoryReasons.push("High-value transactions require ITR filing")
+      itrForm = "ITR-2"
+      mandatoryReasons.push("No complex investments")
       confidence += 15
-    } else if (financial_transactions === "some_high_value") {
-      confidence += 10
     }
 
-    // Additional factors affecting confidence
-    if (previous_filing === "filed_before") {
-      confidence += 5
-    } else if (previous_filing === "irregular_filing") {
-      mandatoryReasons.push("Previous irregular filing history")
-      confidence += 10
-    }
-
-    if (tax_deductions === "many_deductions") {
-      mandatoryReasons.push("Multiple deductions benefit from ITR filing")
-      confidence += 8
-    } else if (tax_deductions === "some_deductions") {
-      confidence += 5
-    }
-
-    // Determine final ITR form based on complexity
-    if (foreign_assets !== "no_foreign" || income_sources === "multiple" || income_sources === "capital_gains") {
+    if (unlisted_shares === "yes_unlisted") {
+      isEligible = true
       itrForm = "ITR-2"
-    } else if (income_sources === "business") {
-      itrForm = "ITR-3"
-    } else if (income_sources === "salary" && tax_deductions !== "many_deductions") {
+      mandatoryReasons.push("Unlisted shares require ITR-2")
+      confidence += 10
+    }
+
+    // Determine the appropriate ITR form and result
+    if (!isEligible || (incomeValue <= 250000 && business_income === "no_business" && director_status === "no_director" && capital_gains === "no_capital_gains" && foreign_assets === "no_foreign" && crypto_esop === "no_crypto_esop" && unlisted_shares === "no_unlisted")) {
+      title = "ITR-1 (Sahaj)"
+      description = "Simplest form for resident individuals with total income ≤ ₹50 lakh"
       itrForm = "ITR-1"
+    } else if (business_income === "yes_business") {
+      title = "ITR-3"
+      description = "Comprehensive form for business owners"
+      itrForm = "ITR-3"
     } else {
+      title = "ITR-2"
+      description = "For individuals without business income but with capital gains, etc."
       itrForm = "ITR-2"
     }
 
-    confidence = Math.min(confidence, 98)
+    const requirements = [
+      "ITR-1: Only for salary, pension, and house property income",
+      "ITR-2: For individuals without business income but with capital gains, etc.",
+      "ITR-3: Comprehensive form for business owners",
+      "ITR-4: For presumptive taxation scheme (44AD/44ADA/44AE)"
+    ]
 
-    if (isEligible) {
-      return {
-        eligible: true,
-        itrForm,
-        title: "Yes, you need to file ITR",
-        description: `Based on your profile, you are required to file ${itrForm} form.`,
-        requirements: [
-          ...mandatoryReasons,
-          "Compliance with Income Tax Act",
-          "Avoid penalties and legal issues"
-        ],
-        nextSteps: [
-          "Gather all income documents",
-          "Collect investment and deduction proofs",
-          "Calculate total taxable income",
-          "File ITR before due date (July 31st)",
-          ...(tax_deductions === "many_deductions" ? ["Organize all deduction certificates"] : []),
-          ...(foreign_assets !== "no_foreign" ? ["Prepare foreign asset details"] : []),
-          "Pay any tax liability"
-        ],
-        confidence
-      }
-    } else {
-      // Even if not mandatory, check if beneficial
-      let beneficialReasons: string[] = [
-        "Income below exemption limit",
-        "No mandatory filing requirement"
-      ]
+    const nextSteps = [
+      "Gather all required documents",
+      "Choose the appropriate ITR form",
+      "File your return before the due date",
+      "Keep records for future reference"
+    ]
 
-      if (tax_deductions === "some_deductions" || tax_deductions === "many_deductions") {
-        beneficialReasons.push("Filing can help claim tax refunds")
-        confidence += 15
-      }
-
-      if (previous_filing === "filed_before") {
-        beneficialReasons.push("Maintains filing continuity")
-        confidence += 10
-      }
-
-      if (financial_transactions === "some_high_value") {
-        beneficialReasons.push("Documents high-value transactions")
-        confidence += 10
-      }
-
-      return {
-        eligible: false,
-        itrForm: incomeValue > 0 ? "ITR-1 (Optional)" : "Not Required",
-        title: confidence > 85 ? "ITR filing recommended" : "ITR filing not mandatory",
-        description: confidence > 85 ?
-          "While not mandatory, filing ITR would be beneficial for you." :
-          "Based on your profile, ITR filing is not mandatory, but could be beneficial.",
-        requirements: beneficialReasons,
-        nextSteps: [
-          confidence > 85 ? "Consider voluntary filing for benefits" : "Consider voluntary filing",
-          "Maintain income and investment records",
-          "Plan for future tax obligations",
-          ...(tax_deductions !== "no_deductions" ? ["File to claim tax refunds"] : []),
-          "Consult for tax optimization strategies"
-        ],
-        confidence
-      }
+    return {
+      eligible: true,
+      itrForm,
+      title,
+      description,
+      requirements: mandatoryReasons.length > 0 ? mandatoryReasons : requirements,
+      nextSteps,
+      confidence: Math.min(confidence, 95)
     }
   }
 
-  const handleAnswer = (questionId: string, value: string) => {
-    setAnswers(prev => ({ ...prev, [questionId]: value }))
-    setSelectedOption(value)
+  const handleOptionSelect = (optionValue: string) => {
+    if (isAnimating) return
+
+    setIsAnimating(true)
+    setSelectedOption(optionValue)
+    setAnswers(prev => ({
+      ...prev,
+      [questions[currentStep].id]: optionValue
+    }))
   }
 
-  const nextStep = () => {
-    if (currentStep < questions.length - 1) {
-      setIsAnimating(true)
-      setTimeout(() => {
-        setCurrentStep(currentStep + 1)
-        setSelectedOption(null)
-        setIsAnimating(false)
-      }, 300)
-    } else {
+  const goToPrevious = () => {
+    if (currentStep > 0 && !isAnimating) {
+      setCurrentStep(prev => prev - 1)
+      setSelectedOption(null)
+    }
+  }
+
+  const goToNext = () => {
+    if (currentStep < questions.length - 1 && !isAnimating) {
+      setCurrentStep(prev => prev + 1)
+      setSelectedOption(null)
+    } else if (currentStep === questions.length - 1) {
       setShowResults(true)
-    }
-  }
-
-  const prevStep = () => {
-    if (currentStep > 0) {
-      setIsAnimating(true)
-      setTimeout(() => {
-        setCurrentStep(currentStep - 1)
-        setSelectedOption(answers[questions[currentStep - 1].id] || null)
-        setIsAnimating(false)
-      }, 300)
     }
   }
 
@@ -531,19 +473,10 @@ export default function ITREligibilityQuiz() {
         <div className="text-center">
           <div className={cn(
             "inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full mb-3 sm:mb-4",
-            result.eligible
-              ? "bg-gradient-to-r from-orange-100 to-red-100"
-              : "bg-gradient-to-r from-green-100 to-blue-100"
+            "bg-gradient-to-r from-green-100 to-blue-100"
           )}>
-            {result.eligible ? (
-              <AlertCircle className="w-4 h-4 sm:w-5 sm:h-5 text-orange-600" />
-            ) : (
-              <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 text-green-600" />
-            )}
-            <span className={cn(
-              "text-xs sm:text-sm font-semibold",
-              result.eligible ? "text-orange-700" : "text-green-700"
-            )}>
+            <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 text-green-600" />
+            <span className="text-xs sm:text-sm font-semibold text-green-700">
               Analysis Complete
             </span>
           </div>
@@ -564,7 +497,7 @@ export default function ITREligibilityQuiz() {
             <div>
               <h4 className="font-semibold text-slate-900 mb-2 sm:mb-3 flex items-center gap-2">
                 <Info className="w-4 h-4 sm:w-5 sm:h-5 text-blue-500" />
-                <span className="text-sm sm:text-base">Key Points</span>
+                <span className="text-sm sm:text-base">Why this form is recommended</span>
               </h4>
               <ul className="space-y-1.5 sm:space-y-2">
                 {result.requirements.map((req, i) => (
@@ -576,67 +509,51 @@ export default function ITREligibilityQuiz() {
               </ul>
             </div>
 
-            {/* Next Steps */}
+            {/* Key Points */}
             <div>
-              <h4 className="font-semibold text-slate-900 mb-2 sm:mb-3 flex items-center gap-2 mt-4 md:mt-0">
-                <Target className="w-4 h-4 sm:w-5 sm:h-5 text-purple-500" />
-                <span className="text-sm sm:text-base">Next Steps</span>
+              <h4 className="font-semibold text-slate-900 mb-2 sm:mb-3 flex items-center gap-2">
+                <FileText className="w-4 h-4 sm:w-5 sm:h-5 text-orange-500" />
+                <span className="text-sm sm:text-base">Key Points</span>
               </h4>
               <ul className="space-y-1.5 sm:space-y-2">
-                {result.nextSteps.map((step, i) => (
-                  <li key={i} className="flex items-start gap-2 text-xs sm:text-sm text-slate-600">
-                    <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 text-blue-500 mt-0.5 flex-shrink-0" />
-                    <span className="leading-relaxed">{step}</span>
-                  </li>
-                ))}
+                <li className="flex items-start gap-2 text-xs sm:text-sm text-slate-600">
+                  <CheckCircle className="w-3 h-3 sm:w-4 sm:h-4 text-green-500 mt-0.5 flex-shrink-0" />
+                  <span className="leading-relaxed">ITR-1: Only for salary, pension, and house property income</span>
+                </li>
+                <li className="flex items-start gap-2 text-xs sm:text-sm text-slate-600">
+                  <CheckCircle className="w-3 h-3 sm:w-4 sm:h-4 text-green-500 mt-0.5 flex-shrink-0" />
+                  <span className="leading-relaxed">ITR-2: For individuals without business income but with capital gains, etc.</span>
+                </li>
+                <li className="flex items-start gap-2 text-xs sm:text-sm text-slate-600">
+                  <CheckCircle className="w-3 h-3 sm:w-4 sm:h-4 text-green-500 mt-0.5 flex-shrink-0" />
+                  <span className="leading-relaxed">ITR-3: Comprehensive form for business owners</span>
+                </li>
+                <li className="flex items-start gap-2 text-xs sm:text-sm text-slate-600">
+                  <CheckCircle className="w-3 h-3 sm:w-4 sm:h-4 text-green-500 mt-0.5 flex-shrink-0" />
+                  <span className="leading-relaxed">ITR-4: For presumptive taxation scheme (44AD/44ADA/44AE)</span>
+                </li>
               </ul>
-            </div>
-          </div>
-
-          {/* ITR Form Info */}
-          <div className="mt-4 sm:mt-6 p-3 sm:p-4 bg-blue-50 rounded-lg border border-blue-200">
-            <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3">
-              <div className="flex items-center gap-2 sm:gap-3 flex-1">
-                <FileText className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600 flex-shrink-0" />
-                <div className="min-w-0">
-                  <h5 className="font-semibold text-blue-900 text-sm sm:text-base">Recommended ITR Form</h5>
-                  <p className="text-blue-700 text-xs sm:text-sm truncate">{result.itrForm}</p>
-                </div>
-              </div>
-              <div className="self-start sm:self-auto">
-                <div className="bg-blue-100 text-blue-700 px-2 py-1 sm:px-3 sm:py-1 rounded-full text-xs sm:text-sm font-bold">
-                  {result.confidence}% confidence
-                </div>
-              </div>
             </div>
           </div>
         </div>
 
         {/* Action Buttons */}
-        <div className="flex flex-col gap-3 sm:gap-4">
-          <Link href="/services/income-tax-filing" className="w-full">
-            <Button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 py-2.5 sm:py-3">
-              <FileText className="w-4 h-4 mr-2" />
-              <span className="text-sm sm:text-base">Get ITR Filing Help</span>
-              <ArrowRight className="w-4 h-4 ml-2" />
+        <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-2">
+          <Button
+            onClick={resetQuiz}
+            variant="outline"
+            className="flex-1 h-10 sm:h-12 text-xs sm:text-sm font-medium border-slate-300 hover:bg-slate-50"
+          >
+            <RotateCcw className="w-3 h-3 sm:w-4 sm:h-4 mr-1.5 sm:mr-2" />
+            Take Quiz Again
+          </Button>
+
+          <Link href="/services/itr-filing" className="flex-1">
+            <Button className="w-full h-10 sm:h-12 text-xs sm:text-sm font-medium bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700">
+              <FileText className="w-3 h-3 sm:w-4 sm:h-4 mr-1.5 sm:mr-2" />
+              Get ITR Filing Service
             </Button>
           </Link>
-
-          <Button
-            variant="outline"
-            onClick={resetQuiz}
-            className="flex items-center justify-center gap-2 py-2.5 sm:py-3"
-          >
-            <RotateCcw className="w-4 h-4" />
-            <span className="text-sm sm:text-base">Take Quiz Again</span>
-          </Button>
-        </div>
-
-        {/* Disclaimer */}
-        <div className="text-center">
-          <p className="text-xs text-slate-500">
-            This is a general assessment. For specific tax advice, please consult a qualified tax professional.
-          </p>
         </div>
       </div>
     )
@@ -646,145 +563,122 @@ export default function ITREligibilityQuiz() {
   const progress = ((currentStep + 1) / questions.length) * 100
 
   return (
-    <div className="p-3 sm:p-4 md:p-6">
+    <div className="p-3 sm:p-4 md:p-6 space-y-4 sm:space-y-6">
       {/* Progress Header */}
-      <div className="text-center mb-4 sm:mb-6">
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4 mb-3 sm:mb-4">
-          <Badge className="bg-gradient-to-r from-green-500 to-emerald-500 text-white px-3 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm">
-            <Sparkles className="w-3 h-3 sm:w-4 sm:h-4 mr-1.5 sm:mr-2" />
+      <div className="space-y-3 sm:space-y-4">
+        <div className="flex items-center justify-between text-xs sm:text-sm">
+          <span className="font-medium text-slate-600">
             Question {currentStep + 1} of {questions.length}
-          </Badge>
-          <div className="text-xs sm:text-sm font-medium text-slate-600">
-            {Math.round(progress)}% complete
-          </div>
+          </span>
+          <span className="font-medium text-blue-600">
+            {Math.round(progress)}% Complete
+          </span>
         </div>
 
-        {/* Progress Bar */}
-        <div className="w-full max-w-xs sm:max-w-md mx-auto">
-          <div className="w-full bg-slate-200 rounded-full h-2 sm:h-3 overflow-hidden">
-            <div
-              className="h-full bg-gradient-to-r from-green-500 to-emerald-500 rounded-full transition-all duration-700"
-              style={{ width: `${progress}%` }}
-            />
-          </div>
+        <div className="w-full bg-slate-200 rounded-full h-1.5 sm:h-2">
+          <div
+            className="bg-gradient-to-r from-blue-500 to-purple-500 h-1.5 sm:h-2 rounded-full transition-all duration-500 ease-out"
+            style={{ width: `${progress}%` }}
+          />
         </div>
       </div>
 
-      {/* Question Card */}
-      <div className={cn(
-        "transition-all duration-300",
-        isAnimating ? "opacity-0 transform translate-y-4" : "opacity-100 transform translate-y-0"
-      )}>
-        <div className="bg-gradient-to-br from-white to-slate-50 rounded-lg sm:rounded-xl border border-slate-200 p-3 sm:p-4 md:p-6 mb-4 sm:mb-6">
-          <div className="text-center mb-4 sm:mb-6">
-            <div className="text-2xl sm:text-3xl md:text-4xl mb-2 sm:mb-3 md:mb-4">{currentQuestion.emoji}</div>
-            <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-slate-900 mb-2 sm:mb-3 leading-tight px-2">
-              {currentQuestion.question}
-            </h3>
-            {currentQuestion.description && (
-              <p className="text-sm sm:text-base text-slate-600 max-w-xl mx-auto px-2">
-                {currentQuestion.description}
-              </p>
-            )}
+      {/* Question */}
+      <div className="text-center space-y-2 sm:space-y-3">
+        {currentQuestion.emoji && (
+          <div className="text-3xl sm:text-4xl mb-2 sm:mb-3">
+            {currentQuestion.emoji}
           </div>
+        )}
 
-          {/* Options */}
-          <div className="grid gap-3 sm:gap-4 mb-4 sm:mb-6">
-            {currentQuestion.options.map((option) => {
-              const isSelected = answers[currentQuestion.id] === option.value
-              const isCurrentSelection = selectedOption === option.value
+        <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-slate-900 px-2">
+          {currentQuestion.question}
+        </h2>
 
-              return (
-                <button
-                  key={option.id}
-                  onClick={() => handleAnswer(currentQuestion.id, option.value)}
-                  disabled={isAnimating}
-                  className={cn(
-                    "group relative p-3 sm:p-4 text-left border-2 rounded-lg sm:rounded-xl transition-all duration-300 hover:scale-[1.02] sm:hover:scale-105 hover:shadow-lg",
-                    isSelected || isCurrentSelection
-                      ? "border-green-500 bg-gradient-to-br from-green-50 to-emerald-50 shadow-lg scale-[1.02] sm:scale-105"
-                      : "border-slate-200 bg-white hover:border-slate-300",
-                    option.popular && "ring-1 sm:ring-2 ring-yellow-400 ring-offset-1 sm:ring-offset-2",
-                    isAnimating && "pointer-events-none"
-                  )}
-                >
-                  {/* Popular Badge */}
-                  {option.popular && (
-                    <div className="absolute -top-1 -right-1 sm:-top-2 sm:-right-2 bg-gradient-to-r from-yellow-400 to-orange-500 text-white text-xs font-bold px-1.5 py-0.5 sm:px-2 sm:py-1 rounded-full">
-                      <Star className="w-2 h-2 sm:w-3 sm:h-3 inline mr-0.5 sm:mr-1" />
-                      <span className="hidden sm:inline">Popular</span>
-                      <span className="sm:hidden">★</span>
-                    </div>
-                  )}
+        {currentQuestion.description && (
+          <p className="text-xs sm:text-sm text-slate-600 max-w-lg mx-auto px-2">
+            {currentQuestion.description}
+          </p>
+        )}
+      </div>
 
-                  <div className="flex items-center gap-3 sm:gap-4">
-                    {/* Icon */}
-                    <div className={cn(
-                      "w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl flex items-center justify-center transition-all duration-300 flex-shrink-0",
-                      isSelected || isCurrentSelection
-                        ? `bg-gradient-to-br ${option.gradient} text-white shadow-lg`
-                        : "bg-slate-100 text-slate-600 group-hover:bg-slate-200"
-                    )}>
-                      <option.icon className="w-5 h-5 sm:w-6 sm:h-6" />
-                    </div>
+      {/* Options */}
+      <div className="space-y-2 sm:space-y-3">
+        {currentQuestion.options.map((option) => {
+          const Icon = option.icon
+          const isSelected = answers[currentQuestion.id] === option.value
+          const isCurrentlySelected = selectedOption === option.value
 
-                    {/* Content */}
-                    <div className="flex-1 min-w-0">
-                      <h4 className={cn(
-                        "font-semibold text-sm sm:text-base md:text-lg transition-colors duration-300 leading-tight",
-                        isSelected || isCurrentSelection ? "text-green-700" : "text-slate-900 group-hover:text-green-600"
-                      )}>
-                        {option.label}
-                      </h4>
-                      <p className="text-xs sm:text-sm text-slate-600 leading-relaxed mt-1">
-                        {option.description}
-                      </p>
-                    </div>
-
-                    {/* Selection Indicator */}
-                    {(isSelected || isCurrentSelection) && (
-                      <div className="w-5 h-5 sm:w-6 sm:h-6 bg-gradient-to-br from-green-500 to-emerald-500 rounded-full flex items-center justify-center flex-shrink-0">
-                        <CheckCircle className="w-3 h-3 sm:w-4 sm:h-4 text-white" />
-                      </div>
-                    )}
-                  </div>
-                </button>
-              )
-            })}
-          </div>
-
-          {/* Navigation */}
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-0">
-            <Button
-              variant="outline"
-              onClick={prevStep}
-              disabled={currentStep === 0 || isAnimating}
-              className="flex items-center gap-1 sm:gap-2 px-3 sm:px-4 py-2 text-sm order-2 sm:order-1"
+          return (
+            <button
+              key={option.id}
+              onClick={() => handleOptionSelect(option.value)}
+              disabled={isAnimating}
+              className={cn(
+                "w-full p-3 sm:p-4 rounded-lg sm:rounded-xl border-2 text-left transition-all duration-300 group relative overflow-hidden",
+                isSelected || isCurrentlySelected
+                  ? "border-blue-500 bg-blue-50 shadow-lg scale-[1.02]"
+                  : "border-slate-200 bg-white hover:border-blue-300 hover:bg-blue-50 hover:shadow-md",
+                isAnimating && isCurrentlySelected && "animate-pulse",
+                option.popular && !isSelected && "ring-2 ring-orange-200 ring-opacity-50"
+              )}
             >
-              <ArrowLeft className="w-3 h-3 sm:w-4 sm:h-4" />
-              <span className="hidden sm:inline">Previous</span>
-              <span className="sm:hidden">Back</span>
-            </Button>
+              {option.popular && !isSelected && (
+                <Badge className="absolute top-2 right-2 bg-orange-100 text-orange-600 border-orange-200 text-xs px-2 py-0.5">
+                  <Star className="w-2.5 h-2.5 mr-1" />
+                  Popular
+                </Badge>
+              )}
 
-            <div className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm text-slate-500 order-1 sm:order-2">
-              <Clock className="w-3 h-3 sm:w-4 sm:h-4" />
-              <span>{questions.length - currentStep - 1} left</span>
-            </div>
+              <div className="flex items-start gap-3 sm:gap-4">
+                <div className={cn(
+                  "flex-shrink-0 w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center transition-all duration-300",
+                  `bg-gradient-to-br ${option.gradient}`,
+                  isSelected || isCurrentlySelected ? "shadow-lg" : "shadow-md"
+                )}>
+                  <Icon className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
+                </div>
 
-            {!selectedOption && (
-              <Button
-                onClick={nextStep}
-                disabled={!answers[currentQuestion.id] || isAnimating}
-                className="flex items-center gap-1 sm:gap-2 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 px-4 sm:px-6 py-2 text-sm sm:text-base order-3 w-full sm:w-auto"
-              >
-                <span className="truncate">
-                  {currentStep === questions.length - 1 ? "Get Results" : "Next"}
-                </span>
-                <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
-              </Button>
-            )}
-          </div>
-        </div>
+                <div className="flex-1 min-w-0">
+                  <h3 className="font-semibold text-slate-900 text-sm sm:text-base mb-1">
+                    {option.label}
+                  </h3>
+                  {option.description && (
+                    <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                      {option.description}
+                    </p>
+                  )}
+                </div>
+
+                {(isSelected || isCurrentlySelected) && (
+                  <CheckCircle className="w-5 h-5 sm:w-6 sm:h-6 text-blue-500 flex-shrink-0" />
+                )}
+              </div>
+            </button>
+          )
+        })}
+      </div>
+
+      {/* Navigation */}
+      <div className="flex justify-between pt-4 sm:pt-6">
+        <Button
+          onClick={goToPrevious}
+          disabled={currentStep === 0 || isAnimating}
+          variant="outline"
+          className="h-9 sm:h-10 px-3 sm:px-4 text-xs sm:text-sm"
+        >
+          <ArrowLeft className="w-3 h-3 sm:w-4 sm:h-4 mr-1.5 sm:mr-2" />
+          Previous
+        </Button>
+
+        <Button
+          onClick={goToNext}
+          disabled={!answers[currentQuestion.id] || isAnimating}
+          className="h-9 sm:h-10 px-3 sm:px-4 text-xs sm:text-sm bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
+        >
+          {currentStep === questions.length - 1 ? "Get Results" : "Next"}
+          <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 ml-1.5 sm:ml-2" />
+        </Button>
       </div>
     </div>
   )
