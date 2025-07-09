@@ -117,7 +117,7 @@ export default function BlogForm({
     if (!blogData) return;
 
     // Update blog state when data changes
-    setBlog((prev) => ({
+    setBlog((prev: Partial<Blog>) => ({
       ...prev,
       ...blogData,
     }));
@@ -224,7 +224,7 @@ export default function BlogForm({
     >
   ) => {
     const { name, value } = e.target;
-    setBlog((prev) => ({
+    setBlog((prev: Partial<Blog>) => ({
       ...prev,
       [name]: value,
       ...(name === "title" && { slug: generateSlug(value) }),
@@ -266,7 +266,7 @@ export default function BlogForm({
             ? plainText.substring(0, 157) + "..."
             : plainText;
 
-        setBlog((prev) => ({ ...prev, excerpt }));
+        setBlog((prev: Partial<Blog>) => ({ ...prev, excerpt }));
         toast.success("Excerpt generated from content");
       } catch (error) {
         toast.error("Failed to generate excerpt");
@@ -304,7 +304,7 @@ export default function BlogForm({
     slug: string;
   }) => {
     // Update all form fields with generated content
-    setBlog((prev) => ({
+    setBlog((prev: Partial<Blog>) => ({
       ...prev,
       title: generatedContent.title,
       excerpt: generatedContent.excerpt,
@@ -494,7 +494,7 @@ export default function BlogForm({
               <ImageUpload
                 onImageUploaded={(imageUrl) => {
                   console.log('Image uploaded successfully:', imageUrl);
-                  setBlog((prev) => {
+                  setBlog((prev: Partial<Blog>) => {
                     const updated = { ...prev, featuredImage: imageUrl };
                     console.log('Updated blog state with new image:', updated.featuredImage);
                     return updated;
