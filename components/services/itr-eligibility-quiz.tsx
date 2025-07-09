@@ -295,21 +295,29 @@ export default function ITREligibilityQuiz() {
     }
   ]
 
-  // Auto-advance after selection
+  // Auto-advance after selection (disabled to allow manual navigation)
+  // useEffect(() => {
+  //   if (selectedOption && !isAnimating) {
+  //     const timer = setTimeout(() => {
+  //       if (currentStep < questions.length - 1) {
+  //         setCurrentStep(prev => prev + 1)
+  //         setSelectedOption(null)
+  //         setIsAnimating(false)
+  //       } else {
+  //         setShowResults(true)
+  //       }
+  //     }, 800)
+  //     return () => clearTimeout(timer)
+  //   }
+  // }, [selectedOption, currentStep, isAnimating, questions.length])
+
+  // Sync selectedOption with current answer when step changes
   useEffect(() => {
-    if (selectedOption && !isAnimating) {
-      const timer = setTimeout(() => {
-        if (currentStep < questions.length - 1) {
-          setCurrentStep(prev => prev + 1)
-          setSelectedOption(null)
-          setIsAnimating(false)
-        } else {
-          setShowResults(true)
-        }
-      }, 800)
-      return () => clearTimeout(timer)
+    const currentQuestionId = questions[currentStep]?.id
+    if (currentQuestionId) {
+      setSelectedOption(answers[currentQuestionId] || null)
     }
-  }, [selectedOption, currentStep, isAnimating, questions.length])
+  }, [currentStep, answers, questions])
 
   const getITRResult = (): ITRResult => {
     const {
@@ -438,19 +446,28 @@ export default function ITREligibilityQuiz() {
       ...prev,
       [questions[currentStep].id]: optionValue
     }))
+    
+    // Reset animation state after a short delay to allow visual feedback
+    setTimeout(() => {
+      setIsAnimating(false)
+    }, 300)
   }
 
   const goToPrevious = () => {
     if (currentStep > 0 && !isAnimating) {
       setCurrentStep(prev => prev - 1)
-      setSelectedOption(null)
+      // Set selected option to the answer for the previous question
+      const previousQuestionId = questions[currentStep - 1].id
+      setSelectedOption(answers[previousQuestionId] || null)
     }
   }
 
   const goToNext = () => {
     if (currentStep < questions.length - 1 && !isAnimating) {
       setCurrentStep(prev => prev + 1)
-      setSelectedOption(null)
+      // Set selected option to the answer for the next question
+      const nextQuestionId = questions[currentStep + 1].id
+      setSelectedOption(answers[nextQuestionId] || null)
     } else if (currentStep === questions.length - 1) {
       setShowResults(true)
     }
@@ -538,22 +555,15 @@ export default function ITREligibilityQuiz() {
         </div>
 
         {/* Action Buttons */}
-        <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-2">
+        <div className="flex justify-center pt-2">
           <Button
             onClick={resetQuiz}
             variant="outline"
-            className="flex-1 h-10 sm:h-12 text-xs sm:text-sm font-medium border-slate-300 hover:bg-slate-50"
+            className="h-10 sm:h-12 px-6 sm:px-8 text-xs sm:text-sm font-medium border-slate-300 hover:bg-slate-50"
           >
             <RotateCcw className="w-3 h-3 sm:w-4 sm:h-4 mr-1.5 sm:mr-2" />
             Take Quiz Again
           </Button>
-
-          <Link href="/services/itr-filing" className="flex-1">
-            <Button className="w-full h-10 sm:h-12 text-xs sm:text-sm font-medium bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700">
-              <FileText className="w-3 h-3 sm:w-4 sm:h-4 mr-1.5 sm:mr-2" />
-              Get ITR Filing Service
-            </Button>
-          </Link>
         </div>
       </div>
     )
