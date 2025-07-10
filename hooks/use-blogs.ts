@@ -7,7 +7,10 @@ import type { Blog } from '@/lib/types'
 const fetchBlogs = async (status?: string): Promise<Blog[]> => {
   try {
     const params = new URLSearchParams()
-    if (status && status !== 'all') {
+
+
+    // Always append status parameter if provided
+    if (status) {
       params.append('status', status)
     }
 
@@ -15,6 +18,9 @@ const fetchBlogs = async (status?: string): Promise<Blog[]> => {
     if (status === 'all') {
       params.append('limit', '1000') // High limit to get all blogs for counting
     }
+
+    console.log(`🚀 ~ use-blogs.ts:21 ~ params:`, params.toString())
+
 
     const url = `/api/blogs?${params.toString()}`
     console.log(`🔄 Fetching blogs from: ${url}`)

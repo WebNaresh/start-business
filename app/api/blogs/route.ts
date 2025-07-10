@@ -47,7 +47,6 @@ export async function GET(request: Request) {
                 })
 
                 console.log(`📊 API: Database returned ${result.length} blogs for status="${status}"`)
-                console.log(`📋 API: Blog statuses:`, result.map(blog => ({ title: blog.title, status: blog.status })))
 
                 return result
             },
