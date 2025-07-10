@@ -80,9 +80,13 @@ export async function safeDatabaseOperation<T>(
   retries: number = 2
 ): Promise<T> {
   try {
-    return await retryDatabaseConnection(operation, retries)
+    console.log('🔄 Attempting database operation...')
+    const result = await retryDatabaseConnection(operation, retries)
+    console.log('✅ Database operation successful')
+    return result
   } catch (error) {
-    console.error('Database operation failed after retries, using fallback:', error)
+    console.error('❌ Database operation failed after retries, using fallback:', error)
+    console.log('⚠️ Fallback data:', Array.isArray(fallback) ? `Array with ${fallback.length} items` : typeof fallback)
     return fallback
   }
 }
@@ -111,71 +115,5 @@ export function isConnectionError(error: any): boolean {
  * Get mock data for when database is unavailable
  */
 export function getMockBlogData() {
-  return [
-    {
-      id: 1,
-      title: 'How to Start a Private Limited Company in India',
-      slug: 'how-to-start-private-limited-company-india',
-      excerpt: 'A comprehensive guide to registering your private limited company in India with all the required documents and procedures.',
-      featuredImage: null,
-      author: 'StartBusiness Team',
-      status: 'published',
-      publishedAt: new Date(),
-      metaTitle: 'How to Start a Private Limited Company in India',
-      metaDescription: 'Learn the complete process of starting a private limited company in India',
-      tags: 'business registration, private limited company, india'
-    },
-    {
-      id: 2,
-      title: 'GST Registration Process Made Simple',
-      slug: 'gst-registration-process-simple',
-      excerpt: 'Step-by-step guide to GST registration for your business with required documents and online process.',
-      featuredImage: null,
-      author: 'StartBusiness Team',
-      status: 'published',
-      publishedAt: new Date(),
-      metaTitle: 'GST Registration Process Made Simple',
-      metaDescription: 'Complete guide to GST registration for businesses in India',
-      tags: 'gst registration, tax compliance, business'
-    },
-    {
-      id: 3,
-      title: 'Understanding FSSAI License Requirements',
-      slug: 'understanding-fssai-license-requirements-draft',
-      excerpt: 'Complete guide to FSSAI license requirements for food businesses in India. Learn about different types of licenses and application process.',
-      featuredImage: null,
-      author: 'StartBusiness Team',
-      status: 'draft',
-      publishedAt: null,
-      metaTitle: 'Understanding FSSAI License Requirements',
-      metaDescription: 'Learn about FSSAI license requirements for food businesses',
-      tags: 'fssai license, food business, compliance'
-    },
-    {
-      id: 4,
-      title: 'Digital Marketing Strategies for Small Businesses',
-      slug: 'digital-marketing-strategies-small-businesses-draft',
-      excerpt: 'Effective digital marketing strategies that small businesses can implement to grow their online presence and reach more customers.',
-      featuredImage: null,
-      author: 'StartBusiness Team',
-      status: 'draft',
-      publishedAt: null,
-      metaTitle: 'Digital Marketing Strategies for Small Businesses',
-      metaDescription: 'Digital marketing strategies for small business growth',
-      tags: 'digital marketing, small business, online marketing'
-    },
-    {
-      id: 5,
-      title: 'Tax Planning for Startups in India',
-      slug: 'tax-planning-startups-india-draft',
-      excerpt: 'Essential tax planning strategies for startups in India. Learn about tax benefits, deductions, and compliance requirements.',
-      featuredImage: null,
-      author: 'StartBusiness Team',
-      status: 'draft',
-      publishedAt: null,
-      metaTitle: 'Tax Planning for Startups in India',
-      metaDescription: 'Tax planning strategies and benefits for Indian startups',
-      tags: 'tax planning, startups, india, compliance'
-    }
-  ]
+  return []
 }

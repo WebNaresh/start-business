@@ -13,10 +13,12 @@ export async function GET(request: Request) {
         // Build where clause based on status filter
         const whereClause = status === 'all' ? {} : { status: status }
 
+        console.log(`🔍 API: Fetching blogs with status="${status}", whereClause:`, whereClause)
+
         // Use safe database operation with fallback
         const blogs = await safeDatabaseOperation(
             async () => {
-                return await prisma.blog.findMany({
+                const result = await prisma.blog.findMany({
                     where: whereClause,
                     orderBy: [
                         { status: 'asc' }, // Show drafts first, then published
@@ -40,13 +42,19 @@ export async function GET(request: Request) {
                     take: limit,
                     skip: offset
                 })
+
+                console.log(`📊 API: Database returned ${result.length} blogs for status="${status}"`)
+                console.log(`📋 API: Blog statuses:`, result.map(blog => ({ title: blog.title, status: blog.status })))
+
+                return result
             },
-            // Apply status filtering to mock data as well
+            // Apply status filtering to mock data as well (now empty)
             (() => {
                 const mockData = getMockBlogData()
                 const filteredMockData = status === 'all'
                     ? mockData
                     : mockData.filter(blog => blog.status === status)
+                console.log(`⚠️ API: Using fallback mock data (${filteredMockData.length} blogs)`)
                 return filteredMockData.slice(offset, offset + limit)
             })()
         )
