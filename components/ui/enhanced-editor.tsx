@@ -14,6 +14,7 @@ import Quote from "@editorjs/quote";
 import Table from "@editorjs/table";
 import Underline from "@editorjs/underline";
 import { forwardRef, useEffect, useImperativeHandle, useRef } from "react";
+import { convertEditorDataMarkdownToInline } from "@/lib/editor-utils";
 
 export interface EditorRef {
   save: () => Promise<OutputData>;
@@ -44,7 +45,7 @@ const EnhancedEditor = forwardRef<EditorRef, EditorProps>(
       header: {
         class: Header as unknown as ToolConstructable,
         shortcut: "CMD+H",
-        inlineToolbar: true,
+        inlineToolbar: ["bold", "italic", "link"],
         config: {
           placeholder: "Enter a Header",
           levels: [2, 3, 4],
@@ -53,13 +54,26 @@ const EnhancedEditor = forwardRef<EditorRef, EditorProps>(
       },
       paragraph: {
         class: Paragraph as unknown as ToolConstructable,
-        inlineToolbar: true,
+        inlineToolbar: [
+          "bold",
+          "italic",
+          "link",
+          "marker",
+          "underline",
+          "inlineCode",
+        ],
         config: {},
       },
       inlineCode: InlineCode,
       table: Table,
-      list: List,
-      quote: Quote,
+      list: {
+        class: List,
+        inlineToolbar: ["bold", "italic", "link"],
+      },
+      quote: {
+        class: Quote,
+        inlineToolbar: ["bold", "italic", "link"],
+      },
       delimiter: Delimiter,
       linkTool: {
         class: LinkTool,
@@ -108,11 +122,19 @@ const EnhancedEditor = forwardRef<EditorRef, EditorProps>(
           holderRef.current
         );
 
+        // Convert markdown syntax to EditorJS inline format for initial data
+        const initialData = data
+          ? convertEditorDataMarkdownToInline(data)
+          : { blocks: [] };
+
         const editor = new EditorJS({
           holder: holderRef.current,
           placeholder: placeholder || "Start writing...",
           tools: EDITOR_TOOLS,
-          data: data || { blocks: [] },
+          data: initialData,
+          // Global inline toolbar configuration
+          inlineToolbar:
+            showToolbar !== false ? ["bold", "italic", "link"] : false,
           async onChange(api, event) {
             console.log(`🚀 ~ Enhanced Editor onChange:`, event);
             try {
@@ -166,9 +188,12 @@ const EnhancedEditor = forwardRef<EditorRef, EditorProps>(
 
       console.log("🚀 Updating EditorJS with new data:", data);
 
+      // Convert markdown syntax to EditorJS inline format before rendering
+      const convertedData = convertEditorDataMarkdownToInline(data);
+
       // Use the EditorJS render method correctly with proper error handling
       try {
-        editorRef.current.render(data);
+        editorRef.current.render(convertedData);
         console.log("✅ Successfully rendered new data");
       } catch (error) {
         console.error("❌ Error rendering editor data:", error);

@@ -5,29 +5,106 @@ export interface EditorBlock extends OutputBlockData {
   data: any
 }
 
-// Utility function to clean asterisks from text content
+// Utility function to convert markdown text to EditorJS inline format
+export function convertMarkdownToEditorJS(text: string): string {
+  if (!text || typeof text !== 'string') return text
+
+  // Convert markdown formatting to EditorJS inline format
+  return text
+    // Convert bold markdown to EditorJS bold format
+    .replace(/\*\*(.*?)\*\*/g, '<b>$1</b>')
+    // Convert italic markdown to EditorJS italic format
+    .replace(/\*([^*\n]+?)\*/g, '<i>$1</i>')
+    // Clean up extra spaces
+    .replace(/\s+/g, ' ')
+    .trim()
+}
+
+// Utility function to convert EditorJS inline format back to markdown
+export function convertEditorJSToMarkdown(text: string): string {
+  if (!text || typeof text !== 'string') return text
+
+  return text
+    // Convert EditorJS bold format to markdown
+    .replace(/<b>(.*?)<\/b>/g, '**$1**')
+    .replace(/<strong>(.*?)<\/strong>/g, '**$1**')
+    // Convert EditorJS italic format to markdown
+    .replace(/<i>(.*?)<\/i>/g, '*$1*')
+    .replace(/<em>(.*?)<\/em>/g, '*$1*')
+    // Clean up extra spaces
+    .replace(/\s+/g, ' ')
+    .trim()
+}
+
+// Utility function to convert EditorJS data with markdown syntax to proper EditorJS format
+export function convertEditorDataMarkdownToInline(data: OutputData): OutputData {
+  if (!data || !data.blocks) return data
+
+  const convertedBlocks = data.blocks.map(block => {
+    const newBlock = { ...block }
+
+    switch (block.type) {
+      case 'paragraph':
+        if (newBlock.data?.text) {
+          newBlock.data.text = convertMarkdownToEditorJS(newBlock.data.text)
+        }
+        break
+
+      case 'header':
+        if (newBlock.data?.text) {
+          newBlock.data.text = convertMarkdownToEditorJS(newBlock.data.text)
+        }
+        break
+
+      case 'list':
+        if (newBlock.data?.items && Array.isArray(newBlock.data.items)) {
+          newBlock.data.items = newBlock.data.items.map((item: any) => {
+            if (typeof item === 'string') {
+              return convertMarkdownToEditorJS(item)
+            } else if (item && typeof item === 'object' && item.content) {
+              return {
+                ...item,
+                content: convertMarkdownToEditorJS(item.content)
+              }
+            }
+            return item
+          })
+        }
+        break
+
+      case 'quote':
+        if (newBlock.data?.text) {
+          newBlock.data.text = convertMarkdownToEditorJS(newBlock.data.text)
+        }
+        if (newBlock.data?.caption) {
+          newBlock.data.caption = convertMarkdownToEditorJS(newBlock.data.caption)
+        }
+        break
+    }
+
+    return newBlock
+  })
+
+  return {
+    ...data,
+    blocks: convertedBlocks
+  }
+}
+
+// Utility function to convert markdown formatting to HTML
 export function cleanAsterisks(text: string): string {
   if (!text || typeof text !== 'string') return text
 
-  // More aggressive asterisk cleaning
+  // Convert markdown-style formatting to HTML (order matters!)
   return text
-    // First handle markdown-style formatting
-    .replace(/\*\*\*(.*?)\*\*\*/g, '<strong><em>$1</em></strong>') // Bold + Italic
-    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') // Bold
-    .replace(/\*(.*?)\*/g, '<em>$1</em>') // Italic
-    // Remove bullet point asterisks
-    .replace(/^\*\s+/gm, '') // Remove bullet point asterisks at start of lines
-    .replace(/^\*+\s*/gm, '') // Remove multiple asterisks at start of lines
-    // Remove standalone asterisks
-    .replace(/\s\*\s/g, ' ') // Remove standalone asterisks between spaces
-    .replace(/\s\*+\s/g, ' ') // Remove multiple standalone asterisks
-    // Remove asterisks at the beginning or end
-    .replace(/^\*+/gm, '') // Remove asterisks at start of lines
-    .replace(/\*+$/gm, '') // Remove asterisks at end of lines
-    // Remove any remaining isolated asterisks
-    .replace(/\*+/g, '') // Remove any remaining asterisks
+    // First handle triple asterisks (bold + italic)
+    .replace(/\*\*\*(.*?)\*\*\*/g, '<strong><em>$1</em></strong>')
+    // Then handle double asterisks (bold)
+    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+    // Finally handle single asterisks (italic) - but be careful not to match already processed ones
+    .replace(/\*([^*\n]+?)\*/g, '<em>$1</em>')
     // Clean up extra spaces
-    .replace(/\s+/g, ' ') // Replace multiple spaces with single space
+    .replace(/\s+/g, ' ')
     .trim()
 }
 
@@ -86,14 +163,14 @@ function blockToHtml(block: EditorBlock): string {
 function headerToHtml(data: any): string {
   const level = data.level || 2
   const text = data.text || ''
-  const cleanedText = cleanAsterisks(text)
-  return `<h${level} class="text-${level === 1 ? '4xl' : level === 2 ? '3xl' : level === 3 ? '2xl' : level === 4 ? 'xl' : 'lg'} font-bold mb-4 mt-6">${cleanedText}</h${level}>`
+  const convertedText = convertMarkdownToEditorJS(text)
+  return `<h${level} class="text-${level === 1 ? '4xl' : level === 2 ? '3xl' : level === 3 ? '2xl' : level === 4 ? 'xl' : 'lg'} font-bold mb-4 mt-6">${convertedText}</h${level}>`
 }
 
 function paragraphToHtml(data: any): string {
   const text = data.text || ''
-  const cleanedText = cleanAsterisks(text)
-  return `<p class="mb-4 leading-relaxed">${cleanedText}</p>`
+  const convertedText = convertMarkdownToEditorJS(text)
+  return `<p class="mb-4 leading-relaxed">${convertedText}</p>`
 }
 
 function listToHtml(data: any): string {
@@ -121,9 +198,9 @@ function listToHtml(data: any): string {
         itemText = String(item)
       }
 
-      // Clean the text and asterisks
-      const cleanedText = cleanAsterisks(itemText)
-      return cleanedText
+      // Convert markdown to EditorJS format and clean the text
+      const convertedText = convertMarkdownToEditorJS(itemText)
+      return convertedText
         .replace(/\[object Object\]/g, '') // Remove object references
         .replace(/\[object [^\]]+\]/g, '') // Remove any object patterns
         .replace(/undefined/g, '') // Remove undefined values
