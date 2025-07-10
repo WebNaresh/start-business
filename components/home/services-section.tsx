@@ -533,19 +533,19 @@ function ServiceCard({ service, idx, hoveredCard, setHoveredCard }: ServiceCardP
             <IconComponent className={`w-5 h-5 md:w-6 md:h-6 ${service.mostPopular ? "text-blue-600" : "text-slate-600"}`} />
           </div>
           <div className="flex-1 min-w-0">
-            <h3 
+            <h4 
               id={`service-title-${idx}`}
               className="text-sm sm:text-base md:text-lg font-semibold text-slate-900 mb-1.5 md:mb-2 group-hover:text-blue-600 transition-colors leading-tight"
             >
               {service.title}
-            </h3>
+            </h4>
             <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">{service.description}</p>
           </div>
         </div>
 
         {/* Features List */}
         <div className="mb-4 md:mb-6 flex-1">
-          <h4 className="text-xs sm:text-sm font-semibold mb-2 md:mb-3 text-slate-700">What's included:</h4>
+          <h5 className="text-xs sm:text-sm font-semibold mb-2 md:mb-3 text-slate-700">What's included:</h5>
           <ul className="space-y-1.5 md:space-y-2">
             {service.features.slice(0, 3).map((feature, featureIdx) => (
               <li key={featureIdx} className="flex items-center gap-2 text-xs sm:text-sm text-slate-600">
