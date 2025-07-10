@@ -3,7 +3,7 @@
 import type { Blog } from "@/lib/types";
 import Image from "next/image";
 import Link from "next/link";
-import { useMemo } from "react";
+import { useMemo, useState, useEffect } from "react";
 import { useQueryState } from "nuqs";
 import { useBlogs } from "@/hooks/use-blogs";
 import BlogSearchFilter from "./blog-search-filter";
@@ -30,8 +30,18 @@ export default function BlogListClient() {
     clearOnDefault: true,
   });
 
+  // Pagination state management
+  const ITEMS_PER_PAGE = 6; // Number of articles to show per page
+  const [currentPage, setCurrentPage] = useState(1);
+  const [isLoadingMore, setIsLoadingMore] = useState(false);
+
   // Fetch blog data using TanStack Query
   const { data: blogPosts = [], isLoading, error } = useBlogs("published");
+
+  // Reset pagination when filters change
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchQuery, category, dateRange, sortBy]);
 
   // Extract unique categories and tags from blog posts
   const categories = useMemo(() => {
@@ -47,7 +57,7 @@ export default function BlogListClient() {
   const tags = categories; // For now, using same as categories
 
   // Filter and search functionality using useMemo for performance
-  const filteredPosts = useMemo(() => {
+  const allFilteredPosts = useMemo(() => {
     let filtered = [...blogPosts];
 
     // Apply search filter
@@ -118,6 +128,17 @@ export default function BlogListClient() {
     return filtered;
   }, [blogPosts, searchQuery, category, dateRange, sortBy]);
 
+  // Calculate visible posts based on pagination
+  const visiblePosts = useMemo(() => {
+    const endIndex = currentPage * ITEMS_PER_PAGE;
+    return allFilteredPosts.slice(0, endIndex);
+  }, [allFilteredPosts, currentPage, ITEMS_PER_PAGE]);
+
+  // Check if there are more posts to load
+  const hasMorePosts = useMemo(() => {
+    return visiblePosts.length < allFilteredPosts.length;
+  }, [visiblePosts.length, allFilteredPosts.length]);
+
   const handleSearch = (query: string) => {
     setSearchQuery(query);
   };
@@ -133,6 +154,17 @@ export default function BlogListClient() {
     if (filters.sortBy !== undefined) {
       setSortBy(filters.sortBy || "newest");
     }
+  };
+
+  // Handle load more functionality
+  const handleLoadMore = async () => {
+    setIsLoadingMore(true);
+
+    // Simulate a small delay for better UX (optional)
+    await new Promise((resolve) => setTimeout(resolve, 300));
+
+    setCurrentPage((prev) => prev + 1);
+    setIsLoadingMore(false);
   };
 
   // Handle error state
@@ -224,9 +256,9 @@ export default function BlogListClient() {
       {blogPosts.length > 0 && (
         <div className="mb-8">
           <p className="text-gray-600 text-center">
-            {filteredPosts.length === blogPosts.length
+            {allFilteredPosts.length === blogPosts.length
               ? `Showing all ${blogPosts.length} articles`
-              : `Showing ${filteredPosts.length} of ${blogPosts.length} articles`}
+              : `Showing ${visiblePosts.length} of ${allFilteredPosts.length} articles`}
             {searchQuery && ` for "${searchQuery}"`}
           </p>
         </div>
@@ -256,7 +288,7 @@ export default function BlogListClient() {
             Check back soon for new articles and insights.
           </p>
         </div>
-      ) : filteredPosts.length === 0 ? (
+      ) : allFilteredPosts.length === 0 ? (
         <div className="text-center py-16">
           <div className="w-24 h-24 mx-auto mb-6 bg-gray-100 rounded-full flex items-center justify-center">
             <svg
@@ -283,7 +315,7 @@ export default function BlogListClient() {
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredPosts.map((post, index) => (
+          {visiblePosts.map((post, index) => (
             <Link href={`/blog/${post.slug}`} key={post.id} className="group">
               <article className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-xl hover:border-blue-200 transition-all duration-500 group-hover:-translate-y-2 h-full flex flex-col">
                 {/* Featured Image */}
@@ -408,25 +440,41 @@ export default function BlogListClient() {
         </div>
       )}
 
-      {/* Load More Button (placeholder for future pagination) */}
-      {filteredPosts.length > 0 && (
+      {/* Load More Button */}
+      {hasMorePosts && (
         <div className="text-center mt-12">
-          <button className="inline-flex items-center px-6 py-3 bg-white border border-gray-300 rounded-full text-gray-700 font-medium hover:bg-gray-50 hover:border-gray-400 transition-colors">
-            <span>Load More Articles</span>
-            <svg
-              className="w-4 h-4 ml-2"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M19 9l-7 7-7-7"
-              />
-            </svg>
+          <button
+            onClick={handleLoadMore}
+            disabled={isLoadingMore}
+            className="inline-flex items-center px-6 py-3 bg-white border border-gray-300 rounded-full text-gray-700 font-medium hover:bg-gray-50 hover:border-gray-400 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            {isLoadingMore ? (
+              <>
+                <div className="w-4 h-4 border-2 border-gray-400 border-t-transparent rounded-full animate-spin mr-2"></div>
+                <span>Loading...</span>
+              </>
+            ) : (
+              <>
+                <span>Load More Articles</span>
+                <svg
+                  className="w-4 h-4 ml-2"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M19 9l-7 7-7-7"
+                  />
+                </svg>
+              </>
+            )}
           </button>
+          <p className="text-sm text-gray-500 mt-3">
+            Showing {visiblePosts.length} of {allFilteredPosts.length} articles
+          </p>
         </div>
       )}
     </section>
