@@ -202,13 +202,13 @@ export default function FixedHeroCarousel() {
                         key={index}
                         className="relative rounded-lg sm:rounded-xl flex-[0_0_100%] min-w-0 aspect-[4/3] sm:aspect-[5/4] md:aspect-[4/3]"
                       >
-                        <div className="relative rounded-lg sm:rounded-xl w-full h-full overflow-hidden">
+                        <div className="relative rounded-lg sm:rounded-xl w-full h-full overflow-hidden bg-gradient-to-br from-blue-50 to-indigo-50">
                           <ResponsiveHeroImage
                             src={slide.image || "/placeholder.svg"}
                             alt={slide.title}
                             className="object-contain p-3 sm:p-4 md:p-6 w-full h-full"
                             priority={index === 0}
-                            quality={80}
+                            quality={90}
                           />
                         </div>
                       </div>

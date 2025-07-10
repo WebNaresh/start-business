@@ -90,6 +90,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        <link rel="preload" as="image" href="/hero/hero-latest-1.png" fetchPriority="high" />
         <meta name="apple-mobile-web-app-title" content="Start Business" />
         <meta
           name="google-site-verification"
