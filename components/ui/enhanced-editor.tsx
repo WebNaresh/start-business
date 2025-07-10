@@ -44,6 +44,7 @@ const EnhancedEditor = forwardRef<EditorRef, EditorProps>(
     const [isEditorReady, setIsEditorReady] = useState(false);
     const lastDataString = useRef<string>("");
     const renderTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+    const changeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
     const editorId = useRef(
       `enhanced-editor-${Math.random().toString(36).substring(2, 11)}`
     ).current;
@@ -149,12 +150,21 @@ const EnhancedEditor = forwardRef<EditorRef, EditorProps>(
               showToolbar !== false ? ["bold", "italic", "link"] : false,
             async onChange(api, event) {
               console.log(`🚀 ~ Enhanced Editor onChange:`, event);
-              try {
-                const content = await api.saver.save();
-                onChange?.(content);
-              } catch (error) {
-                console.error("Error saving editor content:", error);
+
+              // Clear any existing timeout to debounce rapid changes
+              if (changeTimeoutRef.current) {
+                clearTimeout(changeTimeoutRef.current);
               }
+
+              // Debounce the onChange callback to prevent excessive updates
+              changeTimeoutRef.current = setTimeout(async () => {
+                try {
+                  const content = await api.saver.save();
+                  onChange?.(content);
+                } catch (error) {
+                  console.error("Error saving editor content:", error);
+                }
+              }, 500); // 500ms debounce for onChange
             },
             onReady: async () => {
               console.log("🚀 EditorJS is ready!");
@@ -220,8 +230,16 @@ const EnhancedEditor = forwardRef<EditorRef, EditorProps>(
             console.error("❌ Error destroying EditorJS:", error);
           }
         }
+
+        // Cleanup timeouts
+        if (changeTimeoutRef.current) {
+          clearTimeout(changeTimeoutRef.current);
+        }
+        if (renderTimeoutRef.current) {
+          clearTimeout(renderTimeoutRef.current);
+        }
       };
-    }, [data, isLoading]); // Add data and isLoading as dependencies to handle initial data loading
+    }, []); // Only run once on mount - data loading is handled by separate useEffect
 
     // Handle data updates after editor initialization
     useEffect(() => {
@@ -253,10 +271,14 @@ const EnhancedEditor = forwardRef<EditorRef, EditorProps>(
         }
 
         // Check if data has actually changed to avoid unnecessary re-renders
-        const currentDataString = JSON.stringify(data);
+        // Ignore timestamp changes by comparing only the blocks content
+        const dataForComparison = data ? { blocks: data.blocks } : null;
+        const currentDataString = JSON.stringify(dataForComparison);
 
         if (lastDataString.current === currentDataString) {
-          console.log("⏳ Data unchanged, skipping update");
+          console.log(
+            "⏳ Data unchanged (ignoring timestamp), skipping update"
+          );
           return;
         }
 
@@ -302,20 +324,6 @@ const EnhancedEditor = forwardRef<EditorRef, EditorProps>(
             await editorRef.current.render(convertedData);
             console.log(
               "✅ Successfully rendered new data using legacy render API"
-            );
-          } else if (
-            editorRef.current.blocks &&
-            typeof editorRef.current.blocks.clear === "function" &&
-            typeof editorRef.current.blocks.insert === "function"
-          ) {
-            // Manual block insertion as last resort
-            console.warn("⚠️ Using manual block insertion fallback");
-            await editorRef.current.blocks.clear();
-            for (const block of convertedData.blocks || []) {
-              await editorRef.current.blocks.insert(block.type, block.data);
-            }
-            console.log(
-              "✅ Successfully rendered new data using manual insertion"
             );
           } else {
             // Editor not ready or API not available
