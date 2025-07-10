@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { Plus, Pencil, Trash2, Eye, FileText } from "lucide-react";
 import { toast } from "sonner";
@@ -14,14 +14,10 @@ import {
 } from "@/components/admin/blog-status-filter";
 import { useBlogs, useDeleteBlog } from "@/hooks/use-blogs";
 import type { Blog } from "@/lib/types";
-import { checkDatabaseHealth, type DatabaseHealth } from "@/lib/db-health";
 
 export default function AdminBlogsPage() {
   // State for blog status filtering
   const [statusFilter, setStatusFilter] = useState<BlogStatusFilterType>("all");
-
-  // State for database health
-  const [dbHealth, setDbHealth] = useState<DatabaseHealth | null>(null);
 
   // State for confirmation dialog
   const [deleteDialog, setDeleteDialog] = useState<{
@@ -31,26 +27,6 @@ export default function AdminBlogsPage() {
     open: false,
     blog: null,
   });
-
-  // Check database health on component mount
-  useEffect(() => {
-    const checkHealth = async () => {
-      try {
-        const health = await checkDatabaseHealth();
-        setDbHealth(health);
-        console.log("🏥 Database Health Check:", health);
-      } catch (error) {
-        console.error("❌ Database health check failed:", error);
-        setDbHealth({
-          isConnected: false,
-          error: "Health check failed",
-          timestamp: new Date(),
-        });
-      }
-    };
-
-    checkHealth();
-  }, []);
 
   // Fetch blogs using custom hook with status filter
   const { data: blogs = [], isLoading, error } = useBlogs(statusFilter);
@@ -67,7 +43,6 @@ export default function AdminBlogsPage() {
 
   // Debug logging for blog counts
   console.log("🔍 Admin Blog Counts Debug:", {
-    databaseHealth: dbHealth,
     totalBlogs: allBlogs.length,
     blogStatuses: allBlogs.map((blog) => ({
       title: blog.title,
