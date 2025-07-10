@@ -38,7 +38,7 @@ export default function ServiceRecommendationQuiz() {
   const serviceCategories: ServiceCategory[] = [
     {
       id: "company-registration",
-      title: "Which Company Should I Register?",
+      title: "Find Your Perfect Business Structure",
       description: "Get personalized recommendations for your business structure based on your needs, investment capacity, and growth plans.",
       icon: Building2,
       gradient: "from-blue-500 to-indigo-600",
