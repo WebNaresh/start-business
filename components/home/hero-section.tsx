@@ -27,11 +27,6 @@ export default function FixedHeroCarousel() {
       title: "Start Your Business with Expert Guidance",
       description: "Professional business registration, compliance, and legal services to help your business thrive in India's growing market",
     },
-    {
-      image: "/hero/hero-latest-3.png",
-      title: "GST, Income Tax, and Trademark Services",
-      description: "Get personalized consultation and comprehensive support for all your business compliance and legal requirements in India",
-    },
   ]
 
   // Generate structured data for the hero section
