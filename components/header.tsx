@@ -114,12 +114,6 @@ export default function Header() {
       gradientTo: "to-green-400",
       subServices: [
         {
-          name: "GST Registration",
-          href: "/services/gst-registration",
-          popular: true,
-          description: "Register for Goods and Services Tax (GST) for your business",
-        },
-        {
           name: "Company Annual ROC Compliance",
           href: "/services/roc-annual-compliances",
           popular: true,
@@ -212,6 +206,12 @@ export default function Header() {
       gradientFrom: "from-amber-600",
       gradientTo: "to-orange-400",
       subServices: [
+        {
+          name: "GST Registration",
+          href: "/services/gst-registration",
+          popular: true,
+          description: "Register for Goods and Services Tax (GST) for your business",
+        },
         {
           name: "Import Export Code",
           href: "/services/iec-license",
