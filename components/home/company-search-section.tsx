@@ -368,13 +368,13 @@ export default function CompanySearchSection() {
         {/* Enhanced Search Interface */}
         <div className="max-w-5xl mx-auto">
           <div className="relative mb-12">
-            <div className="relative group">
-              <Search className={`absolute left-6 top-1/2 transform -translate-y-1/2 w-6 h-6 transition-all duration-200 z-10 ${
+            <div className="relative group overflow-visible">
+              <Search className={`absolute left-6 top-1/2 transform -translate-y-1/2 w-6 h-6 transition-all duration-200 z-20 pointer-events-none ${
                 searchState.isLoading 
                   ? 'text-blue-500 animate-pulse' 
                   : searchState.isTyping 
                   ? 'text-blue-400' 
-                  : 'text-gray-400'
+                  : 'text-gray-500'
               }`} />
               <Input
                 ref={searchInputRef}
@@ -382,11 +382,11 @@ export default function CompanySearchSection() {
                 placeholder="Enter Company Name, CIN (L12345AB2020PLC123456), or LLPIN (ABC1234D2020LLP123456)"
                 value={searchState.query}
                 onChange={handleInputChange}
-                className={`pl-16 pr-16 py-6 text-lg border-2 rounded-2xl bg-white/80 backdrop-blur-sm shadow-lg transition-all duration-200 ${
+                className={`pl-16 pr-16 py-6 text-lg border-2 rounded-2xl bg-white/90 backdrop-blur-sm shadow-lg transition-all duration-200 relative ${
                   searchState.isTyping 
                     ? 'border-blue-500 shadow-blue-100' 
                     : 'border-gray-200 hover:border-gray-300 focus:border-blue-500'
-                } group-hover:shadow-xl`}
+                } group-hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-blue-100/50`}
                 onKeyDown={(e) => {
                   if (e.key === 'Escape') {
                     setSearchState(prev => ({ ...prev, showSuggestions: false }))
