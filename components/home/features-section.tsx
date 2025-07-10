@@ -128,7 +128,7 @@ export default function WhyChooseUs() {
             aria-label="Our key features and benefits"
           >
             {features.map((feature, index) => (
-              <article
+              <div
                 key={index}
                 className="group relative p-4 md:p-6 bg-white rounded-2xl border border-slate-200 hover:border-slate-300 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 cursor-pointer"
                 // onMouseEnter={() => setActiveFeature(index)} // Disabled for now
@@ -171,7 +171,7 @@ export default function WhyChooseUs() {
                   className={`absolute inset-0 bg-gradient-to-br ${feature.color} opacity-0 group-hover:opacity-5 rounded-2xl transition-opacity duration-300`}
                   aria-hidden="true"
                 />
-              </article>
+              </div>
             ))}
           </div>
         </div>
