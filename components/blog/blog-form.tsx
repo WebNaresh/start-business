@@ -13,7 +13,7 @@ import { useQuery } from "@tanstack/react-query";
 import { OutputData } from "@editorjs/editorjs";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
 import axios from "axios";
 
@@ -57,14 +57,18 @@ export default function BlogForm({
 }: BlogFormProps) {
   const router = useRouter();
   const editorRef = useRef<EditorRef>(null);
+  const hasInitialDataLoaded = useRef(false);
   const [isSaving, setIsSaving] = useState(false);
   const [editorData, setEditorData] = useState<OutputData | undefined>();
   console.log(`🚀 ~ editorData:`, editorData);
 
   // Reset editorData when slug changes to prevent stale data
+  // Only reset if we're actually changing to a different slug
   useEffect(() => {
     console.log(`🚀 ~ Slug changed, resetting editorData:`, slug);
-    setEditorData(undefined);
+    if (slug) {
+      setEditorData(undefined);
+    }
   }, [slug]);
 
   // Use TanStack Query to fetch blog data when editing (only if no initialData provided)
@@ -115,6 +119,14 @@ export default function BlogForm({
       ...blogData,
     }));
 
+    // Only update editor data if it's not already set or if this is initial load
+    if (editorData && hasInitialDataLoaded.current) {
+      console.log(
+        `🚀 ~ Editor already has data and user may be editing, skipping update`
+      );
+      return;
+    }
+
     // Priority 1: Use editorData if available (new format)
     if (
       blogData?.editorData &&
@@ -128,6 +140,7 @@ export default function BlogForm({
           parsedData
         );
         setEditorData(parsedData);
+        hasInitialDataLoaded.current = true;
         return;
       } catch (error) {
         console.error("❌ Failed to parse editorData:", error);
@@ -156,6 +169,7 @@ export default function BlogForm({
           convertedData
         );
         setEditorData(convertedData);
+        hasInitialDataLoaded.current = true;
       }
     }
   }, [blogData, slug]);
@@ -221,9 +235,19 @@ export default function BlogForm({
     }));
   };
 
-  const handleEditorChange = (data: OutputData) => {
-    setEditorData(data);
-  };
+  const handleEditorChange = useCallback((data: OutputData) => {
+    // Only update state if data has actually changed
+    setEditorData((prevData) => {
+      const prevString = JSON.stringify(prevData);
+      const newString = JSON.stringify(data);
+
+      if (prevString === newString) {
+        return prevData; // No change, return previous data to prevent re-render
+      }
+
+      return data;
+    });
+  }, []);
 
   const generateExcerpt = async () => {
     if (editorRef.current) {

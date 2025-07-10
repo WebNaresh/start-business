@@ -45,6 +45,8 @@ const EnhancedEditor = forwardRef<EditorRef, EditorProps>(
     const lastDataString = useRef<string>("");
     const renderTimeoutRef = useRef<NodeJS.Timeout | null>(null);
     const changeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+    const isInitializing = useRef(false);
+    const hasInitialDataLoaded = useRef(false);
     const editorId = useRef(
       `enhanced-editor-${Math.random().toString(36).substring(2, 11)}`
     ).current;
@@ -157,14 +159,20 @@ const EnhancedEditor = forwardRef<EditorRef, EditorProps>(
               }
 
               // Debounce the onChange callback to prevent excessive updates
+              // Use longer debounce for better typing experience
               changeTimeoutRef.current = setTimeout(async () => {
                 try {
                   const content = await api.saver.save();
-                  onChange?.(content);
+
+                  // Only call onChange if content has actually changed
+                  const contentString = JSON.stringify(content);
+                  if (lastDataString.current !== contentString) {
+                    onChange?.(content);
+                  }
                 } catch (error) {
                   console.error("Error saving editor content:", error);
                 }
-              }, 500); // 500ms debounce for onChange
+              }, 1000); // 1000ms debounce for better typing experience
             },
             onReady: async () => {
               console.log("🚀 EditorJS is ready!");
@@ -260,13 +268,9 @@ const EnhancedEditor = forwardRef<EditorRef, EditorProps>(
           return;
         }
 
-        if (
-          !data ||
-          !data.blocks ||
-          !Array.isArray(data.blocks) ||
-          data.blocks.length === 0
-        ) {
-          console.log("⏳ No valid data to render, skipping update");
+        // Allow empty data for new documents
+        if (!data) {
+          console.log("⏳ No data provided, skipping update");
           return;
         }
 
@@ -282,7 +286,20 @@ const EnhancedEditor = forwardRef<EditorRef, EditorProps>(
           return;
         }
 
+        // Prevent updates during user typing by checking if editor has focus
+        if (editorRef.current && holderRef.current) {
+          const editorElement =
+            holderRef.current.querySelector(".codex-editor");
+          if (editorElement && editorElement.contains(document.activeElement)) {
+            console.log(
+              "⏳ Editor has focus (user typing), skipping update to prevent interruption"
+            );
+            return;
+          }
+        }
+
         lastDataString.current = currentDataString;
+        hasInitialDataLoaded.current = true;
 
         // Additional safety check: ensure blocks API is available
         if (!editorRef.current.blocks) {
