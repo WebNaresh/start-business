@@ -34,6 +34,8 @@ export default function AdminBlogsPage() {
   // Fetch all blogs for counts (separate query)
   const { data: allBlogs = [] } = useBlogs("all");
 
+  console.log(`🚀 ~ page.tsx:37 ~ allBlogs:`, allBlogs);
+
   // Calculate blog counts for filter badges
   const blogCounts = {
     all: allBlogs.length,

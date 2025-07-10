@@ -10,6 +10,7 @@ import { htmlToEditorData } from "@/lib/editor-utils";
 import type { Blog } from "@/lib/types";
 import { generateSlug } from "@/lib/utils";
 import { useQuery } from "@tanstack/react-query";
+import { useCreateBlog, useUpdateBlog } from "@/hooks/use-blogs";
 import { OutputData } from "@editorjs/editorjs";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
@@ -57,6 +58,10 @@ export default function BlogForm({
 }: BlogFormProps) {
   const router = useRouter();
   const editorRef = useRef<EditorRef>(null);
+
+  // TanStack Query hooks for cache management
+  const createBlogMutation = useCreateBlog();
+  const updateBlogMutation = useUpdateBlog();
   const hasInitialDataLoaded = useRef(false);
   const [isSaving, setIsSaving] = useState(false);
   const [editorData, setEditorData] = useState<OutputData | undefined>();
@@ -201,13 +206,22 @@ export default function BlogForm({
       if (onSubmit) {
         await onSubmit(blogData);
       } else {
-        // Default API call using axios
+        // Use TanStack Query mutations for better cache management
         if (isEditing) {
-          await axios.put(`/api/blogs/${blog.slug}`, blogData);
+          console.log(
+            "🔄 Updating blog via TanStack Query mutation:",
+            blog.slug
+          );
+          await updateBlogMutation.mutateAsync({
+            slug: blog.slug || "",
+            data: blogData,
+          });
         } else {
-          await axios.post("/api/blogs", blogData);
+          console.log("🔄 Creating blog via TanStack Query mutation");
+          await createBlogMutation.mutateAsync(blogData);
         }
-        toast.success(`Blog ${isEditing ? "updated" : "created"} successfully`);
+        // Navigation will happen after successful mutation
+        // Toast messages are handled by the mutation hooks
         router.push("/admin/blogs");
       }
     } catch (error) {

@@ -114,6 +114,18 @@ export function isConnectionError(error: any): boolean {
 /**
  * Get mock data for when database is unavailable
  */
-export function getMockBlogData() {
+export function getMockBlogData(): Array<{
+  id: number;
+  title: string;
+  slug: string;
+  excerpt: string | null;
+  featuredImage: string | null;
+  author: string;
+  publishedAt: Date | null;
+  status: string;
+  metaTitle: string | null;
+  metaDescription: string | null;
+  tags: string | null;
+}> {
   return []
 }

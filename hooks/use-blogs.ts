@@ -11,18 +11,42 @@ const fetchBlogs = async (status?: string): Promise<Blog[]> => {
       params.append('status', status)
     }
 
-    console.log(`🔄 Fetching blogs with status: ${status || 'published'}`)
-    const response = await axios.get(`/api/blogs?${params.toString()}`)
+    // For 'all' status (used for counting), get a high limit to ensure we get all blogs
+    if (status === 'all') {
+      params.append('limit', '1000') // High limit to get all blogs for counting
+    }
+
+    const url = `/api/blogs?${params.toString()}`
+    console.log(`🔄 Fetching blogs from: ${url}`)
+    console.log(`📋 Request status parameter: "${status || 'published'}"`)
+
+    const response = await axios.get(url)
+    console.log(`📡 Raw API response:`, response.data)
+
     const blogs = Array.isArray(response.data) ? response.data : []
 
-    console.log(`📊 Fetched ${blogs.length} blogs for status "${status || 'published'}":`,
-      blogs.map(blog => ({ title: blog.title, status: blog.status }))
-    )
+    console.log(`📊 Processed ${blogs.length} blogs for status "${status || 'published'}"`)
+    console.log(`📝 Blog details:`, blogs.map(blog => ({
+      id: blog.id,
+      title: blog.title,
+      status: blog.status,
+      author: blog.author
+    })))
+
+    // Count by status for verification
+    const statusCounts = {
+      draft: blogs.filter(b => b.status === 'draft').length,
+      published: blogs.filter(b => b.status === 'published').length,
+      other: blogs.filter(b => !['draft', 'published'].includes(b.status)).length
+    }
+    console.log(`🔢 Status breakdown:`, statusCounts)
 
     return blogs
   } catch (error) {
     console.error(`❌ Error fetching blogs for status "${status}":`, error)
     if (axios.isAxiosError(error)) {
+      console.error(`📡 Response status: ${error.response?.status}`)
+      console.error(`📡 Response data:`, error.response?.data)
       const errorMessage = error.response?.data?.error || error.message
       throw new Error(errorMessage)
     }
@@ -200,17 +224,29 @@ export const useCreateBlog = () => {
   return useMutation({
     mutationFn: createBlog,
     onSuccess: (newBlog) => {
-      // Add the new blog to the cache
-      queryClient.setQueryData<Blog[]>(['blogs'], (old) => [newBlog, ...(old || [])])
+      console.log('✅ Blog created successfully, invalidating all blog queries')
+
+      // Invalidate all blog-related queries to ensure fresh data
+      // This includes ['blogs', 'all'], ['blogs', 'published'], ['blogs', 'draft'], etc.
+      queryClient.invalidateQueries({ queryKey: ['blogs'] })
+
+      // Also invalidate the specific blog query if it exists
+      queryClient.invalidateQueries({ queryKey: ['blog', newBlog.slug] })
+
+      // Specifically invalidate the most common queries used in admin
+      queryClient.invalidateQueries({ queryKey: ['blogs', 'all'] })
+      queryClient.invalidateQueries({ queryKey: ['blogs', 'published'] })
+      queryClient.invalidateQueries({ queryKey: ['blogs', 'draft'] })
+
+      console.log('🔄 Cache invalidation completed for new blog:', newBlog.slug)
       toast.success('Blog created successfully')
     },
     onError: (error) => {
       const errorMessage = error instanceof Error ? error.message : 'Failed to create blog'
       toast.error(errorMessage)
     },
-    onSettled: () => {
-      queryClient.invalidateQueries({ queryKey: ['blogs'] })
-    },
+    // Remove onSettled to prevent double invalidation
+    // onSuccess already handles invalidation after successful creation
   })
 }
 
@@ -245,13 +281,26 @@ export const useUpdateBlog = () => {
       }
       toast.error('Failed to update blog')
     },
-    onSuccess: () => {
+    onSuccess: (_, variables) => {
+      console.log('✅ Blog updated successfully, invalidating all blog queries')
+
+      // Invalidate all blog-related queries to ensure fresh data
+      // This includes ['blogs', 'all'], ['blogs', 'published'], ['blogs', 'draft'], etc.
+      queryClient.invalidateQueries({ queryKey: ['blogs'] })
+
+      // Invalidate the specific blog query
+      queryClient.invalidateQueries({ queryKey: ['blog', variables.slug] })
+
+      // Specifically invalidate the most common queries used in admin
+      queryClient.invalidateQueries({ queryKey: ['blogs', 'all'] })
+      queryClient.invalidateQueries({ queryKey: ['blogs', 'published'] })
+      queryClient.invalidateQueries({ queryKey: ['blogs', 'draft'] })
+
+      console.log('🔄 Cache invalidation completed for updated blog:', variables.slug)
       toast.success('Blog updated successfully')
     },
-    onSettled: (_, __, variables) => {
-      queryClient.invalidateQueries({ queryKey: ['blog', variables.slug] })
-      queryClient.invalidateQueries({ queryKey: ['blogs'] })
-    },
+    // Remove onSettled to prevent double invalidation
+    // onSuccess already handles invalidation after successful update
   })
 }
 

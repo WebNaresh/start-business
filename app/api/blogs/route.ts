@@ -6,6 +6,9 @@ import { generateSlug } from '@/lib/utils'
 export async function GET(request: Request) {
     try {
         const { searchParams } = new URL(request.url)
+
+        console.log(`🚀 ~ route.ts:10 ~ searchParams:`, searchParams)
+
         const limit = parseInt(searchParams.get('limit') || '10')
         const offset = parseInt(searchParams.get('offset') || '0')
         const status = searchParams.get('status') || 'published'
