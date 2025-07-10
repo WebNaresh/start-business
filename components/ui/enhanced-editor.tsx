@@ -118,11 +118,11 @@ const EnhancedEditor = forwardRef<EditorRef, EditorProps>(
         if (!data || !data.blocks) {
           throw new Error("Invalid data provided to render");
         }
-        // Verify that the render method exists on the EditorJS instance
-        if (typeof editorRef.current.render !== "function") {
-          throw new Error("Editor render method not available");
+        // Use the correct EditorJS API for rendering data
+        await editorRef.current.blocks.clear();
+        if (data.blocks && data.blocks.length > 0) {
+          await editorRef.current.blocks.render(data);
         }
-        await editorRef.current.render(data);
       },
     }));
 
@@ -155,7 +155,7 @@ const EnhancedEditor = forwardRef<EditorRef, EditorProps>(
                 console.error("Error saving editor content:", error);
               }
             },
-            onReady: () => {
+            onReady: async () => {
               console.log("🚀 EditorJS is ready!");
               setIsEditorReady(true);
 
@@ -170,13 +170,15 @@ const EnhancedEditor = forwardRef<EditorRef, EditorProps>(
                 console.log("🚀 Editor ready, loading initial data:", data);
                 const convertedData = convertEditorDataMarkdownToInline(data);
 
-                // Verify render method exists before calling
-                if (typeof editor.render === "function") {
-                  editor.render(convertedData).catch((error) => {
-                    console.error("❌ Error loading initial data:", error);
-                  });
-                } else {
-                  console.error("❌ Editor render method not available");
+                // Use the correct EditorJS API for rendering data
+                try {
+                  await editor.blocks.clear();
+                  if (convertedData.blocks && convertedData.blocks.length > 0) {
+                    await editor.blocks.render(convertedData);
+                  }
+                  console.log("✅ Successfully loaded initial data");
+                } catch (error) {
+                  console.error("❌ Error loading initial data:", error);
                 }
               } else {
                 console.log(
@@ -209,70 +211,91 @@ const EnhancedEditor = forwardRef<EditorRef, EditorProps>(
 
     // Handle data updates after editor initialization
     useEffect(() => {
-      // Comprehensive validation before attempting to render
-      if (!editorRef.current) {
-        console.log("⏳ Editor not initialized yet, skipping data update");
-        return;
-      }
-
-      if (!isEditorReady) {
-        console.log("⏳ Editor not ready yet, skipping data update");
-        return;
-      }
-
-      if (isLoading) {
-        console.log("⏳ Still loading, skipping data update");
-        return;
-      }
-
-      if (
-        !data ||
-        !data.blocks ||
-        !Array.isArray(data.blocks) ||
-        data.blocks.length === 0
-      ) {
-        console.log("⏳ No valid data to render, skipping update");
-        return;
-      }
-
-      // Check if data has actually changed to avoid unnecessary re-renders
-      const currentDataString = JSON.stringify(data);
-
-      if (lastDataString.current === currentDataString) {
-        console.log("⏳ Data unchanged, skipping update");
-        return;
-      }
-
-      lastDataString.current = currentDataString;
-
-      console.log("🚀 Updating EditorJS with new data:", data);
-
-      // Convert markdown syntax to EditorJS inline format before rendering
-      const convertedData = convertEditorDataMarkdownToInline(data);
-
-      // Use the EditorJS render method correctly with proper error handling
-      try {
-        // Additional validation: ensure editor instance is valid
-        if (!editorRef.current || typeof editorRef.current !== "object") {
-          console.error("❌ Invalid editor instance");
+      const renderData = async () => {
+        // Comprehensive validation before attempting to render
+        if (!editorRef.current) {
+          console.log("⏳ Editor not initialized yet, skipping data update");
           return;
         }
 
-        // Verify render method exists before calling
-        if (typeof editorRef.current.render === "function") {
-          editorRef.current.render(convertedData);
-          console.log("✅ Successfully rendered new data");
-        } else {
-          console.error("❌ Editor render method not available");
-          console.log(
-            "Available methods:",
-            Object.getOwnPropertyNames(editorRef.current)
-          );
+        if (!isEditorReady) {
+          console.log("⏳ Editor not ready yet, skipping data update");
+          return;
         }
-      } catch (error) {
-        console.error("❌ Error rendering editor data:", error);
-        // Don't throw here to prevent component crashes
-      }
+
+        if (isLoading) {
+          console.log("⏳ Still loading, skipping data update");
+          return;
+        }
+
+        if (
+          !data ||
+          !data.blocks ||
+          !Array.isArray(data.blocks) ||
+          data.blocks.length === 0
+        ) {
+          console.log("⏳ No valid data to render, skipping update");
+          return;
+        }
+
+        // Check if data has actually changed to avoid unnecessary re-renders
+        const currentDataString = JSON.stringify(data);
+
+        if (lastDataString.current === currentDataString) {
+          console.log("⏳ Data unchanged, skipping update");
+          return;
+        }
+
+        lastDataString.current = currentDataString;
+
+        console.log("🚀 Updating EditorJS with new data:", data);
+
+        // Convert markdown syntax to EditorJS inline format before rendering
+        const convertedData = convertEditorDataMarkdownToInline(data);
+
+        // Use the correct EditorJS API for rendering data
+        try {
+          // Additional validation: ensure editor instance is valid
+          if (!editorRef.current || typeof editorRef.current !== "object") {
+            console.error("❌ Invalid editor instance");
+            return;
+          }
+
+          // Use the correct EditorJS blocks API with fallback
+          if (
+            editorRef.current.blocks &&
+            typeof editorRef.current.blocks.clear === "function"
+          ) {
+            // Modern EditorJS API (v2.x)
+            await editorRef.current.blocks.clear();
+            if (convertedData.blocks && convertedData.blocks.length > 0) {
+              await editorRef.current.blocks.render(convertedData);
+            }
+            console.log("✅ Successfully rendered new data using blocks API");
+          } else if (typeof editorRef.current.render === "function") {
+            // Legacy EditorJS API fallback
+            await editorRef.current.render(convertedData);
+            console.log(
+              "✅ Successfully rendered new data using legacy render API"
+            );
+          } else {
+            // Manual block insertion as last resort
+            console.warn("⚠️ Using manual block insertion fallback");
+            await editorRef.current.blocks.clear();
+            for (const block of convertedData.blocks || []) {
+              await editorRef.current.blocks.insert(block.type, block.data);
+            }
+            console.log(
+              "✅ Successfully rendered new data using manual insertion"
+            );
+          }
+        } catch (error) {
+          console.error("❌ Error rendering editor data:", error);
+          // Don't throw here to prevent component crashes
+        }
+      };
+
+      renderData();
     }, [data, isLoading, isEditorReady]);
 
     // Show skeleton while loading
