@@ -3,7 +3,7 @@
 import type React from "react"
 import { useState, useEffect, useCallback, useRef } from "react"
 
-import { ArrowRight  } from "lucide-react"
+import { ArrowRight, Sparkles, Star } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import ResponsiveHeroImage from "@/components/ui/responsive-hero-image"
@@ -255,3 +255,166 @@ export default function FixedHeroCarousel() {
     </section>
   )
 }
+
+/* ============================================ */
+/* NEW MODERN HERO SECTION FOR COMPARISON */
+/* ============================================ */
+
+function NewModernHeroSection() {
+  const [isVisible, setIsVisible] = useState(false)
+
+  // Modern hero data
+  const heroData = {
+    badge: " Trusted by 5000+ Entrepreneurs",
+    headline: "Launch Your Dream Business",
+    subHeadline: "in Just 7 Days",
+    description: "From idea to incorporation - we handle everything. Get your business registered with 100% compliance guarantee and expert guidance every step of the way.",
+    cta: {
+      primary: "Start Your Journey",
+      secondary: "See How It Works"
+    }
+  }
+
+  // Stats data
+  const stats = [
+    { number: "5000+", label: "Businesses Launched", icon: "🏢" },
+    { number: "7", label: "Days Average Setup", icon: "⚡" },
+    { number: "100%", label: "Compliance Rate", icon: "✅" },
+    { number: "24/7", label: "Expert Support", icon: "🛡️" }
+  ]
+
+  // Popular services for quick access
+  const quickServices = [
+    { name: "Private Limited", href: "/services/private-limited-company", popular: true },
+    { name: "LLP Registration", href: "/services/llp", popular: false },
+    { name: "Sole Proprietorship", href: "/services/sole-proprietorship", popular: false },
+    { name: "OPC Registration", href: "/services/opc", popular: false }
+  ]
+
+  // Animation effect
+  useEffect(() => {
+    setIsVisible(true)
+  }, [])
+
+  return (
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-slate-50 via-blue-50/30 to-indigo-50/20">
+      {/* Background Pattern */}
+      <div className="absolute inset-0 opacity-40">
+        <div className="absolute top-0 left-0 w-full h-full" 
+             style={{
+               backgroundImage: `radial-gradient(circle at 20% 20%, rgba(59, 130, 246, 0.1) 0%, transparent 50%), 
+                                radial-gradient(circle at 80% 80%, rgba(147, 51, 234, 0.1) 0%, transparent 50%),
+                                radial-gradient(circle at 40% 60%, rgba(16, 185, 129, 0.1) 0%, transparent 50%)`
+             }}
+        />
+      </div>
+
+      {/* Floating Elements */}
+      <div className="absolute top-20 left-10 w-2 h-2 bg-blue-400 rounded-full animate-pulse opacity-60" />
+      <div className="absolute top-40 right-20 w-3 h-3 bg-purple-400 rounded-full animate-bounce opacity-40" style={{ animationDelay: '1s' }} />
+      <div className="absolute bottom-32 left-1/4 w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse opacity-50" style={{ animationDelay: '2s' }} />
+      <div className="absolute top-1/3 right-1/3 w-2.5 h-2.5 bg-indigo-400 rounded-full animate-bounce opacity-30" style={{ animationDelay: '3s' }} />
+
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="text-center max-w-6xl mx-auto">
+          
+          {/* Badge */}
+          <div className={`inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-100 to-purple-100 rounded-full text-sm font-semibold text-blue-800 mb-8 shadow-lg transform transition-all duration-1000 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
+            <span className="mr-2">🚀</span>
+            {heroData.badge}
+            <Sparkles className="w-4 h-4 ml-2 text-blue-600" />
+          </div>
+
+          {/* Main Headline */}
+          <div className={`mb-8 transform transition-all duration-1000 delay-200 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black mb-4">
+              <span className="bg-gradient-to-r from-slate-900 via-blue-900 to-purple-900 bg-clip-text text-transparent">
+                {heroData.headline}
+              </span>
+              <br />
+              <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent">
+                {heroData.subHeadline}
+              </span>
+            </h1>
+            
+            <p className="text-xl sm:text-2xl md:text-3xl text-slate-600 max-w-4xl mx-auto leading-relaxed font-medium">
+              {heroData.description}
+            </p>
+          </div>
+
+          {/* Stats Grid */}
+          <div className={`grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 md:gap-8 mb-12 transform transition-all duration-1000 delay-400 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
+            {stats.map((stat, index) => (
+              <div key={index} className="group">
+                <div className="bg-white/80 backdrop-blur-sm border border-white/20 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105 hover:bg-white">
+                  <div className="text-3xl mb-2">{stat.icon}</div>
+                  <div className="text-2xl sm:text-3xl font-bold text-slate-900 mb-1">{stat.number}</div>
+                  <div className="text-sm text-slate-600 font-medium">{stat.label}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* CTA Buttons */}
+          <div className={`flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 mb-12 transform transition-all duration-1000 delay-600 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
+            <Button
+              asChild
+              size="lg"
+              className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white shadow-2xl hover:shadow-3xl transition-all duration-300 text-lg px-12 py-6 font-bold rounded-2xl border-0 hover:scale-105 group"
+            >
+              <Link href="/contact" className="flex items-center">
+                {heroData.cta.primary}
+                <ArrowRight className="ml-3 h-6 w-6 transition-transform duration-300 group-hover:translate-x-2" />
+              </Link>
+            </Button>
+            
+            <Button
+              asChild
+              variant="outline"
+              size="lg"
+              className="border-2 border-slate-300 hover:border-blue-400 hover:bg-blue-50 transition-all duration-300 text-lg px-12 py-6 font-semibold rounded-2xl hover:scale-105 bg-white/80 backdrop-blur-sm shadow-lg"
+            >
+              <Link href="#how-it-works" className="flex items-center">
+                <svg className="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.828 14.828a4 4 0 01-5.656 0M9 10h1m4 0h1m-7 4h12l-2-2m0 0l2-2m-2 2H8m6 8a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                {heroData.cta.secondary}
+              </Link>
+            </Button>
+          </div>
+
+          {/* Quick Service Access */}
+          <div className={`mb-12 transform transition-all duration-1000 delay-700 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
+            <p className="text-sm font-semibold text-slate-700 mb-4 uppercase tracking-wide">Quick Start Options</p>
+            <div className="flex flex-wrap justify-center gap-3">
+              {quickServices.map((service, index) => (
+                <Link
+                  key={index}
+                  href={service.href}
+                  className={`group relative px-6 py-3 rounded-full font-medium transition-all duration-300 hover:scale-105 ${
+                    service.popular
+                      ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-lg hover:shadow-xl'
+                      : 'bg-white/80 border border-slate-200 text-slate-700 hover:bg-white hover:border-blue-300 hover:text-blue-700 shadow-md hover:shadow-lg'
+                  }`}
+                >
+                  {service.popular && (
+                    <div className="absolute -top-2 -right-2 bg-orange-500 text-white text-xs px-2 py-1 rounded-full font-bold">
+                      Popular
+                    </div>
+                  )}
+                  {service.name}
+                </Link>
+              ))}
+            </div>
+          </div>
+
+
+
+        </div>
+      </div>
+    </section>
+  )
+}
+
+// Export both for comparison
+export { NewModernHeroSection }

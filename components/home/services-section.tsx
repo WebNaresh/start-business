@@ -503,12 +503,14 @@ function ServiceCard({ service, idx, hoveredCard, setHoveredCard }: ServiceCardP
   const savingsPercent = Math.round((savings / Number.parseInt(service.originalPrice.replace(/[₹,]/g, ""))) * 100)
 
   return (
-    <article
+    <div
       className={`group relative rounded-2xl bg-white shadow-lg border-2 transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 ${
         service.mostPopular ? "border-blue-500 shadow-blue-100" : "border-slate-100 hover:border-blue-200"
       } flex flex-col overflow-hidden h-full`}
       onMouseEnter={() => setHoveredCard(idx)}
       onMouseLeave={() => setHoveredCard(null)}
+      role="article"
+      aria-labelledby={`service-title-${idx}`}
     >
       {/* Savings Badge */}
       <div className="absolute top-2 right-2 z-10">
@@ -531,7 +533,10 @@ function ServiceCard({ service, idx, hoveredCard, setHoveredCard }: ServiceCardP
             <IconComponent className={`w-5 h-5 md:w-6 md:h-6 ${service.mostPopular ? "text-blue-600" : "text-slate-600"}`} />
           </div>
           <div className="flex-1 min-w-0">
-            <h3 className="text-sm sm:text-base md:text-lg font-semibold text-slate-900 mb-1.5 md:mb-2 group-hover:text-blue-600 transition-colors leading-tight">
+            <h3 
+              id={`service-title-${idx}`}
+              className="text-sm sm:text-base md:text-lg font-semibold text-slate-900 mb-1.5 md:mb-2 group-hover:text-blue-600 transition-colors leading-tight"
+            >
               {service.title}
             </h3>
             <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">{service.description}</p>
@@ -595,6 +600,6 @@ function ServiceCard({ service, idx, hoveredCard, setHoveredCard }: ServiceCardP
         }`}
         aria-hidden="true"
       />
-    </article>
+    </div>
   )
 }
