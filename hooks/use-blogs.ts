@@ -4,9 +4,14 @@ import axios from 'axios'
 import type { Blog } from '@/lib/types'
 
 // API functions using axios
-const fetchBlogs = async (): Promise<Blog[]> => {
+const fetchBlogs = async (status?: string): Promise<Blog[]> => {
   try {
-    const response = await axios.get('/api/blogs')
+    const params = new URLSearchParams()
+    if (status && status !== 'all') {
+      params.append('status', status)
+    }
+
+    const response = await axios.get(`/api/blogs?${params.toString()}`)
     return Array.isArray(response.data) ? response.data : []
   } catch (error) {
     if (axios.isAxiosError(error)) {
@@ -69,10 +74,10 @@ const updateBlog = async ({ slug, data }: { slug: string; data: Partial<Blog> })
 }
 
 // Custom hooks
-export const useBlogs = () => {
+export const useBlogs = (status: string = 'published') => {
   return useQuery({
-    queryKey: ['blogs'],
-    queryFn: fetchBlogs,
+    queryKey: ['blogs', status],
+    queryFn: () => fetchBlogs(status),
     staleTime: 5 * 60 * 1000, // 5 minutes
     gcTime: 10 * 60 * 1000, // 10 minutes
     retry: 2,
@@ -99,36 +104,54 @@ export const useDeleteBlog = () => {
     onMutate: async (slug) => {
       console.log('🚀 Starting optimistic delete for blog:', slug)
 
-      // Cancel any outgoing refetches for both blogs list and individual blog
+      // Cancel any outgoing refetches for all blog queries
       await queryClient.cancelQueries({ queryKey: ['blogs'] })
       await queryClient.cancelQueries({ queryKey: ['blog', slug] })
 
-      // Snapshot the previous values
-      const previousBlogs = queryClient.getQueryData<Blog[]>(['blogs'])
+      // Snapshot the previous values for all status filters
+      const previousAllBlogs = queryClient.getQueryData<Blog[]>(['blogs', 'all'])
+      const previousPublishedBlogs = queryClient.getQueryData<Blog[]>(['blogs', 'published'])
+      const previousDraftBlogs = queryClient.getQueryData<Blog[]>(['blogs', 'draft'])
       const previousBlog = queryClient.getQueryData(['blog', slug])
 
-      console.log('📸 Snapshotted previous data, blogs count:', previousBlogs?.length || 0)
+      console.log('📸 Snapshotted previous data, all blogs count:', previousAllBlogs?.length || 0)
 
-      // Optimistically update to the new value
-      queryClient.setQueryData<Blog[]>(
-        ['blogs'],
-        (old) => {
-          const filtered = old?.filter(blog => blog.slug !== slug) || []
-          console.log('⚡ Optimistic update: removed blog, new count:', filtered.length)
-          return filtered
-        }
-      )
+      // Optimistically update all blog queries
+      const updateBlogsList = (old: Blog[] | undefined) => {
+        const filtered = old?.filter(blog => blog.slug !== slug) || []
+        console.log('⚡ Optimistic update: removed blog, new count:', filtered.length)
+        return filtered
+      }
+
+      queryClient.setQueryData<Blog[]>(['blogs', 'all'], updateBlogsList)
+      queryClient.setQueryData<Blog[]>(['blogs', 'published'], updateBlogsList)
+      queryClient.setQueryData<Blog[]>(['blogs', 'draft'], updateBlogsList)
 
       // Remove the individual blog from cache
       queryClient.removeQueries({ queryKey: ['blog', slug] })
 
       // Return a context object with the snapshotted values
-      return { previousBlogs, previousBlog, slug }
+      return {
+        previousAllBlogs,
+        previousPublishedBlogs,
+        previousDraftBlogs,
+        previousBlog,
+        slug
+      }
     },
     onError: (error, __, context) => {
       // If the mutation fails, use the context returned from onMutate to roll back
       if (context) {
-        queryClient.setQueryData(['blogs'], context.previousBlogs)
+        // Restore all cached blog queries
+        if (context.previousAllBlogs) {
+          queryClient.setQueryData(['blogs', 'all'], context.previousAllBlogs)
+        }
+        if (context.previousPublishedBlogs) {
+          queryClient.setQueryData(['blogs', 'published'], context.previousPublishedBlogs)
+        }
+        if (context.previousDraftBlogs) {
+          queryClient.setQueryData(['blogs', 'draft'], context.previousDraftBlogs)
+        }
         if (context.previousBlog) {
           queryClient.setQueryData(['blog', context.slug], context.previousBlog)
         }
@@ -151,6 +174,7 @@ export const useDeleteBlog = () => {
       // This ensures the API has completed and the blog is actually deleted from the database
       console.log('🗑️ Blog deletion successful, invalidating queries for slug:', slug)
 
+      // Invalidate all blog-related queries
       queryClient.invalidateQueries({ queryKey: ['blogs'] })
       queryClient.invalidateQueries({ queryKey: ['blog', slug] })
 

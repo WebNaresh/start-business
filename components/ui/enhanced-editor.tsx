@@ -118,6 +118,10 @@ const EnhancedEditor = forwardRef<EditorRef, EditorProps>(
         if (!data || !data.blocks) {
           throw new Error("Invalid data provided to render");
         }
+        // Verify that the render method exists on the EditorJS instance
+        if (typeof editorRef.current.render !== "function") {
+          throw new Error("Editor render method not available");
+        }
         await editorRef.current.render(data);
       },
     }));
@@ -129,61 +133,76 @@ const EnhancedEditor = forwardRef<EditorRef, EditorProps>(
           holderRef.current
         );
 
-        // Always initialize with empty blocks to avoid race conditions
-        // Data will be loaded via the data update effect
-        const initialData = { blocks: [] };
+        try {
+          // Always initialize with empty blocks to avoid race conditions
+          // Data will be loaded via the data update effect
+          const initialData = { blocks: [] };
 
-        const editor = new EditorJS({
-          holder: holderRef.current,
-          placeholder: placeholder || "Start writing...",
-          tools: EDITOR_TOOLS,
-          data: initialData,
-          // Global inline toolbar configuration
-          inlineToolbar:
-            showToolbar !== false ? ["bold", "italic", "link"] : false,
-          async onChange(api, event) {
-            console.log(`🚀 ~ Enhanced Editor onChange:`, event);
-            try {
-              const content = await api.saver.save();
-              onChange?.(content);
-            } catch (error) {
-              console.error("Error saving editor content:", error);
-            }
-          },
-          onReady: () => {
-            console.log("🚀 EditorJS is ready!");
-            setIsEditorReady(true);
+          const editor = new EditorJS({
+            holder: holderRef.current,
+            placeholder: placeholder || "Start writing...",
+            tools: EDITOR_TOOLS,
+            data: initialData,
+            // Global inline toolbar configuration
+            inlineToolbar:
+              showToolbar !== false ? ["bold", "italic", "link"] : false,
+            async onChange(api, event) {
+              console.log(`🚀 ~ Enhanced Editor onChange:`, event);
+              try {
+                const content = await api.saver.save();
+                onChange?.(content);
+              } catch (error) {
+                console.error("Error saving editor content:", error);
+              }
+            },
+            onReady: () => {
+              console.log("🚀 EditorJS is ready!");
+              setIsEditorReady(true);
 
-            // Trigger data update after editor is ready if data is available
-            if (
-              data &&
-              data.blocks &&
-              Array.isArray(data.blocks) &&
-              data.blocks.length > 0 &&
-              !isLoading
-            ) {
-              console.log("🚀 Editor ready, loading initial data:", data);
-              const convertedData = convertEditorDataMarkdownToInline(data);
-              editor.render(convertedData).catch((error) => {
-                console.error("❌ Error loading initial data:", error);
-              });
-            } else {
-              console.log(
-                "🚀 Editor ready, but no data available yet. Will wait for data update."
-              );
-            }
-          },
-        });
+              // Trigger data update after editor is ready if data is available
+              if (
+                data &&
+                data.blocks &&
+                Array.isArray(data.blocks) &&
+                data.blocks.length > 0 &&
+                !isLoading
+              ) {
+                console.log("🚀 Editor ready, loading initial data:", data);
+                const convertedData = convertEditorDataMarkdownToInline(data);
 
-        editorRef.current = editor;
+                // Verify render method exists before calling
+                if (typeof editor.render === "function") {
+                  editor.render(convertedData).catch((error) => {
+                    console.error("❌ Error loading initial data:", error);
+                  });
+                } else {
+                  console.error("❌ Editor render method not available");
+                }
+              } else {
+                console.log(
+                  "🚀 Editor ready, but no data available yet. Will wait for data update."
+                );
+              }
+            },
+          });
+
+          editorRef.current = editor;
+        } catch (error) {
+          console.error("❌ Failed to initialize EditorJS:", error);
+          setIsEditorReady(false);
+        }
       }
 
       return () => {
         if (editorRef.current && editorRef.current.destroy) {
           console.log("🚀 Destroying EditorJS");
-          editorRef.current.destroy();
-          editorRef.current = null;
-          setIsEditorReady(false);
+          try {
+            editorRef.current.destroy();
+            editorRef.current = null;
+            setIsEditorReady(false);
+          } catch (error) {
+            console.error("❌ Error destroying EditorJS:", error);
+          }
         }
       };
     }, [data, isLoading]); // Add data and isLoading as dependencies to handle initial data loading
@@ -233,8 +252,23 @@ const EnhancedEditor = forwardRef<EditorRef, EditorProps>(
 
       // Use the EditorJS render method correctly with proper error handling
       try {
-        editorRef.current.render(convertedData);
-        console.log("✅ Successfully rendered new data");
+        // Additional validation: ensure editor instance is valid
+        if (!editorRef.current || typeof editorRef.current !== "object") {
+          console.error("❌ Invalid editor instance");
+          return;
+        }
+
+        // Verify render method exists before calling
+        if (typeof editorRef.current.render === "function") {
+          editorRef.current.render(convertedData);
+          console.log("✅ Successfully rendered new data");
+        } else {
+          console.error("❌ Editor render method not available");
+          console.log(
+            "Available methods:",
+            Object.getOwnPropertyNames(editorRef.current)
+          );
+        }
       } catch (error) {
         console.error("❌ Error rendering editor data:", error);
         // Don't throw here to prevent component crashes

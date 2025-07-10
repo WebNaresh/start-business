@@ -10,16 +10,19 @@ export async function GET(request: Request) {
         const offset = parseInt(searchParams.get('offset') || '0')
         const status = searchParams.get('status') || 'published'
 
+        // Build where clause based on status filter
+        const whereClause = status === 'all' ? {} : { status: status }
+
         // Use safe database operation with fallback
         const blogs = await safeDatabaseOperation(
             async () => {
                 return await prisma.blog.findMany({
-                    where: {
-                        status: status
-                    },
-                    orderBy: {
-                        publishedAt: 'desc'
-                    },
+                    where: whereClause,
+                    orderBy: [
+                        { status: 'asc' }, // Show drafts first, then published
+                        { publishedAt: 'desc' },
+                        { updatedAt: 'desc' }
+                    ],
                     select: {
                         id: true,
                         title: true,

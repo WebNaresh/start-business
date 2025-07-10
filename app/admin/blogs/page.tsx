@@ -7,10 +7,18 @@ import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import AdminNavigation from "@/components/admin/admin-navigation";
 import { DeleteConfirmationDialog } from "@/components/ui/confirmation-dialog";
+import {
+  BlogStatusFilter,
+  BlogStatusBadge,
+  type BlogStatusFilter as BlogStatusFilterType,
+} from "@/components/admin/blog-status-filter";
 import { useBlogs, useDeleteBlog } from "@/hooks/use-blogs";
 import type { Blog } from "@/lib/types";
 
 export default function AdminBlogsPage() {
+  // State for blog status filtering
+  const [statusFilter, setStatusFilter] = useState<BlogStatusFilterType>("all");
+
   // State for confirmation dialog
   const [deleteDialog, setDeleteDialog] = useState<{
     open: boolean;
@@ -20,8 +28,18 @@ export default function AdminBlogsPage() {
     blog: null,
   });
 
-  // Fetch blogs using custom hook
-  const { data: blogs = [], isLoading, error } = useBlogs();
+  // Fetch blogs using custom hook with status filter
+  const { data: blogs = [], isLoading, error } = useBlogs(statusFilter);
+
+  // Fetch all blogs for counts (separate query)
+  const { data: allBlogs = [] } = useBlogs("all");
+
+  // Calculate blog counts for filter badges
+  const blogCounts = {
+    all: allBlogs.length,
+    published: allBlogs.filter((blog) => blog.status === "published").length,
+    draft: allBlogs.filter((blog) => blog.status === "draft").length,
+  };
 
   // Delete mutation with optimistic updates
   const deleteMutation = useDeleteBlog();
@@ -92,6 +110,13 @@ export default function AdminBlogsPage() {
         </div>
       </div>
 
+      {/* Blog Status Filter */}
+      <BlogStatusFilter
+        currentFilter={statusFilter}
+        onFilterChange={setStatusFilter}
+        blogCounts={blogCounts}
+      />
+
       {/* Content */}
       <div>
         {isLoading ? (
@@ -136,15 +161,7 @@ export default function AdminBlogsPage() {
                           {blog.slug}
                         </p>
                       </div>
-                      <span
-                        className={`ml-3 inline-flex items-center px-2 py-1 rounded-full text-xs font-semibold ${
-                          blog.status === "published"
-                            ? "bg-green-100 text-green-800 border border-green-200"
-                            : "bg-yellow-100 text-yellow-800 border border-yellow-200"
-                        }`}
-                      >
-                        {blog.status}
-                      </span>
+                      <BlogStatusBadge status={blog.status} className="ml-3" />
                     </div>
                     <div className="flex items-center justify-between text-xs text-slate-600 mb-3">
                       <span>by {blog.author}</span>
@@ -220,15 +237,7 @@ export default function AdminBlogsPage() {
                         {blog.author}
                       </td>
                       <td className="px-4 lg:px-6 py-4">
-                        <span
-                          className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold ${
-                            blog.status === "published"
-                              ? "bg-green-100 text-green-800 border border-green-200"
-                              : "bg-yellow-100 text-yellow-800 border border-yellow-200"
-                          }`}
-                        >
-                          {blog.status}
-                        </span>
+                        <BlogStatusBadge status={blog.status} />
                       </td>
                       <td className="px-4 lg:px-6 py-4 text-sm text-slate-600">
                         {formatDate(blog.publishedAt)}

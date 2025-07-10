@@ -1,19 +1,26 @@
-'use client'
+"use client";
 
-import { useState, useRef, useCallback } from 'react'
-import { Upload, X, Image as ImageIcon, Loader2, AlertCircle, Check } from 'lucide-react'
-import Image from 'next/image'
-import { Button } from '@/components/ui/button'
-import { Progress } from '@/components/ui/progress'
-import { Alert, AlertDescription } from '@/components/ui/alert'
-import { cn } from '@/lib/utils'
+import { useState, useRef, useCallback } from "react";
+import {
+  Upload,
+  X,
+  Image as ImageIcon,
+  Loader2,
+  AlertCircle,
+  Check,
+} from "lucide-react";
+import Image from "next/image";
+import { Button } from "@/components/ui/button";
+import { Progress } from "@/components/ui/progress";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { cn } from "@/lib/utils";
 
 interface ImageUploadProps {
-  onImageUploaded: (imageUrl: string) => void
-  currentImageUrl?: string
-  className?: string
-  disabled?: boolean
-  maxSizeText?: string
+  onImageUploaded: (imageUrl: string) => void;
+  currentImageUrl?: string;
+  className?: string;
+  disabled?: boolean;
+  maxSizeText?: string;
 }
 
 export default function ImageUpload({
@@ -21,132 +28,144 @@ export default function ImageUpload({
   currentImageUrl,
   className,
   disabled = false,
-  maxSizeText = "Max 5MB • JPEG, PNG, WebP"
+  maxSizeText = "Max 5MB • JPEG, PNG, WebP",
 }: ImageUploadProps) {
-  const [isUploading, setIsUploading] = useState(false)
-  const [uploadProgress, setUploadProgress] = useState(0)
-  const [error, setError] = useState<string | null>(null)
-  const [dragActive, setDragActive] = useState(false)
-  const [previewUrl, setPreviewUrl] = useState<string | null>(currentImageUrl || null)
-  const fileInputRef = useRef<HTMLInputElement>(null)
+  const [isUploading, setIsUploading] = useState(false);
+  const [uploadProgress, setUploadProgress] = useState(0);
+  const [error, setError] = useState<string | null>(null);
+  const [dragActive, setDragActive] = useState(false);
+  const [previewUrl, setPreviewUrl] = useState<string | null>(
+    currentImageUrl || null
+  );
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const handleFileSelect = useCallback(async (file: File) => {
-    if (disabled) return
+  const handleFileSelect = useCallback(
+    async (file: File) => {
+      if (disabled) return;
 
-    setError(null)
-    setIsUploading(true)
-    setUploadProgress(0)
+      setError(null);
+      setIsUploading(true);
+      setUploadProgress(0);
 
-    try {
-      // Create preview
-      const preview = URL.createObjectURL(file)
-      setPreviewUrl(preview)
+      try {
+        // Create preview
+        const preview = URL.createObjectURL(file);
+        setPreviewUrl(preview);
 
-      // Simulate progress for better UX
-      const progressInterval = setInterval(() => {
-        setUploadProgress(prev => {
-          if (prev >= 90) {
-            clearInterval(progressInterval)
-            return 90
-          }
-          return prev + 10
-        })
-      }, 200)
+        // Simulate progress for better UX
+        const progressInterval = setInterval(() => {
+          setUploadProgress((prev) => {
+            if (prev >= 90) {
+              clearInterval(progressInterval);
+              return 90;
+            }
+            return prev + 10;
+          });
+        }, 200);
 
-      // Upload file
-      const formData = new FormData()
-      formData.append('image', file)
+        // Upload file
+        const formData = new FormData();
+        formData.append("image", file);
 
-      const response = await fetch('/api/upload/image', {
-        method: 'POST',
-        body: formData,
-      })
+        const response = await fetch("/api/upload/image", {
+          method: "POST",
+          body: formData,
+        });
 
-      clearInterval(progressInterval)
-      setUploadProgress(100)
+        clearInterval(progressInterval);
+        setUploadProgress(100);
 
-      if (!response.ok) {
-        const errorData = await response.json()
-        throw new Error(errorData.error || 'Upload failed')
-      }
-
-      const result = await response.json()
-      
-      if (result.success && result.imageUrl) {
-        onImageUploaded(result.imageUrl)
-        setPreviewUrl(result.imageUrl)
-        
-        // Clean up object URL
-        if (preview.startsWith('blob:')) {
-          URL.revokeObjectURL(preview)
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.error || "Upload failed");
         }
-      } else {
-        throw new Error(result.error || 'Upload failed')
-      }
 
-    } catch (err) {
-      console.error('Upload error:', err)
-      setError(err instanceof Error ? err.message : 'Upload failed')
-      setPreviewUrl(currentImageUrl || null)
-    } finally {
-      setIsUploading(false)
-      setUploadProgress(0)
-    }
-  }, [disabled, onImageUploaded, currentImageUrl])
+        const result = await response.json();
+
+        if (result.success && result.imageUrl) {
+          onImageUploaded(result.imageUrl);
+          setPreviewUrl(result.imageUrl);
+
+          // Clean up object URL
+          if (preview.startsWith("blob:")) {
+            URL.revokeObjectURL(preview);
+          }
+        } else {
+          throw new Error(result.error || "Upload failed");
+        }
+      } catch (err) {
+        console.error("Upload error:", err);
+        setError(err instanceof Error ? err.message : "Upload failed");
+        setPreviewUrl(currentImageUrl || null);
+      } finally {
+        setIsUploading(false);
+        setUploadProgress(0);
+      }
+    },
+    [disabled, onImageUploaded, currentImageUrl]
+  );
 
   const handleDrag = useCallback((e: React.DragEvent) => {
-    e.preventDefault()
-    e.stopPropagation()
-    if (e.type === 'dragenter' || e.type === 'dragover') {
-      setDragActive(true)
-    } else if (e.type === 'dragleave') {
-      setDragActive(false)
+    e.preventDefault();
+    e.stopPropagation();
+    if (e.type === "dragenter" || e.type === "dragover") {
+      setDragActive(true);
+    } else if (e.type === "dragleave") {
+      setDragActive(false);
     }
-  }, [])
+  }, []);
 
-  const handleDrop = useCallback((e: React.DragEvent) => {
-    e.preventDefault()
-    e.stopPropagation()
-    setDragActive(false)
+  const handleDrop = useCallback(
+    (e: React.DragEvent) => {
+      e.preventDefault();
+      e.stopPropagation();
+      setDragActive(false);
 
-    if (disabled) return
+      if (disabled) return;
 
-    const files = e.dataTransfer.files
-    if (files && files[0]) {
-      handleFileSelect(files[0])
-    }
-  }, [disabled, handleFileSelect])
+      const files = e.dataTransfer.files;
+      if (files && files[0]) {
+        handleFileSelect(files[0]);
+      }
+    },
+    [disabled, handleFileSelect]
+  );
 
-  const handleInputChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files
-    if (files && files[0]) {
-      handleFileSelect(files[0])
-    }
-  }, [handleFileSelect])
+  const handleInputChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const files = e.target.files;
+      if (files && files[0]) {
+        handleFileSelect(files[0]);
+      }
+    },
+    [handleFileSelect]
+  );
 
   const handleRemoveImage = useCallback(() => {
-    setPreviewUrl(null)
-    setError(null)
-    onImageUploaded('')
+    setPreviewUrl(null);
+    setError(null);
+    onImageUploaded("");
     if (fileInputRef.current) {
-      fileInputRef.current.value = ''
+      fileInputRef.current.value = "";
     }
-  }, [onImageUploaded])
+  }, [onImageUploaded]);
 
   const openFileDialog = useCallback(() => {
     if (!disabled && fileInputRef.current) {
-      fileInputRef.current.click()
+      fileInputRef.current.click();
     }
-  }, [disabled])
+  }, [disabled]);
 
   return (
-    <div className={cn('w-full', className)}>
+    <div className={cn("w-full", className)}>
       <div
         className={cn(
-          'relative border-2 border-dashed rounded-lg transition-all duration-200',
-          dragActive ? 'border-blue-500 bg-blue-50' : 'border-gray-300',
-          disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer hover:border-gray-400',
-          previewUrl ? 'border-solid border-gray-200' : ''
+          "relative border-2 border-dashed rounded-lg transition-all duration-200",
+          dragActive ? "border-blue-500 bg-blue-50" : "border-gray-300",
+          disabled
+            ? "opacity-50 cursor-not-allowed"
+            : "cursor-pointer hover:border-gray-400",
+          previewUrl ? "border-solid border-gray-200" : ""
         )}
         onDragEnter={handleDrag}
         onDragLeave={handleDrag}
@@ -175,16 +194,18 @@ export default function ImageUpload({
                 sizes="(max-width: 768px) 100vw, 50vw"
               />
             </div>
-            
+
             {/* Overlay with actions */}
             <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-200 rounded-lg flex items-center justify-center">
               <div className="flex gap-2">
                 <Button
+                  type="button"
                   size="sm"
                   variant="secondary"
                   onClick={(e) => {
-                    e.stopPropagation()
-                    openFileDialog()
+                    e.preventDefault();
+                    e.stopPropagation();
+                    openFileDialog();
                   }}
                   disabled={disabled || isUploading}
                 >
@@ -192,11 +213,13 @@ export default function ImageUpload({
                   Replace
                 </Button>
                 <Button
+                  type="button"
                   size="sm"
                   variant="destructive"
                   onClick={(e) => {
-                    e.stopPropagation()
-                    handleRemoveImage()
+                    e.preventDefault();
+                    e.stopPropagation();
+                    handleRemoveImage();
                   }}
                   disabled={disabled || isUploading}
                 >
@@ -225,7 +248,9 @@ export default function ImageUpload({
                 <Loader2 className="h-12 w-12 animate-spin mx-auto text-blue-600" />
                 <div>
                   <p className="text-lg font-medium">Uploading image...</p>
-                  <p className="text-sm text-gray-500 mb-2">Please wait while we process your image</p>
+                  <p className="text-sm text-gray-500 mb-2">
+                    Please wait while we process your image
+                  </p>
                   <Progress value={uploadProgress} className="w-48 mx-auto" />
                 </div>
               </div>
@@ -236,10 +261,21 @@ export default function ImageUpload({
                 </div>
                 <div>
                   <p className="text-lg font-medium">Upload featured image</p>
-                  <p className="text-sm text-gray-500">Drag and drop or click to select</p>
+                  <p className="text-sm text-gray-500">
+                    Drag and drop or click to select
+                  </p>
                   <p className="text-xs text-gray-400 mt-1">{maxSizeText}</p>
                 </div>
-                <Button variant="outline" disabled={disabled}>
+                <Button
+                  type="button"
+                  variant="outline"
+                  disabled={disabled}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    openFileDialog();
+                  }}
+                >
                   <Upload className="h-4 w-4 mr-2" />
                   Choose File
                 </Button>
@@ -267,5 +303,5 @@ export default function ImageUpload({
         </Alert>
       )}
     </div>
-  )
+  );
 }
