@@ -122,17 +122,15 @@ export default function WhyChooseUs() {
 
         {/* Features Grid */}
         <div className="max-w-6xl mx-auto mb-12">
-          <div 
-            className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6"
-            role="list"
+          <ul 
+            className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 list-none"
             aria-label="Our key features and benefits"
           >
             {features.map((feature, index) => (
-              <div
+              <li
                 key={index}
                 className="group relative p-4 md:p-6 bg-white rounded-2xl border border-slate-200 hover:border-slate-300 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 cursor-pointer"
                 // onMouseEnter={() => setActiveFeature(index)} // Disabled for now
-                role="listitem"
               >
                 {/* Icon */}
                 <div
@@ -171,9 +169,9 @@ export default function WhyChooseUs() {
                   className={`absolute inset-0 bg-gradient-to-br ${feature.color} opacity-0 group-hover:opacity-5 rounded-2xl transition-opacity duration-300`}
                   aria-hidden="true"
                 />
-              </div>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
 
         {/* Bottom CTA */}

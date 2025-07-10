@@ -546,9 +546,9 @@ function ServiceCard({ service, idx, hoveredCard, setHoveredCard }: ServiceCardP
         {/* Features List */}
         <div className="mb-4 md:mb-6 flex-1">
           <h4 className="text-xs sm:text-sm font-semibold mb-2 md:mb-3 text-slate-700">What's included:</h4>
-          <ul className="space-y-1.5 md:space-y-2" role="list">
+          <ul className="space-y-1.5 md:space-y-2">
             {service.features.slice(0, 3).map((feature, featureIdx) => (
-              <li key={featureIdx} className="flex items-center gap-2 text-xs sm:text-sm text-slate-600" role="listitem">
+              <li key={featureIdx} className="flex items-center gap-2 text-xs sm:text-sm text-slate-600">
                 <CheckCircle className="w-3 h-3 sm:w-4 sm:h-4 text-green-500 flex-shrink-0" aria-hidden="true" />
                 <span className="leading-tight">{feature}</span>
               </li>
