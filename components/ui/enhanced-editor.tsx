@@ -34,6 +34,7 @@ const EnhancedEditor = forwardRef<EditorRef, EditorProps>(
   ({ data, onChange, placeholder, showToolbar, className, isLoading }, ref) => {
     const editorRef = useRef<EditorJS | null>(null);
     const holderRef = useRef<HTMLDivElement>(null);
+    const isEditorReady = useRef(false);
     const editorId = useRef(
       `enhanced-editor-${Math.random().toString(36).substring(2, 11)}`
     ).current;
@@ -73,20 +74,30 @@ const EnhancedEditor = forwardRef<EditorRef, EditorProps>(
 
     useImperativeHandle(ref, () => ({
       save: async () => {
-        if (editorRef.current) {
-          return await editorRef.current.save();
+        if (!editorRef.current) {
+          throw new Error("Editor not initialized");
         }
-        throw new Error("Editor not initialized");
+        if (!isEditorReady.current) {
+          throw new Error("Editor not ready");
+        }
+        return await editorRef.current.save();
       },
       clear: () => {
-        if (editorRef.current) {
+        if (editorRef.current && isEditorReady.current) {
           editorRef.current.clear();
         }
       },
       render: async (data: OutputData) => {
-        if (editorRef.current) {
-          await editorRef.current.render(data);
+        if (!editorRef.current) {
+          throw new Error("Editor not initialized");
         }
+        if (!isEditorReady.current) {
+          throw new Error("Editor not ready");
+        }
+        if (!data || !data.blocks) {
+          throw new Error("Invalid data provided to render");
+        }
+        await editorRef.current.render(data);
       },
     }));
 
@@ -113,6 +124,7 @@ const EnhancedEditor = forwardRef<EditorRef, EditorProps>(
           },
           onReady: () => {
             console.log("🚀 EditorJS is ready!");
+            isEditorReady.current = true;
           },
         });
 
@@ -124,9 +136,45 @@ const EnhancedEditor = forwardRef<EditorRef, EditorProps>(
           console.log("🚀 Destroying EditorJS");
           editorRef.current.destroy();
           editorRef.current = null;
+          isEditorReady.current = false;
         }
       };
     }, []);
+
+    // Handle data updates after editor initialization
+    useEffect(() => {
+      // Comprehensive validation before attempting to render
+      if (!editorRef.current) {
+        console.log("⏳ Editor not initialized yet, skipping data update");
+        return;
+      }
+
+      if (!isEditorReady.current) {
+        console.log("⏳ Editor not ready yet, skipping data update");
+        return;
+      }
+
+      if (isLoading) {
+        console.log("⏳ Still loading, skipping data update");
+        return;
+      }
+
+      if (!data || !data.blocks || !Array.isArray(data.blocks)) {
+        console.log("⏳ No valid data to render, skipping update");
+        return;
+      }
+
+      console.log("🚀 Updating EditorJS with new data:", data);
+
+      // Use the EditorJS render method correctly with proper error handling
+      try {
+        editorRef.current.render(data);
+        console.log("✅ Successfully rendered new data");
+      } catch (error) {
+        console.error("❌ Error rendering editor data:", error);
+        // Don't throw here to prevent component crashes
+      }
+    }, [data, isLoading]);
 
     // Show skeleton while loading
     if (isLoading) {

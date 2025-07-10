@@ -122,7 +122,13 @@ export default function EditBlogPage({
       </div>
 
       {/* Blog Form */}
-      <BlogForm slug={slug} isEditing={true} onSubmit={handleSubmit} />
+      <BlogForm
+        slug={slug}
+        isEditing={true}
+        onSubmit={handleSubmit}
+        initialData={blog}
+        isLoadingInitialData={isLoading}
+      />
     </div>
   );
 }

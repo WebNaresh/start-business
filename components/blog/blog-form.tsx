@@ -38,6 +38,7 @@ interface BlogFormProps {
   isEditing?: boolean;
   onSubmit?: (data: Partial<Blog>) => Promise<void>;
   slug?: string; // For fetching data when editing
+  isLoadingInitialData?: boolean; // Loading state from parent
 }
 
 // Fetch blog data function
@@ -52,6 +53,7 @@ export default function BlogForm({
   isEditing = false,
   onSubmit,
   slug,
+  isLoadingInitialData = false,
 }: BlogFormProps) {
   const router = useRouter();
   const editorRef = useRef<EditorRef>(null);
@@ -59,7 +61,7 @@ export default function BlogForm({
   const [editorData, setEditorData] = useState<OutputData | undefined>();
   console.log(`🚀 ~ editorData:`, editorData);
 
-  // Use TanStack Query to fetch blog data when editing
+  // Use TanStack Query to fetch blog data when editing (only if no initialData provided)
   const {
     data: fetchedBlogData,
     isLoading: isLoadingBlogData,
@@ -67,14 +69,16 @@ export default function BlogForm({
   } = useQuery({
     queryKey: ["blog", slug],
     queryFn: () => fetchBlogData(slug!),
-    enabled: isEditing && !!slug, // Only fetch when editing and slug is provided
+    enabled: isEditing && !!slug && !initialData, // Only fetch when editing, slug provided, and no initialData
     staleTime: 5 * 60 * 1000, // 5 minutes
     gcTime: 10 * 60 * 1000, // 10 minutes
   });
 
-  // Determine the data source (fetched data takes priority over initialData)
-  const blogData = fetchedBlogData || initialData;
-  const isLoading = isEditing ? isLoadingBlogData : false;
+  // Determine the data source (initialData takes priority over fetched data)
+  const blogData = initialData || fetchedBlogData;
+  const isLoading = isEditing
+    ? isLoadingInitialData || isLoadingBlogData
+    : false;
 
   const [blog, setBlog] = useState<Partial<Blog>>({
     title: "",
@@ -565,10 +569,10 @@ export default function BlogForm({
             ref={editorRef}
             data={editorData}
             onChange={handleEditorChange}
+            isLoading={isLoading}
             placeholder="Start writing your blog post... Try pasting formatted content from AI tools!"
             showToolbar={true}
             className="min-h-[500px]"
-            isLoading={isLoading}
           />
         </div>
 
