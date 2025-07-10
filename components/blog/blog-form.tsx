@@ -61,6 +61,12 @@ export default function BlogForm({
   const [editorData, setEditorData] = useState<OutputData | undefined>();
   console.log(`🚀 ~ editorData:`, editorData);
 
+  // Reset editorData when slug changes to prevent stale data
+  useEffect(() => {
+    console.log(`🚀 ~ Slug changed, resetting editorData:`, slug);
+    setEditorData(undefined);
+  }, [slug]);
+
   // Use TanStack Query to fetch blog data when editing (only if no initialData provided)
   const {
     data: fetchedBlogData,
@@ -96,7 +102,12 @@ export default function BlogForm({
 
   // Convert content to EditorJS data when data is available
   useEffect(() => {
-    if (!blogData) return;
+    console.log(`🚀 ~ blogData useEffect triggered:`, { blogData, slug });
+
+    if (!blogData) {
+      console.log(`🚀 ~ No blogData available, skipping`);
+      return;
+    }
 
     // Update blog state when data changes
     setBlog((prev) => ({
@@ -112,6 +123,10 @@ export default function BlogForm({
     ) {
       try {
         const parsedData = JSON.parse(blogData.editorData);
+        console.log(
+          `🚀 ~ Setting editorData from blogData.editorData:`,
+          parsedData
+        );
         setEditorData(parsedData);
         return;
       } catch (error) {
@@ -128,14 +143,22 @@ export default function BlogForm({
       try {
         // Try to parse as JSON first (EditorJS data)
         const parsedData = JSON.parse(blogData.content);
+        console.log(
+          `🚀 ~ Setting editorData from blogData.content (JSON):`,
+          parsedData
+        );
         setEditorData(parsedData);
       } catch {
         // If not JSON, convert HTML to EditorJS data
         const convertedData = htmlToEditorData(blogData.content);
+        console.log(
+          `🚀 ~ Setting editorData from blogData.content (HTML):`,
+          convertedData
+        );
         setEditorData(convertedData);
       }
     }
-  }, [blogData]);
+  }, [blogData, slug]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

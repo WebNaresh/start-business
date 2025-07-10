@@ -13,7 +13,13 @@ import Paragraph from "@editorjs/paragraph";
 import Quote from "@editorjs/quote";
 import Table from "@editorjs/table";
 import Underline from "@editorjs/underline";
-import { forwardRef, useEffect, useImperativeHandle, useRef } from "react";
+import {
+  forwardRef,
+  useEffect,
+  useImperativeHandle,
+  useRef,
+  useState,
+} from "react";
 import { convertEditorDataMarkdownToInline } from "@/lib/editor-utils";
 
 export interface EditorRef {
@@ -35,7 +41,8 @@ const EnhancedEditor = forwardRef<EditorRef, EditorProps>(
   ({ data, onChange, placeholder, showToolbar, className, isLoading }, ref) => {
     const editorRef = useRef<EditorJS | null>(null);
     const holderRef = useRef<HTMLDivElement>(null);
-    const isEditorReady = useRef(false);
+    const [isEditorReady, setIsEditorReady] = useState(false);
+    const lastDataString = useRef<string>("");
     const editorId = useRef(
       `enhanced-editor-${Math.random().toString(36).substring(2, 11)}`
     ).current;
@@ -91,13 +98,13 @@ const EnhancedEditor = forwardRef<EditorRef, EditorProps>(
         if (!editorRef.current) {
           throw new Error("Editor not initialized");
         }
-        if (!isEditorReady.current) {
+        if (!isEditorReady) {
           throw new Error("Editor not ready");
         }
         return await editorRef.current.save();
       },
       clear: () => {
-        if (editorRef.current && isEditorReady.current) {
+        if (editorRef.current && isEditorReady) {
           editorRef.current.clear();
         }
       },
@@ -105,7 +112,7 @@ const EnhancedEditor = forwardRef<EditorRef, EditorProps>(
         if (!editorRef.current) {
           throw new Error("Editor not initialized");
         }
-        if (!isEditorReady.current) {
+        if (!isEditorReady) {
           throw new Error("Editor not ready");
         }
         if (!data || !data.blocks) {
@@ -122,10 +129,9 @@ const EnhancedEditor = forwardRef<EditorRef, EditorProps>(
           holderRef.current
         );
 
-        // Convert markdown syntax to EditorJS inline format for initial data
-        const initialData = data
-          ? convertEditorDataMarkdownToInline(data)
-          : { blocks: [] };
+        // Always initialize with empty blocks to avoid race conditions
+        // Data will be loaded via the data update effect
+        const initialData = { blocks: [] };
 
         const editor = new EditorJS({
           holder: holderRef.current,
@@ -146,7 +152,26 @@ const EnhancedEditor = forwardRef<EditorRef, EditorProps>(
           },
           onReady: () => {
             console.log("🚀 EditorJS is ready!");
-            isEditorReady.current = true;
+            setIsEditorReady(true);
+
+            // Trigger data update after editor is ready if data is available
+            if (
+              data &&
+              data.blocks &&
+              Array.isArray(data.blocks) &&
+              data.blocks.length > 0 &&
+              !isLoading
+            ) {
+              console.log("🚀 Editor ready, loading initial data:", data);
+              const convertedData = convertEditorDataMarkdownToInline(data);
+              editor.render(convertedData).catch((error) => {
+                console.error("❌ Error loading initial data:", error);
+              });
+            } else {
+              console.log(
+                "🚀 Editor ready, but no data available yet. Will wait for data update."
+              );
+            }
           },
         });
 
@@ -158,10 +183,10 @@ const EnhancedEditor = forwardRef<EditorRef, EditorProps>(
           console.log("🚀 Destroying EditorJS");
           editorRef.current.destroy();
           editorRef.current = null;
-          isEditorReady.current = false;
+          setIsEditorReady(false);
         }
       };
-    }, []);
+    }, [data, isLoading]); // Add data and isLoading as dependencies to handle initial data loading
 
     // Handle data updates after editor initialization
     useEffect(() => {
@@ -171,7 +196,7 @@ const EnhancedEditor = forwardRef<EditorRef, EditorProps>(
         return;
       }
 
-      if (!isEditorReady.current) {
+      if (!isEditorReady) {
         console.log("⏳ Editor not ready yet, skipping data update");
         return;
       }
@@ -181,10 +206,25 @@ const EnhancedEditor = forwardRef<EditorRef, EditorProps>(
         return;
       }
 
-      if (!data || !data.blocks || !Array.isArray(data.blocks)) {
+      if (
+        !data ||
+        !data.blocks ||
+        !Array.isArray(data.blocks) ||
+        data.blocks.length === 0
+      ) {
         console.log("⏳ No valid data to render, skipping update");
         return;
       }
+
+      // Check if data has actually changed to avoid unnecessary re-renders
+      const currentDataString = JSON.stringify(data);
+
+      if (lastDataString.current === currentDataString) {
+        console.log("⏳ Data unchanged, skipping update");
+        return;
+      }
+
+      lastDataString.current = currentDataString;
 
       console.log("🚀 Updating EditorJS with new data:", data);
 
@@ -199,7 +239,7 @@ const EnhancedEditor = forwardRef<EditorRef, EditorProps>(
         console.error("❌ Error rendering editor data:", error);
         // Don't throw here to prevent component crashes
       }
-    }, [data, isLoading]);
+    }, [data, isLoading, isEditorReady]);
 
     // Show skeleton while loading
     if (isLoading) {
