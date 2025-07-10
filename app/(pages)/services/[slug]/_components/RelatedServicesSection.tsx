@@ -143,10 +143,10 @@ export default function RelatedServicesSection({ currentService }: RelatedServic
               <div className="flex gap-4">
                 {relatedServices.map((service) => {
                   const colorClasses = {
-                    blue: "bg-blue-50 text-blue-600 hover:bg-blue-100",
-                    green: "bg-green-50 text-green-600 hover:bg-green-100",
-                    purple: "bg-purple-50 text-purple-600 hover:bg-purple-100",
-                    amber: "bg-amber-50 text-amber-600 hover:bg-amber-100",
+                    blue: "bg-blue-50 text-blue-700 hover:bg-blue-100",
+                    green: "bg-green-50 text-green-700 hover:bg-green-100",
+                    purple: "bg-purple-50 text-purple-700 hover:bg-purple-100",
+                    amber: "bg-amber-50 text-amber-800 hover:bg-amber-100",
                   }[service.color]
 
                   return (

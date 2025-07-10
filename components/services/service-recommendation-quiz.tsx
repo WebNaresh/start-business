@@ -123,7 +123,7 @@ export default function ServiceRecommendationQuiz() {
               {/* Popular Badge */}
               {category.popular && (
                 <div className="absolute top-4 right-4 z-10">
-                  <span className="inline-flex items-center px-2 py-1 text-xs font-medium text-orange-600 bg-orange-100 rounded-full">
+                  <span className="inline-flex items-center px-2 py-1 text-xs font-medium text-orange-800 bg-orange-200 rounded-full">
                     <Star className="w-3 h-3 mr-1" />
                     Popular
                   </span>

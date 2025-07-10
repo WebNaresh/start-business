@@ -151,7 +151,7 @@ export default function BlogShowcase() {
                 {/* Trending indicator for first post */}
                 {index === 0 && (
                   <div className="absolute top-3 left-3">
-                    <span className="inline-flex items-center px-2 py-1 text-xs font-medium text-orange-600 bg-orange-100 rounded-full">
+                    <span className="inline-flex items-center px-2 py-1 text-xs font-medium text-orange-800 bg-orange-200 rounded-full">
                       <TrendingUp className="w-3 h-3 mr-1" />
                       Trending
                     </span>

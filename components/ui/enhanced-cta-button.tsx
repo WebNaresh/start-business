@@ -36,8 +36,8 @@ export default function EnhancedCTAButton({
   
   const variantClasses = {
     primary: "bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white shadow-lg hover:shadow-xl",
-    secondary: "bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white shadow-lg hover:shadow-xl",
-    urgent: "bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white shadow-lg hover:shadow-xl animate-pulse"
+    secondary: "bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white shadow-lg hover:shadow-xl",
+    urgent: "bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white shadow-lg hover:shadow-xl animate-pulse"
   }
   
   const sizeClasses = {
@@ -53,7 +53,7 @@ export default function EnhancedCTAButton({
       {/* Urgency/Savings Badge */}
       {(urgency || savings) && (
         <Badge 
-          className="absolute -top-2 -right-2 z-10 bg-red-500 text-white text-xs px-2 py-1 animate-bounce"
+          className="absolute -top-2 -right-2 z-10 bg-red-700 text-white text-xs px-2 py-1 animate-bounce"
           variant="destructive"
         >
           {urgency || savings}
@@ -63,7 +63,7 @@ export default function EnhancedCTAButton({
       {/* Popular Badge */}
       {popular && (
         <Badge 
-          className="absolute -top-2 -left-2 z-10 bg-yellow-500 text-black text-xs px-2 py-1"
+          className="absolute -top-2 -left-2 z-10 bg-amber-600 text-white text-xs px-2 py-1"
         >
           <Zap className="w-3 h-3 mr-1" />
           Most Popular
@@ -95,8 +95,8 @@ export default function EnhancedCTAButton({
       
       {/* Trust Indicators */}
       {guarantee && (
-        <div className="flex items-center justify-center gap-1 mt-2 text-xs text-slate-600">
-          <Shield className="w-3 h-3 text-green-500" />
+        <div className="flex items-center justify-center gap-1 mt-2 text-xs text-slate-700">
+          <Shield className="w-3 h-3 text-green-600" />
           <span>100% Money-Back Guarantee</span>
         </div>
       )}

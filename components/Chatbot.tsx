@@ -266,7 +266,7 @@ export default function Chatbot() {
                     </h3>
                     <Badge
                       variant="outline"
-                      className="bg-green-50 text-green-600 border-green-200 text-xs"
+                      className="bg-green-100 text-green-700 border-green-300 text-xs"
                     >
                       Online
                     </Badge>

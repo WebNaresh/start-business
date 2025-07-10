@@ -516,7 +516,7 @@ function ServiceCard({ service, idx, hoveredCard, setHoveredCard }: ServiceCardP
       <div className="absolute top-2 right-2 z-10">
         <Badge
           variant="destructive"
-          className="bg-green-600 hover:bg-green-700 text-xs px-2 py-1"
+          className="bg-green-700 hover:bg-green-800 text-white text-xs px-2 py-1"
           aria-label={`Save ${savingsPercent}%`}
         >
           Save {savingsPercent}%
