@@ -47,7 +47,7 @@ export default function ServiceRecommendationQuiz() {
     },
     {
       id: "itr-eligibility",
-      title: "Am I Eligible for ITR Filing?",
+      title: "Find the right ITR form for you | FY 2024-25",
       description: "Determine your Income Tax Return filing requirements based on your income sources, earnings, and tax status.",
       icon: FileText,
       gradient: "from-green-500 to-emerald-600",
