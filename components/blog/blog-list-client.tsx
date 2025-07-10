@@ -3,56 +3,51 @@
 import type { Blog } from "@/lib/types";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useMemo } from "react";
+import { useQueryState } from "nuqs";
+import { useBlogs } from "@/hooks/use-blogs";
 import BlogSearchFilter from "./blog-search-filter";
 
 export default function BlogListClient() {
-  const [blogPosts, setBlogPosts] = useState<Blog[]>([]);
-  const [filteredPosts, setFilteredPosts] = useState<Blog[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [searchQuery, setSearchQuery] = useState("");
-  const [activeFilters, setActiveFilters] = useState<any>({});
+  // URL state management with nuqs
+  const [searchQuery, setSearchQuery] = useQueryState("search", {
+    defaultValue: "",
+    clearOnDefault: true,
+  });
+
+  const [category, setCategory] = useQueryState("category", {
+    defaultValue: "",
+    clearOnDefault: true,
+  });
+
+  const [dateRange, setDateRange] = useQueryState("dateRange", {
+    defaultValue: "",
+    clearOnDefault: true,
+  });
+
+  const [sortBy, setSortBy] = useQueryState("sortBy", {
+    defaultValue: "newest",
+    clearOnDefault: true,
+  });
+
+  // Fetch blog data using TanStack Query
+  const { data: blogPosts = [], isLoading, error } = useBlogs("published");
 
   // Extract unique categories and tags from blog posts
-  const categories = Array.from(
-    new Set(
-      blogPosts.flatMap(
-        (post) => post.tags?.split(",").map((tag) => tag.trim()) || []
+  const categories = useMemo(() => {
+    return Array.from(
+      new Set(
+        blogPosts.flatMap(
+          (post) => post.tags?.split(",").map((tag) => tag.trim()) || []
+        )
       )
-    )
-  ).filter(Boolean);
+    ).filter(Boolean);
+  }, [blogPosts]);
 
   const tags = categories; // For now, using same as categories
 
-  useEffect(() => {
-    const loadBlogPosts = async () => {
-      try {
-        const response = await fetch("/api/blogs");
-        if (!response.ok) {
-          const errorData = await response.json().catch(() => ({}));
-          throw new Error(
-            errorData.error || `HTTP ${response.status}: ${response.statusText}`
-          );
-        }
-        const data = await response.json();
-        const publishedPosts = Array.isArray(data)
-          ? data.filter((post) => post.status === "published")
-          : [];
-        setBlogPosts(publishedPosts);
-        setFilteredPosts(publishedPosts);
-      } catch (error) {
-        console.error("Failed to load blog posts:", error);
-        setBlogPosts([]);
-        setFilteredPosts([]);
-      } finally {
-        setLoading(false);
-      }
-    };
-    loadBlogPosts();
-  }, []);
-
-  // Filter and search functionality
-  useEffect(() => {
+  // Filter and search functionality using useMemo for performance
+  const filteredPosts = useMemo(() => {
     let filtered = [...blogPosts];
 
     // Apply search filter
@@ -67,18 +62,18 @@ export default function BlogListClient() {
     }
 
     // Apply category filter
-    if (activeFilters.category) {
+    if (category) {
       filtered = filtered.filter((post) =>
-        post.tags?.toLowerCase().includes(activeFilters.category.toLowerCase())
+        post.tags?.toLowerCase().includes(category.toLowerCase())
       );
     }
 
     // Apply date range filter
-    if (activeFilters.dateRange) {
+    if (dateRange) {
       const now = new Date();
       const filterDate = new Date();
 
-      switch (activeFilters.dateRange) {
+      switch (dateRange) {
         case "week":
           filterDate.setDate(now.getDate() - 7);
           break;
@@ -99,41 +94,81 @@ export default function BlogListClient() {
     }
 
     // Apply sorting
-    if (activeFilters.sortBy) {
-      switch (activeFilters.sortBy) {
-        case "newest":
-          filtered.sort((a, b) => {
-            const dateA = a.publishedAt ? new Date(a.publishedAt).getTime() : 0;
-            const dateB = b.publishedAt ? new Date(b.publishedAt).getTime() : 0;
-            return dateB - dateA;
-          });
-          break;
-        case "oldest":
-          filtered.sort((a, b) => {
-            const dateA = a.publishedAt ? new Date(a.publishedAt).getTime() : 0;
-            const dateB = b.publishedAt ? new Date(b.publishedAt).getTime() : 0;
-            return dateA - dateB;
-          });
-          break;
-        case "alphabetical":
-          filtered.sort((a, b) => a.title.localeCompare(b.title));
-          break;
-        // 'popular' would need view counts or similar metrics
-      }
+    switch (sortBy) {
+      case "newest":
+        filtered.sort((a, b) => {
+          const dateA = a.publishedAt ? new Date(a.publishedAt).getTime() : 0;
+          const dateB = b.publishedAt ? new Date(b.publishedAt).getTime() : 0;
+          return dateB - dateA;
+        });
+        break;
+      case "oldest":
+        filtered.sort((a, b) => {
+          const dateA = a.publishedAt ? new Date(a.publishedAt).getTime() : 0;
+          const dateB = b.publishedAt ? new Date(b.publishedAt).getTime() : 0;
+          return dateA - dateB;
+        });
+        break;
+      case "alphabetical":
+        filtered.sort((a, b) => a.title.localeCompare(b.title));
+        break;
+      // 'popular' would need view counts or similar metrics
     }
 
-    setFilteredPosts(filtered);
-  }, [blogPosts, searchQuery, activeFilters]);
+    return filtered;
+  }, [blogPosts, searchQuery, category, dateRange, sortBy]);
 
   const handleSearch = (query: string) => {
     setSearchQuery(query);
   };
 
   const handleFilterChange = (filters: any) => {
-    setActiveFilters(filters);
+    // Update individual filter states based on the filters object
+    if (filters.category !== undefined) {
+      setCategory(filters.category || "");
+    }
+    if (filters.dateRange !== undefined) {
+      setDateRange(filters.dateRange || "");
+    }
+    if (filters.sortBy !== undefined) {
+      setSortBy(filters.sortBy || "newest");
+    }
   };
 
-  if (loading) {
+  // Handle error state
+  if (error) {
+    return (
+      <div className="container mx-auto px-4 py-12">
+        <div className="text-center py-16">
+          <div className="w-24 h-24 mx-auto mb-6 bg-red-100 rounded-full flex items-center justify-center">
+            <svg
+              className="w-12 h-12 text-red-500"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.732-.833-2.5 0L4.268 18.5c-.77.833.192 2.5 1.732 2.5z"
+              />
+            </svg>
+          </div>
+          <h3 className="text-xl font-semibold text-gray-900 mb-2">
+            Error Loading Blog Posts
+          </h3>
+          <p className="text-gray-600">
+            {error instanceof Error
+              ? error.message
+              : "An unexpected error occurred"}
+          </p>
+        </div>
+      </div>
+    );
+  }
+
+  if (isLoading) {
     return (
       <div className="container mx-auto px-4 py-12">
         <div className="animate-pulse">
