@@ -3,6 +3,7 @@ import FloatingCallButton from "@/components/floating-call-button";
 import Footer from "@/components/footer";
 import Header from "@/components/header";
 import QueryProvider from "@/components/providers/query-provider";
+import NuqsSuspenseProvider from "@/components/providers/nuqs-suspense-provider";
 import { ThemeProvider } from "@/components/theme-provider";
 import { UIProvider } from "@/contexts/ui-context";
 import { Analytics } from "@vercel/analytics/next";
@@ -10,6 +11,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Script from "next/script";
 import { Toaster } from "sonner";
+import { NuqsAdapter } from "nuqs/adapters/next/app";
 import "./globals.css";
 
 const inter = Inter({
@@ -90,7 +92,12 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <link rel="preload" as="image" href="/hero/hero-latest-1.png" fetchPriority="high" />
+        <link
+          rel="preload"
+          as="image"
+          href="/hero/hero-latest-1.png"
+          fetchPriority="high"
+        />
         <meta name="apple-mobile-web-app-title" content="Start Business" />
         <meta
           name="google-site-verification"
@@ -111,26 +118,35 @@ export default function RootLayout({
         </Script>
       </head>
       <body className={inter.className} suppressHydrationWarning>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="light"
-          enableSystem={false}
-          disableTransitionOnChange
-        >
-          <Analytics />
-          <QueryProvider>
-            <div className="relative min-h-screen flex flex-col">
-              <UIProvider>
-                <Header />
-                <main className="flex-1">{children}</main>
-                <Footer />
-                <FloatingCallButton />
-                <Chatbot />
-              </UIProvider>
-            </div>
-          </QueryProvider>
-          <Toaster position="top-center" expand={true} richColors closeButton />
-        </ThemeProvider>
+        <NuqsAdapter>
+          <NuqsSuspenseProvider>
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="light"
+              enableSystem={false}
+              disableTransitionOnChange
+            >
+              <Analytics />
+              <QueryProvider>
+                <div className="relative min-h-screen flex flex-col">
+                  <UIProvider>
+                    <Header />
+                    <main className="flex-1">{children}</main>
+                    <Footer />
+                    <FloatingCallButton />
+                    <Chatbot />
+                  </UIProvider>
+                </div>
+              </QueryProvider>
+              <Toaster
+                position="top-center"
+                expand={true}
+                richColors
+                closeButton
+              />
+            </ThemeProvider>
+          </NuqsSuspenseProvider>
+        </NuqsAdapter>
       </body>
     </html>
   );

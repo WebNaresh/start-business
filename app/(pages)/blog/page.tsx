@@ -1,36 +1,40 @@
-import { Metadata } from 'next'
-import BlogListClient from "@/components/blog/blog-list-client"
+import { Metadata } from "next";
+import BlogListClient from "@/components/blog/blog-list-client";
 
 export const metadata: Metadata = {
-  title: 'Blog | Your Business Hub - Expert Insights & Guides',
-  description: 'Discover expert insights on business registration, finance, entrepreneurship, and more. Read our comprehensive guides to help you succeed in your business journey.',
-  keywords: 'business blog, entrepreneurship, finance tips, business registration, startup guides, business insights',
+  title: "Blog | Your Business Hub - Expert Insights & Guides",
+  description:
+    "Discover expert insights on business registration, finance, entrepreneurship, and more. Read our comprehensive guides to help you succeed in your business journey.",
+  keywords:
+    "business blog, entrepreneurship, finance tips, business registration, startup guides, business insights",
   openGraph: {
-    title: 'Blog | Your Business Hub - Expert Insights & Guides',
-    description: 'Discover expert insights on business registration, finance, entrepreneurship, and more. Read our comprehensive guides to help you succeed in your business journey.',
-    url: '/blog',
-    siteName: 'Your Business Blog',
+    title: "Blog | Your Business Hub - Expert Insights & Guides",
+    description:
+      "Discover expert insights on business registration, finance, entrepreneurship, and more. Read our comprehensive guides to help you succeed in your business journey.",
+    url: "/blog",
+    siteName: "Your Business Blog",
     images: [
       {
-        url: '/blog-og-image.jpg',
+        url: "/blog-og-image.jpg",
         width: 1200,
         height: 630,
-        alt: 'Your Business Blog',
-      }
+        alt: "Your Business Blog",
+      },
     ],
-    locale: 'en_US',
-    type: 'website',
+    locale: "en_US",
+    type: "website",
   },
   twitter: {
-    card: 'summary_large_image',
-    title: 'Blog | Your Business Hub - Expert Insights & Guides',
-    description: 'Discover expert insights on business registration, finance, entrepreneurship, and more.',
-    images: ['/blog-og-image.jpg'],
+    card: "summary_large_image",
+    title: "Blog | Your Business Hub - Expert Insights & Guides",
+    description:
+      "Discover expert insights on business registration, finance, entrepreneurship, and more.",
+    images: ["/blog-og-image.jpg"],
   },
   alternates: {
-    canonical: '/blog',
+    canonical: "/blog", // Canonical URL without query strings for SEO
   },
-}
+};
 
 export default function BlogListingPage() {
   return (
@@ -39,10 +43,13 @@ export default function BlogListingPage() {
       <section className="relative overflow-hidden bg-gradient-to-r from-blue-600 via-blue-700 to-indigo-700">
         {/* Background Pattern */}
         <div className="absolute inset-0 opacity-20">
-          <div className="absolute inset-0" style={{
-            backgroundImage: `radial-gradient(circle at 1px 1px, rgba(255,255,255,0.15) 1px, transparent 0)`,
-            backgroundSize: '20px 20px'
-          }}></div>
+          <div
+            className="absolute inset-0"
+            style={{
+              backgroundImage: `radial-gradient(circle at 1px 1px, rgba(255,255,255,0.15) 1px, transparent 0)`,
+              backgroundSize: "20px 20px",
+            }}
+          ></div>
         </div>
 
         <div className="relative container mx-auto px-4 py-16 lg:py-24">
@@ -60,7 +67,8 @@ export default function BlogListingPage() {
             </h1>
 
             <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto leading-relaxed">
-              Discover expert advice, practical guides, and industry insights to help you navigate your business journey with confidence.
+              Discover expert advice, practical guides, and industry insights to
+              help you navigate your business journey with confidence.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
@@ -84,8 +92,16 @@ export default function BlogListingPage() {
 
         {/* Bottom Wave */}
         <div className="absolute bottom-0 left-0 right-0">
-          <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto">
-            <path d="M0 120L60 105C120 90 240 60 360 45C480 30 600 30 720 37.5C840 45 960 60 1080 67.5C1200 75 1320 75 1380 75L1440 75V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z" fill="rgb(248 250 252)"/>
+          <svg
+            viewBox="0 0 1440 120"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            className="w-full h-auto"
+          >
+            <path
+              d="M0 120L60 105C120 90 240 60 360 45C480 30 600 30 720 37.5C840 45 960 60 1080 67.5C1200 75 1320 75 1380 75L1440 75V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z"
+              fill="rgb(248 250 252)"
+            />
           </svg>
         </div>
       </section>
@@ -93,5 +109,5 @@ export default function BlogListingPage() {
       {/* Blog Posts Grid */}
       <BlogListClient />
     </div>
-  )
+  );
 }
