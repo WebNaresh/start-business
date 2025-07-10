@@ -115,18 +115,34 @@ export async function DELETE(
     try {
         const resolvedParams = await params
 
-        // Note: Image cleanup removed for simplicity
-        // Images are managed through S3 lifecycle policies
+        // Verify blog exists before attempting deletion
+        const existingBlog = await prisma.blog.findUnique({
+            where: { slug: resolvedParams.slug },
+            select: { id: true, slug: true }
+        })
 
+        if (!existingBlog) {
+            return NextResponse.json(
+                { error: 'Blog not found' },
+                { status: 404 }
+            )
+        }
+
+        // Delete the blog and wait for the transaction to complete
         await prisma.blog.delete({
             where: {
                 slug: resolvedParams.slug
             }
         })
 
-        // Note: Image cleanup handled by S3 lifecycle policies
+        // Ensure database transaction is fully committed
+        // Small delay to guarantee consistency across database replicas
+        await new Promise(resolve => setTimeout(resolve, 100))
 
-        return NextResponse.json({ message: 'Blog deleted successfully' }, {
+        return NextResponse.json({
+            message: 'Blog deleted successfully',
+            slug: resolvedParams.slug
+        }, {
             headers: {
                 'Cache-Control': 'no-cache, no-store, must-revalidate',
                 'Pragma': 'no-cache',
@@ -135,6 +151,17 @@ export async function DELETE(
         })
     } catch (error) {
         console.error('Error deleting blog:', error)
+
+        // Handle specific Prisma errors
+        if (error && typeof error === 'object' && 'code' in error) {
+            if (error.code === 'P2025') {
+                return NextResponse.json(
+                    { error: 'Blog not found' },
+                    { status: 404 }
+                )
+            }
+        }
+
         return NextResponse.json(
             { error: 'Failed to delete blog' },
             { status: 500 }

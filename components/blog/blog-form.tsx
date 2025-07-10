@@ -187,27 +187,12 @@ export default function BlogForm({
       if (onSubmit) {
         await onSubmit(blogData);
       } else {
-        // Default API call
-        const url = isEditing ? `/api/blogs/${blog.slug}` : "/api/blogs";
-        const method = isEditing ? "PUT" : "POST";
-
-        const response = await fetch(url, {
-          method,
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(blogData),
-        });
-
-        if (!response.ok) {
-          const errorData = await response.json().catch(() => ({}));
-          const errorMessage =
-            errorData.error ||
-            `Failed to ${isEditing ? "update" : "create"} blog`;
-          throw new Error(errorMessage);
+        // Default API call using axios
+        if (isEditing) {
+          await axios.put(`/api/blogs/${blog.slug}`, blogData);
+        } else {
+          await axios.post("/api/blogs", blogData);
         }
-
-        const result = await response.json();
         toast.success(`Blog ${isEditing ? "updated" : "created"} successfully`);
         router.push("/admin/blogs");
       }

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, use as usePromise } from "react";
+import { useEffect, use as usePromise } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import BlogForm from "@/components/blog/blog-form";
 import type { Blog } from "@/lib/types";
 import AdminNavigation from "@/components/admin/admin-navigation";
+import { useBlog, useUpdateBlog } from "@/hooks/use-blogs";
 
 export default function EditBlogPage({
   params,
@@ -17,50 +18,40 @@ export default function EditBlogPage({
 }) {
   const router = useRouter();
   const { slug } = usePromise(params) as { slug: string };
-  const [isLoading, setIsLoading] = useState(true);
-  const [blog, setBlog] = useState<Partial<Blog> | undefined>();
 
+  // Fetch blog data using custom hook
+  const { data: blogData, isLoading, error } = useBlog(slug);
+
+  // Update blog mutation
+  const updateMutation = useUpdateBlog();
+
+  // Handle error
   useEffect(() => {
-    fetchBlog();
-  }, [slug]);
-
-  const fetchBlog = async () => {
-    try {
-      const response = await fetch(`/api/blogs/${slug}`);
-      if (!response.ok) throw new Error("Blog not found");
-      const data = await response.json();
-      setBlog({
-        ...data,
-        metaTitle: data.metaTitle || "",
-        metaDescription: data.metaDescription || "",
-        excerpt: data.excerpt || "",
-        content: data.content || "",
-        editorData: data.editorData || "",
-      });
-    } catch (error) {
+    if (error) {
+      console.error("Error fetching blog:", error);
       toast.error("Failed to fetch blog");
       router.push("/admin/blogs");
-    } finally {
-      setIsLoading(false);
     }
-  };
+  }, [error, router]);
+
+  // Prepare blog data with defaults
+  const blog = blogData
+    ? {
+        ...blogData,
+        metaTitle: blogData.metaTitle || "",
+        metaDescription: blogData.metaDescription || "",
+        excerpt: blogData.excerpt || "",
+        content: blogData.content || "",
+        editorData: blogData.editorData || "",
+      }
+    : undefined;
 
   const handleSubmit = async (blogData: Partial<Blog>) => {
     try {
-      const response = await fetch(`/api/blogs/${slug}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(blogData),
-      });
-
-      if (!response.ok) throw new Error("Failed to update blog");
-
-      toast.success("Blog updated successfully");
+      await updateMutation.mutateAsync({ slug, data: blogData });
       router.push("/admin/blogs");
     } catch (error) {
-      toast.error("Failed to update blog");
+      // Error handling is done in the mutation hook
       throw error;
     }
   };
