@@ -43,6 +43,7 @@ const EnhancedEditor = forwardRef<EditorRef, EditorProps>(
     const holderRef = useRef<HTMLDivElement>(null);
     const [isEditorReady, setIsEditorReady] = useState(false);
     const lastDataString = useRef<string>("");
+    const renderTimeoutRef = useRef<NodeJS.Timeout | null>(null);
     const editorId = useRef(
       `enhanced-editor-${Math.random().toString(36).substring(2, 11)}`
     ).current;
@@ -170,13 +171,26 @@ const EnhancedEditor = forwardRef<EditorRef, EditorProps>(
                 console.log("🚀 Editor ready, loading initial data:", data);
                 const convertedData = convertEditorDataMarkdownToInline(data);
 
-                // Use the correct EditorJS API for rendering data
+                // Use the correct EditorJS API for rendering data with validation
                 try {
-                  await editor.blocks.clear();
-                  if (convertedData.blocks && convertedData.blocks.length > 0) {
-                    await editor.blocks.render(convertedData);
+                  if (
+                    editor.blocks &&
+                    typeof editor.blocks.clear === "function" &&
+                    typeof editor.blocks.render === "function"
+                  ) {
+                    await editor.blocks.clear();
+                    if (
+                      convertedData.blocks &&
+                      convertedData.blocks.length > 0
+                    ) {
+                      await editor.blocks.render(convertedData);
+                    }
+                    console.log("✅ Successfully loaded initial data");
+                  } else {
+                    console.warn(
+                      "⚠️ EditorJS blocks API not available during initialization"
+                    );
                   }
-                  console.log("✅ Successfully loaded initial data");
                 } catch (error) {
                   console.error("❌ Error loading initial data:", error);
                 }
@@ -248,6 +262,14 @@ const EnhancedEditor = forwardRef<EditorRef, EditorProps>(
 
         lastDataString.current = currentDataString;
 
+        // Additional safety check: ensure blocks API is available
+        if (!editorRef.current.blocks) {
+          console.warn(
+            "⚠️ EditorJS blocks API not available yet, skipping render"
+          );
+          return;
+        }
+
         console.log("🚀 Updating EditorJS with new data:", data);
 
         // Convert markdown syntax to EditorJS inline format before rendering
@@ -261,12 +283,14 @@ const EnhancedEditor = forwardRef<EditorRef, EditorProps>(
             return;
           }
 
-          // Use the correct EditorJS blocks API with fallback
+          // Use the correct EditorJS blocks API with proper validation
           if (
             editorRef.current.blocks &&
-            typeof editorRef.current.blocks.clear === "function"
+            typeof editorRef.current.blocks.clear === "function" &&
+            typeof editorRef.current.blocks.render === "function"
           ) {
-            // Modern EditorJS API (v2.x)
+            // Modern EditorJS API (v2.x) - preferred method
+            console.log("🔄 Using EditorJS blocks API");
             await editorRef.current.blocks.clear();
             if (convertedData.blocks && convertedData.blocks.length > 0) {
               await editorRef.current.blocks.render(convertedData);
@@ -274,11 +298,16 @@ const EnhancedEditor = forwardRef<EditorRef, EditorProps>(
             console.log("✅ Successfully rendered new data using blocks API");
           } else if (typeof editorRef.current.render === "function") {
             // Legacy EditorJS API fallback
+            console.log("🔄 Using legacy EditorJS render API");
             await editorRef.current.render(convertedData);
             console.log(
               "✅ Successfully rendered new data using legacy render API"
             );
-          } else {
+          } else if (
+            editorRef.current.blocks &&
+            typeof editorRef.current.blocks.clear === "function" &&
+            typeof editorRef.current.blocks.insert === "function"
+          ) {
             // Manual block insertion as last resort
             console.warn("⚠️ Using manual block insertion fallback");
             await editorRef.current.blocks.clear();
@@ -288,6 +317,14 @@ const EnhancedEditor = forwardRef<EditorRef, EditorProps>(
             console.log(
               "✅ Successfully rendered new data using manual insertion"
             );
+          } else {
+            // Editor not ready or API not available
+            console.warn("⚠️ EditorJS API not ready, skipping render");
+            console.log(
+              "Available methods:",
+              Object.getOwnPropertyNames(editorRef.current)
+            );
+            return;
           }
         } catch (error) {
           console.error("❌ Error rendering editor data:", error);
@@ -295,7 +332,22 @@ const EnhancedEditor = forwardRef<EditorRef, EditorProps>(
         }
       };
 
-      renderData();
+      // Clear any existing timeout to debounce rapid updates
+      if (renderTimeoutRef.current) {
+        clearTimeout(renderTimeoutRef.current);
+      }
+
+      // Debounce the render operation to prevent infinite loops
+      renderTimeoutRef.current = setTimeout(() => {
+        renderData();
+      }, 100); // 100ms debounce
+
+      // Cleanup timeout on unmount
+      return () => {
+        if (renderTimeoutRef.current) {
+          clearTimeout(renderTimeoutRef.current);
+        }
+      };
     }, [data, isLoading, isEditorReady]);
 
     // Show skeleton while loading
