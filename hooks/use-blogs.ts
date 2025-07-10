@@ -11,9 +11,17 @@ const fetchBlogs = async (status?: string): Promise<Blog[]> => {
       params.append('status', status)
     }
 
+    console.log(`🔄 Fetching blogs with status: ${status || 'published'}`)
     const response = await axios.get(`/api/blogs?${params.toString()}`)
-    return Array.isArray(response.data) ? response.data : []
+    const blogs = Array.isArray(response.data) ? response.data : []
+
+    console.log(`📊 Fetched ${blogs.length} blogs for status "${status || 'published'}":`,
+      blogs.map(blog => ({ title: blog.title, status: blog.status }))
+    )
+
+    return blogs
   } catch (error) {
+    console.error(`❌ Error fetching blogs for status "${status}":`, error)
     if (axios.isAxiosError(error)) {
       const errorMessage = error.response?.data?.error || error.message
       throw new Error(errorMessage)

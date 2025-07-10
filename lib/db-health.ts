@@ -137,6 +137,45 @@ export function getMockBlogData() {
       metaTitle: 'GST Registration Process Made Simple',
       metaDescription: 'Complete guide to GST registration for businesses in India',
       tags: 'gst registration, tax compliance, business'
+    },
+    {
+      id: 3,
+      title: 'Understanding FSSAI License Requirements',
+      slug: 'understanding-fssai-license-requirements-draft',
+      excerpt: 'Complete guide to FSSAI license requirements for food businesses in India. Learn about different types of licenses and application process.',
+      featuredImage: null,
+      author: 'StartBusiness Team',
+      status: 'draft',
+      publishedAt: null,
+      metaTitle: 'Understanding FSSAI License Requirements',
+      metaDescription: 'Learn about FSSAI license requirements for food businesses',
+      tags: 'fssai license, food business, compliance'
+    },
+    {
+      id: 4,
+      title: 'Digital Marketing Strategies for Small Businesses',
+      slug: 'digital-marketing-strategies-small-businesses-draft',
+      excerpt: 'Effective digital marketing strategies that small businesses can implement to grow their online presence and reach more customers.',
+      featuredImage: null,
+      author: 'StartBusiness Team',
+      status: 'draft',
+      publishedAt: null,
+      metaTitle: 'Digital Marketing Strategies for Small Businesses',
+      metaDescription: 'Digital marketing strategies for small business growth',
+      tags: 'digital marketing, small business, online marketing'
+    },
+    {
+      id: 5,
+      title: 'Tax Planning for Startups in India',
+      slug: 'tax-planning-startups-india-draft',
+      excerpt: 'Essential tax planning strategies for startups in India. Learn about tax benefits, deductions, and compliance requirements.',
+      featuredImage: null,
+      author: 'StartBusiness Team',
+      status: 'draft',
+      publishedAt: null,
+      metaTitle: 'Tax Planning for Startups in India',
+      metaDescription: 'Tax planning strategies and benefits for Indian startups',
+      tags: 'tax planning, startups, india, compliance'
     }
   ]
 }

@@ -41,7 +41,14 @@ export async function GET(request: Request) {
                     skip: offset
                 })
             },
-            getMockBlogData().slice(offset, offset + limit) // Fallback data
+            // Apply status filtering to mock data as well
+            (() => {
+                const mockData = getMockBlogData()
+                const filteredMockData = status === 'all'
+                    ? mockData
+                    : mockData.filter(blog => blog.status === status)
+                return filteredMockData.slice(offset, offset + limit)
+            })()
         )
 
         // Add cache headers for better performance

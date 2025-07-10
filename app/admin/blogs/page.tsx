@@ -41,6 +41,17 @@ export default function AdminBlogsPage() {
     draft: allBlogs.filter((blog) => blog.status === "draft").length,
   };
 
+  // Debug logging for blog counts
+  console.log("🔍 Admin Blog Counts Debug:", {
+    totalBlogs: allBlogs.length,
+    blogStatuses: allBlogs.map((blog) => ({
+      title: blog.title,
+      status: blog.status,
+    })),
+    calculatedCounts: blogCounts,
+    statusFilter: statusFilter,
+  });
+
   // Delete mutation with optimistic updates
   const deleteMutation = useDeleteBlog();
 
