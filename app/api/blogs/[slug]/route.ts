@@ -82,8 +82,6 @@ export async function PUT(
             }
         })
 
-        // Note: Image cleanup removed for simplicity
-        // Featured images are managed through S3 lifecycle policies
 
         return NextResponse.json(updatedBlog)
     } catch (error) {
