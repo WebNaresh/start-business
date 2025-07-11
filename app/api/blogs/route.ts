@@ -62,13 +62,7 @@ export async function GET(request: Request) {
         )
 
         // Add cache headers for better performance
-        return NextResponse.json(blogs, {
-            headers: {
-                'Cache-Control': 'public, s-maxage=300, stale-while-revalidate=600',
-                'CDN-Cache-Control': 'public, s-maxage=300',
-                'Vercel-CDN-Cache-Control': 'public, s-maxage=300'
-            }
-        })
+        return NextResponse.json(blogs)
     } catch (error) {
         console.error('Error fetching blogs:', error)
         return NextResponse.json(
