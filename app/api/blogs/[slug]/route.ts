@@ -39,14 +39,7 @@ export async function GET(
         }
 
         // Add aggressive caching for individual blog posts
-        return NextResponse.json(blog, {
-            headers: {
-                'Cache-Control': 'public, s-maxage=3600, stale-while-revalidate=86400',
-                'CDN-Cache-Control': 'public, s-maxage=3600',
-                'Vercel-CDN-Cache-Control': 'public, s-maxage=3600',
-                'ETag': `"${blog.slug}-${blog.updatedAt.getTime()}"`
-            }
-        })
+        return NextResponse.json(blog)
     } catch (error) {
         console.error('Error fetching blog:', error)
         return NextResponse.json(
@@ -92,13 +85,7 @@ export async function PUT(
         // Note: Image cleanup removed for simplicity
         // Featured images are managed through S3 lifecycle policies
 
-        return NextResponse.json(updatedBlog, {
-            headers: {
-                'Cache-Control': 'no-cache, no-store, must-revalidate',
-                'Pragma': 'no-cache',
-                'Expires': '0'
-            }
-        })
+        return NextResponse.json(updatedBlog)
     } catch (error) {
         console.error('Error updating blog:', error)
         return NextResponse.json(
@@ -142,12 +129,6 @@ export async function DELETE(
         return NextResponse.json({
             message: 'Blog deleted successfully',
             slug: resolvedParams.slug
-        }, {
-            headers: {
-                'Cache-Control': 'no-cache, no-store, must-revalidate',
-                'Pragma': 'no-cache',
-                'Expires': '0'
-            }
         })
     } catch (error) {
         console.error('Error deleting blog:', error)

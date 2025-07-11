@@ -119,14 +119,7 @@ export async function POST(req: Request) {
             data: blogData as any // Type assertion to handle schema transition
         })
 
-        return NextResponse.json(newBlog, {
-            status: 201,
-            headers: {
-                'Cache-Control': 'no-cache, no-store, must-revalidate',
-                'Pragma': 'no-cache',
-                'Expires': '0'
-            }
-        })
+        return NextResponse.json(newBlog,)
     } catch (error) {
         console.error('Error creating blog:', error)
         return NextResponse.json(

@@ -36,16 +36,16 @@ function checkRateLimit(ip: string): boolean {
   const maxRequests = 30 // 30 requests per minute
 
   const record = rateLimitStore.get(ip)
-  
+
   if (!record || now > record.resetTime) {
     rateLimitStore.set(ip, { count: 1, resetTime: now + windowMs })
     return true
   }
-  
+
   if (record.count >= maxRequests) {
     return false
   }
-  
+
   record.count++
   return true
 }
@@ -53,15 +53,15 @@ function checkRateLimit(ip: string): boolean {
 function getClientIP(request: NextRequest): string {
   const forwarded = request.headers.get('x-forwarded-for')
   const realIP = request.headers.get('x-real-ip')
-  
+
   if (forwarded) {
     return forwarded.split(',')[0].trim()
   }
-  
+
   if (realIP) {
     return realIP
   }
-  
+
   return 'unknown'
 }
 
@@ -71,24 +71,24 @@ function validateSearchQuery(query: string): { isValid: boolean; type: 'name' | 
   }
 
   const trimmedQuery = query.trim().toUpperCase()
-  
+
   // CIN format: L/U + 5 digits + 2 letters + 4 digits + 3 letters + 6 digits
   const cinPattern = /^[LU]\d{5}[A-Z]{2}\d{4}[A-Z]{3}\d{6}$/
   if (cinPattern.test(trimmedQuery)) {
     return { isValid: true, type: 'cin' }
   }
-  
+
   // LLPIN format: 3 letters + 4 digits + 1 letter + 4 digits + 3 letters + 6 digits
   const llpinPattern = /^[A-Z]{3}\d{4}[A-Z]\d{4}[A-Z]{3}\d{6}$/
   if (llpinPattern.test(trimmedQuery)) {
     return { isValid: true, type: 'llpin' }
   }
-  
+
   // Company name search
   if (trimmedQuery.length >= 2) {
     return { isValid: true, type: 'name' }
   }
-  
+
   return { isValid: false, type: null }
 }
 
@@ -173,15 +173,11 @@ export async function POST(request: NextRequest) {
       message: validation.type === 'name' ? 'Company search results' : 'Company details found'
     }
 
-    return NextResponse.json(apiResponse, {
-      headers: {
-        'Cache-Control': 'public, s-maxage=300, stale-while-revalidate=600', // Cache for 5 minutes
-      }
-    })
+    return NextResponse.json(apiResponse)
 
   } catch (error) {
     console.error('Company search API error:', error)
-    
+
     if (error instanceof Error && error.name === 'AbortError') {
       return NextResponse.json(
         { success: false, error: 'Request timeout. Please try again.' },
