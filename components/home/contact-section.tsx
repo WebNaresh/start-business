@@ -189,7 +189,7 @@ export default function ContactSection() {
 
   return (
     <section 
-      className="bg-gradient-to-br from-slate-50 to-blue-50/30 py-12 sm:py-8 md:py-8"
+      className="bg-background py-12 sm:py-8 md:py-8"
       aria-labelledby="contact-heading"
     >
       <Script
@@ -212,24 +212,24 @@ export default function ContactSection() {
           {/* Contact Information */}
           <div className="bg-white rounded-xl p-6 sm:p-8 shadow-lg border border-slate-100">
             <div className="mb-8 space-y-4" role="list" aria-label="Contact information">
-              <div className="flex items-center p-3 rounded-lg bg-slate-50 hover:bg-blue-50 transition-colors duration-300" role="listitem">
-                <div className="mr-4 rounded-full bg-blue-100 p-2.5" aria-hidden="true">
-                  <Phone className="h-5 w-5 text-blue-600" />
+              <div className="flex items-center p-3 rounded-lg bg-secondary hover:bg-secondary/80 transition-colors duration-300" role="listitem">
+                <div className="mr-4 rounded-full bg-primary/10 p-2.5" aria-hidden="true">
+                  <Phone className="h-5 w-5 text-primary" />
                 </div>
                 <div>
                   <p className="text-sm text-slate-500 mb-1">Phone Support</p>
                   <a 
                     href="tel:+919168499520" 
-                    className="text-base font-semibold text-slate-700 hover:text-blue-600 transition-colors"
+                    className="text-base font-semibold text-foreground hover:text-primary transition-colors"
                     aria-label="Call us at +91 91684 99520"
                   >
                     +91 91684 99520
                   </a>
                 </div>
               </div>
-              <div className="flex items-center p-3 rounded-lg bg-slate-50 hover:bg-blue-50 transition-colors duration-300" role="listitem">
-                <div className="mr-4 rounded-full bg-blue-100 p-2.5" aria-hidden="true">
-                  <MessageSquare className="h-5 w-5 text-blue-600" />
+              <div className="flex items-center p-3 rounded-lg bg-secondary hover:bg-secondary/80 transition-colors duration-300" role="listitem">
+                <div className="mr-4 rounded-full bg-primary/10 p-2.5" aria-hidden="true">
+                  <MessageSquare className="h-5 w-5 text-primary" />
                 </div>
                 <div>
                   <p className="text-sm text-slate-500 mb-1">Contact Form</p>
@@ -242,13 +242,13 @@ export default function ContactSection() {
                   </a>
                 </div>
               </div>
-              <div className="flex items-start p-3 rounded-lg bg-slate-50 hover:bg-blue-50 transition-colors duration-300" role="listitem">
-                <div className="mr-4 rounded-full bg-blue-100 p-2.5" aria-hidden="true">
-                  <MapPin className="h-5 w-5 text-blue-600" />
+              <div className="flex items-start p-3 rounded-lg bg-secondary hover:bg-secondary/80 transition-colors duration-300" role="listitem">
+                <div className="mr-4 rounded-full bg-primary/10 p-2.5" aria-hidden="true">
+                  <MapPin className="h-5 w-5 text-primary" />
                 </div>
                 <div>
-                  <p className="text-sm text-slate-500 mb-1">Office Location</p>
-                  <address className="text-base font-semibold text-slate-700 not-italic">
+                  <p className="text-sm text-muted-foreground mb-1">Office Location</p>
+                  <address className="text-base font-semibold text-foreground not-italic">
                     Office No 7, 3rd Floor, Saraswati Heights, Deccan Gymkhana, Behind Goodluck Café, Pune 411004
                   </address>
                 </div>
@@ -256,9 +256,9 @@ export default function ContactSection() {
             </div>
 
             {/* Business Hours */}
-            <div className="mb-8 p-4 rounded-lg bg-blue-50 border border-blue-100">
-              <h3 className="text-base font-semibold text-slate-800 mb-3 flex items-center">
-                <Building2 className="h-4 w-4 mr-2 text-blue-600" />
+            <div className="mb-8 p-4 rounded-lg bg-primary/10 border border-primary/20">
+              <h3 className="text-base font-semibold text-foreground mb-3 flex items-center">
+                <Building2 className="h-4 w-4 mr-2 text-primary" />
                 Business Hours
               </h3>
               <div className="space-y-2">
@@ -301,7 +301,7 @@ export default function ContactSection() {
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
-                    className={`w-full rounded-lg border ${errors.name ? 'border-red-500' : 'border-slate-300'} p-2.5 text-slate-900 focus:border-blue-500 focus:ring-blue-500 transition-colors`}
+                    className={`w-full rounded-lg border ${errors.name ? 'border-red-500' : 'border-border'} p-2.5 text-foreground focus:border-primary focus:ring-primary transition-colors`}
                     placeholder="Your name"
                     aria-invalid={!!errors.name}
                     aria-describedby={errors.name ? 'name-error' : undefined}
@@ -322,7 +322,7 @@ export default function ContactSection() {
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
-                    className={`w-full rounded-lg border ${errors.email ? 'border-red-500' : 'border-slate-300'} p-2.5 text-slate-900 focus:border-blue-500 focus:ring-blue-500 transition-colors`}
+                    className={`w-full rounded-lg border ${errors.email ? 'border-red-500' : 'border-border'} p-2.5 text-foreground focus:border-primary focus:ring-primary transition-colors`}
                     placeholder="your@email.com"
                     aria-invalid={!!errors.email}
                     aria-describedby={errors.email ? 'email-error' : undefined}
@@ -344,7 +344,7 @@ export default function ContactSection() {
                   name="phone"
                   value={formData.phone}
                   onChange={handleChange}
-                  className={`w-full rounded-lg border ${errors.phone ? 'border-red-500' : 'border-slate-300'} p-2.5 text-slate-900 focus:border-blue-500 focus:ring-blue-500 transition-colors`}
+                  className={`w-full rounded-lg border ${errors.phone ? 'border-red-500' : 'border-border'} p-2.5 text-foreground focus:border-primary focus:ring-primary transition-colors`}
                   placeholder="+91 91684 99520"
                   aria-invalid={!!errors.phone}
                   aria-describedby={errors.phone ? 'phone-error' : undefined}

@@ -92,9 +92,9 @@ export default function TrustStatsSection() {
       value: `${counters.businesses}+`,
       label: "Business Registered",
       description: "Across India",
-      color: "from-blue-500 to-blue-600",
-      bgColor: "bg-blue-50",
-      iconColor: "text-blue-600",
+      color: "text-primary",
+      bgColor: "bg-primary/10",
+      iconColor: "text-primary",
       trend: "+15% this month",
     },
     {
@@ -102,9 +102,9 @@ export default function TrustStatsSection() {
       value: `${counters.successRate}%`,
       label: "Success Rate",
       description: "Positive client feedback",
-      color: "from-green-500 to-green-600",
-      bgColor: "bg-green-50",
-      iconColor: "text-green-600",
+      color: "text-primary",
+      bgColor: "bg-primary/10",
+      iconColor: "text-primary",
       trend: "Perfect record",
     },
     {
@@ -131,7 +131,7 @@ export default function TrustStatsSection() {
 
   return (
     <section 
-      className="py-4 relative overflow-hidden via-white to-blue-50/30"
+      className="py-4 relative overflow-hidden via-background to-background/30"
       aria-labelledby="stats-heading"
     >
       <Script
@@ -153,7 +153,7 @@ export default function TrustStatsSection() {
         {/* Header */}
         <div className="text-center mb-16">
           <Badge 
-            className="mb-6 bg-blue-100 text-blue-700 border-blue-200 px-6 py-3 text-sm"
+            className="mb-6 bg-secondary text-secondary-foreground border-border px-6 py-3 text-sm"
             aria-label="Trust badge"
           >
             <Star className="w-4 h-4 mr-2 fill-current" aria-hidden="true" />
@@ -165,7 +165,7 @@ export default function TrustStatsSection() {
             className="text-2xl md:text-3xl font-bold text-slate-900 mb-3"
           >
             Why Entrepreneurs Trust {""}
-            <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+            <span className="text-primary">
               StartBusiness
             </span>
           </h2>

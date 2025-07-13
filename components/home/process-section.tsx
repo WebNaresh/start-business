@@ -10,19 +10,19 @@ export default function ProcessSection() {
       icon: MessageSquare,
       title: "Consultation",
       description: "Schedule a free consultation with our experts to discuss your requirements",
-      color: "bg-blue-50 text-blue-600 border-blue-600",
-      hoverColor: "group-hover:bg-blue-600 group-hover:text-white",
-      shadowColor: "shadow-blue-200",
-      gradient: "from-blue-500 to-blue-600",
+      color: "bg-primary/10 text-primary border-primary",
+      hoverColor: "group-hover:bg-primary group-hover:text-primary-foreground",
+      shadowColor: "shadow-primary/20",
+      gradient: "text-primary",
     },
     {
       icon: FileText,
       title: "Documentation",
       description: "We'll guide you through the required documentation process",
-      color: "bg-purple-50 text-purple-600 border-purple-600",
-      hoverColor: "group-hover:bg-purple-600 group-hover:text-white",
-      shadowColor: "shadow-purple-200",
-      gradient: "from-purple-500 to-purple-600",
+      color: "bg-primary/10 text-primary border-primary",
+      hoverColor: "group-hover:bg-primary group-hover:text-primary-foreground",
+      shadowColor: "shadow-primary/20",
+      gradient: "text-primary",
     },
     {
       icon: ClipboardCheck,
@@ -74,12 +74,12 @@ export default function ProcessSection() {
       />
       <div className="container mx-auto px-4">
         <div className="mb-16 text-center">
-          <Badge variant="secondary" className="mb-4 bg-blue-100 text-blue-700 px-4 py-2">
+          <Badge variant="secondary" className="mb-4 bg-secondary text-secondary-foreground px-4 py-2">
             <Sparkles className="w-4 h-4 mr-2" aria-hidden="true" />
             Simple Process
           </Badge>
           <h2 id="process-heading" className="text-2xl md:text-3xl font-bold text-slate-900 mb-3">
-            How It <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Works</span>
+            How It <span className="text-primary">Works</span>
           </h2>
           <p className="text-sm md:text-base text-slate-600 mb-8 max-w-2xl mx-auto">
             Our streamlined 4-step process makes business registration simple, efficient, and hassle-free
@@ -89,7 +89,7 @@ export default function ProcessSection() {
         <div className="relative">
           {/* Connecting line for mobile */}
           <div 
-            className="absolute left-1/2 top-0 h-full w-1 -translate-x-1/2 bg-gradient-to-b from-blue-200 via-purple-200 to-emerald-200 md:hidden"
+            className="absolute left-1/2 top-0 h-full w-1 -translate-x-1/2 bg-gradient-to-b from-primary/30 via-primary/20 to-primary/10 md:hidden"
             aria-hidden="true"
           />
 
@@ -98,7 +98,7 @@ export default function ProcessSection() {
             className="absolute left-0 top-1/2 hidden h-2 w-full -translate-y-1/2 md:block"
             aria-hidden="true"
           >
-            <div className="h-full bg-gradient-to-r from-blue-200 via-purple-200 to-emerald-200 rounded-full"></div>
+            <div className="h-full bg-gradient-to-r from-primary/30 via-primary/20 to-primary/10 rounded-full"></div>
           </div>
 
           <div 

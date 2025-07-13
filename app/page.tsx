@@ -22,7 +22,7 @@ export default function Home() {
       <ServicesSection />
       <StatsSection />
           <section
-                className="py-8 sm:py-10 md:py-12 bg-gradient-to-br from-blue-50 to-indigo-50"
+                className="py-8 sm:py-10 md:py-12 bg-background"
                 aria-labelledby="quiz-heading"
               >
                 <div className="container mx-auto px-4 sm:px-6 lg:px-8">
