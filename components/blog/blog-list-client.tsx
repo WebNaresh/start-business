@@ -167,6 +167,14 @@ export default function BlogListClient() {
     setIsLoadingMore(false);
   };
 
+  // Clear all filters and search
+  const clearAllFilters = () => {
+    setSearchQuery("");
+    setCategory("");
+    setDateRange("");
+    setSortBy("newest");
+  };
+
   // Handle error state
   if (error) {
     return (
@@ -202,23 +210,43 @@ export default function BlogListClient() {
 
   if (isLoading) {
     return (
-      <div className="container mx-auto px-4 py-12">
+      <div className="container mx-auto px-4 py-20">
         <div className="animate-pulse">
-          <div className="h-10 bg-gray-200 rounded w-1/4 mb-8"></div>
+          {/* Header Skeleton */}
+          <div className="text-center mb-16">
+            <div className="h-6 bg-blue-100 rounded-full w-32 mx-auto mb-6"></div>
+            <div className="h-12 bg-slate-200 rounded-lg w-96 mx-auto mb-4"></div>
+            <div className="h-6 bg-slate-200 rounded w-80 mx-auto"></div>
+          </div>
+          
+          {/* Search Filter Skeleton */}
+          <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm mb-16">
+            <div className="h-12 bg-slate-200 rounded-xl"></div>
+          </div>
+          
+          {/* Grid Skeleton */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[...Array(6)].map((_, index) => (
               <div
                 key={`skeleton-${index}`}
-                className="bg-white rounded-xl shadow-md overflow-hidden"
+                className="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden"
               >
-                <div className="h-48 bg-gray-200"></div>
+                <div className="h-56 bg-gradient-to-br from-blue-50 to-indigo-50"></div>
                 <div className="p-6">
-                  <div className="h-6 bg-gray-200 rounded w-1/3 mb-2"></div>
-                  <div className="h-6 bg-gray-200 rounded w-full mb-2"></div>
-                  <div className="h-4 bg-gray-200 rounded w-full mb-4"></div>
-                  <div className="flex gap-4">
-                    <div className="h-4 bg-gray-200 rounded w-1/4"></div>
-                    <div className="h-4 bg-gray-200 rounded w-1/4"></div>
+                  <div className="h-6 bg-blue-100 rounded-full w-20 mb-3"></div>
+                  <div className="h-7 bg-slate-200 rounded w-full mb-2"></div>
+                  <div className="h-7 bg-slate-200 rounded w-3/4 mb-4"></div>
+                  <div className="h-4 bg-slate-200 rounded w-full mb-2"></div>
+                  <div className="h-4 bg-slate-200 rounded w-2/3 mb-6"></div>
+                  <div className="flex items-center justify-between pt-4 border-t border-slate-100">
+                    <div className="flex items-center">
+                      <div className="w-10 h-10 bg-blue-100 rounded-full mr-3"></div>
+                      <div>
+                        <div className="h-4 bg-slate-200 rounded w-20 mb-1"></div>
+                        <div className="h-3 bg-slate-200 rounded w-16"></div>
+                      </div>
+                    </div>
+                    <div className="w-8 h-8 bg-blue-50 rounded-full"></div>
                   </div>
                 </div>
               </div>
@@ -230,20 +258,25 @@ export default function BlogListClient() {
   }
 
   return (
-    <section className="container mx-auto px-4 py-16">
+    <section className="container mx-auto px-4 py-20">
       {/* Section Header */}
-      <div className="text-center mb-12">
-        <h2 className="text-3xl font-bold text-gray-900 mb-4">
-          Latest Articles
+      <div className="text-center mb-16">
+        <div className="inline-flex items-center px-4 py-2 bg-blue-50 text-blue-600 rounded-full text-sm font-medium mb-6 border border-blue-100">
+          <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+          Quality Content
+        </div>
+        <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-slate-900 via-blue-900 to-indigo-900 bg-clip-text text-transparent mb-6 leading-tight">
+          Latest Articles & Insights
         </h2>
-        <p className="text-gray-600 max-w-2xl mx-auto mb-8">
-          Stay updated with the latest business insights, expert tips, and
-          industry trends to help grow your business.
+        <p className="text-lg text-slate-600 max-w-3xl mx-auto leading-relaxed">
+          Stay updated with the latest business insights, expert tips, and industry trends to help grow your business and achieve your entrepreneurial goals.
         </p>
       </div>
 
       {/* Search and Filter */}
-      <div className="mb-12">
+      <div className="mb-16">
         <BlogSearchFilter
           onSearch={handleSearch}
           onFilterChange={handleFilterChange}
@@ -254,21 +287,29 @@ export default function BlogListClient() {
 
       {/* Results Summary */}
       {blogPosts.length > 0 && (
-        <div className="mb-8">
-          <p className="text-gray-600 text-center">
-            {allFilteredPosts.length === blogPosts.length
-              ? `Showing all ${blogPosts.length} articles`
-              : `Showing ${visiblePosts.length} of ${allFilteredPosts.length} articles`}
-            {searchQuery && ` for "${searchQuery}"`}
-          </p>
+        <div className="mb-12">
+          <div className="flex items-center justify-center">
+            <div className="bg-white rounded-full px-6 py-3 shadow-sm border border-slate-200">
+              <p className="text-slate-600 text-sm font-medium">
+                {allFilteredPosts.length === blogPosts.length
+                  ? `Showing all ${blogPosts.length} articles`
+                  : `Showing ${visiblePosts.length} of ${allFilteredPosts.length} articles`}
+                {searchQuery && (
+                  <span className="text-blue-600 font-semibold ml-1">
+                    for "{searchQuery}"
+                  </span>
+                )}
+              </p>
+            </div>
+          </div>
         </div>
       )}
 
       {blogPosts.length === 0 ? (
-        <div className="text-center py-16">
-          <div className="w-24 h-24 mx-auto mb-6 bg-gray-100 rounded-full flex items-center justify-center">
+        <div className="text-center py-20">
+          <div className="w-32 h-32 mx-auto mb-8 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-full flex items-center justify-center shadow-lg">
             <svg
-              className="w-12 h-12 text-gray-400"
+              className="w-16 h-16 text-blue-400"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -281,18 +322,26 @@ export default function BlogListClient() {
               />
             </svg>
           </div>
-          <h3 className="text-xl font-semibold text-gray-900 mb-2">
-            No blog posts found
+          <h3 className="text-2xl font-bold text-slate-900 mb-4">
+            No Blog Posts Yet
           </h3>
-          <p className="text-gray-600">
-            Check back soon for new articles and insights.
+          <p className="text-slate-600 mb-8 max-w-md mx-auto">
+            We're working on creating amazing content for you. Check back soon for insightful articles and expert guides.
           </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <button className="px-6 py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors">
+              Subscribe for Updates
+            </button>
+            <button className="px-6 py-3 bg-slate-100 text-slate-700 rounded-lg font-medium hover:bg-slate-200 transition-colors">
+              Explore Services
+            </button>
+          </div>
         </div>
       ) : allFilteredPosts.length === 0 ? (
-        <div className="text-center py-16">
-          <div className="w-24 h-24 mx-auto mb-6 bg-gray-100 rounded-full flex items-center justify-center">
+        <div className="text-center py-20">
+          <div className="w-32 h-32 mx-auto mb-8 bg-gradient-to-br from-amber-50 to-orange-50 rounded-full flex items-center justify-center shadow-lg">
             <svg
-              className="w-12 h-12 text-gray-400"
+              className="w-16 h-16 text-amber-400"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -305,19 +354,29 @@ export default function BlogListClient() {
               />
             </svg>
           </div>
-          <h3 className="text-xl font-semibold text-gray-900 mb-2">
-            No articles match your search
+          <h3 className="text-2xl font-bold text-slate-900 mb-4">
+            No Articles Found
           </h3>
-          <p className="text-gray-600">
-            Try adjusting your search terms or filters to find what you're
-            looking for.
+          <p className="text-slate-600 mb-8 max-w-md mx-auto">
+            We couldn't find any articles matching your search criteria. Try adjusting your filters or search terms.
           </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <button 
+              onClick={clearAllFilters}
+              className="px-6 py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors"
+            >
+              Clear All Filters
+            </button>
+            <button className="px-6 py-3 bg-slate-100 text-slate-700 rounded-lg font-medium hover:bg-slate-200 transition-colors">
+              Browse All Articles
+            </button>
+          </div>
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {visiblePosts.map((post, index) => (
             <Link href={`/blog/${post.slug}`} key={post.id} className="group">
-              <article className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-xl hover:border-blue-200 transition-all duration-500 group-hover:-translate-y-2 h-full flex flex-col">
+              <article className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-2xl hover:border-blue-200 transition-all duration-500 group-hover:-translate-y-3 h-full flex flex-col">
                 {/* Featured Image */}
                 <div className="relative h-56 overflow-hidden bg-gradient-to-br from-blue-50 to-indigo-50">
                   {post.featuredImage &&
@@ -337,10 +396,10 @@ export default function BlogListClient() {
                       fetchPriority={index < 3 ? "high" : "auto"}
                     />
                   ) : (
-                    <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-50">
-                      <div className="text-center text-gray-400">
+                    <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
+                      <div className="text-center text-slate-400">
                         <svg
-                          className="w-16 h-16 mx-auto mb-2"
+                          className="w-20 h-20 mx-auto mb-3"
                           fill="none"
                           stroke="currentColor"
                           viewBox="0 0 24 24"
@@ -352,16 +411,19 @@ export default function BlogListClient() {
                             d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
                           />
                         </svg>
-                        <span className="text-sm">Upload Image</span>
-                        <p className="text-xs mt-1">Use S3 Upload</p>
+                        <span className="text-sm font-medium">Business Insights</span>
+                        <p className="text-xs mt-1 text-slate-300">Expert Content</p>
                       </div>
                     </div>
                   )}
-                  {/* Gradient Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  {/* Enhanced Gradient Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 
                   {/* Reading Time Badge */}
-                  <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-full px-3 py-1 text-xs font-medium text-gray-700">
+                  <div className="absolute top-4 right-4 bg-white/95 backdrop-blur-sm rounded-full px-3 py-1.5 text-xs font-semibold text-slate-700 shadow-sm border border-white/20">
+                    <svg className="w-3 h-3 inline mr-1" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
+                    </svg>
                     5 min read
                   </div>
                 </div>
@@ -370,38 +432,44 @@ export default function BlogListClient() {
                 <div className="p-6 flex-1 flex flex-col">
                   {/* Category/Tags */}
                   {post.tags && (
-                    <div className="mb-3">
-                      <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                    <div className="mb-4">
+                      <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-gradient-to-r from-blue-50 to-indigo-50 text-blue-700 border border-blue-100">
+                        <svg className="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M17.707 9.293a1 1 0 010 1.414l-7 7a1 1 0 01-1.414 0l-7-7A.997.997 0 012 10V5a3 3 0 013-3h5c.256 0 .512.098.707.293l7 7zM5 6a1 1 0 100-2 1 1 0 000 2z" clipRule="evenodd" />
+                        </svg>
                         {post.tags.split(",")[0].trim()}
                       </span>
                     </div>
                   )}
 
                   {/* Title */}
-                  <h2 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors line-clamp-2 leading-tight">
+                  <h2 className="text-xl font-bold text-slate-900 mb-4 group-hover:text-blue-600 transition-colors line-clamp-2 leading-tight">
                     {post.title}
                   </h2>
 
                   {/* Excerpt */}
                   {post.excerpt && (
-                    <p className="text-gray-600 mb-6 line-clamp-3 text-sm leading-relaxed flex-1">
+                    <p className="text-slate-600 mb-6 line-clamp-3 text-sm leading-relaxed flex-1">
                       {post.excerpt}
                     </p>
                   )}
 
                   {/* Author & Meta Info */}
-                  <div className="flex items-center justify-between pt-4 border-t border-gray-100">
+                  <div className="flex items-center justify-between pt-4 border-t border-slate-100">
                     <div className="flex items-center">
-                      <div className="w-10 h-10 rounded-full bg-gradient-to-r from-blue-500 to-indigo-500 mr-3 flex items-center justify-center shadow-sm">
+                      <div className="w-10 h-10 rounded-full bg-gradient-to-r from-blue-500 to-indigo-500 mr-3 flex items-center justify-center shadow-sm ring-2 ring-white">
                         <span className="text-sm font-bold text-white">
                           {post.author.charAt(0).toUpperCase()}
                         </span>
                       </div>
                       <div>
-                        <p className="text-sm font-semibold text-gray-900">
+                        <p className="text-sm font-semibold text-slate-900">
                           {post.author}
                         </p>
-                        <p className="text-xs text-gray-500">
+                        <p className="text-xs text-slate-500 flex items-center">
+                          <svg className="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd" />
+                          </svg>
                           {post.publishedAt
                             ? new Date(post.publishedAt).toLocaleDateString(
                                 "en-US",
@@ -411,26 +479,28 @@ export default function BlogListClient() {
                                   year: "numeric",
                                 }
                               )
-                            : "No date"}
+                            : "Coming soon"}
                         </p>
                       </div>
                     </div>
 
-                    {/* Read More Arrow */}
-                    <div className="w-8 h-8 rounded-full bg-blue-50 group-hover:bg-blue-100 flex items-center justify-center transition-colors">
-                      <svg
-                        className="w-4 h-4 text-blue-600 group-hover:translate-x-0.5 transition-transform"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M9 5l7 7-7 7"
-                        />
-                      </svg>
+                    {/* Enhanced Read More Button */}
+                    <div className="group/btn">
+                      <div className="w-10 h-10 rounded-full bg-gradient-to-r from-blue-50 to-indigo-50 group-hover:from-blue-100 group-hover:to-indigo-100 flex items-center justify-center transition-all duration-300 border border-blue-100 group-hover:border-blue-200 group-hover:scale-110">
+                        <svg
+                          className="w-4 h-4 text-blue-600 group-hover:translate-x-0.5 transition-transform duration-200"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M9 5l7 7-7 7"
+                          />
+                        </svg>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -440,41 +510,52 @@ export default function BlogListClient() {
         </div>
       )}
 
-      {/* Load More Button */}
+      {/* Enhanced Load More Section */}
       {hasMorePosts && (
-        <div className="text-center mt-12">
-          <button
-            onClick={handleLoadMore}
-            disabled={isLoadingMore}
-            className="inline-flex items-center px-6 py-3 bg-white border border-gray-300 rounded-full text-gray-700 font-medium hover:bg-gray-50 hover:border-gray-400 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            {isLoadingMore ? (
-              <>
-                <div className="w-4 h-4 border-2 border-gray-400 border-t-transparent rounded-full animate-spin mr-2"></div>
-                <span>Loading...</span>
-              </>
-            ) : (
-              <>
-                <span>Load More Articles</span>
-                <svg
-                  className="w-4 h-4 ml-2"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M19 9l-7 7-7-7"
-                  />
+        <div className="text-center mt-16">
+          <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-8 max-w-md mx-auto">
+            <div className="mb-6">
+              <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-full flex items-center justify-center border border-blue-100">
+                <svg className="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
                 </svg>
-              </>
-            )}
-          </button>
-          <p className="text-sm text-gray-500 mt-3">
-            Showing {visiblePosts.length} of {allFilteredPosts.length} articles
-          </p>
+              </div>
+              <h3 className="text-lg font-semibold text-slate-900 mb-2">Discover More Articles</h3>
+              <p className="text-sm text-slate-600">
+                Showing {visiblePosts.length} of {allFilteredPosts.length} articles
+              </p>
+            </div>
+            
+            <button
+              onClick={handleLoadMore}
+              disabled={isLoadingMore}
+              className="w-full inline-flex items-center justify-center px-6 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-semibold rounded-xl transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed shadow-sm hover:shadow-md transform hover:-translate-y-0.5"
+            >
+              {isLoadingMore ? (
+                <>
+                  <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin mr-3"></div>
+                  <span>Loading Amazing Content...</span>
+                </>
+              ) : (
+                <>
+                  <span>Load More Articles</span>
+                  <svg
+                    className="w-5 h-5 ml-2 group-hover:translate-y-0.5 transition-transform"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M19 9l-7 7-7-7"
+                    />
+                  </svg>
+                </>
+              )}
+            </button>
+          </div>
         </div>
       )}
     </section>
