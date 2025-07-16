@@ -73,7 +73,7 @@ export async function generateMetadata({
     description: service.description,
     keywords,
     openGraph: {
-      title: service.title,
+      title: service.title + " | StartBusiness",
       description: service.description,
       type: "website",
       locale: "en_IN",
