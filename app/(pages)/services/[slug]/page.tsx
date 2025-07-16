@@ -79,7 +79,7 @@ export async function generateMetadata({
       locale: "en_IN",
       siteName: "StartBusiness",
       url: `https://startbusiness.co.in/services/${param.slug}`,
-      images: [`/og/services/${param.slug}.jpg`],
+      images: [`/og/services/${param.slug}.png`],
     },
     twitter: {
       card: "summary_large_image",
