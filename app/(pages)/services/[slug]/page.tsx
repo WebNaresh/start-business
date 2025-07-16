@@ -79,20 +79,13 @@ export async function generateMetadata({
       locale: "en_IN",
       siteName: "StartBusiness",
       url: `https://startbusiness.co.in/services/${param.slug}`,
-      images: [
-        {
-          url: `/images/services/${param.slug}.jpg`,
-          width: 1200,
-          height: 630,
-          alt: service.title,
-        },
-      ],
+      images: [`/og/services/${param.slug}.jpg`],
     },
     twitter: {
       card: "summary_large_image",
       title: service.title,
       description: service.description,
-      images: [`/images/services/${param.slug}.jpg`],
+      images: [`/og/services/${param.slug}.png`],
     },
     robots: {
       index: true,

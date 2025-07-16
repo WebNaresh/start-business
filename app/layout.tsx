@@ -21,8 +21,11 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title:
-    "StartBusiness - Company Registration, MCA, RBI Compliance, Trademark Services",
+  title: {
+    default:
+      "StartBusiness - Company Registration, MCA, RBI Compliance, Trademark Services",
+    template: "%s | StartBusiness",
+  },
   description:
     "Platform for company registration, trademark registration, MCA compliance, RBI compliance and business registration services in India. Search company information by CIN, LLPIN, or company name. Expert guidance for entrepreneurs.",
   keywords:
