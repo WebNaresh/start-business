@@ -16,7 +16,7 @@ const services = require('../app/(pages)/services/[slug]/data/services.json')
 const prisma = new PrismaClient()
 
 // Configuration
-const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://startubusiness.co.in'
+const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.startbusiness.co.in'
 const OUTPUT_PATH = path.join(process.cwd(), 'public', 'sitemap.xml')
 
 // All available calculators
