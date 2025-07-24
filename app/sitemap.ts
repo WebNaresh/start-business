@@ -139,20 +139,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         'compliance'
     ].map(tag => createEntry(`blog/tag/${tag}`, 'weekly', 0.6))
 
-    // Location-specific service routes
-    const locationRoutes: SitemapEntry[] = [
-        'pune',
-        'mumbai',
-        'bangalore',
-        'delhi',
-        'hyderabad',
-        'chennai',
-        'kolkata'
-    ].flatMap(location =>
-        Object.keys(services).map(service =>
-            createEntry(`services/${location}/${service}`, 'weekly', 0.8)
-        )
-    )
+
 
     // Fetch published blog posts from database
     const blogPosts = await safeDatabaseOperation(
@@ -194,7 +181,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         ...calculatorRoutes,
         ...blogCategories,
         ...blogTags,
-        ...locationRoutes,
         ...blogPostRoutes
     ]
 } 
