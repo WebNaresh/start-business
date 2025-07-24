@@ -564,15 +564,7 @@ export default function Header() {
                           ))}
                         </div>
                       </div>
-                      <div className="bg-slate-50 px-4 py-3 border-t border-slate-200">
-                        <Link
-                          href={`/services/${category.id}`}
-                          className="text-sm font-medium text-blue-600 hover:text-blue-700 flex items-center gap-1 group"
-                        >
-                          View all {category.name} services
-                          <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                        </Link>
-                      </div>
+                     
                     </div>
                   )}
                 </div>
@@ -779,14 +771,7 @@ export default function Header() {
                                   </Link>
                                 </SheetClose>
                               ))}
-                              <SheetClose asChild>
-                                <Link
-                                  href={`/services/${category.id}`}
-                                  className="block px-4 py-2.5 text-sm font-medium text-blue-600 hover:text-blue-700 transition-all duration-200"
-                                >
-                                  View all {category.name} services
-                                </Link>
-                              </SheetClose>
+                             
                             </div>
                           </div>
                         )}
