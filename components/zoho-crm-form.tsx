@@ -38,34 +38,20 @@ const zohoCrmFormSchema = z.object({
     .min(1, "Please select a Start Business service"),
   requirement: z.string()
     .optional()
-    .refine((val) => !val || val.length <= 2000, "Brief requirement must be less than 2000 characters")
+    .refine((val) => !val || val.length <= 2000, "Brief requirement must be less than 2000 characters"),
+  captcha: z.string()
+    .min(1, "Please enter the captcha code")
+    .max(10, "Captcha code must be less than 10 characters")
 })
 
 type ZohoCrmFormData = z.infer<typeof zohoCrmFormSchema>
 
-// Service options based on the services.json data
+// Service options matching Zoho CRM form exactly
 const serviceOptions = [
-  { value: "private-limited-company", label: "Private Limited Company Registration" },
-  { value: "opc", label: "One Person Company Registration" },
-  { value: "llp", label: "Limited Liability Partnership" },
-  { value: "partnership-firm", label: "Partnership Firm Registration" },
-  { value: "sole-proprietorship", label: "Sole Proprietorship Registration" },
-  { value: "nidhi-company", label: "Nidhi Company Registration" },
-  { value: "section-8-company", label: "Section 8 Company Registration" },
-  { value: "producer-company", label: "Producer Company Registration" },
-  { value: "gst-registration", label: "GST Registration" },
-  { value: "trademark-registration", label: "Trademark Registration" },
-  { value: "fssai-license", label: "FSSAI License" },
-  { value: "iso-certification", label: "ISO Certification" },
-  { value: "startup-india", label: "Startup India Registration" },
-  { value: "msme-registration", label: "MSME Registration" },
-  { value: "import-export-code", label: "Import Export Code (IEC)" },
-  { value: "gem-portal", label: "GeM Portal Registration" },
-  { value: "digital-signature", label: "Digital Signature Certificate" },
-  { value: "annual-compliance", label: "Annual Compliance Services" },
-  { value: "gst-filing", label: "GST Filing Services" },
-  { value: "income-tax-filing", label: "Income Tax Filing" },
-  { value: "other", label: "Other Services" }
+  { value: "Company Registration", label: "Company Registration" },
+  { value: "Trademark Registration", label: "Trademark Registration" },
+  { value: "Compilance Services", label: "Compliance Services" },
+  { value: "Other Services", label: "Other Services" }
 ]
 
 interface ZohoCrmFormProps {
@@ -81,13 +67,15 @@ export default function ZohoCrmForm({
 }: ZohoCrmFormProps) {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isClient, setIsClient] = useState(false)
+  const [isSubmitted, setIsSubmitted] = useState(false)
   const [formData, setFormData] = useState<ZohoCrmFormData>({
     firstName: "",
     lastName: "",
     email: "",
     phone: "",
     service: "",
-    requirement: ""
+    requirement: "",
+    captcha: ""
   })
   const [errors, setErrors] = useState<Partial<Record<keyof ZohoCrmFormData, string>>>({})
 
@@ -124,29 +112,34 @@ export default function ZohoCrmForm({
       const form = document.createElement('form')
       form.method = 'POST'
       form.action = 'https://crm.zoho.in/crm/WebToLeadForm'
-      form.target = '_blank'
+      form.name = 'WebToLeads958448000000550148'
+      form.target = '_self'
       form.style.display = 'none'
+      form.acceptCharset = 'UTF-8'
 
-      // Add form fields
+      // Add form fields with exact Zoho CRM parameters
       const fields = [
-        { name: 'xnQsjsdp', value: 'YOUR_ZOHO_FORM_ID' }, // Replace with actual Zoho form ID
+        { name: 'xnQsjsdp', value: '4ac4a262cc0cdab66479a83bab625e53490e93515119234f760756c6d41d1e30' },
         { name: 'zc_gad', value: '' },
-        { name: 'xmIwtLD', value: 'YOUR_FIELD_ID' }, // Replace with actual field ID
+        { name: 'xmIwtLD', value: '9b604b603f4934dd9307c088b0f0687992de5df2a82b8f215c20f3146c901290f9d1694693f8eb2a48f6d1994bcc9395' },
         { name: 'actionType', value: 'TGVhZHM=' },
         { name: 'returnURL', value: window.location.origin + '/thank-you' },
         { name: 'First Name', value: formData.firstName },
         { name: 'Last Name', value: formData.lastName },
         { name: 'Email', value: formData.email },
         { name: 'Phone', value: formData.phone },
-        { name: 'Start Business Services', value: formData.service },
-        { name: 'Brief Requirement', value: formData.requirement }
+        { name: 'LEADCF2', value: formData.service },
+        { name: 'Description', value: formData.requirement || '' },
+        { name: 'Lead Source', value: 'Website- Start Business' },
+        { name: 'enterdigest', value: formData.captcha },
+        { name: 'aG9uZXlwb3Q', value: '' } // Honeypot field
       ]
 
       fields.forEach(field => {
         const input = document.createElement('input')
         input.type = 'hidden'
         input.name = field.name
-        input.value = field.value
+        input.value = field.value || ''
         form.appendChild(input)
       })
 
@@ -155,26 +148,35 @@ export default function ZohoCrmForm({
       form.submit()
       document.body.removeChild(form)
 
-      // Show success message
-      toast.success('Form Submitted Successfully!', {
-        description: 'Thank you for your interest. Our team will contact you within 24 hours.',
-        duration: 5000,
-        action: {
-          label: 'Close',
-          onClick: () => toast.dismiss(),
-        },
-      })
+      // Show success message immediately since we're submitting to external service
+      setTimeout(() => {
+        setIsSubmitted(true)
+        toast.success('Form Submitted Successfully!', {
+          description: 'Thank you for your interest. Our team will contact you within 24 hours.',
+          duration: 6000,
+          action: {
+            label: 'Close',
+            onClick: () => toast.dismiss(),
+          },
+        })
 
-      // Reset form
-      setFormData({
-        firstName: "",
-        lastName: "",
-        email: "",
-        phone: "",
-        service: "",
-        requirement: ""
-      })
-      setErrors({})
+        // Reset form after showing success message
+        setFormData({
+          firstName: "",
+          lastName: "",
+          email: "",
+          phone: "",
+          service: "",
+          requirement: "",
+          captcha: ""
+        })
+        setErrors({})
+
+        // Reset submitted state after 3 seconds
+        setTimeout(() => {
+          setIsSubmitted(false)
+        }, 3000)
+      }, 1000) // Small delay to ensure form submission started
 
     } catch (error) {
       console.error('Form submission error:', error)
@@ -219,6 +221,30 @@ export default function ZohoCrmForm({
           <div className="h-10 bg-gray-200 rounded"></div>
           <div className="h-24 bg-gray-200 rounded"></div>
           <div className="h-12 bg-gray-200 rounded"></div>
+        </div>
+      </div>
+    )
+  }
+
+  // Show success message
+  if (isSubmitted) {
+    return (
+      <div className={`bg-white rounded-xl p-6 sm:p-8 shadow-lg border border-slate-100 ${className}`}>
+        <div className="text-center py-8">
+          <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+            </svg>
+          </div>
+          <h3 className="text-xl font-semibold text-slate-800 mb-2">
+            Form Submitted Successfully!
+          </h3>
+          <p className="text-slate-600 mb-4">
+            Thank you for your interest. Our team will contact you within 24 hours.
+          </p>
+          <div className="text-sm text-slate-500">
+            You can close this form or submit another inquiry.
+          </div>
         </div>
       </div>
     )
@@ -349,7 +375,7 @@ export default function ZohoCrmForm({
         {/* Brief Requirement */}
         <div>
           <Label htmlFor="requirement" className="mb-2 block text-sm font-medium text-slate-700">
-            Brief Requirement *
+            Brief Requirement
           </Label>
           <Textarea
             id="requirement"
@@ -364,6 +390,56 @@ export default function ZohoCrmForm({
           {errors.requirement && (
             <p className="mt-1 text-sm text-red-600">{errors.requirement}</p>
           )}
+        </div>
+
+        {/* Captcha Field */}
+        <div>
+          <Label htmlFor="captcha" className="mb-2 block text-sm font-medium text-slate-700">
+            Enter the Captcha *
+          </Label>
+          <div className="space-y-3">
+            <div className="flex items-center gap-3">
+              <img
+                id="captchaImage"
+                src="https://crm.zoho.in/crm/CaptchaServlet?formId=9b604b603f4934dd9307c088b0f0687992de5df2a82b8f215c20f3146c901290f9d1694693f8eb2a48f6d1994bcc9395&grpid=4ac4a262cc0cdab66479a83bab625e53490e93515119234f760756c6d41d1e30"
+                alt="Captcha"
+                className="border border-gray-300 rounded"
+              />
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                onClick={() => {
+                  const img = document.getElementById('captchaImage') as HTMLImageElement;
+                  if (img) {
+                    const src = img.src;
+                    if (src.indexOf('&d') !== -1) {
+                      img.src = src.substring(0, src.indexOf('&d')) + '&d' + new Date().getTime();
+                    } else {
+                      img.src = src + '&d' + new Date().getTime();
+                    }
+                  }
+                }}
+                className="text-sm"
+              >
+                Reload
+              </Button>
+            </div>
+            <Input
+              id="captcha"
+              name="captcha"
+              type="text"
+              value={formData.captcha}
+              onChange={(e) => handleChange('captcha', e.target.value)}
+              className={`${errors.captcha ? 'border-red-500' : 'border-border'}`}
+              placeholder="Enter the captcha code"
+              maxLength={10}
+              required
+            />
+            {errors.captcha && (
+              <p className="mt-1 text-sm text-red-600">{errors.captcha}</p>
+            )}
+          </div>
         </div>
 
         {/* Submit Button */}

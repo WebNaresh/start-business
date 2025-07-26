@@ -1,4 +1,4 @@
-import Chatbot from "@/components/Chatbot";
+
 import FloatingCallButton from "@/components/floating-call-button";
 import Footer from "@/components/footer";
 import Header from "@/components/header";
@@ -151,7 +151,7 @@ export default function RootLayout({
                     <main className="flex-1">{children}</main>
                     <Footer />
                     <FloatingCallButton />
-                    <Chatbot />
+                    {/* <Chatbot /> */}
                   </UIProvider>
                 </div>
               </QueryProvider>
