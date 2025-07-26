@@ -470,13 +470,16 @@ export default function Header() {
 
   return (
     <header
-      className={`sticky top-0 z-50 w-full transition-all duration-300 shadow-lg ${scrolled ? "shadow-lg bg-white/95 backdrop-blur-sm" : "bg-white"}`}
+      className={`sticky top-0 z-50 w-full transition-all duration-300 ${scrolled
+        ? "bg-white/95 backdrop-blur-md shadow-lg border-b border-slate-200/50"
+        : "bg-white shadow-sm border-b border-slate-100"
+        }`}
     >
       {/* Main navigation */}
       <div className={`transition-all duration-300 ${scrolled ? "py-2" : "py-3"}`}>
         <div className="container mx-auto flex items-center justify-between px-4">
           <div className="flex flex-1 items-center">
-            {/* Logo */}
+            {/* Clean Logo */}
             <Link href="/" className="flex items-center group">
               <div className="relative h-12 w-12 overflow-hidden">
                 <Image
@@ -499,14 +502,14 @@ export default function Header() {
               </div>
             </Link>
           </div>
-          <div className="flex items-center flex-shrink-0">
+
+          <div className="flex items-center gap-2">
             {/* Desktop Navigation */}
-            <nav className="hidden lg:flex items-center justify-end space-x-1">
+            <nav className="hidden lg:flex items-center space-x-1">
               <Link
                 href="/"
-                className={`relative px-2 py-2 text-sm font-medium rounded-md transition-all duration-200 ${
-                  isActive("/") ? "text-blue-600" : "text-slate-700 hover:text-blue-600 hover:bg-blue-50"
-                }`}
+                className={`relative px-2 py-2 text-sm font-medium rounded-md transition-all duration-200 ${isActive("/") ? "text-blue-600" : "text-slate-700 hover:text-blue-600 hover:bg-blue-50"
+                  }`}
               >
                 Home
                 {isActive("/") && <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-600 rounded-full" />}
@@ -520,11 +523,10 @@ export default function Header() {
                   onMouseLeave={handleMouseLeave}
                 >
                   <button
-                    className={`relative px-2 py-2 text-sm font-medium rounded-md transition-all duration-200 flex items-center gap-1 ${
-                      isActive(`/services/${category.id}`)
-                        ? "text-blue-600"
-                        : "text-slate-700 hover:text-blue-600 hover:bg-blue-50"
-                    }`}
+                    className={`relative px-2 py-2 text-sm font-medium rounded-md transition-all duration-200 flex items-center gap-1 ${isActive(`/services/${category.id}`)
+                      ? "text-blue-600"
+                      : "text-slate-700 hover:text-blue-600 hover:bg-blue-50"
+                      }`}
                   >
                     {category.name}
                     <ChevronDown
@@ -564,7 +566,7 @@ export default function Header() {
                           ))}
                         </div>
                       </div>
-                     
+
                     </div>
                   )}
                 </div>
@@ -577,11 +579,10 @@ export default function Header() {
                 onMouseLeave={handleMouseLeave}
               >
                 <button
-                  className={`relative px-2 py-2 text-sm font-medium rounded-md transition-all duration-200 flex items-center gap-1 ${
-                    isActive("/business-calculators")
-                      ? "text-blue-600"
-                      : "text-slate-700 hover:text-blue-600 hover:bg-blue-50"
-                  }`}
+                  className={`relative px-2 py-2 text-sm font-medium rounded-md transition-all duration-200 flex items-center gap-1 ${isActive("/business-calculators")
+                    ? "text-blue-600"
+                    : "text-slate-700 hover:text-blue-600 hover:bg-blue-50"
+                    }`}
                 >
                   Calculators
                   <ChevronDown
@@ -602,7 +603,7 @@ export default function Header() {
                         </div>
                         <h3 className="text-sm font-semibold text-slate-800">Business Calculators</h3>
                       </div>
-                      
+
                       <div className="grid grid-cols-1 gap-6">
                         {calculatorCategories.map((category) => (
                           <div key={category.id} className="space-y-2">
@@ -654,9 +655,8 @@ export default function Header() {
 
               <Link
                 href="/blog"
-                className={`relative px-2 py-2 text-sm font-medium rounded-md transition-all duration-200 ${
-                  isActive("/blog") ? "text-blue-600" : "text-slate-700 hover:text-blue-600 hover:bg-blue-50"
-                }`}
+                className={`relative px-2 py-2 text-sm font-medium rounded-md transition-all duration-200 ${isActive("/blog") ? "text-blue-600" : "text-slate-700 hover:text-blue-600 hover:bg-blue-50"
+                  }`}
               >
                 Blogs
                 {isActive("/blog") && (
@@ -665,9 +665,8 @@ export default function Header() {
               </Link>
               <Link
                 href="/contact"
-                className={`relative px-2 py-2 text-sm font-medium rounded-md transition-all duration-200 ${
-                  isActive("/contact") ? "text-blue-600" : "text-slate-700 hover:text-blue-600 hover:bg-blue-50"
-                }`}
+                className={`relative px-2 py-2 text-sm font-medium rounded-md transition-all duration-200 ${isActive("/contact") ? "text-blue-600" : "text-slate-700 hover:text-blue-600 hover:bg-blue-50"
+                  }`}
               >
                 Contact
                 {isActive("/contact") && (
@@ -675,6 +674,18 @@ export default function Header() {
                 )}
               </Link>
             </nav>
+
+            {/* Professional CTA Button */}
+            <div className="hidden lg:flex items-center ml-4">
+              <Button
+                asChild
+                className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white shadow-lg hover:shadow-xl transition-all duration-300 px-6 py-2.5 text-sm font-semibold"
+              >
+                <Link href="/contact">
+                  Get Started
+                </Link>
+              </Button>
+            </div>
           </div>
 
           {/* Mobile menu button */}
@@ -700,10 +711,10 @@ export default function Header() {
                       alt="StartBusiness logo"
                       width={32}
                       height={32}
-                          blurDataURL="/placeholder.svg"
-                          quality={75} // Reduce if needed
-  priority={true} // For LCP image
-  placeholder="blur" // Optional blur-up
+                      blurDataURL="/placeholder.svg"
+                      quality={75} // Reduce if needed
+                      priority={true} // For LCP image
+                      placeholder="blur" // Optional blur-up
                       className="mr-2"
                     />
                     <span className="text-lg font-bold text-slate-900">StartBusiness</span>
@@ -716,11 +727,10 @@ export default function Header() {
                     <SheetClose asChild>
                       <Link
                         href="/"
-                        className={`rounded-md px-4 py-3 text-base font-medium transition-colors ${
-                          isActive("/")
-                            ? "bg-blue-50 text-blue-600"
-                            : "text-slate-700 hover:bg-slate-50 hover:text-blue-600"
-                        }`}
+                        className={`rounded-md px-4 py-3 text-base font-medium transition-colors ${isActive("/")
+                          ? "bg-blue-50 text-blue-600"
+                          : "text-slate-700 hover:bg-slate-50 hover:text-blue-600"
+                          }`}
                       >
                         Home
                       </Link>
@@ -733,11 +743,10 @@ export default function Header() {
                           onClick={() =>
                             setExpandedMobileCategory(expandedMobileCategory === category.id ? null : category.id)
                           }
-                          className={`w-full rounded-md px-4 py-3 text-base font-medium transition-all duration-200 flex items-center justify-between ${
-                            isActive(`/services/${category.id}`)
-                              ? "bg-blue-50 text-blue-600"
-                              : "text-slate-700 hover:bg-slate-50 hover:text-blue-600"
-                          }`}
+                          className={`w-full rounded-md px-4 py-3 text-base font-medium transition-all duration-200 flex items-center justify-between ${isActive(`/services/${category.id}`)
+                            ? "bg-blue-50 text-blue-600"
+                            : "text-slate-700 hover:bg-slate-50 hover:text-blue-600"
+                            }`}
                         >
                           <div className="flex items-center gap-2">
                             <div className={`p-1.5 rounded-lg ${category.bgColor}`}>
@@ -746,9 +755,8 @@ export default function Header() {
                             <span>{category.name}</span>
                           </div>
                           <ChevronDown
-                            className={`w-5 h-5 transition-transform duration-200 ${
-                              expandedMobileCategory === category.id ? "rotate-180" : ""
-                            }`}
+                            className={`w-5 h-5 transition-transform duration-200 ${expandedMobileCategory === category.id ? "rotate-180" : ""
+                              }`}
                           />
                         </button>
                         {expandedMobileCategory === category.id && (
@@ -771,7 +779,7 @@ export default function Header() {
                                   </Link>
                                 </SheetClose>
                               ))}
-                             
+
                             </div>
                           </div>
                         )}
@@ -784,11 +792,10 @@ export default function Header() {
                         onClick={() =>
                           setExpandedMobileCategory(expandedMobileCategory === 'calculators' ? null : 'calculators')
                         }
-                        className={`w-full rounded-md px-4 py-3 text-base font-medium transition-all duration-200 flex items-center justify-between ${
-                          isActive("/business-calculators")
-                            ? "bg-blue-50 text-blue-600"
-                            : "text-slate-700 hover:bg-slate-50 hover:text-blue-600"
-                        }`}
+                        className={`w-full rounded-md px-4 py-3 text-base font-medium transition-all duration-200 flex items-center justify-between ${isActive("/business-calculators")
+                          ? "bg-blue-50 text-blue-600"
+                          : "text-slate-700 hover:bg-slate-50 hover:text-blue-600"
+                          }`}
                       >
                         <div className="flex items-center gap-2">
                           <div className="p-1.5 rounded-lg bg-blue-50">
@@ -797,9 +804,8 @@ export default function Header() {
                           <span>Calculators</span>
                         </div>
                         <ChevronDown
-                          className={`w-5 h-5 transition-transform duration-200 ${
-                            expandedMobileCategory === 'calculators' ? "rotate-180" : ""
-                          }`}
+                          className={`w-5 h-5 transition-transform duration-200 ${expandedMobileCategory === 'calculators' ? "rotate-180" : ""
+                            }`}
                         />
                       </button>
                       {expandedMobileCategory === 'calculators' && (
@@ -850,32 +856,30 @@ export default function Header() {
                       )}
                     </div>
 
-                  
+
 
                     <SheetClose asChild>
                       <Link
                         href="/blog"
-                        className={`rounded-md px-4 py-3 text-base font-medium transition-colors ${
-                          isActive("/blog")
-                            ? "bg-blue-50 text-blue-600"
-                            : "text-slate-700 hover:bg-slate-50 hover:text-blue-600"
-                        }`}
+                        className={`rounded-md px-4 py-3 text-base font-medium transition-colors ${isActive("/blog")
+                          ? "bg-blue-50 text-blue-600"
+                          : "text-slate-700 hover:bg-slate-50 hover:text-blue-600"
+                          }`}
                       >
                         Blogs
                       </Link>
                     </SheetClose>
-                        <SheetClose asChild>
+                    <SheetClose asChild>
                       <Link
                         href="/contact"
-                        className={`rounded-md px-4 py-3 text-base font-medium transition-colors ${
-                          isActive("/contact")
-                            ? "bg-blue-50 text-blue-600"
-                            : "text-slate-700 hover:bg-slate-50 hover:text-blue-600"
-                        }`}
+                        className={`rounded-md px-4 py-3 text-base font-medium transition-colors ${isActive("/contact")
+                          ? "bg-blue-50 text-blue-600"
+                          : "text-slate-700 hover:bg-slate-50 hover:text-blue-600"
+                          }`}
                       >
                         Contact
                       </Link>
-                        </SheetClose>
+                    </SheetClose>
 
                   </nav>
                 </div>
