@@ -119,6 +119,20 @@ export default function RootLayout({
             gtag('config', 'G-2T86HZSNGB');
           `}
         </Script>
+
+        {/* Zoho SalesIQ Chat Widget */}
+        <Script id="zoho-salesiq-init" strategy="afterInteractive">
+          {`
+            window.$zoho = window.$zoho || {};
+            $zoho.salesiq = $zoho.salesiq || {ready: function(){}};
+          `}
+        </Script>
+        <Script
+          id="zoho-salesiq-widget"
+          src="https://salesiq.zohopublic.in/widget?wc=siq978926485bd5d64e3e56c7a1707d1cceebd9fa58d0d53561241dc137851567600c34c6eada1ad92bdd33d2ca4127495d"
+          strategy="afterInteractive"
+          defer
+        />
       </head>
       <body className={inter.className} suppressHydrationWarning>
         <NuqsAdapter>

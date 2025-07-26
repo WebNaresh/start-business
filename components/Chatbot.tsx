@@ -13,7 +13,6 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import OptimizedAvatar from "@/components/ui/optimized-avatar";
 import {
   Tooltip,
   TooltipContent,
@@ -29,7 +28,9 @@ import {
   ChevronDown,
   Clock,
   Loader2,
+  MessageSquare,
   Send,
+  Sparkles,
   Trash,
   User,
   X,
@@ -241,78 +242,92 @@ export default function Chatbot() {
 
   return (
     <div className="relative z-[9999]">
-      {/* Help Popup */}
+      {/* Help Popup - SalesIQ Style */}
       {showHelpPopup && !isExpanded && (
         <motion.div
           initial={{ opacity: 0, y: 20, scale: 0.95 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: 20, scale: 0.95 }}
-          className="fixed bottom-20 right-4 z-[9999]"
+          className={`fixed z-[9999] ${
+            isMobile
+              ? "bottom-36 right-4" // On mobile: above chatbot button
+              : "bottom-20 right-20" // On desktop: beside Zoho widget
+          }`}
         >
-          <Card className="w-72 shadow-xl border border-blue-100">
-            <CardContent className="p-4">
-              <div className="flex items-start gap-3">
-                <OptimizedAvatar
-                  src="/bot-avatar.png"
-                  alt="Business Assistant"
-                  size={40}
-                  fallbackSrc="/bot-avatar.png"
-                  className="border-2 border-blue-100"
-                />
-                <div className="flex-1">
-                  <div className="flex items-center gap-2 mb-1">
-                    <h3 className="text-sm font-semibold text-slate-900">
-                      Business Assistant
-                    </h3>
-                    <Badge
-                      variant="outline"
-                      className="bg-green-100 text-green-700 border-green-300 text-xs"
-                    >
-                      Online
-                    </Badge>
-                  </div>
-                  <p className="text-sm text-slate-600 mb-3">
-                    May I help you with your business needs?
-                  </p>
-                  <div className="flex gap-2">
-                    <Button
-                      size="sm"
-                      className="flex-1 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white"
-                      onClick={() => {
-                        setShowHelpPopup(false);
-                        setIsExpanded(true);
-                      }}
-                    >
-                      Yes, please
-                    </Button>
-                    <Button
-                      size="sm"
-                      variant="outline"
-                      className="flex-1"
-                      onClick={() => setShowHelpPopup(false)}
-                    >
-                      Not now
-                    </Button>
-                  </div>
+          <div className="bg-white rounded-2xl shadow-2xl border border-gray-100 w-80 overflow-hidden">
+            {/* Header */}
+            <div className="bg-gradient-to-r from-blue-600 to-blue-700 p-4 text-white relative">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center">
+                  <Bot className="w-5 h-5 text-white" />
                 </div>
+                <div>
+                  <h3 className="font-semibold text-sm">StartBusiness</h3>
+                  <p className="text-xs text-blue-100">Business Assistant</p>
+                </div>
+              </div>
+              <Button
+                variant="ghost"
+                size="icon"
+                className="absolute top-2 right-2 h-6 w-6 text-white hover:bg-white/20"
+                onClick={() => setShowHelpPopup(false)}
+                aria-label="Close"
+              >
+                <X className="h-4 w-4" />
+              </Button>
+            </div>
+
+            {/* Content */}
+            <div className="p-4">
+              <p className="text-sm text-gray-600 mb-4">
+                We are here to help you with business registration, compliance, and financial services. How can we assist you today?
+              </p>
+
+              {/* Action Buttons */}
+              <div className="space-y-2">
                 <Button
-                  variant="ghost"
-                  size="icon"
-                  className="h-6 w-6 -mt-1 -mr-1"
-                  onClick={() => setShowHelpPopup(false)}
-                  aria-label="Close help popup"
+                  className="w-full justify-start bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200"
+                  onClick={() => {
+                    setShowHelpPopup(false);
+                    setIsExpanded(true);
+                  }}
                 >
-                  <X className="h-4 w-4" />
+                  <MessageSquare className="w-4 h-4 mr-3" />
+                  Start a conversation
+                </Button>
+                <Button
+                  variant="outline"
+                  className="w-full justify-start hover:bg-gray-50"
+                  onClick={() => {
+                    setShowHelpPopup(false);
+                    setIsExpanded(true);
+                    setInput("I need help with business registration");
+                  }}
+                >
+                  <Bot className="w-4 h-4 mr-3" />
+                  Business Registration Help
                 </Button>
               </div>
-            </CardContent>
-          </Card>
+            </div>
+
+            {/* Footer */}
+            <div className="px-4 py-3 bg-gray-50 border-t border-gray-100">
+              <div className="flex items-center justify-center gap-2 text-xs text-gray-500">
+                <Sparkles className="w-3 h-3" />
+                <span>Powered by AI • Available 24/7</span>
+              </div>
+            </div>
+          </div>
         </motion.div>
       )}
 
       {/* Chat button */}
       {!isExpanded && (
-        <div className="fixed bottom-4 right-4 z-50">
+        <div className={`fixed z-50 ${
+          isMobile
+            ? "bottom-20 right-4" // On mobile: above Zoho widget
+            : "bottom-4 right-20" // On desktop: beside Zoho widget
+        }`}>
           <Button
             onClick={toggleExpand}
             size="icon"
@@ -339,15 +354,15 @@ export default function Chatbot() {
           className={`fixed z-[9999] ${
             isMobile
               ? "inset-0" // Full screen on mobile
-              : "bottom-4 right-4 w-full max-w-md md:max-w-2xl" // Normal size on desktop
+              : "bottom-4 right-20 w-80 h-96" // Compact size like SalesIQ, positioned to avoid Zoho widget
           }`}
         >
           <Card
             className={`${
               isMobile
                 ? "h-full w-full rounded-none border-0"
-                : "border border-gray-200 shadow-xl"
-            } flex flex-col overflow-hidden`}
+                : "h-full w-full rounded-2xl border border-gray-100 shadow-2xl"
+            } flex flex-col overflow-hidden bg-white`}
           >
             <CardHeader className="p-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white flex-shrink-0">
               <div className="flex justify-between items-center">
