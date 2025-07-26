@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useRef } from "react"
-import { Building2, TrendingUp, ArrowRight } from "lucide-react"
+import { ArrowRight, Sparkles, CheckCircle } from "lucide-react"
+import { Badge } from "@/components/ui/badge"
 import useEmblaCarousel from 'embla-carousel-react'
 
 const latestIncorporations = [
@@ -21,13 +22,13 @@ export default function LatestIncorporationsTicker() {
   })
   const autoplayRef = useRef<NodeJS.Timeout | null>(null)
 
-  // Autoplay logic with smoother transitions
+  // Smoother autoplay with better timing
   const autoplay = useCallback(() => {
     if (!emblaApi) return
     if (autoplayRef.current) clearInterval(autoplayRef.current)
     autoplayRef.current = setInterval(() => {
       if (emblaApi) emblaApi.scrollNext()
-    }, 3000)
+    }, 4000) // Slower for better readability
   }, [emblaApi])
 
   useEffect(() => {
@@ -43,64 +44,77 @@ export default function LatestIncorporationsTicker() {
   }, [emblaApi, autoplay])
 
   return (
-    <section className="w-full bg-gradient-to-r from-blue-50 via-white to-indigo-50 border-y border-slate-200 py-8 md:py-12 overflow-hidden">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header Section */}
-        <div className="max-w-4xl mx-auto text-center mb-8 md:mb-10">
-          <div className="flex items-center justify-center gap-3 md:gap-4 mb-4">
-            <div className="flex items-center gap-3">
-              <span className="inline-flex items-center justify-center rounded-full bg-gradient-to-br from-blue-500 to-blue-600 text-white p-2 md:p-2.5 shadow-lg transform hover:scale-105 transition-transform duration-200">
-                <Building2 className="w-5 h-5 md:w-6 md:h-6" />
-              </span>
-              <h2 className="font-bold text-slate-800 text-xl md:text-2xl lg:text-3xl tracking-tight">
-                Latest Incorporations
-              </h2>
-            </div>
-            <span className="inline-flex items-center justify-center rounded-full bg-green-100 text-green-600 p-1.5 md:p-2 shadow-md">
-              <TrendingUp className="w-4 h-4 md:w-5 md:h-5" />
-            </span>
-          </div>
-          <p className="text-slate-600 text-sm md:text-base max-w-2xl mx-auto">
-            Stay updated with our latest business registrations and corporate formations
+    <section className="py-12 sm:py-16 bg-gradient-to-br from-slate-50 via-white to-blue-50/30 overflow-hidden">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+        {/* Professional Header */}
+        <div className="text-center mb-10">
+          <Badge className="mb-4 bg-blue-50 text-blue-700 border-blue-200 px-4 py-2 text-sm font-medium">
+            <Sparkles className="w-4 h-4 mr-2" />
+            Live Updates
+          </Badge>
+          <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">
+            Latest <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">Incorporations</span>
+          </h2>
+          <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+            See the businesses that just got incorporated with our expert services
           </p>
         </div>
 
-        {/* Ticker Container */}
-        <div className="relative w-full max-w-6xl mx-auto overflow-hidden rounded-2xl bg-white shadow-xl border border-slate-100">
-          <div className="embla" ref={emblaRef}>
-            <div className="embla__container flex">
-              {[...latestIncorporations, ...latestIncorporations].map((name, idx) => (
+        {/* Modern Ticker Container */}
+        <div className="relative bg-white rounded-2xl shadow-xl border border-slate-200 overflow-hidden">
+          {/* Live indicator */}
+          <div className="absolute top-4 right-4 z-10 flex items-center gap-2 bg-green-50 px-3 py-1.5 rounded-full border border-green-200">
+            <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+            <span className="text-xs font-medium text-green-700">Live</span>
+          </div>
+
+          <div className="embla p-6" ref={emblaRef}>
+            <div className="embla__container flex gap-4">
+              {[...latestIncorporations, ...latestIncorporations].map((company, idx) => (
                 <div
-                  className="embla__slide flex-shrink-0 px-3 md:px-6 py-3 md:py-4 flex items-center"
-                  style={{ minWidth: 'auto', width: 'auto' }}
+                  className="embla__slide flex-shrink-0"
+                  style={{ minWidth: '280px', maxWidth: '350px' }}
                   key={idx}
                 >
-                  <span 
-                    className="text-slate-700 text-sm md:text-base font-medium px-4 md:px-6 py-2 md:py-2.5 rounded-xl 
-                             bg-gradient-to-r from-slate-50 to-slate-100 border border-slate-200 
-                             shadow-sm hover:shadow-lg hover:bg-gradient-to-r hover:from-blue-50 hover:to-indigo-50 
-                             hover:border-blue-200 hover:text-blue-700 transition-all duration-300 cursor-pointer
-                             transform hover:-translate-y-0.5 flex items-center gap-2 group"
-                  >
-                    {name}
-                    <ArrowRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  </span>
+                  <div className="bg-slate-50 rounded-xl p-4 border border-slate-200 hover:border-blue-300 hover:bg-blue-50 transition-all duration-300 group cursor-pointer">
+                    <div className="flex items-center gap-3 mb-3">
+                      <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0" />
+                      <span className="text-xs text-green-700 font-medium bg-green-50 px-2 py-1 rounded-full">
+                        Successfully Incorporated
+                      </span>
+                    </div>
+
+                    <h3 className="font-semibold text-slate-900 text-sm leading-tight group-hover:text-blue-700 transition-colors">
+                      {company}
+                    </h3>
+
+                    <div className="flex justify-end mt-3">
+                      <ArrowRight className="w-4 h-4 text-slate-400 group-hover:text-blue-600 group-hover:translate-x-1 transition-all duration-300" />
+                    </div>
+                  </div>
                 </div>
               ))}
             </div>
           </div>
 
-          {/* Gradient Overlays for Smooth Edge Effect */}
-          <div className="absolute left-0 top-0 bottom-0 w-12 bg-gradient-to-r from-white to-transparent pointer-events-none" />
-          <div className="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-white to-transparent pointer-events-none" />
+          {/* Gradient fade edges */}
+          <div className="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-white to-transparent pointer-events-none z-10" />
+          <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-white to-transparent pointer-events-none z-10" />
         </div>
 
-        {/* Bottom Section */}
-        <div className="max-w-4xl mx-auto mt-8 md:mt-10 text-center">
-          <p className="text-slate-500 text-sm md:text-base">
-            Join our growing list of successful businesses. Start your incorporation journey today.
+        {/* Professional CTA Section */}
+        <div className="text-center mt-10">
+          <p className="text-slate-600 mb-4">
+            Ready to join them? Start your business registration today.
           </p>
-          <div className="h-px bg-gradient-to-r from-transparent via-slate-200 to-transparent mt-6" />
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <button className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white px-6 py-3 rounded-xl font-semibold transition-all duration-300 shadow-lg hover:shadow-xl">
+              Start Registration
+            </button>
+            <button className="border-2 border-slate-300 hover:border-blue-300 hover:bg-blue-50 text-slate-700 px-6 py-3 rounded-xl font-medium transition-all duration-300">
+              View All Services
+            </button>
+          </div>
         </div>
       </div>
     </section>
