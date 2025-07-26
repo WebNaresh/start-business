@@ -5,9 +5,9 @@ import { useRef } from "react"
 
 import { ArrowRight, Shield, Clock, Users, CheckCircle, Star, TrendingUp, Award, Building2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
+
 import Link from "next/link"
-import ResponsiveHeroImage from "@/components/ui/responsive-hero-image"
+
 import Script from "next/script"
 import Image from "next/image"
 
@@ -90,15 +90,15 @@ export default function ProfessionalHeroSection() {
 
             {/* Main Headline */}
             <div className="space-y-4">
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-slate-900 leading-tight">
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 leading-tight">
                 Start Your Business with
-                <span className="block bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+                <span className="text-primary ml-2">
                   Expert Guidance
                 </span>
               </h1>
 
               {/* Professional Description */}
-              <p className="text-xl text-slate-600 leading-relaxed max-w-xl">
+              <p className="text-lg text-slate-600 leading-relaxed max-w-xl">
                 India's most trusted business registration platform. Get your Private Limited Company, LLP, or OPC registered with 100% compliance guarantee.
               </p>
             </div>
