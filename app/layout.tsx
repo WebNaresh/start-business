@@ -121,18 +121,26 @@ export default function RootLayout({
         </Script>
 
         {/* Zoho SalesIQ Chat Widget */}
-        <Script id="zoho-salesiq-init" strategy="afterInteractive">
+        <Script id="zoho-salesiq" strategy="afterInteractive">
           {`
-            window.$zoho = window.$zoho || {};
-            $zoho.salesiq = $zoho.salesiq || {ready: function(){}};
+            var $zoho = $zoho || {};
+            $zoho.salesiq = $zoho.salesiq || {
+              widgetcode: "siq978926485bd5d64e3e56c7a1707d1cceebd9fa58d0d53561241dc137851567600c34c6eada1ad92bdd33d2ca4127495d",
+              values: {},
+              ready: function() {
+                $zoho.salesiq.floatbutton.visible("show");
+              }
+            };
+            var d = document;
+            var s = d.createElement("script");
+            s.type = "text/javascript";
+            s.id = "zsiqscript";
+            s.defer = true;
+            s.src = "https://salesiq.zoho.in/widget";
+            var t = d.getElementsByTagName("script")[0];
+            t.parentNode.insertBefore(s, t);
           `}
         </Script>
-        <Script
-          id="zoho-salesiq-widget"
-          src="https://salesiq.zohopublic.in/widget?wc=siq978926485bd5d64e3e56c7a1707d1cceebd9fa58d0d53561241dc137851567600c34c6eada1ad92bdd33d2ca4127495d"
-          strategy="afterInteractive"
-          defer
-        />
       </head>
       <body className={inter.className} suppressHydrationWarning>
         <NuqsAdapter>
