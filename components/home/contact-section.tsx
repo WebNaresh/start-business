@@ -48,11 +48,11 @@ export default function ContactSection() {
                   <div>
                     <p className="text-sm text-muted-foreground mb-1">Email</p>
                     <a 
-                      href="mailto:info@startbusiness.co.in" 
+                      href="mailto:start@startbusiness.co.in" 
                       className="text-base font-semibold text-foreground hover:text-primary transition-colors"
-                      aria-label="Send email to info@startbusiness.co.in"
+                      aria-label="Send email to start@startbusiness.co.in"
                     >
-                      info@startbusiness.co.in
+                      start@startbusiness.co.in
                     </a>
                   </div>
                 </div>

@@ -45,8 +45,8 @@ export default function ThankYouPage() {
             </div>
             <div className="flex items-center justify-center text-sm text-gray-600">
               <Mail className="w-4 h-4 mr-2" />
-              <a href="mailto:info@startbusiness.co.in" className="hover:text-blue-600">
-                info@startbusiness.co.in
+              <a href="mailto:start@startbusiness.co.in" className="hover:text-blue-600">
+                start@startbusiness.co.in
               </a>
             </div>
           </div>
