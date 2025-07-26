@@ -323,70 +323,69 @@ export default function CompanySearchSection() {
         }}
       />
 
-      <section className="relative py-20 bg-background overflow-hidden">
-        {/* Background decorative elements */}
+      <section className="relative py-16 bg-gradient-to-br from-slate-50 via-white to-blue-50/30 overflow-hidden">
+        {/* Enhanced Background Elements */}
         <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute -top-10 -right-10 w-32 h-32 bg-primary/10 rounded-full opacity-20 animate-pulse"></div>
-          <div className="absolute -bottom-10 -left-10 w-24 h-24 bg-primary/5 rounded-full opacity-20 animate-pulse delay-300"></div>
-          <div className="absolute top-1/3 left-1/4 w-16 h-16 bg-primary/5 rounded-full opacity-20 animate-pulse delay-700"></div>
+          <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-blue-100/20 to-transparent rounded-full -mr-48 -mt-48 blur-3xl"></div>
+          <div className="absolute bottom-0 left-0 w-80 h-80 bg-gradient-to-tr from-indigo-100/15 to-transparent rounded-full -ml-40 -mb-40 blur-2xl"></div>
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-gradient-to-r from-blue-50/30 to-indigo-50/30 rounded-full blur-3xl"></div>
         </div>
 
-        <div className="container mx-auto px-4 relative z-10">
-        {/* Enhanced Header */}
-        <div className="text-center mb-16">
-          <div className="inline-flex items-center px-6 py-3 bg-secondary border border-border text-secondary-foreground rounded-full text-sm font-medium mb-6 shadow-sm hover:shadow-md transition-shadow duration-200">
-            <Building2 className="w-5 h-5 mr-2" />
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 max-w-6xl">
+        {/* Professional Header */}
+        <div className="text-center mb-12">
+          <div className="inline-flex items-center px-5 py-2.5 bg-blue-50 border border-blue-200 text-blue-700 rounded-full text-sm font-medium mb-6 shadow-sm hover:shadow-md transition-all duration-200">
+            <Building2 className="w-4 h-4 mr-2" />
             <span>MCA Company Search</span>
-            <Sparkles className="w-4 h-4 ml-2 text-primary" />
+            <Sparkles className="w-4 h-4 ml-2" />
           </div>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6 leading-tight">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 mb-4 leading-tight">
             Search Company 
-            <span className="text-primary"> Information</span>
+            <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent"> Information</span>
           </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-            Find detailed information about any Indian company using Company Name, CIN, or LLPIN. 
-            Get instant access to MCA registered company details with real-time search.
+          <p className="text-lg sm:text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed">
+            Find detailed information about any Indian company using Company Name, CIN, or LLPIN with real-time MCA data.
           </p>
           
-          {/* Feature badges */}
-          <div className="flex flex-wrap justify-center gap-3 mt-8">
-            <Badge variant="secondary" className="px-4 py-2 text-sm font-medium bg-secondary backdrop-blur-sm shadow-sm">
-              <TrendingUp className="w-4 h-4 mr-2" />
+          {/* Compact Feature badges */}
+          <div className="flex flex-wrap justify-center gap-2 mt-6">
+            <Badge className="bg-green-50 text-green-700 border-green-200 px-3 py-1 text-xs font-medium">
+              <TrendingUp className="w-3 h-3 mr-1" />
               Real-time Data
             </Badge>
-            <Badge variant="secondary" className="px-4 py-2 text-sm font-medium bg-secondary backdrop-blur-sm shadow-sm">
-              <Shield className="w-4 h-4 mr-2" />
+            <Badge className="bg-blue-50 text-blue-700 border-blue-200 px-3 py-1 text-xs font-medium">
+              <Shield className="w-3 h-3 mr-1" />
               MCA Verified
             </Badge>
-            <Badge variant="secondary" className="px-4 py-2 text-sm font-medium bg-secondary backdrop-blur-sm shadow-sm">
-              <Sparkles className="w-4 h-4 mr-2" />
+            <Badge className="bg-purple-50 text-purple-700 border-purple-200 px-3 py-1 text-xs font-medium">
+              <Sparkles className="w-3 h-3 mr-1" />
               Instant Results
             </Badge>
           </div>
         </div>
 
-        {/* Enhanced Search Interface */}
-        <div className="max-w-5xl mx-auto">
-          <div className="relative mb-12">
-            <div className="relative group overflow-visible">
-              <Search className={`absolute left-6 top-1/2 transform -translate-y-1/2 w-6 h-6 transition-all duration-200 z-20 pointer-events-none ${
+        {/* Modern Search Interface */}
+        <div className="max-w-4xl mx-auto">
+          <div className="relative mb-10">
+            <div className="relative group">
+              <Search className={`absolute left-5 top-1/2 transform -translate-y-1/2 w-5 h-5 transition-all duration-200 z-20 pointer-events-none ${
                 searchState.isLoading 
-                  ? 'text-primary animate-pulse' 
+                  ? 'text-blue-600 animate-pulse' 
                   : searchState.isTyping 
-                  ? 'text-primary/80' 
-                  : 'text-muted-foreground'
+                  ? 'text-blue-500' 
+                  : 'text-slate-400'
               }`} />
               <Input
                 ref={searchInputRef}
                 type="text"
-                placeholder="Enter Company Name, CIN (L12345AB2020PLC123456), or LLPIN (ABC1234D2020LLP123456)"
+                placeholder="Search by Company Name, CIN, or LLPIN..."
                 value={searchState.query}
                 onChange={handleInputChange}
-                className={`pl-16 pr-16 py-6 text-lg border-2 rounded-2xl bg-background/90 backdrop-blur-sm shadow-lg transition-all duration-200 relative ${
+                className={`pl-14 pr-14 py-4 text-base border-2 rounded-xl bg-white shadow-md transition-all duration-200 ${
                   searchState.isTyping 
-                    ? 'border-primary shadow-primary/20' 
-                    : 'border-border hover:border-border/80 focus:border-primary'
-                } group-hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-primary/20`}
+                    ? 'border-blue-500 shadow-blue-100 ring-4 ring-blue-50' 
+                    : 'border-slate-200 hover:border-slate-300 focus:border-blue-500 focus:ring-4 focus:ring-blue-50'
+                } group-hover:shadow-lg focus:outline-none`}
                 onKeyDown={(e) => {
                   if (e.key === 'Escape') {
                     setSearchState(prev => ({ ...prev, showSuggestions: false }))
@@ -396,11 +395,11 @@ export default function CompanySearchSection() {
                   }
                 }}
               />
-              <div className="absolute right-6 top-1/2 transform -translate-y-1/2 flex items-center space-x-2">
+              <div className="absolute right-4 top-1/2 transform -translate-y-1/2 flex items-center space-x-2">
                 {searchState.isLoading && (
-                  <div className="flex items-center">
-                    <Loader2 className="text-primary w-5 h-5 animate-spin mr-2" />
-                    <span className="text-xs text-primary font-medium">Searching...</span>
+                  <div className="flex items-center bg-blue-50 px-3 py-1 rounded-full">
+                    <Loader2 className="text-blue-600 w-4 h-4 animate-spin mr-2" />
+                    <span className="text-xs text-blue-600 font-medium">Searching...</span>
                   </div>
                 )}
                 {searchState.query && !searchState.isLoading && (
@@ -408,7 +407,7 @@ export default function CompanySearchSection() {
                     variant="ghost"
                     size="sm"
                     onClick={clearSearch}
-                    className="text-muted-foreground hover:text-foreground rounded-full p-2 hover:bg-secondary"
+                    className="text-slate-400 hover:text-slate-600 rounded-full p-1.5 hover:bg-slate-100 h-auto"
                   >
                     ✕
                   </Button>
@@ -423,24 +422,24 @@ export default function CompanySearchSection() {
               </div>
             )}
 
-            {/* Enhanced Search Suggestions */}
+            {/* Modern Search Suggestions */}
             {searchState.showSuggestions && searchState.results.length > 0 && (
-              <div className="absolute top-full left-0 right-0 bg-card/95 backdrop-blur-sm border border-border rounded-2xl shadow-2xl z-20 mt-3 max-h-80 overflow-hidden">
-                <div className="p-2">
-                  <div className="text-xs font-medium text-muted-foreground px-4 py-2 border-b border-border">
-                    Search Results ({searchState.results.length})
+              <div className="absolute top-full left-0 right-0 bg-white border border-slate-200 rounded-xl shadow-xl z-20 mt-2 max-h-80 overflow-hidden">
+                <div className="p-3">
+                  <div className="text-xs font-medium text-slate-500 px-3 py-2 border-b border-slate-100">
+                    Found {searchState.results.length} companies
                   </div>
                   <div className="max-h-64 overflow-y-auto">
                     {searchState.results.map((result, index) => (
                       <button
                         key={index}
                         onClick={() => handleSuggestionSelect(result)}
-                        className="w-full px-4 py-4 text-left hover:bg-primary/10 rounded-xl mx-2 my-1 transition-all duration-150 group focus:bg-primary/10 focus:outline-none border border-transparent hover:border-primary/20"
+                        className="w-full px-3 py-3 text-left hover:bg-blue-50 rounded-lg my-1 transition-all duration-150 group focus:bg-blue-50 focus:outline-none"
                       >
-                        <div className="font-semibold text-foreground group-hover:text-primary transition-colors">
+                        <div className="font-medium text-slate-900 group-hover:text-blue-700 transition-colors">
                           {result.label}
                         </div>
-                        <div className="text-sm text-muted-foreground font-mono mt-1">
+                        <div className="text-sm text-slate-500 font-mono mt-1">
                           {result.value}
                         </div>
                       </button>
@@ -453,13 +452,13 @@ export default function CompanySearchSection() {
             {/* Popular Searches - Show when input is empty */}
             {!searchState.query && !searchState.selectedCompany && (
               <div className="mt-8">
-                <p className="text-sm font-medium text-muted-foreground mb-4 text-center">Popular Searches:</p>
-                <div className="flex flex-wrap justify-center gap-3">
+                <p className="text-sm font-medium text-slate-600 mb-4 text-center">Popular Searches:</p>
+                <div className="flex flex-wrap justify-center gap-2">
                   {popularSearches.map((search, index) => (
                     <button
                       key={index}
                       onClick={() => handlePopularSearchSelect(search)}
-                      className="px-4 py-2 bg-secondary backdrop-blur-sm border border-border rounded-full text-sm font-medium text-secondary-foreground hover:bg-primary/10 hover:border-primary/30 hover:text-primary transition-all duration-200 shadow-sm hover:shadow-md"
+                      className="px-4 py-2 bg-white border border-slate-200 rounded-full text-sm font-medium text-slate-700 hover:bg-blue-50 hover:border-blue-300 hover:text-blue-700 transition-all duration-200 shadow-sm hover:shadow-md"
                     >
                       {search}
                     </button>
@@ -480,41 +479,41 @@ export default function CompanySearchSection() {
             </div>
           )}
 
-          {/* Enhanced Company Details */}
+          {/* Modern Company Details */}
           {searchState.selectedCompany && (
-            <div className="bg-card/90 backdrop-blur-sm rounded-3xl shadow-2xl border border-border p-8 mb-12 animate-in slide-in-from-bottom-4 duration-500">
-              <div className="flex items-center mb-8">
-                <div className="p-3 bg-primary rounded-2xl mr-4">
-                  <Building2 className="w-8 h-8 text-white" />
+            <div className="bg-white rounded-2xl shadow-xl border border-slate-200 p-6 sm:p-8 mb-10 animate-in slide-in-from-bottom-4 duration-500">
+              <div className="flex items-center mb-6">
+                <div className="p-3 bg-blue-600 rounded-xl mr-4">
+                  <Building2 className="w-6 h-6 text-white" />
                 </div>
                 <div>
-                  <h3 className="text-2xl font-bold text-foreground">Company Details</h3>
-                  <p className="text-muted-foreground text-sm">Verified MCA Information</p>
+                  <h3 className="text-xl font-bold text-slate-900">Company Details</h3>
+                  <p className="text-slate-600 text-sm">Verified MCA Information</p>
                 </div>
               </div>
 
-              <div className="grid lg:grid-cols-2 gap-8">
-                <div className="space-y-6">
-                  <div className="p-6 bg-secondary rounded-2xl">
-                    <label className="block text-sm font-semibold text-muted-foreground mb-2 uppercase tracking-wide">Company Name</label>
-                    <div className="text-xl font-bold text-foreground leading-tight">{searchState.selectedCompany.companyName}</div>
+              <div className="grid lg:grid-cols-2 gap-6">
+                <div className="space-y-4">
+                  <div className="p-5 bg-slate-50 rounded-xl border border-slate-100">
+                    <label className="block text-xs font-semibold text-slate-500 mb-2 uppercase tracking-wide">Company Name</label>
+                    <div className="text-lg font-bold text-slate-900 leading-tight">{searchState.selectedCompany.companyName}</div>
                   </div>
 
                   {searchState.selectedCompany.cin && (
-                    <div className="p-6 bg-primary/10 rounded-2xl">
-                      <label className="block text-sm font-semibold text-primary mb-2 uppercase tracking-wide">CIN</label>
+                    <div className="p-5 bg-blue-50 rounded-xl border border-blue-100">
+                      <label className="block text-xs font-semibold text-blue-600 mb-2 uppercase tracking-wide">CIN</label>
                       <div className="flex items-center justify-between">
-                        <span className="font-mono text-lg text-foreground break-all">{searchState.selectedCompany.cin}</span>
+                        <span className="font-mono text-base text-slate-900 break-all">{searchState.selectedCompany.cin}</span>
                         <Button
                           variant="ghost"
                           size="sm"
                           onClick={() => copyToClipboard(searchState.selectedCompany!.cin!, 'cin')}
-                          className="ml-3 p-2 h-auto rounded-xl hover:bg-primary/10 transition-colors"
+                          className="ml-3 p-2 h-auto rounded-lg hover:bg-blue-100 transition-colors"
                         >
                           {copiedField === 'cin' ? (
-                            <CheckCircle className="w-5 h-5 text-green-500" />
+                            <CheckCircle className="w-4 h-4 text-green-600" />
                           ) : (
-                            <Copy className="w-5 h-5 text-primary" />
+                            <Copy className="w-4 h-4 text-blue-600" />
                           )}
                         </Button>
                       </div>
@@ -522,20 +521,20 @@ export default function CompanySearchSection() {
                   )}
 
                   {searchState.selectedCompany.llpin && (
-                    <div className="p-6 bg-primary/10 rounded-2xl">
-                      <label className="block text-sm font-semibold text-primary mb-2 uppercase tracking-wide">LLPIN</label>
+                    <div className="p-5 bg-blue-50 rounded-xl border border-blue-100">
+                      <label className="block text-xs font-semibold text-blue-600 mb-2 uppercase tracking-wide">LLPIN</label>
                       <div className="flex items-center justify-between">
-                        <span className="font-mono text-lg text-foreground break-all">{searchState.selectedCompany.llpin}</span>
+                        <span className="font-mono text-base text-slate-900 break-all">{searchState.selectedCompany.llpin}</span>
                         <Button
                           variant="ghost"
                           size="sm"
                           onClick={() => copyToClipboard(searchState.selectedCompany!.llpin!, 'llpin')}
-                          className="ml-3 p-2 h-auto rounded-xl hover:bg-primary/10 transition-colors"
+                          className="ml-3 p-2 h-auto rounded-lg hover:bg-blue-100 transition-colors"
                         >
                           {copiedField === 'llpin' ? (
-                            <CheckCircle className="w-5 h-5 text-green-500" />
+                            <CheckCircle className="w-4 h-4 text-green-600" />
                           ) : (
-                            <Copy className="w-5 h-5 text-primary" />
+                            <Copy className="w-4 h-4 text-blue-600" />
                           )}
                         </Button>
                       </div>
@@ -543,11 +542,11 @@ export default function CompanySearchSection() {
                   )}
                 </div>
 
-                <div className="space-y-6">
+                <div className="space-y-4">
                   {searchState.selectedCompany.status && (
-                    <div className="p-6 bg-secondary rounded-2xl">
-                      <label className="block text-sm font-semibold text-muted-foreground mb-3 uppercase tracking-wide">Status</label>
-                      <span className={`inline-flex px-4 py-2 rounded-full text-sm font-semibold shadow-sm ${
+                    <div className="p-5 bg-slate-50 rounded-xl border border-slate-100">
+                      <label className="block text-xs font-semibold text-slate-500 mb-3 uppercase tracking-wide">Status</label>
+                      <span className={`inline-flex px-3 py-1.5 rounded-full text-sm font-semibold ${
                         searchState.selectedCompany.status.toLowerCase().includes('active') 
                           ? 'bg-green-100 text-green-800 border border-green-200' 
                           : 'bg-yellow-100 text-yellow-800 border border-yellow-200'
@@ -558,38 +557,38 @@ export default function CompanySearchSection() {
                   )}
 
                   {searchState.selectedCompany.registrationDate && (
-                    <div className="p-6 bg-secondary rounded-2xl">
-                      <label className="block text-sm font-semibold text-muted-foreground mb-2 uppercase tracking-wide">Registration Date</label>
-                      <div className="text-lg font-semibold text-foreground">{searchState.selectedCompany.registrationDate}</div>
+                    <div className="p-5 bg-slate-50 rounded-xl border border-slate-100">
+                      <label className="block text-xs font-semibold text-slate-500 mb-2 uppercase tracking-wide">Registration Date</label>
+                      <div className="text-base font-semibold text-slate-900">{searchState.selectedCompany.registrationDate}</div>
                     </div>
                   )}
 
                   {searchState.selectedCompany.companyCategory && (
-                    <div className="p-6 bg-secondary rounded-2xl">
-                      <label className="block text-sm font-semibold text-muted-foreground mb-2 uppercase tracking-wide">Category</label>
-                      <div className="text-lg font-semibold text-foreground">{searchState.selectedCompany.companyCategory}</div>
+                    <div className="p-5 bg-slate-50 rounded-xl border border-slate-100">
+                      <label className="block text-xs font-semibold text-slate-500 mb-2 uppercase tracking-wide">Category</label>
+                      <div className="text-base font-semibold text-slate-900">{searchState.selectedCompany.companyCategory}</div>
                     </div>
                   )}
                 </div>
               </div>
 
-              {/* Enhanced Call to Action */}
-              <div className="mt-10 pt-8 border-t border-border">
+              {/* Professional Call to Action */}
+              <div className="mt-8 pt-6 border-t border-slate-200">
                 <div className="text-center mb-6">
-                  <h4 className="text-lg font-semibold text-foreground mb-2">Need Professional Help?</h4>
-                  <p className="text-muted-foreground">Get expert assistance with compliance and registration services</p>
+                  <h4 className="text-lg font-semibold text-slate-900 mb-2">Need Professional Help?</h4>
+                  <p className="text-slate-600">Get expert assistance with compliance and registration services</p>
                 </div>
-                <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <div className="flex flex-col sm:flex-row gap-3 justify-center">
                   <Link href="/services/roc-annual-compliances">
-                    <Button size="lg" className="flex-1 sm:flex-none bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200">
-                      <FileText className="w-5 h-5 mr-2" />
-                      Annual Compliance Services
+                    <Button size="lg" className="flex-1 sm:flex-none bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white px-6 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200">
+                      <FileText className="w-4 h-4 mr-2" />
+                      Annual Compliance
                     </Button>
                   </Link>
-                  <Link href="/services/company-registration">
-                    <Button variant="outline" size="lg" className="flex-1 sm:flex-none border-2 px-8 py-4 rounded-xl hover:bg-secondary transition-all duration-200">
-                      <Building2 className="w-5 h-5 mr-2" />
-                      Register New Company
+                  <Link href="/services/private-limited-company">
+                    <Button variant="outline" size="lg" className="flex-1 sm:flex-none border-2 border-slate-300 hover:border-blue-300 hover:bg-blue-50 px-6 py-3 rounded-xl transition-all duration-200">
+                      <Building2 className="w-4 h-4 mr-2" />
+                      Register Company
                     </Button>
                   </Link>
                 </div>
