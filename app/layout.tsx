@@ -28,8 +28,23 @@ export const metadata: Metadata = {
   },
   description:
     "Platform for company registration, trademark registration, MCA compliance, RBI compliance and business registration services in India. Search company information by CIN, LLPIN, or company name. Expert guidance for entrepreneurs.",
-  keywords:
-    "company search, CIN lookup, LLPIN search, MCA company details, company information search, best online company registration,best CA firm in India,Best CA firm in Pune,Best ca frim near me,company registration,startup registration,private limited company registration,limited company registration,gst,business registration, startup, trademark, GST, FSSAI, compliance, legal services, India, Pune, online incorporation, business consultant, MSME, LLP, private limited, ngo registration, tax filing, business support",
+  keywords: [
+    // Business Registration Keywords
+    "company registration", "business registration", "startup registration", "private limited company registration", "llp registration", "online company registration", "best ca firm in india", "best ca firm in pune", "business consultant",
+    
+    // Calculator Keywords (High Traffic)
+    "ppf calculator", "gst calculator", "income tax calculator", "emi calculator", "salary calculator", "hra calculator", "tds calculator", "car loan calculator", "home loan calculator", "business loan calculator",
+    "ppf calculator online", "gst calculator online", "income tax calculator india", "free calculators", "financial calculators", "tax calculators", "loan calculators",
+    
+    // Service Keywords
+    "gst registration", "trademark registration", "fssai license", "msme registration", "ngo registration", "tax filing", "compliance services",
+    
+    // Location Keywords
+    "india", "pune", "mumbai", "delhi", "bangalore", "chennai", "hyderabad",
+    
+    // Business Keywords
+    "startup", "entrepreneur", "small business", "msme", "private limited", "llp", "partnership firm", "sole proprietorship"
+  ],
   authors: [{ name: "StartBusiness", url: "https://startbusiness.co.in" }],
   creator: "StartBusiness",
   publisher: "StartBusiness",

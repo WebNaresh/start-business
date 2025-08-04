@@ -1,80 +1,63 @@
-# Robots.txt for StartBusiness Website
-# This file tells search engine crawlers which pages they can and cannot access
+# Robots.txt for StartBusiness - Financial Calculators & Business Services
 
-# Allow all web crawlers to access the site
 User-agent: *
 Allow: /
-
-# Block access to admin routes
 Disallow: /admin/
-Disallow: /admin/*
-
-# Block access to API routes
 Disallow: /api/
-Disallow: /api/*
-
-# Block access to private/internal routes
+Disallow: /private/
 Disallow: /_next/
 Disallow: /_vercel/
-Disallow: /private/
+Disallow: /debug-content/
+Disallow: /test-*
 
-# Block access to temporary or development files
-Disallow: /*.json$
-Disallow: /*.xml$
-Disallow: /*.txt$
-Disallow: /*.log$
+# Allow important calculator pages
+Allow: /business-calculators/
+Allow: /business-calculators/ppf-calculator
+Allow: /business-calculators/gst-calculator
+Allow: /business-calculators/income-tax-calculator
+Allow: /business-calculators/emi-calculator
+Allow: /business-calculators/hra-calculator
+Allow: /business-calculators/salary-calculator
+Allow: /business-calculators/tds-calculator
+Allow: /business-calculators/car-loan-calculator
+Allow: /business-calculators/home-loan-calculator
 
-# Allow access to important files
-Allow: /sitemap.xml
-Allow: /robots.txt
-Allow: /favicon.ico
-Allow: /*.css
-Allow: /*.js
-Allow: /*.png
-Allow: /*.jpg
-Allow: /*.jpeg
-Allow: /*.gif
-Allow: /*.webp
-Allow: /*.svg
+# Allow service pages
+Allow: /services/
+Allow: /about
+Allow: /contact
+Allow: /blog/
 
-# Specific rules for major search engines
-
-# Google
+# Specific bot instructions
 User-agent: Googlebot
 Allow: /
 Disallow: /admin/
 Disallow: /api/
 Crawl-delay: 1
 
-# Bing
 User-agent: Bingbot
 Allow: /
 Disallow: /admin/
 Disallow: /api/
 Crawl-delay: 1
 
-# Yahoo
-User-agent: Slurp
-Allow: /
-Disallow: /admin/
-Disallow: /api/
-Crawl-delay: 2
+# Block AI crawlers
+User-agent: GPTBot
+Disallow: /
 
-# Yandex
-User-agent: YandexBot
-Allow: /
-Disallow: /admin/
-Disallow: /api/
-Crawl-delay: 2
+User-agent: ChatGPT-User
+Disallow: /
 
-# DuckDuckGo
-User-agent: DuckDuckBot
-Allow: /
-Disallow: /admin/
-Disallow: /api/
-Crawl-delay: 1
+User-agent: CCBot
+Disallow: /
 
-# Block bad bots and scrapers
+User-agent: anthropic-ai
+Disallow: /
+
+User-agent: Claude-Web
+Disallow: /
+
+# Block aggressive crawlers
 User-agent: AhrefsBot
 Disallow: /
 
@@ -87,12 +70,11 @@ Disallow: /
 User-agent: DotBot
 Disallow: /
 
+User-agent: BLEXBot
+Disallow: /
+
 # Sitemap location
-Sitemap: https://yourdomain.com/sitemap.xml
+Sitemap: https://www.startbusiness.co.in/sitemap.xml
 
-# Additional sitemaps (if you have them)
-# Sitemap: https://yourdomain.com/sitemap-images.xml
-# Sitemap: https://yourdomain.com/sitemap-news.xml
-
-# Host directive (optional - specify your preferred domain)
-# Host: https://yourdomain.com
+# Host specification
+Host: https://www.startbusiness.co.in

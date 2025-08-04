@@ -1,8 +1,6 @@
 import { MetadataRoute } from 'next'
-import { PrismaClient } from '@prisma/client'
+import { generateComprehensiveSitemap, cleanupPrisma } from '@/lib/seo-utils'
 import services from '@/app/(pages)/services/[slug]/data/services.json'
-
-const prisma = new PrismaClient()
 
 // Define types for better type safety
 type ChangeFrequency = 'always' | 'hourly' | 'daily' | 'weekly' | 'monthly' | 'yearly' | 'never'
@@ -36,36 +34,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const baseUrl = 'https://www.startbusiness.co.in/'
     const currentDate = new Date()
 
-    // Helper function to create sitemap entries
-    const createEntry = (
-        path: string,
-        changeFrequency: ChangeFrequency,
-        priority: number,
-        images?: string[]
-    ): SitemapEntry => ({
-        url: `${baseUrl}${path}`,
-        lastModified: currentDate,
-        changeFrequency,
-        priority,
-        ...(images && { images: images.map(img => `${baseUrl}${img}`) })
-    })
-
-    // Static routes with high priority
-    const staticRoutes: SitemapEntry[] = [
-        createEntry('', 'daily', 1, ['/logo.png']),
-        createEntry('services', 'daily', 0.9, ['/hero_new_1.png', '/hero_new_2.png', '/hero_new.png']),
-        createEntry('about', 'monthly', 0.8),
-        createEntry('contact', 'monthly', 0.8),
-        createEntry('blog', 'weekly', 0.8),
-        createEntry('testimonials', 'weekly', 0.7),
-        createEntry('careers', 'monthly', 0.7),
-        createEntry('calculators', 'monthly', 0.8),
-        createEntry('privacy-policy', 'yearly', 0.5),
-        createEntry('terms-of-service', 'yearly', 0.5),
-        createEntry('refund-policy', 'yearly', 0.5),
-        createEntry('sitemap.xml', 'daily', 0.5),
-    ]
-
     // Service routes from services.json with enhanced metadata
     const serviceRoutes: SitemapEntry[] = Object.entries(services).map(([slug, service]) => ({
         url: `${baseUrl}services/${slug}`,
@@ -74,37 +42,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         priority: service.popular ? 0.9 : 0.8,
         images: service.icon ? [`/services/${slug}/icon.png`] : undefined
     }))
-
-    // Calculator routes
-    const calculatorRoutes: SitemapEntry[] = [
-        // Tax Calculators
-        'gst-calculator',
-        'income-tax-calculator',
-        'tds-calculator',
-        'hra-calculator',
-        'gratuity-calculator',
-        'salary-calculator',
-        'gstr-3b-interest-calculator',
-        'hra-rent-receipt-calculator',
-
-        // Financial Calculators
-        'emi-calculator',
-        'sip-calculator',
-        'ppf-calculator',
-        'fixed-deposit-calculator',
-        'rd-calculator',
-        'nps-calculator',
-        'ssy-calculator',
-        'retirement-corpus-calculator',
-
-        // Loan Calculators
-        'home-loan-calculator',
-        'car-loan-calculator',
-        'business-loan-calculator'
-    ].map(calc => {
-        const priority = ['gst-calculator', 'income-tax-calculator', 'emi-calculator', 'sip-calculator', 'home-loan-calculator', 'business-loan-calculator'].includes(calc) ? 0.7 : 0.6
-        return createEntry(`calculators/${calc}`, 'monthly', priority)
-    })
 
     // Blog category routes with enhanced metadata
     const blogCategories: SitemapEntry[] = [
@@ -118,7 +55,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         'compliance',
         'legal',
         'accounting'
-    ].map(category => createEntry(`blog/category/${category}`, 'weekly', 0.7))
+    ].map(category => ({
+        url: `${baseUrl}blog/category/${category}`,
+        lastModified: currentDate,
+        changeFrequency: 'weekly' as const,
+        priority: 0.7
+    }))
 
     // Blog tag routes with enhanced metadata
     const blogTags: SitemapEntry[] = [
@@ -137,50 +79,24 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         'india',
         'registration',
         'compliance'
-    ].map(tag => createEntry(`blog/tag/${tag}`, 'weekly', 0.6))
-
-
-
-    // Fetch published blog posts from database
-    const blogPosts = await safeDatabaseOperation(
-        async () => {
-            return await prisma.blog.findMany({
-                where: {
-                    status: 'published'
-                },
-                select: {
-                    slug: true,
-                    updatedAt: true,
-                    publishedAt: true,
-                    featuredImage: true
-                },
-                orderBy: {
-                    publishedAt: 'desc'
-                }
-            })
-        },
-        [] // Fallback to empty array if database fails
-    )
-
-    // Convert blog posts to sitemap entries
-    const blogPostRoutes: SitemapEntry[] = blogPosts.map(post => ({
-        url: `${baseUrl}blog/${post.slug}`,
-        lastModified: post.updatedAt || post.publishedAt || currentDate,
+    ].map(tag => ({
+        url: `${baseUrl}blog/tag/${tag}`,
+        lastModified: currentDate,
         changeFrequency: 'weekly' as const,
-        priority: 0.7,
-        images: post.featuredImage ? [post.featuredImage] : undefined
+        priority: 0.6
     }))
 
+    // Get comprehensive sitemap including calculators
+    const comprehensiveSitemap = await generateComprehensiveSitemap()
+
     // Clean up Prisma connection
-    await prisma.$disconnect()
+    await cleanupPrisma()
 
     // Combine all routes
     return [
-        ...staticRoutes,
+        ...comprehensiveSitemap,
         ...serviceRoutes,
-        ...calculatorRoutes,
         ...blogCategories,
-        ...blogTags,
-        ...blogPostRoutes
+        ...blogTags
     ]
 } 

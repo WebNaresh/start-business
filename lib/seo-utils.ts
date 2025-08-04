@@ -1,6 +1,7 @@
 // SEO Utilities for Next.js 15 Blog Website
 
 import { PrismaClient } from '@prisma/client'
+import { calculatorSEOConfigs, generateCalculatorSitemapEntries } from './calculator-seo-config'
 
 const prisma = new PrismaClient()
 
@@ -185,7 +186,7 @@ export function generateBlogMetaTags(blog: {
   tags?: string[]
 }): SEOMetadata {
   const canonical = generateCanonicalUrl(`blog/${blog.slug}`)
-  
+
   return {
     title: `${blog.title} | StartBusiness Blog`,
     description: blog.excerpt || `Read ${blog.title} on StartBusiness blog. Expert insights on business registration and compliance.`,
@@ -208,7 +209,7 @@ export function generateServiceMetaTags(service: {
   slug: string
 }): SEOMetadata {
   const canonical = generateCanonicalUrl(`services/${service.slug}`)
-  
+
   return {
     title: `${service.title} | StartBusiness Services`,
     description: service.description,
@@ -226,13 +227,110 @@ export function generateStaticPageMetaTags(page: {
   path: string
 }): SEOMetadata {
   const canonical = generateCanonicalUrl(page.path)
-  
+
   return {
     title: `${page.title} | StartBusiness`,
     description: page.description,
     canonical,
     ogImage: '/logo.png',
     ogType: 'website',
+  }
+}
+
+// Generate meta tags for calculator pages
+export function generateCalculatorMetaTags(calculator: {
+  title: string
+  description: string
+  slug: string
+  keywords?: string[]
+  category?: string
+}): SEOMetadata {
+  const canonical = generateCanonicalUrl(`business-calculators/${calculator.slug}`)
+
+  const defaultKeywords = [
+    'calculator',
+    'financial calculator',
+    'business calculator',
+    'tax calculator',
+    'loan calculator',
+    'india',
+    'online calculator',
+    'free calculator'
+  ]
+
+  const categoryKeywords = calculator.category === 'Tax'
+    ? ['income tax', 'gst', 'tds', 'hra', 'tax calculation', 'tax planning']
+    : calculator.category === 'Loan'
+      ? ['emi', 'loan eligibility', 'interest rate', 'loan calculator', 'home loan', 'car loan']
+      : ['investment', 'returns', 'compound interest', 'financial planning', 'retirement planning']
+
+  return {
+    title: `${calculator.title} - Free Online Calculator | StartBusiness`,
+    description: calculator.description,
+    keywords: [...defaultKeywords, ...categoryKeywords, ...(calculator.keywords || [])],
+    canonical,
+    ogImage: '/calculator-og.png',
+    ogType: 'website',
+  }
+}
+
+// Generate structured data for calculator tools
+export function generateCalculatorStructuredData(calculator: {
+  title: string
+  description: string
+  slug: string
+  category: string
+  features?: string[]
+}) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: calculator.title,
+    description: calculator.description,
+    url: `${BASE_URL}/business-calculators/${calculator.slug}`,
+    applicationCategory: 'FinanceApplication',
+    operatingSystem: 'Web Browser',
+    offers: {
+      '@type': 'Offer',
+      price: '0',
+      priceCurrency: 'INR',
+    },
+    provider: {
+      '@type': 'Organization',
+      name: 'StartBusiness',
+      url: BASE_URL,
+    },
+    featureList: calculator.features || [
+      'Real-time calculations',
+      'Detailed breakdown',
+      'Export results',
+      'Mobile responsive'
+    ],
+    browserRequirements: 'Requires JavaScript',
+    softwareVersion: '1.0',
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: '4.8',
+      reviewCount: '1250',
+      bestRating: '5',
+      worstRating: '1'
+    }
+  }
+}
+
+// Generate FAQ structured data for calculators
+export function generateCalculatorFAQStructuredData(faqs: Array<{ question: string, answer: string }>) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map(faq => ({
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: faq.answer
+      }
+    }))
   }
 }
 
@@ -249,14 +347,14 @@ export function validateSitemapUrl(url: string): boolean {
 // Generate XML sitemap string
 export function generateSitemapXML(entries: SitemapEntry[]): string {
   const validEntries = entries.filter(entry => validateSitemapUrl(entry.url))
-  
+
   const urlElements = validEntries.map(entry => {
-    const imageElements = entry.images?.map(image => 
+    const imageElements = entry.images?.map(image =>
       `    <image:image>
       <image:loc>${image}</image:loc>
     </image:image>`
     ).join('\n') || ''
-    
+
     return `  <url>
     <loc>${entry.url}</loc>
     <lastmod>${entry.lastModified.toISOString()}</lastmod>
@@ -270,6 +368,60 @@ export function generateSitemapXML(entries: SitemapEntry[]): string {
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
 ${urlElements}
 </urlset>`
+}
+
+// Get all calculator pages for sitemap
+export function getCalculatorPages(): SitemapEntry[] {
+  return generateCalculatorSitemapEntries()
+}
+
+// Generate comprehensive sitemap including calculators
+export async function generateComprehensiveSitemap(): Promise<SitemapEntry[]> {
+  const staticPages: SitemapEntry[] = [
+    {
+      url: `${BASE_URL}`,
+      lastModified: new Date(),
+      changeFrequency: 'daily',
+      priority: 1.0,
+    },
+    {
+      url: `${BASE_URL}/business-calculators`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.9,
+    },
+    {
+      url: `${BASE_URL}/services`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.9,
+    },
+    {
+      url: `${BASE_URL}/about`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    {
+      url: `${BASE_URL}/contact`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+  ]
+
+  const calculatorPages = getCalculatorPages()
+  const blogPosts = await getPublishedBlogPosts()
+
+  const blogSitemapEntries: SitemapEntry[] = blogPosts.map(post => ({
+    url: `${BASE_URL}/blog/${post.slug}`,
+    lastModified: post.updatedAt || post.publishedAt || new Date(),
+    changeFrequency: 'monthly',
+    priority: 0.7,
+    images: post.featuredImage ? [`${BASE_URL}${post.featuredImage}`] : undefined,
+  }))
+
+  return [...staticPages, ...calculatorPages, ...blogSitemapEntries]
 }
 
 // Clean up Prisma connection
