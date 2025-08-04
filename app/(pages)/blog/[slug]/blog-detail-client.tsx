@@ -164,21 +164,7 @@ export default function BlogDetailClient({ blogPost }: BlogDetailClientProps) {
                       <p className="text-sm">Author</p>
                     </div>
                   </div>
-                  <div className="flex items-center">
-                    <Calendar className="w-4 h-4 mr-2" />
-                    <span>
-                      {blogPost.publishedAt
-                        ? new Date(blogPost.publishedAt).toLocaleDateString(
-                            "en-US",
-                            {
-                              year: "numeric",
-                              month: "long",
-                              day: "numeric",
-                            }
-                          )
-                        : "Not published"}
-                    </span>
-                  </div>
+                 
                   <div className="flex items-center">
                     <Clock className="w-4 h-4 mr-2" />
                     <span>5 min read</span>

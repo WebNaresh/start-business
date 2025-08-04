@@ -56,7 +56,7 @@ export default function ProfessionalHeroSection() {
         "availability": "https://schema.org/InStock"
       },
       "featureList": [
-        "7-15 days processing time",
+     
         "Expert CA and legal guidance",
         "End-to-end business solutions",
         "100% compliance guaranteed"
@@ -168,10 +168,7 @@ export default function ProfessionalHeroSection() {
                 <div className="absolute -top-4 -right-4 bg-green-500 text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg">
                   ✓ Verified
                 </div>
-                <div className="absolute -bottom-4 -left-4 bg-blue-600 text-white px-5 py-3 rounded-xl text-sm font-medium shadow-lg flex items-center">
-                  <Clock className="w-4 h-4 mr-2" />
-                  7-15 Days
-                </div>
+            
               </div>
 
               {/* Subtle Decorative Elements */}
