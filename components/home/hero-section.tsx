@@ -161,6 +161,7 @@ export default function ProfessionalHeroSection() {
                   priority={true}
                   width={1200}
                   height={900}
+                  fetchPriority="high"
                   quality={95}
                 />
 
