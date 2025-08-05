@@ -20,7 +20,6 @@ export default function Home() {
       <HeroSection />
       <CompanySearchSection />
       <ServicesSection />
-      <StatsSection />
           <section
                 className="py-8 sm:py-10 md:py-12 bg-background"
                 aria-labelledby="quiz-heading"
@@ -29,6 +28,7 @@ export default function Home() {
                   <ServiceRecommendationQuiz />
                 </div>
               </section>
+      <StatsSection />
       <FeaturesSection />
       <ProcessSection />
 

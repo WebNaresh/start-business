@@ -2,6 +2,37 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Service recommendation quiz enhancements */
+.touch-target {
+  min-height: 44px;
+  min-width: 44px;
+}
+
+.service-card-mobile {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+.service-card-mobile:active {
+  transform: scale(0.98);
+}
+
+/* Smooth carousel transitions */
+.embla__slide {
+  transform: translate3d(0, 0, 0);
+}
+
+/* Mobile-specific touch improvements */
+@media (max-width: 768px) {
+  .touch-pan-y {
+    touch-action: pan-y;
+  }
+  
+  .service-quiz-container {
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
 :root {
   --background: 0 0% 100%;
   --foreground: 222.2 84% 4.9%;
