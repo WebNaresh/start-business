@@ -13,7 +13,6 @@ import {
   Users,
   CheckCircle,
   Sparkles,
-  Filter,
   Search,
   AlertCircle,
   ChevronLeft,
@@ -302,7 +301,7 @@ export default function ServicesCarousel() {
   }
 
   return (
-    <section 
+    <section
       className="py-4"
       aria-labelledby="services-heading"
     >
@@ -312,14 +311,14 @@ export default function ServicesCarousel() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(servicesStructuredData) }}
       />
       <div className="container mx-auto px-4">
-        {/* Enhanced Header */}
+        {/* Enhanced Header - Mobile Optimized */}
         <div className="mb-6 md:mb-8 text-center px-4">
           <Badge
             variant="secondary"
-            className="mb-3 md:mb-4 bg-secondary text-secondary-foreground px-3 py-1.5 md:px-4 md:py-2 text-xs md:text-sm"
+            className="mb-3 md:mb-4 bg-blue-50 text-blue-700 border-blue-200 px-3 py-1.5 md:px-4 md:py-2 text-xs md:text-sm"
             aria-label="Services section badge"
           >
-            <Sparkles className="w-3 h-3 md:w-4 md:h-4 mr-1.5 md:mr-2 text-primary" aria-hidden="true" />
+            <Sparkles className="w-3 h-3 md:w-4 md:h-4 mr-1.5 md:mr-2 text-blue-600" aria-hidden="true" />
             Our Services
           </Badge>
           <h2
@@ -328,17 +327,26 @@ export default function ServicesCarousel() {
           >
             Our <span className="text-primary">Popular</span> Services
           </h2>
-          <p className="text-sm sm:text-base md:text-lg text-muted-foreground mb-6 md:mb-8 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-sm sm:text-base md:text-lg text-muted-foreground mb-6 md:mb-8 max-w-3xl mx-auto leading-relaxed">
             Everything you need to start, run, and grow your business with confidence
           </p>
         </div>
 
-        {/* Enhanced Filters and Search */}
-        <div className="mb-8 md:mb-12 px-4">
-          <div className="flex flex-col lg:flex-row gap-4 md:gap-6 items-center justify-between">
-            {/* Category Filters */}
+        {/* Enhanced Filters and Search - Mobile First */}
+        <div className="mb-6 md:mb-8 px-4">
+          <div className="flex flex-col gap-4 items-center">
+            {/* Enhanced Search - Mobile First */}
+            <div className="w-full max-w-md lg:max-w-lg">
+              <EnhancedSearch
+                onSearch={setSearchTerm}
+                placeholder="Search services..."
+                className="w-full text-sm md:text-base"
+              />
+            </div>
+
+            {/* Category Filters - Simplified for Mobile */}
             <div
-              className="flex flex-wrap gap-1.5 md:gap-2 justify-center lg:justify-start"
+              className="flex flex-wrap gap-2 justify-center"
               role="group"
               aria-label="Service category filters"
             >
@@ -348,28 +356,17 @@ export default function ServicesCarousel() {
                   variant={selectedCategory === category.id ? "default" : "outline"}
                   size="sm"
                   onClick={() => setSelectedCategory(category.id)}
-                  className={`transition-all duration-300 text-xs sm:text-sm px-2 sm:px-3 py-1.5 sm:py-2 ${
-                    selectedCategory === category.id
+                  className={`transition-all duration-300 text-xs sm:text-sm px-3 py-2 rounded-full ${selectedCategory === category.id
                       ? "bg-primary hover:bg-primary/90 text-primary-foreground shadow-md"
-                      : "hover:bg-secondary hover:text-secondary-foreground"
-                  }`}
+                      : "hover:bg-blue-50 hover:text-blue-700 hover:border-blue-300"
+                    }`}
                   aria-pressed={selectedCategory === category.id}
                   role="button"
                 >
-                  <Filter className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" aria-hidden="true" />
-                  <span className="hidden sm:inline">{category.name} ({category.count})</span>
-                  <span className="sm:hidden">{category.name}</span>
+                  <span>{category.name}</span>
+                  <span className="ml-1 text-xs opacity-75">({category.count})</span>
                 </Button>
               ))}
-            </div>
-
-            {/* Enhanced Search */}
-            <div className="w-full lg:w-80">
-              <EnhancedSearch
-                onSearch={setSearchTerm}
-                placeholder="Search services..."
-                className="w-full text-sm md:text-base"
-              />
             </div>
           </div>
         </div>
@@ -378,8 +375,8 @@ export default function ServicesCarousel() {
         <div className="relative">
           {filteredServices.length > 0 ? (
             <>
-              <div 
-                className="overflow-hidden" 
+              <div
+                className="overflow-hidden"
                 ref={emblaRef}
                 role="region"
                 aria-roledescription="carousel"
@@ -389,7 +386,7 @@ export default function ServicesCarousel() {
                   {filteredServices.map((service, idx) => (
                     <div
                       key={service.title}
-                      className="flex-[0_0_100%] sm:flex-[0_0_50%] lg:flex-[0_0_33.333%] min-w-0 px-2 sm:px-3 md:px-4"
+                      className="flex-[0_0_100%] sm:flex-[0_0_85%] md:flex-[0_0_50%] lg:flex-[0_0_33.333%] min-w-0 px-3 sm:px-4"
                       role="group"
                       aria-roledescription="slide"
                       aria-label={`Slide ${idx + 1} of ${filteredServices.length}`}
@@ -406,7 +403,7 @@ export default function ServicesCarousel() {
               </div>
 
               {/* Carousel Controls */}
-              <div 
+              <div
                 className="mt-8 flex items-center justify-center gap-4"
                 role="group"
                 aria-label="Carousel controls"
@@ -422,7 +419,7 @@ export default function ServicesCarousel() {
                 </Button>
 
                 {/* Dots Indicators */}
-                <div 
+                <div
                   className="flex items-center gap-2"
                   role="tablist"
                   aria-label="Slide indicators"
@@ -431,9 +428,8 @@ export default function ServicesCarousel() {
                     <button
                       key={idx}
                       onClick={() => emblaApi?.scrollTo(idx)}
-                      className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                        currentSlide === idx ? "bg-blue-600 w-4" : "bg-slate-300"
-                      }`}
+                      className={`w-2 h-2 rounded-full transition-all duration-300 ${currentSlide === idx ? "bg-blue-600 w-4" : "bg-slate-300"
+                        }`}
                       role="tab"
                       aria-selected={currentSlide === idx}
                       aria-label={`Go to slide ${idx + 1}`}
@@ -454,7 +450,7 @@ export default function ServicesCarousel() {
             </>
           ) : (
             /* No Results State */
-            <div 
+            <div
               className="text-center py-12"
               role="alert"
               aria-live="polite"
@@ -478,7 +474,7 @@ export default function ServicesCarousel() {
           )}
         </div>
 
-   
+
         {/* View More Services Button */}
         <div className="mt-8 text-center">
           <EnhancedCTAButton
@@ -504,38 +500,46 @@ function ServiceCard({ service, idx, hoveredCard, setHoveredCard }: ServiceCardP
 
   return (
     <div
-      className={`group relative rounded-2xl bg-card shadow-lg border-2 transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 ${
-        service.mostPopular ? "border-primary shadow-primary/10" : "border-border hover:border-primary/50"
-      } flex flex-col overflow-hidden h-full`}
+      className={`group relative rounded-xl lg:rounded-2xl bg-card shadow-md hover:shadow-xl border-2 transition-all duration-300 hover:-translate-y-1 ${service.mostPopular ? "border-primary shadow-primary/10 ring-1 ring-primary/20" : "border-border hover:border-primary/50"
+        } flex flex-col overflow-hidden h-full`}
       onMouseEnter={() => setHoveredCard(idx)}
       onMouseLeave={() => setHoveredCard(null)}
       role="article"
       aria-labelledby={`service-title-${idx}`}
     >
-      {/* Savings Badge */}
-      <div className="absolute top-2 right-2 z-10">
+      {/* Most Popular Badge - Top Left */}
+      {service.mostPopular && (
+        <div className="absolute top-3 left-3 z-10">
+          <Badge className="bg-amber-500 hover:bg-amber-600 text-white text-xs px-2 py-1 shadow-sm">
+            Most Popular
+          </Badge>
+        </div>
+      )}
+
+      {/* Savings Badge - Top Right Corner */}
+      <div className="absolute top-3 right-3 z-10">
         <Badge
           variant="destructive"
-          className="bg-green-700 hover:bg-green-800 text-white text-xs px-2 py-1"
+          className="bg-green-600 hover:bg-green-700 text-white text-xs px-2 py-1 shadow-sm rounded-full"
           aria-label={`Save ${savingsPercent}%`}
         >
           Save {savingsPercent}%
         </Badge>
       </div>
 
-      <div className="p-4 sm:p-5 md:p-6 flex-1 flex flex-col">
-        {/* Service Header */}
-        <div className="flex items-start gap-3 md:gap-4 mb-3 md:mb-4">
+      <div className="p-4 sm:p-5 lg:p-6 flex-1 flex flex-col pt-12">
+        {/* Service Header - Mobile Optimized with proper spacing */}
+        <div className="flex items-start gap-3 mb-4">
           <div
-            className={`p-2 sm:p-2.5 md:p-3 rounded-lg md:rounded-xl ${service.mostPopular ? "bg-primary/10" : "bg-secondary"} group-hover:scale-110 transition-transform duration-300`}
+            className={`p-2.5 rounded-xl ${service.mostPopular ? "bg-primary/10" : "bg-blue-50"} group-hover:scale-105 transition-transform duration-200 flex-shrink-0`}
             aria-hidden="true"
           >
-            <IconComponent className={`w-5 h-5 md:w-6 md:h-6 ${service.mostPopular ? "text-primary" : "text-muted-foreground"}`} />
+            <IconComponent className={`w-5 h-5 ${service.mostPopular ? "text-primary" : "text-blue-600"}`} />
           </div>
           <div className="flex-1 min-w-0">
-            <h4 
+            <h4
               id={`service-title-${idx}`}
-              className="text-sm sm:text-base md:text-lg font-semibold text-foreground mb-1.5 md:mb-2 group-hover:text-primary transition-colors leading-tight"
+              className="text-sm sm:text-base lg:text-lg font-bold text-foreground mb-2 group-hover:text-primary transition-colors leading-tight pr-1"
             >
               {service.title}
             </h4>
@@ -543,36 +547,36 @@ function ServiceCard({ service, idx, hoveredCard, setHoveredCard }: ServiceCardP
           </div>
         </div>
 
-        {/* Features List */}
-        <div className="mb-4 md:mb-6 flex-1">
-          <h5 className="text-xs sm:text-sm font-semibold mb-2 md:mb-3 text-muted-foreground">What's included:</h5>
-          <ul className="space-y-1.5 md:space-y-2">
+        {/* Features List - Simplified for Mobile */}
+        <div className="mb-4 flex-1">
+          <h5 className="text-sm font-semibold mb-3 text-slate-700">What's included:</h5>
+          <ul className="space-y-2">
             {service.features.slice(0, 3).map((feature, featureIdx) => (
-              <li key={featureIdx} className="flex items-center gap-2 text-xs sm:text-sm text-muted-foreground">
-                <CheckCircle className="w-3 h-3 sm:w-4 sm:h-4 text-primary flex-shrink-0" aria-hidden="true" />
+              <li key={featureIdx} className="flex items-start gap-2 text-sm text-slate-600">
+                <CheckCircle className="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" aria-hidden="true" />
                 <span className="leading-tight">{feature}</span>
               </li>
             ))}
             {service.features.length > 3 && (
-              <li className="text-xs sm:text-sm text-primary font-medium">
+              <li className="text-sm text-primary font-medium pl-6">
                 +{service.features.length - 3} more features
               </li>
             )}
           </ul>
         </div>
 
-        {/* Pricing */}
-        <div className="mb-4 md:mb-6">
-          <div className="flex items-baseline gap-1.5 md:gap-2 mb-1">
-            <span className="text-xl sm:text-2xl md:text-3xl font-bold text-slate-900">{service.price}</span>
-            <span className="text-sm sm:text-base md:text-lg text-slate-500 line-through">{service.originalPrice}</span>
-            <span className="text-xs sm:text-sm font-normal text-slate-500">{service.billing}</span>
+        {/* Pricing - Mobile Optimized */}
+        <div className="mb-5">
+          <div className="flex items-baseline gap-2 mb-2">
+            <span className="text-2xl sm:text-3xl font-bold text-slate-900">{service.price}</span>
+            <span className="text-base text-slate-500 line-through">{service.originalPrice}</span>
+            <span className="text-sm font-normal text-slate-500">{service.billing}</span>
           </div>
-          <p className="text-xs sm:text-sm text-green-700 font-medium">
+          <p className="text-sm text-green-700 font-semibold mb-2">
             You save ₹{savings.toLocaleString()}!
           </p>
-          <div className="flex items-center gap-1 mt-1.5 md:mt-2 text-xs sm:text-sm text-red-600">
-            <AlertCircle className="w-3 h-3 sm:w-4 sm:h-4" aria-hidden="true" />
+          <div className="flex items-center gap-1.5 text-xs text-amber-600 bg-amber-50 px-2 py-1 rounded-md">
+            <AlertCircle className="w-3 h-3" aria-hidden="true" />
             <span>Government fee excluded</span>
           </div>
         </div>
@@ -595,9 +599,8 @@ function ServiceCard({ service, idx, hoveredCard, setHoveredCard }: ServiceCardP
 
       {/* Hover Effect Overlay */}
       <div
-        className={`absolute inset-0 bg-gradient-to-br from-blue-600/5 to-transparent transition-opacity duration-300 pointer-events-none ${
-          hoveredCard === idx ? "opacity-100" : "opacity-0"
-        }`}
+        className={`absolute inset-0 bg-gradient-to-br from-blue-600/5 to-transparent transition-opacity duration-300 pointer-events-none ${hoveredCard === idx ? "opacity-100" : "opacity-0"
+          }`}
         aria-hidden="true"
       />
     </div>

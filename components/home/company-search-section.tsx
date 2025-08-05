@@ -323,7 +323,7 @@ export default function CompanySearchSection() {
         }}
       />
 
-      <section className="relative py-16 bg-gradient-to-br from-slate-50 via-white to-blue-50/30 overflow-hidden">
+      <section className="relative py-12 sm:py-16 bg-gradient-to-br from-slate-50 via-white to-blue-50/30 overflow-hidden">
         {/* Enhanced Background Elements */}
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-blue-100/20 to-transparent rounded-full -mr-48 -mt-48 blur-3xl"></div>
@@ -332,43 +332,43 @@ export default function CompanySearchSection() {
         </div>
 
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 max-w-6xl">
-          {/* Professional Header */}
-          <div className="text-center mb-12">
-            <div className="inline-flex items-center px-5 py-2.5 bg-blue-50 border border-blue-200 text-blue-700 rounded-full text-sm font-medium mb-6 shadow-sm hover:shadow-md transition-all duration-200">
+          {/* Professional Header - Mobile Optimized */}
+          <div className="text-center mb-8 sm:mb-12">
+            <div className="inline-flex items-center px-4 py-2 bg-blue-50 border border-blue-200 text-blue-700 rounded-full text-sm font-medium mb-4 sm:mb-6 shadow-sm hover:shadow-md transition-all duration-200">
               <Building2 className="w-4 h-4 mr-2" />
               <span>MCA Company Search</span>
               <Sparkles className="w-4 h-4 ml-2" />
             </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 mb-4 leading-tight">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-3 sm:mb-4 leading-tight px-4">
               Search Company
-              <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent"> Information</span>
+              <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent block sm:inline sm:ml-2"> Information</span>
             </h2>
-            <p className="text-lg sm:text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-base sm:text-lg lg:text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed px-4">
               Find detailed information about any Indian company using Company Name, CIN, or LLPIN with real-time MCA data.
             </p>
 
-            {/* Compact Feature badges */}
-            <div className="flex flex-wrap justify-center gap-2 mt-6">
-              <Badge className="bg-green-50 text-green-700 border-green-200 px-3 py-1 text-xs font-medium">
+            {/* Compact Feature badges - Mobile Optimized */}
+            <div className="flex flex-wrap justify-center gap-2 mt-4 sm:mt-6 px-4">
+              <Badge className="bg-green-50 text-green-700 border-green-200 px-2 sm:px-3 py-1 text-xs font-medium">
                 <TrendingUp className="w-3 h-3 mr-1" />
                 Real-time Data
               </Badge>
-              <Badge className="bg-blue-50 text-blue-700 border-blue-200 px-3 py-1 text-xs font-medium">
+              <Badge className="bg-blue-50 text-blue-700 border-blue-200 px-2 sm:px-3 py-1 text-xs font-medium">
                 <Shield className="w-3 h-3 mr-1" />
                 MCA Verified
               </Badge>
-              <Badge className="bg-purple-50 text-purple-700 border-purple-200 px-3 py-1 text-xs font-medium">
+              <Badge className="bg-purple-50 text-purple-700 border-purple-200 px-2 sm:px-3 py-1 text-xs font-medium">
                 <Sparkles className="w-3 h-3 mr-1" />
                 Instant Results
               </Badge>
             </div>
           </div>
 
-          {/* Modern Search Interface */}
-          <div className="max-w-4xl mx-auto">
-            <div className="relative mb-10">
+          {/* Modern Search Interface - Mobile Optimized */}
+          <div className="max-w-4xl mx-auto px-4">
+            <div className="relative mb-8 sm:mb-10">
               <div className="relative group">
-                <Search className={`absolute left-5 top-1/2 transform -translate-y-1/2 w-5 h-5 transition-all duration-200 z-20 pointer-events-none ${searchState.isLoading
+                <Search className={`absolute left-4 sm:left-5 top-1/2 transform -translate-y-1/2 w-4 h-4 sm:w-5 sm:h-5 transition-all duration-200 z-20 pointer-events-none ${searchState.isLoading
                     ? 'text-blue-600 animate-pulse'
                     : searchState.isTyping
                       ? 'text-blue-500'
@@ -380,9 +380,9 @@ export default function CompanySearchSection() {
                   placeholder="Search by Company Name, CIN, or LLPIN..."
                   value={searchState.query}
                   onChange={handleInputChange}
-                  className={`pl-14 pr-14 py-4 text-base border-2 rounded-xl bg-white shadow-md transition-all duration-200 ${searchState.isTyping
-                      ? 'border-blue-500 shadow-blue-100 ring-4 ring-blue-50'
-                      : 'border-slate-200 hover:border-slate-300 focus:border-blue-500 focus:ring-4 focus:ring-blue-50'
+                  className={`pl-12 sm:pl-14 pr-12 sm:pr-14 py-3 sm:py-4 text-sm sm:text-base border-2 rounded-xl bg-white shadow-md transition-all duration-200 ${searchState.isTyping
+                      ? 'border-blue-500 shadow-blue-100 ring-2 sm:ring-4 ring-blue-50'
+                      : 'border-slate-200 hover:border-slate-300 focus:border-blue-500 focus:ring-2 sm:focus:ring-4 focus:ring-blue-50'
                     } group-hover:shadow-lg focus:outline-none`}
                   onKeyDown={(e) => {
                     if (e.key === 'Escape') {
@@ -393,11 +393,11 @@ export default function CompanySearchSection() {
                     }
                   }}
                 />
-                <div className="absolute right-4 top-1/2 transform -translate-y-1/2 flex items-center space-x-2">
+                <div className="absolute right-3 sm:right-4 top-1/2 transform -translate-y-1/2 flex items-center space-x-2">
                   {searchState.isLoading && (
-                    <div className="flex items-center bg-blue-50 px-3 py-1 rounded-full">
-                      <Loader2 className="text-blue-600 w-4 h-4 animate-spin mr-2" />
-                      <span className="text-xs text-blue-600 font-medium">Searching...</span>
+                    <div className="flex items-center bg-blue-50 px-2 sm:px-3 py-1 rounded-full">
+                      <Loader2 className="text-blue-600 w-3 h-3 sm:w-4 sm:h-4 animate-spin mr-1 sm:mr-2" />
+                      <span className="text-xs text-blue-600 font-medium hidden sm:inline">Searching...</span>
                     </div>
                   )}
                   {searchState.query && !searchState.isLoading && (
@@ -447,18 +447,18 @@ export default function CompanySearchSection() {
                 </div>
               )}
 
-              {/* Popular Searches - Show when input is empty */}
+              {/* Popular Searches - Mobile Optimized */}
               {!searchState.query && !searchState.selectedCompany && (
-                <div className="mt-8">
-                  <p className="text-sm font-medium text-slate-600 mb-4 text-center">Popular Searches:</p>
+                <div className="mt-6 sm:mt-8">
+                  <p className="text-sm font-medium text-slate-600 mb-3 sm:mb-4 text-center">Popular Searches:</p>
                   <div className="flex flex-wrap justify-center gap-2">
                     {popularSearches.map((search, index) => (
                       <button
                         key={index}
                         onClick={() => handlePopularSearchSelect(search)}
-                        className="px-4 py-2 bg-white border border-slate-200 rounded-full text-sm font-medium text-slate-700 hover:bg-blue-50 hover:border-blue-300 hover:text-blue-700 transition-all duration-200 shadow-sm hover:shadow-md"
+                        className="px-3 sm:px-4 py-1.5 sm:py-2 bg-white border border-slate-200 rounded-full text-xs sm:text-sm font-medium text-slate-700 hover:bg-blue-50 hover:border-blue-300 hover:text-blue-700 transition-all duration-200 shadow-sm hover:shadow-md"
                       >
-                        {search}
+                        <span className="truncate max-w-[120px] sm:max-w-none">{search}</span>
                       </button>
                     ))}
                   </div>
