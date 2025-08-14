@@ -27,9 +27,91 @@
   .touch-pan-y {
     touch-action: pan-y;
   }
-  
+
   .service-quiz-container {
     -webkit-overflow-scrolling: touch;
+  }
+
+  /* Bottom navigation safe area */
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
+  /* Ensure content doesn't get hidden behind bottom nav */
+  body {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
+  /* Adjust Zoho SalesIQ widget position on mobile to avoid bottom navigation */
+  #zsiq_float,
+  #zsiq_float div,
+  .zsiq_floatmain,
+  .zsiq_theme1 {
+    bottom: calc(64px + 16px + env(safe-area-inset-bottom, 0px)) !important; /* Move above bottom navigation */
+    right: 16px !important;
+    z-index: 8998 !important; /* Below bottom navigation */
+  }
+
+  /* Adjust Zoho chat window position */
+  #zsiq_agtchatdiv,
+  .zsiq_chatwindow {
+    bottom: calc(64px + 16px + env(safe-area-inset-bottom, 0px)) !important;
+    right: 16px !important;
+    z-index: 8998 !important;
+  }
+
+  /* Ensure Zoho elements don't overlap bottom navigation */
+  [id*="zsiq"],
+  [class*="zsiq"] {
+    z-index: 8998 !important;
+  }
+
+  /* Specific targeting for Zoho float button */
+  div[id^="zsiq_float"] {
+    bottom: calc(64px + 16px + env(safe-area-inset-bottom, 0px)) !important;
+  }
+
+  /* Bottom navigation enhancements */
+  .bottom-nav-item {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+
+  /* Smooth transitions for better performance */
+  .bottom-nav-item:active {
+    transform: scale(0.95);
+    transition: transform 0.1s ease-out;
+  }
+
+  /* Improved touch targets */
+  .bottom-nav-item {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Better visual feedback */
+  .bottom-nav-indicator {
+    animation: slideIn 0.2s ease-out;
+  }
+
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateX(-50%) scale(0.8);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(-50%) scale(1);
+    }
+  }
+
+  /* Backdrop blur fallback */
+  @supports not (backdrop-filter: blur(16px)) {
+    .bottom-nav-fallback {
+      background: rgba(255, 255, 255, 0.98);
+    }
   }
 }
 

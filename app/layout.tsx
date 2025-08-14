@@ -2,6 +2,7 @@
 import FloatingCallButton from "@/components/floating-call-button";
 import Footer from "@/components/footer";
 import Header from "@/components/header";
+import BottomNavigation from "@/components/ui/bottom-navigation";
 import QueryProvider from "@/components/providers/query-provider";
 import NuqsSuspenseProvider from "@/components/providers/nuqs-suspense-provider";
 import { ThemeProvider } from "@/components/theme-provider";
@@ -144,6 +145,19 @@ export default function RootLayout({
               values: {},
               ready: function() {
                 $zoho.salesiq.floatbutton.visible("show");
+
+                // Adjust position for mobile devices to avoid bottom navigation
+                if (window.innerWidth < 768) {
+                  setTimeout(function() {
+                    var floatButton = document.getElementById('zsiq_float');
+                    if (floatButton) {
+                      floatButton.style.bottom = '80px'; // Position above bottom nav (64px + 16px margin)
+                      floatButton.style.right = '16px';
+                      floatButton.style.zIndex = '8998';
+                      floatButton.style.transform = 'scale(0.9)'; // Slightly smaller for mobile
+                    }
+                  }, 1000);
+                }
               }
             };
             var d = document;
@@ -171,9 +185,10 @@ export default function RootLayout({
                 <div className="relative min-h-screen flex flex-col">
                   <UIProvider>
                     <Header />
-                    <main className="flex-1">{children}</main>
+                    <main className="flex-1 pb-safe">{children}</main>
                     <Footer />
                     <FloatingCallButton />
+                    <BottomNavigation />
                     {/* <Chatbot /> */}
                   </UIProvider>
                 </div>
