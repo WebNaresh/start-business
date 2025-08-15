@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect, useCallback } from "react"
+import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import {
   ArrowRight,
@@ -22,9 +22,7 @@ import {
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import Link from "next/link"
-import QuizModal from "@/components/ui/quiz-modal"
-import CompanyRegistrationQuiz from "./company-registration-quiz"
-import ITREligibilityQuiz from "./itr-eligibility-quiz"
+
 import { useServiceCarousel } from '@/hooks/use-service-carousel'
 
 interface ServiceCategory {
@@ -38,8 +36,6 @@ interface ServiceCategory {
 }
 
 export default function ServiceRecommendationQuiz() {
-  const [selectedQuiz, setSelectedQuiz] = useState<string | null>(null)
-  const [isModalOpen, setIsModalOpen] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
 
   // Use custom carousel hook
@@ -51,7 +47,6 @@ export default function ServiceRecommendationQuiz() {
     canScrollNext,
     scrollPrev,
     scrollNext,
-    scrollTo,
     toggleAutoplay
   } = useServiceCarousel({
     autoplayDelay: 4000,
@@ -113,30 +108,20 @@ export default function ServiceRecommendationQuiz() {
       window.open("/business-calculators", "_blank")
       return
     }
-    setSelectedQuiz(categoryId)
-    setIsModalOpen(true)
-  }
-
-  const closeModal = () => {
-    setIsModalOpen(false)
-    setSelectedQuiz(null)
-  }
-
-  const getModalTitle = () => {
-    const category = serviceCategories.find(cat => cat.id === selectedQuiz)
-    return category?.title || "Quiz"
-  }
-
-  const renderQuizContent = () => {
-    switch (selectedQuiz) {
-      case "company-registration":
-        return <CompanyRegistrationQuiz />
-      case "itr-eligibility":
-        return <ITREligibilityQuiz />
-      default:
-        return null
+    
+    // Redirect to dedicated quiz pages instead of opening modals
+    if (categoryId === "company-registration") {
+      window.open("/business-structure-quiz", "_blank")
+      return
+    }
+    
+    if (categoryId === "itr-eligibility") {
+      window.open("/itr-eligibility-quiz", "_blank")
+      return
     }
   }
+
+
 
   return (
     <>
@@ -245,21 +230,7 @@ export default function ServiceRecommendationQuiz() {
                 </Button>
               </div>
 
-              {/* Enhanced Carousel Indicators */}
-              <div className="flex justify-center gap-2 mt-4">
-                {serviceCategories.map((_, idx) => (
-                  <button
-                    key={idx}
-                    onClick={() => scrollTo(idx)}
-                    className={`rounded-full transition-all duration-300 touch-target ${currentSlide === idx
-                        ? "bg-blue-600 w-6 h-2"
-                        : "bg-slate-300 w-2 h-2 hover:bg-slate-400"
-                      }`}
-                    aria-label={`Go to service ${idx + 1}`}
-                  />
-                ))}
-              </div>
-
+   
               {/* Swipe hint for first-time users */}
               <div className="flex justify-center mt-2">
                 <span className="text-xs text-slate-400 animate-pulse">
@@ -315,13 +286,6 @@ export default function ServiceRecommendationQuiz() {
               Need Personal Guidance?
             </h3>
 
-            <p className={cn(
-              "text-slate-600 mb-6 sm:mb-8 leading-relaxed",
-              isMobile ? "text-sm px-2" : "text-sm sm:text-base px-2"
-            )}>
-              Our business experts are here to help you make the right decisions for your specific situation. Get personalized advice in just 15 minutes.
-            </p>
-
             {/* Enhanced Stats with Mobile Carousel */}
             <div className={cn(
               "mb-6 sm:mb-8 text-xs sm:text-sm text-slate-500",
@@ -363,14 +327,7 @@ export default function ServiceRecommendationQuiz() {
         </div>
       </div>
 
-      {/* Quiz Modal */}
-      <QuizModal
-        isOpen={isModalOpen}
-        onClose={closeModal}
-        title={getModalTitle()}
-      >
-        {renderQuizContent()}
-      </QuizModal>
+
     </>
   )
 }
@@ -461,9 +418,9 @@ function ServiceCard({ category, onSelect, isMobile }: ServiceCardProps) {
               <>
                 <Play className="w-4 h-4 sm:w-5 sm:h-5" />
                 <span className={isMobile ? "" : "hidden sm:inline"}>
-                  {isMobile ? "Start" : "Start Quiz"}
+                  {isMobile ? "Take Quiz" : "Take Quiz"}
                 </span>
-                {!isMobile && <span className="sm:hidden">Start</span>}
+                {!isMobile && <span className="sm:hidden">Take Quiz</span>}
               </>
             )}
             <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />

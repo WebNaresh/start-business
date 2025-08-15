@@ -34,9 +34,9 @@ export default function ContactSection() {
                     <a 
                       href="tel:+919168499520" 
                       className="text-base font-semibold text-foreground hover:text-primary transition-colors"
-                      aria-label="Call us at +91 91684 99520"
+                      aria-label="Call us at +91 96992 14195"
                     >
-                      +91 91684 99520
+                      +91 96992 14195
                     </a>
                   </div>
                 </div>

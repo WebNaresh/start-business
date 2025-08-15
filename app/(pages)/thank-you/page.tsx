@@ -40,7 +40,7 @@ export default function ThankYouPage() {
             <div className="flex items-center justify-center text-sm text-gray-600">
               <Phone className="w-4 h-4 mr-2" />
               <a href="tel:+919168499520" className="hover:text-blue-600">
-                +91 91684 99520
+                +91 96992 14195
               </a>
             </div>
             <div className="flex items-center justify-center text-sm text-gray-600">

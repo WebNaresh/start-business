@@ -136,7 +136,7 @@ export default function ComingSoonPage() {
               <Phone className="w-5 h-5 text-green-600" />
               <div className="text-left">
                 <div className="text-sm font-medium text-green-800">Call Us</div>
-                <div className="text-sm text-green-600">+91 91684 99520</div>
+                <div className="text-sm text-green-600">+91 96992 14195</div>
               </div>
             </a>
 

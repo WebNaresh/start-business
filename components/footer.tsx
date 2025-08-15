@@ -374,7 +374,7 @@ export default function EnhancedFooter() {
                       rel="noopener noreferrer"
                       className="text-slate-400 hover:text-green-400 transition-colors text-xs font-medium"
                     >
-                      +91 91684 99520
+                      +91 96992 14195
                     </a>
                   </div>
                 </div>

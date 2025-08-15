@@ -72,7 +72,7 @@ export default function SchemaMarkup() {
     },
     "contactPoint": {
       "@type": "ContactPoint",
-      "telephone": "+91 91684 99520",
+      "telephone": "+91 96992 14195",
       "contactType": "customer service",
       "contactOption": "TollFree",
       "areaServed": "IN",

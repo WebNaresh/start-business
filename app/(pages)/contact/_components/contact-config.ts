@@ -2,9 +2,9 @@ import { Phone, Mail, MapPin, Clock, Car, Building2, Coffee, ShoppingBag, Utensi
 
 export const contactInfo = {
     phone: {
-        value: "+91 91684 99520",
+        value: "+91 96992 14195",
         href: "tel:+919168499520",
-        display: "+91 91684 99520"
+        display: "+91 96992 14195"
     },
     contact: {
         value: "Contact Us",

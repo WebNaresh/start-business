@@ -23,9 +23,9 @@ import {
   RotateCcw,
   Award,
   Shield,
-  Globe
-
-
+  Globe,
+  TrendingUp,
+  FileText
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import Link from "next/link"
@@ -65,77 +65,224 @@ export default function CompanyRegistrationQuiz() {
 
   const questions: QuizQuestion[] = [
     {
-      id: "team_structure",
-      question: "Are you starting the business alone?",
-      description: "This helps us understand your business partnership structure",
-      emoji: "�",
+      id: "business_type",
+      question: "What type of business are you planning to start?",
+      description: "Different business types have different structural requirements",
+      emoji: "💼",
       options: [
         {
-          id: "alone",
-          label: "Yes, I'm starting alone",
-          description: "I'm starting as a solo entrepreneur",
-          icon: UserCheck,
-          value: "alone",
+          id: "service_business",
+          label: "Service-based business",
+          description: "Consulting, freelancing, professional services",
+          icon: Laptop,
+          value: "service_business",
           gradient: "from-blue-400 to-blue-600",
           popular: true
         },
         {
-          id: "with_partners",
-          label: "No, I have partners",
-          description: "I'm starting with business partners",
-          icon: Users,
-          value: "with_partners",
-          gradient: "from-purple-400 to-purple-600"
-        }
-      ]
-    },
-    {
-      id: "compliance_preference",
-      question: "What is your preference for compliance burden?",
-      description: "Different structures have varying compliance requirements",
-      emoji: "📋",
-      options: [
-        {
-          id: "minimal",
-          label: "Minimal compliance, I prefer simplicity",
-          description: "I want simple, easy-to-manage requirements",
-          icon: Lightbulb,
-          value: "minimal",
-          gradient: "from-green-400 to-green-600",
-          popular: true
+          id: "product_business",
+          label: "Product-based business",
+          description: "Manufacturing, retail, e-commerce",
+          icon: Store,
+          value: "product_business",
+          gradient: "from-green-400 to-green-600"
         },
         {
-          id: "moderate",
-          label: "I can handle moderate compliance for better structure",
-          description: "I'm okay with regular filings for better business structure",
-          icon: Building2,
-          value: "moderate",
+          id: "tech_startup",
+          label: "Technology startup",
+          description: "Software, app development, SaaS",
+          icon: Rocket,
+          value: "tech_startup",
+          gradient: "from-purple-400 to-purple-600"
+        },
+        {
+          id: "manufacturing",
+          label: "Manufacturing business",
+          description: "Production, heavy machinery, industrial",
+          icon: Factory,
+          value: "manufacturing",
           gradient: "from-orange-400 to-orange-600"
         }
       ]
     },
     {
-      id: "liability_protection",
-      question: "Do you want limited liability protection for your solo business?",
-      description: "This affects your personal asset protection",
-      emoji: "🛡️",
+      id: "team_structure",
+      question: "How many people will be involved in the business?",
+      description: "This helps determine the ownership structure",
+      emoji: "👥",
       options: [
         {
-          id: "yes_protection",
-          label: "Yes, I want limited liability protection",
-          description: "I want to protect my personal assets from business risks",
-          icon: Shield,
-          value: "yes_protection",
-          gradient: "from-red-400 to-red-600",
+          id: "solo",
+          label: "Just me (Solo entrepreneur)",
+          description: "I'm starting and running the business alone",
+          icon: UserCheck,
+          value: "solo",
+          gradient: "from-blue-400 to-blue-600",
           popular: true
         },
         {
-          id: "no_protection",
-          label: "No, I'm comfortable with unlimited liability",
-          description: "I'm comfortable with personal liability for business",
-          icon: UserCheck,
-          value: "no_protection",
-          gradient: "from-gray-400 to-gray-600"
+          id: "two_to_five",
+          label: "2-5 partners/co-founders",
+          description: "Small team of partners or co-founders",
+          icon: Users,
+          value: "two_to_five",
+          gradient: "from-purple-400 to-purple-600"
+        },
+        {
+          id: "more_than_five",
+          label: "More than 5 people",
+          description: "Large team or multiple investors",
+          icon: Building2,
+          value: "more_than_five",
+          gradient: "from-orange-400 to-orange-600"
+        }
+      ]
+    },
+    {
+      id: "initial_investment",
+      question: "What's your initial investment range?",
+      description: "Investment amount affects the suitable business structure",
+      emoji: "💰",
+      options: [
+        {
+          id: "under_1_lakh",
+          label: "Under ₹1 Lakh",
+          description: "Small investment, testing the waters",
+          icon: Banknote,
+          value: "under_1_lakh",
+          gradient: "from-green-400 to-green-600",
+          popular: true
+        },
+        {
+          id: "1_to_10_lakh",
+          label: "₹1 Lakh - ₹10 Lakh",
+          description: "Moderate investment for established business",
+          icon: Target,
+          value: "1_to_10_lakh",
+          gradient: "from-blue-400 to-blue-600"
+        },
+        {
+          id: "10_to_50_lakh",
+          label: "₹10 Lakh - ₹50 Lakh",
+          description: "Significant investment for growth-oriented business",
+          icon: TrendingUp,
+          value: "10_to_50_lakh",
+          gradient: "from-purple-400 to-purple-600"
+        },
+        {
+          id: "above_50_lakh",
+          label: "Above ₹50 Lakh",
+          description: "Large investment for scalable business",
+          icon: Award,
+          value: "above_50_lakh",
+          gradient: "from-orange-400 to-red-600"
+        }
+      ]
+    },
+    {
+      id: "growth_plans",
+      question: "What are your growth and expansion plans?",
+      description: "Future plans help determine the most suitable structure",
+      emoji: "📈",
+      options: [
+        {
+          id: "local_small",
+          label: "Local/Small scale operation",
+          description: "Planning to stay small and local",
+          icon: Store,
+          value: "local_small",
+          gradient: "from-green-400 to-green-600"
+        },
+        {
+          id: "moderate_growth",
+          label: "Moderate growth within state/region",
+          description: "Planning to expand regionally over time",
+          icon: TrendingUp,
+          value: "moderate_growth",
+          gradient: "from-blue-400 to-blue-600",
+          popular: true
+        },
+        {
+          id: "rapid_scaling",
+          label: "Rapid scaling across India",
+          description: "Planning aggressive expansion and scaling",
+          icon: Rocket,
+          value: "rapid_scaling",
+          gradient: "from-purple-400 to-purple-600"
+        },
+        {
+          id: "global_expansion",
+          label: "International expansion",
+          description: "Planning to expand globally in future",
+          icon: Globe,
+          value: "global_expansion",
+          gradient: "from-orange-400 to-red-600"
+        }
+      ]
+    },
+    {
+      id: "funding_needs",
+      question: "Do you plan to raise external funding?",
+      description: "Funding requirements affect the choice of business structure",
+      emoji: "💸",
+      options: [
+        {
+          id: "no_funding",
+          label: "No external funding needed",
+          description: "Self-funded or bootstrapped business",
+          icon: Shield,
+          value: "no_funding",
+          gradient: "from-green-400 to-green-600",
+          popular: true
+        },
+        {
+          id: "bank_loans",
+          label: "Bank loans and traditional funding",
+          description: "Planning to get bank loans or traditional financing",
+          icon: Building2,
+          value: "bank_loans",
+          gradient: "from-blue-400 to-blue-600"
+        },
+        {
+          id: "investor_funding",
+          label: "Angel investors or VCs",
+          description: "Planning to raise from investors or venture capital",
+          icon: Rocket,
+          value: "investor_funding",
+          gradient: "from-purple-400 to-purple-600"
+        }
+      ]
+    },
+    {
+      id: "compliance_comfort",
+      question: "How comfortable are you with regulatory compliance?",
+      description: "Different structures have varying compliance requirements",
+      emoji: "📋",
+      options: [
+        {
+          id: "minimal_compliance",
+          label: "Prefer minimal compliance",
+          description: "I want the simplest possible requirements",
+          icon: Lightbulb,
+          value: "minimal_compliance",
+          gradient: "from-green-400 to-green-600",
+          popular: true
+        },
+        {
+          id: "moderate_compliance",
+          label: "Can handle moderate compliance",
+          description: "I'm okay with regular filings and documentation",
+          icon: FileText,
+          value: "moderate_compliance",
+          gradient: "from-blue-400 to-blue-600"
+        },
+        {
+          id: "complex_compliance",
+          label: "Can manage complex compliance",
+          description: "I have resources to handle detailed compliance",
+          icon: Award,
+          value: "complex_compliance",
+          gradient: "from-purple-400 to-purple-600"
         }
       ]
     }
@@ -162,129 +309,209 @@ export default function CompanyRegistrationQuiz() {
 
   const getRecommendations = (): CompanyRecommendation[] => {
     const {
+      business_type,
       team_structure,
-      compliance_preference,
-      liability_protection
+      initial_investment,
+      growth_plans,
+      funding_needs,
+      compliance_comfort
     } = answers
 
     const recommendations: CompanyRecommendation[] = []
-    let confidence = 80
-
-    // Enhanced logic for recommendations based on new questions
-
-    // Solo Proprietorship - For minimal compliance and no liability protection
-    if (team_structure === "alone" && compliance_preference === "minimal" && liability_protection === "no_protection") {
-      confidence = 95
-
-      recommendations.push({
-        title: "Sole Proprietorship",
-        description: "Simplest business structure with minimal compliance",
-        price: "₹3,000",
-        originalPrice: "₹5,000",
-        slug: "sole-proprietorship",
-        confidence: Math.min(confidence, 98),
-        reasons: [
-          "You're starting alone",
-          "Minimal compliance requirements",
-          "No liability protection needed",
-          "Lowest cost structure",
-          "Easy to start and manage"
-        ]
-      })
+    
+    // Scoring system for each business structure
+    const scores = {
+      sole_proprietorship: 0,
+      opc: 0,
+      partnership: 0,
+      llp: 0,
+      private_limited: 0
     }
 
-    // One Person Company (OPC) - For solo entrepreneurs with liability protection
-    if (team_structure === "alone" && liability_protection === "yes_protection") {
-      confidence = 92
-      if (compliance_preference === "minimal") confidence += 3
-
-      recommendations.push({
-        title: "One Person Company (OPC)",
-        description: "Perfect for solo entrepreneurs with limited liability protection",
-        price: "₹8,000",
-        originalPrice: "₹10,000",
-        slug: "opc-registration",
-        confidence: Math.min(confidence, 98),
-        reasons: [
-          "You're operating solo",
-          "Limited liability protection",
-          "Professional credibility",
-          "Can convert to Pvt Ltd later",
-          ...(compliance_preference === "minimal" ? ["Relatively simple compliance"] : ["Structured business approach"])
-        ]
-      })
+    // Business type scoring
+    if (business_type === "service_business") {
+      scores.sole_proprietorship += 25
+      scores.opc += 20
+      scores.llp += 15
+    } else if (business_type === "product_business") {
+      scores.opc += 20
+      scores.private_limited += 25
+      scores.llp += 15
+    } else if (business_type === "tech_startup") {
+      scores.opc += 15
+      scores.private_limited += 30
+      scores.llp += 10
+    } else if (business_type === "manufacturing") {
+      scores.private_limited += 30
+      scores.llp += 20
     }
 
-    // Partnership - For multiple partners with minimal compliance
-    if (team_structure === "with_partners" && compliance_preference === "minimal" && liability_protection === "no_protection") {
-      confidence = 88
-
-      recommendations.push({
-        title: "Partnership Firm",
-        description: "Simple structure for multiple partners",
-        price: "₹5,000",
-        originalPrice: "₹7,000",
-        slug: "partnership-firm",
-        confidence: Math.min(confidence, 95),
-        reasons: [
-          "You have business partners",
-          "Minimal compliance requirements",
-          "Easy to establish",
-          "Flexible profit sharing",
-          "Cost-effective structure"
-        ]
-      })
+    // Team structure scoring
+    if (team_structure === "solo") {
+      scores.sole_proprietorship += 30
+      scores.opc += 25
+    } else if (team_structure === "two_to_five") {
+      scores.partnership += 20
+      scores.llp += 25
+      scores.private_limited += 20
+    } else if (team_structure === "more_than_five") {
+      scores.private_limited += 30
+      scores.llp += 15
     }
 
-    // Limited Liability Partnership (LLP) - For partners with liability protection
-    if (team_structure === "with_partners" && liability_protection === "yes_protection") {
-      confidence = 90
-      if (compliance_preference === "moderate") confidence += 5
-
-      recommendations.push({
-        title: "Limited Liability Partnership (LLP)",
-        description: "Ideal for partnerships with liability protection",
-        price: "₹10,000",
-        originalPrice: "₹13,000",
-        slug: "llp-registration",
-        confidence: Math.min(confidence, 98),
-        reasons: [
-          "Perfect for partnerships",
-          "Limited liability protection",
-          "Flexible management structure",
-          "Professional credibility",
-          ...(compliance_preference === "moderate" ? ["Manageable compliance"] : ["Structured approach"])
-        ]
-      })
+    // Investment amount scoring
+    if (initial_investment === "under_1_lakh") {
+      scores.sole_proprietorship += 25
+      scores.opc += 15
+    } else if (initial_investment === "1_to_10_lakh") {
+      scores.opc += 20
+      scores.partnership += 15
+      scores.llp += 20
+    } else if (initial_investment === "10_to_50_lakh") {
+      scores.llp += 20
+      scores.private_limited += 25
+    } else if (initial_investment === "above_50_lakh") {
+      scores.private_limited += 30
     }
 
-    // Private Limited Company - For those who want maximum structure and protection
-    if (compliance_preference === "moderate" && liability_protection === "yes_protection") {
-      confidence = 85
-      if (team_structure === "with_partners") confidence += 5
-
-      recommendations.push({
-        title: "Private Limited Company",
-        description: "Most professional structure with maximum benefits",
-        price: "₹12,000",
-        originalPrice: "₹15,000",
-        slug: "private-limited-company",
-        confidence: Math.min(confidence, 95),
-        reasons: [
-          "Maximum liability protection",
-          "Professional credibility",
-          "Easy to raise capital",
-          "Investor-friendly structure",
-          "Separate legal entity",
-          ...(team_structure === "with_partners" ? ["Great for multiple stakeholders"] : ["Can add partners later"])
-        ]
-      })
+    // Growth plans scoring
+    if (growth_plans === "local_small") {
+      scores.sole_proprietorship += 20
+      scores.partnership += 15
+    } else if (growth_plans === "moderate_growth") {
+      scores.opc += 20
+      scores.llp += 20
+      scores.private_limited += 15
+    } else if (growth_plans === "rapid_scaling") {
+      scores.private_limited += 30
+      scores.llp += 10
+    } else if (growth_plans === "global_expansion") {
+      scores.private_limited += 35
     }
 
-    // Sort by confidence and return top 3
-    return recommendations
-      .sort((a, b) => b.confidence - a.confidence)
+    // Funding needs scoring
+    if (funding_needs === "no_funding") {
+      scores.sole_proprietorship += 20
+      scores.opc += 15
+      scores.partnership += 15
+    } else if (funding_needs === "bank_loans") {
+      scores.opc += 15
+      scores.llp += 20
+      scores.private_limited += 20
+    } else if (funding_needs === "investor_funding") {
+      scores.private_limited += 35
+    }
+
+    // Compliance comfort scoring
+    if (compliance_comfort === "minimal_compliance") {
+      scores.sole_proprietorship += 25
+      scores.partnership += 20
+    } else if (compliance_comfort === "moderate_compliance") {
+      scores.opc += 20
+      scores.llp += 25
+    } else if (compliance_comfort === "complex_compliance") {
+      scores.private_limited += 25
+      scores.llp += 15
+    }
+
+    // Generate recommendations based on scores
+    const sortedStructures = Object.entries(scores)
+      .sort(([,a], [,b]) => b - a)
       .slice(0, 3)
+
+    sortedStructures.forEach(([structure, score]) => {
+      const confidence = Math.min(Math.round((score / 150) * 100), 98)
+      
+      if (structure === "sole_proprietorship" && confidence > 40) {
+        recommendations.push({
+          title: "Sole Proprietorship",
+          description: "Simplest business structure with minimal compliance and quick setup",
+          price: "₹3,000",
+          originalPrice: "₹5,000",
+          slug: "sole-proprietorship",
+          confidence,
+          reasons: [
+            "Lowest cost and fastest setup",
+            "Minimal compliance requirements",
+            "Complete control over business",
+            "Direct tax benefits",
+            "Easy to close if needed",
+            "Perfect for small service businesses"
+          ]
+        })
+      } else if (structure === "opc" && confidence > 40) {
+        recommendations.push({
+          title: "One Person Company (OPC)",
+          description: "Perfect balance of simplicity and professional credibility for solo entrepreneurs",
+          price: "₹8,000",
+          originalPrice: "₹10,000",
+          slug: "opc-registration",
+          confidence,
+          reasons: [
+            "Limited liability protection",
+            "Professional business credibility",
+            "Can convert to Pvt Ltd later",
+            "Separate legal entity status",
+            "Better for client trust",
+            "Suitable for moderate growth plans"
+          ]
+        })
+      } else if (structure === "partnership" && confidence > 40) {
+        recommendations.push({
+          title: "Partnership Firm",
+          description: "Simple and cost-effective structure for multiple partners",
+          price: "₹5,000",
+          originalPrice: "₹7,000",
+          slug: "partnership-firm",
+          confidence,
+          reasons: [
+            "Easy to establish and manage",
+            "Flexible profit sharing",
+            "Minimal compliance burden",
+            "Cost-effective for partners",
+            "Quick decision making",
+            "Suitable for professional services"
+          ]
+        })
+      } else if (structure === "llp" && confidence > 40) {
+        recommendations.push({
+          title: "Limited Liability Partnership (LLP)",
+          description: "Best of both worlds - partnership flexibility with liability protection",
+          price: "₹10,000",
+          originalPrice: "₹13,000",
+          slug: "llp-registration",
+          confidence,
+          reasons: [
+            "Limited liability for all partners",
+            "Flexible management structure",
+            "Professional credibility",
+            "Perpetual succession",
+            "Better for scaling businesses",
+            "Suitable for professional firms"
+          ]
+        })
+      } else if (structure === "private_limited" && confidence > 40) {
+        recommendations.push({
+          title: "Private Limited Company",
+          description: "Most professional structure with maximum benefits and growth potential",
+          price: "₹12,000",
+          originalPrice: "₹15,000",
+          slug: "private-limited-company",
+          confidence,
+          reasons: [
+            "Maximum liability protection",
+            "Easy to raise capital and funding",
+            "Highest professional credibility",
+            "Separate legal entity",
+            "Perpetual succession",
+            "Best for scaling and expansion",
+            "Investor and bank friendly"
+          ]
+        })
+      }
+    })
+
+    return recommendations.filter(rec => rec.confidence > 40)
   }
 
   const handleAnswer = (questionId: string, value: string) => {
@@ -346,50 +573,102 @@ export default function CompanyRegistrationQuiz() {
         </div>
 
         {/* Recommendations */}
-        <div className="space-y-3 sm:space-y-4">
+        <div className="space-y-4 sm:space-y-6">
           {recommendations.map((rec, index) => (
-            <div key={index} className="bg-gradient-to-br from-white to-slate-50 rounded-lg sm:rounded-xl border border-slate-200 p-4 sm:p-6 hover:shadow-lg transition-all">
-              <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between mb-3 sm:mb-4">
+            <div key={index} className={cn(
+              "bg-gradient-to-br from-white to-slate-50 rounded-xl border-2 p-6 hover:shadow-xl transition-all duration-300",
+              index === 0 ? "border-blue-300 bg-gradient-to-br from-blue-50 to-white" : "border-slate-200"
+            )}>
+              {/* Header with Badge */}
+              <div className="flex items-start justify-between mb-4">
                 <div className="flex-1">
-                  <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between mb-2 sm:mb-0">
-                    <h4 className="text-lg sm:text-xl font-bold text-slate-900 mb-1 sm:mb-2">{rec.title}</h4>
-                    <div className="sm:text-right sm:ml-4">
-                      <div className="bg-green-100 text-green-700 px-2 py-1 sm:px-3 sm:py-1 rounded-full text-xs sm:text-sm font-bold mb-2 inline-block">
-                        {rec.confidence}% match
-                      </div>
-                    </div>
+                  <div className="flex items-center gap-3 mb-2">
+                    <h4 className="text-xl sm:text-2xl font-bold text-slate-900">{rec.title}</h4>
+                    {index === 0 && (
+                      <Badge className="bg-gradient-to-r from-blue-500 to-purple-500 text-white px-3 py-1">
+                        <Star className="w-3 h-3 mr-1" />
+                        Best Match
+                      </Badge>
+                    )}
                   </div>
-                  <p className="text-sm sm:text-base text-slate-600 mb-3">{rec.description}</p>
-                  <div className="flex items-center gap-2 sm:gap-3">
-                    <span className="text-xl sm:text-2xl font-bold text-green-600">{rec.price}</span>
-                    <span className="text-base sm:text-lg text-slate-400 line-through">{rec.originalPrice}</span>
+                  <p className="text-base text-slate-600 mb-3">{rec.description}</p>
+                </div>
+                <div className="text-right ml-4">
+                  <div className={cn(
+                    "px-3 py-2 rounded-full text-sm font-bold mb-2",
+                    rec.confidence >= 80 ? "bg-green-100 text-green-700" :
+                    rec.confidence >= 60 ? "bg-yellow-100 text-yellow-700" :
+                    "bg-orange-100 text-orange-700"
+                  )}>
+                    {rec.confidence}% match
                   </div>
                 </div>
               </div>
 
-              <div className="mb-4">
-                <h5 className="font-semibold text-slate-900 mb-2 flex items-center gap-2">
-                  <Target className="w-4 h-4 text-blue-500" />
-                  Why this is perfect for you:
-                </h5>
-                <ul className="space-y-1">
-                  {rec.reasons.map((reason, i) => (
-                    <li key={i} className="flex items-start gap-2 text-sm text-slate-600">
-                      <CheckCircle className="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" />
-                      <span>{reason}</span>
-                    </li>
-                  ))}
-                </ul>
+              {/* Pricing */}
+              <div className="flex items-center gap-3 mb-4 p-3 bg-green-50 rounded-lg border border-green-200">
+                <div className="flex items-center gap-2">
+                  <span className="text-2xl font-bold text-green-600">{rec.price}</span>
+                  <span className="text-lg text-slate-400 line-through">{rec.originalPrice}</span>
+                </div>
+                <div className="text-sm text-green-700 font-medium">
+                  Save {parseInt(rec.originalPrice.replace('₹', '').replace(',', '')) - parseInt(rec.price.replace('₹', '').replace(',', ''))}
+                </div>
               </div>
 
-              <Link href={`/services/${rec.slug}`}>
-                <Button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700">
-                  Get Started - {rec.price}
-                  <ArrowRight className="w-4 h-4 ml-2" />
+              {/* Key Benefits */}
+              <div className="mb-6">
+                <h5 className="font-semibold text-slate-900 mb-3 flex items-center gap-2">
+                  <Target className="w-5 h-5 text-blue-500" />
+                  Why this structure is perfect for you:
+                </h5>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                  {rec.reasons.map((reason, i) => (
+                    <div key={i} className="flex items-start gap-2 text-sm text-slate-600 p-2 bg-slate-50 rounded-lg">
+                      <CheckCircle className="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" />
+                      <span>{reason}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="flex flex-col sm:flex-row gap-3">
+                <Link href={`/services/${rec.slug}`} className="flex-1">
+                  <Button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white py-3">
+                    Get Started - {rec.price}
+                    <ArrowRight className="w-4 h-4 ml-2" />
+                  </Button>
+                </Link>
+                <Button variant="outline" className="sm:w-auto px-6">
+                  Learn More
                 </Button>
-              </Link>
+              </div>
             </div>
           ))}
+        </div>
+
+        {/* Additional Information */}
+        <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl border border-blue-200 p-6 mt-6">
+          <div className="text-center">
+            <h4 className="font-semibold text-slate-900 mb-3 flex items-center justify-center gap-2">
+              <Sparkles className="w-5 h-5 text-blue-600" />
+              Need Help Deciding?
+            </h4>
+            <p className="text-sm text-slate-600 mb-4 max-w-2xl mx-auto">
+              Our business experts can help you understand the nuances of each structure and guide you through the registration process.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+              <Button className="bg-blue-600 hover:bg-blue-700 text-white">
+                <Users className="w-4 h-4 mr-2" />
+                Talk to Expert
+              </Button>
+              <Button variant="outline" className="border-blue-300 text-blue-700 hover:bg-blue-50">
+                <FileText className="w-4 h-4 mr-2" />
+                Download Comparison
+              </Button>
+            </div>
+          </div>
         </div>
 
         {/* Action Buttons */}

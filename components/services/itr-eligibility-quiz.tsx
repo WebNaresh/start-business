@@ -27,6 +27,7 @@ import {
   Users
 } from "lucide-react"
 import { cn } from "@/lib/utils"
+import Link from "next/link"
 
 interface QuizQuestion {
   id: string
@@ -554,14 +555,14 @@ export default function ITREligibilityQuiz() {
                   ].map((item, i) => (
                     <div key={i} className={cn(
                       "flex items-start gap-2 sm:gap-3 p-2 sm:p-3 rounded-lg transition-colors",
-                      result.itrForm === item.form 
-                        ? "bg-blue-50 border border-blue-200" 
+                      result.itrForm === item.form
+                        ? "bg-blue-50 border border-blue-200"
                         : "bg-slate-50"
                     )}>
                       <div className={cn(
                         "w-6 h-6 sm:w-7 sm:h-7 rounded-md flex items-center justify-center text-xs font-bold",
-                        result.itrForm === item.form 
-                          ? "bg-blue-600 text-white" 
+                        result.itrForm === item.form
+                          ? "bg-blue-600 text-white"
                           : "bg-slate-300 text-slate-600"
                       )}>
                         {item.form.split('-')[1]}
@@ -620,10 +621,7 @@ export default function ITREligibilityQuiz() {
                   <Users className="w-4 h-4 mr-2" />
                   Get Expert Help
                 </Button>
-                <Button variant="outline" className="border-green-300 text-green-700 hover:bg-green-50 text-xs sm:text-sm px-4 sm:px-6 py-2 sm:py-2.5">
-                  <Download className="w-4 h-4 mr-2" />
-                  Download ITR Form
-                </Button>
+
               </div>
             </div>
           </div>
@@ -639,10 +637,12 @@ export default function ITREligibilityQuiz() {
             <RotateCcw className="w-3 h-3 sm:w-4 sm:h-4 mr-2" />
             Take Quiz Again
           </Button>
-          <Button className="h-10 sm:h-12 px-6 sm:px-8 text-xs sm:text-sm bg-blue-600 hover:bg-blue-700">
-            <ExternalLink className="w-3 h-3 sm:w-4 sm:h-4 mr-2" />
-            File ITR Online
-          </Button>
+          <Link href={"https://eportal.incometax.gov.in/iec/foservices/"} target="_blank">
+            <Button className="h-10 sm:h-12 px-6 sm:px-8 text-xs sm:text-sm bg-blue-600 hover:bg-blue-700">
+              <ExternalLink className="w-3 h-3 sm:w-4 sm:h-4 mr-2" />
+              File ITR Online
+            </Button>
+          </Link>
         </div>
       </div>
     )

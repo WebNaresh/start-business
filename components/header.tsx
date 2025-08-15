@@ -894,7 +894,7 @@ export default function Header() {
                       className="flex items-center text-slate-700 hover:text-blue-600 transition-colors"
                     >
                       <Phone className="mr-2 h-4 w-4 text-blue-600" />
-                      <span>+91 91684 99520</span>
+                      <span>+91 96992 14195</span>
                     </a>
                     <Link
                       href="/contact"
