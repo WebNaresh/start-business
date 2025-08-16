@@ -318,8 +318,8 @@ export default function CompanyRegistrationQuiz() {
     } = answers
 
     const recommendations: CompanyRecommendation[] = []
-    
-    // Scoring system for each business structure
+
+    // Enhanced scoring system for each business structure
     const scores = {
       sole_proprietorship: 0,
       opc: 0,
@@ -328,101 +328,236 @@ export default function CompanyRegistrationQuiz() {
       private_limited: 0
     }
 
-    // Business type scoring
+    // Enhanced business type scoring with better logic
     if (business_type === "service_business") {
-      scores.sole_proprietorship += 25
-      scores.opc += 20
-      scores.llp += 15
+      scores.sole_proprietorship += 30  // Best for simple services
+      scores.opc += 25                  // Good for professional services
+      scores.llp += 20                  // Good for professional partnerships
+      scores.partnership += 15          // Basic partnership option
+      scores.private_limited += 10      // Overkill for simple services
     } else if (business_type === "product_business") {
-      scores.opc += 20
-      scores.private_limited += 25
-      scores.llp += 15
+      scores.sole_proprietorship += 15  // Limited for product businesses
+      scores.opc += 25                  // Good for solo product businesses
+      scores.partnership += 20          // Good for small product teams
+      scores.llp += 25                  // Good for product partnerships
+      scores.private_limited += 30      // Best for scalable products
     } else if (business_type === "tech_startup") {
-      scores.opc += 15
-      scores.private_limited += 30
-      scores.llp += 10
+      scores.sole_proprietorship += 5   // Not suitable for tech startups
+      scores.opc += 20                  // Good for solo tech entrepreneurs
+      scores.partnership += 10          // Limited for tech scaling
+      scores.llp += 15                  // Moderate for tech partnerships
+      scores.private_limited += 35      // Best for tech startups
     } else if (business_type === "manufacturing") {
-      scores.private_limited += 30
-      scores.llp += 20
+      scores.sole_proprietorship += 5   // Not suitable for manufacturing
+      scores.opc += 10                  // Limited for manufacturing
+      scores.partnership += 15          // Basic option
+      scores.llp += 25                  // Good for manufacturing partnerships
+      scores.private_limited += 35      // Best for manufacturing
     }
 
-    // Team structure scoring
+    // Enhanced team structure scoring with strict solo logic
     if (team_structure === "solo") {
-      scores.sole_proprietorship += 30
-      scores.opc += 25
+      scores.sole_proprietorship += 40  // Perfect for solo entrepreneurs
+      scores.opc += 35                  // Excellent for solo with growth plans
+      scores.partnership -= 50          // PENALTY: Partnership requires multiple people
+      scores.llp -= 30                  // PENALTY: LLP requires partners
+      scores.private_limited += 20      // Possible for solo but complex
     } else if (team_structure === "two_to_five") {
-      scores.partnership += 20
-      scores.llp += 25
-      scores.private_limited += 20
+      scores.sole_proprietorship -= 40  // PENALTY: Not suitable for multiple people
+      scores.opc -= 50                  // PENALTY: OPC is limited to one person only
+      scores.partnership += 35          // Perfect for small partnerships
+      scores.llp += 40                  // Excellent for small professional teams
+      scores.private_limited += 30      // Good for small teams with growth plans
     } else if (team_structure === "more_than_five") {
-      scores.private_limited += 30
-      scores.llp += 15
+      scores.sole_proprietorship -= 50  // PENALTY: Not applicable for large teams
+      scores.opc -= 50                  // PENALTY: Not applicable for large teams
+      scores.partnership += 20          // Moderate for large teams
+      scores.llp += 25                  // Good for large teams
+      scores.private_limited += 45      // Best for large teams and scaling
     }
 
-    // Investment amount scoring
+    // Enhanced investment amount scoring
     if (initial_investment === "under_1_lakh") {
-      scores.sole_proprietorship += 25
-      scores.opc += 15
+      scores.sole_proprietorship += 30  // Perfect for low investment
+      scores.opc += 20                  // Good for low investment with structure
+      scores.partnership += 25          // Good for shared low investment
+      scores.llp += 15                  // Moderate for low investment
+      scores.private_limited += 5       // Expensive setup for low investment
     } else if (initial_investment === "1_to_10_lakh") {
-      scores.opc += 20
-      scores.partnership += 15
-      scores.llp += 20
+      scores.sole_proprietorship += 20  // Still good for moderate investment
+      scores.opc += 25                  // Excellent for moderate investment
+      scores.partnership += 20          // Good for shared moderate investment
+      scores.llp += 25                  // Excellent for moderate investment
+      scores.private_limited += 15      // Reasonable for moderate investment
     } else if (initial_investment === "10_to_50_lakh") {
-      scores.llp += 20
-      scores.private_limited += 25
+      scores.sole_proprietorship += 10  // Risk for high personal investment
+      scores.opc += 20                  // Good with liability protection
+      scores.partnership += 15          // Shared risk is better
+      scores.llp += 25                  // Good liability protection
+      scores.private_limited += 30      // Best liability protection
     } else if (initial_investment === "above_50_lakh") {
-      scores.private_limited += 30
+      scores.sole_proprietorship += 0   // Too risky for high investment
+      scores.opc += 15                  // Some protection but limited
+      scores.partnership += 10          // Shared risk but unlimited liability
+      scores.llp += 20                  // Good protection
+      scores.private_limited += 35      // Best protection for high investment
     }
 
-    // Growth plans scoring
+    // Enhanced growth plans scoring
     if (growth_plans === "local_small") {
-      scores.sole_proprietorship += 20
-      scores.partnership += 15
+      scores.sole_proprietorship += 30  // Perfect for local small business
+      scores.opc += 15                  // Overkill for local small
+      scores.partnership += 25          // Good for local partnerships
+      scores.llp += 10                  // Overkill for local small
+      scores.private_limited += 5       // Overkill for local small
     } else if (growth_plans === "moderate_growth") {
-      scores.opc += 20
-      scores.llp += 20
-      scores.private_limited += 15
+      scores.sole_proprietorship += 15  // Limited for growth
+      scores.opc += 25                  // Good for moderate growth
+      scores.partnership += 20          // Good for moderate growth
+      scores.llp += 25                  // Excellent for moderate growth
+      scores.private_limited += 20      // Good for moderate growth
     } else if (growth_plans === "rapid_scaling") {
-      scores.private_limited += 30
-      scores.llp += 10
+      scores.sole_proprietorship += 0   // Not suitable for rapid scaling
+      scores.opc += 10                  // Limited for rapid scaling
+      scores.partnership += 5           // Limited for rapid scaling
+      scores.llp += 15                  // Moderate for rapid scaling
+      scores.private_limited += 35      // Best for rapid scaling
     } else if (growth_plans === "global_expansion") {
-      scores.private_limited += 35
+      scores.sole_proprietorship += 0   // Not suitable for global expansion
+      scores.opc += 5                   // Very limited for global expansion
+      scores.partnership += 0           // Not suitable for global expansion
+      scores.llp += 10                  // Limited for global expansion
+      scores.private_limited += 40      // Best for global expansion
     }
 
-    // Funding needs scoring
+    // Enhanced funding needs scoring with team structure consideration
     if (funding_needs === "no_funding") {
-      scores.sole_proprietorship += 20
-      scores.opc += 15
-      scores.partnership += 15
+      scores.sole_proprietorship += 25  // Perfect for self-funded
+      scores.opc += 20                  // Good for self-funded with structure
+      // Apply team structure penalty for partnerships if solo
+      if (team_structure === "solo") {
+        scores.partnership -= 20        // Additional penalty for solo wanting partnership
+        scores.llp -= 15               // Additional penalty for solo wanting LLP
+      } else {
+        scores.partnership += 20        // Good for self-funded partnerships
+        scores.llp += 15               // Good but may be overkill
+      }
+      scores.private_limited += 10      // May be overkill for self-funded
     } else if (funding_needs === "bank_loans") {
-      scores.opc += 15
-      scores.llp += 20
-      scores.private_limited += 20
+      scores.sole_proprietorship += 10  // Banks prefer structured entities
+      scores.opc += 20                  // Good credibility for bank loans
+      if (team_structure === "solo") {
+        scores.partnership -= 15        // Additional penalty for solo wanting partnership
+        scores.llp -= 10               // Additional penalty for solo wanting LLP
+      } else {
+        scores.partnership += 15        // Moderate credibility
+        scores.llp += 25               // Good credibility for bank loans
+      }
+      scores.private_limited += 30      // Best credibility for bank loans
     } else if (funding_needs === "investor_funding") {
-      scores.private_limited += 35
+      scores.sole_proprietorship += 0   // Investors don't invest in sole proprietorship
+      scores.opc += 5                   // Very limited for investor funding
+      if (team_structure === "solo") {
+        scores.partnership -= 20        // Strong penalty for solo wanting partnership
+        scores.llp -= 15               // Strong penalty for solo wanting LLP
+      } else {
+        scores.partnership += 5         // Very limited for investor funding
+        scores.llp += 10               // Limited for investor funding
+      }
+      scores.private_limited += 40      // Essential for investor funding
     }
 
-    // Compliance comfort scoring
+    // Enhanced compliance comfort scoring
     if (compliance_comfort === "minimal_compliance") {
-      scores.sole_proprietorship += 25
-      scores.partnership += 20
+      scores.sole_proprietorship += 30  // Minimal compliance required
+      scores.opc += 10                  // Moderate compliance required
+      scores.partnership += 25          // Minimal compliance required
+      scores.llp += 5                   // Moderate compliance required
+      scores.private_limited += 0       // High compliance required
     } else if (compliance_comfort === "moderate_compliance") {
-      scores.opc += 20
-      scores.llp += 25
+      scores.sole_proprietorship += 15  // Still simple
+      scores.opc += 25                  // Perfect fit for moderate compliance
+      scores.partnership += 20          // Moderate compliance
+      scores.llp += 30                  // Perfect fit for moderate compliance
+      scores.private_limited += 15      // Higher compliance but manageable
     } else if (compliance_comfort === "complex_compliance") {
-      scores.private_limited += 25
-      scores.llp += 15
+      scores.sole_proprietorship += 10  // Simple but may not utilize resources
+      scores.opc += 20                  // Good utilization of compliance capability
+      scores.partnership += 15          // Moderate utilization
+      scores.llp += 25                  // Good utilization of compliance capability
+      scores.private_limited += 35      // Best utilization of compliance capability
     }
 
-    // Generate recommendations based on scores
-    const sortedStructures = Object.entries(scores)
+    // Enhanced recommendation generation with better scoring logic
+    const maxPossibleScore = 225 // Updated max possible score (35+40+35+40+40+35)
+
+    // Debug logging for development
+    console.log('Quiz Answers:', answers)
+    console.log('Scores:', scores)
+
+    // Apply strict team structure filtering
+    let filteredStructures = Object.entries(scores)
+
+    // For solo users, completely exclude partnership structures
+    if (team_structure === "solo") {
+      filteredStructures = filteredStructures.filter(([structure]) =>
+        structure !== "partnership" && structure !== "llp"
+      )
+    }
+
+    // For multi-person teams, exclude solo-only structures
+    if (team_structure === "two_to_five" || team_structure === "more_than_five") {
+      filteredStructures = filteredStructures.filter(([structure]) =>
+        structure !== "sole_proprietorship" && structure !== "opc"
+      )
+    }
+
+    const sortedStructures = filteredStructures
       .sort(([,a], [,b]) => b - a)
-      .slice(0, 3)
+      .filter(([, score]) => score > 10) // Lower threshold for better recommendations
+
+    // Ensure we always have at least one recommendation
+    if (sortedStructures.length === 0) {
+      // Fallback to the highest scoring option
+      const fallbackStructures = Object.entries(scores)
+        .sort(([,a], [,b]) => b - a)
+        .slice(0, 1)
+      sortedStructures.push(...fallbackStructures)
+    }
 
     sortedStructures.forEach(([structure, score]) => {
-      const confidence = Math.min(Math.round((score / 150) * 100), 98)
-      
-      if (structure === "sole_proprietorship" && confidence > 40) {
+      // Improved confidence calculation with better scaling
+      let confidence = Math.round((score / maxPossibleScore) * 100)
+
+      // Ensure minimum confidence for top recommendation
+      if (sortedStructures.indexOf([structure, score]) === 0 && confidence < 60) {
+        confidence = Math.max(confidence, 60)
+      }
+
+      // Cap maximum confidence
+      confidence = Math.min(confidence, 95)
+
+      if (structure === "sole_proprietorship" && confidence > 35) {
+        // Personalized reasons based on user answers
+        const personalizedReasons = [
+          "Lowest cost and fastest setup",
+          "Minimal compliance requirements",
+          "Complete control over business"
+        ]
+
+        if (initial_investment === "under_1_lakh") {
+          personalizedReasons.push("Perfect for your low investment budget")
+        }
+        if (team_structure === "solo") {
+          personalizedReasons.push("Ideal for solo entrepreneurs like you")
+        }
+        if (compliance_comfort === "minimal_compliance") {
+          personalizedReasons.push("Matches your preference for minimal compliance")
+        }
+        if (growth_plans === "local_small") {
+          personalizedReasons.push("Suitable for your local business plans")
+        }
+
         recommendations.push({
           title: "Sole Proprietorship",
           description: "Simplest business structure with minimal compliance and quick setup",
@@ -430,16 +565,29 @@ export default function CompanyRegistrationQuiz() {
           originalPrice: "₹5,000",
           slug: "sole-proprietorship",
           confidence,
-          reasons: [
-            "Lowest cost and fastest setup",
-            "Minimal compliance requirements",
-            "Complete control over business",
-            "Direct tax benefits",
-            "Easy to close if needed",
-            "Perfect for small service businesses"
-          ]
+          reasons: personalizedReasons.slice(0, 6)
         })
-      } else if (structure === "opc" && confidence > 40) {
+      } else if (structure === "opc" && confidence > 35) {
+        // Personalized reasons for OPC
+        const personalizedReasons = [
+          "Limited liability protection",
+          "Professional business credibility",
+          "Separate legal entity status"
+        ]
+
+        if (team_structure === "solo") {
+          personalizedReasons.push("Perfect for solo entrepreneurs like you")
+        }
+        if (growth_plans === "moderate_growth") {
+          personalizedReasons.push("Suitable for your moderate growth plans")
+        }
+        if (funding_needs === "bank_loans") {
+          personalizedReasons.push("Better credibility for bank loans")
+        }
+        if (business_type === "service_business" || business_type === "product_business") {
+          personalizedReasons.push("Can convert to Pvt Ltd when you scale")
+        }
+
         recommendations.push({
           title: "One Person Company (OPC)",
           description: "Perfect balance of simplicity and professional credibility for solo entrepreneurs",
@@ -447,16 +595,9 @@ export default function CompanyRegistrationQuiz() {
           originalPrice: "₹10,000",
           slug: "opc-registration",
           confidence,
-          reasons: [
-            "Limited liability protection",
-            "Professional business credibility",
-            "Can convert to Pvt Ltd later",
-            "Separate legal entity status",
-            "Better for client trust",
-            "Suitable for moderate growth plans"
-          ]
+          reasons: personalizedReasons.slice(0, 6)
         })
-      } else if (structure === "partnership" && confidence > 40) {
+      } else if (structure === "partnership" && confidence > 35) {
         recommendations.push({
           title: "Partnership Firm",
           description: "Simple and cost-effective structure for multiple partners",
@@ -473,7 +614,7 @@ export default function CompanyRegistrationQuiz() {
             "Suitable for professional services"
           ]
         })
-      } else if (structure === "llp" && confidence > 40) {
+      } else if (structure === "llp" && confidence > 35) {
         recommendations.push({
           title: "Limited Liability Partnership (LLP)",
           description: "Best of both worlds - partnership flexibility with liability protection",
@@ -490,7 +631,30 @@ export default function CompanyRegistrationQuiz() {
             "Suitable for professional firms"
           ]
         })
-      } else if (structure === "private_limited" && confidence > 40) {
+      } else if (structure === "private_limited" && confidence > 35) {
+        // Personalized reasons for Private Limited
+        const personalizedReasons = [
+          "Maximum liability protection",
+          "Highest professional credibility",
+          "Separate legal entity"
+        ]
+
+        if (funding_needs === "investor_funding") {
+          personalizedReasons.push("Essential for investor funding you plan to raise")
+        }
+        if (growth_plans === "rapid_scaling" || growth_plans === "global_expansion") {
+          personalizedReasons.push("Perfect for your ambitious growth plans")
+        }
+        if (initial_investment === "above_50_lakh" || initial_investment === "10_to_50_lakh") {
+          personalizedReasons.push("Best protection for your significant investment")
+        }
+        if (team_structure === "more_than_five") {
+          personalizedReasons.push("Ideal structure for your large team")
+        }
+        if (business_type === "tech_startup" || business_type === "manufacturing") {
+          personalizedReasons.push("Industry standard for your business type")
+        }
+
         recommendations.push({
           title: "Private Limited Company",
           description: "Most professional structure with maximum benefits and growth potential",
@@ -498,20 +662,98 @@ export default function CompanyRegistrationQuiz() {
           originalPrice: "₹15,000",
           slug: "private-limited-company",
           confidence,
-          reasons: [
-            "Maximum liability protection",
-            "Easy to raise capital and funding",
-            "Highest professional credibility",
-            "Separate legal entity",
-            "Perpetual succession",
-            "Best for scaling and expansion",
-            "Investor and bank friendly"
-          ]
+          reasons: personalizedReasons.slice(0, 6)
         })
       }
     })
 
-    return recommendations.filter(rec => rec.confidence > 40)
+    // Enhanced fallback logic to ensure we always provide recommendations
+    let finalRecommendations = recommendations.filter(rec => rec.confidence > 35)
+
+    // If no recommendations meet the threshold, provide the top 2 with adjusted confidence
+    if (finalRecommendations.length === 0) {
+      // Apply the same team structure filtering for fallback
+      let fallbackStructures = Object.entries(scores)
+
+      if (team_structure === "solo") {
+        fallbackStructures = fallbackStructures.filter(([structure]) =>
+          structure !== "partnership" && structure !== "llp"
+        )
+      }
+
+      if (team_structure === "two_to_five" || team_structure === "more_than_five") {
+        fallbackStructures = fallbackStructures.filter(([structure]) =>
+          structure !== "sole_proprietorship" && structure !== "opc"
+        )
+      }
+
+      const topStructures = fallbackStructures
+        .sort(([,a], [,b]) => b - a)
+        .slice(0, 2)
+
+      topStructures.forEach(([structure, score]) => {
+        const adjustedConfidence = Math.max(50, Math.round((score / maxPossibleScore) * 100))
+
+        if (structure === "sole_proprietorship") {
+          finalRecommendations.push({
+            title: "Sole Proprietorship",
+            description: "Simplest business structure with minimal compliance and quick setup",
+            price: "₹3,000",
+            originalPrice: "₹5,000",
+            slug: "sole-proprietorship",
+            confidence: adjustedConfidence,
+            reasons: [
+              "Lowest cost and fastest setup",
+              "Minimal compliance requirements",
+              "Complete control over business",
+              "Direct tax benefits",
+              "Easy to close if needed",
+              "Perfect for small service businesses"
+            ]
+          })
+        } else if (structure === "opc") {
+          finalRecommendations.push({
+            title: "One Person Company (OPC)",
+            description: "Perfect balance of simplicity and professional credibility for solo entrepreneurs",
+            price: "₹8,000",
+            originalPrice: "₹10,000",
+            slug: "opc-registration",
+            confidence: adjustedConfidence,
+            reasons: [
+              "Limited liability protection",
+              "Professional business credibility",
+              "Can convert to Pvt Ltd later",
+              "Separate legal entity status",
+              "Better for client trust",
+              "Suitable for moderate growth plans"
+            ]
+          })
+        } else if (structure === "private_limited") {
+          finalRecommendations.push({
+            title: "Private Limited Company",
+            description: "Most professional structure with maximum benefits and growth potential",
+            price: "₹12,000",
+            originalPrice: "₹15,000",
+            slug: "private-limited-company",
+            confidence: adjustedConfidence,
+            reasons: [
+              "Maximum liability protection",
+              "Easy to raise capital and funding",
+              "Highest professional credibility",
+              "Separate legal entity",
+              "Perpetual succession",
+              "Best for scaling and expansion",
+              "Investor and bank friendly"
+            ]
+          })
+        }
+      })
+    }
+
+    // Sort by confidence and return top 3
+    return finalRecommendations
+      .sort((a, b) => b.confidence - a.confidence)
+      .slice(0, 3)
   }
 
   const handleAnswer = (questionId: string, value: string) => {
