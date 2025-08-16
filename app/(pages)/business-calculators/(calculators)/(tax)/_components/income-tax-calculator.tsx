@@ -14,6 +14,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Switch } from "@/components/ui/switch"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
+import RelatedCalculators from "@/components/ui/related-calculators"
 
 export default function IncomeTaxCalculator() {
   const [taxRegime, setTaxRegime] = useState("new")
@@ -742,6 +743,9 @@ export default function IncomeTaxCalculator() {
             </Accordion>
           </CardContent>
         </Card>
+
+        {/* Related Calculators */}
+        <RelatedCalculators currentCalculator="income-tax" className="mt-12" />
       </div>
     </div>
   )
