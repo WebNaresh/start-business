@@ -5,7 +5,6 @@ import { Button } from "@/components/ui/button"
 import { ArrowLeft, Play, UserCheck, Building2, Users, Target, Award, Sparkles, Clock } from "lucide-react"
 import Link from "next/link"
 import CompanyRegistrationQuiz from "@/components/services/company-registration-quiz"
-import { cn } from "@/lib/utils"
 
 export default function BusinessStructureQuizPage() {
   const [showQuiz, setShowQuiz] = useState(false)
@@ -22,10 +21,10 @@ export default function BusinessStructureQuizPage() {
                 Back to Home
               </Link>
               <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-2">
-                Business Structure Decision Quiz
+                Which Business Structure is Right for You? Take the Quiz
               </h1>
               <p className="text-slate-600">
-                Find the perfect business structure for your needs
+                Find the perfect business structure for your needs with our CA-verified recommendations
               </p>
             </div>
 
@@ -61,13 +60,18 @@ export default function BusinessStructureQuizPage() {
                 </div>
 
                 <h1 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">
-                  Find Your Perfect Business Structure
+                  Which Business Structure is Right for You? Take the Quiz
                 </h1>
 
                 <p className="text-lg text-slate-600 mb-8 leading-relaxed">
-                  Get personalized recommendations for your business structure based on your business type, 
-                  team size, investment capacity, and growth plans. Our intelligent quiz analyzes multiple 
-                  factors to suggest the ideal company registration type.
+                  Discover the best business structure in India for your startup with our comprehensive quiz.
+                  Get CA-verified recommendations for company registration options including Sole Proprietorship,
+                  OPC, Partnership, LLP, or Private Limited Company. Our intelligent startup entity selection
+                  tool analyzes your business type, team size, investment capacity, and growth plans to suggest
+                  the ideal company registration type for Indian entrepreneurs. For detailed insights, read our
+                  <Link href="/blog" className="text-blue-600 hover:text-blue-700 underline">
+                    comprehensive business structure guide
+                  </Link> before taking the quiz.
                 </p>
 
                 <div className="grid grid-cols-1 sm:grid-cols-4 gap-4 mb-8">
@@ -154,6 +158,106 @@ export default function BusinessStructureQuizPage() {
               </div>
             </div>
 
+            {/* Comparative Analysis Table */}
+            <div className="bg-white rounded-2xl shadow-lg border border-slate-200 p-8">
+              <h2 className="text-2xl font-bold text-slate-900 mb-6 text-center">
+                Comparative Analysis of Key Business Structures in India
+              </h2>
+
+              <div className="overflow-x-auto">
+                <table className="w-full text-sm">
+                  <thead>
+                    <tr className="border-b border-slate-200">
+                      <th className="text-left py-3 px-2 font-semibold text-slate-900">Dimension</th>
+                      <th className="text-left py-3 px-2 font-semibold text-slate-900">Sole Proprietorship</th>
+                      <th className="text-left py-3 px-2 font-semibold text-slate-900">Partnership</th>
+                      <th className="text-left py-3 px-2 font-semibold text-slate-900">LLP</th>
+                      <th className="text-left py-3 px-2 font-semibold text-slate-900">Private Limited</th>
+                    </tr>
+                  </thead>
+                  <tbody className="text-slate-600">
+                    <tr className="border-b border-slate-100">
+                      <td className="py-3 px-2 font-medium">Governing Act</td>
+                      <td className="py-3 px-2">N/A (informal)</td>
+                      <td className="py-3 px-2">Indian Partnership Act, 1932</td>
+                      <td className="py-3 px-2">LLP Act, 2008</td>
+                      <td className="py-3 px-2">Companies Act, 2013</td>
+                    </tr>
+                    <tr className="border-b border-slate-100">
+                      <td className="py-3 px-2 font-medium">Minimum Owners</td>
+                      <td className="py-3 px-2">1</td>
+                      <td className="py-3 px-2">2</td>
+                      <td className="py-3 px-2">2</td>
+                      <td className="py-3 px-2">2 (shareholders & directors)</td>
+                    </tr>
+                    <tr className="border-b border-slate-100">
+                      <td className="py-3 px-2 font-medium">Maximum Owners</td>
+                      <td className="py-3 px-2">1</td>
+                      <td className="py-3 px-2">50</td>
+                      <td className="py-3 px-2">No limit</td>
+                      <td className="py-3 px-2">200 (shareholders)</td>
+                    </tr>
+                    <tr className="border-b border-slate-100">
+                      <td className="py-3 px-2 font-medium">Legal Status</td>
+                      <td className="py-3 px-2">Not a separate entity</td>
+                      <td className="py-3 px-2">Not a separate entity</td>
+                      <td className="py-3 px-2">Separate legal entity</td>
+                      <td className="py-3 px-2">Separate legal entity</td>
+                    </tr>
+                    <tr className="border-b border-slate-100">
+                      <td className="py-3 px-2 font-medium">Liability</td>
+                      <td className="py-3 px-2">Unlimited personal liability</td>
+                      <td className="py-3 px-2">Shared unlimited liability</td>
+                      <td className="py-3 px-2">Limited to partner contribution</td>
+                      <td className="py-3 px-2">Limited to shareholder investment</td>
+                    </tr>
+                    <tr className="border-b border-slate-100">
+                      <td className="py-3 px-2 font-medium">Taxation</td>
+                      <td className="py-3 px-2">Individual income tax</td>
+                      <td className="py-3 px-2">Partners' individual income tax</td>
+                      <td className="py-3 px-2">Fixed 30% on firm's income</td>
+                      <td className="py-3 px-2">Corporate tax (15% to 30% rates)</td>
+                    </tr>
+                    <tr className="border-b border-slate-100">
+                      <td className="py-3 px-2 font-medium">Audit Requirement</td>
+                      <td className="py-3 px-2">None (unless specified)</td>
+                      <td className="py-3 px-2">None (unless specified)</td>
+                      <td className="py-3 px-2">Conditional (Turnover &gt; ₹40L or Capital &gt; ₹25L)</td>
+                      <td className="py-3 px-2">Mandatory (irrespective of turnover)</td>
+                    </tr>
+                    <tr className="border-b border-slate-100">
+                      <td className="py-3 px-2 font-medium">Compliance Burden</td>
+                      <td className="py-3 px-2">Low</td>
+                      <td className="py-3 px-2">Low</td>
+                      <td className="py-3 px-2">Moderate</td>
+                      <td className="py-3 px-2">High</td>
+                    </tr>
+                    <tr className="border-b border-slate-100">
+                      <td className="py-3 px-2 font-medium">Cost of Formation</td>
+                      <td className="py-3 px-2">Low</td>
+                      <td className="py-3 px-2">Low to moderate</td>
+                      <td className="py-3 px-2">Moderate</td>
+                      <td className="py-3 px-2">High</td>
+                    </tr>
+                    <tr className="border-b border-slate-100">
+                      <td className="py-3 px-2 font-medium">External Funding</td>
+                      <td className="py-3 px-2">Poor (limited to debt)</td>
+                      <td className="py-3 px-2">Poor (limited to debt)</td>
+                      <td className="py-3 px-2">Poor (cannot issue equity)</td>
+                      <td className="py-3 px-2">Excellent (can issue shares)</td>
+                    </tr>
+                    <tr className="border-b border-slate-100">
+                      <td className="py-3 px-2 font-medium">Perpetual Succession</td>
+                      <td className="py-3 px-2">No</td>
+                      <td className="py-3 px-2">No</td>
+                      <td className="py-3 px-2">Yes</td>
+                      <td className="py-3 px-2">Yes</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
             {/* Why Use Our Quiz */}
             <div className="bg-gradient-to-br from-slate-50 to-blue-50 rounded-2xl border border-slate-200 p-8">
               <div className="max-w-3xl mx-auto text-center">
@@ -214,6 +318,84 @@ export default function BusinessStructureQuizPage() {
                   <Play className="w-5 h-5 mr-2" />
                   Start Your Analysis Now
                 </Button>
+              </div>
+            </div>
+
+            {/* FAQ Section */}
+            <div className="bg-white rounded-2xl shadow-lg border border-slate-200 p-8">
+              <h2 className="text-2xl font-bold text-slate-900 mb-8 text-center">
+                Frequently Asked Questions
+              </h2>
+
+              <div className="space-y-6">
+                <div className="border-b border-slate-100 pb-6">
+                  <h3 className="text-lg font-semibold text-slate-900 mb-3">
+                    Which is the best business structure for startups in India?
+                  </h3>
+                  <p className="text-slate-600">
+                    For high-growth startups planning to raise investment, a Private Limited Company is the most suitable.
+                    It offers limited liability, credibility, and is investor-friendly.
+                  </p>
+                </div>
+
+                <div className="border-b border-slate-100 pb-6">
+                  <h3 className="text-lg font-semibold text-slate-900 mb-3">
+                    Is OPC better than Proprietorship?
+                  </h3>
+                  <p className="text-slate-600">
+                    Yes, an OPC provides limited liability and a separate legal identity, unlike a proprietorship where
+                    the owner's personal assets are at risk. However, OPC has higher compliance and costs.
+                  </p>
+                </div>
+
+                <div className="border-b border-slate-100 pb-6">
+                  <h3 className="text-lg font-semibold text-slate-900 mb-3">
+                    What is the difference between LLP and Pvt Ltd?
+                  </h3>
+                  <p className="text-slate-600">
+                    LLP suits professional services or small businesses wanting limited liability with fewer compliances.
+                    Pvt Ltd is better for startups and companies needing investment and scalability, though it has stricter compliance.
+                  </p>
+                </div>
+
+                <div className="border-b border-slate-100 pb-6">
+                  <h3 className="text-lg font-semibold text-slate-900 mb-3">
+                    Which business structure has the lowest cost and compliance?
+                  </h3>
+                  <p className="text-slate-600">
+                    A Sole Proprietorship has the lowest cost and minimal compliance, but it comes with unlimited liability.
+                  </p>
+                </div>
+
+                <div className="border-b border-slate-100 pb-6">
+                  <h3 className="text-lg font-semibold text-slate-900 mb-3">
+                    Can a foreigner start a business in India?
+                  </h3>
+                  <p className="text-slate-600">
+                    Foreigners can invest in or start a Private Limited Company or LLP in India (subject to FDI rules).
+                    Proprietorships and partnerships are not available to NRIs.
+                  </p>
+                </div>
+
+                <div className="border-b border-slate-100 pb-6">
+                  <h3 className="text-lg font-semibold text-slate-900 mb-3">
+                    What is the cheapest way to register a company in India?
+                  </h3>
+                  <p className="text-slate-600">
+                    If you just want to formalize operations, a Partnership Firm or Proprietorship is cheapest.
+                    But for legal protection and credibility, OPC or LLP is better.
+                  </p>
+                </div>
+
+                <div>
+                  <h3 className="text-lg font-semibold text-slate-900 mb-3">
+                    Which business structure is best for freelancers?
+                  </h3>
+                  <p className="text-slate-600">
+                    Freelancers and solo consultants usually start with Sole Proprietorship. If income grows and
+                    liability risk increases, they can shift to OPC or LLP.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
