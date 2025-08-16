@@ -3,12 +3,12 @@
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import Image from "next/image"
-import { Menu, Phone, Mail, ChevronDown, ChevronRight, Building2, FileText, Gavel, Shield, Calculator, TrendingUp, Receipt, Home, PiggyBank, Target, Banknote } from "lucide-react"
+import { Menu, Phone, Mail, ChevronDown, ChevronRight, Building2, FileText, Gavel, Shield, Calculator, TrendingUp, Receipt, Home, PiggyBank, Target, Banknote, ArrowRight, Star, Clock, Users } from "lucide-react"
 import { usePathname } from "next/navigation"
 
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger, SheetClose, SheetTitle } from "@/components/ui/sheet"
-import WhatsAppCTAButton from "@/components/whatsapp-cta-button"
+
 import { Badge } from "@/components/ui/badge"
 
 interface SubService {
@@ -418,16 +418,12 @@ export default function Header() {
     },
   ]
 
-  // Handle scroll effect with improved performance
+  // Enhanced scroll effect
   useEffect(() => {
     setMounted(true)
     const handleScroll = () => {
       const currentScrollY = window.scrollY
-      if (currentScrollY > 10) {
-        setScrolled(true)
-      } else {
-        setScrolled(false)
-      }
+      setScrolled(currentScrollY > 10)
     }
 
     window.addEventListener("scroll", handleScroll, { passive: true })
@@ -440,6 +436,8 @@ export default function Header() {
     }
     return pathname.startsWith(href)
   }
+
+
 
   const handleMouseEnter = (categoryId: string) => {
     if (hoverTimeout) {
@@ -675,14 +673,19 @@ export default function Header() {
               </Link>
             </nav>
 
-            {/* Professional CTA Button */}
-            <div className="hidden lg:flex items-center ml-4">
+            {/* Enhanced Desktop CTA Section */}
+            <div className="hidden lg:flex items-center space-x-3 ml-4">
+              {/* Phone CTA */}
+            
+
+              {/* Enhanced Get Started Button */}
               <Button
                 asChild
-                className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white shadow-lg hover:shadow-xl transition-all duration-300 px-6 py-2.5 text-sm font-semibold"
+                className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white shadow-lg hover:shadow-xl transition-all duration-300 px-6 py-2.5 text-sm font-semibold hover:scale-105 active:scale-95"
               >
-                <Link href="/contact">
+                <Link href="/contact" className="flex items-center gap-2">
                   Get Started
+                  <ArrowRight className="h-4 w-4" />
                 </Link>
               </Button>
             </div>
@@ -700,41 +703,78 @@ export default function Header() {
                 <span className="sr-only">Toggle menu</span>
               </Button>
             </SheetTrigger>
-            <SheetContent side="right" className="w-[85%] sm:w-[350px] p-0">
+            <SheetContent side="right" className="w-[85%] sm:w-[380px] p-0 bg-white">
               <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
               <div className="flex flex-col h-full">
-                {/* Mobile menu header */}
-                <div className="p-4 border-b flex items-center justify-between">
-                  <Link href="/" className="flex items-center">
-                    <Image
-                      src="/logos/logo_icon.png"
-                      alt="StartBusiness logo"
-                      width={32}
-                      height={32}
-                      blurDataURL="/placeholder.svg"
-                      quality={75} // Reduce if needed
-                      priority={true} // For LCP image
-                      placeholder="blur" // Optional blur-up
-                      className="mr-2"
-                    />
-                    <span className="text-lg font-bold text-slate-900">StartBusiness</span>
-                  </Link>
+                {/* Enhanced Mobile menu header */}
+                <div className="p-4 border-b bg-gradient-to-r from-blue-50 to-indigo-50">
+                  <div className="flex items-center justify-between">
+                    <Link href="/" className="flex items-center group">
+                      <div className="relative">
+                        <Image
+                          src="/logos/logo_icon.png"
+                          alt="StartBusiness logo"
+                          width={36}
+                          height={36}
+                          blurDataURL="/placeholder.svg"
+                          quality={75}
+                          priority={true}
+                          placeholder="blur"
+                          className="mr-3 group-hover:scale-110 transition-transform duration-200"
+                        />
+                      </div>
+                      <div>
+                        <span className="text-lg font-bold text-slate-900">StartBusiness</span>
+                        <div className="text-xs text-slate-500">Your Business Partner</div>
+                      </div>
+                    </Link>
+
+                    {/* Quick Stats */}
+                   
+                  </div>
                 </div>
 
-                {/* Mobile navigation */}
+                {/* Enhanced Mobile navigation */}
                 <div className="flex-1 overflow-auto py-4 px-2">
                   <nav className="flex flex-col space-y-1">
+                    {/* Home Link */}
                     <SheetClose asChild>
                       <Link
                         href="/"
-                        className={`rounded-md px-4 py-3 text-base font-medium transition-colors ${isActive("/")
-                          ? "bg-blue-50 text-blue-600"
+                        className={`rounded-lg px-4 py-3 text-base font-medium transition-all duration-200 flex items-center gap-3 ${isActive("/")
+                          ? "bg-blue-50 text-blue-600 border-l-4 border-blue-600"
                           : "text-slate-700 hover:bg-slate-50 hover:text-blue-600"
                           }`}
                       >
+                        <Home className="w-5 h-5" />
                         Home
                       </Link>
                     </SheetClose>
+
+                    {/* Quick Access Section */}
+                    <div className="px-2 py-2">
+                      <div className="text-xs font-semibold text-slate-500 mb-2">QUICK ACCESS</div>
+                      <div className="grid grid-cols-2 gap-2">
+                        <SheetClose asChild>
+                          <Link
+                            href="/business-calculators"
+                            className="flex flex-col items-center p-3 rounded-lg hover:bg-blue-50 transition-colors group"
+                          >
+                            <Calculator className="w-6 h-6 text-blue-600 mb-1 group-hover:scale-110 transition-transform" />
+                            <span className="text-xs font-medium text-slate-700">Calculators</span>
+                          </Link>
+                        </SheetClose>
+                        <SheetClose asChild>
+                          <Link
+                            href="/business-structure-quiz"
+                            className="flex flex-col items-center p-3 rounded-lg hover:bg-green-50 transition-colors group"
+                          >
+                            <Target className="w-6 h-6 text-green-600 mb-1 group-hover:scale-110 transition-transform" />
+                            <span className="text-xs font-medium text-slate-700">Quiz</span>
+                          </Link>
+                        </SheetClose>
+                      </div>
+                    </div>
 
                     {/* Mobile Service Categories */}
                     {serviceCategories.map((category) => (
@@ -884,28 +924,48 @@ export default function Header() {
                   </nav>
                 </div>
 
-                {/* Mobile contact & CTA */}
-                <div className="border-t p-4 space-y-4">
-                  <div className="flex flex-col space-y-3">
+                {/* Enhanced Mobile contact & CTA */}
+                <div className="border-t bg-slate-50 p-4 space-y-4">
+                  {/* Contact Options */}
+                  <div className="space-y-3">
+                    <div className="text-xs font-semibold text-slate-500 mb-3">GET IN TOUCH</div>
+
                     <a
                       href="tel:+919168499520"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center text-slate-700 hover:text-blue-600 transition-colors"
+                      className="flex items-center justify-between p-3 bg-white rounded-lg hover:bg-blue-50 transition-colors group border"
                     >
-                      <Phone className="mr-2 h-4 w-4 text-blue-600" />
-                      <span>+91 96992 14195</span>
+                      <div className="flex items-center">
+                        <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mr-3">
+                          <Phone className="h-5 w-5 text-blue-600" />
+                        </div>
+                        <div>
+                          <div className="font-medium text-slate-900">Call Us Now</div>
+                          <div className="text-sm text-slate-500">+91 96992 14195</div>
+                        </div>
+                      </div>
+                      <ArrowRight className="w-4 h-4 text-slate-400 group-hover:text-blue-600 transition-colors" />
                     </a>
-                    <Link
-                      href="/contact"
-                      className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors"
-                      aria-label="Contact us"
-                    >
-                      <Mail className="h-4 w-4" />
-                      <span>Contact Us</span>
-                    </Link>
+
+                    <SheetClose asChild>
+                      <Link
+                        href="/contact"
+                        className="flex items-center justify-between p-3 bg-white rounded-lg hover:bg-green-50 transition-colors group border"
+                      >
+                        <div className="flex items-center">
+                          <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center mr-3">
+                            <Mail className="h-5 w-5 text-green-600" />
+                          </div>
+                          <div>
+                            <div className="font-medium text-slate-900">Contact Form</div>
+                            <div className="text-sm text-slate-500">Send us a message</div>
+                          </div>
+                        </div>
+                        <ArrowRight className="w-4 h-4 text-slate-400 group-hover:text-green-600 transition-colors" />
+                      </Link>
+                    </SheetClose>
                   </div>
-                  <WhatsAppCTAButton className="w-full rounded-md">Call Now</WhatsAppCTAButton>
+
+                
                 </div>
               </div>
             </SheetContent>
