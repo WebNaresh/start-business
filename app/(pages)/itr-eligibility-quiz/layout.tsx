@@ -1,12 +1,12 @@
 import { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "ITR Eligibility Quiz FY 2024-25 | Find the Right ITR Form",
-  description: "Determine your Income Tax Return filing requirements for FY 2024-25. Get personalized recommendations for ITR-1, ITR-2, ITR-3, or ITR-4 forms based on your income sources and tax status.",
-  keywords: "ITR eligibility quiz, income tax return, ITR form, ITR-1, ITR-2, ITR-3, ITR-4, tax filing, FY 2024-25, income tax calculator",
+  title: "Which ITR Form to File? Free ITR Eligibility Quiz 2025",
+  description: "Confused about which ITR form to file? Take our quick ITR Eligibility Quiz for FY 2024-25 and find the right form (ITR-1, 2, 3, or 4) for your income profile.",
+  keywords: "ITR eligibility quiz, which ITR form to file, income tax return, ITR-1, ITR-2, ITR-3, ITR-4, tax filing, FY 2024-25, AY 2025-26, presumptive taxation, agricultural income, capital gains",
   openGraph: {
-    title: "ITR Eligibility Quiz FY 2024-25 | Find the Right ITR Form",
-    description: "Determine your Income Tax Return filing requirements for FY 2024-25. Get personalized recommendations for the right ITR form.",
+    title: "Which ITR Form to File? Free ITR Eligibility Quiz 2025",
+    description: "Confused about which ITR form to file? Take our quick ITR Eligibility Quiz for FY 2024-25 and find the right form (ITR-1, 2, 3, or 4) for your income profile.",
     type: "website",
   },
 }

@@ -24,7 +24,10 @@ import {
   Download,
   ExternalLink,
   Calendar,
-  Users
+  Users,
+  Leaf,
+  TreePine,
+  CreditCard
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import Link from "next/link"
@@ -263,6 +266,114 @@ export default function ITREligibilityQuiz() {
       ]
     },
     {
+      id: "presumptive_taxation",
+      question: "Are you opting for presumptive taxation?",
+      description: "Under sections 44AD, 44ADA, or 44AE",
+      emoji: "📋",
+      options: [
+        {
+          id: "yes_presumptive",
+          label: "Yes, opting for presumptive taxation",
+          description: "Using sections 44AD, 44ADA, or 44AE",
+          icon: FileText,
+          value: "yes_presumptive",
+          gradient: "from-green-400 to-green-600"
+        },
+        {
+          id: "no_presumptive",
+          label: "No, not opting for presumptive taxation",
+          description: "Regular business taxation",
+          icon: Shield,
+          value: "no_presumptive",
+          gradient: "from-blue-400 to-blue-600",
+          popular: true
+        }
+      ]
+    },
+    {
+      id: "agricultural_income",
+      question: "Do you have agricultural income?",
+      description: "Income from agricultural activities",
+      emoji: "🌾",
+      options: [
+        {
+          id: "no_agricultural",
+          label: "No agricultural income",
+          description: "No income from farming or agriculture",
+          icon: Shield,
+          value: "no_agricultural",
+          gradient: "from-gray-400 to-gray-600",
+          popular: true
+        },
+        {
+          id: "agricultural_below_5000",
+          label: "Up to ₹5,000",
+          description: "Agricultural income up to ₹5,000",
+          icon: Leaf,
+          value: "agricultural_below_5000",
+          gradient: "from-green-400 to-green-600"
+        },
+        {
+          id: "agricultural_above_5000",
+          label: "Above ₹5,000",
+          description: "Agricultural income above ₹5,000",
+          icon: TreePine,
+          value: "agricultural_above_5000",
+          gradient: "from-orange-400 to-orange-600"
+        }
+      ]
+    },
+    {
+      id: "capital_gains_112a",
+      question: "Do you have LTCG u/s 112A up to ₹1.25 Lac?",
+      description: "Long-term capital gains from equity shares/units",
+      emoji: "📊",
+      options: [
+        {
+          id: "yes_ltcg_112a",
+          label: "Yes, LTCG u/s 112A up to ₹1.25 Lac",
+          description: "Long-term capital gains from equity shares up to ₹1.25 Lac",
+          icon: TrendingUp,
+          value: "yes_ltcg_112a",
+          gradient: "from-blue-400 to-blue-600"
+        },
+        {
+          id: "no_ltcg_112a",
+          label: "No such capital gains",
+          description: "No LTCG u/s 112A or above ₹1.25 Lac",
+          icon: Shield,
+          value: "no_ltcg_112a",
+          gradient: "from-green-400 to-green-600",
+          popular: true
+        }
+      ]
+    },
+    {
+      id: "tds_194n",
+      question: "Do you have TDS u/s 194N deducted?",
+      description: "TDS on cash withdrawal exceeding ₹1 crore",
+      emoji: "💳",
+      options: [
+        {
+          id: "yes_tds_194n",
+          label: "Yes, TDS u/s 194N deducted",
+          description: "TDS deducted on cash withdrawal",
+          icon: CreditCard,
+          value: "yes_tds_194n",
+          gradient: "from-red-400 to-red-600"
+        },
+        {
+          id: "no_tds_194n",
+          label: "No TDS u/s 194N",
+          description: "No such TDS deducted",
+          icon: Shield,
+          value: "no_tds_194n",
+          gradient: "from-green-400 to-green-600",
+          popular: true
+        }
+      ]
+    },
+    {
       id: "house_properties",
       question: "How many house properties do you own?",
       description: "Property ownership affects tax calculations",
@@ -297,21 +408,24 @@ export default function ITREligibilityQuiz() {
     }
   ]
 
-  // Auto-advance after selection (disabled to allow manual navigation)
-  // useEffect(() => {
-  //   if (selectedOption && !isAnimating) {
-  //     const timer = setTimeout(() => {
-  //       if (currentStep < questions.length - 1) {
-  //         setCurrentStep(prev => prev + 1)
-  //         setSelectedOption(null)
-  //         setIsAnimating(false)
-  //       } else {
-  //         setShowResults(true)
-  //       }
-  //     }, 800)
-  //     return () => clearTimeout(timer)
-  //   }
-  // }, [selectedOption, currentStep, isAnimating, questions.length])
+  // Auto-advance after selection
+  useEffect(() => {
+    if (selectedOption && !isAnimating) {
+      const timer = setTimeout(() => {
+        if (currentStep < questions.length - 1) {
+          setIsAnimating(true)
+          setTimeout(() => {
+            setCurrentStep(prev => prev + 1)
+            setSelectedOption(null)
+            setIsAnimating(false)
+          }, 300)
+        } else {
+          setShowResults(true)
+        }
+      }, 800)
+      return () => clearTimeout(timer)
+    }
+  }, [selectedOption, currentStep, isAnimating, questions.length])
 
   // Sync selectedOption with current answer when step changes
   useEffect(() => {
@@ -330,7 +444,11 @@ export default function ITREligibilityQuiz() {
       foreign_assets,
       crypto_esop,
       unlisted_shares,
-      house_properties
+      house_properties,
+      presumptive_taxation,
+      agricultural_income,
+      capital_gains_112a,
+      tds_194n
     } = answers
 
     // Determine if filing is required based on income
@@ -356,39 +474,44 @@ export default function ITREligibilityQuiz() {
       confidence += 25
     }
 
+    // Check for business income and presumptive taxation
     if (business_income === "yes_business") {
       isEligible = true
-      itrForm = "ITR-3"
-      mandatoryReasons.push("You are not a director")
-      mandatoryReasons.push("No business income")
+      if (presumptive_taxation === "yes_presumptive") {
+        itrForm = "ITR-4"
+        mandatoryReasons.push("Business income under presumptive taxation scheme")
+      } else {
+        itrForm = "ITR-3"
+        mandatoryReasons.push("Business income not under presumptive taxation")
+      }
       confidence += 20
     }
 
     if (director_status === "yes_director") {
       isEligible = true
       itrForm = "ITR-2"
-      mandatoryReasons.push("Director status requires ITR filing")
+      mandatoryReasons.push("Director status requires ITR-2")
       confidence += 20
     }
 
     if (capital_gains === "yes_capital_gains") {
       isEligible = true
       itrForm = "ITR-2"
-      mandatoryReasons.push("No capital gains")
+      mandatoryReasons.push("Capital gains require ITR-2")
       confidence += 15
     }
 
     if (foreign_assets === "yes_foreign") {
       isEligible = true
       itrForm = "ITR-2"
-      mandatoryReasons.push("No foreign assets")
+      mandatoryReasons.push("Foreign assets require ITR-2")
       confidence += 25
     }
 
     if (crypto_esop === "yes_crypto_esop") {
       isEligible = true
       itrForm = "ITR-2"
-      mandatoryReasons.push("No complex investments")
+      mandatoryReasons.push("Crypto/ESOP income requires ITR-2")
       confidence += 15
     }
 
@@ -399,11 +522,52 @@ export default function ITREligibilityQuiz() {
       confidence += 10
     }
 
+    // Check agricultural income
+    if (agricultural_income === "agricultural_above_5000") {
+      isEligible = true
+      if (itrForm === "ITR-1") {
+        itrForm = "ITR-2"
+      }
+      mandatoryReasons.push("Agricultural income above ₹5,000 requires ITR-2/3")
+      confidence += 10
+    }
+
+    // Check LTCG u/s 112A
+    if (capital_gains_112a === "yes_ltcg_112a") {
+      isEligible = true
+      mandatoryReasons.push("LTCG u/s 112A up to ₹1.25 Lac allowed in ITR-1/4")
+      confidence += 5
+    }
+
+    // Check TDS 194N
+    if (tds_194n === "yes_tds_194n") {
+      isEligible = true
+      if (itrForm === "ITR-1") {
+        itrForm = "ITR-2"
+      }
+      mandatoryReasons.push("TDS u/s 194N requires ITR-2/3")
+      confidence += 10
+    }
+
+    // Check house properties
+    if (house_properties === "multiple_properties") {
+      isEligible = true
+      if (itrForm === "ITR-1" || itrForm === "ITR-4") {
+        itrForm = "ITR-2"
+      }
+      mandatoryReasons.push("Multiple house properties require ITR-2/3")
+      confidence += 10
+    }
+
     // Determine the appropriate ITR form and result
-    if (!isEligible || (incomeValue <= 250000 && business_income === "no_business" && director_status === "no_director" && capital_gains === "no_capital_gains" && foreign_assets === "no_foreign" && crypto_esop === "no_crypto_esop" && unlisted_shares === "no_unlisted")) {
+    if (!isEligible || (incomeValue <= 250000 && business_income === "no_business" && director_status === "no_director" && capital_gains === "no_capital_gains" && foreign_assets === "no_foreign" && crypto_esop === "no_crypto_esop" && unlisted_shares === "no_unlisted" && agricultural_income !== "agricultural_above_5000" && tds_194n === "no_tds_194n" && house_properties !== "multiple_properties")) {
       title = "ITR-1 (Sahaj)"
       description = "Simplest form for resident individuals with total income ≤ ₹50 lakh"
       itrForm = "ITR-1"
+    } else if (business_income === "yes_business" && presumptive_taxation === "yes_presumptive") {
+      title = "ITR-4 (Sugam)"
+      description = "For businesses opting for presumptive taxation scheme"
+      itrForm = "ITR-4"
     } else if (business_income === "yes_business") {
       title = "ITR-3"
       description = "Comprehensive form for business owners"
@@ -442,17 +606,11 @@ export default function ITREligibilityQuiz() {
   const handleOptionSelect = (optionValue: string) => {
     if (isAnimating) return
 
-    setIsAnimating(true)
     setSelectedOption(optionValue)
     setAnswers(prev => ({
       ...prev,
       [questions[currentStep].id]: optionValue
     }))
-
-    // Reset animation state after a short delay to allow visual feedback
-    setTimeout(() => {
-      setIsAnimating(false)
-    }, 300)
   }
 
   const goToPrevious = () => {
