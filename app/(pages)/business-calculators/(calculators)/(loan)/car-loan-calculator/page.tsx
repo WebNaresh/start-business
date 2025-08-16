@@ -3,10 +3,29 @@ import CarLoanCalculator from "../_components/car-loan-calculator"
 
 
 export const metadata: Metadata = {
-  title: "Car Loan Calculator - Calculate EMI, Interest & Total Cost | Free Tool",
+  title: "Free Car Loan Calculator India 2024 | Calculate Car EMI, Interest Online",
   description:
-    "Calculate car loan EMI, total interest, and affordability with our comprehensive car loan calculator. Compare different loan options and plan your car purchase.",
-  keywords: "car loan calculator, auto loan EMI, car finance calculator, vehicle loan, car EMI calculator",
+    "Calculate car loan EMI, interest, total cost with our free car loan calculator. Check car loan eligibility, compare rates. Best auto loan calculator India 2024.",
+  keywords: [
+    'car loan calculator india',
+    'car emi calculator',
+    'auto loan calculator',
+    'vehicle loan calculator',
+    'car finance calculator india',
+    'car loan emi calculator',
+    'free car loan calculator',
+    'car loan eligibility calculator',
+    'auto loan emi calculator',
+    'car financing calculator',
+    'vehicle finance calculator',
+    'car loan interest calculator',
+    'used car loan calculator',
+    'new car loan calculator',
+    'car loan affordability calculator',
+    'auto finance calculator',
+    'car payment calculator',
+    'vehicle emi calculator'
+  ],
 }
 
 export default function CarLoanPage() {

@@ -6,8 +6,8 @@ import { generateStaticPageMetaTags, generateWebsiteStructuredData } from "@/lib
 import Script from "next/script"
 
 const pageMetadata = generateStaticPageMetaTags({
-  title: "Business Calculators - Free Online Financial Calculators India",
-  description: "Free online business calculators for GST, income tax, PPF, EMI, salary, HRA, TDS, car loan, home loan calculations. Accurate financial planning tools for India.",
+  title: "Free Online Business Calculators India 2024-25 | Tax, Loan, Investment Tools",
+  description: "Calculate income tax, GST, EMI, salary, PPF, HRA, TDS & more with our free online calculators. Accurate financial planning tools for Indian businesses & individuals.",
   path: "business-calculators"
 })
 
@@ -15,26 +15,31 @@ export const metadata: Metadata = {
   title: pageMetadata.title,
   description: pageMetadata.description,
   keywords: [
-    'business calculators',
-    'financial calculators',
-    'tax calculators',
-    'loan calculators',
-    'gst calculator',
-    'income tax calculator',
-    'ppf calculator',
-    'emi calculator',
-    'salary calculator',
-    'hra calculator',
-    'tds calculator',
-    'car loan calculator',
+    'free online calculators india',
+    'business calculators 2024-25',
+    'income tax calculator india',
+    'gst calculator online india',
+    'salary calculator take home',
+    'emi calculator india',
+    'ppf calculator online',
+    'hra calculator income tax',
+    'car loan calculator india',
     'home loan calculator',
-    'free online calculators',
-    'india financial tools',
-    'business planning tools',
-    'investment calculators',
-    'retirement planning',
-    'tax planning',
-    'loan eligibility calculator'
+    'tds calculator online',
+    'gratuity calculator india',
+    'nps calculator',
+    'fd calculator',
+    'sip calculator',
+    'retirement corpus calculator',
+    'tax calculator 2024-25',
+    'loan calculator india',
+    'financial planning tools',
+    'calculate income tax india',
+    'gst calculation online',
+    'net salary calculator',
+    'take home salary calculator',
+    'business loan calculator',
+    'investment calculator india'
   ],
   openGraph: {
     title: pageMetadata.title,

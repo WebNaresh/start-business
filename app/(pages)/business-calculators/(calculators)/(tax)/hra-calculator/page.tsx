@@ -3,9 +3,30 @@ import HRACalculator from "../_components/hra-calculator"
 
 
 export const metadata: Metadata = {
-  title: "HRA Calculator - Calculate House Rent Allowance Exemption | Free Tool",
+  title: "Free HRA Calculator India 2024-25 | Calculate House Rent Allowance Exemption",
   description:
-    "Calculate your HRA exemption with our comprehensive HRA calculator. Determine tax savings on house rent allowance for metro and non-metro cities.",
+    "Calculate HRA exemption for income tax with our free HRA calculator. Check house rent allowance tax savings for metro, non-metro cities. Generate rent receipts online.",
+  keywords: [
+    'hra calculator',
+    'hra calculator income tax',
+    'house rent allowance calculator',
+    'hra exemption calculator',
+    'hra tax calculator',
+    'calculate hra exemption',
+    'hra calculation online',
+    'hra tax exemption calculator',
+    'hra deduction calculator',
+    'rent allowance calculator',
+    'house rent calculator income tax',
+    'hra calc',
+    'hra calculater',
+    'calculate hra for income tax',
+    'hra exemption calculator online',
+    'income tax hra calculator',
+    'hra rent receipt calculator',
+    'basic salary hra calculation',
+    'hra calculation formula'
+  ],
 }
 
 export default function HRACalculatorPage() {

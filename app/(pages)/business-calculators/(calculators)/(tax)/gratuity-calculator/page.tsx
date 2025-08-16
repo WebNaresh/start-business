@@ -3,9 +3,29 @@ import GratuityCalculator from "../_components/gratuity-calculator"
 
 
 export const metadata: Metadata = {
-  title: "Gratuity Calculator - Calculate Employment Gratuity Amount | Free Tool",
+  title: "Free Gratuity Calculator India 2024 | Calculate Gratuity Amount Online",
   description:
-    "Calculate your gratuity amount with our comprehensive gratuity calculator. Support for both government and private sector employees with latest rules.",
+    "Calculate gratuity amount for private & government employees with our free calculator. Check gratuity eligibility, calculation formula. Accurate gratuity calculator India.",
+  keywords: [
+    'gratuity calculator',
+    'gratuity calculator india',
+    'gratuity calculator online',
+    'calculate gratuity',
+    'gratuity calculation',
+    'gratuity amount calculator',
+    'gratuity calculator for private employees',
+    'government gratuity calculator',
+    'company gratuity calculator',
+    'gratuity calculation india',
+    'gratuity calculation for private employees',
+    'gratuity calculation chart',
+    'how to calculate gratuity',
+    'gratuity eligibility calculator',
+    'employment gratuity calculator',
+    'gratuity formula calculator',
+    'free gratuity calculator',
+    'online gratuity calculator india'
+  ],
 }
 
 export default function GratuityCalculatorPage() {
