@@ -75,48 +75,7 @@ export default function GSTCalculator() {
     }).format(value)
   }
 
-  const gstTerms = [
-    {
-      term: "Goods and Services Tax (GST)",
-      definition: "A comprehensive indirect tax levied on the supply of goods and services in India, replacing multiple cascading taxes."
-    },
-    {
-      term: "GST Exclusive",
-      definition: "Pricing where GST is added on top of the base price. The quoted price does not include GST."
-    },
-    {
-      term: "GST Inclusive",
-      definition: "Pricing where GST is included in the quoted price. The total price includes both base amount and GST."
-    },
-    {
-      term: "CGST (Central GST)",
-      definition: "Central component of GST collected by the Central Government on intra-state transactions."
-    },
-    {
-      term: "SGST (State GST)",
-      definition: "State component of GST collected by the State Government on intra-state transactions."
-    },
-    {
-      term: "IGST (Integrated GST)",
-      definition: "GST levied on inter-state transactions, collected by the Central Government and shared with states."
-    },
-    {
-      term: "Input Tax Credit (ITC)",
-      definition: "Credit available to registered taxpayers for GST paid on purchases, which can be set off against output tax liability."
-    },
-    {
-      term: "HSN Code",
-      definition: "Harmonized System of Nomenclature code used to classify goods and determine applicable GST rates."
-    },
-    {
-      term: "Reverse Charge Mechanism",
-      definition: "A mechanism where the recipient of goods/services pays GST instead of the supplier."
-    },
-    {
-      term: "Composition Scheme",
-      definition: "A simplified GST scheme for small taxpayers with lower tax rates but no input tax credit."
-    }
-  ]
+
 
   return (
     <div className="max-w-6xl mx-auto space-y-8">
@@ -136,10 +95,10 @@ export default function GSTCalculator() {
       >
         <div className="flex items-center justify-center space-x-2">
           <Receipt className="h-8 w-8 text-blue-600" />
-          <h1 className="text-3xl md:text-4xl font-bold text-slate-800">GST Calculator</h1>
+          <h1 className="text-3xl md:text-4xl font-bold text-slate-800">Free GST Calculator: Your Simple and Accurate Tool for India</h1>
         </div>
-        <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-          Calculate GST amounts with support for all tax rates, inclusive/exclusive pricing, and CGST/SGST breakdown
+        <p className="text-lg text-slate-600 max-w-4xl mx-auto">
+          Calculating the Goods and Services Tax (GST) can be complex and time-consuming. Our free online GST calculator is an easy-to-use tool designed to simplify this process, helping you determine the correct tax amount and final price for any transaction, whether you are a buyer, seller, manufacturer, or wholesaler. By providing instant and precise results, our calculator helps you save time and reduce the chances of manual errors, ensuring accuracy and compliance in your financial dealings.
         </p>
       </motion.div>
 
@@ -311,42 +270,49 @@ export default function GSTCalculator() {
         <TabsContent value="guide" className="space-y-6">
           <Card>
             <CardHeader>
-              <CardTitle>How GST Calculation Works</CardTitle>
-              <CardDescription>Understanding GST calculation methods and formulas</CardDescription>
+              <CardTitle>How to Use the GST Calculator?</CardTitle>
+              <CardDescription>Using our GST calculator is a straightforward process that gets you the results you need in just a few steps.</CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
-              <div className="grid md:grid-cols-3 gap-6">
+              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
                 <div className="bg-blue-50 p-6 rounded-lg">
-                  <h3 className="font-semibold text-blue-800 mb-3">1. GST Exclusive</h3>
-                  <p className="text-sm text-slate-600 mb-3">
-                    When GST is added to the base price
-                  </p>
-                  <div className="bg-white p-3 rounded border">
-                    <p className="text-xs font-mono">GST Amount = Base × Rate ÷ 100</p>
-                    <p className="text-xs font-mono">Total = Base + GST Amount</p>
+                  <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <span className="text-white font-bold">1</span>
                   </div>
+                  <h3 className="font-semibold text-blue-800 mb-3 text-center">Choose Your Calculation</h3>
+                  <p className="text-sm text-slate-600 text-center">
+                    First, select whether you need to calculate a GST Exclusive or GST Inclusive amount or reverse using tax amount.
+                  </p>
                 </div>
 
                 <div className="bg-green-50 p-6 rounded-lg">
-                  <h3 className="font-semibold text-green-800 mb-3">2. GST Inclusive</h3>
-                  <p className="text-sm text-slate-600 mb-3">
-                    When GST is included in the total price
-                  </p>
-                  <div className="bg-white p-3 rounded border">
-                    <p className="text-xs font-mono">GST = Total × Rate ÷ (100 + Rate)</p>
-                    <p className="text-xs font-mono">Base = Total - GST Amount</p>
+                  <div className="w-12 h-12 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <span className="text-white font-bold">2</span>
                   </div>
+                  <h3 className="font-semibold text-green-800 mb-3 text-center">Enter Your Amount</h3>
+                  <p className="text-sm text-slate-600 text-center">
+                    Input the original price of the goods or services into the designated field.
+                  </p>
                 </div>
 
                 <div className="bg-purple-50 p-6 rounded-lg">
-                  <h3 className="font-semibold text-purple-800 mb-3">3. Reverse GST</h3>
-                  <p className="text-sm text-slate-600 mb-3">
-                    When calculating base from GST amount
-                  </p>
-                  <div className="bg-white p-3 rounded border">
-                    <p className="text-xs font-mono">Base = GST Amount × 100 ÷ Rate</p>
-                    <p className="text-xs font-mono">Total = Base + GST Amount</p>
+                  <div className="w-12 h-12 bg-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <span className="text-white font-bold">3</span>
                   </div>
+                  <h3 className="font-semibold text-purple-800 mb-3 text-center">Select the GST Rate</h3>
+                  <p className="text-sm text-slate-600 text-center">
+                    Choose the applicable GST rate for your product or service from the drop-down menu. Our calculator includes all the common Indian GST slabs: 5%, 12%, 18%, and 28%.
+                  </p>
+                </div>
+
+                <div className="bg-orange-50 p-6 rounded-lg">
+                  <div className="w-12 h-12 bg-orange-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <span className="text-white font-bold">4</span>
+                  </div>
+                  <h3 className="font-semibold text-orange-800 mb-3 text-center">View Your Results</h3>
+                  <p className="text-sm text-slate-600 text-center">
+                    View instantly get a detailed breakdown of the GST amount and the final price.
+                  </p>
                 </div>
               </div>
 
@@ -378,21 +344,55 @@ export default function GSTCalculator() {
         <TabsContent value="terms" className="space-y-6">
           <Card>
             <CardHeader>
-              <CardTitle>GST Terms & Definitions</CardTitle>
-              <CardDescription>Essential GST terminology explained</CardDescription>
+              <CardTitle>Frequently Asked Questions (FAQs)</CardTitle>
+              <CardDescription>Common questions about GST calculation and compliance</CardDescription>
             </CardHeader>
             <CardContent>
               <Accordion type="single" collapsible className="space-y-2">
-                {gstTerms.map((item, index) => (
-                  <AccordionItem key={index} value={`item-${index}`} className="border rounded-lg px-4">
-                    <AccordionTrigger className="text-left">
-                      <span className="font-medium">{item.term}</span>
-                    </AccordionTrigger>
-                    <AccordionContent className="text-slate-600">
-                      {item.definition}
-                    </AccordionContent>
-                  </AccordionItem>
-                ))}
+                <AccordionItem value="faq-1" className="border rounded-lg px-4">
+                  <AccordionTrigger className="text-left">
+                    <span className="font-medium">Q: What is GST?</span>
+                  </AccordionTrigger>
+                  <AccordionContent className="text-slate-600">
+                    A: Goods and Services Tax (GST) is a destination-based tax on the consumption of goods and services. It is levied at all stages of the supply chain, from manufacture to final consumption. Only the value addition at each stage is taxed, and the final tax burden is borne by the end consumer.
+                  </AccordionContent>
+                </AccordionItem>
+
+                <AccordionItem value="faq-2" className="border rounded-lg px-4">
+                  <AccordionTrigger className="text-left">
+                    <span className="font-medium">Q: What are the different GST rates in India?</span>
+                  </AccordionTrigger>
+                  <AccordionContent className="text-slate-600">
+                    A: India has a multi-tiered GST structure. The main tax slabs are 5%, 12%, 18%, and 28%. Additionally, some items are taxed at 0% (nil-rated), 0.25%, or 3%.
+                  </AccordionContent>
+                </AccordionItem>
+
+                <AccordionItem value="faq-3" className="border rounded-lg px-4">
+                  <AccordionTrigger className="text-left">
+                    <span className="font-medium">Q: How is GST calculated on the Maximum Retail Price (MRP)?</span>
+                  </AccordionTrigger>
+                  <AccordionContent className="text-slate-600">
+                    A: The MRP is the final price, which already includes all taxes, including GST. To calculate the GST amount from the MRP, you can use the formula: GST Amount = (MRP x GST Rate) / (100 + GST Rate).
+                  </AccordionContent>
+                </AccordionItem>
+
+                <AccordionItem value="faq-4" className="border rounded-lg px-4">
+                  <AccordionTrigger className="text-left">
+                    <span className="font-medium">Q: What is the difference between GST Inclusive and GST Exclusive?</span>
+                  </AccordionTrigger>
+                  <AccordionContent className="text-slate-600">
+                    A: GST Exclusive is the price of a product or service before the tax is added. GST Inclusive is the final price, with the GST already factored in. Our calculator is designed to perform both calculations.
+                  </AccordionContent>
+                </AccordionItem>
+
+                <AccordionItem value="faq-5" className="border rounded-lg px-4">
+                  <AccordionTrigger className="text-left">
+                    <span className="font-medium">Q: On which value is GST calculated?</span>
+                  </AccordionTrigger>
+                  <AccordionContent className="text-slate-600">
+                    A: GST is calculated on the transaction value of the goods or services. This includes the base price plus any additional costs like packaging and delivery.
+                  </AccordionContent>
+                </AccordionItem>
               </Accordion>
             </CardContent>
           </Card>
@@ -401,55 +401,65 @@ export default function GSTCalculator() {
         <TabsContent value="tips" className="space-y-6">
           <Card>
             <CardHeader>
-              <CardTitle>GST Compliance Tips</CardTitle>
-              <CardDescription>Expert advice for GST management and compliance</CardDescription>
+              <CardTitle>Get Started with Our GST Calculator</CardTitle>
+              <CardDescription>Your essential tool for accurate GST calculations in India</CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
-              <div className="grid md:grid-cols-2 gap-6">
-                <div className="space-y-4">
-                  <div className="bg-blue-50 p-4 rounded-lg">
-                    <h3 className="font-semibold text-blue-800 mb-2">Registration Requirements</h3>
+              <div className="bg-gradient-to-br from-blue-50 to-green-50 p-8 rounded-lg text-center">
+                <h3 className="text-xl font-bold text-slate-800 mb-4">
+                  Simplify Your GST Calculations Today
+                </h3>
+                <p className="text-slate-600 mb-6 max-w-3xl mx-auto">
+                  With its simple interface and powerful features, our GST calculator is an essential tool for anyone in India managing their finances or running a business. By providing quick, accurate, and detailed results, it simplifies tax computations and helps you focus on what matters most.
+                </p>
+                <div className="grid md:grid-cols-3 gap-6 mt-8">
+                  <div className="bg-white p-6 rounded-lg shadow-sm">
+                    <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                      <Calculator className="w-6 h-6 text-white" />
+                    </div>
+                    <h4 className="font-semibold text-slate-800 mb-2">Quick & Accurate</h4>
                     <p className="text-sm text-slate-600">
-                      Register for GST if annual turnover exceeds ₹20 lakhs (₹10 lakhs for special category states).
+                      Get instant GST calculations with 100% accuracy for all Indian tax slabs.
                     </p>
                   </div>
 
-                  <div className="bg-green-50 p-4 rounded-lg">
-                    <h3 className="font-semibold text-green-800 mb-2">Input Tax Credit</h3>
+                  <div className="bg-white p-6 rounded-lg shadow-sm">
+                    <div className="w-12 h-12 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                      <Receipt className="w-6 h-6 text-white" />
+                    </div>
+                    <h4 className="font-semibold text-slate-800 mb-2">Detailed Breakdown</h4>
                     <p className="text-sm text-slate-600">
-                      Claim ITC on business purchases to reduce your GST liability. Maintain proper invoices and documentation.
+                      View complete CGST, SGST, and IGST breakdowns for better understanding.
                     </p>
                   </div>
 
-                  <div className="bg-purple-50 p-4 rounded-lg">
-                    <h3 className="font-semibold text-purple-800 mb-2">Filing Returns</h3>
+                  <div className="bg-white p-6 rounded-lg shadow-sm">
+                    <div className="w-12 h-12 bg-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                      <Lightbulb className="w-6 h-6 text-white" />
+                    </div>
+                    <h4 className="font-semibold text-slate-800 mb-2">Easy to Use</h4>
                     <p className="text-sm text-slate-600">
-                      File GSTR-1, GSTR-3B monthly and GSTR-9 annually. Late filing attracts penalties and interest.
+                      Simple interface designed for buyers, sellers, manufacturers, and wholesalers.
                     </p>
                   </div>
                 </div>
+              </div>
 
-                <div className="space-y-4">
-                  <div className="bg-orange-50 p-4 rounded-lg">
-                    <h3 className="font-semibold text-orange-800 mb-2">Invoice Requirements</h3>
-                    <p className="text-sm text-slate-600">
-                      Include GSTIN, HSN codes, tax breakup, and all mandatory fields in your invoices.
-                    </p>
-                  </div>
-
-                  <div className="bg-red-50 p-4 rounded-lg">
-                    <h3 className="font-semibold text-red-800 mb-2">Common Mistakes</h3>
-                    <p className="text-sm text-slate-600">
-                      Avoid wrong HSN codes, incorrect tax rates, and claiming ITC without valid invoices.
-                    </p>
-                  </div>
-
-                  <div className="bg-teal-50 p-4 rounded-lg">
-                    <h3 className="font-semibold text-teal-800 mb-2">Record Keeping</h3>
-                    <p className="text-sm text-slate-600">
-                      Maintain digital records for 6 years. Use GST-compliant accounting software for accuracy.
-                    </p>
-                  </div>
+              <div className="bg-slate-50 p-6 rounded-lg">
+                <h3 className="font-semibold text-slate-800 mb-3">Key Features</h3>
+                <div className="grid md:grid-cols-2 gap-4">
+                  <ul className="space-y-2 text-sm text-slate-600">
+                    <li>• Support for all GST rates: 5%, 12%, 18%, 28%</li>
+                    <li>• GST Exclusive and Inclusive calculations</li>
+                    <li>• Reverse GST calculation from tax amount</li>
+                    <li>• CGST/SGST breakdown for intra-state transactions</li>
+                  </ul>
+                  <ul className="space-y-2 text-sm text-slate-600">
+                    <li>• IGST calculation for inter-state transactions</li>
+                    <li>• Instant results with detailed breakdowns</li>
+                    <li>• Mobile-friendly responsive design</li>
+                    <li>• Free to use with no registration required</li>
+                  </ul>
                 </div>
               </div>
             </CardContent>

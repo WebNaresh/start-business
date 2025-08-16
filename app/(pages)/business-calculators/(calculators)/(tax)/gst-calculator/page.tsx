@@ -3,9 +3,9 @@ import GSTCalculator from "../_components/gst-calculator"
 
 
 export const metadata: Metadata = {
-  title: "GST Calculator - Calculate GST Inclusive & Exclusive | Free Online Tool",
+  title: "Free GST Calculator: Your Simple and Accurate Tool for India",
   description:
-    "Calculate GST amounts with our comprehensive GST calculator. Support for all GST rates (5%, 12%, 18%, 28%), inclusive/exclusive calculations, and CGST/SGST breakdown.",
+    "Calculate GST amounts with our free online GST calculator. Easy-to-use tool for buyers, sellers, manufacturers & wholesalers. Supports all GST rates (5%, 12%, 18%, 28%).",
 }
 
 export default function GSTCalculatorPage() {
