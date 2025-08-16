@@ -65,12 +65,12 @@ export default function IncomeTaxCalculator() {
     if (age === "above-80") exemptionLimit = 500000
 
     if (taxRegime === "new") {
-      // New Tax Regime Slabs (FY 2024-25)
-      if (taxableIncome > 300000) tax += Math.min(taxableIncome - 300000, 300000) * 0.05
-      if (taxableIncome > 600000) tax += Math.min(taxableIncome - 600000, 300000) * 0.1
-      if (taxableIncome > 900000) tax += Math.min(taxableIncome - 900000, 300000) * 0.15
-      if (taxableIncome > 1200000) tax += Math.min(taxableIncome - 1200000, 300000) * 0.2
-      if (taxableIncome > 1500000) tax += (taxableIncome - 1500000) * 0.3
+      // New Tax Regime Slabs (FY 2024-25) - Correct Rates
+      if (taxableIncome > 300000) tax += Math.min(taxableIncome - 300000, 400000) * 0.05 // 3L to 7L
+      if (taxableIncome > 700000) tax += Math.min(taxableIncome - 700000, 300000) * 0.10 // 7L to 10L
+      if (taxableIncome > 1000000) tax += Math.min(taxableIncome - 1000000, 200000) * 0.15 // 10L to 12L
+      if (taxableIncome > 1200000) tax += Math.min(taxableIncome - 1200000, 300000) * 0.20 // 12L to 15L
+      if (taxableIncome > 1500000) tax += (taxableIncome - 1500000) * 0.30 // Above 15L
     } else {
       // Old Tax Regime Slabs
       if (taxableIncome > exemptionLimit) {
@@ -191,10 +191,10 @@ export default function IncomeTaxCalculator() {
       >
         <div className="flex items-center justify-center space-x-2">
           <Receipt className="h-8 w-8 text-blue-600" />
-          <h1 className="text-3xl md:text-4xl font-bold text-slate-800">Income Tax Calculator</h1>
+          <h1 className="text-3xl md:text-4xl font-bold text-slate-800">Calculate Your FY 2024-25 Tax Liability – Old vs New Regime</h1>
         </div>
-        <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-          Calculate your income tax liability for FY 2024-25 with support for both old and new tax regimes
+        <p className="text-lg text-slate-600 max-w-4xl mx-auto">
+          Your Trusted Income Tax Calculator for FY 2024-25. Navigate the complexities of Indian income tax with confidence. Our free, easy-to-use income tax calculator is built by our team of expert CAs and Consultants, ensuring you get accurate, reliable estimates for your tax liability. Whether you're a salaried professional, this tool provides a fast, transparent way to understand your tax position and plan your finances effectively.
         </p>
       </motion.div>
 
@@ -480,10 +480,10 @@ export default function IncomeTaxCalculator() {
                   <div className="space-y-2 text-sm">
                     <p className="font-medium">Tax Slabs (FY 2024-25):</p>
                     <ul className="space-y-1 text-slate-600">
-                      <li>• Up to ₹3,00,000: Nil</li>
-                      <li>• ₹3,00,001 - ₹6,00,000: 5%</li>
-                      <li>• ₹6,00,001 - ₹9,00,000: 10%</li>
-                      <li>• ₹9,00,001 - ₹12,00,000: 15%</li>
+                      <li>• Up to ₹3,00,000: 0%</li>
+                      <li>• ₹3,00,001 - ₹7,00,000: 5%</li>
+                      <li>• ₹7,00,001 - ₹10,00,000: 10%</li>
+                      <li>• ₹10,00,001 - ₹12,00,000: 15%</li>
                       <li>• ₹12,00,001 - ₹15,00,000: 20%</li>
                       <li>• Above ₹15,00,000: 30%</li>
                     </ul>
@@ -632,6 +632,117 @@ export default function IncomeTaxCalculator() {
           </Card>
         </TabsContent>
       </Tabs>
+
+      {/* Enhanced Content Sections */}
+      <div className="mt-12 space-y-8">
+        {/* Why Choose StartBusiness Tax Calculator */}
+        <Card>
+          <CardHeader>
+            <CardTitle>Why Choose the StartBusiness Tax Calculator?</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="grid md:grid-cols-3 gap-6">
+              <div className="bg-blue-50 p-6 rounded-lg">
+                <h3 className="font-semibold text-blue-800 mb-3">Dual Regime Comparison</h3>
+                <p className="text-sm text-slate-600">
+                  Instantly compare your tax liability under the old and new tax regimes to see which one saves you more money for the Financial Year 2024-25.
+                </p>
+              </div>
+              <div className="bg-green-50 p-6 rounded-lg">
+                <h3 className="font-semibold text-green-800 mb-3">Comprehensive & Detailed</h3>
+                <p className="text-sm text-slate-600">
+                  Our calculator goes beyond the basics. It includes fields for various income sources, such as rental income and interest from FDs, and accounts for key deductions like those under Sections 80C, 80D, and interest on home or education loans.
+                </p>
+              </div>
+              <div className="bg-purple-50 p-6 rounded-lg">
+                <h3 className="font-semibold text-purple-800 mb-3">Total Transparency</h3>
+                <p className="text-sm text-slate-600">
+                  Get a complete, step-by-step breakdown of your tax calculation. See exactly how your taxable income is determined and how tax rates are applied, demystifying the entire process.
+                </p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* How to Calculate Your Income Tax */}
+        <Card>
+          <CardHeader>
+            <CardTitle>How to Calculate Your Income Tax in 3 Simple Steps</CardTitle>
+            <CardDescription>Our tool is designed to be simple and intuitive</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="grid md:grid-cols-3 gap-6">
+              <div className="text-center">
+                <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <span className="text-white font-bold">1</span>
+                </div>
+                <h3 className="font-semibold mb-2">Enter Your Details</h3>
+                <p className="text-sm text-slate-600">Start by entering your annual income, age, and taxpayer status.</p>
+              </div>
+              <div className="text-center">
+                <div className="w-12 h-12 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <span className="text-white font-bold">2</span>
+                </div>
+                <h3 className="font-semibold mb-2">Add Deductions & Investments</h3>
+                <p className="text-sm text-slate-600">Input your relevant tax-saving investments and expenses under applicable sections, as well as any business-related expenses.</p>
+              </div>
+              <div className="text-center">
+                <div className="w-12 h-12 bg-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <span className="text-white font-bold">3</span>
+                </div>
+                <h3 className="font-semibold mb-2">Get Your Results</h3>
+                <p className="text-sm text-slate-600">The calculator will instantly show your tax liability for both the old and new tax regimes, highlighting your potential savings.</p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* FAQ Section */}
+        <Card>
+          <CardHeader>
+            <CardTitle>Frequently Asked Questions</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <Accordion type="single" collapsible className="space-y-2">
+              <AccordionItem value="faq-1" className="border rounded-lg px-4">
+                <AccordionTrigger className="text-left">
+                  <span className="font-medium">How do I calculate my tax on salary?</span>
+                </AccordionTrigger>
+                <AccordionContent className="text-slate-600">
+                  Your gross salary includes your basic salary, allowances, and other taxable components. To arrive at your taxable income, you first subtract exemptions like House Rent Allowance (HRA) and Leave Travel Allowance (LTA), which are available only under the old tax regime. You then subtract deductions under various sections, such as 80C, 80D, and 24b for home loan interest.
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="faq-2" className="border rounded-lg px-4">
+                <AccordionTrigger className="text-left">
+                  <span className="font-medium">What is the difference between the Old and New Tax Regimes?</span>
+                </AccordionTrigger>
+                <AccordionContent className="text-slate-600">
+                  The new tax regime is now the default option, offering lower tax rates but requiring you to forgo most common deductions and exemptions. The old regime allows you to claim a wide range of deductions but has higher tax rates. Our calculator helps you compare both to make an informed decision and see which is more beneficial for you.
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="faq-3" className="border rounded-lg px-4">
+                <AccordionTrigger className="text-left">
+                  <span className="font-medium">What are the key deductions for salaried employees?</span>
+                </AccordionTrigger>
+                <AccordionContent className="text-slate-600">
+                  Salaried employees can claim deductions under various sections, including investments like Public Provident Fund (PPF) and life insurance premiums under Section 80C. You can also deduct medical insurance premiums under Section 80D and interest paid on education or home loans.
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="faq-4" className="border rounded-lg px-4">
+                <AccordionTrigger className="text-left">
+                  <span className="font-medium">How can an income tax calculator help me?</span>
+                </AccordionTrigger>
+                <AccordionContent className="text-slate-600">
+                  An income tax calculator helps you estimate your tax liability accurately and quickly, reducing the chance of errors that can occur with manual calculations. It is a useful tool for financial planning, helping you understand your post-tax income and how different investments can affect your tax bill.
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
+          </CardContent>
+        </Card>
+      </div>
     </div>
   )
 }

@@ -78,7 +78,7 @@ export default function EnhancedFooter() {
             {/* Company Registration Services */}
             <div>
               <h3 className="mb-4 lg:mb-6 text-base sm:text-lg font-bold text-white relative">
-                Company Registration
+                Business Setup
                 <span className="absolute -bottom-2 left-0 w-12 h-1 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full"></span>
               </h3>
               <ul className="space-y-2 lg:space-y-3">
@@ -220,7 +220,7 @@ export default function EnhancedFooter() {
             {/* Intellectual Property */}
             <div>
               <h3 className="mb-4 lg:mb-6 text-base sm:text-lg font-bold text-white relative">
-                Intellectual Property
+                Trademark Services
                 <span className="absolute -bottom-2 left-0 w-12 h-1 bg-gradient-to-r from-red-500 to-red-600 rounded-full"></span>
               </h3>
               <ul className="space-y-2 lg:space-y-3">
@@ -267,7 +267,7 @@ export default function EnhancedFooter() {
             {/* Business Setup */}
             <div>
               <h3 className="mb-4 lg:mb-6 text-base sm:text-lg font-bold text-white relative">
-                Business Setup
+                Important Registrations
                 <span className="absolute -bottom-2 left-0 w-12 h-1 bg-gradient-to-r from-indigo-500 to-indigo-600 rounded-full"></span>
               </h3>
               <ul className="space-y-2 lg:space-y-3">

@@ -2,9 +2,9 @@ import type { Metadata } from "next"
 import IncomeTaxCalculator from "../_components/income-tax-calculator"
 
 export const metadata: Metadata = {
-  title: "Income Tax Calculator 2024-25 - Calculate Tax Liability | Free Online Tool",
+  title: "FY 2024-25 Income Tax Calculator (Old & New Regime) – StartBusiness",
   description:
-    "Calculate your income tax liability with our comprehensive tax calculator. Support for old vs new tax regime, all deductions, and latest tax slabs for FY 2024-25.",
+    "Estimate your tax liability with detailed inputs like HRA, bonus; compare regimes; accurate for Indian taxpayers.",
 }
 
 export default function IncomeTaxCalculatorPage() {

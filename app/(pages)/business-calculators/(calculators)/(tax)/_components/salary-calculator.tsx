@@ -173,21 +173,21 @@ export function SalaryCalculator() {
     let incomeTax = 0
     if (taxableIncome > 0) {
       if (taxRegime === "new") {
-        // New tax regime rates (AY 2024-25)
+        // New tax regime rates (AY 2024-25) - Correct Rates
         if (taxableIncome > 300000) {
-          incomeTax += Math.min(taxableIncome - 300000, 300000) * 0.05
+          incomeTax += Math.min(taxableIncome - 300000, 400000) * 0.05 // 3L to 7L
         }
-        if (taxableIncome > 600000) {
-          incomeTax += Math.min(taxableIncome - 600000, 300000) * 0.1
+        if (taxableIncome > 700000) {
+          incomeTax += Math.min(taxableIncome - 700000, 300000) * 0.10 // 7L to 10L
         }
-        if (taxableIncome > 900000) {
-          incomeTax += Math.min(taxableIncome - 900000, 300000) * 0.15
+        if (taxableIncome > 1000000) {
+          incomeTax += Math.min(taxableIncome - 1000000, 200000) * 0.15 // 10L to 12L
         }
         if (taxableIncome > 1200000) {
-          incomeTax += Math.min(taxableIncome - 1200000, 300000) * 0.2
+          incomeTax += Math.min(taxableIncome - 1200000, 300000) * 0.20 // 12L to 15L
         }
         if (taxableIncome > 1500000) {
-          incomeTax += (taxableIncome - 1500000) * 0.3
+          incomeTax += (taxableIncome - 1500000) * 0.30 // Above 15L
         }
       } else {
         // Old tax regime rates
@@ -725,9 +725,9 @@ export function SalaryCalculator() {
                           </div>
                           <div className="text-xs space-y-1 pl-4">
                             <div>₹0 - ₹3L: 0%</div>
-                            <div>₹3L - ₹6L: 5%</div>
-                            <div>₹6L - ₹9L: 10%</div>
-                            <div>₹9L - ₹12L: 15%</div>
+                            <div>₹3L - ₹7L: 5%</div>
+                            <div>₹7L - ₹10L: 10%</div>
+                            <div>₹10L - ₹12L: 15%</div>
                             <div>₹12L - ₹15L: 20%</div>
                             <div>Above ₹15L: 30%</div>
                           </div>
