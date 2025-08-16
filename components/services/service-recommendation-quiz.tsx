@@ -105,18 +105,18 @@ export default function ServiceRecommendationQuiz() {
   const handleCategorySelect = (categoryId: string) => {
     if (categoryId === "business-calculators") {
       // Redirect to calculators page
-      window.open("/business-calculators", "_blank")
+      window.location.href = "/business-calculators"
       return
     }
     
     // Redirect to dedicated quiz pages instead of opening modals
     if (categoryId === "company-registration") {
-      window.open("/business-structure-quiz", "_blank")
+      window.location.href = "/business-structure-quiz"
       return
     }
-    
+
     if (categoryId === "itr-eligibility") {
-      window.open("/itr-eligibility-quiz", "_blank")
+      window.location.href = "/itr-eligibility-quiz"
       return
     }
   }

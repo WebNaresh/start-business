@@ -8,6 +8,7 @@ export const metadata: Metadata = {
     title: "Which ITR Form to File? Free ITR Eligibility Quiz 2025",
     description: "Confused about which ITR form to file? Take our quick ITR Eligibility Quiz for FY 2024-25 and find the right form (ITR-1, 2, 3, or 4) for your income profile.",
     type: "website",
+    images:["/og/quiz/itr-quiz-og.png"]
   },
 }
 
