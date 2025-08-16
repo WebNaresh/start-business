@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 
 /**
- * Generate sitemap.xml in public folder
- * This script fetches blog posts from the database and generates a complete sitemap
- * Run with: node scripts/generate-sitemap.js
+ * Legacy sitemap generator - now replaced by next-sitemap
+ * This script is kept for reference but next-sitemap handles sitemap generation
+ * Use: npm run sitemap (which runs next-sitemap)
  */
 
 const fs = require('fs')
