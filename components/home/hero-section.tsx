@@ -142,11 +142,7 @@ export default function ProfessionalHeroSection() {
               </Button>
             </div>
 
-            {/* Professional Guarantee */}
-            <div className="flex items-center space-x-2 text-sm text-slate-600 pt-2">
-              <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0" />
-              <span>100% Money-back guarantee • Free consultation • 7-15 days processing</span>
-            </div>
+            
           </div>
 
           {/* Professional Visual Section */}
@@ -178,28 +174,7 @@ export default function ProfessionalHeroSection() {
           </div>
         </div>
 
-        {/* Bottom Trust Indicators - Clean and minimal */}
-        <div className="mt-16 pt-8 border-t border-slate-200/60">
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
-            <div className="flex items-center space-x-8 text-sm text-slate-600">
-              <div className="flex items-center space-x-2">
-                <Shield className="w-4 h-4 text-green-600" />
-                <span>SSL Secured</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <Award className="w-4 h-4 text-blue-600" />
-                <span>ISO Certified</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <Users className="w-4 h-4 text-purple-600" />
-                <span>Expert CA Team</span>
-              </div>
-            </div>
-            <div className="text-sm text-slate-500 font-medium">
-              Trusted by 1,000+ entrepreneurs
-            </div>
-          </div>
-        </div>
+       
       </div>
     </section>
   )
