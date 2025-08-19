@@ -79,7 +79,7 @@ export const metadata: Metadata = {
       "StartBusiness - Business Registration, Compliance & Legal Services in India",
     description:
       "Professional company registration, trademark, GST, FSSAI, compliance, and legal services for startups and businesses in India. Fast, affordable, and expert support.",
-    images: ["/hero_og.png"],
+    images: ["/og/hero-og.png"],
     creator: "@startbusinessin",
     site: "@startbusinessin",
   },
