@@ -2,49 +2,19 @@
 
 import type React from "react"
 
-import { useState } from "react"
 import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
 import WhatsAppCTAButton from "@/components/whatsapp-cta-button"
-import { ArrowRight, CheckCircle, Phone, Mail, User, Send, Sparkles } from "lucide-react"
+import { ArrowRight, Phone, Mail, User, Sparkles } from "lucide-react"
 import type { ServiceData } from "./service-types"
 import Script from "next/script"
+import ZohoServiceForm from "@/components/zoho-service-form"
 
 interface OverviewSectionProps {
   service: ServiceData
 }
 
 export default function OverviewSection({ service }: OverviewSectionProps) {
-  const [formData, setFormData] = useState({
-    name: "",
-    mobile: "",
-    email: "",
-  })
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [isSubmitted, setIsSubmitted] = useState(false)
-
-  const handleInputChange = (field: string, value: string) => {
-    setFormData((prev) => ({ ...prev, [field]: value }))
-  }
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsSubmitting(true)
-
-    // Simulate API call
-    setTimeout(() => {
-      setIsSubmitting(false)
-      setIsSubmitted(true)
-
-      // Reset form after 3 seconds
-      setTimeout(() => {
-        setIsSubmitted(false)
-        setFormData({ name: "", mobile: "", email: "" })
-      }, 3000)
-    }, 1500)
-  }
 
   // Generate structured data for the service
   const serviceStructuredData = {
@@ -199,118 +169,12 @@ export default function OverviewSection({ service }: OverviewSectionProps) {
               </div>
 
               <div className="relative z-10">
-                {!isSubmitted ? (
-                  <>
-                    {/* Form Header */}
-                    <div className="text-center mb-6">
-                      <h3 className="text-lg font-bold text-slate-800 mb-2">
-                        Register For <span className="text-blue-600">{service.shortTitle.replace("Registration", "").trim()}</span> Today
-                      </h3>
-                    </div>
-
-                    {/* Form */}
-                    <form onSubmit={handleSubmit} className="space-y-6" aria-label="Registration form">
-                      <div className="space-y-2">
-                        <Label htmlFor="name" className="sr-only">Full Name</Label>
-                        <Input
-                          id="name"
-                          type="text"
-                          placeholder="Enter your full name"
-                          value={formData.name}
-                          onChange={(e) => handleInputChange("name", e.target.value)}
-                          className="h-12 border-slate-200 focus:border-blue-500 focus:ring-blue-200 rounded-xl"
-                          required
-                          aria-required="true"
-                        />
-                      </div>
-
-                      <div className="space-y-2">
-                        <Label htmlFor="mobile" className="sr-only">Mobile Number</Label>
-                        <Input
-                          id="mobile"
-                          type="tel"
-                          placeholder="+91 98765 43210"
-                          value={formData.mobile}
-                          onChange={(e) => handleInputChange("mobile", e.target.value)}
-                          className="h-12 border-slate-200 focus:border-blue-500 focus:ring-blue-200 rounded-xl"
-                          required
-                          aria-required="true"
-                          pattern="[0-9]{10}"
-                          aria-label="Mobile number (10 digits)"
-                        />
-                      </div>
-
-                      <div className="space-y-2">
-                        <Label htmlFor="email" className="sr-only">Email Address</Label>
-                        <Input
-                          id="email"
-                          type="email"
-                          placeholder="your@email.com"
-                          value={formData.email}
-                          onChange={(e) => handleInputChange("email", e.target.value)}
-                          className="h-12 border-slate-200 focus:border-blue-500 focus:ring-blue-200 rounded-xl"
-                          required
-                          aria-required="true"
-                        />
-                      </div>
-
-                      <Button
-                        type="submit"
-                        disabled={isSubmitting}
-                        className="w-full h-12 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
-                        aria-label={isSubmitting ? "Processing your request" : "Submit registration form"}
-                      >
-                        {isSubmitting ? (
-                          <>
-                            <motion.div
-                              animate={{ rotate: 360 }}
-                              transition={{ duration: 1, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
-                              className="w-5 h-5 border-2 border-white border-t-transparent rounded-full mr-2"
-                              aria-hidden="true"
-                            />
-                            Processing...
-                          </>
-                        ) : (
-                          <>
-                            <Send className="w-5 h-5 mr-2" aria-hidden="true" />
-                            Get Free Consultation
-                          </>
-                        )}
-                      </Button>
-                    </form>
-                  </>
-                ) : (
-                  /* Success State */
-                  <motion.div
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    className="text-center py-8"
-                    role="alert"
-                    aria-live="polite"
-                  >
-                    <motion.div
-                      initial={{ scale: 0 }}
-                      animate={{ scale: 1 }}
-                      transition={{ delay: 0.2, type: "spring", bounce: 0.5 }}
-                      className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4"
-                      aria-hidden="true"
-                    >
-                      <CheckCircle className="w-8 h-8 text-white" />
-                    </motion.div>
-                    <h3 className="text-xl font-bold text-blue-600 mb-2">Thank You!</h3>
-                    <p className="text-sm text-slate-600 mb-4">
-                      Your request has been submitted successfully. Our expert will call you within 30 minutes.
-                    </p>
-                    <div className="bg-blue-50 rounded-lg p-4 border border-blue-100">
-                      <p className="text-sm text-slate-700">
-                        <strong>What's Next?</strong>
-                        <br />• Expert consultation call
-                        <br />• Customized service plan
-                        <br />• Instant process initiation
-                      </p>
-                    </div>
-                  </motion.div>
-                )}
+                <ZohoServiceForm
+                  title={`Register For ${service.shortTitle.replace("Registration", "").trim()} Today`}
+                  description="Fill out the form below and our experts will get back to you within 24 hours."
+                  defaultService={service.shortTitle}
+                  className="shadow-2xl border-0"
+                />
               </div>
             </div>
           </motion.div>
