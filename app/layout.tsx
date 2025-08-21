@@ -138,19 +138,6 @@ export default function RootLayout({
               values: {},
               ready: function() {
                 $zoho.salesiq.floatbutton.visible("show");
-
-                // Adjust position for mobile devices to avoid bottom navigation
-                if (window.innerWidth < 768) {
-                  setTimeout(function() {
-                    var floatButton = document.getElementById('zsiq_float');
-                    if (floatButton) {
-                      floatButton.style.bottom = '80px'; // Position above bottom nav (64px + 16px margin)
-                      floatButton.style.right = '16px';
-                      floatButton.style.zIndex = '8998';
-                      floatButton.style.transform = 'scale(0.9)'; // Slightly smaller for mobile
-                    }
-                  }, 1000);
-                }
               }
             };
             var d = document;

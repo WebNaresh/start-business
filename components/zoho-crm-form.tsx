@@ -50,8 +50,12 @@ type ZohoCrmFormData = z.infer<typeof zohoCrmFormSchema>
 const serviceOptions = [
   { value: "Company Registration", label: "Company Registration" },
   { value: "Trademark Registration", label: "Trademark Registration" },
-  { value: "Compilance Services", label: "Compliance Services" },
-  { value: "Other Services", label: "Other Services" }
+  { value: "GST Registration", label: "GST Registration" },
+  { value: "FSSAI License", label: "FSSAI License" },
+  { value: "MSME Registration", label: "MSME Registration" },
+  { value: "Tax Filing", label: "Tax Filing" },
+  { value: "Compliance Services", label: "Compliance Services" },
+  { value: "Other", label: "Other Services" }
 ]
 
 interface ZohoCrmFormProps {
@@ -119,18 +123,18 @@ export default function ZohoCrmForm({
 
       // Add form fields with exact Zoho CRM parameters
       const fields = [
-        { name: 'xnQsjsdp', value: '4ac4a262cc0cdab66479a83bab625e53490e93515119234f760756c6d41d1e30' },
+        { name: 'xnQsjsdp', value: 'c6d7810e05120b1ace91a2b4af426290e7c684da637dda5026b3b8587c9afe55' },
         { name: 'zc_gad', value: '' },
-        { name: 'xmIwtLD', value: '9b604b603f4934dd9307c088b0f0687992de5df2a82b8f215c20f3146c901290f9d1694693f8eb2a48f6d1994bcc9395' },
+        { name: 'xmIwtLD', value: '731203c0c029cc9fadd510ff25e826b1b003e8b3f6e99c0158e7cac8e272bfaad04b698e60452158a53e7bf1a1aa924a' },
         { name: 'actionType', value: 'TGVhZHM=' },
-        { name: 'returnURL', value: window.location.origin + '/thank-you' },
+        { name: 'returnURL', value: 'https://startbusiness.co.in/thank-you' },
         { name: 'First Name', value: formData.firstName },
         { name: 'Last Name', value: formData.lastName },
         { name: 'Email', value: formData.email },
         { name: 'Phone', value: formData.phone },
-        { name: 'LEADCF2', value: formData.service },
+        { name: 'LEADCF1', value: formData.service },
         { name: 'Description', value: formData.requirement || '' },
-        { name: 'Lead Source', value: 'Website- Start Business' },
+        { name: 'Lead Source', value: 'Web Research' },
         { name: 'enterdigest', value: formData.captcha },
         { name: 'aG9uZXlwb3Q', value: '' } // Honeypot field
       ]
@@ -401,7 +405,7 @@ export default function ZohoCrmForm({
             <div className="flex items-center gap-3">
               <img
                 id="captchaImage"
-                src="https://crm.zoho.in/crm/CaptchaServlet?formId=9b604b603f4934dd9307c088b0f0687992de5df2a82b8f215c20f3146c901290f9d1694693f8eb2a48f6d1994bcc9395&grpid=4ac4a262cc0cdab66479a83bab625e53490e93515119234f760756c6d41d1e30"
+                src="https://crm.zoho.in/crm/CaptchaServlet?formId=731203c0c029cc9fadd510ff25e826b1b003e8b3f6e99c0158e7cac8e272bfaad04b698e60452158a53e7bf1a1aa924a&grpid=c6d7810e05120b1ace91a2b4af426290e7c684da637dda5026b3b8587c9afe55"
                 alt="Captcha"
                 className="border border-gray-300 rounded"
               />
