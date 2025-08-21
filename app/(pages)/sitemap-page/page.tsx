@@ -57,7 +57,7 @@ const sitemapSections: SitemapSection[] = [
       },
       {
         title: "One Person Company (OPC)",
-        href: "/services/opc",
+        href: "/services/opc-registration",
         description: "Solo entrepreneur business registration"
       },
       {

@@ -17,7 +17,7 @@ module.exports = {
     // Add dynamic service pages
     const services = [
       'private-limited-company',
-      'opc',
+      'opc-registration',
       'llp',
       'partnership-firm',
       'sole-proprietorship',
@@ -61,6 +61,8 @@ module.exports = {
         lastmod: new Date().toISOString(),
       })
     })
+
+
 
     // Add calculator pages with high priority
     const calculators = [

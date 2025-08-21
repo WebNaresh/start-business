@@ -85,7 +85,7 @@ export default function EnhancedFooter() {
                 {[
                   { name: "Private Limited Company", href: "/services/private-limited-company", popular: true },
                   { name: "Limited Liability Partnership", href: "/services/llp", popular: false },
-                  { name: "One Person Company", href: "/services/opc", popular: false },
+                  { name: "One Person Company", href: "/services/opc-registration", popular: false },
                   { name: "Partnership Firm", href: "/services/partnership-firm", popular: false },
                   { name: "Sole Proprietorship", href: "/services/sole-proprietorship", popular: false },
                 ].map((service, index) => (

@@ -160,130 +160,214 @@
       }
     ]
   },
-  "opc": {
-    "title": "One Person Company Registration",
+  "opc-registration": {
+    "title": "One Person Company (OPC) Registration in India Online",
     "shortTitle": "OPC Registration",
-    "description": "Start your entrepreneurial journey with a One Person Company - a perfect blend of sole proprietorship and private limited company benefits.",
+    "description": "Register your One Person Company (OPC) in India in 12–15 days. Full MCA process, DSC, DIN & compliance. Free expert consultation.",
     "category": "business-setup",
     "icon": "User",
     "color": "violet",
     "popular": true,
     "pricing": {
-      "amount": "8,000",
-      "originalAmount": "10,000",
+      "amount": "9,999",
+      "originalAmount": "12,999",
       "currency": "₹",
       "gst": true,
       "includes": [
-        "Name Reservation fees",
-        "ROC filing fees",
-        "DSC for director",
-        "DIN for director",
+        "OPC Name Reservation fees",
+        "All Govt. Fees (Capital of Rs. 1 Lac)",
+        "E-MoA and e-AoA",
+        "DSC for one director",
+        "DIN for one director",
         "Professional charges",
-        "OPC incorporation certificate"
+        "OPC incorporation certificate",
+        "PAN and TAN",
+        "Filing of INC-20A"
       ]
     },
     "timeline": {
       "total": "12-15 working days",
       "steps": [
         {
-          "name": "Name Reservation",
+          "name": "Name Reservation & DSC",
           "duration": "2-3 days"
         },
         {
-          "name": "DSC & DIN",
+          "name": "DIN Application",
           "duration": "2-3 days"
         },
         {
-          "name": "Drafting of  eMoA & eAoA",
-          "duration": "4-5 days"
+          "name": "Document Preparation",
+          "duration": "3-4 days"
         },
         {
-          "name": "Final Approval",
-          "duration": "4-5 days"
+          "name": "MCA Filing & Approval",
+          "duration": "5-6 days"
         }
       ]
     },
     "whatIs": {
-      "title": "What is a One Person Company?",
-      "description": "A One Person Company (OPC) is a type of business entity that allows a single person to run a company with limited liability protection. It combines the benefits of a sole proprietorship with the advantages of a private limited company."
+      "title": "What is One Person Company?",
+      "description": "A One Person Company (OPC) is a type of company that can be formed by a single individual as both shareholder and director, introduced under the Companies Act, 2013. An OPC is a unique business structure for a single entrepreneur that combines the simplicity of a sole proprietorship with the legal protections of a corporate entity. It is defined under Section 2(62) of the Companies Act, 2013, as a company with only one member."
     },
     "keyFeatures": [
-      "Single person ownership",
-      "Limited liability protection",
-      "Separate legal entity",
-      "Perpetual succession",
-      "Easy to manage",
-      "Professional structure"
+      "Limited Liability – Personal assets are protected",
+      "Separate Legal Entity – Recognized as a company under law",
+      "Less Compliance – Fewer requirements than private limited companies",
+      "Full Control – Sole decision-making authority",
+      "Perpetual Succession – Nominee takes over in unforeseen events",
+      "Credibility – Trusted by banks, customers, and vendors"
     ],
     "idealFor": [
-      "Solo entrepreneurs",
-      "Startup founders",
-      "Small business owners",
-      "Professionals",
-      "Consultants",
-      "Freelancers"
+      "Solo entrepreneurs starting their business journey",
+      "Professionals wanting corporate structure",
+      "Small business owners seeking limited liability",
+      "Consultants and freelancers",
+      "Service providers requiring credibility",
+      "Individuals with innovative business ideas"
     ],
     "process": [
       {
         "step": 1,
-        "title": "Name Reservation",
-        "description": "Apply for Name Reservation through MCA portal with up to 2 name options."
+        "title": "Digital Signature Certificate (DSC)",
+        "description": "Obtain DSC for the director to digitally sign documents during the registration process."
       },
       {
         "step": 2,
-        "title": "Obtain Digital Signature Certificate (DSC)",
-        "description": "Obtain Digital Signature Certificate and Director Identification Number."
+        "title": "Director Identification Number (DIN)",
+        "description": "Apply for DIN for the director through MCA portal with required documents."
       },
       {
         "step": 3,
-        "title": "Drafting of  eMoA & eAoA",
-        "description": "Submit incorporation documents including MOA, AOA, and other forms."
+        "title": "Name Reservation",
+        "description": "Reserve unique company name through SPICe+ form with alternative name options."
       },
       {
         "step": 4,
-        "title": "Filing SPICe+ Form",
-        "description": "Receive Certificate of Incorporation from MCA."
+        "title": "Document Preparation",
+        "description": "Prepare Memorandum of Association (MoA), Articles of Association (AoA), and other incorporation documents."
       },
       {
         "step": 5,
-        "title": "Certificate of Registration ",
-        "description": "Complete PAN, TAN, GST, and bank account opening formalities."
+        "title": "SPICe+ Form Filing",
+        "description": "Submit SPICe+ form with all documents and fees to MCA for incorporation approval."
+      },
+      {
+        "step": 6,
+        "title": "Certificate of Incorporation",
+        "description": "Receive Certificate of Incorporation, PAN, TAN, and complete post-incorporation formalities."
       }
     ],
     "requiredDocuments": {
       "forDirector": [
-        "PAN Card",
-        "Aadhaar Card",
-        "Passport size photographs",
-        "Bank statement/utility bill for address proof",
+        "PAN Card of the director",
+        "Aadhaar Card of the director",
+        "Passport size photographs (2 copies)",
+        "Address proof (Bank statement/Utility bill)",
         "Mobile number linked with Aadhaar",
-        "Email ID"
+        "Email ID of the director"
+      ],
+      "forNominee": [
+        "PAN Card of the nominee",
+        "Aadhaar Card of the nominee",
+        "Passport size photographs of nominee",
+        "Address proof of nominee",
+        "Consent letter from nominee"
       ],
       "forRegisteredOffice": [
-        "Rent agreement/ownership deed",
+        "Rent agreement or ownership deed",
         "Utility bills (not older than 2 months)",
         "NOC from property owner",
-        "Property tax receipt",
-        "Municipality trade license",
-        "Office photographs"
+        "Property tax receipt or municipal bill",
+        "Office address proof documents"
       ]
+    },
+    "eligibilityCriteria": [
+      "Any Indian citizen, whether resident in India or otherwise",
+      "Nominee resident person required",
+      "Cannot incorporate more than one OPC",
+      "Resident and major nominee required"
+    ],
+    "complianceRequirements": [
+      {
+        "form": "INC-20A",
+        "purpose": "Commencement Certificate",
+        "timeline": "Within 180 days of incorporation"
+      },
+      {
+        "form": "DIR-8",
+        "purpose": "Director declaration of non-disqualification",
+        "timeline": "Annually"
+      },
+      {
+        "form": "AOC-4",
+        "purpose": "Filing of Financials",
+        "timeline": "Within 180 days from FY end"
+      },
+      {
+        "form": "MGT-7A",
+        "purpose": "Annual Return",
+        "timeline": "Within 180 days from FY end"
+      },
+      {
+        "form": "DIR-3 KYC",
+        "purpose": "KYC of Director",
+        "timeline": "By September 30th annually"
+      }
+    ],
+    "taxation": {
+      "incomeTax": "22% to 30% + Surcharge + Cess (treated as separate legal entity)",
+      "tds": "Must comply with TDS provisions from day one",
+      "gst": "Required if turnover exceeds ₹20 lakh (₹10 lakh in special category states)"
     },
     "faqs": [
       {
-        "question": "What is the minimum capital required for OPC?",
-        "answer": "There is no minimum capital requirement for OPC registration. You can start with a nominal paid-up capital."
+        "question": "What is a One Person Company (OPC)?",
+        "answer": "An OPC is a business structure defined under the Companies Act of 2013 that allows a single individual to form and run a company. It is a unique entity that gives a sole entrepreneur the benefits of a corporate organization, such as limited liability, while maintaining full control."
       },
       {
-        "question": "Can an OPC have more than one director?",
-        "answer": "An OPC must have only one director, but it can have a nominee director who will take over in case of the main director's death or incapacity."
+        "question": "What are the main benefits of registering an OPC?",
+        "answer": "The key advantages include: Limited Liability (personal assets are protected), Separate Legal Entity (distinct legal identity), Perpetual Succession (nominee can take over), and Less Compliance (fewer requirements than private limited companies)."
       },
       {
-        "question": "What are the annual compliance requirements for OPC?",
-        "answer": "Annual compliances include filing annual returns, financial statements, and conducting board meetings as required by the Companies Act and RBI/MCA regulations."
+        "question": "Is an OPC suitable for small businesses?",
+        "answer": "Yes, an OPC is an ideal choice for solo entrepreneurs, freelancers, and small business owners who are seeking the legal protection of a corporate structure without needing partners or multiple directors."
       },
       {
-        "question": "Can an OPC be converted to a Private Limited Company?",
-        "answer": "Yes, an OPC can be converted to a Private Limited Company when its paid-up capital exceeds ₹50 lakhs or annual turnover exceeds ₹2 crores."
+        "question": "Who is eligible to form a One Person Company?",
+        "answer": "To form an OPC, the individual must be a natural person and an Indian citizen. As per the Companies (Incorporation) Second Amendment Rules, 2021, any Indian citizen, whether resident in India or otherwise, is now eligible to form an OPC."
+      },
+      {
+        "question": "Can a Non-Resident Indian (NRI) register an OPC?",
+        "answer": "Yes, as per the Companies (Incorporation) Second Amendment Rules, 2021, any Indian citizen, whether resident in India or otherwise, is now eligible to form an OPC."
+      },
+      {
+        "question": "Do I need to appoint a nominee?",
+        "answer": "Yes, it is mandatory for the sole director and member of an OPC to appoint a nominee. The nominee must also be a natural person and an Indian citizen."
+      },
+      {
+        "question": "Are there any specific board meeting or AGM requirements for an OPC?",
+        "answer": "If an OPC has only one director, it is not mandatory to hold an Annual General Meeting (AGM) or board meetings. However, if there is more than one director, at least one board meeting must be held in each half of a calendar year, with a gap of at least 90 days between meetings."
+      },
+      {
+        "question": "What are the key annual compliance requirements for an OPC?",
+        "answer": "An OPC must file its financial statements and annual returns with the MCA. This includes e-forms like AOC-4 for financial statements and MGT-7A for the annual return."
+      },
+      {
+        "question": "Is a statutory audit mandatory for an OPC?",
+        "answer": "Yes, it is a requirement to appoint a statutory auditor within 30 days of incorporation."
+      },
+      {
+        "question": "Have the turnover and paid-up capital limits for OPCs been removed?",
+        "answer": "Yes, the Companies (Incorporation) Second Amendment Rules, 2021, removed the mandatory conversion requirements for OPCs based on their paid-up capital (previously ₹50 lakhs) or average annual turnover (previously ₹2 crore). An OPC can now grow indefinitely without being forced to convert to a private or public company."
+      },
+      {
+        "question": "Can an OPC voluntarily convert into a private company?",
+        "answer": "Yes, an OPC can voluntarily convert into a private or public company at any time by passing a special resolution and fulfilling the requirements for the new company type, such as increasing the number of members and directors."
+      },
+      {
+        "question": "What are the common reasons for OPC application rejection?",
+        "answer": "An OPC application can be rejected for several reasons, including: Incorrect or incomplete documentation, proposed company name too similar to existing name, failure to meet eligibility criteria, or errors in the Digital Signature Certificate (DSC) or Director Identification Number (DIN)."
       }
     ]
   },

@@ -140,7 +140,7 @@ export default function AllServicesPage() {
         },
         {
           name: "One Person Company",
-          href: "/services/opc",
+          href: "/services/opc-registration",
           description: "Start a company with a single person as shareholder and director",
           price: "₹5,499",
           timeline: "7-10 days",

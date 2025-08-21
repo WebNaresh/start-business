@@ -61,7 +61,7 @@ export default function EnhancedSearch({
     { id: "2", text: "GST Registration", type: "service", href: "/services/gst-registration", popular: true },
     { id: "3", text: "Trademark Registration", type: "service", href: "/services/trademark-registration" },
     { id: "4", text: "LLP Registration", type: "service", href: "/services/llp" },
-    { id: "5", text: "One Person Company", type: "service", href: "/services/opc" },
+    { id: "5", text: "One Person Company", type: "service", href: "/services/opc-registration" },
     { id: "6", text: "Business Setup", type: "category" },
     { id: "7", text: "Tax Compliance", type: "category" },
     { id: "8", text: "Legal Services", type: "category" },
