@@ -12,8 +12,7 @@ import {
   Star,
   Clock,
   Sparkles,
-  Grid3X3,
-  List,
+
   TrendingUp,
   CheckCircle,
   X,
@@ -51,13 +50,11 @@ interface Service {
   totalServices?: number;
 }
 
-type ViewMode = "grid" | "list";
 type SortBy = "popular" | "name" | "newest";
 
 export default function AllServicesPage() {
   const [activeCategory, setActiveCategory] = useState<string>("all");
   const [searchQuery, setSearchQuery] = useState("");
-  const [viewMode, setViewMode] = useState<ViewMode>("grid");
   const [sortBy, setSortBy] = useState<SortBy>("popular");
   const [filteredServices, setFilteredServices] = useState<SubService[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -579,52 +576,10 @@ export default function AllServicesPage() {
               </span>
             </p>
 
-            {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8 sm:mb-12">
-              <Button
-                size="lg"
-                className="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
-              >
-                <Search className="w-5 h-5 mr-2" />
-                Find Your Service
-              </Button>
-              <Button
-                variant="outline"
-                size="lg"
-                className="w-full sm:w-auto border-2 border-slate-300 hover:border-blue-300 px-8 py-3 rounded-xl font-semibold"
-              >
-                <ArrowRight className="w-5 h-5 mr-2" />
-                Compare Services
-              </Button>
-            </div>
+      
 
-            {/* Trust Indicators */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 text-center">
-              <div className="space-y-2">
-                <div className="text-2xl sm:text-3xl font-bold text-blue-600">
-                  50+
-                </div>
-                <div className="text-sm text-slate-600">Business Services</div>
-              </div>
-              <div className="space-y-2">
-                <div className="text-2xl sm:text-3xl font-bold text-green-600">
-                  10K+
-                </div>
-                <div className="text-sm text-slate-600">Happy Clients</div>
-              </div>
-              <div className="space-y-2">
-                <div className="text-2xl sm:text-3xl font-bold text-purple-600">
-                  7-15
-                </div>
-                <div className="text-sm text-slate-600">Days Processing</div>
-              </div>
-              <div className="space-y-2">
-                <div className="text-2xl sm:text-3xl font-bold text-orange-600">
-                  24/7
-                </div>
-                <div className="text-sm text-slate-600">Expert Support</div>
-              </div>
-            </div>
+        
+           
           </div>
         </div>
       </section>
@@ -704,28 +659,8 @@ export default function AllServicesPage() {
               </div>
             </div>
 
-            {/* View Mode and Sort */}
+            {/* Sort Options */}
             <div className="flex items-center gap-3 order-2">
-              <div className="flex items-center border border-slate-200 rounded-lg p-1 bg-slate-50">
-                <Button
-                  variant={viewMode === "grid" ? "default" : "ghost"}
-                  size="sm"
-                  onClick={() => setViewMode("grid")}
-                  className="h-8 w-8 p-0"
-                  title="Grid View"
-                >
-                  <Grid3X3 className="w-4 h-4" />
-                </Button>
-                <Button
-                  variant={viewMode === "list" ? "default" : "ghost"}
-                  size="sm"
-                  onClick={() => setViewMode("list")}
-                  className="h-8 w-8 p-0"
-                  title="List View"
-                >
-                  <List className="w-4 h-4" />
-                </Button>
-              </div>
 
               <select
                 value={sortBy}
@@ -826,18 +761,13 @@ export default function AllServicesPage() {
             )}
           </div>
 
-          {/* Services Grid/List */}
+          {/* Services Grid */}
           {isLoading ? (
-            <ServiceSkeleton count={8} viewMode={viewMode} />
+            <ServiceSkeleton count={8} viewMode="grid" />
           ) : filteredServices.length > 0 ? (
             <div
               id="services-grid"
-              className={cn(
-                "transition-all duration-300",
-                viewMode === "grid"
-                  ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6"
-                  : "space-y-3 sm:space-y-4"
-              )}
+              className="transition-all duration-300 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6"
               role="tabpanel"
               aria-label={`${filteredServices.length} services found`}
               aria-live="polite"
@@ -848,13 +778,7 @@ export default function AllServicesPage() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.3, delay: index * 0.05 }}
-                  className={cn(
-                    "group relative bg-white rounded-xl border border-slate-200 hover:border-blue-300 hover:shadow-xl transition-all duration-300 overflow-hidden",
-                    viewMode === "grid"
-                      ? "hover:-translate-y-1 shadow-sm"
-                      : "flex items-center p-4 sm:p-6 hover:shadow-lg",
-                    "before:absolute before:inset-0 before:bg-gradient-to-br before:from-blue-50/0 before:to-purple-50/0 hover:before:from-blue-50/30 hover:before:to-purple-50/20 before:transition-all before:duration-300"
-                  )}
+                  className="group relative bg-white rounded-xl border border-slate-200 hover:border-blue-300 hover:shadow-xl transition-all duration-300 overflow-hidden hover:-translate-y-1 shadow-sm before:absolute before:inset-0 before:bg-gradient-to-br before:from-blue-50/0 before:to-purple-50/0 hover:before:from-blue-50/30 hover:before:to-purple-50/20 before:transition-all before:duration-300"
                 >
                   {/* Popular/New Badge */}
                   {(service.popular || service.new) && (
@@ -881,137 +805,80 @@ export default function AllServicesPage() {
                     className="block relative z-10"
                     aria-label={`Learn more about ${service.name} - ${service.price}`}
                   >
-                    {viewMode === "grid" ? (
-                      <article className="p-5 sm:p-6 h-full flex flex-col">
-                        {/* Header */}
-                        <header className="mb-4">
-                          <h3 className="font-semibold text-slate-900 group-hover:text-blue-600 transition-colors text-base sm:text-lg leading-tight pr-8 mb-2">
-                            {service.name}
-                          </h3>
-                          {service.description && (
-                            <p className="text-sm text-slate-600 line-clamp-2 leading-relaxed">
-                              {service.description}
-                            </p>
-                          )}
-                        </header>
+                    <article className="p-5 sm:p-6 h-full flex flex-col">
+                      {/* Header */}
+                      <header className="mb-4">
+                        <h3 className="font-semibold text-slate-900 group-hover:text-blue-600 transition-colors text-base sm:text-lg leading-tight pr-8 mb-2">
+                          {service.name}
+                        </h3>
+                        {service.description && (
+                          <p className="text-sm text-slate-600 line-clamp-2 leading-relaxed">
+                            {service.description}
+                          </p>
+                        )}
+                      </header>
 
-                        {/* Price and Timeline */}
-                        {service.price && (
-                          <div className="flex items-center justify-between mb-4 p-3 bg-slate-50 rounded-lg">
-                            <div>
-                              <div className="text-xl sm:text-2xl font-bold text-emerald-600">
-                                {service.price}
+                      {/* Price and Timeline */}
+                      {service.price && (
+                        <div className="flex items-center justify-between mb-4 p-3 bg-slate-50 rounded-lg">
+                          <div>
+                            <div className="text-xl sm:text-2xl font-bold text-emerald-600">
+                              {service.price}
+                            </div>
+                            <div className="text-xs text-slate-500">
+                              Starting from
+                            </div>
+                          </div>
+                          {service.timeline && (
+                            <div className="text-right">
+                              <div className="flex items-center text-sm text-slate-700 font-medium">
+                                <Clock className="w-4 h-4 mr-1.5 text-blue-500" />
+                                {service.timeline}
                               </div>
                               <div className="text-xs text-slate-500">
-                                Starting from
+                                Processing time
                               </div>
                             </div>
-                            {service.timeline && (
-                              <div className="text-right">
-                                <div className="flex items-center text-sm text-slate-700 font-medium">
-                                  <Clock className="w-4 h-4 mr-1.5 text-blue-500" />
-                                  {service.timeline}
-                                </div>
-                                <div className="text-xs text-slate-500">
-                                  Processing time
-                                </div>
-                              </div>
-                            )}
-                          </div>
-                        )}
-
-                        {/* Features */}
-                        {service.features && service.features.length > 0 && (
-                          <div className="space-y-2 mb-6 flex-1">
-                            <div className="text-xs font-medium text-slate-700 mb-2">
-                              Key Features:
-                            </div>
-                            {service.features
-                              .slice(0, 3)
-                              .map((feature, idx) => (
-                                <div
-                                  key={idx}
-                                  className="flex items-center text-sm text-slate-600"
-                                >
-                                  <CheckCircle className="w-4 h-4 text-green-500 mr-2.5 flex-shrink-0" />
-                                  {feature}
-                                </div>
-                              ))}
-                            {service.features.length > 3 && (
-                              <div className="text-xs text-slate-500 ml-6">
-                                +{service.features.length - 3} more features
-                              </div>
-                            )}
-                          </div>
-                        )}
-
-                        {/* CTA Button */}
-                        <div className="mt-auto">
-                          <Button
-                            size="sm"
-                            className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white shadow-md hover:shadow-lg transition-all duration-300"
-                          >
-                            Get Started
-                            <ArrowRight className="w-4 h-4 ml-2" />
-                          </Button>
+                          )}
                         </div>
-                      </article>
-                    ) : (
-                      <div className="flex-1 relative z-10">
-                        <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3 sm:gap-4">
-                          {/* Left Content */}
-                          <div className="flex-1 min-w-0">
-                            <h3 className="font-semibold text-slate-900 group-hover:text-blue-600 transition-colors text-lg sm:text-xl leading-tight mb-2">
-                              {service.name}
-                            </h3>
+                      )}
 
-                            {service.description && (
-                              <p className="text-sm text-slate-600 mb-3 line-clamp-2 leading-relaxed">
-                                {service.description}
-                              </p>
-                            )}
-
-                            {/* Features and Timeline */}
-                            <div className="flex flex-wrap items-center gap-4 text-sm text-slate-500 mb-3">
-                              {service.timeline && (
-                                <div className="flex items-center bg-blue-50 px-2 py-1 rounded-md">
-                                  <Clock className="w-4 h-4 mr-1.5 text-blue-500" />
-                                  {service.timeline}
-                                </div>
-                              )}
-                              {service.features && (
-                                <div className="flex items-center bg-green-50 px-2 py-1 rounded-md">
-                                  <CheckCircle className="w-4 h-4 mr-1.5 text-green-500" />
-                                  {service.features.length} features
-                                </div>
-                              )}
-                            </div>
+                      {/* Features */}
+                      {service.features && service.features.length > 0 && (
+                        <div className="space-y-2 mb-6 flex-1">
+                          <div className="text-xs font-medium text-slate-700 mb-2">
+                            Key Features:
                           </div>
-
-                          {/* Right Content */}
-                          <div className="flex flex-col sm:items-end gap-3 sm:text-right">
-                            {service.price && (
-                              <div className="bg-emerald-50 px-3 py-2 rounded-lg">
-                                <div className="text-xl sm:text-2xl font-bold text-emerald-600">
-                                  {service.price}
-                                </div>
-                                <div className="text-xs text-emerald-600/70">
-                                  Starting from
-                                </div>
+                          {service.features
+                            .slice(0, 3)
+                            .map((feature, idx) => (
+                              <div
+                                key={idx}
+                                className="flex items-center text-sm text-slate-600"
+                              >
+                                <CheckCircle className="w-4 h-4 text-green-500 mr-2.5 flex-shrink-0" />
+                                {feature}
                               </div>
-                            )}
-
-                            <Button
-                              size="sm"
-                              className="bg-blue-600 hover:bg-blue-700 text-white shadow-sm hover:shadow-md transition-all duration-300 w-full sm:w-auto"
-                            >
-                              Get Started
-                              <ArrowRight className="w-4 h-4 ml-2" />
-                            </Button>
-                          </div>
+                            ))}
+                          {service.features.length > 3 && (
+                            <div className="text-xs text-slate-500 ml-6">
+                              +{service.features.length - 3} more features
+                            </div>
+                          )}
                         </div>
+                      )}
+
+                      {/* CTA Button */}
+                      <div className="mt-auto">
+                        <Button
+                          size="sm"
+                          className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white shadow-md hover:shadow-lg transition-all duration-300"
+                        >
+                          Get Started
+                          <ArrowRight className="w-4 h-4 ml-2" />
+                        </Button>
                       </div>
-                    )}
+                    </article>
                   </Link>
                 </motion.div>
               ))}

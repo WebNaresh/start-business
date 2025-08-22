@@ -471,7 +471,7 @@ export default function ServiceComparisonTool({
                     </EnhancedCTAButton>
                   </CardContent>
                 </Card>
-              </div>
+              </motion.div>
             ))}
           </div>
 
