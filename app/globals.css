@@ -81,9 +81,8 @@
 
   /* Additional specificity for Zoho chat button alignment */
   @media (max-width: 768px) {
-
     #zsiq_float,
-    #zsiq_float>div,
+    #zsiq_float > div,
     .zsiq_floatmain {
       bottom: calc(64px + 16px + env(safe-area-inset-bottom, 0px)) !important;
       right: 16px !important;
@@ -102,7 +101,6 @@
 
   /* Force alignment of floating buttons */
   @media (max-width: 768px) {
-
     /* Call button alignment */
     a[href^="tel:"] {
       bottom: calc(64px + 16px + env(safe-area-inset-bottom, 0px)) !important;
@@ -111,7 +109,7 @@
     /* Zoho chat button forced alignment */
     #zsiq_float,
     #zsiq_float div,
-    #zsiq_float>div,
+    #zsiq_float > div,
     .zsiq_floatmain,
     .zsiq_theme1,
     [id*="zsiq_float"] {
@@ -232,6 +230,15 @@
   }
 }
 
+@keyframes shimmerGradient {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
 .animate-fade-in-up {
   animation: fadeInUp 0.6s ease-out forwards;
 }
@@ -240,6 +247,12 @@
   background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
   background-size: 200px 100%;
   animation: shimmer 1.5s infinite;
+}
+
+.animate-shimmer-gradient {
+  background: linear-gradient(90deg, #f1f5f9 25%, #e2e8f0 50%, #f1f5f9 75%);
+  background-size: 200% 100%;
+  animation: shimmerGradient 1.5s infinite;
 }
 
 /* Enhanced Company Search Animations */
@@ -290,7 +303,12 @@
 }
 
 .shimmer {
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.4),
+    transparent
+  );
   background-size: 200px 100%;
   animation: shimmer 1.5s infinite;
 }
@@ -343,6 +361,16 @@ html {
 
 ::-webkit-scrollbar-thumb:hover {
   background: #94a3b8;
+}
+
+/* Hide scrollbar utility */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
 }
 
 /* Ensure links are properly styled and visible in blog content */
