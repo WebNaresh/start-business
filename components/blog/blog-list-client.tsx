@@ -258,25 +258,25 @@ export default function BlogListClient() {
   }
 
   return (
-    <section className="container mx-auto px-4 py-20">
-      {/* Section Header */}
-      <div className="text-center mb-16">
-        <div className="inline-flex items-center px-4 py-2 bg-blue-50 text-blue-600 rounded-full text-sm font-medium mb-6 border border-blue-100">
+    <section className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12 lg:py-16">
+      {/* Enhanced Section Header */}
+      <div className="text-center mb-8 md:mb-12">
+        <div className="inline-flex items-center px-4 py-2 bg-blue-50 text-blue-600 rounded-full text-sm font-medium mb-6 border border-blue-100 shadow-sm">
           <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
             <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
           </svg>
-          Quality Content
+          Latest Content
         </div>
-        <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-slate-900 via-blue-900 to-indigo-900 bg-clip-text text-transparent mb-6 leading-tight">
-          Latest Articles & Insights
+        <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-slate-900 via-blue-900 to-indigo-900 bg-clip-text text-transparent mb-4 md:mb-6 leading-tight">
+          Featured Articles & Insights
         </h2>
-        <p className="text-lg text-slate-600 max-w-3xl mx-auto leading-relaxed">
+        <p className="text-base md:text-lg text-slate-600 max-w-3xl mx-auto leading-relaxed">
           Stay updated with the latest business insights, expert tips, and industry trends to help grow your business and achieve your entrepreneurial goals.
         </p>
       </div>
 
-      {/* Search and Filter */}
-      <div className="mb-16">
+      {/* Enhanced Search and Filter */}
+      <div className="mb-8 md:mb-12">
         <BlogSearchFilter
           onSearch={handleSearch}
           onFilterChange={handleFilterChange}
@@ -373,12 +373,12 @@ export default function BlogListClient() {
           </div>
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {visiblePosts.map((post, index) => (
             <Link href={`/blog/${post.slug}`} key={post.id} className="group">
-              <article className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-2xl hover:border-blue-200 transition-all duration-500 group-hover:-translate-y-3 h-full flex flex-col">
-                {/* Featured Image */}
-                <div className="relative h-56 overflow-hidden bg-gradient-to-br from-blue-50 to-indigo-50">
+              <article className="bg-white rounded-xl md:rounded-2xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-xl hover:border-blue-200 transition-all duration-300 group-hover:-translate-y-2 h-full flex flex-col touch-manipulation">
+                {/* Enhanced Featured Image */}
+                <div className="relative h-48 sm:h-52 md:h-56 overflow-hidden bg-gradient-to-br from-blue-50 to-indigo-50">
                   {post.featuredImage &&
                   post.featuredImage !== "/placeholder.svg" &&
                   post.featuredImage !== "" &&
@@ -388,8 +388,8 @@ export default function BlogListClient() {
                       src={post.featuredImage}
                       alt={post.title}
                       fill
-                      className="object-cover group-hover:scale-110 transition-transform duration-700"
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                       quality={85}
                       priority={index < 3}
                       loading={index < 3 ? "eager" : "lazy"}
@@ -428,13 +428,13 @@ export default function BlogListClient() {
                   </div>
                 </div>
 
-                {/* Content */}
-                <div className="p-6 flex-1 flex flex-col">
+                {/* Enhanced Content */}
+                <div className="p-4 sm:p-5 md:p-6 flex-1 flex flex-col">
                   {/* Category/Tags */}
                   {post.tags && (
-                    <div className="mb-4">
-                      <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-gradient-to-r from-blue-50 to-indigo-50 text-blue-700 border border-blue-100">
-                        <svg className="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                    <div className="mb-3 md:mb-4">
+                      <span className="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-semibold bg-gradient-to-r from-blue-50 to-indigo-50 text-blue-700 border border-blue-100 shadow-sm">
+                        <svg className="w-3 h-3 mr-1.5" fill="currentColor" viewBox="0 0 20 20">
                           <path fillRule="evenodd" d="M17.707 9.293a1 1 0 010 1.414l-7 7a1 1 0 01-1.414 0l-7-7A.997.997 0 012 10V5a3 3 0 013-3h5c.256 0 .512.098.707.293l7 7zM5 6a1 1 0 100-2 1 1 0 000 2z" clipRule="evenodd" />
                         </svg>
                         {post.tags.split(",")[0].trim()}
@@ -442,53 +442,55 @@ export default function BlogListClient() {
                     </div>
                   )}
 
-                  {/* Title */}
-                  <h2 className="text-xl font-bold text-slate-900 mb-4 group-hover:text-blue-600 transition-colors line-clamp-2 leading-tight">
+                  {/* Enhanced Title */}
+                  <h2 className="text-lg sm:text-xl font-bold text-slate-900 mb-3 md:mb-4 group-hover:text-blue-600 transition-colors line-clamp-2 leading-tight">
                     {post.title}
                   </h2>
 
-                  {/* Excerpt */}
+                  {/* Enhanced Excerpt */}
                   {post.excerpt && (
-                    <p className="text-slate-600 mb-6 line-clamp-3 text-sm leading-relaxed flex-1">
+                    <p className="text-slate-600 mb-4 md:mb-6 line-clamp-3 text-sm md:text-base leading-relaxed flex-1">
                       {post.excerpt}
                     </p>
                   )}
 
-                  {/* Author & Meta Info */}
-                  <div className="flex items-center justify-between pt-4 border-t border-slate-100">
-                    <div className="flex items-center">
-                      <div className="w-10 h-10 rounded-full bg-gradient-to-r from-blue-500 to-indigo-500 mr-3 flex items-center justify-center shadow-sm ring-2 ring-white">
-                        <span className="text-sm font-bold text-white">
+                  {/* Enhanced Author & Meta Info */}
+                  <div className="flex items-center justify-between pt-3 md:pt-4 border-t border-slate-100">
+                    <div className="flex items-center flex-1 min-w-0">
+                      <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-r from-blue-500 to-indigo-500 mr-2 md:mr-3 flex items-center justify-center shadow-sm ring-2 ring-white flex-shrink-0">
+                        <span className="text-xs md:text-sm font-bold text-white">
                           {post.author.charAt(0).toUpperCase()}
                         </span>
                       </div>
-                      <div>
-                        <p className="text-sm font-semibold text-slate-900">
+                      <div className="min-w-0 flex-1">
+                        <p className="text-sm font-semibold text-slate-900 truncate">
                           {post.author}
                         </p>
                         <p className="text-xs text-slate-500 flex items-center">
-                          <svg className="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                          <svg className="w-3 h-3 mr-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                             <path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd" />
                           </svg>
-                          {post.publishedAt
-                            ? new Date(post.publishedAt).toLocaleDateString(
-                                "en-US",
-                                {
-                                  month: "short",
-                                  day: "numeric",
-                                  year: "numeric",
-                                }
-                              )
-                            : "Coming soon"}
+                          <span className="truncate">
+                            {post.publishedAt
+                              ? new Date(post.publishedAt).toLocaleDateString(
+                                  "en-US",
+                                  {
+                                    month: "short",
+                                    day: "numeric",
+                                    year: "numeric",
+                                  }
+                                )
+                              : "Coming soon"}
+                          </span>
                         </p>
                       </div>
                     </div>
 
                     {/* Enhanced Read More Button */}
-                    <div className="group/btn">
-                      <div className="w-10 h-10 rounded-full bg-gradient-to-r from-blue-50 to-indigo-50 group-hover:from-blue-100 group-hover:to-indigo-100 flex items-center justify-center transition-all duration-300 border border-blue-100 group-hover:border-blue-200 group-hover:scale-110">
+                    <div className="group/btn ml-3">
+                      <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-r from-blue-50 to-indigo-50 group-hover:from-blue-100 group-hover:to-indigo-100 flex items-center justify-center transition-all duration-300 border border-blue-100 group-hover:border-blue-200 group-hover:scale-110 touch-manipulation">
                         <svg
-                          className="w-4 h-4 text-blue-600 group-hover:translate-x-0.5 transition-transform duration-200"
+                          className="w-3 h-3 md:w-4 md:h-4 text-blue-600 group-hover:translate-x-0.5 transition-transform duration-200"
                           fill="none"
                           stroke="currentColor"
                           viewBox="0 0 24 24"
@@ -512,35 +514,35 @@ export default function BlogListClient() {
 
       {/* Enhanced Load More Section */}
       {hasMorePosts && (
-        <div className="text-center mt-16">
-          <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-8 max-w-md mx-auto">
-            <div className="mb-6">
-              <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-full flex items-center justify-center border border-blue-100">
-                <svg className="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div className="text-center mt-8 md:mt-12 lg:mt-16">
+          <div className="bg-white rounded-xl md:rounded-2xl border border-slate-200 shadow-sm p-6 md:p-8 max-w-md mx-auto">
+            <div className="mb-4 md:mb-6">
+              <div className="w-12 h-12 md:w-16 md:h-16 mx-auto mb-3 md:mb-4 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-full flex items-center justify-center border border-blue-100">
+                <svg className="w-6 h-6 md:w-8 md:h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
                 </svg>
               </div>
-              <h3 className="text-lg font-semibold text-slate-900 mb-2">Discover More Articles</h3>
+              <h3 className="text-base md:text-lg font-semibold text-slate-900 mb-2">Discover More Articles</h3>
               <p className="text-sm text-slate-600">
                 Showing {visiblePosts.length} of {allFilteredPosts.length} articles
               </p>
             </div>
-            
+
             <button
               onClick={handleLoadMore}
               disabled={isLoadingMore}
-              className="w-full inline-flex items-center justify-center px-6 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-semibold rounded-xl transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed shadow-sm hover:shadow-md transform hover:-translate-y-0.5"
+              className="w-full inline-flex items-center justify-center px-6 py-3 md:py-4 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-semibold rounded-xl transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed shadow-sm hover:shadow-md transform hover:-translate-y-0.5 touch-manipulation text-sm md:text-base"
             >
               {isLoadingMore ? (
                 <>
-                  <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin mr-3"></div>
-                  <span>Loading Amazing Content...</span>
+                  <div className="w-4 h-4 md:w-5 md:h-5 border-2 border-white/30 border-t-white rounded-full animate-spin mr-2 md:mr-3"></div>
+                  <span>Loading Content...</span>
                 </>
               ) : (
                 <>
                   <span>Load More Articles</span>
                   <svg
-                    className="w-5 h-5 ml-2 group-hover:translate-y-0.5 transition-transform"
+                    className="w-4 h-4 md:w-5 md:h-5 ml-2 group-hover:translate-y-0.5 transition-transform"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"

@@ -81,23 +81,24 @@ export default function BlogSearchFilter({
   ]
 
   return (
-    <div className={`bg-white rounded-2xl border border-slate-200 p-6 shadow-sm hover:shadow-md transition-shadow duration-200 ${className}`}>
-      <div className="flex flex-col lg:flex-row gap-4">
+    <div className={`bg-white rounded-xl md:rounded-2xl border border-slate-200 p-4 md:p-6 shadow-sm hover:shadow-md transition-shadow duration-200 ${className}`}>
+      <div className="flex flex-col gap-4">
         {/* Enhanced Search Input */}
-        <div className="flex-1">
+        <div className="w-full">
           <div className="relative">
-            <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-slate-400 w-5 h-5" />
+            <Search className="absolute left-3 md:left-4 top-1/2 transform -translate-y-1/2 text-slate-400 w-4 h-4 md:w-5 md:h-5" />
             <Input
               type="text"
               placeholder="Search articles, topics, or keywords..."
               value={searchQuery}
               onChange={(e) => handleSearchChange(e.target.value)}
-              className="pl-12 pr-12 py-3 text-base border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-slate-50 hover:bg-white transition-colors"
+              className="pl-10 md:pl-12 pr-10 md:pr-12 py-3 md:py-4 text-sm md:text-base border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-slate-50 hover:bg-white transition-colors touch-manipulation"
             />
             {searchQuery && (
               <button
                 onClick={() => handleSearchChange('')}
-                className="absolute right-4 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-slate-600 transition-colors"
+                className="absolute right-3 md:right-4 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-slate-600 transition-colors p-1 rounded-full hover:bg-slate-100"
+                aria-label="Clear search"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -105,16 +106,16 @@ export default function BlogSearchFilter({
           </div>
         </div>
 
-        {/* Enhanced Filter Dropdown */}
-        <div className="flex items-center gap-3">
+        {/* Enhanced Filter Section */}
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
           <DropdownMenu open={isFilterOpen} onOpenChange={setIsFilterOpen}>
             <DropdownMenuTrigger asChild>
-              <Button 
-                variant="outline" 
-                className="relative px-4 py-3 border-slate-300 rounded-xl hover:bg-slate-50 hover:border-slate-400 transition-all duration-200 bg-slate-50"
+              <Button
+                variant="outline"
+                className="relative px-4 py-3 md:py-3 border-slate-300 rounded-xl hover:bg-slate-50 hover:border-slate-400 transition-all duration-200 bg-slate-50 touch-manipulation w-full sm:w-auto"
               >
                 <Filter className="w-4 h-4 mr-2 text-slate-600" />
-                <span className="text-slate-700 font-medium">Filters</span>
+                <span className="text-slate-700 font-medium text-sm md:text-base">Filters</span>
                 {getActiveFilterCount() > 0 && (
                   <span className="absolute -top-2 -right-2 w-5 h-5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-xs rounded-full flex items-center justify-center shadow-sm border-2 border-white">
                     {getActiveFilterCount()}
@@ -122,7 +123,7 @@ export default function BlogSearchFilter({
                 )}
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="w-64 shadow-lg border-slate-200">
+            <DropdownMenuContent align="end" className="w-72 md:w-80 shadow-lg border-slate-200">
               {/* Categories */}
               <DropdownMenuLabel className="flex items-center text-slate-700 font-semibold">
                 <Tag className="w-4 h-4 mr-2 text-blue-600" />
@@ -216,37 +217,43 @@ export default function BlogSearchFilter({
             </DropdownMenuContent>
           </DropdownMenu>
 
-          {/* Clear Filters Button */}
+          {/* Enhanced Clear Filters Button */}
           {getActiveFilterCount() > 0 && (
             <Button
               variant="ghost"
               onClick={clearAllFilters}
-              className="text-gray-500 hover:text-gray-700"
+              className="text-slate-500 hover:text-slate-700 px-3 py-2 text-sm touch-manipulation w-full sm:w-auto"
             >
               <X className="w-4 h-4 mr-1" />
-              Clear
+              Clear All
             </Button>
           )}
         </div>
       </div>
 
-      {/* Active Filters Display */}
+      {/* Enhanced Active Filters Display */}
       {getActiveFilterCount() > 0 && (
-        <div className="mt-4 pt-4 border-t border-gray-200">
-          <div className="flex flex-wrap gap-2">
-            <span className="text-sm text-gray-600 mr-2">Active filters:</span>
+        <div className="mt-4 pt-4 border-t border-slate-200">
+          <div className="flex flex-wrap gap-2 items-center">
+            <span className="text-sm text-slate-600 font-medium">Active filters:</span>
             {Object.entries(activeFilters).map(([key, value]) => (
               <span
                 key={key}
-                className="inline-flex items-center px-3 py-1 bg-blue-100 text-blue-800 text-sm rounded-full"
+                className="inline-flex items-center px-3 py-1.5 bg-blue-50 text-blue-700 text-sm rounded-full border border-blue-200 shadow-sm"
               >
-                {key === 'category' && 'Category: '}
-                {key === 'dateRange' && 'Date: '}
-                {key === 'sortBy' && 'Sort: '}
-                {value}
+                {key === 'category' && '📂 '}
+                {key === 'dateRange' && '📅 '}
+                {key === 'sortBy' && '🔄 '}
+                <span className="font-medium">
+                  {key === 'category' && 'Category: '}
+                  {key === 'dateRange' && 'Date: '}
+                  {key === 'sortBy' && 'Sort: '}
+                  {value}
+                </span>
                 <button
                   onClick={() => handleFilterChange(key as keyof BlogFilters, undefined)}
-                  className="ml-2 text-blue-600 hover:text-blue-800"
+                  className="ml-2 text-blue-600 hover:text-blue-800 p-0.5 rounded-full hover:bg-blue-100 transition-colors"
+                  aria-label={`Remove ${key} filter`}
                 >
                   <X className="w-3 h-3" />
                 </button>

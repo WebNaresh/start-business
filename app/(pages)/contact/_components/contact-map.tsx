@@ -84,21 +84,30 @@ export default function ContactMap() {
         />
       </Head>
 
-      <section className="py-12 sm:py-16 bg-gradient-to-br from-slate-50 to-blue-50/30" aria-label="Office Location">
-        <div className="container mx-auto px-4">
-          <div className="max-w-2xl mx-auto text-center mb-8 sm:mb-12">
-            <h1 className="text-2xl sm:text-3xl font-bold text-slate-800 mb-3">Visit Our Office</h1>
-            <p className="text-base sm:text-lg text-slate-600 leading-relaxed">
+      <section className="py-8 md:py-12 lg:py-16 bg-gradient-to-br from-slate-50 to-blue-50/30" aria-label="Office Location">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-4xl mx-auto text-center mb-8 md:mb-12">
+            <div className="inline-flex items-center px-4 py-2 bg-blue-50 text-blue-600 rounded-full text-sm font-medium mb-6 border border-blue-100 shadow-sm">
+              <MapPin className="w-4 h-4 mr-2" />
+              Office Location
+            </div>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-4 md:mb-6">
+              Visit Our{" "}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
+                Office
+              </span>
+            </h2>
+            <p className="text-base md:text-lg text-slate-600 leading-relaxed max-w-3xl mx-auto">
               Located in the heart of Pune, our office is easily accessible and equipped with modern facilities for
               in-person consultations.
             </p>
           </div>
 
           <div className="max-w-7xl mx-auto">
-            <div className="grid lg:grid-cols-12 gap-6">
-              {/* Map */}
-              <div className="lg:col-span-5">
-                <div className="relative rounded-lg overflow-hidden shadow-lg border border-slate-200">
+            <div className="grid lg:grid-cols-12 gap-6 md:gap-8">
+              {/* Enhanced Map */}
+              <div className="lg:col-span-5 order-2 lg:order-1">
+                <div className="relative rounded-xl md:rounded-2xl overflow-hidden shadow-xl border border-slate-200 hover:shadow-2xl transition-all duration-300">
                   <iframe
                     src={`https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3783.2598522750845!2d73.83699!3d18.5194!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2c07f4e32c379%3A0xc7a0a3b95ad3e2e!2sDeccan%20Gymkhana%2C%20Pune%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1651234567890!5m2!1sen!2sin`}
                     width="100%"
@@ -107,32 +116,34 @@ export default function ContactMap() {
                     allowFullScreen
                     loading="lazy"
                     referrerPolicy="no-referrer-when-downgrade"
-                    className="w-full h-[320px] md:h-[380px] lg:h-[420px]"
+                    className="w-full h-[280px] sm:h-[320px] md:h-[380px] lg:h-[420px]"
                     title="StartBusiness Office Location"
                     aria-label="Interactive map showing StartBusiness office location in Pune"
                   />
 
-                  {/* Overlay with office info */}
-                  <div className="absolute top-3 left-3 bg-white/95 backdrop-blur-sm rounded-lg p-3 shadow-md max-w-xs">
+                  {/* Enhanced Overlay with office info */}
+                  <div className="absolute top-3 left-3 bg-white/95 backdrop-blur-sm rounded-xl p-3 md:p-4 shadow-lg max-w-xs border border-white/20">
                     <div className="flex items-start space-x-3">
-                      <div className="p-2 bg-blue-100 rounded-lg">
+                      <div className="p-2 bg-blue-100 rounded-lg flex-shrink-0">
                         <MapPin className="w-4 h-4 text-blue-600" aria-hidden="true" />
                       </div>
-                      <div>
-                        <h2 className="font-semibold text-slate-800 mb-1">StartBusiness Office</h2>
-                        <address className="text-sm text-slate-600 leading-relaxed not-italic">
-                          {officeLocation.address}
+                      <div className="min-w-0">
+                        <h3 className="font-semibold text-slate-800 mb-1 text-sm md:text-base">StartBusiness Office</h3>
+                        <address className="text-xs md:text-sm text-slate-600 leading-relaxed not-italic">
+                          Office No 7, 3rd Floor<br />
+                          Saraswati Heights<br />
+                          Deccan Gymkhana, Pune
                         </address>
                       </div>
                     </div>
                   </div>
                 </div>
 
-                {/* Action Buttons */}
-                <div className="grid grid-cols-2 gap-3 mt-4">
+                {/* Enhanced Action Buttons */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-4 md:mt-6">
                   <Button
                     onClick={() => window.open(officeLocation.googleMapsUrl, "_blank")}
-                    className="w-full bg-blue-600 hover:bg-blue-700 text-white"
+                    className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 md:py-4 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 active:scale-95"
                     aria-label="Get directions to our office"
                   >
                     <Navigation className="w-4 h-4 mr-2" aria-hidden="true" />
