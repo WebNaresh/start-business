@@ -14,6 +14,7 @@ import FaqSection from "./FaqSection"
 import RelatedServicesSection from "./RelatedServicesSection"
 import Breadcrumbs from "@/components/ui/breadcrumbs"
 import RelatedServices from "@/components/seo/related-services"
+import ServiceRelatedBlogs from "./ServiceRelatedBlogs"
 
 interface ServiceData {
   title: string
@@ -79,6 +80,7 @@ const FloatingNavbar = ({
     { id: "documents", label: "Documents" },
     { id: "pricing", label: "Pricing" },
     { id: "faqs", label: "FAQs" },
+    { id: "blogs", label: "Articles" },
   ]
 
   return (
@@ -248,7 +250,35 @@ export default function DynamicServicePage({ service, slug }: DynamicServicePage
             </div>
           </section>
 
-          <FaqSection service={service} openFAQs={openFAQs} toggleFAQ={toggleFAQ} />
+        
+
+          {/* Related Blogs Section */}
+          <section id="blogs" className="py-12 md:py-16 bg-white">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="max-w-4xl mx-auto">
+                <div className="text-center mb-8">
+                  <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-4">
+                    Learn More About{" "}
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
+                      {service.category}
+                    </span>
+                  </h2>
+                  <p className="text-slate-600 max-w-2xl mx-auto">
+                    Explore our expert insights and guides related to {service.shortTitle.toLowerCase()}
+                    and other business services.
+                  </p>
+                </div>
+
+                <ServiceRelatedBlogs
+                  serviceCategory={service.category}
+                  serviceTitle={service.shortTitle}
+                  serviceKeywords={service.keyFeatures}
+                  className="max-w-3xl mx-auto"
+                />
+              </div>
+            </div>
+          </section>
+            <FaqSection service={service} openFAQs={openFAQs} toggleFAQ={toggleFAQ} />
         </div>
       </div>
     </TooltipProvider>
