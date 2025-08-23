@@ -45,44 +45,13 @@ export const metadata: Metadata = {
   },
 }
 
-const servicesFaqs = [
-  {
-    question: "What business registration services do you offer?",
-    answer:
-      "We offer complete business registration services including Private Limited Company, LLP, OPC, Sole Proprietorship, Partnership Firm, and specialized registrations like Nidhi Company and Producer Company. Each service includes end-to-end documentation and government filing.",
-  },
-  {
-    question: "How long does company registration take?",
-    answer:
-      "Company registration typically takes 10-15 working days for Private Limited Company and 15-20 days for LLP, depending on document completeness and government processing time. We provide real-time updates throughout the process.",
-  },
-  {
-    question: "Do you provide ongoing compliance support?",
-    answer:
-      "Yes, we provide comprehensive compliance support including annual filings, GST returns, income tax filing, board resolutions, and regulatory compliance management. Our team ensures you never miss any important deadlines.",
-  },
-  {
-    question: "What is included in your trademark registration service?",
-    answer:
-      "Our trademark registration includes comprehensive trademark search, application filing, government fee, status tracking, objection handling (if any), and final certificate delivery. We also provide ongoing trademark watch services.",
-  },
-
-  {
-    question: "What are your service charges and payment terms?",
-    answer:
-      "We offer transparent pricing with no hidden costs. Payment can be made in installments, and we provide detailed cost breakdowns upfront. Government fees are separate and clearly mentioned in our quotations.",
-  },
-]
 
 export default function ServicesPage() {
   return (
     <AccessibilityImprovements>
       <VisualHierarchyImprovements />
       <div className="flex min-h-screen flex-col">
-        {/* <ServicesNavigation /> */}
-        {/* <ServicesHero /> */}
 
-     
     
 
 
