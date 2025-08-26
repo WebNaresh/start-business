@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import {
   Select,
   SelectContent,
@@ -12,7 +11,6 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { toast } from "sonner";
 import {
   Loader2,
@@ -20,8 +18,6 @@ import {
   CheckCircle,
   RefreshCw,
   Phone,
-  Mail,
-  User,
   Briefcase,
   Shield,
   Clock,
@@ -356,25 +352,17 @@ export default function ZohoServiceForm({
         <CardContent className="p-4 sm:p-6">
           <form
             key={isClient ? "client-form" : "server-form"}
-            className="space-y-4"
+            className="space-y-3 sm:space-y-4"
             onSubmit={handleSubmit}
             noValidate
             suppressHydrationWarning={true}
           >
             {/* Enhanced Name Field */}
             <motion.div
-              className="space-y-2"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
             >
-              <Label
-                htmlFor="name"
-                className="flex items-center gap-2 text-sm font-medium text-slate-700"
-              >
-                <User className="w-4 h-4 text-blue-600" />
-                Name *
-              </Label>
               <div className="relative">
                 <Input
                   type="text"
@@ -387,7 +375,7 @@ export default function ZohoServiceForm({
                       ? "border-red-500 focus:border-red-500 focus:ring-red-200"
                       : "border-slate-300 focus:border-blue-500 focus:ring-blue-200"
                   }`}
-                  placeholder="Enter your full name"
+                  placeholder="Enter your full name *"
                   required
                 />
               </div>
@@ -397,7 +385,7 @@ export default function ZohoServiceForm({
                     initial={{ opacity: 0, height: 0 }}
                     animate={{ opacity: 1, height: "auto" }}
                     exit={{ opacity: 0, height: 0 }}
-                    className="text-sm text-red-600 flex items-center gap-1"
+                    className="text-sm text-red-600 flex items-center gap-1 mt-1"
                   >
                     {errors.name}
                   </motion.p>
@@ -412,14 +400,7 @@ export default function ZohoServiceForm({
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
             >
-              <div className="space-y-2">
-                <Label
-                  htmlFor="email"
-                  className="flex items-center gap-2 text-sm font-medium text-slate-700"
-                >
-                  <Mail className="w-4 h-4 text-blue-600" />
-                  Email Address *
-                </Label>
+              <div>
                 <div className="relative">
                   <Input
                     type="email"
@@ -432,7 +413,7 @@ export default function ZohoServiceForm({
                         ? "border-red-500 focus:border-red-500 focus:ring-red-200"
                         : "border-slate-300 focus:border-blue-500 focus:ring-blue-200"
                     }`}
-                    placeholder="your.email@example.com"
+                    placeholder="Email Address *"
                     required
                   />
                 </div>
@@ -442,7 +423,7 @@ export default function ZohoServiceForm({
                       initial={{ opacity: 0, height: 0 }}
                       animate={{ opacity: 1, height: "auto" }}
                       exit={{ opacity: 0, height: 0 }}
-                      className="text-sm text-red-600 flex items-center gap-1"
+                      className="text-sm text-red-600 flex items-center gap-1 mt-1"
                     >
                       {errors.email}
                     </motion.p>
@@ -450,14 +431,7 @@ export default function ZohoServiceForm({
                 </AnimatePresence>
               </div>
 
-              <div className="space-y-2">
-                <Label
-                  htmlFor="phone"
-                  className="flex items-center gap-2 text-sm font-medium text-slate-700"
-                >
-                  <Phone className="w-4 h-4 text-blue-600" />
-                  Phone Number *
-                </Label>
+              <div>
                 <div className="relative">
                   <Input
                     type="tel"
@@ -470,7 +444,7 @@ export default function ZohoServiceForm({
                         ? "border-red-500 focus:border-red-500 focus:ring-red-200"
                         : "border-slate-300 focus:border-blue-500 focus:ring-blue-200"
                     }`}
-                    placeholder="+91 9876543210"
+                    placeholder="Phone Number *"
                     required
                   />
                 </div>
@@ -480,7 +454,7 @@ export default function ZohoServiceForm({
                       initial={{ opacity: 0, height: 0 }}
                       animate={{ opacity: 1, height: "auto" }}
                       exit={{ opacity: 0, height: 0 }}
-                      className="text-sm text-red-600 flex items-center gap-1"
+                      className="text-sm text-red-600 flex items-center gap-1 mt-1"
                     >
                       {errors.phone}
                     </motion.p>
@@ -491,13 +465,11 @@ export default function ZohoServiceForm({
 
             {/* Service Selection - Hidden if defaultService is provided */}
             {!defaultService && (
-              <div>
-                <Label
-                  htmlFor="service"
-                  className="mb-2 block text-sm font-medium text-slate-700"
-                >
-                  Service *
-                </Label>
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 }}
+              >
                 <Select
                   value={formData.service}
                   onValueChange={(value) => handleChange("service", value)}
@@ -507,7 +479,7 @@ export default function ZohoServiceForm({
                       errors.service ? "border-red-500" : "border-border"
                     }`}
                   >
-                    <SelectValue placeholder="Select a service" />
+                    <SelectValue placeholder="Select a service *" />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="Company Registration">
@@ -530,25 +502,28 @@ export default function ZohoServiceForm({
                     <SelectItem value="Other">Other Services</SelectItem>
                   </SelectContent>
                 </Select>
-                {errors.service && (
-                  <p className="mt-1 text-sm text-red-600">{errors.service}</p>
-                )}
-              </div>
+                <AnimatePresence>
+                  {errors.service && (
+                    <motion.p
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: "auto" }}
+                      exit={{ opacity: 0, height: 0 }}
+                      className="text-sm text-red-600 flex items-center gap-1 mt-1"
+                    >
+                      {errors.service}
+                    </motion.p>
+                  )}
+                </AnimatePresence>
+              </motion.div>
             )}
 
             {/* Captcha Field - Compact Layout */}
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
+              transition={{ delay: 0.4 }}
             >
-              <Label
-                htmlFor="captcha"
-                className="mb-2 block text-sm font-medium text-slate-700"
-              >
-                Enter the Captcha *
-              </Label>
-              <div className="flex flex-col sm:flex-row gap-3 sm:items-end">
+              <div className="flex flex-col sm:flex-row gap-3 sm:items-center">
                 <div className="flex items-center gap-3">
                   <img
                     id="captchaImage"
@@ -591,7 +566,7 @@ export default function ZohoServiceForm({
                     className={`h-12 ${
                       errors.captcha ? "border-red-500" : "border-border"
                     }`}
-                    placeholder="Enter the captcha code"
+                    placeholder="Enter the captcha code *"
                     maxLength={10}
                     required
                   />
