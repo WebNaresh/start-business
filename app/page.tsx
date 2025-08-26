@@ -11,10 +11,12 @@ import FAQSection from "@/components/home/faq-section"
 import CompanySearchSection from "@/components/home/company-search-section"
 import LatestIncorporationsTicker from "@/components/home/LatestIncorporationsTicker"
 import ServiceRecommendationQuiz from "@/components/services/service-recommendation-quiz"
+import FloatingCallButton from "@/components/floating-call-button"
 
 export default function Home() {
   return (
     <div className="flex min-h-screen flex-col">
+       <FloatingCallButton />
       <HeroSection />
       <CompanySearchSection />
       <ServicesSection />

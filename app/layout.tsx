@@ -1,5 +1,5 @@
 
-import FloatingCallButton from "@/components/floating-call-button";
+
 import Footer from "@/components/footer";
 import Header from "@/components/header";
 import BottomNavigation from "@/components/ui/bottom-navigation";
@@ -167,7 +167,7 @@ export default function RootLayout({
                     <Header />
                     <main className="flex-1 pb-safe">{children}</main>
                     <Footer />
-                    <FloatingCallButton />
+                   
                     <BottomNavigation />
                     {/* <Chatbot /> */}
                   </UIProvider>
