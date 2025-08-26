@@ -59,7 +59,7 @@ export default function ContactMap() {
     "sameAs": [
       "https://www.facebook.com/startbusiness",
       "https://www.linkedin.com/company/startbusiness",
-      "https://twitter.com/startbusiness"
+      "https://x.com/startbusiness"
     ]
   }
 

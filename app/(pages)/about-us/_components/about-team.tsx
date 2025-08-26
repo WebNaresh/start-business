@@ -3,7 +3,7 @@
 import Image from "next/image"
 import { motion } from "framer-motion"
 import { useInView } from "react-intersection-observer"
-import { Linkedin, Twitter, Mail } from "lucide-react"
+import { Linkedin, X, Mail } from "lucide-react"
 
 export default function AboutTeam() {
   const { ref, inView } = useInView({
@@ -123,7 +123,7 @@ export default function AboutTeam() {
                         href={member.social.twitter}
                         className="rounded-full bg-white/20 p-2 text-white hover:bg-white hover:text-blue-600 transition-colors"
                       >
-                        <Twitter className="h-5 w-5" />
+                        <X className="h-5 w-5" />
                       </a>
                       <a
                         href={`mailto:${member.social.email}`}

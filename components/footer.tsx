@@ -6,7 +6,7 @@ import {
   Facebook,
   Instagram,
   Linkedin,
-  Twitter,
+  X,
   Mail,
   Phone,
   MapPin,
@@ -59,7 +59,7 @@ export default function EnhancedFooter() {
               <div className="flex space-x-3">
                 {[
                   { icon: Facebook, href: "#", color: "hover:bg-blue-600" },
-                  { icon: Twitter, href: "#", color: "hover:bg-sky-500" },
+                  { icon: X, href: "#", color: "hover:bg-sky-500" },
                   { icon: Linkedin, href: "#", color: "hover:bg-blue-700" },
                   { icon: Instagram, href: "#", color: "hover:bg-pink-600" },
                 ].map((social, index) => (
