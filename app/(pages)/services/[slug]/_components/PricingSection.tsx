@@ -95,11 +95,11 @@ export default function PricingSection({ service }: PricingSectionProps) {
           </div>
 
           {/* Main Pricing Card */}
-          <div className="grid lg:grid-cols-3 gap-6 mb-12">
+          <div className="grid lg:grid-cols-5 gap-6 mb-12">
             {/* Pricing Card */}
-            <div className="lg:col-span-2 relative">
+            <div className="lg:col-span-3 relative">
               <div
-                className="bg-blue-600 rounded-2xl p-6 lg:p-8 text-white shadow-lg relative overflow-hidden"
+                className="bg-blue-600 rounded-2xl p-6 lg:p-8 text-white shadow-lg relative overflow-hidden h-full flex flex-col"
                 role="article"
                 aria-label="Pricing details"
               >
@@ -109,7 +109,7 @@ export default function PricingSection({ service }: PricingSectionProps) {
                   <div className="absolute bottom-0 left-0 w-24 h-24 bg-white rounded-full -ml-12 -mb-12"></div>
                 </div>
 
-                <div className="relative z-10">
+                <div className="relative z-10 flex flex-col h-full">
                   {/* Popular Badge */}
                   <div className="flex items-center justify-between mb-6">
                     <Badge className="bg-white/20 text-white border-white/30 px-3 py-1.5 text-xs backdrop-blur-sm">
@@ -122,11 +122,11 @@ export default function PricingSection({ service }: PricingSectionProps) {
                   </div>
 
                   {/* Service Title */}
-                  <h3 className="text-base md:text-lg font-bold mb-2">{service.title}</h3>
+                  <h3 className="text-base md:text-lg font-bold mb-4">{service.title}</h3>
 
                   {/* Pricing */}
-                  <div className="mb-4">
-                    <div className="flex items-baseline gap-2 mb-1.5">
+                  <div className="mb-6">
+                    <div className="flex items-baseline gap-2 mb-2">
                       <span className="text-2xl md:text-3xl font-bold" aria-label={`Price: ${service.pricing?.currency || "₹"}${service.pricing?.amount || "2,999"}`}>
                         {service.pricing?.currency || "₹"}
                         {service.pricing?.amount || "2,999"}
@@ -139,27 +139,27 @@ export default function PricingSection({ service }: PricingSectionProps) {
                         <span className="text-white/90 text-xs">+ GST</span>
                       </div>
                     </div>
-                    <div className="bg-white/20 rounded-lg p-2 backdrop-blur-sm">
-                      <p className="text-white/90 text-xs">
+                    <div className="bg-white/20 rounded-lg p-3 backdrop-blur-sm">
+                      <p className="text-white/90 text-sm">
                         💰 You save ₹{savings.toLocaleString()} with our special offer!
                       </p>
                     </div>
                   </div>
 
                   {/* What's Included */}
-                  <div className="mb-6">
-                    <h4 className="text-sm font-semibold mb-2 flex items-center">
+                  <div className="flex-1 mb-6">
+                    <h4 className="text-sm font-semibold mb-4 flex items-center">
                       <CheckCircle className="w-4 h-4 mr-1.5" aria-hidden="true" />
                       What's Included
                     </h4>
-                    <div className="grid md:grid-cols-2 gap-2" role="list" aria-label="Included features">
+                    <div className="grid md:grid-cols-2 gap-3" role="list" aria-label="Included features">
                       {service.pricing?.includes?.map((item: string, index: number) => (
                         <div
                           key={index}
-                          className="flex items-center text-white/90 text-xs"
+                          className="flex items-center text-white/90 text-sm py-1"
                           role="listitem"
                         >
-                          <CheckCircle className="w-3 h-3 mr-2 flex-shrink-0 text-blue-300" aria-hidden="true" />
+                          <CheckCircle className="w-4 h-4 mr-2 flex-shrink-0 text-blue-300" aria-hidden="true" />
                           {item}
                         </div>
                       )) || []}
@@ -167,10 +167,10 @@ export default function PricingSection({ service }: PricingSectionProps) {
                   </div>
 
                   {/* CTA Buttons */}
-                  <div className="flex flex-col sm:flex-row gap-3">
+                  <div className="flex flex-col sm:flex-row gap-3 mt-auto">
                     <Button
                       variant="default"
-                      className="text-white border-white/30 hover:bg-white/20 text-sm"
+                      className="bg-white text-blue-600 border-white hover:bg-blue-50 hover:text-blue-700 text-sm py-3 font-semibold"
                       onClick={() => window.location.href = "tel:+919699214195"}
                       aria-label="Call expert for assistance"
                     >
@@ -183,29 +183,29 @@ export default function PricingSection({ service }: PricingSectionProps) {
             </div>
 
             {/* Timeline & Features */}
-            <div className="space-y-4">
+            <div className="lg:col-span-2 flex flex-col h-full">
               {/* Timeline Card */}
-              <div className="bg-white rounded-xl p-4 shadow-md border border-blue-200" role="complementary" aria-label="Processing timeline">
-                <h4 className="text-sm font-bold text-slate-800 mb-3 flex items-center">
-                  <Clock className="w-4 h-4 text-blue-600 mr-2" aria-hidden="true" />
+              <div className="bg-white rounded-xl p-6 shadow-md border border-blue-200 flex-1 mb-4" role="complementary" aria-label="Processing timeline">
+                <h4 className="text-base font-bold text-slate-800 mb-4 flex items-center">
+                  <Clock className="w-5 h-5 text-blue-600 mr-2" aria-hidden="true" />
                   Processing Timeline
                 </h4>
-                <div className="space-y-2" role="list">
+                <div className="space-y-3" role="list">
                   {service.timeline?.steps?.map((step, index) => (
                     <div
                       key={index}
-                      className="flex justify-between items-center py-1.5 border-b border-slate-100 last:border-b-0"
+                      className="flex justify-between items-center py-2 border-b border-slate-100 last:border-b-0"
                       role="listitem"
                     >
-                      <span className="text-xs text-slate-700">{step.name}</span>
-                      <span className="font-medium text-xs text-slate-800">{step.duration}</span>
+                      <span className="text-sm text-slate-700 font-medium">{step.name}</span>
+                      <span className="font-semibold text-sm text-slate-800">{step.duration}</span>
                     </div>
                   )) || []}
                 </div>
-                <div className="mt-3 pt-3 border-t border-slate-100">
+                <div className="mt-4 pt-4 border-t border-slate-200">
                   <div className="flex justify-between items-center">
-                    <span className="text-xs font-semibold text-slate-800">Total Time:</span>
-                    <Badge className="bg-blue-50 text-blue-600 border-blue-200 text-xs">
+                    <span className="text-sm font-semibold text-slate-800">Total Time:</span>
+                    <Badge className="bg-blue-50 text-blue-600 border-blue-200 text-sm px-3 py-1">
                       {service.timeline?.total || "7-10 days"}
                     </Badge>
                   </div>
@@ -213,12 +213,12 @@ export default function PricingSection({ service }: PricingSectionProps) {
               </div>
 
               {/* Trust Indicators */}
-              <div className="bg-white rounded-xl p-4 shadow-md border border-blue-200" role="complementary" aria-label="Why choose us">
-                <h4 className="text-sm font-bold text-slate-800 mb-3 flex items-center">
-                  <Shield className="w-4 h-4 text-blue-600 mr-2" aria-hidden="true" />
+              <div className="bg-white rounded-xl p-6 shadow-md border border-blue-200 flex-1" role="complementary" aria-label="Why choose us">
+                <h4 className="text-base font-bold text-slate-800 mb-4 flex items-center">
+                  <Shield className="w-5 h-5 text-blue-600 mr-2" aria-hidden="true" />
                   Why Choose Us
                 </h4>
-                <div className="space-y-2" role="list">
+                <div className="space-y-3" role="list">
                   {[
                     { icon: Award, text: "100% Success Rate", color: "text-blue-600" },
                     { icon: Users, text: "1,000+ Happy Clients", color: "text-blue-600" },
@@ -227,11 +227,11 @@ export default function PricingSection({ service }: PricingSectionProps) {
                   ].map((item, index) => (
                     <div
                       key={index}
-                      className="flex items-center text-slate-700"
+                      className="flex items-center text-slate-700 py-1"
                       role="listitem"
                     >
-                      <item.icon className={`w-3 h-3 mr-2 ${item.color}`} aria-hidden="true" />
-                      <span className="text-xs">{item.text}</span>
+                      <item.icon className={`w-4 h-4 mr-3 ${item.color}`} aria-hidden="true" />
+                      <span className="text-sm font-medium">{item.text}</span>
                     </div>
                   ))}
                 </div>
