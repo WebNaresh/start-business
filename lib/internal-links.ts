@@ -726,7 +726,7 @@ export function generateBreadcrumbs(pathname: string): BreadcrumbItem[] {
 // Topic clusters for content organization
 export const topicClusters = {
   'company-registration': {
-    pillarPage: '/services/business-setup',
+    pillarPage: '/services/private-limited-company',
     clusterPages: [
       '/services/private-limited-company',
       '/services/llp-registration',
