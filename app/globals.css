@@ -42,6 +42,28 @@
     padding-bottom: env(safe-area-inset-bottom, 0px);
   }
 
+  /* Improve quiz option button spacing and touch targets */
+  .quiz-option-button {
+    min-height: 60px;
+    padding: 12px 16px;
+  }
+
+  /* Better text readability on mobile */
+  .quiz-question-text {
+    line-height: 1.5;
+    font-size: 16px;
+  }
+
+  /* Prevent zoom on input focus */
+  input, select, textarea {
+    font-size: 16px !important;
+  }
+
+  /* Smooth scrolling for quiz navigation */
+  .quiz-scroll-container {
+    scroll-behavior: smooth;
+  }
+
   /* Adjust Zoho SalesIQ widget position on mobile to align with call button */
   #zsiq_float,
   #zsiq_float div,

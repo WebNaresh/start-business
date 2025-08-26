@@ -818,26 +818,26 @@ export default function CompanyRegistrationQuiz() {
         <div className="space-y-4 sm:space-y-6">
           {recommendations.map((rec, index) => (
             <div key={index} className={cn(
-              "bg-gradient-to-br from-white to-slate-50 rounded-xl border-2 p-6 hover:shadow-xl transition-all duration-300",
+              "bg-gradient-to-br from-white to-slate-50 rounded-lg sm:rounded-xl border-2 p-4 sm:p-6 hover:shadow-xl transition-all duration-300",
               index === 0 ? "border-blue-300 bg-gradient-to-br from-blue-50 to-white" : "border-slate-200"
             )}>
               {/* Header with Badge */}
-              <div className="flex items-start justify-between mb-4">
-                <div className="flex-1">
-                  <div className="flex items-center gap-3 mb-2">
-                    <h4 className="text-xl sm:text-2xl font-bold text-slate-900">{rec.title}</h4>
+              <div className="flex flex-col sm:flex-row items-start justify-between mb-4 gap-3 sm:gap-0">
+                <div className="flex-1 w-full sm:w-auto">
+                  <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-3 mb-2">
+                    <h4 className="text-lg sm:text-xl md:text-2xl font-bold text-slate-900 leading-tight">{rec.title}</h4>
                     {index === 0 && (
-                      <Badge className="bg-gradient-to-r from-blue-500 to-purple-500 text-white px-3 py-1">
+                      <Badge className="bg-gradient-to-r from-blue-500 to-purple-500 text-white px-2 sm:px-3 py-1 text-xs sm:text-sm">
                         <Star className="w-3 h-3 mr-1" />
                         Best Match
                       </Badge>
                     )}
                   </div>
-                  <p className="text-base text-slate-600 mb-3">{rec.description}</p>
+                  <p className="text-sm sm:text-base text-slate-600 mb-3 leading-relaxed">{rec.description}</p>
                 </div>
-                <div className="text-right ml-4">
+                <div className="text-left sm:text-right w-full sm:w-auto sm:ml-4">
                   <div className={cn(
-                    "px-3 py-2 rounded-full text-sm font-bold mb-2",
+                    "px-3 py-2 rounded-full text-xs sm:text-sm font-bold mb-2 inline-block",
                     rec.confidence >= 80 ? "bg-green-100 text-green-700" :
                     rec.confidence >= 60 ? "bg-yellow-100 text-yellow-700" :
                     "bg-orange-100 text-orange-700"
@@ -848,27 +848,27 @@ export default function CompanyRegistrationQuiz() {
               </div>
 
               {/* Pricing */}
-              <div className="flex items-center gap-3 mb-4 p-3 bg-green-50 rounded-lg border border-green-200">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-3 mb-4 p-3 bg-green-50 rounded-lg border border-green-200">
                 <div className="flex items-center gap-2">
-                  <span className="text-2xl font-bold text-green-600">{rec.price}</span>
-                  <span className="text-lg text-slate-400 line-through">{rec.originalPrice}</span>
+                  <span className="text-xl sm:text-2xl font-bold text-green-600">{rec.price}</span>
+                  <span className="text-base sm:text-lg text-slate-400 line-through">{rec.originalPrice}</span>
                 </div>
-                <div className="text-sm text-green-700 font-medium">
-                  Save {parseInt(rec.originalPrice.replace('₹', '').replace(',', '')) - parseInt(rec.price.replace('₹', '').replace(',', ''))}
+                <div className="text-xs sm:text-sm text-green-700 font-medium">
+                  Save ₹{parseInt(rec.originalPrice.replace('₹', '').replace(',', '')) - parseInt(rec.price.replace('₹', '').replace(',', ''))}
                 </div>
               </div>
 
               {/* Key Benefits */}
-              <div className="mb-6">
-                <h5 className="font-semibold text-slate-900 mb-3 flex items-center gap-2">
-                  <Target className="w-5 h-5 text-blue-500" />
+              <div className="mb-4 sm:mb-6">
+                <h5 className="font-semibold text-slate-900 mb-3 flex items-center gap-2 text-sm sm:text-base">
+                  <Target className="w-4 h-4 sm:w-5 sm:h-5 text-blue-500" />
                   Why this structure is perfect for you:
                 </h5>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                <div className="grid grid-cols-1 gap-2">
                   {rec.reasons.map((reason, i) => (
-                    <div key={i} className="flex items-start gap-2 text-sm text-slate-600 p-2 bg-slate-50 rounded-lg">
-                      <CheckCircle className="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" />
-                      <span>{reason}</span>
+                    <div key={i} className="flex items-start gap-2 text-xs sm:text-sm text-slate-600 p-2 sm:p-3 bg-slate-50 rounded-lg">
+                      <CheckCircle className="w-3 h-3 sm:w-4 sm:h-4 text-green-500 mt-0.5 flex-shrink-0" />
+                      <span className="leading-relaxed">{reason}</span>
                     </div>
                   ))}
                 </div>
@@ -877,12 +877,12 @@ export default function CompanyRegistrationQuiz() {
               {/* Action Buttons */}
               <div className="flex flex-col sm:flex-row gap-3">
                 <Link href={`/services/${rec.slug}`} className="flex-1">
-                  <Button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white py-3">
+                  <Button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white py-3 text-sm sm:text-base touch-target">
                     Get Started - {rec.price}
                     <ArrowRight className="w-4 h-4 ml-2" />
                   </Button>
                 </Link>
-                <Button variant="outline" className="sm:w-auto px-6">
+                <Button variant="outline" className="w-full sm:w-auto px-4 sm:px-6 text-sm sm:text-base touch-target">
                   Learn More
                 </Button>
               </div>
@@ -891,21 +891,21 @@ export default function CompanyRegistrationQuiz() {
         </div>
 
         {/* Additional Information */}
-        <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl border border-blue-200 p-6 mt-6">
+        <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg sm:rounded-xl border border-blue-200 p-4 sm:p-6 mt-4 sm:mt-6">
           <div className="text-center">
-            <h4 className="font-semibold text-slate-900 mb-3 flex items-center justify-center gap-2">
-              <Sparkles className="w-5 h-5 text-blue-600" />
+            <h4 className="font-semibold text-slate-900 mb-3 flex items-center justify-center gap-2 text-sm sm:text-base">
+              <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600" />
               Need Help Deciding?
             </h4>
-            <p className="text-sm text-slate-600 mb-4 max-w-2xl mx-auto">
+            <p className="text-xs sm:text-sm text-slate-600 mb-4 max-w-2xl mx-auto leading-relaxed px-2">
               Our business experts can help you understand the nuances of each structure and guide you through the registration process.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <Button className="bg-blue-600 hover:bg-blue-700 text-white">
+              <Button className="bg-blue-600 hover:bg-blue-700 text-white text-sm sm:text-base touch-target">
                 <Users className="w-4 h-4 mr-2" />
                 Talk to Expert
               </Button>
-              <Button variant="outline" className="border-blue-300 text-blue-700 hover:bg-blue-50">
+              <Button variant="outline" className="border-blue-300 text-blue-700 hover:bg-blue-50 text-sm sm:text-base touch-target">
                 <FileText className="w-4 h-4 mr-2" />
                 Download Comparison
               </Button>
@@ -914,11 +914,11 @@ export default function CompanyRegistrationQuiz() {
         </div>
 
         {/* Action Buttons */}
-        <div className="text-center pt-4">
+        <div className="text-center pt-4 pb-safe">
           <Button
             variant="outline"
             onClick={resetQuiz}
-            className="flex items-center gap-2 mx-auto"
+            className="flex items-center gap-2 mx-auto text-sm sm:text-base touch-target"
           >
             <RotateCcw className="w-4 h-4" />
             Take Quiz Again
@@ -932,7 +932,7 @@ export default function CompanyRegistrationQuiz() {
   const progress = ((currentStep + 1) / questions.length) * 100
 
   return (
-    <div className="p-3 sm:p-4 md:p-6">
+    <div className="p-3 sm:p-4 md:p-6 service-quiz-container">
       {/* Progress Header */}
       <div className="text-center mb-4 sm:mb-6">
         <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4 mb-3 sm:mb-4">
@@ -986,9 +986,9 @@ export default function CompanyRegistrationQuiz() {
                   onClick={() => handleAnswer(currentQuestion.id, option.value)}
                   disabled={isAnimating}
                   className={cn(
-                    "group relative p-3 sm:p-4 text-left border-2 rounded-lg sm:rounded-xl transition-all duration-300 hover:scale-[1.02] sm:hover:scale-105 hover:shadow-lg",
+                    "group relative p-3 sm:p-4 text-left border-2 rounded-lg sm:rounded-xl transition-all duration-300 hover:scale-[1.01] sm:hover:scale-105 hover:shadow-lg touch-target service-card-mobile",
                     isSelected || isCurrentSelection
-                      ? "border-blue-500 bg-gradient-to-br from-blue-50 to-purple-50 shadow-lg scale-[1.02] sm:scale-105"
+                      ? "border-blue-500 bg-gradient-to-br from-blue-50 to-purple-50 shadow-lg scale-[1.01] sm:scale-105"
                       : "border-slate-200 bg-white hover:border-slate-300",
                     option.popular && "ring-1 sm:ring-2 ring-yellow-400 ring-offset-1 sm:ring-offset-2",
                     isAnimating && "pointer-events-none"
@@ -1040,12 +1040,12 @@ export default function CompanyRegistrationQuiz() {
           </div>
 
           {/* Navigation */}
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-0">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-0 pb-safe">
             <Button
               variant="outline"
               onClick={prevStep}
               disabled={currentStep === 0 || isAnimating}
-              className="flex items-center gap-1 sm:gap-2 px-3 sm:px-4 py-2 text-sm order-2 sm:order-1"
+              className="flex items-center gap-1 sm:gap-2 px-3 sm:px-4 py-2 text-sm order-2 sm:order-1 touch-target"
             >
               <ArrowLeft className="w-3 h-3 sm:w-4 sm:h-4" />
               <span className="hidden sm:inline">Previous</span>
@@ -1061,7 +1061,7 @@ export default function CompanyRegistrationQuiz() {
               <Button
                 onClick={nextStep}
                 disabled={!answers[currentQuestion.id] || isAnimating}
-                className="flex items-center gap-1 sm:gap-2 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 px-4 sm:px-6 py-2 text-sm sm:text-base order-3 w-full sm:w-auto"
+                className="flex items-center gap-1 sm:gap-2 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 px-4 sm:px-6 py-2 text-sm sm:text-base order-3 w-full sm:w-auto touch-target"
               >
                 <span className="truncate">
                   {currentStep === questions.length - 1 ? "Get Results" : "Next"}

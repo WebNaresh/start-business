@@ -12,24 +12,24 @@ export default function BusinessStructureQuizPage() {
   if (showQuiz) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
-        <div className="container mx-auto px-4 py-8">
+        <div className="container mx-auto px-3 sm:px-4 py-4 sm:py-8">
           <div className="max-w-4xl mx-auto">
             {/* Header */}
-            <div className="mb-8">
-              <Link href="/" className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 mb-4">
+            <div className="mb-6 sm:mb-8">
+              <Link href="/" className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 mb-4 touch-target">
                 <ArrowLeft className="w-4 h-4" />
-                Back to Home
+                <span className="text-sm sm:text-base">Back to Home</span>
               </Link>
-              <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-2">
+              <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-slate-900 mb-2 leading-tight px-2">
                 Which Business Structure is Right for You? Take the Quiz
               </h1>
-              <p className="text-slate-600">
+              <p className="text-sm sm:text-base text-slate-600 px-2">
                 Find the perfect business structure for your needs with our CA-verified recommendations
               </p>
             </div>
 
             {/* Quiz Component */}
-            <div className="bg-white rounded-2xl shadow-lg border border-slate-200">
+            <div className="bg-white rounded-xl sm:rounded-2xl shadow-lg border border-slate-200">
               <CompanyRegistrationQuiz />
             </div>
           </div>
@@ -306,8 +306,8 @@ export default function BusinessStructureQuizPage() {
                         <Clock className="w-4 h-4 text-white" />
                       </div>
                       <div>
-                        <h3 className="font-semibold text-slate-900 mb-1">Instant Results</h3>
-                        <p className="text-sm text-slate-600">Get detailed recommendations with pricing and next steps immediately</p>
+                        <h3 className="font-semibold text-slate-900 mb-1 text-sm sm:text-base">Instant Results</h3>
+                        <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">Get detailed recommendations with pricing and next steps immediately</p>
                       </div>
                     </div>
                   </div>
@@ -315,36 +315,36 @@ export default function BusinessStructureQuizPage() {
 
                 <Button
                   onClick={() => setShowQuiz(true)}
-                  className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-3 text-lg rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
+                  className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 w-full sm:w-auto touch-target"
                 >
-                  <Play className="w-5 h-5 mr-2" />
+                  <Play className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
                   Start Your Analysis Now
                 </Button>
               </div>
             </div>
 
             {/* FAQ Section */}
-            <div className="bg-white rounded-2xl shadow-lg border border-slate-200 p-8">
-              <h2 className="text-2xl font-bold text-slate-900 mb-8 text-center">
+            <div className="bg-white rounded-xl sm:rounded-2xl shadow-lg border border-slate-200 p-4 sm:p-6 md:p-8">
+              <h2 className="text-xl sm:text-2xl font-bold text-slate-900 mb-6 sm:mb-8 text-center px-2">
                 Frequently Asked Questions
               </h2>
 
-              <div className="space-y-6">
-                <div className="border-b border-slate-100 pb-6">
-                  <h3 className="text-lg font-semibold text-slate-900 mb-3">
+              <div className="space-y-4 sm:space-y-6">
+                <div className="border-b border-slate-100 pb-4 sm:pb-6">
+                  <h3 className="text-base sm:text-lg font-semibold text-slate-900 mb-2 sm:mb-3 leading-tight">
                     Which is the best business structure for startups in India?
                   </h3>
-                  <p className="text-slate-600">
+                  <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
                     For high-growth startups planning to raise investment, a Private Limited Company is the most suitable.
                     It offers limited liability, credibility, and is investor-friendly.
                   </p>
                 </div>
 
-                <div className="border-b border-slate-100 pb-6">
-                  <h3 className="text-lg font-semibold text-slate-900 mb-3">
+                <div className="border-b border-slate-100 pb-4 sm:pb-6">
+                  <h3 className="text-base sm:text-lg font-semibold text-slate-900 mb-2 sm:mb-3 leading-tight">
                     Is OPC better than Proprietorship?
                   </h3>
-                  <p className="text-slate-600">
+                  <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
                     Yes, an OPC provides limited liability and a separate legal identity, unlike a proprietorship where
                     the owner's personal assets are at risk. However, OPC has higher compliance and costs.
                   </p>
