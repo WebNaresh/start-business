@@ -69,7 +69,7 @@ export default function BusinessStructureQuizPage() {
                   OPC, Partnership, LLP, or Private Limited Company. Our intelligent startup entity selection
                   tool analyzes your business type, team size, investment capacity, and growth plans to suggest
                   the ideal company registration type for Indian entrepreneurs. For detailed insights, read our{' '}
-                  <Link href="/blog" className="text-blue-600 hover:text-blue-700 underline">
+                  <Link href="/blog//which-business-structure-is-right-for-you-a-beginner-s-guide-to-company-registration-in-india" className="text-blue-600 hover:text-blue-700 underline">
                     comprehensive business structure guide
                   </Link>{' '}before taking the quiz.
                 </p>

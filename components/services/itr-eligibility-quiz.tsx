@@ -786,17 +786,17 @@ export default function ITREligibilityQuiz() {
         </div>
 
         {/* Enhanced Action Buttons */}
-        <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center pt-2 sm:pt-4">
+        <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center pt-2 sm:pt-4 pb-safe">
           <Button
             onClick={resetQuiz}
             variant="outline"
-            className="h-10 sm:h-12 px-6 sm:px-8 text-xs sm:text-sm font-medium border-slate-300 hover:bg-slate-50"
+            className="h-10 sm:h-12 px-6 sm:px-8 text-sm sm:text-sm font-medium border-slate-300 hover:bg-slate-50 touch-target"
           >
             <RotateCcw className="w-3 h-3 sm:w-4 sm:h-4 mr-2" />
             Take Quiz Again
           </Button>
           <Link href={"https://eportal.incometax.gov.in/iec/foservices/"} target="_blank">
-            <Button className="h-10 sm:h-12 px-6 sm:px-8 text-xs sm:text-sm bg-blue-600 hover:bg-blue-700">
+            <Button className="h-10 sm:h-12 px-6 sm:px-8 text-sm sm:text-sm bg-green-600 hover:bg-green-700 touch-target">
               <ExternalLink className="w-3 h-3 sm:w-4 sm:h-4 mr-2" />
               File ITR Online
             </Button>
@@ -810,21 +810,21 @@ export default function ITREligibilityQuiz() {
   const progress = ((currentStep + 1) / questions.length) * 100
 
   return (
-    <div className="p-3 sm:p-4 md:p-6 space-y-4 sm:space-y-6">
+    <div className="p-3 sm:p-4 md:p-6 space-y-4 sm:space-y-6 service-quiz-container">
       {/* Progress Header */}
       <div className="space-y-3 sm:space-y-4">
         <div className="flex items-center justify-between text-xs sm:text-sm">
           <span className="font-medium text-slate-600">
             Question {currentStep + 1} of {questions.length}
           </span>
-          <span className="font-medium text-blue-600">
+          <span className="font-medium text-green-600">
             {Math.round(progress)}% Complete
           </span>
         </div>
 
         <div className="w-full bg-slate-200 rounded-full h-1.5 sm:h-2">
           <div
-            className="bg-gradient-to-r from-blue-500 to-purple-500 h-1.5 sm:h-2 rounded-full transition-all duration-500 ease-out"
+            className="bg-gradient-to-r from-green-500 to-emerald-500 h-1.5 sm:h-2 rounded-full transition-all duration-500 ease-out"
             style={{ width: `${progress}%` }}
           />
         </div>
@@ -862,10 +862,10 @@ export default function ITREligibilityQuiz() {
               onClick={() => handleOptionSelect(option.value)}
               disabled={isAnimating}
               className={cn(
-                "w-full p-3 sm:p-4 rounded-lg sm:rounded-xl border-2 text-left transition-all duration-300 group relative overflow-hidden",
+                "w-full p-3 sm:p-4 rounded-lg sm:rounded-xl border-2 text-left transition-all duration-300 group relative overflow-hidden touch-target service-card-mobile",
                 isSelected || isCurrentlySelected
-                  ? "border-blue-500 bg-blue-50 shadow-lg scale-[1.02]"
-                  : "border-slate-200 bg-white hover:border-blue-300 hover:bg-blue-50 hover:shadow-md",
+                  ? "border-green-500 bg-green-50 shadow-lg scale-[1.01] sm:scale-[1.02]"
+                  : "border-slate-200 bg-white hover:border-green-300 hover:bg-green-50 hover:shadow-md",
                 isAnimating && isCurrentlySelected && "animate-pulse",
                 option.popular && !isSelected && "ring-2 ring-orange-200 ring-opacity-50"
               )}
@@ -898,7 +898,7 @@ export default function ITREligibilityQuiz() {
                 </div>
 
                 {(isSelected || isCurrentlySelected) && (
-                  <CheckCircle className="w-5 h-5 sm:w-6 sm:h-6 text-blue-500 flex-shrink-0" />
+                  <CheckCircle className="w-5 h-5 sm:w-6 sm:h-6 text-green-500 flex-shrink-0" />
                 )}
               </div>
             </button>
@@ -907,21 +907,22 @@ export default function ITREligibilityQuiz() {
       </div>
 
       {/* Navigation */}
-      <div className="flex justify-between pt-4 sm:pt-6">
+      <div className="flex flex-col sm:flex-row justify-between gap-3 sm:gap-0 pt-4 sm:pt-6 pb-safe">
         <Button
           onClick={goToPrevious}
           disabled={currentStep === 0 || isAnimating}
           variant="outline"
-          className="h-9 sm:h-10 px-3 sm:px-4 text-xs sm:text-sm"
+          className="h-10 sm:h-10 px-4 sm:px-4 text-sm sm:text-sm order-2 sm:order-1 touch-target"
         >
           <ArrowLeft className="w-3 h-3 sm:w-4 sm:h-4 mr-1.5 sm:mr-2" />
-          Previous
+          <span className="hidden sm:inline">Previous</span>
+          <span className="sm:hidden">Back</span>
         </Button>
 
         <Button
           onClick={goToNext}
           disabled={!answers[currentQuestion.id] || isAnimating}
-          className="h-9 sm:h-10 px-3 sm:px-4 text-xs sm:text-sm bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
+          className="h-10 sm:h-10 px-4 sm:px-4 text-sm sm:text-sm bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 order-1 sm:order-2 w-full sm:w-auto touch-target"
         >
           {currentStep === questions.length - 1 ? "Get Results" : "Next"}
           <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 ml-1.5 sm:ml-2" />
