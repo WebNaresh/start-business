@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useCallback, useRef, useEffect, useMemo } from 'react'
-import { Search, Building2, Copy, CheckCircle, AlertCircle, Loader2, FileText, Sparkles, TrendingUp, Shield } from 'lucide-react'
+import { Search, Building2, Copy, CheckCircle, AlertCircle, Loader2, FileText, Sparkles, TrendingUp, Shield, ExternalLink } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Badge } from '@/components/ui/badge'
@@ -97,6 +97,11 @@ export default function CompanySearchSection() {
         signal: abortControllerRef.current.signal
       })
 
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({ error: 'Network error' }))
+        throw new Error(errorData.error || `HTTP ${response.status}: ${response.statusText}`)
+      }
+
       const data = await response.json()
 
       if (!data.success) {
@@ -146,10 +151,23 @@ export default function CompanySearchSection() {
       }
 
       console.error('Search error:', error)
+
+      // Provide user-friendly error messages
+      let errorMessage = 'Search failed. Please try again.'
+      if (error instanceof Error) {
+        if (error.message.includes('Service temporarily unavailable')) {
+          errorMessage = 'Company search service is temporarily unavailable. Please try again later or contact support.'
+        } else if (error.message.includes('Network error') || error.message.includes('Failed to fetch')) {
+          errorMessage = 'Network connection issue. Please check your internet connection and try again.'
+        } else {
+          errorMessage = error.message
+        }
+      }
+
       setSearchState(prev => ({
         ...prev,
         isLoading: false,
-        error: error instanceof Error ? error.message : 'Search failed. Please try again.',
+        error: errorMessage,
         results: [],
         showSuggestions: false
       }))
@@ -245,7 +263,14 @@ export default function CompanySearchSection() {
     }
   }
 
-  // Clear search
+  // Retry search function
+  const retrySearch = () => {
+    if (searchState.query.trim().length >= 2) {
+      setSearchState(prev => ({ ...prev, error: null }))
+      debouncedSearch(searchState.query)
+    }
+  }
+
   // Clear search
   const clearSearch = () => {
     setSearchState({
@@ -468,11 +493,59 @@ export default function CompanySearchSection() {
 
             {/* Enhanced Error Message */}
             {searchState.error && (
-              <div className="mb-8 p-6 bg-red-50 border border-red-200 rounded-2xl flex items-start shadow-sm">
-                <AlertCircle className="w-6 h-6 text-red-500 mr-4 flex-shrink-0 mt-0.5" />
-                <div>
-                  <p className="text-red-700 font-medium">Search Error</p>
-                  <p className="text-red-600 text-sm mt-1">{searchState.error}</p>
+              <div className="mb-8 p-6 bg-red-50 border border-red-200 rounded-2xl shadow-sm">
+                <div className="flex items-start">
+                  <AlertCircle className="w-6 h-6 text-red-500 mr-4 flex-shrink-0 mt-0.5" />
+                  <div className="flex-1">
+                    <p className="text-red-700 font-medium">Search Error</p>
+                    <p className="text-red-600 text-sm mt-1">{searchState.error}</p>
+
+                    {/* Retry button for general errors */}
+                    {!searchState.error.includes('temporarily unavailable') && (
+                      <div className="mt-3">
+                        <Button
+                          size="sm"
+                          onClick={retrySearch}
+                          variant="outline"
+                          className="text-red-600 border-red-300 hover:bg-red-50"
+                        >
+                          Try Again
+                        </Button>
+                      </div>
+                    )}
+
+                    {/* Additional help for service unavailable */}
+                    {searchState.error.includes('temporarily unavailable') && (
+                      <div className="mt-4 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                        <p className="text-blue-700 font-medium text-sm mb-2">Alternative Options:</p>
+                        <ul className="text-blue-600 text-sm space-y-1">
+                          <li>• Visit the official MCA website directly</li>
+                          <li>• Try searching again in a few minutes</li>
+                          <li>• Contact our support team for assistance</li>
+                        </ul>
+                        <div className="mt-3 flex flex-col sm:flex-row gap-2">
+                          <Button
+                            size="sm"
+                            onClick={retrySearch}
+                            className="bg-blue-600 hover:bg-blue-700 text-white"
+                          >
+                            Try Again
+                          </Button>
+                          <Link href="https://www.mca.gov.in/mcafoportal/companyLLPMasterData.do" target="_blank" rel="noopener noreferrer">
+                            <Button size="sm" variant="outline" className="text-blue-600 border-blue-300 hover:bg-blue-50">
+                              <ExternalLink className="w-4 h-4 mr-2" />
+                              MCA Portal
+                            </Button>
+                          </Link>
+                          <Link href="/contact">
+                            <Button size="sm" variant="outline" className="text-blue-600 border-blue-300 hover:bg-blue-50">
+                              Contact Support
+                            </Button>
+                          </Link>
+                        </div>
+                      </div>
+                    )}
+                  </div>
                 </div>
               </div>
             )}

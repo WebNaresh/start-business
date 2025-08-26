@@ -126,8 +126,12 @@ export async function POST(request: NextRequest) {
     if (!apiKey) {
       console.error('NAME_SEARCH_API environment variable not set')
       return NextResponse.json(
-        { success: false, error: 'Service temporarily unavailable' },
-        { status: 500 }
+        {
+          success: false,
+          error: 'Company search service is temporarily unavailable. Please try again later or visit the MCA portal directly.',
+          fallback: true
+        },
+        { status: 503 } // Service Unavailable
       )
     }
 
@@ -157,9 +161,19 @@ export async function POST(request: NextRequest) {
 
     if (!response.ok) {
       console.error('Falconebiz API error:', response.status, response.statusText)
+
+      let errorMessage = 'Failed to search company data. Please try again.'
+      if (response.status === 503 || response.status === 502) {
+        errorMessage = 'Company search service is temporarily unavailable. Please try again later.'
+      } else if (response.status === 429) {
+        errorMessage = 'Too many requests. Please wait a moment and try again.'
+      } else if (response.status >= 500) {
+        errorMessage = 'Server error occurred. Please try again later.'
+      }
+
       return NextResponse.json(
-        { success: false, error: 'Failed to search company data. Please try again.' },
-        { status: 500 }
+        { success: false, error: errorMessage },
+        { status: response.status >= 500 ? 503 : 400 }
       )
     }
 
