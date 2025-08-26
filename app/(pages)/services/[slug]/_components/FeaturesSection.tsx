@@ -68,10 +68,13 @@ export default function FeaturesSection({ service }: FeaturesSectionProps) {
              <span className="text-blue-600">{service.shortTitle}</span> in India
             </h2>
 
-            <p className="text-xs md:text-sm text-slate-600 leading-relaxed max-w-3xl mx-auto">
-              {service.whatIs?.description ||
-                "Comprehensive solution designed to meet all your business needs with expert guidance and seamless execution."}
-            </p>
+            <div className="max-w-4xl mx-auto text-left">
+              <p className="text-sm md:text-base text-slate-700 leading-relaxed mb-4">
+                {service.whatIs?.description ||
+                  `${service.shortTitle} is a comprehensive business solution designed to streamline your operations and ensure compliance with Indian regulations. Our expert team provides end-to-end support, from initial consultation to final implementation, making the entire process seamless and efficient for your business.`}
+              </p>
+           
+            </div>
           </div>
 
           {/* Features Grid */}
