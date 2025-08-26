@@ -85,7 +85,7 @@ const FloatingNavbar = ({
 
   return (
     <div
-      className={`fixed top-20 left-1/2 transform -translate-x-1/2 z-30 transition-all duration-300 ${
+      className={`fixed top-20 left-1/2 transform -translate-x-1/2 z-30 transition-all duration-300 hidden md:block ${
         showStickyNav ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4 pointer-events-none"
       }`}
     >

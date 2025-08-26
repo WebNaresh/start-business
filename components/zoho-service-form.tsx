@@ -19,8 +19,6 @@ import {
   RefreshCw,
   Phone,
   Briefcase,
-  Shield,
-  Clock,
   Star,
 } from "lucide-react";
 import { z } from "zod";
@@ -619,20 +617,11 @@ export default function ZohoServiceForm({
                 )}
               </Button>
 
-              {/* Trust Indicators */}
-              <div className="flex items-center justify-center gap-4 mt-4 text-xs text-slate-500">
-                <div className="flex items-center gap-1">
-                  <Shield className="w-3 h-3" />
-                  <span>SSL Secured</span>
-                </div>
-                <div className="flex items-center gap-1">
-                  <Clock className="w-3 h-3" />
-                  <span>Quick Response</span>
-                </div>
-                <div className="flex items-center gap-1">
-                  <Star className="w-3 h-3" />
-                  <span>Expert Support</span>
-                </div>
+              {/* Privacy Note */}
+              <div className="mt-4">
+                <p className="text-xs text-center text-green-600 leading-relaxed font-medium">
+                  🔒 We respect your privacy. No spam, only valuable business insights.
+                </p>
               </div>
             </motion.div>
           </form>
