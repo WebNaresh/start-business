@@ -4,8 +4,7 @@ import type React from "react"
 
 import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
-import WhatsAppCTAButton from "@/components/whatsapp-cta-button"
-import { ArrowRight, Phone, Mail, User, Sparkles } from "lucide-react"
+import { Phone } from "lucide-react"
 import type { ServiceData } from "./service-types"
 import Script from "next/script"
 import ZohoServiceForm from "@/components/zoho-service-form"
@@ -171,7 +170,6 @@ export default function OverviewSection({ service }: OverviewSectionProps) {
               <div className="relative z-10">
                 <ZohoServiceForm
                   title={`Register For ${service.shortTitle.replace("Registration", "").trim()} Today`}
-                  description="Fill out the form below and our experts will get back to you within 24 hours."
                   defaultService={service.shortTitle}
                   className="shadow-2xl border-0"
                 />

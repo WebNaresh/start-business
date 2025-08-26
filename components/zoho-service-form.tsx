@@ -32,16 +32,11 @@ import { motion, AnimatePresence } from "framer-motion";
 
 // Validation schema for service-specific form (with captcha)
 const zohoServiceFormSchema = z.object({
-  firstName: z
+  name: z
     .string()
-    .min(1, "First name is required")
-    .max(40, "First name must be less than 40 characters")
-    .regex(/^[a-zA-Z\s]*$/, "First name can only contain letters and spaces"),
-  lastName: z
-    .string()
-    .min(1, "Last name is required")
-    .max(80, "Last name must be less than 80 characters")
-    .regex(/^[a-zA-Z\s]*$/, "Last name can only contain letters and spaces"),
+    .min(1, "Name is required")
+    .max(100, "Name must be less than 100 characters")
+    .regex(/^[a-zA-Z\s]*$/, "Name can only contain letters and spaces"),
   email: z
     .string()
     .min(1, "Email is required")
@@ -67,22 +62,19 @@ type ZohoServiceFormData = z.infer<typeof zohoServiceFormSchema>;
 interface ZohoServiceFormProps {
   className?: string;
   title?: string;
-  description?: string;
   defaultService?: string;
 }
 
 export default function ZohoServiceForm({
   className = "",
   title = "Get Expert Consultation",
-  description = "Fill out the form below and our experts will get back to you within 24 hours.",
   defaultService = "",
 }: ZohoServiceFormProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isClient, setIsClient] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [formData, setFormData] = useState<ZohoServiceFormData>({
-    firstName: "",
-    lastName: "",
+    name: "",
     email: "",
     phone: "",
     service: defaultService,
@@ -134,6 +126,11 @@ export default function ZohoServiceForm({
       form.acceptCharset = "UTF-8";
 
       // Add form fields with exact Zoho CRM parameters
+      // Split name into first and last name for Zoho compatibility
+      const nameParts = formData.name.trim().split(' ');
+      const firstName = nameParts[0] || '';
+      const lastName = nameParts.slice(1).join(' ') || '';
+
       const fields = [
         {
           name: "xnQsjsdp",
@@ -148,8 +145,8 @@ export default function ZohoServiceForm({
         },
         { name: "actionType", value: "TGVhZHM=" },
         { name: "returnURL", value: "https://startbusiness.co.in/thank-you" },
-        { name: "First Name", value: formData.firstName },
-        { name: "Last Name", value: formData.lastName },
+        { name: "First Name", value: firstName },
+        { name: "Last Name", value: lastName },
         { name: "Email", value: formData.email },
         { name: "Phone", value: formData.phone },
         { name: "LEADCF1", value: formData.service },
@@ -187,8 +184,7 @@ export default function ZohoServiceForm({
 
         // Reset form after showing success message
         setFormData({
-          firstName: "",
-          lastName: "",
+          name: "",
           email: "",
           phone: "",
           service: defaultService,
@@ -226,18 +222,15 @@ export default function ZohoServiceForm({
     return (
       <div className={className}>
         <Card className="bg-white/95 backdrop-blur-sm shadow-xl border-0 overflow-hidden">
-          <CardHeader className="bg-gradient-to-r from-blue-600 to-blue-700 text-white p-4 sm:p-6">
-            <div className="flex items-start gap-3">
-              <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center flex-shrink-0">
-                <Send className="w-5 h-5" />
+          <CardHeader className="bg-gradient-to-r from-blue-600 to-blue-700 text-white p-3 sm:p-4">
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center flex-shrink-0">
+                <Send className="w-4 h-4" />
               </div>
               <div className="flex-1 min-w-0">
-                <CardTitle className="text-lg sm:text-xl font-bold mb-2">
+                <CardTitle className="text-base sm:text-lg font-bold">
                   {title}
                 </CardTitle>
-                <p className="text-blue-100 text-sm leading-relaxed">
-                  {description}
-                </p>
               </div>
             </div>
           </CardHeader>
@@ -348,19 +341,15 @@ export default function ZohoServiceForm({
       className={className}
     >
       <Card className="bg-white/95 backdrop-blur-sm shadow-xl border-0 overflow-hidden">
-        <CardHeader className="bg-gradient-to-r from-blue-600 to-blue-700 text-white p-4 sm:p-6">
-          <div className="flex items-start gap-3">
-            <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center flex-shrink-0">
-              <Send className="w-5 h-5" />
+        <CardHeader className="bg-gradient-to-r from-blue-600 to-blue-700 text-white p-3 sm:p-4">
+          <div className="flex items-center gap-3">
+            <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center flex-shrink-0">
+              <Send className="w-4 h-4" />
             </div>
             <div className="flex-1 min-w-0">
-              <CardTitle className="text-lg sm:text-xl font-bold mb-2">
+              <CardTitle className="text-base sm:text-lg font-bold">
                 {title}
               </CardTitle>
-
-              <p className="text-blue-100 text-sm leading-relaxed">
-                {description}
-              </p>
             </div>
           </div>
         </CardHeader>
@@ -372,88 +361,53 @@ export default function ZohoServiceForm({
             noValidate
             suppressHydrationWarning={true}
           >
-            {/* Enhanced Name Fields */}
+            {/* Enhanced Name Field */}
             <motion.div
-              className="grid gap-4 sm:gap-6 lg:grid-cols-2"
+              className="space-y-2"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
             >
-              <div className="space-y-2">
-                <Label
-                  htmlFor="firstName"
-                  className="flex items-center gap-2 text-sm font-medium text-slate-700"
-                >
-                  <User className="w-4 h-4 text-blue-600" />
-                  First Name *
-                </Label>
-                <div className="relative">
-                  <Input
-                    type="text"
-                    id="firstName"
-                    name="firstName"
-                    value={formData.firstName}
-                    onChange={(e) => handleChange("firstName", e.target.value)}
-                    className={`h-12 pl-4 pr-4 text-base transition-all duration-200 ${
-                      errors.firstName
-                        ? "border-red-500 focus:border-red-500 focus:ring-red-200"
-                        : "border-slate-300 focus:border-blue-500 focus:ring-blue-200"
-                    }`}
-                    placeholder="Enter your first name"
-                    required
-                  />
-                </div>
-                <AnimatePresence>
-                  {errors.firstName && (
-                    <motion.p
-                      initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: "auto" }}
-                      exit={{ opacity: 0, height: 0 }}
-                      className="text-sm text-red-600 flex items-center gap-1"
-                    >
-                      {errors.firstName}
-                    </motion.p>
-                  )}
-                </AnimatePresence>
-              </div>
-
-              <div>
-                <Label
-                  htmlFor="lastName"
-                  className="mb-2 block text-sm font-medium text-slate-700"
-                >
-                  Last Name *
-                </Label>
+              <Label
+                htmlFor="name"
+                className="flex items-center gap-2 text-sm font-medium text-slate-700"
+              >
+                <User className="w-4 h-4 text-blue-600" />
+                Name *
+              </Label>
+              <div className="relative">
                 <Input
                   type="text"
-                  id="lastName"
-                  name="lastName"
-                  value={formData.lastName}
-                  onChange={(e) => handleChange("lastName", e.target.value)}
-                  className={`h-12 ${
-                    errors.lastName ? "border-red-500" : "border-border"
+                  id="name"
+                  name="name"
+                  value={formData.name}
+                  onChange={(e) => handleChange("name", e.target.value)}
+                  className={`h-12 pl-4 pr-4 text-base transition-all duration-200 ${
+                    errors.name
+                      ? "border-red-500 focus:border-red-500 focus:ring-red-200"
+                      : "border-slate-300 focus:border-blue-500 focus:ring-blue-200"
                   }`}
-                  placeholder="Your last name"
+                  placeholder="Enter your full name"
                   required
                 />
-                <AnimatePresence>
-                  {errors.lastName && (
-                    <motion.p
-                      initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: "auto" }}
-                      exit={{ opacity: 0, height: 0 }}
-                      className="text-sm text-red-600 flex items-center gap-1"
-                    >
-                      {errors.lastName}
-                    </motion.p>
-                  )}
-                </AnimatePresence>
               </div>
+              <AnimatePresence>
+                {errors.name && (
+                  <motion.p
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: "auto" }}
+                    exit={{ opacity: 0, height: 0 }}
+                    className="text-sm text-red-600 flex items-center gap-1"
+                  >
+                    {errors.name}
+                  </motion.p>
+                )}
+              </AnimatePresence>
             </motion.div>
 
-            {/* Enhanced Contact Fields */}
+            {/* Enhanced Contact Fields - Single Row Layout */}
             <motion.div
-              className="grid gap-4 sm:gap-6 lg:grid-cols-2"
+              className="grid gap-3 sm:gap-4 grid-cols-1 sm:grid-cols-2"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
@@ -582,21 +536,25 @@ export default function ZohoServiceForm({
               </div>
             )}
 
-            {/* Captcha Field */}
-            <div>
+            {/* Captcha Field - Compact Layout */}
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
+            >
               <Label
                 htmlFor="captcha"
                 className="mb-2 block text-sm font-medium text-slate-700"
               >
                 Enter the Captcha *
               </Label>
-              <div className="space-y-3">
+              <div className="flex flex-col sm:flex-row gap-3 sm:items-end">
                 <div className="flex items-center gap-3">
                   <img
                     id="captchaImage"
                     src="https://crm.zoho.in/crm/CaptchaServlet?formId=731203c0c029cc9fadd510ff25e826b1b003e8b3f6e99c0158e7cac8e272bfaad04b698e60452158a53e7bf1a1aa924a&grpid=c6d7810e05120b1ace91a2b4af426290e7c684da637dda5026b3b8587c9afe55"
                     alt="Captcha"
-                    className="border border-gray-300 rounded"
+                    className="border border-gray-300 rounded h-12"
                   />
                   <Button
                     type="button"
@@ -618,29 +576,40 @@ export default function ZohoServiceForm({
                         }
                       }
                     }}
-                    className="text-sm"
+                    className="text-sm h-12"
                   >
-                    Reload
+                    <RefreshCw className="w-4 h-4" />
                   </Button>
                 </div>
-                <Input
-                  id="captcha"
-                  name="captcha"
-                  type="text"
-                  value={formData.captcha}
-                  onChange={(e) => handleChange("captcha", e.target.value)}
-                  className={`h-12 ${
-                    errors.captcha ? "border-red-500" : "border-border"
-                  }`}
-                  placeholder="Enter the captcha code"
-                  maxLength={10}
-                  required
-                />
-                {errors.captcha && (
-                  <p className="mt-1 text-sm text-red-600">{errors.captcha}</p>
-                )}
+                <div className="flex-1">
+                  <Input
+                    id="captcha"
+                    name="captcha"
+                    type="text"
+                    value={formData.captcha}
+                    onChange={(e) => handleChange("captcha", e.target.value)}
+                    className={`h-12 ${
+                      errors.captcha ? "border-red-500" : "border-border"
+                    }`}
+                    placeholder="Enter the captcha code"
+                    maxLength={10}
+                    required
+                  />
+                </div>
               </div>
-            </div>
+              <AnimatePresence>
+                {errors.captcha && (
+                  <motion.p
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: "auto" }}
+                    exit={{ opacity: 0, height: 0 }}
+                    className="text-sm text-red-600 flex items-center gap-1 mt-2"
+                  >
+                    {errors.captcha}
+                  </motion.p>
+                )}
+              </AnimatePresence>
+            </motion.div>
 
             {/* Enhanced Submit Button */}
             <motion.div
