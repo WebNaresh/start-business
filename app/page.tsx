@@ -1,6 +1,6 @@
 "use client"
 
-import HeroSection from "@/components/home/hero-section"
+import ModernHeroSection from "@/components/home/modern-hero-section"
 import FeaturesSection from "@/components/home/features-section"
 import StatsSection from "@/components/home/stats-section"
 import ServicesSection from "@/components/home/services-section"
@@ -12,14 +12,30 @@ import CompanySearchSection from "@/components/home/company-search-section"
 import LatestIncorporationsTicker from "@/components/home/LatestIncorporationsTicker"
 import ServiceRecommendationQuiz from "@/components/services/service-recommendation-quiz"
 import FloatingCallButton from "@/components/floating-call-button"
+// New enhanced components
+import CostCalculatorWidget from "@/components/home/cost-calculator-widget"
+import TrustSecuritySection from "@/components/home/trust-security-section"
+import SuccessStoriesSection from "@/components/home/success-stories-section"
+
+import LiveChatWidget from "@/components/home/live-chat-widget"
 
 export default function Home() {
   return (
     <div className="flex min-h-screen flex-col">
-       <FloatingCallButton />
-      <HeroSection />
+      {/* Floating Elements */}
+      <FloatingCallButton />
+      <LiveChatWidget />
+
+      {/* Main Content Flow */}
+      <ModernHeroSection />
       <CompanySearchSection />
+
+      {/* Cost Calculator - High Priority for Conversion */}
+      <CostCalculatorWidget />
+
       <ServicesSection />
+
+      {/* Service Recommendation Quiz */}
       <section
         className="py-8 sm:py-10 md:py-12 bg-gradient-to-br from-slate-50 via-white to-blue-50/20"
         aria-labelledby="quiz-heading"
@@ -28,9 +44,19 @@ export default function Home() {
           <ServiceRecommendationQuiz />
         </div>
       </section>
+
+      {/* Trust & Security - Build Confidence */}
+      <TrustSecuritySection />
+
       <StatsSection />
       <FeaturesSection />
+
+      {/* Success Stories - Social Proof */}
+      <SuccessStoriesSection />
+
       <ProcessSection />
+
+
       <LatestIncorporationsTicker />
       <TestimonialsBlogSection />
       <FAQSection />

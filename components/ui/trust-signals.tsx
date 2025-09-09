@@ -27,7 +27,7 @@ export default function TrustSignals({
   const trustMetrics = [
     {
       icon: Users,
-      value: "10,000+",
+      value: "1,000+",
       label: "Businesses Registered",
       color: "text-blue-600"
     },

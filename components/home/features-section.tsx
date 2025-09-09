@@ -145,21 +145,7 @@ export default function WhyChooseUs() {
                   {feature.shortDesc}
                 </p>
 
-                {/* Benefit Badge */}
-                <div className="flex items-center justify-between">
-                  <Badge 
-                    variant="secondary" 
-                    className="text-[10px] md:text-xs bg-secondary text-secondary-foreground"
-                    aria-label={`Benefit: ${feature.benefit}`}
-                  >
-                    <CheckCircle className="w-2 h-2 md:w-3 md:h-3 mr-1 text-primary" aria-hidden="true" />
-                    {feature.benefit}
-                  </Badge>
-                  <ArrowRight 
-                    className="w-3 h-3 md:w-4 md:h-4 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all duration-300" 
-                    aria-hidden="true" 
-                  />
-                </div>
+        
 
                 {/* Hover Gradient Overlay */}
                 <div

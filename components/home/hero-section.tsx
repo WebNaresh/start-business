@@ -42,7 +42,7 @@ export default function ProfessionalHeroSection() {
     "@context": "https://schema.org",
     "@type": "WebPage",
     "name": "Business Registration and Compliance Services in India",
-    "description": "India's leading business registration platform with 10,000+ companies registered. Expert CA and legal support for Private Limited, LLP, OPC registration with 100% compliance guarantee.",
+    "description": "India's leading business registration platform with 1,000+ companies registered. Expert CA and legal support for Private Limited, LLP, OPC registration with 100% compliance guarantee.",
     "mainEntity": {
       "@type": "Service",
       "name": "Business Registration Services",
