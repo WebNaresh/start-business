@@ -17,14 +17,11 @@ import CostCalculatorWidget from "@/components/home/cost-calculator-widget"
 import TrustSecuritySection from "@/components/home/trust-security-section"
 import SuccessStoriesSection from "@/components/home/success-stories-section"
 
-import LiveChatWidget from "@/components/home/live-chat-widget"
-
 export default function Home() {
   return (
     <div className="flex min-h-screen flex-col">
       {/* Floating Elements */}
       <FloatingCallButton />
-      <LiveChatWidget />
 
       {/* Main Content Flow */}
       <ModernHeroSection />
