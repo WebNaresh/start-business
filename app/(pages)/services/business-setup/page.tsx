@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge"
 import { CheckCircle2, Building2, FileCheck, Users, Shield, Clock, ArrowRight } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
+import ZohoBusinessSetupForm from "@/components/forms/zoho-business-setup-form"
 
 const features = [
   {
@@ -69,34 +70,92 @@ export default function BusinessSetupPage() {
       {/* Hero Section */}
       <section className="relative py-20 overflow-hidden">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center">
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="text-4xl md:text-5xl font-bold text-slate-900 mb-6"
-            >
-              Business Setup Services
-            </motion.h1>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 }}
-              className="text-lg text-slate-600 mb-8"
-            >
-              Start your business journey with confidence. Our comprehensive business setup services ensure a smooth and compliant launch of your venture.
-            </motion.p>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-            >
-              <Button
-                size="lg"
-                className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white"
+          <div className="max-w-6xl mx-auto">
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+              {/* Left Content */}
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6 }}
+                className="space-y-8"
               >
-                Get Started
-              </Button>
-            </motion.div>
+                <div className="space-y-4">
+                  <Badge className="bg-blue-100 text-blue-800 border-blue-200">
+                    🚀 Complete Business Setup Solutions
+                  </Badge>
+                  <motion.h1
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="text-4xl md:text-5xl font-bold text-slate-900 leading-tight"
+                  >
+                    Business Setup Services
+                  </motion.h1>
+                  <motion.p
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.1 }}
+                    className="text-lg text-slate-600 leading-relaxed"
+                  >
+                    Start your business journey with confidence. Our comprehensive business setup services ensure a smooth and compliant launch of your venture.
+                  </motion.p>
+                </div>
+
+                {/* Quick Features */}
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 className="w-5 h-5 text-green-500" />
+                    <span className="text-slate-700 text-sm">Expert Guidance</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 className="w-5 h-5 text-green-500" />
+                    <span className="text-slate-700 text-sm">Quick Processing</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 className="w-5 h-5 text-green-500" />
+                    <span className="text-slate-700 text-sm">Full Compliance</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 className="w-5 h-5 text-green-500" />
+                    <span className="text-slate-700 text-sm">Affordable Pricing</span>
+                  </div>
+                </div>
+
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.2 }}
+                  className="flex flex-col sm:flex-row gap-4"
+                >
+                  <Button
+                    size="lg"
+                    className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white"
+                  >
+                    Get Started
+                    <ArrowRight className="w-4 h-4 ml-2" />
+                  </Button>
+                  <Button
+                    size="lg"
+                    variant="outline"
+                    className="border-blue-200 text-blue-700 hover:bg-blue-50"
+                  >
+                    View Services
+                  </Button>
+                </motion.div>
+              </motion.div>
+
+              {/* Right Content - Form */}
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="relative"
+              >
+                <ZohoBusinessSetupForm 
+                  title="Get Your Business Started Today"
+                  className="max-w-lg mx-auto"
+                />
+              </motion.div>
+            </div>
           </div>
         </div>
       </section>

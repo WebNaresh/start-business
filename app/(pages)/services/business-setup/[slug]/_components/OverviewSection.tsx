@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button"
 import { Phone } from "lucide-react"
 import type { ServiceData } from "./service-types"
 import Script from "next/script"
-import ZohoServiceForm from "@/components/zoho-service-form"
+import ZohoBusinessSetupForm from "@/components/forms/zoho-business-setup-form"
 
 interface OverviewSectionProps {
   service: ServiceData
@@ -168,7 +168,7 @@ export default function OverviewSection({ service }: OverviewSectionProps) {
               </div>
 
               <div className="relative z-10">
-                <ZohoServiceForm
+                <ZohoBusinessSetupForm
                   title={`Register For ${service.shortTitle.replace("Registration", "").trim()} Today`}
                   defaultService={service.shortTitle}
                   className="shadow-2xl border-0"
