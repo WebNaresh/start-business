@@ -14,6 +14,17 @@ interface OverviewSectionProps {
 }
 
 export default function OverviewSection({ service }: OverviewSectionProps) {
+  const scrollToForm = () => {
+    const formElement = document.getElementById('consultation-form')
+    if (formElement) {
+      formElement.scrollIntoView({ behavior: 'smooth', block: 'center' })
+      // Add a subtle highlight effect
+      formElement.style.animation = 'pulse 1s ease-in-out'
+      setTimeout(() => {
+        formElement.style.animation = ''
+      }, 1000)
+    }
+  }
 
   // Generate structured data for the service
   const serviceStructuredData = {
@@ -39,7 +50,7 @@ export default function OverviewSection({ service }: OverviewSectionProps) {
   }
 
   return (
-    <section id="overview" className="relative py-4 md:py-8 bg-white overflow-hidden" aria-labelledby="overview-heading">
+    <section id="overview" className="relative py-6 sm:py-8 md:py-12 lg:py-16 bg-gradient-to-br from-slate-50 to-white overflow-hidden" aria-labelledby="overview-heading">
       <Script
         id="service-structured-data"
         type="application/ld+json"
@@ -73,21 +84,21 @@ export default function OverviewSection({ service }: OverviewSectionProps) {
         />
       </div>
 
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="grid lg:grid-cols-3 gap-6 lg:gap-8 xl:gap-12 items-stretch min-h-[600px] lg:min-h-[650px]">
           {/* Left Content */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-center lg:text-left"
+            className="lg:col-span-2 text-center lg:text-left"
           >
             <motion.h1
               id="overview-heading"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.3 }}
-              className="text-2xl md:text-3xl lg:text-4xl font-bold text-slate-900 mb-4 leading-tight"
+              className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-slate-900 mb-3 sm:mb-4 leading-tight"
             >
               <span className="text-blue-600">{service.title.split(" ").slice(0, 2).join(" ")}</span>{" "}
               <span className="text-slate-900">{service.title.split(" ").slice(2).join(" ")}</span>
@@ -97,7 +108,7 @@ export default function OverviewSection({ service }: OverviewSectionProps) {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
-              className="text-sm md:text-base text-slate-600 mb-6 leading-relaxed max-w-2xl mx-auto lg:mx-0"
+              className="text-sm sm:text-base lg:text-lg text-slate-600 mb-4 sm:mb-6 leading-relaxed max-w-2xl mx-auto lg:mx-0"
             >
               {service.description}
             </motion.p>
@@ -107,25 +118,26 @@ export default function OverviewSection({ service }: OverviewSectionProps) {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.7 }}
-              className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8"
+              className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3 mb-6 sm:mb-8"
               role="list"
               aria-label="Service features"
             >
               {[
-                "⏱️ Quick Turnaround Time",
-                "🎯 Expert Legal Guidance",
+                "⏱️ Quick Turnaround",
+                "🎯 Expert Guidance", 
                 "🔄 End-to-End Solutions",
-                "✅ 100% Compliance Assured",
+                "✅ 100% Compliance",
               ].map((feature, index) => (
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.5, delay: 0.8 + index * 0.1 }}
-                  className="flex items-center p-3 rounded-lg bg-blue-50 border border-blue-100 hover:bg-blue-100 transition-all duration-300"
+                  whileHover={{ scale: 1.02, x: 5 }}
+                  className="flex items-center p-2 sm:p-3 rounded-lg bg-blue-50 border border-blue-100 hover:bg-blue-100 hover:border-blue-200 transition-all duration-300 cursor-default"
                   role="listitem"
                 >
-                  <span className="text-slate-700 text-sm font-medium">{feature}</span>
+                  <span className="text-slate-700 text-xs sm:text-sm font-medium">{feature}</span>
                 </motion.div>
               ))}
             </motion.div>
@@ -135,43 +147,47 @@ export default function OverviewSection({ service }: OverviewSectionProps) {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.9 }}
-              className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
+              className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start mb-6 lg:mb-0"
             >
-              {/* <WhatsAppCTAButton className="">
-                Get Started Now
-                <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
-              </WhatsAppCTAButton> */}
               <Button
                 variant="default"
-                className=""
+                size="default"
+                className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 active:scale-95"
                 onClick={() => (window.location.href = "tel:+919699214195")}
                 aria-label="Call expert for consultation"
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'scale(1.05)'
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'scale(1)'
+                }}
               >
-                <Phone className="w-5 h-5 mr-2" aria-hidden="true" />
-                Call Expert
+                <Phone className="w-4 h-4 mr-2" aria-hidden="true" />
+                Call Expert Now
               </Button>
             </motion.div>
           </motion.div>
 
-          {/* Right Form */}
+          {/* Right Form - Sticky on larger screens */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="relative max-w-full w-full mx-auto lg:mx-0"
+            className="relative w-full lg:sticky lg:top-4"
           >
-            <div className="bg-white rounded-3xl p-8 shadow-lg border border-slate-200 relative overflow-hidden">
-              {/* Form Background Pattern */}
-              <div className="absolute inset-0 opacity-5" aria-hidden="true">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500 rounded-full -mr-16 -mt-16"></div>
-                <div className="absolute bottom-0 left-0 w-24 h-24 bg-blue-400 rounded-full -ml-12 -mb-12"></div>
+            <div className="bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 shadow-xl border border-slate-100 relative overflow-hidden backdrop-blur-sm">
+              {/* Improved Form Background Pattern */}
+              <div className="absolute inset-0 opacity-3" aria-hidden="true">
+                <div className="absolute top-0 right-0 w-20 sm:w-32 h-20 sm:h-32 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full -mr-10 sm:-mr-16 -mt-10 sm:-mt-16"></div>
+                <div className="absolute bottom-0 left-0 w-16 sm:w-24 h-16 sm:h-24 bg-gradient-to-tr from-blue-400 to-blue-500 rounded-full -ml-8 sm:-ml-12 -mb-8 sm:-mb-12"></div>
+                <div className="absolute top-1/2 left-1/2 w-32 h-32 bg-gradient-to-r from-blue-100 to-blue-200 rounded-full -translate-x-1/2 -translate-y-1/2 blur-3xl"></div>
               </div>
 
-              <div className="relative z-10">
+              <div className="relative z-10" id="consultation-form">
                 <ZohoBusinessSetupForm
                   title={`Register For ${service.shortTitle.replace("Registration", "").trim()} Today`}
                   defaultService={service.shortTitle}
-                  className="shadow-2xl border-0"
+                  className="border-0 shadow-none"
                 />
               </div>
             </div>

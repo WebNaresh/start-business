@@ -98,22 +98,23 @@ export default function ZohoBusinessSetupForm({
 
   return (
     <div className={`w-full ${className}`}>
-      <Card className="shadow-lg border-slate-200">
-        <CardContent className="p-4 sm:p-6">
-          <div className="mb-4">
-            <h3 className="text-lg sm:text-xl font-semibold text-slate-900 mb-2">{title}</h3>
+      <Card className="border-0 shadow-none bg-transparent">
+        <CardContent className="p-0">
+          <div className="mb-4 sm:mb-6">
+            <h3 className="text-base sm:text-lg lg:text-xl font-bold text-slate-900 mb-1 text-center">{title}</h3>
+            <p className="text-xs sm:text-sm text-slate-600 text-center">Fill the form below and get expert consultation</p>
           </div>
           
-          <form onSubmit={handleSubmit} className="space-y-3">
+          <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4">
             {/* Name Fields Row */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div className="grid grid-cols-2 gap-2 sm:gap-3">
               <Input
                 id="firstName"
                 type="text"
                 value={formData.firstName}
                 onChange={(e) => handleInputChange('firstName', e.target.value)}
                 placeholder="First Name"
-                className="h-9"
+                className="h-10 sm:h-11 text-sm border-slate-200 focus:border-blue-500 focus:ring-blue-500/20"
               />
               
               <Input
@@ -123,7 +124,7 @@ export default function ZohoBusinessSetupForm({
                 onChange={(e) => handleInputChange('lastName', e.target.value)}
                 placeholder="Last Name *"
                 required
-                className="h-9"
+                className="h-10 sm:h-11 text-sm border-slate-200 focus:border-blue-500 focus:ring-blue-500/20"
               />
             </div>
 
@@ -135,7 +136,7 @@ export default function ZohoBusinessSetupForm({
               onChange={(e) => handleInputChange('email', e.target.value)}
               placeholder="Email Address *"
               required
-              className="h-9"
+              className="h-10 sm:h-11 text-sm border-slate-200 focus:border-blue-500 focus:ring-blue-500/20"
             />
 
             <Input
@@ -145,41 +146,47 @@ export default function ZohoBusinessSetupForm({
               onChange={(e) => handleInputChange('phone', e.target.value)}
               placeholder="Phone Number *"
               required
-              className="h-9"
+              className="h-10 sm:h-11 text-sm border-slate-200 focus:border-blue-500 focus:ring-blue-500/20"
+              pattern="[0-9]{10}"
+              title="Please enter a 10-digit phone number"
             />
 
             {/* Captcha Section */}
-            <div className="flex items-center gap-2">
+            <div className="space-y-2">
+              <div className="flex items-center gap-2">
+                <img 
+                  src={`https://crm.zoho.in/crm/CaptchaServlet?formId=807d92b3c3d38b2f055043e33cb4fc8abde2c6504bc6b15566de33a208cf33ae6ab44d7608092b1b2b7315c225e2587f&grpid=0449ef94165a176cece1e6ece65e4c9be0449b94b4030e8dd38645a7b17fafa0&d=${captchaReload}`}
+                  alt="Captcha verification image"
+                  className="border border-slate-300 rounded-md h-10 sm:h-11 w-24 sm:w-28 object-contain bg-white"
+                />
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="sm"
+                  onClick={reloadCaptcha}
+                  className="h-10 sm:h-11 px-3 border-slate-200 hover:border-blue-300"
+                  title="Reload captcha"
+                >
+                  <RefreshCw className="w-4 h-4" />
+                </Button>
+              </div>
               <Input
                 id="captcha"
                 type="text"
                 value={formData.captcha}
                 onChange={(e) => handleInputChange('captcha', e.target.value)}
-                placeholder="Enter Captcha *"
+                placeholder="Enter Captcha Code *"
                 required
-                className="h-9 flex-1"
+                className="h-10 sm:h-11 text-sm border-slate-200 focus:border-blue-500 focus:ring-blue-500/20"
+                autoComplete="off"
               />
-              <img 
-                src={`https://crm.zoho.in/crm/CaptchaServlet?formId=807d92b3c3d38b2f055043e33cb4fc8abde2c6504bc6b15566de33a208cf33ae6ab44d7608092b1b2b7315c225e2587f&grpid=0449ef94165a176cece1e6ece65e4c9be0449b94b4030e8dd38645a7b17fafa0&d=${captchaReload}`}
-                alt="Captcha"
-                className="border border-slate-300 rounded h-9 w-20"
-              />
-              <Button
-                type="button"
-                variant="outline"
-                size="sm"
-                onClick={reloadCaptcha}
-                className="h-9 w-9 p-0"
-              >
-                <RefreshCw className="w-3 h-3" />
-              </Button>
             </div>
 
             {/* Submit Button */}
             <Button
               type="submit"
               disabled={isSubmitting}
-              className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white h-10"
+              className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white h-11 sm:h-12 text-sm sm:text-base font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02] disabled:transform-none disabled:hover:scale-100"
             >
               {isSubmitting ? (
                 <>
@@ -190,6 +197,13 @@ export default function ZohoBusinessSetupForm({
                 'Get Free Consultation'
               )}
             </Button>
+            
+            {/* Trust indicators */}
+            <div className="text-center pt-2">
+              <p className="text-xs text-slate-500">
+                🔒 Secure & Confidential • ⚡ Quick Response
+              </p>
+            </div>
           </form>
         </CardContent>
       </Card>
