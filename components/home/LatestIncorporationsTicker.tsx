@@ -1,15 +1,44 @@
-import React, { useCallback, useEffect, useRef } from "react"
-import { ArrowRight, Sparkles, CheckCircle } from "lucide-react"
-import { Badge } from "@/components/ui/badge"
+"use client"
+
+import React, { useCallback, useEffect, useRef, useState } from "react"
+import { ArrowRight, Sparkles, CheckCircle, Building2, Play, Pause } from "lucide-react"
+import { useMobile } from "@/hooks/use-mobile"
 import useEmblaCarousel from 'embla-carousel-react'
 
-const latestIncorporations = [
-  "Apaha Institute Of Construction Project Management LLP",
-  "Apaha Overseas Study LLP",
-  "Lightnet Technology Private Limited",
-  "Mangesha'z Salon & Academy Private Limited",
-  "Octogle Technologies Private Limited",
-  "Multicare Health Services And Consultancy LLP",
+interface Incorporation {
+  name: string
+  type: 'Private Limited' | 'LLP' | 'OPC' | 'Partnership'
+}
+
+const latestIncorporations: Incorporation[] = [
+  {
+    name: "Apaha Institute Of Construction Project Management LLP",
+    type: "LLP"
+  },
+  {
+    name: "Apaha Overseas Study LLP", 
+    type: "LLP"
+  },
+  {
+    name: "Lightnet Technology Private Limited",
+    type: "Private Limited"
+  },
+  {
+    name: "Mangesha'z Salon & Academy Private Limited",
+    type: "Private Limited"
+  },
+  {
+    name: "Octogle Technologies Private Limited",
+    type: "Private Limited"
+  },
+  {
+    name: "Multicare Health Services And Consultancy LLP",
+    type: "LLP"
+  },
+  {
+    name: "Navibyte Innovations Private Limited",
+    type: "Private Limited"
+  },
 ]
 
 export default function LatestIncorporationsTicker() {
@@ -21,75 +50,120 @@ export default function LatestIncorporationsTicker() {
     skipSnaps: false,
     slidesToScroll: 1,
   })
+  
+  const [isPaused, setIsPaused] = useState(false)
+  const [isHovered, setIsHovered] = useState(false)
   const autoplayRef = useRef<NodeJS.Timeout | null>(null)
+  const isMobile = useMobile(768)
+  const isTablet = useMobile(1024)
 
-  // Smoother autoplay with better timing
+  // Enhanced autoplay with pause functionality
   const autoplay = useCallback(() => {
-    if (!emblaApi) return
+    if (!emblaApi || isPaused || isHovered) return
     if (autoplayRef.current) clearInterval(autoplayRef.current)
     autoplayRef.current = setInterval(() => {
-      if (emblaApi) emblaApi.scrollNext()
-    }, 3500) // Optimized for mobile readability
-  }, [emblaApi])
+      if (emblaApi && !isPaused && !isHovered) emblaApi.scrollNext()
+    }, isMobile ? 4000 : 3000) // Slower on mobile for better readability
+  }, [emblaApi, isPaused, isHovered, isMobile])
 
   useEffect(() => {
     if (!emblaApi) return
     autoplay()
+    
     emblaApi.on('pointerDown', () => {
       if (autoplayRef.current) clearInterval(autoplayRef.current)
     })
     emblaApi.on('pointerUp', autoplay)
+    
     return () => {
       if (autoplayRef.current) clearInterval(autoplayRef.current)
     }
   }, [emblaApi, autoplay])
 
+  // Get type badge color
+  const getTypeBadgeColor = (type: Incorporation['type']) => {
+    switch (type) {
+      case 'Private Limited':
+        return 'bg-blue-100 text-blue-700 border-blue-200'
+      case 'LLP':
+        return 'bg-green-100 text-green-700 border-green-200'
+      case 'OPC':
+        return 'bg-purple-100 text-purple-700 border-purple-200'
+      case 'Partnership':
+        return 'bg-orange-100 text-orange-700 border-orange-200'
+      default:
+        return 'bg-gray-100 text-gray-700 border-gray-200'
+    }
+  }
+
   return (
-    <section className="py-10 sm:py-12 lg:py-16 bg-gradient-to-br from-slate-50 via-white to-blue-50/30 overflow-hidden">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
-        {/* Professional Header - Mobile Optimized */}
-        <div className="text-center mb-8 sm:mb-10">
-          <Badge className="mb-3 sm:mb-4 bg-blue-50 text-blue-700 border-blue-200 px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-medium">
-            <Sparkles className="w-3 h-3 sm:w-4 sm:h-4 mr-1.5 sm:mr-2" />
-            Live Updates
-          </Badge>
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-slate-900 mb-3 sm:mb-4 px-4">
+    <section 
+      className="py-8 sm:py-12 lg:py-16 bg-gradient-to-br from-slate-50 via-white to-blue-50/30 overflow-hidden relative"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      {/* Subtle background decorative elements */}
+      <div className="absolute top-0 right-0 w-48 h-48 bg-gradient-to-br from-blue-200/10 to-indigo-200/10 rounded-full -mr-24 -mt-24 animate-pulse"></div>
+      <div className="absolute bottom-0 left-0 w-64 h-64 bg-gradient-to-tr from-blue-100/5 to-purple-100/5 rounded-full -ml-32 -mb-32 animate-pulse" style={{ animationDelay: '2s' }}></div>
+
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl relative z-10">
+        {/* Compact Header */}
+        <div className="text-center mb-6 sm:mb-8">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 mb-4 text-xs font-medium text-blue-700 bg-blue-100/80 rounded-full border border-blue-200/50 backdrop-blur-sm">
+            <Sparkles className="w-3 h-3 animate-pulse" />
+            <span>Live Updates</span>
+            <div className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse ml-1"></div>
+          </div>
+          
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-slate-900 via-blue-900 to-indigo-900 bg-clip-text text-transparent mb-3">
             Latest <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">Incorporations</span>
           </h2>
-          <p className="text-base sm:text-lg text-slate-600 max-w-3xl mx-auto px-4">
+          
+          <p className="text-sm sm:text-base text-slate-600 max-w-2xl mx-auto">
             See the businesses that just got incorporated with our expert services
           </p>
+
+         
         </div>
 
-        {/* Modern Ticker Container - Mobile Optimized */}
-        <div className="relative bg-white rounded-xl lg:rounded-2xl shadow-lg lg:shadow-xl border border-slate-200 overflow-hidden">
-          {/* Live indicator - Mobile Optimized */}
-          <div className="absolute top-3 right-3 sm:top-4 sm:right-4 z-10 flex items-center gap-1.5 sm:gap-2 bg-green-50 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full border border-green-200">
-            <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-green-500 rounded-full animate-pulse"></div>
+        {/* Compact Ticker Container */}
+        <div className="relative bg-white/80 backdrop-blur-sm rounded-xl lg:rounded-2xl shadow-lg border border-slate-200/50 overflow-hidden">
+          {/* Compact live indicator */}
+          <div className="absolute top-3 right-3 z-20 flex items-center gap-1.5 bg-green-50/90 backdrop-blur-sm px-2 py-1 rounded-full border border-green-200/50">
+            <div className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></div>
             <span className="text-xs font-medium text-green-700">Live</span>
           </div>
 
-          <div className="embla p-4 sm:p-6" ref={emblaRef}>
+          <div className="embla p-4 sm:p-5" ref={emblaRef}>
             <div className="embla__container flex gap-3 sm:gap-4">
               {[...latestIncorporations, ...latestIncorporations].map((company, idx) => (
                 <div
-                  className="embla__slide flex-shrink-0 w-[260px] sm:w-[280px] max-w-[300px] sm:max-w-[350px]"
-                  key={idx}
+                  className="embla__slide flex-shrink-0 w-[240px] sm:w-[260px] lg:w-[280px]"
+                  key={`${company.name}-${idx}`}
                 >
-                  <div className="bg-slate-50 rounded-lg sm:rounded-xl p-3 sm:p-4 border border-slate-200 hover:border-blue-300 hover:bg-blue-50 transition-all duration-300 group cursor-pointer h-full">
-                    <div className="flex items-center gap-2 sm:gap-3 mb-2 sm:mb-3">
-                      <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 text-green-600 flex-shrink-0" />
-                      <span className="text-xs text-green-700 font-medium bg-green-50 px-2 py-0.5 sm:py-1 rounded-full">
-                        Successfully Incorporated
+                  <div className="bg-gradient-to-br from-slate-50 to-blue-50/30 rounded-lg lg:rounded-xl p-3 sm:p-4 border border-slate-200/50 hover:border-blue-300/50 hover:shadow-md transition-all duration-300 group cursor-pointer h-full backdrop-blur-sm">
+                    {/* Compact header with status */}
+                    <div className="flex items-center gap-1.5 mb-3">
+                      <CheckCircle className="w-4 h-4 text-green-600 flex-shrink-0" />
+                      <span className="text-xs font-medium text-green-700 bg-green-100/80 px-2 py-0.5 rounded-full">
+                        Incorporated
                       </span>
                     </div>
 
-                    <h3 className="font-semibold text-slate-900 text-xs sm:text-sm leading-tight group-hover:text-blue-700 transition-colors mb-2 sm:mb-3 line-clamp-2">
-                      {company}
+                    {/* Compact company name */}
+                    <h3 className="font-semibold text-slate-900 text-xs sm:text-sm leading-tight group-hover:text-blue-700 transition-colors mb-3 line-clamp-2 min-h-[2rem]">
+                      {company.name}
                     </h3>
 
-                    <div className="flex justify-end">
-                      <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 text-slate-400 group-hover:text-blue-600 group-hover:translate-x-1 transition-all duration-300" />
+                    {/* Compact company type */}
+                    <div className="flex items-center justify-between">
+                      <div className={`inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-medium border ${getTypeBadgeColor(company.type)}`}>
+                        <Building2 className="w-3 h-3" />
+                        <span>{company.type}</span>
+                      </div>
+                      
+                      {/* Compact arrow indicator */}
+                      <ArrowRight className="w-3 h-3 text-slate-400 group-hover:text-blue-600 group-hover:translate-x-0.5 transition-all duration-300" />
                     </div>
                   </div>
                 </div>
@@ -97,25 +171,12 @@ export default function LatestIncorporationsTicker() {
             </div>
           </div>
 
-          {/* Gradient fade edges - Mobile Optimized */}
-          <div className="absolute left-0 top-0 bottom-0 w-4 sm:w-8 bg-gradient-to-r from-white to-transparent pointer-events-none z-10" />
-          <div className="absolute right-0 top-0 bottom-0 w-4 sm:w-8 bg-gradient-to-l from-white to-transparent pointer-events-none z-10" />
+          {/* Compact gradient fade edges */}
+          <div className="absolute left-0 top-0 bottom-0 w-6 sm:w-8 bg-gradient-to-r from-white/80 to-transparent pointer-events-none z-10" />
+          <div className="absolute right-0 top-0 bottom-0 w-6 sm:w-8 bg-gradient-to-l from-white/80 to-transparent pointer-events-none z-10" />
         </div>
 
-        {/* Professional CTA Section - Mobile Optimized */}
-        <div className="text-center mt-8 sm:mt-10 px-4">
-          <p className="text-slate-600 mb-4 sm:mb-6 text-sm sm:text-base">
-            Ready to join them? Start your business registration today.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-3 justify-center max-w-md sm:max-w-none mx-auto">
-            <button className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white px-6 py-3 rounded-xl font-semibold transition-all duration-300 shadow-lg hover:shadow-xl text-sm sm:text-base">
-              Start Registration
-            </button>
-            <button className="border-2 border-slate-300 hover:border-blue-300 hover:bg-blue-50 text-slate-700 px-6 py-3 rounded-xl font-medium transition-all duration-300 text-sm sm:text-base">
-              View All Services
-            </button>
-          </div>
-        </div>
+  
       </div>
     </section>
   )
