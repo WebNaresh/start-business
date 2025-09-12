@@ -112,6 +112,11 @@ export default function TestimonialsSection() {
       position: "Co-founder, Multicare Health Services And Consultancy LLP",
       rating: 5
     },
+    {
+      text: "As a software development company, we've worked with many service providers, but StartBusiness stands out for their exceptional founder behavior. Their kindness, helpfulness, and genuine care for clients sets them apart. The team went above and beyond to ensure our company registration was smooth and hassle-free. Truly remarkable human approach to business!",
+      position: "Co-founder, Navibyte Innovations Private Limited",
+      rating: 5
+    },
   ]
 
   const [activeIndex, setActiveIndex] = useState(0)
