@@ -83,11 +83,11 @@ export default function EnhancedFooter() {
               </h3>
               <ul className="space-y-2 lg:space-y-3">
                 {[
-                  { name: "Private Limited Company", href: "/services/private-limited-company", popular: true },
-                  { name: "Limited Liability Partnership", href: "/services/llp", popular: false },
-                  { name: "One Person Company", href: "/services/opc-registration", popular: false },
-                  { name: "Partnership Firm", href: "/services/partnership-firm", popular: false },
-                  { name: "Sole Proprietorship", href: "/services/sole-proprietorship", popular: false },
+                  { name: "Private Limited Company", href: "/services/business-setup/private-limited-company", popular: true },
+                  { name: "Limited Liability Partnership", href: "/services/business-setup/llp", popular: false },
+                  { name: "One Person Company", href: "/services/business-setup/opc-registration", popular: false },
+                  { name: "Partnership Firm", href: "/services/business-setup/partnership-firm", popular: false },
+                  { name: "Sole Proprietorship", href: "/services/business-setup/sole-proprietorship", popular: false },
                 ].map((service, index) => (
                   <li key={index}>
                     <Link

@@ -63,6 +63,26 @@ export default function CompanyRegistrationQuiz() {
   const [isAnimating, setIsAnimating] = useState(false)
   const [selectedOption, setSelectedOption] = useState<string | null>(null)
 
+  // Helper function to get the correct service URL for business setup services
+  const getServiceUrl = (slug: string) => {
+    // All the slugs in this quiz are business setup services
+    const businessSetupSlugs = [
+      'sole-proprietorship',
+      'opc-registration', 
+      'partnership-firm',
+      'llp-registration',
+      'private-limited-company'
+    ];
+    
+    if (businessSetupSlugs.includes(slug)) {
+      // Map llp-registration to llp to match the actual file structure
+      const actualSlug = slug === 'llp-registration' ? 'llp' : slug;
+      return `/services/business-setup/${actualSlug}`;
+    }
+    
+    return `/services/${slug}`;
+  };
+
   const questions: QuizQuestion[] = [
     {
       id: "business_type",
@@ -876,7 +896,7 @@ export default function CompanyRegistrationQuiz() {
 
               {/* Action Buttons */}
               <div className="flex flex-col sm:flex-row gap-3">
-                <Link href={`/services/${rec.slug}`} className="flex-1">
+                <Link href={getServiceUrl(rec.slug)} className="flex-1">
                   <Button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white py-3 text-sm sm:text-base touch-target">
                     Get Started - {rec.price}
                     <ArrowRight className="w-4 h-4 ml-2" />

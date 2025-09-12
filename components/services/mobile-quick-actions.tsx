@@ -36,7 +36,7 @@ export default function MobileQuickActions({ className = "" }: MobileQuickAction
       title: "Start Company",
       description: "Private Limited Registration",
       icon: Building2,
-      href: "/services/private-limited-company",
+      href: "/services/business-setup/private-limited-company",
       price: "₹12,000",
       popular: true,
       color: "bg-blue-500"

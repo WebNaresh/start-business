@@ -138,7 +138,7 @@ export default function AllServicesPage() {
       subServices: [
         {
           name: "Private Limited Company",
-          href: "/services/private-limited-company",
+          href: "/services/business-setup/private-limited-company",
           popular: true,
           description:
             "Register your business as a Private Limited Company with limited liability protection",
@@ -152,7 +152,7 @@ export default function AllServicesPage() {
         },
         {
           name: "Limited Liability Partnership",
-          href: "/services/llp",
+          href: "/services/business-setup/llp",
           description:
             "Form an LLP with the benefits of partnership and limited liability",
           price: "₹5,999",
@@ -165,7 +165,7 @@ export default function AllServicesPage() {
         },
         {
           name: "One Person Company",
-          href: "/services/opc-registration",
+          href: "/services/business-setup/opc-registration",
           description:
             "Start a company with a single person as shareholder and director",
           price: "₹5,499",
@@ -174,7 +174,7 @@ export default function AllServicesPage() {
         },
         {
           name: "Sole Proprietorship",
-          href: "/services/sole-proprietorship",
+          href: "/services/business-setup/sole-proprietorship",
           description:
             "Register as a sole proprietor for simple business structure",
           price: "₹2,999",
@@ -183,7 +183,7 @@ export default function AllServicesPage() {
         },
         {
           name: "Nidhi Company",
-          href: "/services/nidhi-company",
+          href: "/services/business-setup/nidhi-company",
           description:
             "Establish a Nidhi Company for borrowing and lending among members",
           price: "₹12,999",
@@ -192,7 +192,7 @@ export default function AllServicesPage() {
         },
         {
           name: "Producer Company",
-          href: "/services/producer-company",
+          href: "/services/business-setup/producer-company",
           description: "Form a company owned by primary producers or farmers",
           price: "₹8,999",
           timeline: "10-15 days",
@@ -204,7 +204,7 @@ export default function AllServicesPage() {
         },
         {
           name: "Partnership Firm",
-          href: "/services/partnership-firm",
+          href: "/services/business-setup/partnership-firm",
           description: "Create a partnership between two or more individuals",
           price: "₹3,999",
           timeline: "5-7 days",
@@ -216,7 +216,7 @@ export default function AllServicesPage() {
         },
         {
           name: "Section 8 Company",
-          href: "/services/section-8-company",
+          href: "/services/business-setup/section-8-company",
           description:
             "Register a non-profit company for charitable and social welfare activities",
           price: "₹18,000",
@@ -225,7 +225,7 @@ export default function AllServicesPage() {
         },
         {
           name: "Subsidiary of Foreign Company",
-          href: "/services/subsidiary-foreign-company",
+          href: "/services/business-setup/subsidiary-foreign-company",
           description:
             "Establish Indian subsidiary of your foreign company with complete compliance",
           price: "₹35,000",

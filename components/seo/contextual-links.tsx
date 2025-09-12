@@ -120,13 +120,15 @@ export function InlineServiceLink({
   // Map service names to URLs
   const serviceUrls: Record<string, string> = {
     // Company Registration Services
-    'private-limited-company': '/services/private-limited-company',
-    'llp-registration': '/services/llp-registration',
-    'opc-registration': '/services/opc-registration',
-    'partnership-firm': '/services/partnership-firm',
-    'sole-proprietorship': '/services/sole-proprietorship',
-    'section-8-company': '/services/section-8-company',
-    'producer-company': '/services/producer-company',
+    'private-limited-company': '/services/business-setup/private-limited-company',
+    'llp-registration': '/services/business-setup/llp',
+    'opc-registration': '/services/business-setup/opc-registration',
+    'partnership-firm': '/services/business-setup/partnership-firm',
+    'sole-proprietorship': '/services/business-setup/sole-proprietorship',
+    'section-8-company': '/services/business-setup/section-8-company',
+    'producer-company': '/services/business-setup/producer-company',
+    'nidhi-company': '/services/business-setup/nidhi-company',
+    'subsidiary-foreign-company': '/services/business-setup/subsidiary-foreign-company',
 
     // Compliances Services
     'gst-registration': '/services/gst-registration',
@@ -226,13 +228,15 @@ export function ServiceCTA({
 }) {
   const serviceUrls: Record<string, string> = {
     // Company Registration Services
-    'private-limited-company': '/services/private-limited-company',
-    'llp-registration': '/services/llp-registration',
-    'opc-registration': '/services/opc-registration',
-    'partnership-firm': '/services/partnership-firm',
-    'sole-proprietorship': '/services/sole-proprietorship',
-    'section-8-company': '/services/section-8-company',
-    'producer-company': '/services/producer-company',
+    'private-limited-company': '/services/business-setup/private-limited-company',
+    'llp-registration': '/services/business-setup/llp',
+    'opc-registration': '/services/business-setup/opc-registration',
+    'partnership-firm': '/services/business-setup/partnership-firm',
+    'sole-proprietorship': '/services/business-setup/sole-proprietorship',
+    'section-8-company': '/services/business-setup/section-8-company',
+    'producer-company': '/services/business-setup/producer-company',
+    'nidhi-company': '/services/business-setup/nidhi-company',
+    'subsidiary-foreign-company': '/services/business-setup/subsidiary-foreign-company',
 
     // Compliances Services
     'gst-registration': '/services/gst-registration',

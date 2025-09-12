@@ -12,6 +12,7 @@ const { PrismaClient } = require('@prisma/client')
 
 // Import services data
 const services = require('../app/(pages)/services/[slug]/data/services.json')
+const businessSetupServices = require('../app/(pages)/services/business-setup/[slug]/data/business-setup.json')
 
 const prisma = new PrismaClient()
 
@@ -113,13 +114,24 @@ const staticPages = [
 
 // Generate service URLs from services.json
 function generateServiceUrls() {
-  return Object.entries(services).map(([slug, service]) => ({
+  const regularServiceUrls = Object.entries(services).map(([slug, service]) => ({
     url: `${BASE_URL}/services/${slug}`,
     lastmod: new Date().toISOString(),
     changefreq: 'weekly',
     priority: service.popular ? 0.9 : 0.8,
     images: service.icon ? [`${BASE_URL}/services/${slug}/icon.png`] : undefined
   }))
+
+  // Generate business setup service URLs with new path structure
+  const businessSetupUrls = Object.entries(businessSetupServices).map(([slug, service]) => ({
+    url: `${BASE_URL}/services/business-setup/${slug}`,
+    lastmod: new Date().toISOString(),
+    changefreq: 'weekly',
+    priority: service.popular ? 0.9 : 0.8,
+    images: service.icon ? [`${BASE_URL}/services/business-setup/${slug}/icon.png`] : undefined
+  }))
+
+  return [...regularServiceUrls, ...businessSetupUrls]
 }
 
 // Generate calculator URLs

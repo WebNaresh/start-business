@@ -18,7 +18,7 @@ export interface RelatedContent {
 export const coreServices: InternalLink[] = [
   // Company Registration Services
   {
-    href: '/services/private-limited-company',
+    href: '/services/business-setup/private-limited-company',
     title: 'Private Limited Company Registration',
     description: 'Complete guide to registering a Private Limited Company in India with expert assistance',
     category: 'service',
@@ -26,7 +26,7 @@ export const coreServices: InternalLink[] = [
     priority: 'high'
   },
   {
-    href: '/services/llp-registration',
+    href: '/services/business-setup/llp',
     title: 'Limited Liability Partnership (LLP) Registration',
     description: 'Professional LLP registration services for partnerships and professional services',
     category: 'service',
@@ -34,7 +34,7 @@ export const coreServices: InternalLink[] = [
     priority: 'high'
   },
   {
-    href: '/services/opc-registration',
+    href: '/services/business-setup/opc-registration',
     title: 'One Person Company (OPC) Registration',
     description: 'Solo entrepreneur? Register your One Person Company with complete legal protection',
     category: 'service',
@@ -42,7 +42,7 @@ export const coreServices: InternalLink[] = [
     priority: 'high'
   },
   {
-    href: '/services/partnership-firm',
+    href: '/services/business-setup/partnership-firm',
     title: 'Partnership Firm Registration',
     description: 'Register your partnership firm with proper legal documentation and compliance',
     category: 'service',
@@ -50,7 +50,7 @@ export const coreServices: InternalLink[] = [
     priority: 'medium'
   },
   {
-    href: '/services/sole-proprietorship',
+    href: '/services/business-setup/sole-proprietorship',
     title: 'Sole Proprietorship Registration',
     description: 'Simple business registration for individual entrepreneurs and small businesses',
     category: 'service',
@@ -58,7 +58,7 @@ export const coreServices: InternalLink[] = [
     priority: 'medium'
   },
   {
-    href: '/services/section-8-company',
+    href: '/services/business-setup/section-8-company',
     title: 'Section 8 Company Registration',
     description: 'Register a non-profit company under Section 8 for charitable and social purposes',
     category: 'service',
@@ -66,7 +66,7 @@ export const coreServices: InternalLink[] = [
     priority: 'low'
   },
   {
-    href: '/services/producer-company',
+    href: '/services/business-setup/producer-company',
     title: 'Producer Company Registration',
     description: 'Register a producer company for agricultural and farming businesses',
     category: 'service',
@@ -140,7 +140,7 @@ export const coreServices: InternalLink[] = [
     priority: 'low'
   },
   {
-    href: '/services/subsidiary-foreign-company',
+    href: '/services/business-setup/subsidiary-foreign-company',
     title: 'Subsidiary of Foreign Company',
     description: 'Establish Indian subsidiary of foreign company with complete FEMA compliance',
     category: 'service',
@@ -726,15 +726,15 @@ export function generateBreadcrumbs(pathname: string): BreadcrumbItem[] {
 // Topic clusters for content organization
 export const topicClusters = {
   'company-registration': {
-    pillarPage: '/services/private-limited-company',
+    pillarPage: '/services/business-setup/private-limited-company',
     clusterPages: [
-      '/services/private-limited-company',
-      '/services/llp-registration',
-      '/services/opc-registration',
-      '/services/partnership-firm',
-      '/services/sole-proprietorship',
-      '/services/section-8-company',
-      '/services/producer-company',
+      '/services/business-setup/private-limited-company',
+      '/services/business-setup/llp',
+      '/services/business-setup/opc-registration',
+      '/services/business-setup/partnership-firm',
+      '/services/business-setup/sole-proprietorship',
+      '/services/business-setup/section-8-company',
+      '/services/business-setup/producer-company',
       '/blog/choosing-right-business-structure',
       '/blog/company-registration-process',
       '/blog/startup-guide'

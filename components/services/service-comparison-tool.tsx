@@ -72,6 +72,32 @@ export default function ServiceComparisonTool({
   const [searchTerm, setSearchTerm] = useState("");
   const [isAnimating, setIsAnimating] = useState(false);
 
+  // Helper function to get the correct service URL
+  const getServiceUrl = (service: Service) => {
+    // Business setup service IDs that should use the business-setup path
+    const businessSetupServices = ['pvt-ltd', 'opc', 'llp', 'partnership-firm', 'sole-proprietorship', 'section-8', 'producer-company', 'nidhi-company', 'subsidiary-foreign'];
+    
+    if (businessSetupServices.includes(service.id)) {
+      // Map some service IDs to their actual slug names
+      const slugMap: Record<string, string> = {
+        'pvt-ltd': 'private-limited-company',
+        'opc': 'opc-registration',
+        'llp': 'llp',
+        'partnership-firm': 'partnership-firm',
+        'sole-proprietorship': 'sole-proprietorship',
+        'section-8': 'section-8-company',
+        'producer-company': 'producer-company',
+        'nidhi-company': 'nidhi-company',
+        'subsidiary-foreign': 'subsidiary-foreign-company'
+      };
+      
+      const actualSlug = slugMap[service.id] || service.slug;
+      return `/services/business-setup/${actualSlug}`;
+    }
+    
+    return `/services/${service.slug}`;
+  };
+
   // Default services data
   const defaultServices: Service[] = [
     {
@@ -461,7 +487,7 @@ export default function ServiceComparisonTool({
                     <Separator />
 
                     <EnhancedCTAButton
-                      href={`/services/${service.slug}`}
+                      href={getServiceUrl(service)}
                       variant={service.popular ? "primary" : "secondary"}
                       size="lg"
                       className="w-full text-sm sm:text-base"
@@ -528,7 +554,7 @@ export default function ServiceComparisonTool({
                             </div>
                           </div>
                           <EnhancedCTAButton
-                            href={`/services/${service.slug}`}
+                            href={getServiceUrl(service)}
                             variant={service.popular ? "primary" : "secondary"}
                             size="sm"
                             className="w-full mt-4"

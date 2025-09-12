@@ -78,14 +78,14 @@ export async function generateMetadata({
       type: "website",
       locale: "en_IN",
       siteName: "StartBusiness",
-      url: `https://startbusiness.co.in/services/${param.slug}`,
-      images: [`/og/services/${param.slug}.png`],
+      url: `https://startbusiness.co.in/services/business-setup/${param.slug}`,
+      images: [`/og/services/business-setup/${param.slug}.png`],
     },
     twitter: {
       card: "summary_large_image",
       title: service.title,
       description: service.description,
-      images: [`/og/services/${param.slug}.png`],
+      images: [`/og/services/business-setup/${param.slug}.png`],
     },
     robots: {
       index: true,
@@ -99,7 +99,7 @@ export async function generateMetadata({
       },
     },
     alternates: {
-      canonical: `https://startbusiness.co.in/services/${param.slug}`,
+      canonical: `https://startbusiness.co.in/services/business-setup/${param.slug}`,
     },
     other: {
       "structured-data": JSON.stringify(structuredData),
