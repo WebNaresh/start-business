@@ -14,8 +14,8 @@ import ServiceRecommendationQuiz from "@/components/services/service-recommendat
 import FloatingCallButton from "@/components/floating-call-button"
 // New enhanced components
 import CostCalculatorWidget from "@/components/home/cost-calculator-widget"
-import TrustSecuritySection from "@/components/home/trust-security-section"
-import SuccessStoriesSection from "@/components/home/success-stories-section"
+
+
 
 export default function Home() {
   return (
@@ -42,14 +42,9 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Trust & Security - Build Confidence */}
-      <TrustSecuritySection />
 
       <StatsSection />
       <FeaturesSection />
-
-      {/* Success Stories - Social Proof */}
-      <SuccessStoriesSection />
 
       <ProcessSection />
 
