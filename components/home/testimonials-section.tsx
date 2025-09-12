@@ -1,40 +1,33 @@
 "use client"
 
-import Image from "next/image"
 import { useState, useEffect, useCallback } from "react"
 import { Star, ChevronLeft, ChevronRight, Quote } from "lucide-react"
 
 export default function TestimonialsSection() {
   const testimonials = [
     {
-      text: "StartBusiness made the company registration process incredibly smooth. Their team was professional and guided us through every step. Highly recommended!",
-      author: "Rahul Sharma",
-      position: "CEO, TechStart Solutions",
-      image: "/diverse-business-person.png",
+      text: "StartBusiness transformed our LLP registration experience from complex to seamless. Their expertise in project management consulting helped us navigate all legal requirements effortlessly. The team's professionalism exceeded our expectations!",
+      position: "Managing Partner, Apaha Institute Of Construction Project Management LLP",
     },
     {
-      text: "The trademark registration service was excellent. They handled all the paperwork and kept me informed throughout the process. Great service at a reasonable price.",
-      author: "Priya Patel",
-      position: "Founder, StyleHub",
-      image: "/indian-businesswoman.png",
+      text: "As an overseas education consultancy, we needed partners who understood international compliance. StartBusiness delivered exceptional service for our LLP formation and ongoing regulatory support. Truly professional!",
+      position: "Founder, Apaha Overseas Study LLP",
     },
     {
-      text: "Their compliance services have been invaluable for our business. They ensure we meet all regulatory requirements and help us avoid potential legal issues.",
-      author: "Vikram Singh",
-      position: "Director, Global Exports Ltd",
-      image: "/indian-businessman.png",
+      text: "For a technology startup, speed and accuracy are crucial. StartBusiness handled our private limited company registration with remarkable efficiency. Their digital-first approach perfectly matched our tech-focused vision.",
+      position: "CEO, Lightnet Technology Private Limited",
     },
     {
-      text: "I was impressed by their attention to detail and prompt responses. The team at StartBusiness is knowledgeable and professional. Would definitely use their services again.",
-      author: "Ananya Desai",
-      position: "Co-founder, Innovate Solutions",
-      image: "/indian-businesswoman.png",
+      text: "Starting a salon and academy required multiple licenses and registrations. StartBusiness managed everything - from company incorporation to MSME registration. Their comprehensive approach saved us months of paperwork!",
+      position: "Director, Mangesha'z Salon & Academy Private Limited",
     },
     {
-      text: "The MSME registration process was quick and hassle-free. Their team took care of everything, allowing me to focus on my business operations.",
-      author: "Rajesh Kumar",
-      position: "Owner, Craft Creations",
-      image: "/indian-businessman.png",
+      text: "The team at StartBusiness understood our technology business needs perfectly. They expedited our private limited company registration and helped us secure all necessary tech compliance certifications. Outstanding service!",
+      position: "CTO, Octogle Technologies Private Limited",
+    },
+    {
+      text: "Healthcare consulting requires strict regulatory compliance. StartBusiness guided our LLP formation while ensuring we met all healthcare industry standards. Their expertise in healthcare regulations was invaluable.",
+      position: "Co-founder, Multicare Health Services And Consultancy LLP",
     },
   ]
 
@@ -136,24 +129,8 @@ export default function TestimonialsSection() {
                   </div>
                   <p className="mb-6 text-base text-slate-700 leading-relaxed">{testimonial.text}</p>
                   <div className="flex items-center">
-                    <div className="mr-4 h-14 w-14 overflow-hidden rounded-full border-2 border-blue-200">
-                      <Image
-                        src={testimonial.image || "/placeholder.svg"}
-                        alt={testimonial.author}
-                        width={56}
-                        height={56}
-                        sizes="56px"
-                        className="h-full w-full object-cover"
-                        quality={75}
-                        priority={false}
-                        loading="lazy"
-                        placeholder="blur"
-                        blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
-                      />
-                    </div>
                     <div>
-                      <h3 className="text-base font-semibold text-slate-900 mb-2">{testimonial.author}</h3>
-                      <p className="text-xs text-slate-600">{testimonial.position}</p>
+                      <p className="text-sm font-semibold text-slate-900">{testimonial.position}</p>
                     </div>
                   </div>
                 </div>
