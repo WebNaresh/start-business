@@ -37,10 +37,11 @@ export function useServiceCarousel(options: UseServiceCarouselOptions = {}) {
         },
         [Autoplay({
             delay: autoplayDelay,
-            stopOnInteraction,
-            stopOnMouseEnter: true,
-            stopOnFocusIn: true,
-            playOnInit: true
+            stopOnInteraction: false,
+            stopOnMouseEnter: false,
+            stopOnFocusIn: false,
+            playOnInit: true,
+            rootNode: (emblaRoot) => emblaRoot.parentElement
         })]
     )
 
@@ -65,6 +66,20 @@ export function useServiceCarousel(options: UseServiceCarouselOptions = {}) {
         setIsPlaying(!isPlaying)
     }, [emblaApi, isPlaying])
 
+    // Additional effect to ensure autoplay starts
+    useEffect(() => {
+        if (!emblaApi) return
+        
+        const autoplay = emblaApi.plugins()?.autoplay
+        if (autoplay) {
+            // Force start autoplay
+            setTimeout(() => {
+                autoplay.play()
+                setIsPlaying(true)
+            }, 100)
+        }
+    }, [emblaApi])
+
     useEffect(() => {
         if (!emblaApi) return
 
@@ -74,27 +89,17 @@ export function useServiceCarousel(options: UseServiceCarouselOptions = {}) {
             setCanScrollNext(emblaApi.canScrollNext())
         }
 
-        const onPointerDown = () => {
-            const autoplay = emblaApi.plugins()?.autoplay
-            if (autoplay) autoplay.stop()
-        }
-
-        const onPointerUp = () => {
-            const autoplay = emblaApi.plugins()?.autoplay
-            if (autoplay && isPlaying) {
-                setTimeout(() => autoplay.play(), 2000)
-            }
+        // Start autoplay when component mounts
+        const autoplay = emblaApi.plugins()?.autoplay
+        if (autoplay && isPlaying) {
+            autoplay.play()
         }
 
         emblaApi.on('select', onSelect)
-        emblaApi.on('pointerDown', onPointerDown)
-        emblaApi.on('pointerUp', onPointerUp)
         onSelect()
 
         return () => {
             emblaApi.off('select', onSelect)
-            emblaApi.off('pointerDown', onPointerDown)
-            emblaApi.off('pointerUp', onPointerUp)
         }
     }, [emblaApi, isPlaying])
 

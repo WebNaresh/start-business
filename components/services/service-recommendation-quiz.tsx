@@ -8,21 +8,19 @@ import {
   Building2,
   Calculator,
   FileText,
-  HelpCircle,
   ExternalLink,
   Play,
-  Users,
   Sparkles,
-  Zap,
   TrendingUp,
   Award,
   ChevronLeft,
   ChevronRight,
-  Pause
+  CheckCircle,
+  Timer,
+  Shield
 } from "lucide-react"
 import { cn } from "@/lib/utils"
-import Link from "next/link"
-
+import { useMobile } from "@/hooks/use-mobile"
 import { useServiceCarousel } from '@/hooks/use-service-carousel'
 
 interface ServiceCategory {
@@ -36,9 +34,10 @@ interface ServiceCategory {
 }
 
 export default function ServiceRecommendationQuiz() {
-  const [isMobile, setIsMobile] = useState(false)
+  const isMobile = useMobile(768)
+  const isTablet = useMobile(1024)
 
-  // Use custom carousel hook
+  // Use custom carousel hook with enhanced settings
   const {
     emblaRef,
     currentSlide,
@@ -49,29 +48,10 @@ export default function ServiceRecommendationQuiz() {
     scrollNext,
     toggleAutoplay
   } = useServiceCarousel({
-    autoplayDelay: 4000,
+    autoplayDelay: 3000,
     stopOnInteraction: false,
     loop: true
   })
-
-  // Check if mobile on mount and resize
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768)
-    }
-
-    // Initial check with fallback
-    try {
-      checkMobile()
-    } catch (error) {
-      console.warn('Failed to detect mobile device, defaulting to desktop layout')
-      setIsMobile(false)
-    }
-
-    window.addEventListener('resize', checkMobile)
-
-    return () => window.removeEventListener('resize', checkMobile)
-  }, [])
 
   // Service categories
   const serviceCategories: ServiceCategory[] = [
@@ -124,316 +104,246 @@ export default function ServiceRecommendationQuiz() {
 
 
   return (
-    <>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Lightweight Hero Section */}
+    <div className="w-full overflow-hidden">
+      <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
+        {/* Enhanced Hero Section */}
         <div className="text-center mb-8 sm:mb-12 lg:mb-16">
-          <div className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-100 to-purple-100 px-3 sm:px-4 py-2 rounded-full mb-4 sm:mb-6">
-            <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600" />
-            <span className="text-xs sm:text-sm font-semibold text-blue-700">AI-Powered Recommendations</span>
+          <div className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-100 to-purple-100 px-3 sm:px-4 py-2 rounded-full mb-4 sm:mb-6 border border-blue-200/50 backdrop-blur-sm max-w-full">
+            <Sparkles className="w-4 h-4 text-blue-600 animate-pulse flex-shrink-0" />
+            <span className="text-xs sm:text-sm font-semibold text-blue-700 truncate">AI-Powered Recommendations</span>
           </div>
 
-          <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 bg-clip-text text-transparent mb-3 sm:mb-4 md:mb-6 leading-tight px-2">
+          <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 bg-clip-text text-transparent mb-3 sm:mb-4 md:mb-6 leading-tight px-2">
             Find Your Perfect Business Service
           </h1>
 
-          <p className="text-sm sm:text-base md:text-lg text-slate-600 mb-6 md:mb-8 max-w-4xl mx-auto leading-relaxed px-4 sm:px-6">
+          <p className="text-sm sm:text-base md:text-lg lg:text-xl text-slate-600 mb-6 sm:mb-8 max-w-4xl mx-auto leading-relaxed px-2 sm:px-4">
             Choose from our intelligent recommendation tools to get personalized advice for your business needs. Get started in under 2 minutes.
           </p>
 
-          {/* Trust indicators */}
-          <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 text-xs sm:text-sm text-slate-500 mb-8">
-            <div className="flex items-center gap-1">
-              <Award className="w-3 h-3 sm:w-4 sm:h-4 text-blue-500" />
-              <span>Expert Verified</span>
+          {/* Enhanced trust indicators */}
+          <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-4 text-xs sm:text-sm text-slate-500 mb-6 sm:mb-8 px-2">
+            <div className="flex items-center gap-1.5 bg-white/80 backdrop-blur-sm px-2 sm:px-3 py-1.5 sm:py-2 rounded-full border border-slate-200 shadow-sm">
+              <Award className="w-3 h-3 sm:w-4 sm:h-4 text-blue-500 flex-shrink-0" />
+              <span className="whitespace-nowrap">Expert Verified</span>
             </div>
-            <div className="flex items-center gap-1">
-              <Zap className="w-3 h-3 sm:w-4 sm:h-4 text-green-500" />
-              <span>2 Min Setup</span>
+            <div className="flex items-center gap-1.5 bg-white/80 backdrop-blur-sm px-2 sm:px-3 py-1.5 sm:py-2 rounded-full border border-slate-200 shadow-sm">
+              <Timer className="w-3 h-3 sm:w-4 sm:h-4 text-green-500 flex-shrink-0" />
+              <span className="whitespace-nowrap">2 Min Setup</span>
             </div>
-            <div className="flex items-center gap-1">
-              <TrendingUp className="w-3 h-3 sm:w-4 sm:h-4 text-purple-500" />
-              <span>10K+ Helped</span>
+            <div className="flex items-center gap-1.5 bg-white/80 backdrop-blur-sm px-2 sm:px-3 py-1.5 sm:py-2 rounded-full border border-slate-200 shadow-sm">
+              <TrendingUp className="w-3 h-3 sm:w-4 sm:h-4 text-purple-500 flex-shrink-0" />
+              <span className="whitespace-nowrap">10K+ Helped</span>
+            </div>
+            <div className="flex items-center gap-1.5 bg-white/80 backdrop-blur-sm px-2 sm:px-3 py-1.5 sm:py-2 rounded-full border border-slate-200 shadow-sm">
+              <Shield className="w-3 h-3 sm:w-4 sm:h-4 text-orange-500 flex-shrink-0" />
+              <span className="whitespace-nowrap">100% Secure</span>
             </div>
           </div>
         </div>
 
-        {/* Enhanced Service Category Cards with Mobile Carousel */}
+        {/* Enhanced Service Category Cards with Better Mobile Experience */}
         <div className="mb-8 sm:mb-12 lg:mb-16">
-          {/* Mobile Carousel */}
-          <div className="block md:hidden">
-            <div className="relative">
-              {/* Progress indicator */}
-              <div className="flex justify-center mb-4">
-                <div className="bg-white rounded-full px-3 py-1 shadow-sm border border-slate-200">
-                  <span className="text-xs text-slate-600 font-medium">
+          {/* Mobile/Tablet Carousel */}
+          <div className="block lg:hidden">
+            <div className="relative w-full">
+              {/* Enhanced progress indicator */}
+              <div className="flex justify-center mb-4 sm:mb-6 px-4">
+                <div className="bg-white/90 backdrop-blur-sm rounded-full px-3 sm:px-4 py-1.5 sm:py-2 shadow-lg border border-slate-200">
+                  <span className="text-xs sm:text-sm text-slate-700 font-medium">
                     {currentSlide + 1} of {serviceCategories.length}
                   </span>
                 </div>
               </div>
 
-              {/* Carousel Container */}
-              <div className="overflow-hidden" ref={emblaRef}>
+              {/* Enhanced Carousel Container */}
+              <div className="overflow-hidden rounded-xl sm:rounded-2xl mx-2 sm:mx-0" ref={emblaRef}>
                 <div className="flex touch-pan-y">
                   {serviceCategories.map((category) => (
                     <div
                       key={category.id}
-                      className="flex-[0_0_85%] min-w-0 px-3"
+                      className={cn(
+                        "min-w-0 pl-3 pr-3 sm:pl-4 sm:pr-4",
+                        isMobile ? "flex-[0_0_85%]" : "flex-[0_0_80%]"
+                      )}
                     >
                       <ServiceCard
                         category={category}
                         onSelect={handleCategorySelect}
-                        isMobile={true}
+                        isMobile={isMobile}
+                        isTablet={isTablet}
                       />
                     </div>
                   ))}
                 </div>
               </div>
 
-              {/* Mobile Carousel Controls */}
-              <div className="flex items-center justify-center gap-4 mt-6">
+              {/* Enhanced Mobile Carousel Controls */}
+              <div className="flex items-center justify-center gap-3 sm:gap-4 mt-6 sm:mt-8 px-4">
                 <Button
                   variant="outline"
                   size="sm"
                   onClick={scrollPrev}
                   disabled={!canScrollPrev}
-                  className="rounded-full p-2 h-auto bg-white shadow-md hover:shadow-lg touch-target disabled:opacity-50"
+                  className="rounded-full p-2 sm:p-3 h-auto bg-white/90 backdrop-blur-sm shadow-lg hover:shadow-xl border-0 disabled:opacity-30 transition-all duration-300"
                   aria-label="Previous service"
                 >
-                  <ChevronLeft className="h-4 w-4" />
+                  <ChevronLeft className="h-4 w-4 sm:h-5 sm:w-5" />
                 </Button>
 
-                {/* Autoplay Control */}
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={toggleAutoplay}
-                  className="rounded-full p-2 h-auto bg-white shadow-md hover:shadow-lg touch-target"
-                  aria-label={isPlaying ? "Pause autoplay" : "Start autoplay"}
-                >
-                  {isPlaying ? (
-                    <Pause className="h-4 w-4" />
-                  ) : (
-                    <Play className="h-4 w-4" />
-                  )}
-                </Button>
+                {/* Enhanced dot indicators */}
+                <div className="flex gap-1.5 sm:gap-2">
+                  {serviceCategories.map((_, index) => (
+                    <div
+                      key={index}
+                      className={cn(
+                        "h-1.5 sm:h-2 rounded-full transition-all duration-300",
+                        currentSlide === index 
+                          ? "w-6 sm:w-8 bg-gradient-to-r from-blue-500 to-purple-500" 
+                          : "w-1.5 sm:w-2 bg-slate-300"
+                      )}
+                    />
+                  ))}
+                </div>
 
                 <Button
                   variant="outline"
                   size="sm"
                   onClick={scrollNext}
                   disabled={!canScrollNext}
-                  className="rounded-full p-2 h-auto bg-white shadow-md hover:shadow-lg touch-target disabled:opacity-50"
+                  className="rounded-full p-2 sm:p-3 h-auto bg-white/90 backdrop-blur-sm shadow-lg hover:shadow-xl border-0 disabled:opacity-30 transition-all duration-300"
                   aria-label="Next service"
                 >
-                  <ChevronRight className="h-4 w-4" />
+                  <ChevronRight className="h-4 w-4 sm:h-5 sm:w-5" />
                 </Button>
               </div>
 
-   
-              {/* Swipe hint for first-time users */}
-              <div className="flex justify-center mt-2">
-                <span className="text-xs text-slate-400 animate-pulse">
-                  Swipe to explore more services
+              {/* Enhanced swipe hint */}
+              <div className="flex justify-center mt-3 sm:mt-4 px-4">
+                <span className="text-xs sm:text-sm text-slate-400 animate-pulse text-center">
+                  ← Swipe to explore more →
                 </span>
               </div>
             </div>
           </div>
 
-          {/* Desktop Grid */}
-          <div className="hidden md:grid grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+          {/* Enhanced Desktop Grid */}
+          <div className="hidden lg:grid grid-cols-3 gap-8">
             {serviceCategories.map((category) => (
               <ServiceCard
                 key={category.id}
                 category={category}
                 onSelect={handleCategorySelect}
                 isMobile={false}
+                isTablet={false}
               />
             ))}
           </div>
         </div>
-
-        {/* Enhanced Get Expert Help Section */}
-        <div className="bg-gradient-to-br from-slate-50 to-blue-50 rounded-2xl border border-slate-200 p-4 sm:p-6 lg:p-8 text-center relative overflow-hidden">
-          {/* Enhanced Background decoration */}
-          <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-blue-200/20 to-purple-200/20 rounded-full -mr-16 -mt-16 blur-2xl" />
-          <div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-purple-200/20 to-blue-200/20 rounded-full -ml-12 -mb-12 blur-xl" />
-
-          {/* Mobile floating elements */}
-          {isMobile && (
-            <>
-              <div className="absolute top-4 left-4 w-3 h-3 bg-blue-400/30 rounded-full animate-pulse" />
-              <div className="absolute top-8 right-8 w-2 h-2 bg-purple-400/30 rounded-full animate-pulse delay-1000" />
-              <div className="absolute bottom-6 left-8 w-2 h-2 bg-blue-400/30 rounded-full animate-pulse delay-500" />
-            </>
-          )}
-
-          <div className="max-w-3xl mx-auto relative z-10">
-            <div className={cn(
-              "bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-4 sm:mb-6 shadow-lg hover:scale-105 transition-transform duration-300",
-              isMobile ? "w-14 h-14" : "w-12 h-12 sm:w-16 sm:h-16"
-            )}>
-              <HelpCircle className={cn(
-                "text-white",
-                isMobile ? "w-7 h-7" : "w-6 h-6 sm:w-8 sm:h-8"
-              )} />
-            </div>
-
-            <h3 className={cn(
-              "font-bold text-slate-900 mb-3 sm:mb-4",
-              isMobile ? "text-lg" : "text-base sm:text-lg lg:text-xl"
-            )}>
-              Need Personal Guidance?
-            </h3>
-
-            {/* Enhanced Stats with Mobile Carousel */}
-            <div className={cn(
-              "mb-6 sm:mb-8 text-xs sm:text-sm text-slate-500",
-              isMobile ? "overflow-x-auto" : ""
-            )}>
-              <div className={cn(
-                "flex items-center justify-center gap-4 sm:gap-6",
-                isMobile ? "min-w-max px-4" : "flex-wrap"
-              )}>
-                <div className="flex items-center gap-1 bg-white/50 px-3 py-2 rounded-full backdrop-blur-sm">
-                  <Users className="w-3 h-3 sm:w-4 sm:h-4 text-blue-500 flex-shrink-0" />
-                  <span className="whitespace-nowrap">500+ CA Experts</span>
-                </div>
-                <div className="flex items-center gap-1 bg-white/50 px-3 py-2 rounded-full backdrop-blur-sm">
-                  <Zap className="w-3 h-3 sm:w-4 sm:h-4 text-green-500 flex-shrink-0" />
-                  <span className="whitespace-nowrap">15 Min Response</span>
-                </div>
-                <div className="flex items-center gap-1 bg-white/50 px-3 py-2 rounded-full backdrop-blur-sm">
-                  <Award className="w-3 h-3 sm:w-4 sm:h-4 text-purple-500 flex-shrink-0" />
-                  <span className="whitespace-nowrap">Free Consultation</span>
-                </div>
-              </div>
-            </div>
-
-            <Link href="/contact">
-              <Button className={cn(
-                "bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 font-semibold hover:scale-105",
-                isMobile ? "px-6 py-3 text-sm w-full max-w-xs" : "px-6 sm:px-8 py-2.5 sm:py-3 text-sm sm:text-base"
-              )}>
-                <Users className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
-                <span className={isMobile ? "" : "hidden sm:inline"}>
-                  {isMobile ? "Get Help" : "Get Expert Help"}
-                </span>
-                {!isMobile && <span className="sm:hidden">Get Help</span>}
-                <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 ml-2" />
-              </Button>
-            </Link>
-          </div>
-        </div>
       </div>
-
-
-    </>
+    </div>
   )
 }
 
-// ServiceCard Component for reusability
+// Enhanced ServiceCard Component
 interface ServiceCardProps {
   category: ServiceCategory
   onSelect: (categoryId: string) => void
   isMobile: boolean
+  isTablet?: boolean
 }
 
-function ServiceCard({ category, onSelect, isMobile }: ServiceCardProps) {
+function ServiceCard({ category, onSelect, isMobile, isTablet = false }: ServiceCardProps) {
   return (
     <div
       className={cn(
-        "group relative bg-white rounded-2xl border border-slate-200 shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden cursor-pointer",
+        "group relative bg-white/90 backdrop-blur-sm rounded-3xl border border-slate-200/50 shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden cursor-pointer",
         isMobile
-          ? "h-[320px] service-card-mobile active:scale-95"
-          : "h-full hover:-translate-y-1"
+          ? "h-[360px] active:scale-95"
+          : "h-full hover:-translate-y-2 hover:scale-105"
       )}
       onClick={() => onSelect(category.id)}
     >
-      {/* Popular Badge */}
+      {/* Enhanced Popular Badge */}
       {category.popular && (
-        <div className="absolute top-3 sm:top-4 right-3 sm:right-4 z-10">
-          <span className="inline-flex items-center px-2 py-1 text-xs font-medium text-orange-800 bg-orange-200 rounded-full shadow-sm">
-            <Star className="w-3 h-3 mr-1" />
+        <div className="absolute top-4 right-4 z-10">
+          <span className="inline-flex items-center px-3 py-1.5 text-xs font-bold text-orange-800 bg-gradient-to-r from-orange-200 to-yellow-200 rounded-full shadow-lg border border-orange-300">
+            <Star className="w-3 h-3 mr-1 fill-orange-500" />
             Popular
           </span>
         </div>
       )}
 
-      {/* Background Gradient */}
+      {/* Enhanced Background Gradient */}
       <div className={cn(
-        "absolute inset-0 bg-gradient-to-br opacity-5 group-hover:opacity-10 transition-opacity duration-300",
+        "absolute inset-0 bg-gradient-to-br opacity-5 group-hover:opacity-15 transition-all duration-500",
         category.gradient
       )} />
 
-      <div className="relative p-4 sm:p-6 lg:p-8 h-full flex flex-col">
-        {/* Icon */}
+      <div className="relative p-6 sm:p-8 h-full flex flex-col">
+        {/* Enhanced Icon */}
         <div className={cn(
-          "rounded-2xl flex items-center justify-center mb-4 sm:mb-6 transition-transform duration-300 shadow-lg group-hover:scale-105",
+          "rounded-3xl flex items-center justify-center mb-6 transition-all duration-500 shadow-xl group-hover:scale-110 group-hover:rotate-3",
           `bg-gradient-to-br ${category.gradient} text-white`,
-          isMobile ? "w-14 h-14" : "w-12 h-12 sm:w-16 sm:h-16 lg:w-20 lg:h-20"
+          isMobile ? "w-16 h-16" : "w-20 h-20"
         )}>
           <category.icon className={cn(
-            isMobile ? "w-7 h-7" : "w-6 h-6 sm:w-8 sm:h-8 lg:w-10 lg:h-10"
+            isMobile ? "w-8 h-8" : "w-10 h-10"
           )} />
         </div>
 
-        {/* Content */}
+        {/* Enhanced Content */}
         <div className="flex-1 flex flex-col">
           <h3 className={cn(
-            "font-bold text-slate-900 mb-3 sm:mb-4 group-hover:text-blue-600 transition-colors leading-tight",
-            isMobile ? "text-lg" : "text-base sm:text-lg lg:text-xl"
+            "font-bold text-slate-900 mb-4 group-hover:text-blue-600 transition-colors leading-tight",
+            isMobile ? "text-lg" : "text-xl"
           )}>
             {category.title}
           </h3>
 
           <p className={cn(
-            "text-slate-600 mb-4 sm:mb-6 leading-relaxed flex-1",
-            isMobile ? "text-sm" : "text-sm sm:text-base"
-          )}
-            style={isMobile ? {
-              display: '-webkit-box',
-              WebkitLineClamp: 3,
-              WebkitBoxOrient: 'vertical',
-              overflow: 'hidden'
-            } : {}}>
+            "text-slate-600 mb-6 leading-relaxed flex-1",
+            isMobile ? "text-sm line-clamp-3" : "text-base"
+          )}>
             {category.description}
           </p>
 
-          {/* Action Button */}
+          {/* Enhanced Action Button */}
           <button className={cn(
-            "w-full flex items-center justify-center gap-2 px-4 sm:px-6 py-2.5 sm:py-3 rounded-xl font-semibold transition-all duration-300 hover:shadow-lg",
-            `bg-gradient-to-r ${category.gradient} text-white shadow-md`,
-            isMobile ? "text-sm" : "text-sm sm:text-base"
+            "w-full flex items-center justify-center gap-3 px-6 py-4 rounded-2xl font-bold transition-all duration-300 hover:shadow-xl group-hover:scale-105",
+            `bg-gradient-to-r ${category.gradient} text-white shadow-lg`,
+            isMobile ? "text-sm" : "text-base"
           )}>
             {category.id === "business-calculators" ? (
               <>
-                <ExternalLink className="w-4 h-4 sm:w-5 sm:h-5" />
-                <span className={isMobile ? "" : "hidden sm:inline"}>
-                  {isMobile ? "Explore" : "Explore Calculators"}
-                </span>
-                {!isMobile && <span className="sm:hidden">Explore</span>}
+                <Calculator className="w-5 h-5" />
+                <span>Explore Calculators</span>
+                <ExternalLink className="w-4 h-4" />
               </>
             ) : (
               <>
-                <Play className="w-4 h-4 sm:w-5 sm:h-5" />
-                <span className={isMobile ? "" : "hidden sm:inline"}>
-                  {isMobile ? "Take Quiz" : "Take Quiz"}
-                </span>
-                {!isMobile && <span className="sm:hidden">Take Quiz</span>}
+                <Play className="w-5 h-5" />
+                <span>Start Quiz</span>
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </>
             )}
-            <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />
           </button>
         </div>
       </div>
 
-      {/* Mobile-specific enhancements */}
+      {/* Enhanced mobile indicator */}
       {isMobile && (
-        <div className="absolute bottom-2 left-2 right-2">
-          <div className="h-1 bg-gradient-to-r from-transparent via-white/20 to-transparent rounded-full" />
+        <div className="absolute bottom-3 left-3 right-3">
+          <div className="h-1 bg-gradient-to-r from-transparent via-white/30 to-transparent rounded-full" />
         </div>
       )}
+
+      {/* Success checkmark for completed actions */}
+      <div className="absolute top-4 left-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        <div className="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center shadow-lg">
+          <CheckCircle className="w-4 h-4 text-white" />
+        </div>
+      </div>
     </div>
   )
 }

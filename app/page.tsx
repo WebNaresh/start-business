@@ -32,15 +32,8 @@ export default function Home() {
 
       <ServicesSection />
 
-      {/* Service Recommendation Quiz */}
-      <section
-        className="py-8 sm:py-10 md:py-12 bg-gradient-to-br from-slate-50 via-white to-blue-50/20"
-        aria-labelledby="quiz-heading"
-      >
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <ServiceRecommendationQuiz />
-        </div>
-      </section>
+    
 
 
       <StatsSection />
